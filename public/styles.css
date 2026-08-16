@@ -373,6 +373,26 @@ button { font: inherit; color: inherit; }
   letter-spacing: .04em;
   color: var(--ink-2);
 }
+.cat-block__head-right {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex: none;
+}
+.cat-block__copy-all {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  cursor: pointer;
+  font: 700 10px/1 var(--sans);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink-1);
+  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
+}
+.cat-block__copy-all:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.cat-block__copy-all.is-done { background: var(--ok); color: var(--bg); border-color: var(--ok); }
 
 .row-list {
   list-style: none;

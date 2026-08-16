@@ -300,7 +300,10 @@ function renderGrid() {
         <section class="cat-block" aria-labelledby="cat-${esc(cat)}">
           <div class="cat-block__head">
             <h2 class="cat-block__title" id="cat-${esc(cat)}">${esc(cat)}</h2>
-            <span class="cat-block__count">${items.length} spell${items.length === 1 ? "" : "s"}</span>
+            <div class="cat-block__head-right">
+              <span class="cat-block__count">${items.length} spell${items.length === 1 ? "" : "s"}</span>
+              <button class="cat-block__copy-all" type="button" data-copy-cat="${esc(cat)}">Copy all</button>
+            </div>
           </div>
           <ul class="row-list" aria-label="${esc(cat)}">${items.map(rowTemplate).join("")}</ul>
         </section>`;
@@ -513,6 +516,21 @@ function rowSpell(el) {
    used to swap the preview under the cursor as you moved past rows,
    which meant it rarely landed on the one you meant. */
 catalogue.addEventListener("click", async (ev) => {
+  const copyAllBtn = ev.target.closest("[data-copy-cat]");
+  if (copyAllBtn) {
+    ev.preventDefault();
+    const cat = copyAllBtn.dataset.copyCat;
+    const items = SPELLS.filter((s) => s.category === cat && matches(s));
+    const combined = items.map((s) => `/* ${s.id} — ${s.title} */\n${modernCssFor(s)}`).join("\n");
+    try {
+      await copyText(combined);
+      flashCopy(copyAllBtn, "Copied!");
+    } catch {
+      flashCopy(copyAllBtn, "Failed");
+    }
+    return;
+  }
+
   const copyBtn = ev.target.closest("[data-copy-row]");
   if (copyBtn) {
     ev.preventDefault();

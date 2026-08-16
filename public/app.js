@@ -27,14 +27,33 @@ const CAT_ORDER = [
   "Performance",
 ];
 
-/* Tracked-letter badges instead of logos — legible at 11px, no
-   trademark reproduction, and fits the typographic system already
-   used for status labels elsewhere in the UI. */
+/* Small hand-drawn glyphs that read as "the four browsers" at a glance —
+   evocative color/shape conventions, not traced logo artwork. Support
+   level is shown via the wrapping .brow's opacity/grayscale, not color,
+   so the glyphs themselves can stay true-to-brand. */
 const ICONS = {
-  chrome: "CH",
-  edge: "ED",
-  firefox: "FF",
-  safari: "SA",
+  chrome: `<svg viewBox="0 0 16 16" aria-hidden="true">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="#ea4335" stroke-width="3" stroke-dasharray="12.57 25.13" stroke-dashoffset="0" transform="rotate(-90 8 8)"/>
+    <circle cx="8" cy="8" r="6" fill="none" stroke="#fbbc05" stroke-width="3" stroke-dasharray="12.57 25.13" stroke-dashoffset="-12.57" transform="rotate(-90 8 8)"/>
+    <circle cx="8" cy="8" r="6" fill="none" stroke="#34a853" stroke-width="3" stroke-dasharray="12.57 25.13" stroke-dashoffset="-25.13" transform="rotate(-90 8 8)"/>
+    <circle cx="8" cy="8" r="2.5" fill="#4285f4" stroke="#fff" stroke-width=".6"/>
+  </svg>`,
+  edge: `<svg viewBox="0 0 16 16" aria-hidden="true">
+    <circle cx="8" cy="8" r="6.4" fill="#0d5fd9"/>
+    <path d="M3.6 9.4c1-3.6 4.6-4.6 7.2-3 1.9 1.1 2.5 2.7 1.9 4.2-1.4-1.8-3.6-2.6-5.6-1.9-1.7.6-2.5 2.1-1.7 3.6-1.1-.6-1.9-1.6-1.8-2.9Z" fill="#35c1f1"/>
+    <path d="M6.1 12.7c-1.9-.5-2.9-2.1-2.5-3.9.4-1.9 2.4-3.1 4.4-2.7-1.6.5-2.5 1.7-2.2 2.8.3 1.2 1.7 1.8 3.1 1.4-.5 1.3-1.7 2.1-2.8 2.4Z" fill="#5cd1f5" opacity=".85"/>
+  </svg>`,
+  firefox: `<svg viewBox="0 0 16 16" aria-hidden="true">
+    <circle cx="8" cy="8" r="6.4" fill="#ff9c39"/>
+    <path d="M8.4 2.4c2.6.6 4.4 2.9 4.2 5.6-.2 3.1-2.9 5.4-6 5.1-2.2-.2-4-1.7-4.5-3.7 1.1 1.1 2.7 1.6 4.2 1.2 1.9-.5 3.1-2.2 2.9-4-.1-1.1-.8-1.9-1.7-2.2.6-.1 1.2 0 1.7.3-.3-1-1-1.8-1.9-2.3Z" fill="#ff4d2e"/>
+    <path d="M6.4 6.4c-.7 1-.6 2.3.3 3 .8.7 2 .6 2.7-.2-1 0-1.9-.5-2.2-1.4-.3-.8 0-1.7.7-2.2-.6-.1-1.1.2-1.5.8Z" fill="#ffd23f"/>
+  </svg>`,
+  safari: `<svg viewBox="0 0 16 16" aria-hidden="true">
+    <circle cx="8" cy="8" r="6.4" fill="#eaf4fc" stroke="#2f7bc7" stroke-width=".8"/>
+    <path d="M8 8 4.6 11.4 6.6 6.6 11.4 4.6Z" fill="#ff4d4d"/>
+    <path d="M8 8 6.6 6.6 11.4 4.6 9.4 9.4Z" fill="#c9ced3"/>
+    <circle cx="8" cy="8" r="1" fill="#2f7bc7"/>
+  </svg>`,
 };
 
 const BROWSER_META = [
@@ -60,20 +79,20 @@ const PREVIEW_TOKENS = `
   }
   :host {
     display: block;
-    color-scheme: dark;
-    --color-primary: #e4e4e7;
-    --color-bg: #18181b;
-    --color-text: #f4f4f5;
-    --color-text-muted: #a1a1aa;
-    --color-text-inverse: #09090b;
-    --color-border: #27272a;
-    --color-surface: #121215;
-    --color-surface-offset: #1f1f23;
-    --color-surface-dynamic: #27272a;
-    --color-surface-dark: #09090b;
-    --color-error: #fca5a5;
-    --color-success: #86efac;
-    --color-accent: #d4d4d8;
+    color-scheme: light;
+    --color-primary: #18181b;
+    --color-bg: #fbfaf8;
+    --color-text: #18181b;
+    --color-text-muted: #75716a;
+    --color-text-inverse: #fbfaf8;
+    --color-border: #e3ddd0;
+    --color-surface: #ffffff;
+    --color-surface-offset: #f2efe8;
+    --color-surface-dynamic: #e3ddd0;
+    --color-surface-dark: #18181b;
+    --color-error: #b3261e;
+    --color-success: #2f7d4f;
+    --color-accent: #cf4520;
     --radius-sm: 6px;
     --radius-md: 8px;
     --radius-lg: 8px;
@@ -212,7 +231,7 @@ function matches(spell) {
 }
 
 function browserIcon(key, level, label) {
-  return `<span class="brow" data-level="${esc(level)}" title="${esc(label)}: ${esc(LEVEL_LABEL[level] || level)}">${esc(ICONS[key] || "")}</span>`;
+  return `<span class="brow" data-level="${esc(level)}" title="${esc(label)}: ${esc(LEVEL_LABEL[level] || level)}">${ICONS[key] || ""}</span>`;
 }
 
 function browsersRow(spell) {
@@ -490,16 +509,9 @@ function rowSpell(el) {
   return row && SPELLS.find((s) => s.id === row.dataset.id);
 }
 
-catalogue.addEventListener("mouseover", (ev) => {
-  const spell = rowSpell(ev.target);
-  if (spell && spell.id !== state.quick?.id) showQuickPreview(spell);
-});
-
-catalogue.addEventListener("focusin", (ev) => {
-  const spell = rowSpell(ev.target);
-  if (spell && spell.id !== state.quick?.id) showQuickPreview(spell);
-});
-
+/* Preview updates on deliberate click only — hovering across the list
+   used to swap the preview under the cursor as you moved past rows,
+   which meant it rarely landed on the one you meant. */
 catalogue.addEventListener("click", async (ev) => {
   const copyBtn = ev.target.closest("[data-copy-row]");
   if (copyBtn) {
@@ -518,7 +530,17 @@ catalogue.addEventListener("click", async (ev) => {
   const hit = ev.target.closest(".row__hit");
   if (hit) {
     const spell = rowSpell(hit);
-    if (spell) openDrawer(spell, hit);
+    if (spell) {
+      showQuickPreview(spell);
+      openDrawer(spell, hit);
+    }
+    return;
+  }
+
+  const row = ev.target.closest(".row");
+  if (row) {
+    const spell = rowSpell(row);
+    if (spell) showQuickPreview(spell);
   }
 });
 
@@ -675,7 +697,7 @@ function renderBrowserList(spell) {
   drawerBrows.innerHTML = BROWSER_META.map((b) => {
     const level = spell.browsers?.[b.key] || "no";
     return `<li>
-      <span class="bname"><span class="brow" data-level="${esc(level)}">${esc(ICONS[b.key] || "")}</span>${esc(b.label)}</span>
+      <span class="bname"><span class="brow" data-level="${esc(level)}">${ICONS[b.key] || ""}</span>${esc(b.label)}</span>
       <span class="blevel" data-level="${esc(level)}">${esc(LEVEL_LABEL[level] || level)}</span>
     </li>`;
   }).join("");

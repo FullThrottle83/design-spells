@@ -6,23 +6,29 @@
    ============================================================ */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Palette — near-black canvas, off-white ink, one neutral scale */
-  --bg:          #0a0a0b;
-  --surface:     #131316;
-  --canvas:      #17171a;
-  --line:        #26262a;
-  --line-strong: #3a3a40;
+  /* Palette — warm paper canvas, near-black ink, one spot accent.
+     Swiss poster, not developer-tool dark mode. */
+  --bg:          #f7f4ee;
+  --surface:     #ffffff;
+  --canvas:      #efeade;
+  --line:        #e2dcce;
+  --line-strong: #c7bea9;
 
-  --ink:         #f5f5f6;
-  --ink-1:       #a4a4ab;
-  --ink-2:       #6c6c74;
+  --ink:         #18181b;
+  --ink-1:       #514e46;
+  --ink-2:       #8c8778;
 
   /* Status — used only where it carries real meaning (browser support) */
-  --ok:          #7dd99a;
-  --warn:        #e3c069;
-  --no:          #e08a80;
+  --ok:          #2f7d4f;
+  --warn:        #a3690a;
+  --no:          #b23b2e;
+
+  /* One confident spot color — the primary action, active state, brand mark */
+  --accent:      #cf4520;
+  --accent-ink:  #fff6f2;
+  --accent-hover:#a8380f;
 
   /* Type — system stacks only. No webfonts: keeps the page at
      true zero external requests, matching the zero-JS premise. */
@@ -106,25 +112,21 @@ button { font: inherit; color: inherit; }
 .label--warn  { color: var(--warn); }
 .label--muted { color: var(--ink-2); }
 
-/* Browser badges — tracked two-letter marks, tinted by support level.
-   No logo reproduction; reads as data, matching the label idiom above. */
+/* Browser glyphs — small hand-drawn marks, true to each brand's color
+   language. Support level reads through opacity/desaturation rather
+   than recoloring the glyph, so "supported" keeps its real color. */
 .brow {
-  min-width: 22px;
-  height: 16px;
-  padding: 0 3px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid currentColor;
-  border-radius: var(--r);
-  font: 700 9.5px/1 var(--mono);
-  letter-spacing: .03em;
-  color: var(--ink-2);
+  width: 18px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
   flex: none;
+  transition: opacity .12s ease, filter .12s ease;
 }
-.brow[data-level="yes"]     { color: var(--ok); }
-.brow[data-level="partial"] { color: var(--warn); }
-.brow[data-level="no"]      { color: var(--no); opacity: .8; }
+.brow svg { width: 16px; height: 16px; display: block; }
+.brow[data-level="yes"]     { opacity: 1; filter: none; }
+.brow[data-level="partial"] { opacity: .8; filter: grayscale(.4); }
+.brow[data-level="no"]      { opacity: .3; filter: grayscale(1); }
 
 /* ---------------- site header ---------------- */
 
@@ -132,7 +134,7 @@ button { font: inherit; color: inherit; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(10, 10, 11, .92);
+  background: rgba(247, 244, 238, .92);
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -156,7 +158,7 @@ button { font: inherit; color: inherit; }
   align-items: baseline;
   gap: 12px;
 }
-.brand__star { color: var(--ink-2); font-weight: 400; }
+.brand__star { color: var(--accent); font-weight: 400; }
 .brand__tag {
   font: 500 11px/1 var(--sans);
   letter-spacing: .02em;
@@ -314,7 +316,7 @@ button { font: inherit; color: inherit; }
 .nav-item:hover { background: var(--surface); color: var(--ink); }
 .nav-item.is-on {
   background: var(--surface);
-  border-left-color: var(--ink);
+  border-left-color: var(--accent);
   color: var(--ink);
   font-weight: 600;
 }
@@ -394,6 +396,7 @@ button { font: inherit; color: inherit; }
   gap: 16px;
   padding: 13px 4px;
   border-bottom: 1px solid var(--line);
+  cursor: pointer;
   transition: background-color .12s ease;
 }
 .row:hover, .row:focus-within { background: var(--surface); }
@@ -533,17 +536,17 @@ button { font: inherit; color: inherit; }
   appearance: none;
   width: calc(100% - 32px);
   margin: 14px 16px 0;
-  background: var(--ink);
-  border: 1px solid var(--ink);
+  background: var(--accent);
+  border: 1px solid var(--accent);
   padding: 12px 14px;
   cursor: pointer;
   font: 700 12px/1 var(--sans);
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--bg);
+  color: var(--accent-ink);
   transition: background-color .12s ease;
 }
-.preview-panel__copy:hover { background: #dcdce0; }
+.preview-panel__copy:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .preview-panel__copy.is-done { background: var(--ok); border-color: var(--ok); }
 
 .preview-panel__details {
@@ -700,39 +703,42 @@ button { font: inherit; color: inherit; }
 
 /* ---------------- shared code block (drawer) ---------------- */
 
+/* The source viewer stays a dark island regardless of site theme — a
+   code editor reads better dark, and it keeps the syntax-highlight
+   palette below legible without a second color system. */
 .code {
-  border: 1px solid var(--line);
-  background: var(--canvas);
+  border: 1px solid var(--line-strong);
+  background: #18181b;
   overflow: hidden;
 }
 .code__bar {
   display: flex;
   align-items: stretch;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid #2c2c31;
 }
 .code__tabs { display: flex; }
 .code__tab {
   appearance: none;
   background: none;
   border: 0;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid #2c2c31;
   padding: 7px 11px;
   cursor: pointer;
   font: 600 10.5px/1 var(--sans);
   letter-spacing: .03em;
-  color: var(--ink-2);
+  color: #8c8778;
   transition: background-color .12s ease, color .12s ease;
 }
-.code__tab:hover { color: var(--ink-1); }
+.code__tab:hover { color: #d8d3c6; }
 .code__tab[aria-selected="true"] {
-  background: var(--line);
-  color: var(--ink);
+  background: #2c2c31;
+  color: #f5f4f0;
 }
 .code__spacer { flex: 1; }
 
 .code__copy {
   appearance: none;
-  background: var(--ink);
+  background: #f5f4f0;
   border: 0;
   padding: 0 16px;
   margin: 5px 5px 5px auto;
@@ -740,11 +746,11 @@ button { font: inherit; color: inherit; }
   font: 700 10.5px/1 var(--sans);
   letter-spacing: .05em;
   text-transform: uppercase;
-  color: var(--bg);
+  color: #18181b;
   transition: background-color .12s ease;
 }
-.code__copy:hover { background: #dcdce0; }
-.code__copy.is-done { background: var(--ok); }
+.code__copy:hover { background: #ffffff; }
+.code__copy.is-done { background: var(--ok); color: #fff; }
 
 .code__view-wrap { position: relative; }
 .code__view {
@@ -753,11 +759,11 @@ button { font: inherit; color: inherit; }
   overflow: auto;
   padding: 14px 16px;
   font: 12px/1.7 var(--mono);
-  color: var(--ink-1);
+  color: #d8d3c6;
   white-space: pre;
   tab-size: 2;
   scrollbar-width: thin;
-  background: var(--canvas);
+  background: #18181b;
 }
 .code__view:focus-visible { outline: none; }
 
@@ -793,7 +799,7 @@ button { font: inherit; color: inherit; }
   color: var(--bg);
   border-color: var(--ink);
 }
-.btn--primary:hover { background: #dcdce0; color: var(--bg); }
+.btn--primary:hover { background: #2c2c30; color: var(--bg); }
 .btn--primary.is-done { background: var(--ok); border-color: var(--ok); }
 
 /* ---------------- responsive ---------------- */

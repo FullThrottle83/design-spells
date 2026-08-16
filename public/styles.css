@@ -1,47 +1,35 @@
 /* ============================================================
-   design_spells — global sheet
+   Design Spells — catalogue
    sober · technical · high-density editorial
-   theme: os-driven via `color-scheme` + `light-dark()`
-   constraints: zero gradients — 1px hairlines + subtle bg shifts
+   theme: os-driven via color-scheme + light-dark()
    ============================================================ */
-
-/* ---------------- tokens ---------------- */
 
 :root {
   color-scheme: light dark;
 
-  /* surfaces */
   --bg:      light-dark(#fbfbfc, #0d0d10);
   --bg-1:    light-dark(#ffffff, #141419);
   --bg-2:    light-dark(#f2f2f4, #08080a);
 
-  /* ink */
   --ink:     light-dark(#19191f, #eaeaee);
   --ink-1:   light-dark(#53535e, #a0a0aa);
   --ink-2:   light-dark(#90909a, #5c5c66);
 
-  /* hairlines */
   --line:    light-dark(#e2e2e7, #222228);
   --line-1:  light-dark(#c8c8cf, #34343d);
 
-  /* signals */
   --accent:  light-dark(#3b35c7, #a5a1ff);
   --ok:      light-dark(#0b7a45, #6fd39c);
   --warn:    light-dark(#9a5e00, #e0b156);
+  --no:      light-dark(#9a3b32, #e07a72);
 
-  /* type */
   --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
-  /* layout */
   --shell: 1280px;
   --pad-x: clamp(14px, 3.5vw, 36px);
-
-  /* motion */
   --ease: cubic-bezier(.22, .78, .28, 1);
 }
-
-/* ---------------- base ---------------- */
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -72,10 +60,7 @@ button { font: inherit; color: inherit; }
   outline-offset: 2px;
 }
 
-/* the `hidden` attribute must always win over author display rules */
 [hidden] { display: none !important; }
-
-/* ---------------- utilities ---------------- */
 
 .skip-link {
   position: absolute;
@@ -100,11 +85,12 @@ button { font: inherit; color: inherit; }
   text-transform: uppercase;
   color: var(--ink-1);
 }
+.chip--baseline     { color: var(--ok);   border-color: var(--ok); }
+.chip--newer        { color: var(--warn); border-color: var(--warn); }
+.chip--progressive  { color: var(--ink-2); border-style: dashed; }
 .chip--stable       { color: var(--ok);   border-color: var(--ok); }
 .chip--experimental { color: var(--warn); border-color: var(--warn); }
 .chip--draft        { color: var(--ink-2); border-style: dashed; }
-
-/* ---------------- site header ---------------- */
 
 .site-head {
   position: sticky;
@@ -170,12 +156,26 @@ button { font: inherit; color: inherit; }
   border-color: var(--ink);
 }
 
-/* ---------------- shell / toolbar ---------------- */
-
 .shell {
   max-width: var(--shell);
   margin-inline: auto;
   padding: 0 var(--pad-x) 64px;
+}
+
+.intro {
+  padding: 28px 0 8px;
+  max-width: 62ch;
+}
+.intro h1 {
+  font: 560 28px/1.2 var(--sans);
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.intro p {
+  margin-top: 10px;
+  color: var(--ink-1);
+  font-size: 14.5px;
+  text-wrap: pretty;
 }
 
 .toolbar {
@@ -183,15 +183,7 @@ button { font: inherit; color: inherit; }
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  padding: 26px 0 18px;
-}
-
-.toolbar__eyebrow {
-  font: 10px/1 var(--mono);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  white-space: nowrap;
+  padding: 18px 0 12px;
 }
 
 .search {
@@ -242,15 +234,81 @@ button { font: inherit; color: inherit; }
   pointer-events: none;
 }
 
-/* ---------------- spell grid ---------------- */
-/* hairline grid: 1px gaps reveal the line colour behind the cells */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+.filters__cats {
+  display: contents;
+}
+.filters--status { padding-bottom: 8px; }
+
+.chip-btn span {
+  color: inherit;
+  opacity: .55;
+  margin-left: 4px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 4px 0 22px;
+  font: 10.5px/1 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.legend__sep { margin-inline: 4px; }
+
+.chip-btn {
+  appearance: none;
+  background: var(--bg-1);
+  border: 1px solid var(--line-1);
+  padding: 6px 10px;
+  cursor: pointer;
+  font: 10px/1 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-1);
+}
+.chip-btn:hover { border-color: var(--ink); color: var(--ink); }
+.chip-btn.is-on {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.cat-block { margin-bottom: 36px; }
+
+.cat-block__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.cat-block__title {
+  font: 600 13px/1 var(--sans);
+  letter-spacing: -.01em;
+}
+.cat-block__count {
+  font: 10px/1 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
 
 .spell-grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
@@ -270,22 +328,29 @@ button { font: inherit; color: inherit; }
 .card {
   position: relative;
   background: var(--bg);
-  transition: background-color .12s ease;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 .card:hover { background: var(--bg-1); }
-
 .card:focus-within {
   outline: 1px solid var(--accent);
   outline-offset: -2px;
   z-index: 1;
 }
 
+.card__preview {
+  height: 148px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
 .card__inner {
-  min-height: 132px;
-  padding: 14px;
+  padding: 12px 14px 14px;
   display: grid;
-  gap: 12px;
-  align-content: space-between;
+  gap: 10px;
+  flex: 1;
 }
 
 .card__row {
@@ -302,19 +367,13 @@ button { font: inherit; color: inherit; }
 }
 
 .card__title {
-  font: 500 15.5px/1.35 var(--sans);
+  font: 500 15px/1.35 var(--sans);
   letter-spacing: -.01em;
 }
 
-/* stretched-hit pattern: one real button, full-card click area */
 .card__hit {
   all: unset;
   cursor: pointer;
-}
-.card__hit::after {
-  content: "";
-  position: absolute;
-  inset: 0;
 }
 .card__hit:focus-visible { outline: none; }
 
@@ -328,7 +387,47 @@ button { font: inherit; color: inherit; }
   color: var(--ink-2);
 }
 
-/* ---------------- shell note ---------------- */
+.card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.copy-btn {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--line-1);
+  padding: 5px 8px;
+  cursor: pointer;
+  font: 9px/1 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  position: relative;
+  z-index: 2;
+}
+.copy-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.copy-btn.is-done { color: var(--ok); border-color: var(--ok); }
+
+.browsers {
+  display: flex;
+  gap: 4px;
+}
+.brow {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  font: 8px/1 var(--mono);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  border: 1px solid var(--line-1);
+  color: var(--ink-2);
+}
+.brow[data-level="yes"]     { color: var(--ok);   border-color: var(--ok); }
+.brow[data-level="partial"] { color: var(--warn); border-color: var(--warn); }
+.brow[data-level="no"]      { color: var(--no);   border-color: color-mix(in oklch, var(--no) 50%, var(--line)); opacity: .7; }
 
 .shell-note {
   margin-top: 22px;
@@ -344,8 +443,6 @@ button { font: inherit; color: inherit; }
   color: var(--ink-2);
 }
 
-/* ---------------- backdrop ---------------- */
-
 .backdrop {
   position: fixed;
   inset: 0;
@@ -356,25 +453,20 @@ button { font: inherit; color: inherit; }
 }
 .backdrop.is-shown { opacity: 1; }
 
-/* ---------------- drawer ---------------- */
-
 .drawer {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 41;
-  width: min(600px, 100%);
+  width: min(640px, 100%);
   display: flex;
   flex-direction: column;
   background: var(--bg-1);
   border-left: 1px solid var(--line-1);
-
-  /* rest state: parked off-screen to the right */
   transform: translateX(100%);
   transition: transform .32s var(--ease);
 }
-
 .drawer.is-open { transform: translateX(0); }
 
 .drawer__head {
@@ -432,6 +524,13 @@ button { font: inherit; color: inherit; }
   overflow-y: auto;
 }
 
+.drawer__desc {
+  padding: 16px 16px 0;
+  color: var(--ink-1);
+  font-size: 13.5px;
+  text-wrap: pretty;
+}
+
 .sect {
   padding: 16px;
   border-bottom: 1px solid var(--line);
@@ -449,13 +548,49 @@ button { font: inherit; color: inherit; }
 }
 .sect__label span { color: var(--ink-2); }
 
-/* shadow-root host — hydrated by app.js */
+.browser-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.browser-list li {
+  background: var(--bg);
+  padding: 10px 8px;
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+.browser-list .bname {
+  font: 9px/1 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.browser-list .blevel {
+  font: 11px/1 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.browser-list .blevel[data-level="yes"] { color: var(--ok); }
+.browser-list .blevel[data-level="partial"] { color: var(--warn); }
+.browser-list .blevel[data-level="no"] { color: var(--no); }
+
+.support-note {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--ink-1);
+}
+
 .preview-host {
   border: 1px solid var(--line-1);
   background: var(--bg-2);
 }
-
-/* ---------------- code block / tabs ---------------- */
+.preview-host--lg { min-height: 240px; }
 
 .codeblock__bar {
   display: flex;
@@ -492,7 +627,7 @@ button { font: inherit; color: inherit; }
   background: none;
   border: 0;
   border-left: 1px solid var(--line);
-  padding: 8px 16px;
+  padding: 8px 14px;
   cursor: pointer;
   font: 10px/1 var(--mono);
   letter-spacing: .14em;
@@ -518,8 +653,6 @@ button { font: inherit; color: inherit; }
   outline: 1px solid var(--accent);
   outline-offset: -2px;
 }
-
-/* ---------------- drawer footer ---------------- */
 
 .drawer__foot {
   display: flex;
@@ -560,7 +693,10 @@ button { font: inherit; color: inherit; }
 }
 .btn--primary:hover { background: transparent; color: var(--ink); }
 
-/* ---------------- motion ---------------- */
+@media (max-width: 640px) {
+  .browser-list { grid-template-columns: repeat(2, 1fr); }
+  .intro h1 { font-size: 22px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -4,25 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>design_spells — a 0-js css reference bank</title>
-  <meta name="description" content="An open-source reference bank of interaction and layout techniques written in pure CSS. Zero JavaScript required.">
+  <title>Design Spells — zero-JS CSS techniques</title>
+  <meta name="description" content="144 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='1' y='13' font-size='13'%3E%E2%9C%B6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
+  <script src="./spells.js"></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ======================= site header ======================= -->
   <header class="site-head">
     <div class="site-head__row">
       <p class="brand">
-        design_spells<span class="brand__star" aria-hidden="true">*</span>
-        <span class="brand__tag">a 0-js css reference bank</span>
+        Design Spells<span class="brand__star" aria-hidden="true">*</span>
+        <span class="brand__tag">Zero-JS CSS techniques</span>
       </p>
       <div class="head-meta">
-        <p class="counter" id="counter" aria-live="polite">Showing 3 of 144 spells</p>
+        <p class="counter" id="counter" aria-live="polite">Showing 0 of 144 spells</p>
         <a class="sponsor" href="https://github.com/sponsors/FullThrottle83" target="_blank" rel="noopener">
           Sponsor on GitHub <span aria-hidden="true">↗</span>
         </a>
@@ -30,39 +30,69 @@
     </div>
   </header>
 
-  <!-- ========================= catalogue ======================== -->
   <main class="shell" id="main">
 
+    <section class="intro">
+      <h1>A catalogue of CSS that does the work itself.</h1>
+      <p>
+        One hundred forty-four interaction, layout, and polish techniques.
+        No client JavaScript. Filter by category, preview the result, copy the source,
+        and check browser support before you paste.
+      </p>
+    </section>
+
     <div class="toolbar">
-      <p class="toolbar__eyebrow">Catalogue <span aria-hidden="true">/</span> <span>v0.1-foundation</span></p>
       <form class="search" id="search-form" role="search">
         <label class="search__label" for="search">Search</label>
         <div class="search__field">
           <input class="search__input" id="search" name="q" type="search"
-                 placeholder="Filter spells by id, title, category, status…"
+                 placeholder="Filter by name, category, feature, or status…"
                  autocomplete="off" autocapitalize="off" spellcheck="false">
           <kbd class="search__kbd" aria-hidden="true">/</kbd>
         </div>
       </form>
     </div>
 
-    <!-- populated from MOCK_SPELLS by app.js -->
-    <ul class="spell-grid" id="spell-grid" aria-label="Spells"></ul>
+    <div class="filters" role="group" aria-label="Categories">
+      <button class="chip-btn is-on" type="button" data-cat="all">All</button>
+      <div id="cat-chips" class="filters__cats"></div>
+    </div>
+
+    <div class="filters filters--status" role="group" aria-label="Support status">
+      <button class="chip-btn is-on" type="button" data-status="all">Any status</button>
+      <button class="chip-btn" type="button" data-status="baseline">Baseline</button>
+      <button class="chip-btn" type="button" data-status="newer">Newer</button>
+      <button class="chip-btn" type="button" data-status="progressive">Progressive</button>
+    </div>
+
+    <p class="legend">
+      <span class="brow" data-level="yes">C</span> Chrome
+      <span class="brow" data-level="yes">E</span> Edge
+      <span class="brow" data-level="yes">F</span> Firefox
+      <span class="brow" data-level="yes">S</span> Safari
+      <span class="legend__sep" aria-hidden="true">·</span>
+      Green is supported, amber is partial, red is not shipped.
+    </p>
+
+    <div id="catalogue"></div>
 
     <footer class="shell-note">
-      <span>raw css only — no js ships with any spell</span>
-      <span>open source · contributions via pull request</span>
+      <span>Raw CSS only — no JavaScript ships with any spell</span>
+      <span>Open source · contributions via pull request</span>
     </footer>
   </main>
 
-  <!-- ====================== slide-over drawer ==================== -->
   <div class="backdrop" id="backdrop" hidden></div>
 
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
 
     <header class="drawer__head">
       <div class="drawer__head-main">
-        <p class="drawer__eyebrow"><span id="drawer-id">ds-000</span> <span aria-hidden="true">·</span> <span id="drawer-js">js: none</span></p>
+        <p class="drawer__eyebrow">
+          <span id="drawer-id">ds-000</span>
+          <span aria-hidden="true">·</span>
+          <span id="drawer-js">JS: none</span>
+        </p>
         <h2 class="drawer__title" id="drawer-title">Untitled spell</h2>
         <p class="drawer__meta">
           <span class="drawer__cat" id="drawer-category">category</span>
@@ -75,10 +105,17 @@
 
     <div class="drawer__scroll">
 
+      <p class="drawer__desc" id="drawer-desc"></p>
+
+      <section class="sect" aria-labelledby="browsers-label">
+        <h3 class="sect__label" id="browsers-label">Browser support <span id="drawer-feature">feature</span></h3>
+        <ul class="browser-list" id="drawer-browsers"></ul>
+        <p class="support-note" id="drawer-support-note"></p>
+      </section>
+
       <section class="sect" aria-labelledby="preview-label">
-        <h3 class="sect__label" id="preview-label">Live preview <span>shadow-dom · isolated</span></h3>
-        <!-- shadow root attached and hydrated per-spell by app.js -->
-        <div class="preview-host" id="preview-host"></div>
+        <h3 class="sect__label" id="preview-label">Live preview <span>isolated shadow DOM</span></h3>
+        <div class="preview-host preview-host--lg" id="preview-host"></div>
       </section>
 
       <section class="sect" aria-labelledby="source-label">
@@ -86,10 +123,11 @@
         <div class="codeblock">
           <div class="codeblock__bar">
             <div class="codeblock__tabs" role="tablist" aria-label="Source code views" id="code-tabs">
-              <button class="tab" id="tab-css" role="tab" aria-selected="true" aria-controls="code-view" data-tab="css" type="button">css</button>
-              <button class="tab" id="tab-html" role="tab" aria-selected="false" aria-controls="code-view" data-tab="html" type="button">html</button>
+              <button class="tab" id="tab-css" role="tab" aria-selected="true" aria-controls="code-view" data-tab="css" type="button">CSS</button>
+              <button class="tab" id="tab-html" role="tab" aria-selected="false" aria-controls="code-view" data-tab="html" type="button">HTML</button>
             </div>
             <span class="bar__spacer"></span>
+            <button class="codeblock__export" id="copy-source" type="button">Copy</button>
             <button class="codeblock__export" id="copy-astro" type="button">Copy as .astro</button>
           </div>
           <pre class="codeblock__view" id="code-view" role="tabpanel" tabindex="0" aria-labelledby="tab-css"><code id="code-text"></code></pre>
@@ -99,7 +137,7 @@
     </div>
 
     <footer class="drawer__foot">
-      <p class="drawer__hint" id="copy-status" role="status" aria-live="polite">0-js · copy and paste freely</p>
+      <p class="drawer__hint" id="copy-status" role="status" aria-live="polite">Zero JS · copy and paste freely</p>
       <button class="btn" id="reset-preview" type="button">Reset preview</button>
       <button class="btn btn--primary" id="drawer-close-foot" type="button">Close</button>
     </footer>

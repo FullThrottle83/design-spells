@@ -7,9 +7,6 @@
   <title>Design Spells — zero-JS CSS techniques</title>
   <meta name="description" content="145 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='1' y='13' font-size='13'%3E%E2%9C%B6%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="./styles.css">
   <script src="./spells.js"></script>
   <script src="./app.js" defer></script>
@@ -74,7 +71,7 @@
       <span class="brow" data-level="yes">F</span> Firefox
       <span class="brow" data-level="yes">S</span> Safari
       <span class="legend__sep" aria-hidden="true">·</span>
-Green is supported, amber is partial, red is not shipped. Neutral badges indicate zero-JS state and CSS features.
+      Green supported · amber partial · red missing
     </p>
 
     <div id="catalogue"></div>
@@ -100,7 +97,7 @@ Green is supported, amber is partial, red is not shipped. Neutral badges indicat
         <p class="drawer__meta">
           <span class="drawer__cat" id="drawer-category">category</span>
           <span aria-hidden="true">/</span>
-          <span class="badge" id="drawer-status">status</span>
+          <span class="label" id="drawer-status"><span class="label__dot" aria-hidden="true"></span>status</span>
         </p>
       </div>
       <button class="drawer__close" id="drawer-close" type="button" aria-label="Close panel">×</button>

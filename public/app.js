@@ -85,8 +85,6 @@ const PREVIEW_TOKENS = `
     display: grid;
     place-items: center;
     background-color: var(--color-bg);
-    background-image: radial-gradient(circle at 1px 1px, #27272a 1px, transparent 0);
-    background-size: 16px 16px;
     color: var(--color-text);
   }
   .stage > * { max-width: 100%; }
@@ -205,21 +203,13 @@ function oneLine(text) {
 }
 
 function cardTemplate(spell) {
-  const feature = spell.feature || "Modern CSS";
   return `
   <li class="card" data-id="${esc(spell.id)}">
     <header class="card__head">
-      <div class="card__head-main">
-        <h2 class="card__title">
-          <button class="card__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
-        </h2>
-        <p class="card__usecase">${esc(oneLine(spell.description))}</p>
-      </div>
-      <div class="card__head-aside">
-        <span class="badge" title="0 JS · ${esc(feature)}">
-          <span class="badge__dot" aria-hidden="true"></span><span class="badge__text">0 JS · ${esc(feature)}</span>
-        </span>
-      </div>
+      <h2 class="card__title">
+        <button class="card__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
+      </h2>
+      <p class="card__usecase">${esc(oneLine(spell.description))}</p>
     </header>
 
     <div class="card__preview" data-preview="${esc(spell.id)}" aria-hidden="true"></div>
@@ -232,20 +222,19 @@ function cardTemplate(spell) {
             <button class="code__tab" role="tab" data-tab="modern" aria-selected="true" type="button">Modern CSS</button>
             <button class="code__tab" role="tab" data-tab="html" aria-selected="false" type="button">HTML</button>
           </div>
-          <span class="code__spacer"></span>
-          <button class="code__copy" type="button" data-copy-code aria-label="Copy source">Copy</button>
         </div>
         <div class="code__view-wrap">
           <pre class="code__view" role="tabpanel" tabindex="0"><code></code></pre>
         </div>
         <button class="code__toggle" type="button" data-code-toggle>Show more</button>
       </div>
+      <button class="card__copy" type="button" data-copy-code aria-label="Copy source for ${esc(spell.title)}">Copy CSS</button>
     </div>
 
     <div class="card__meta">
       <div class="card__cats">
         <span class="card__id">${esc(spell.id)}</span>
-        <span class="badge badge--muted">${esc(spell.category)}</span>
+        <span class="card__cat-name">${esc(spell.category)}</span>
       </div>
       <div class="card__browsers" aria-label="Browser support">${browsersRow(spell)}</div>
     </div>
@@ -475,6 +464,8 @@ function highlight(src, tab) {
   return highlightCss(src);
 }
 
+const COPY_LABEL = { modern: "Copy CSS", html: "Copy HTML", tailwind: "Copy Tailwind" };
+
 function renderCodeView(wrap) {
   const spell = SPELLS.find((s) => s.id === wrap.dataset.id);
   if (!spell) return;
@@ -488,6 +479,11 @@ function renderCodeView(wrap) {
   const view = wrap.querySelector(".code__view");
   view.scrollTop = 0;
   requestAnimationFrame(() => updateCodeToggle(wrap));
+
+  const copyBtn = wrap.parentElement?.querySelector(".card__copy");
+  if (copyBtn && !copyBtn.classList.contains("is-done")) {
+    copyBtn.textContent = COPY_LABEL[tab] || "Copy";
+  }
 }
 
 function updateCodeToggle(wrap) {
@@ -551,11 +547,12 @@ catalogue.addEventListener("click", async (ev) => {
   const copyBtn = ev.target.closest("[data-copy-code]");
   if (copyBtn) {
     ev.preventDefault();
-    const wrap = copyBtn.closest("[data-code]");
-    const spell = SPELLS.find((s) => s.id === wrap.dataset.id);
+    const wrap = copyBtn.closest(".card__code")?.querySelector("[data-code]");
+    const spell = wrap && SPELLS.find((s) => s.id === wrap.dataset.id);
     if (!spell) return;
+    const tab = wrap.dataset.tab || "modern";
     try {
-      await copyText(codeFor(spell, wrap.dataset.tab || "modern"));
+      await copyText(codeFor(spell, tab));
       flashCopy(copyBtn, "Copied!");
     } catch {
       flashCopy(copyBtn, "Failed");
@@ -633,7 +630,14 @@ tabBar.addEventListener("keydown", (ev) => {
 /* ---------------- clipboard ---------------- */
 
 async function copyText(text) {
-  if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch {
+      // Permission or focus issue — fall back to execCommand below.
+    }
+  }
   const ta = document.createElement("textarea");
   ta.value = text;
   ta.setAttribute("readonly", "");
@@ -691,8 +695,8 @@ function openDrawer(spell, trigger) {
   drawerJs.textContent = spell.jsLabel;
   drawerTitle.textContent = spell.title;
   drawerCat.textContent = spell.category;
-  drawerChip.textContent = spell.statusLabel;
-  drawerChip.className = `badge badge--${spell.status === "baseline" ? "ok" : spell.status === "newer" ? "warn" : "muted"}`;
+  drawerChip.className = `label label--${spell.status === "baseline" ? "ok" : spell.status === "newer" ? "warn" : "muted"}`;
+  drawerChip.innerHTML = `<span class="label__dot" aria-hidden="true"></span>${esc(spell.statusLabel)}`;
   drawerDesc.textContent = spell.description || "A zero-JS CSS technique.";
   drawerFeat.textContent = spell.feature;
   drawerNote.textContent = spell.supportNote;

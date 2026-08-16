@@ -106,16 +106,22 @@ button { font: inherit; color: inherit; }
 .label--warn  { color: var(--warn); }
 .label--muted { color: var(--ink-2); }
 
-/* Browser glyphs — abstract, monochrome, tinted by support level */
+/* Browser badges — tracked two-letter marks, tinted by support level.
+   No logo reproduction; reads as data, matching the label idiom above. */
 .brow {
-  width: 18px;
-  height: 18px;
-  display: inline-grid;
-  place-items: center;
+  min-width: 22px;
+  height: 16px;
+  padding: 0 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: var(--r);
+  font: 700 9.5px/1 var(--mono);
+  letter-spacing: .03em;
   color: var(--ink-2);
   flex: none;
 }
-.brow svg { width: 13px; height: 13px; display: block; }
 .brow[data-level="yes"]     { color: var(--ok); }
 .brow[data-level="partial"] { color: var(--warn); }
 .brow[data-level="no"]      { color: var(--no); opacity: .8; }
@@ -255,13 +261,13 @@ button { font: inherit; color: inherit; }
 .browse {
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
-  gap: 32px;
+  gap: 24px;
   padding-top: 28px;
   align-items: start;
 }
 
-@media (min-width: 1120px) {
-  .browse { grid-template-columns: 200px minmax(0, 1fr) 380px; }
+@media (min-width: 960px) {
+  .browse { grid-template-columns: 200px minmax(0, 1fr) 320px; }
 }
 
 .browse__nav {
@@ -479,7 +485,7 @@ button { font: inherit; color: inherit; }
   max-height: calc(100vh - var(--header-h) - 40px);
   overflow-y: auto;
 }
-@media (min-width: 1120px) {
+@media (min-width: 960px) {
   .browse__preview { display: block; }
 }
 
@@ -513,6 +519,7 @@ button { font: inherit; color: inherit; }
   margin: 14px 16px 0;
   border: 1px solid var(--line);
   min-height: 220px;
+  overflow: hidden;
 }
 .preview-host--lg { min-height: 280px; border: 1px solid var(--line); }
 
@@ -677,7 +684,6 @@ button { font: inherit; color: inherit; }
   letter-spacing: .02em;
   color: var(--ink-2);
 }
-.browser-list .bname .brow { width: auto; height: auto; color: inherit; }
 .browser-list .blevel {
   font: 700 11px/1 var(--sans);
 }

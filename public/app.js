@@ -27,13 +27,14 @@ const CAT_ORDER = [
   "Performance",
 ];
 
-/* Small abstract glyphs (not the trademarked logos) — enough to tell the
-   four browsers apart at a glance while staying monochrome/currentColor. */
+/* Tracked-letter badges instead of logos — legible at 11px, no
+   trademark reproduction, and fits the typographic system already
+   used for status labels elsewhere in the UI. */
 const ICONS = {
-  chrome: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>',
-  edge: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4.6 9.6C5.4 6.8 9.6 6.8 11.4 9.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
-  firefox: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.6c2.6-1.6 3.6.9 1.8 2.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
-  safari: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 4.4 9.5 8 8 11.6 6.5 8Z" fill="currentColor"/></svg>',
+  chrome: "CH",
+  edge: "ED",
+  firefox: "FF",
+  safari: "SA",
 };
 
 const BROWSER_META = [
@@ -54,6 +55,9 @@ const TAB_LABEL = {
 /* Dark-zinc preview sandbox. The stage paints the canvas surface;
    spell markup/CSS sits on top. */
 const PREVIEW_TOKENS = `
+  :host, :host *, :host *::before, :host *::after {
+    box-sizing: border-box;
+  }
   :host {
     display: block;
     color-scheme: dark;
@@ -208,7 +212,7 @@ function matches(spell) {
 }
 
 function browserIcon(key, level, label) {
-  return `<span class="brow" data-level="${esc(level)}" title="${esc(label)}: ${esc(LEVEL_LABEL[level] || level)}">${ICONS[key] || ""}</span>`;
+  return `<span class="brow" data-level="${esc(level)}" title="${esc(label)}: ${esc(LEVEL_LABEL[level] || level)}">${esc(ICONS[key] || "")}</span>`;
 }
 
 function browsersRow(spell) {
@@ -671,7 +675,7 @@ function renderBrowserList(spell) {
   drawerBrows.innerHTML = BROWSER_META.map((b) => {
     const level = spell.browsers?.[b.key] || "no";
     return `<li>
-      <span class="bname">${ICONS[b.key] || ""}${esc(b.label)}</span>
+      <span class="bname"><span class="brow" data-level="${esc(level)}">${esc(ICONS[b.key] || "")}</span>${esc(b.label)}</span>
       <span class="blevel" data-level="${esc(level)}">${esc(LEVEL_LABEL[level] || level)}</span>
     </li>`;
   }).join("");

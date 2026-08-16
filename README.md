@@ -8,75 +8,76 @@ date_added: "2026-08-10"
 
 # Design Spells — Astro Canonical (2026)
 
-En enda **canonical** referensbank över design spells för moderna Astro-projekt där målet är **0 klient-JS**. Den här filen slår ihop originalets spellbibliotek med en Astro-first struktur och **utesluter alla spells märkta `+ JS`**.
+A single **canonical** reference bank of design spells for modern Astro projects whose goal is **0 client JS**. This file merges the original spell library with an Astro-first structure and **excludes every spell marked `+ JS`**.
 
-Dokumentet innehåller därför endast spells märkta **`0 JS`** eller **`Markup`**. I originalfilens terminologi betyder `Markup` att spellen fortfarande är JS-fri men kräver ett tydligt HTML-mönster, till exempel `<details>`, checkbox-state, `popover`, `dialog`-kompatibel struktur eller annan native state-machine.
+The document therefore contains only spells marked **`0 JS`** or **`Markup`**. In the original file's terminology, `Markup` still means the spell is JS-free, but it needs a precise HTML pattern — for example `<details>`, checkbox state, `popover`, a `dialog`-compatible structure, or another native state machine.
 
-Totalt ingår **144 Astro-relevanta spells**. Exkluderade `+ JS`-spells: **4, 42**. Spells **97–146** är 2026-tillägg (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal).
-
----
-
-## Hur dokumentet används
-
-### För människor
-
-- Bläddra till en kategori som matchar problemet.
-- Läs metadata-raden direkt under rubriken.
-- Kopiera CSS-blocket och byt ut projektets tokens där det behövs.
-- Börja med Baseline-spells, gå vidare till Newer och sedan Progressive.
-- Använd helst 1–2 visuellt dominanta spells per sektion.
-
-### För AI-agenter och editor-agenter
-
-- Referera alltid till spells med stabilt nummer, till exempel `Spell 43`.
-- Om flera spells löser samma problem ska den modernaste hållbara väljas först.
-- Prioritet för val: **Baseline → Newer → Progressive**.
-- Föredra spells som passar direkt i `.astro`-komponenter eller layout-CSS.
-- Introducera inte klient-JS för sådant som redan löses av dokumentets JS-fria spells.
+In total there are **144 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–146** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal).
 
 ---
 
-## Kärnprinciper
+## How to use this document
 
-- HTML + CSS först.
-- 0 klient-JS som standard.
-- Native browser state före handbyggda lösningar.
-- Progressive enhancement före hårda beroenden.
-- Astro-fit före demo-effekt.
-- Läsbarhet, fokus och layout går före dekor.
-- Motion är enhancement och ska respektera `prefers-reduced-motion`.
-- Komponentlokal CSS är oftast bättre än globalt läckande selectors.
+### For humans
+
+- Browse the visual catalogue in `public/` (or open the site) to preview, copy, and check browser support.
+- Browse to a category that matches the problem.
+- Read the metadata line directly under the heading.
+- Copy the CSS block and swap in the project’s tokens where needed.
+- Start with Baseline spells, then Newer, then Progressive.
+- Prefer 1–2 visually dominant spells per section.
+
+### For AI agents and editor agents
+
+- Always refer to spells by their stable number, for example `Spell 43`.
+- If several spells solve the same problem, pick the most modern sustainable one first.
+- Selection priority: **Baseline → Newer → Progressive**.
+- Prefer spells that drop straight into `.astro` components or layout CSS.
+- Do not introduce client JS for something this document already solves with a JS-free spell.
 
 ---
 
-## Metadata och tolkning
+## Core principles
 
-Originalfilens metadata behålls inne i spellsektionerna:
+- HTML + CSS first.
+- 0 client JS by default.
+- Native browser state before hand-built solutions.
+- Progressive enhancement before hard dependencies.
+- Astro fit before demo effect.
+- Readability, focus, and layout come before decoration.
+- Motion is enhancement and must respect `prefers-reduced-motion`.
+- Component-local CSS is usually better than globally leaking selectors.
 
-- **Kategori** = funktionell typ av spell.
-- **Status** = browserrisk: `Baseline`, `Newer`, `Progressive`.
-- **JS-behov** = här förekommer bara `0 JS` och `Markup` i denna canonical Astro-utgåva.
+---
 
-### Praktisk tolkning för Astro
+## Metadata and how to read it
 
-- **0 JS**: direkt lämplig i statisk Astro-markup.
-- **Markup**: fortfarande JS-fri, men kräver mer exakt HTML-struktur.
-- **Baseline**: trygg att använda direkt.
-- **Newer**: bra i moderna projekt, testa gärna i kritiska UI-flöden.
-- **Progressive**: ska kapslas i `@supports` eller få tyst fallback.
+The original file’s metadata is kept inside each spell section:
 
-### Rekommenderad placering i Astro
+- **Category** = the functional type of the spell.
+- **Status** = browser risk: `Baseline`, `Newer`, `Progressive`.
+- **JS need** = only `0 JS` and `Markup` appear in this canonical Astro edition.
 
-- Globala spells: `base.css` eller global design layer.
+### Practical reading for Astro
+
+- **0 JS**: ready for static Astro markup.
+- **Markup**: still JS-free, but needs a more exact HTML structure.
+- **Baseline**: safe to use immediately.
+- **Newer**: good in modern projects; test it in critical UI flows.
+- **Progressive**: wrap it in `@supports` or give it a silent fallback.
+
+### Recommended placement in Astro
+
+- Global spells: `base.css` or the global design layer.
 - Page chrome: `MainLayout.astro`, `Header.astro`, `Shell.astro`.
-- Komponentspells: lokal CSS i `.astro`-komponenter.
-- Nya browserfeatures: nära komponenten bakom `@supports`.
+- Component spells: local CSS in `.astro` components.
+- New browser features: next to the component, behind `@supports`.
 
 ---
 
-## Bas-skydd
+## Base safeguards
 
-Detta är fundamentet alla spells bygger på. Ladda före allt annat.
+This is the foundation every spell builds on. Load it before anything else.
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -89,19 +90,19 @@ Detta är fundamentet alla spells bygger på. Ladda före allt annat.
 }
 
 html {
-  /* Förhindrar layout shift när dialog/popover öppnas och låser rullningslisten */
+  /* Prevents layout shift when a dialog/popover opens and locks the scrollbar */
   scrollbar-gutter: stable;
-  /* Förhindrar oönskat textzoombeteende på mobila enheter */
+  /* Prevents unwanted text zoom on mobile devices */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 :target, :focus-visible {
-  /* Förhindrar att djuplänkat innehåll hamnar under sticky header (se Spell 17) */
+  /* Prevents deep-linked content from landing under a sticky header (see Spell 17) */
   scroll-margin-block-start: max(6rem, var(--header-height, 0px));
 }
 
-/* Universell fokus-baslinje för tangentbordsnavigering */
+/* Universal focus baseline for keyboard navigation */
 :where(
   a[href],
   button,
@@ -115,19 +116,19 @@ html {
   outline-offset: 3px;
 }
 
-/* Förhindrar att scroll läcker upp till parent/body i inbäddade scrollers */
+/* Prevents scroll from leaking to the parent/body in nested scrollers */
 .scroller, .modal-body, .drawer-body {
   overscroll-behavior: contain;
 }
 
-/* WCAG 2.2 AA / mobil: minsta tryckyta för knappar, länkar, summary, labels. */
+/* WCAG 2.2 AA / mobile: minimum hit target for buttons, links, summary, labels. */
 button, [type="button"], [type="submit"], [type="reset"],
 summary, .btn, a.btn {
   min-block-size: 44px;
 }
 
-/* Visuellt dold men kvar i tab-ordning och accessibility-trädet.
-   Använd för checkboxar/inputs som driver markup-state-machines (se Spell 60). */
+/* Visually hidden but still in the tab order and accessibility tree.
+   Use for checkboxes/inputs that drive markup state machines (see Spell 60). */
 .sr-only {
   position: absolute;
   inline-size: 1px; block-size: 1px;
@@ -142,7 +143,7 @@ summary, .btn, a.btn {
 
 ## Root scroll-state preset (opt-in)
 
-Lägg till detta **endast** om du använder Spell 43 (Auto-Hide Header) eller Spell 47 (Scroll-Awake Back-to-Top). Spells 44, 45 och 46 sätter upp lokala scroll-state-containers själva och behöver inte detta.
+Add this **only** if you use Spell 43 (Auto-Hide Header) or Spell 47 (Scroll-Awake Back-to-Top). Spells 44, 45, and 46 set up local scroll-state containers themselves and do not need this.
 
 ```css
 html {
@@ -151,37 +152,37 @@ html {
 }
 ```
 
-`container-type: scroll-state` ignoreras tyst i browsers utan stöd, så presetet är säker att inkludera även där fallback krävs. Det är dock opinionerat nog att inte vara default.
+`container-type: scroll-state` is ignored silently in browsers without support, so the preset is safe to include even where a fallback is required. It is opinionated enough not to be the default.
 
 ---
 
-## Urvalsregler
+## Selection rules
 
-1. Välj högst 1–2 visuellt dominanta spells per sektion.
-2. Välj Baseline före Newer och Newer före Progressive.
-3. Prioritera fokus, kontrast, spacing och informationshierarki.
-4. Lägg prestandaspells tidigt på långa sidor.
-5. Använd native state (`:has()`, `:focus-within`, `<details>`, `scroll-snap`, `scroll-state`) innan du uppfinner egna mönster.
+1. Pick at most 1–2 visually dominant spells per section.
+2. Prefer Baseline over Newer, and Newer over Progressive.
+3. Prioritize focus, contrast, spacing, and information hierarchy.
+4. Place performance spells early on long pages.
+5. Use native state (`:has()`, `:focus-within`, `<details>`, `scroll-snap`, `scroll-state`) before inventing your own patterns.
 
 ### Anti-patterns
 
-- För många hover-only-spells i touch-tunga gränssnitt.
-- För många blur- eller backdrop-effekter i samma viewport.
-- För många reveal-effekter samtidigt.
-- För mycket specialmarkup utan tydligt värde.
-- För mycket dekoration innan läsbarhet och state-feedback fungerar.
+- Too many hover-only spells in touch-heavy interfaces.
+- Too many blur or backdrop effects in the same viewport.
+- Too many reveal effects at once.
+- Too much special markup without a clear payoff.
+- Too much decoration before readability and state feedback work.
 
 ---
 
 # Spells
 
 
-## Interaktion & feedback
+## Interaction & feedback
 
-### 1. Shimmer på primärknappar
-*Interaktion · Baseline · 0 JS*
+### 1. Shimmer on primary buttons
+*Interaction · Baseline · 0 JS*
 
-En subtil ljusglimt sveper över knappen vid hover.
+A subtle light gleam sweeps across the button on hover.
 
 ```css
 .btn-primary {
@@ -205,9 +206,9 @@ En subtil ljusglimt sveper över knappen vid hover.
 ```
 
 ### 2. Soft Push
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
-Mikroskopisk nedskalning på `:active` för taktil feedback.
+A microscopic scale-down on `:active` for tactile feedback.
 
 ```css
 .btn, .card-interactive {
@@ -217,10 +218,10 @@ Mikroskopisk nedskalning på `:active` för taktil feedback.
 .btn:active, .card-interactive:active { transform: scale(0.98); }
 ```
 
-### 3. Lift & Zoom på kort
-*Interaktion · Baseline · 0 JS*
+### 3. Lift & Zoom on cards
+*Interaction · Baseline · 0 JS*
 
-Kortet lyfts, bilden zoomas in långsamt.
+The card lifts and the image zooms in slowly.
 
 ```css
 .destination-card {
@@ -242,9 +243,9 @@ Kortet lyfts, bilden zoomas in långsamt.
 ```
 
 ### 5. Magnetic Underline
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
-Underline glider in i stället för att blinka fram.
+The underline slides in instead of blinking on.
 
 ```css
 .nav-link {
@@ -264,7 +265,7 @@ Underline glider in i stället för att blinka fram.
 ```
 
 ### 7. Icon Color Shift
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
 ```css
 .icon {
@@ -277,9 +278,9 @@ Underline glider in i stället för att blinka fram.
 ```
 
 ### 19. Focus-Within Halo
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
-Wrapper-baserad fokusfeedback för sammansatta inputs och sökrutor.
+Wrapper-based focus feedback for composite inputs and search boxes.
 
 ```css
 .input-group {
@@ -297,9 +298,9 @@ Wrapper-baserad fokusfeedback för sammansatta inputs och sökrutor.
 ```
 
 ### 20. Spring-Loaded Checkbox
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
-Animera bara de egenskaper som faktiskt ändras. Aldrig `transition: all`.
+Animate only the properties that actually change. Never `transition: all`.
 
 ```css
 input[type="checkbox"] {
@@ -332,7 +333,7 @@ input[type="checkbox"]:checked::before { transform: scale(1); }
 ```
 
 ### 22. Details Chevron Rotate
-*Interaktion · Baseline · Markup*
+*Interaction · Baseline · Markup*
 
 ```css
 summary {
@@ -349,7 +350,7 @@ details[open] summary .chevron { transform: rotate(180deg); }
 ```
 
 ### 24. External Link Nudge
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
 ```css
 a[target="_blank"] .external-icon {
@@ -363,7 +364,7 @@ a[target="_blank"]:focus-visible .external-icon {
 ```
 
 ### 26. Pill Segmented Control Glow
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
 ```css
 .segmented {
@@ -383,9 +384,9 @@ a[target="_blank"]:focus-visible .external-icon {
 ```
 
 ### 38. Color-Mix Hover States
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
-Skapa hover/active-varianter direkt från en grundfärg utan att hårdkoda extra tokens.
+Build hover/active variants directly from a base color without hard-coding extra tokens.
 
 ```css
 .btn-primary {
@@ -401,9 +402,9 @@ Skapa hover/active-varianter direkt från en grundfärg utan att hårdkoda extra
 ```
 
 ### 39. Accent Color Forms
-*Interaktion · Baseline · 0 JS*
+*Interaction · Baseline · 0 JS*
 
-One-liner som färgar alla native formulärkontroller (radio, checkbox, range, progress).
+A one-liner that tints every native form control (radio, checkbox, range, progress).
 
 ```css
 :root {
@@ -412,18 +413,18 @@ One-liner som färgar alla native formulärkontroller (radio, checkbox, range, p
 ```
 
 ### 67. Scroll-Driven Before/After Comparison
-*Interaktion · Newer · Markup*
+*Interaction · Newer · Markup*
 
-Touch-vänlig och tillgänglig före/efter-bildjämförelse helt utan JS. Scroller exporterar en namngiven `scroll-timeline` via `timeline-scope` så clip-path kan animeras på en *syskon*-yta (inte på scroller-elementet själv). Stödjer svepgester och piltangenter (`tabindex="0"`). `role="region"` — inte `slider` — eftersom `aria-valuenow` inte kan uppdateras utan JS.
+A touch-friendly, accessible before/after image comparison with no JavaScript. The scroller exports a named `scroll-timeline` via `timeline-scope` so `clip-path` can animate on a *sibling* surface (not on the scroller itself). Supports swipe gestures and arrow keys (`tabindex="0"`). Use `role="region"` — not `slider` — because `aria-valuenow` cannot be updated without JS.
 
 ```html
 <div class="compare-container">
-  <img src="/after.jpg" alt="Efter" class="compare-img compare-after">
+    <img src="/after.jpg" alt="After" class="compare-img compare-after">
   <div class="compare-before-wrap">
-    <img src="/before.jpg" alt="Före" class="compare-img compare-before">
+    <img src="/before.jpg" alt="Before" class="compare-img compare-before">
   </div>
   
-  <div class="compare-scroller" tabindex="0" role="region" aria-label="Jämför före och efter. Svep eller använd piltangenter.">
+  <div class="compare-scroller" tabindex="0" role="region" aria-label="Compare before and after. Swipe or use the arrow keys.">
     <div class="scroller-spacer"></div>
   </div>
 </div>
@@ -487,20 +488,20 @@ Touch-vänlig och tillgänglig före/efter-bildjämförelse helt utan JS. Scroll
 ```
 
 ### 71. Sliding Segment Indicator
-*Interaktion · Baseline · Markup*
+*Interaction · Baseline · Markup*
 
-Pill-indikator i segmented controls/flikar som glider sömlöst till aktivt val med `:has()` och CSS-variabler (`--total-items`).
+A pill indicator in segmented controls/tabs that glides to the active choice with `:has()` and CSS variables (`--total-items`).
 
 ```html
 <div class="segmented-nav" style="--total-items: 3;">
   <input type="radio" name="seg" id="seg-1" class="sr-only" checked style="--index: 0;">
-  <label for="seg-1">Översikt</label>
+  <label for="seg-1">Overview</label>
 
   <input type="radio" name="seg" id="seg-2" class="sr-only" style="--index: 1;">
-  <label for="seg-2">Analys</label>
+  <label for="seg-2">Analytics</label>
 
   <input type="radio" name="seg" id="seg-3" class="sr-only" style="--index: 2;">
-  <label for="seg-3">Inställningar</label>
+  <label for="seg-3">Settings</label>
 
   <div class="segment-pill" aria-hidden="true"></div>
 </div>
@@ -544,20 +545,20 @@ Pill-indikator i segmented controls/flikar som glider sömlöst till aktivt val 
 ```
 
 ### 73. Expandable Speed Dial FAB
-*Interaktion · Baseline · Markup*
+*Interaction · Baseline · Markup*
 
-Svävande snabbknapp (FAB) som expanderar undermenyer via nativ `<details>` och `@starting-style`. 
+A floating action button (FAB) that expands child actions via native `<details>` and `@starting-style`. 
 
-**Guardrails:** `pointer-events: none` på wrapper förhindrar att osynliga klickytor täcker skärmen. Alla knappar uppfyller WCAG minsta klickytor (44x44px).
+**Guardrails:** `pointer-events: none` on the wrapper stops invisible hit areas covering the screen. Every button meets WCAG minimum hit targets (44×44px).
 
 ```html
 <details class="speed-dial">
-  <summary class="fab-main" aria-label="Snabbåtgärder">+</summary>
+  <summary class="fab-main" aria-label="Quick actions">+</summary>
 
   <div class="fab-actions">
-    <button class="fab-child" title="Nytt inlägg" aria-label="Nytt inlägg">📝</button>
-    <button class="fab-child" title="Ladda upp bild" aria-label="Ladda upp bild">📷</button>
-    <button class="fab-child" title="Dela sida" aria-label="Dela sida">🔗</button>
+    <button class="fab-child" title="New post" aria-label="New post">📝</button>
+    <button class="fab-child" title="Upload image" aria-label="Upload image">📷</button>
+    <button class="fab-child" title="Share page" aria-label="Share page">🔗</button>
   </div>
 </details>
 ```
@@ -623,18 +624,18 @@ details[open] .fab-actions {
 ### 79. Anchor-Positioned Mega Menu (`[popover]`)
 *Navigation · Newer · Markup*
 
-Megameny som fälls ut från en nav-trigger via Invoker Commands (`commandfor` + `command="toggle-popover"`) och nativ `[popover=auto]`, fäst med anchor positioning. Ger Esc-stängning, light-dismiss och fokus-hantering helt utan skript. Sätt inte statisk `aria-expanded` — native popover sköter tillgänglighetsträdet.
+A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command="toggle-popover"`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree.
 
 ```html
 <nav class="site-nav">
   <button class="mega-trigger" commandfor="mega-1" command="toggle-popover">
-    Produkter <span aria-hidden="true">▾</span>
+    Products <span aria-hidden="true">▾</span>
   </button>
   <div id="mega-1" popover="auto" class="mega-panel">
     <ul>
       <li><a href="/analytics">Analytics</a></li>
       <li><a href="/automation">Automation</a></li>
-      <li><a href="/api">API & Integrationer</a></li>
+      <li><a href="/api">API & Integrations</a></li>
     </ul>
   </div>
 </nav>
@@ -679,13 +680,13 @@ Megameny som fälls ut från en nav-trigger via Invoker Commands (`commandfor` +
 ### 80. Squircle Chips & Nav (`corner-shape`)
 *Navigation · Newer · 0 JS*
 
-Pill-navigering och chips med äkta "squircle"-silhuett (superelliptisk hörnrundning) istället för vanliga `border-radius`-bågar.
+Pill navigation and chips with a true “squircle” silhouette (superellipse corner rounding) instead of ordinary `border-radius` arcs.
 
 ```html
-<nav class="squircle-nav" aria-label="Huvudnavigering">
-  <a href="/" aria-current="page">Översikt</a>
-  <a href="/reports">Rapporter</a>
-  <a href="/settings">Inställningar</a>
+<nav class="squircle-nav" aria-label="Main navigation">
+  <a href="/" aria-current="page">Overview</a>
+  <a href="/reports">Reports</a>
+  <a href="/settings">Settings</a>
 </nav>
 ```
 
@@ -712,14 +713,14 @@ Pill-navigering och chips med äkta "squircle"-silhuett (superelliptisk hörnrun
 ### 81. Overflow-Aware Breadcrumbs
 *Navigation · Newer · Markup*
 
-Brödsmulor som visar en diskret "+N"-hint och kantmaskning endast när raden faktiskt är skrollbar.
+Breadcrumbs that show a discreet “+N” hint and edge masking only when the row is actually scrollable.
 
 ```html
-<nav class="crumbs-wrap" aria-label="Brödsmulor">
+<nav class="crumbs-wrap" aria-label="Breadcrumb">
   <ol class="crumbs">
-    <li><a href="/">Hem</a></li>
-    <li><a href="/docs">Dokumentation</a></li>
-    <li><a href="/docs/components">Komponenter</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/docs">Documentation</a></li>
+    <li><a href="/docs/components">Components</a></li>
     <li aria-current="page">Spells</li>
   </ol>
   <span class="crumb-hint" aria-hidden="true">+2</span>
@@ -750,15 +751,15 @@ Brödsmulor som visar en diskret "+N"-hint och kantmaskning endast när raden fa
 ```
 
 ### 82. Fixed-Angle 3D Tilt Card
-*Kort · Baseline · 0 JS*
+*Cards · Baseline · 0 JS*
 
-Kortet lutar sig subtilt i 3D vid hover/fokus för djupkänsla — utan mus-spårning och utan extra DOM-lager.
+The card tilts subtly in 3D on hover/focus for a sense of depth — no mouse tracking and no extra DOM layers.
 
 ```html
 <article class="tilt-card">
-  <h3>Premium-plan</h3>
-  <p>Allt i Pro, plus prioriterad support och SSO.</p>
-  <a href="/pricing">Välj plan</a>
+  <h3>Premium plan</h3>
+  <p>Everything in Pro, plus priority support and SSO.</p>
+  <a href="/pricing">Choose plan</a>
 </article>
 ```
 
@@ -777,19 +778,19 @@ Kortet lutar sig subtilt i 3D vid hover/fokus för djupkänsla — utan mus-spå
 ```
 
 ### 83. Perforated Ticket Card
-*Kort · Baseline · 0 JS*
+*Cards · Baseline · 0 JS*
 
-Biljett-/kupongkort med äkta perforerade "hål" i kanterna via pseudo-element.
+A ticket/coupon card with real perforated “holes” on the edges via pseudo-elements.
 
 ```html
 <article class="ticket">
   <div class="ticket-body">
-    <h3>Sommarerbjudande</h3>
-    <p>20% rabatt på alla årliga planer.</p>
+    <h3>Summer offer</h3>
+    <p>20% off every annual plan.</p>
   </div>
   <div class="ticket-stub">
     <strong>−20%</strong>
-    <span>Kod: SOMMAR26</span>
+    <span>Code: SUMMER26</span>
   </div>
 </article>
 ```
@@ -816,17 +817,17 @@ Biljett-/kupongkort med äkta perforerade "hål" i kanterna via pseudo-element.
 ```
 
 ### 84. Hover/Focus Reveal Card Actions
-*Kort · Baseline · 0 JS*
+*Cards · Baseline · 0 JS*
 
-Sekundära kortåtgärder döljs tills kortet hovras eller fokuseras.
+Secondary card actions stay hidden until the card is hovered or focused.
 
 ```html
 <article class="card-row">
-  <h3>Q3-rapport</h3>
+  <h3>Q3 report</h3>
   <div class="card-actions">
-    <button aria-label="Redigera Q3-rapport">✏️</button>
-    <button aria-label="Dela Q3-rapport">🔗</button>
-    <button aria-label="Arkivera Q3-rapport">📦</button>
+    <button aria-label="Edit Q3 report">✏️</button>
+    <button aria-label="Share Q3 report">🔗</button>
+    <button aria-label="Archive Q3 report">📦</button>
   </div>
 </article>
 ```
@@ -848,15 +849,15 @@ Sekundära kortåtgärder döljs tills kortet hovras eller fokuseras.
 ```
 
 ### 88. `:target` Toast Stack
-*Overlay · Baseline · 0 JS*
+*Overlays · Baseline · 0 JS*
 
-Bekräftelse-toasts som visas när en länk sätter `#toast-…` och stängs via en stängningslänk.
+Confirmation toasts that appear when a link sets `#toast-…` and close via a dismiss link.
 
 ```html
-<a href="#toast-saved" class="btn">Spara ändringar</a>
+<a href="#toast-saved" class="btn">Save changes</a>
 
 <div id="toast-saved" class="toast" role="status">
-  ✅ Sparat! <a href="#" class="toast-close" aria-label="Stäng notis">✕</a>
+  ✅ Saved! <a href="#" class="toast-close" aria-label="Dismiss notification">✕</a>
 </div>
 ```
 
@@ -876,18 +877,18 @@ Bekräftelse-toasts som visas när en länk sätter `#toast-…` och stängs via
 ```
 
 ### 89. Anchor-Pinned Context Menu
-*Overlay · Newer · Markup*
+*Overlays · Newer · Markup*
 
-Klickstyrd åtgärdsmeny (⋯) fäst till sin trigger med anchor positioning och automatisk flip vid skärmkanter.
+A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges.
 
 ```html
 <div class="ctx">
-  <button class="ctx-btn" commandfor="ctx-menu" command="toggle-popover" aria-haspopup="menu" aria-label="Fler åtgärder">⋯</button>
+  <button class="ctx-btn" commandfor="ctx-menu" command="toggle-popover" aria-haspopup="menu" aria-label="More actions">⋯</button>
   <div id="ctx-menu" popover="auto" class="ctx-menu" role="menu">
-    <button role="menuitem">Redigera</button>
-    <button role="menuitem">Duplicera</button>
+    <button role="menuitem">Edit</button>
+    <button role="menuitem">Duplicate</button>
     <hr>
-    <button role="menuitem" class="danger">Ta bort</button>
+    <button role="menuitem" class="danger">Delete</button>
   </div>
 </div>
 ```
@@ -917,17 +918,17 @@ Klickstyrd åtgärdsmeny (⋯) fäst till sin trigger med anchor positioning och
 ```
 
 ### 90. Sun-Fan FAB (radial)
-*Overlay · Baseline · Markup*
+*Overlays · Baseline · Markup*
 
-Svävande snabbknapp som solfjädrar ut underliggande åtgärder i en båge via nativa CSS `cos()` / `sin()`.
+A floating action button that fans child actions into an arc via native CSS `cos()` / `sin()`.
 
 ```html
 <details class="fan">
-  <summary class="fan-main" aria-label="Snabbåtgärder">＋</summary>
+  <summary class="fan-main" aria-label="Quick actions">＋</summary>
   <div class="fan-items">
-    <button class="fan-item" style="--i:0" aria-label="Nytt inlägg">📝</button>
-    <button class="fan-item" style="--i:1" aria-label="Ladda upp">📷</button>
-    <button class="fan-item" style="--i:2" aria-label="Dela">🔗</button>
+    <button class="fan-item" style="--i:0" aria-label="New post">📝</button>
+    <button class="fan-item" style="--i:1" aria-label="Upload">📷</button>
+    <button class="fan-item" style="--i:2" aria-label="Share">🔗</button>
   </div>
 </details>
 ```
@@ -963,12 +964,12 @@ details[open] .fan-item {
 
 ---
 
-## Reveal & rörelse
+## Reveal & motion
 
-### 8. Gradient Reveal på rubriker
+### 8. Gradient Reveal on headings
 *Reveal · Progressive · 0 JS*
 
-Scroll-driven text reveal med `animation-timeline: view()`.
+A scroll-driven text reveal with `animation-timeline: view()`.
 
 ```css
 @supports (animation-timeline: view()) {
@@ -982,10 +983,10 @@ Scroll-driven text reveal med `animation-timeline: view()`.
 }
 ```
 
-### 9. Depth Parallax på hero
+### 9. Depth Parallax on hero
 *Reveal · Baseline · 0 JS*
 
-Lätt 3D-settle på load.
+A light 3D settle on load.
 
 ```css
 .hero-content { animation: hero-settle 0.8s cubic-bezier(0.16,1,0.3,1) both; }
@@ -998,7 +999,7 @@ Lätt 3D-settle på load.
 ### 11. Skeleton Shimmer
 *Reveal · Baseline · 0 JS*
 
-CSS-driven laddningsyta.
+A CSS-driven loading surface.
 
 ```css
 @keyframes shimmer {
@@ -1018,7 +1019,7 @@ CSS-driven laddningsyta.
 ### 14. Native Page Transitions (`@view-transition`)
 *Reveal · Newer · 0 JS*
 
-Stor premiumeffekt för multipage-sajter. Browsern hanterar MPA-navigeringen nativt.
+A large premium effect for multi-page sites. The browser handles MPA navigation natively.
 
 ```css
 @supports (view-transition-name: none) {
@@ -1042,7 +1043,7 @@ Stor premiumeffekt för multipage-sajter. Browsern hanterar MPA-navigeringen nat
 ### 31. Phantom Entry (`@starting-style`)
 *Reveal · Baseline · Markup*
 
-Mjuk fade-in från `display: none` utan JS. Perfekt för popover-menyer (`[popover]`-attribut) och native modaler.
+A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.
 
 ```css
 .popover-menu {
@@ -1071,7 +1072,7 @@ Mjuk fade-in från `display: none` utan JS. Perfekt för popover-menyer (`[popov
 ### 65. Scroll-Driven Header Compression
 *Scroll-driven · Baseline · 0 JS*
 
-Minskar sticky header-höjd och skalar ner logotypen mjukt när användaren scrollar ner på sidan utan layout shifts.
+Shrinks the sticky header and scales the logo down as the user scrolls, without layout shifts.
 
 ```css
 .site-header {
@@ -1106,7 +1107,7 @@ Minskar sticky header-höjd och skalar ner logotypen mjukt när användaren scro
 ### 66. Backdrop Transition (`::backdrop`)
 *Reveal · Newer · Markup*
 
-Sömlös mjuk toning och oskärpa på `::backdrop` för nativa `<dialog>` och `[popover]`-modaler utan JS.
+A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` modals, with no JS.
 
 ```css
 dialog::backdrop,
@@ -1136,16 +1137,16 @@ dialog[open]::backdrop,
 ### 68. Infinite Logo Marquee
 *Reveal · Baseline · 0 JS*
 
-Smidigt oändligt rullande logoband med kantutoning via `mask-image`. 
+A smooth infinite logo marquee with edge fades via `mask-image`. 
 
-**Obs:** Kräver dubblerad HTML-markup (två identiska `.marquee-track`) för att snurra utan glapp. Pausas automatiskt vid `:hover` och `:focus-within` för tillgänglighet.
+**Note:** Requires duplicated HTML markup (two identical `.marquee-track` elements) to loop without a gap. Pauses automatically on `:hover` and `:focus-within` for accessibility.
 
 ```html
 <div class="marquee">
   <div class="marquee-track">
     <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>
   </div>
-  <!-- Duplicerat spår för skarvlös loop -->
+  <!-- Duplicated track for a seamless loop -->
   <div class="marquee-track" aria-hidden="true">
     <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>
   </div>
@@ -1185,7 +1186,7 @@ Smidigt oändligt rullande logoband med kantutoning via `mask-image`.
 ### 72. Scroll-Driven Staggered List
 *Reveal · Progressive · 0 JS*
 
-List- och kortelement tonas fram i sekvens när användaren scrollar ner, synkat mot viewport-positionen.
+List and card items fade in sequence as the user scrolls, synced to viewport position.
 
 ```css
 @supports (animation-timeline: view()) {
@@ -1211,15 +1212,15 @@ List- och kortelement tonas fram i sekvens när användaren scrollar ner, synkat
 ### 75. Native Modal Image Zoom (`popovertarget`)
 *Reveal · Newer · Markup*
 
-Klicka på en bild för att förstora den till fullskärmsläge med nativ `popover` utan tunga lightbox-bibliotek.
+Click an image to enlarge it to a fullscreen view with a native `popover` — no heavy lightbox library.
 
 ```html
 <button commandfor="img-modal-1" command="toggle-popover" class="img-trigger">
-  <img src="/photo-thumb.jpg" alt="Förstora bild">
+  <img src="/photo-thumb.jpg" alt="Enlarge image">
 </button>
 
 <div id="img-modal-1" popover class="lightbox-popover">
-  <img src="/photo-full.jpg" alt="Förstorad bild">
+  <img src="/photo-full.jpg" alt="Enlarged image">
 </div>
 ```
 
@@ -1257,10 +1258,10 @@ Klicka på en bild för att förstora den till fullskärmsläge med nativ `popov
 ### 91. Ken Burns Scroll Gallery
 *Media · Progressive · 0 JS*
 
-Bilder andas långsamt (scale 1.12 → 1 → 1.12) synkat med sin position i viewporten utan en enda skroll-listener.
+Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in the viewport, with no scroll listener.
 
 ```html
-<figure class="kb"><img src="/hero-1.jpg" alt="Kustlandskap"></figure>
+<figure class="kb"><img src="/hero-1.jpg" alt="Coastal landscape"></figure>
 ```
 
 ```css
@@ -1283,10 +1284,10 @@ Bilder andas långsamt (scale 1.12 → 1 → 1.12) synkat med sin position i vie
 ### 92. Image-Clipped Gradient Headline
 *Media · Baseline · 0 JS*
 
-Rubrik fylld med bild eller gradient via `background-clip: text`.
+A headline filled with an image or gradient via `background-clip: text`.
 
 ```html
-<h1 class="paint-headline">Bygg snabbare. Leverera snyggare.</h1>
+<h1 class="paint-headline">Build faster. Ship prettier.</h1>
 ```
 
 ```css
@@ -1304,17 +1305,17 @@ Rubrik fylld med bild eller gradient via `background-clip: text`.
 ### 93. Snapped Caption Reveal
 *Media · Newer · Markup*
 
-Bildtexter i en scroll-snap-karusell tonas in först när slidet är "snapped".
+Captions in a scroll-snap carousel fade in only once the slide is “snapped”.
 
 ```html
 <div class="snap-carousel">
   <figure class="slide">
     <img src="/a.jpg" alt="">
-    <figcaption class="caption">Alperna — vinter 2026</figcaption>
+    <figcaption class="caption">The Alps — winter 2026</figcaption>
   </figure>
   <figure class="slide">
     <img src="/b.jpg" alt="">
-    <figcaption class="caption">Kusten — höst 2025</figcaption>
+    <figcaption class="caption">The coast — autumn 2025</figcaption>
   </figure>
 </div>
 ```
@@ -1341,7 +1342,7 @@ Bildtexter i en scroll-snap-karusell tonas in först när slidet är "snapped".
 ### 17. Ambient Frost Header
 *Scroll-driven · Newer · 0 JS*
 
-Header får frostat glas först när användaren scrollat lite.
+The header becomes frosted glass only after the user has scrolled a little.
 
 ```css
 .site-header {
@@ -1370,7 +1371,7 @@ Header får frostat glas först när användaren scrollat lite.
 ### 30. Sticky CTA Elevation
 *Scroll-driven · Baseline · 0 JS*
 
-Sticky bottom CTA får mer separation när den ligger ovanpå innehåll.
+A sticky bottom CTA gains more separation when it sits on top of content.
 
 ```css
 .sticky-cta {
@@ -1384,7 +1385,7 @@ Sticky bottom CTA får mer separation när den ligger ovanpå innehåll.
 ### 36. Scroll Progress Bar
 *Scroll-driven · Progressive · 0 JS*
 
-Tunn progressindikator som drivs helt av scroll-position.
+A thin progress indicator driven entirely by scroll position.
 
 ```css
 @supports (animation-timeline: scroll()) {
@@ -1409,7 +1410,7 @@ Markup: `<div class="scroll-progress"></div>`.
 ### 43. Auto-Hide Header
 *Scroll-state · Newer · 0 JS*
 
-Header glider undan på scroll ned, kommer tillbaka på scroll upp. **Kräver Root scroll-state preset.**
+The header slides away on scroll down and returns on scroll up. **Requires the Root scroll-state preset.**
 
 ```css
 .site-header {
@@ -1430,7 +1431,7 @@ Header glider undan på scroll ned, kommer tillbaka på scroll upp. **Kräver Ro
 ### 44. Sticky Shadow When Stuck
 *Scroll-state · Newer · 0 JS*
 
-Sticky-element får extra skugga och border bara när det faktiskt fastnat. Mycket mer premium än permanent skugga.
+A sticky element gains extra shadow and border only once it is actually stuck. Much more premium than a permanent shadow.
 
 ```css
 .toc {
@@ -1456,7 +1457,7 @@ Sticky-element får extra skugga och border bara när det faktiskt fastnat. Myck
 ### 45. Snapped Spotlight
 *Scroll-state · Newer · 0 JS*
 
-Aktiv slide i en scroll-snap-container får full skärpa medan syskonen tonas ned.
+The active slide in a scroll-snap container gets full sharpness while siblings fade down.
 
 ```css
 .carousel {
@@ -1489,7 +1490,7 @@ Aktiv slide i en scroll-snap-container får full skärpa medan syskonen tonas ne
 ### 46. Real Overflow Hint
 *Scroll-state · Newer · 0 JS*
 
-Visa edge-fades, pilar eller "swipe me"-hintar bara när innehållet faktiskt går att skrolla.
+Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.
 
 ```css
 .tabs-wrap {
@@ -1511,7 +1512,7 @@ Visa edge-fades, pilar eller "swipe me"-hintar bara när innehållet faktiskt g�
 ### 47. Scroll-Awake Back-to-Top
 *Scroll-state · Newer · 0 JS*
 
-Floating-knapp som vaknar först när användaren rört sidan. **Kräver Root scroll-state preset.**
+A floating button that wakes only after the user has moved the page. **Requires the Root scroll-state preset.**
 
 ```css
 .backtotop {
@@ -1539,7 +1540,7 @@ Floating-knapp som vaknar först när användaren rört sidan. **Kräver Root sc
 ### 55. Sticky Card Deck
 *Scroll-driven · Progressive · 0 JS*
 
-Kort staplas på varandra som en kortlek när användaren scrollar. Skala och dimning synkat med exit-crossing.
+Cards stack like a deck as the user scrolls. Scale and dimming stay synced to the exit-crossing.
 
 ```css
 .card-stack { display: flex; flex-direction: column; gap: var(--space-4); }
@@ -1568,7 +1569,7 @@ Kort staplas på varandra som en kortlek när användaren scrollar. Skala och di
 ### 69. Scroll-Aware Table Boundaries (`container-type: scroll-state`)
 *Scroll-state · Newer · 0 JS*
 
-Tabeller med `position: sticky` visar skuggor och avdelare mot kanterna *endast* när innehållet faktiskt är skrollat horisontellt.
+Tables with `position: sticky` show edge shadows and dividers *only* when the content has actually been scrolled horizontally.
 
 ```css
 .table-wrapper {
@@ -1594,9 +1595,9 @@ Tabeller med `position: sticky` visar skuggor och avdelare mot kanterna *endast*
 
 ---
 
-## Layout & komposition
+## Layout & composition
 
-### 12. Scroll Snap-galleri
+### 12. Scroll Snap gallery
 *Layout · Baseline · 0 JS*
 
 ```css
@@ -1614,9 +1615,9 @@ Tabeller med `position: sticky` visar skuggor och avdelare mot kanterna *endast*
 ```
 
 ### 15. 0fr Accordion
-*Layout · Baseline · Markup · → 33 är modernare*
+*Layout · Baseline · Markup · → 33 is more modern*
 
-Behåll för bredare browser-kompatibilitet eller äldre projekt.
+Keep this for broader browser compatibility or older projects.
 
 ```css
 details .accordion-panel {
@@ -1630,9 +1631,9 @@ details[open] .accordion-inner { opacity: 1; transition-delay: 80ms; }
 ```
 
 ### 27. Edge Fade Scroll Hint
-*Layout · Baseline · 0 JS · → 56 är modernare*
+*Layout · Baseline · 0 JS · → 56 is more modern*
 
-Behåll endast om bakgrunden är solid och statisk. Annars använd Spell 56.
+Keep this only if the background is solid and static. Otherwise use Spell 56.
 
 ```css
 .scroller-wrap { position: relative; }
@@ -1655,7 +1656,7 @@ Behåll endast om bakgrunden är solid och statisk. Annars använd Spell 56.
 ### 33. True Auto-Height (`interpolate-size`)
 *Layout · Baseline · Markup*
 
-Modernisering av Spell 15. Animerar `block-size: 0` → `auto` direkt.
+A modernization of Spell 15. Animates `block-size: 0` → `auto` directly.
 
 ```css
 :root {
@@ -1673,12 +1674,12 @@ details[open] .accordion-panel {
 }
 ```
 
-Bonus: `<details name="faq">` ger automatiskt exclusive accordion (syskon stängs när nytt öppnas).
+Bonus: `<details name="faq">` gives you an exclusive accordion automatically (siblings close when a new one opens).
 
 ### 37. Container-Aware Card (`@container`)
 *Layout · Baseline · 0 JS*
 
-Kort som anpassar sin layout efter sin container, inte viewporten.
+A card that adapts its layout to its container, not the viewport.
 
 ```css
 .card-container {
@@ -1706,7 +1707,7 @@ Kort som anpassar sin layout efter sin container, inte viewporten.
 ### 40. Subgrid Alignment
 *Layout · Baseline · 0 JS*
 
-Kort i en grid delar exakt samma rad-linjal trots olika innehållsmängd.
+Cards in a grid share the exact same row tracks despite different amounts of content.
 
 ```css
 .card-grid {
@@ -1723,9 +1724,9 @@ Kort i en grid delar exakt samma rad-linjal trots olika innehållsmängd.
 ```
 
 ### 56. Seamless Edge Mask (`mask-image`)
-*Layout · Baseline · 0 JS · ersätter 27 i de flesta fall*
+*Layout · Baseline · 0 JS · replaces 27 in most cases*
 
-Scrollerns egna kanter blir bokstavligen genomskinliga. Fungerar oavsett bakgrundsfärg eller mönster bakom.
+The scroller’s own edges become literally transparent. Works regardless of the background color or pattern behind it.
 
 ```css
 .scroll-gallery {
@@ -1745,7 +1746,7 @@ Scrollerns egna kanter blir bokstavligen genomskinliga. Fungerar oavsett bakgrun
 ### 61. Native Accordion Tabs (`::details-content`)
 *Layout · Newer · Markup*
 
-Riktiga flikar via `<details name="ui-tabs">`. Inga radio-button-hack.
+Real tabs via `<details name="ui-tabs">`. No radio-button hack.
 
 ```css
 details[name="ui-tabs"] summary::-webkit-details-marker { display: none; }
@@ -1775,7 +1776,7 @@ details[name="ui-tabs"]::details-content {
 ### 62. Native Carousel Controls (`::scroll-marker`, `::scroll-button`)
 *Layout · Progressive · 0 JS*
 
-Helt native paginering och nästa/föregående-knappar för scroll-snap-karuseller. Eliminerar de sista JS-biblioteken (Swiper, Embla, Splide) för standardkaruseller.
+Fully native pagination and previous/next buttons for scroll-snap carousels. Removes the last JS libraries (Swiper, Embla, Splide) for standard carousels.
 
 ```css
 @supports selector(::scroll-marker) {
@@ -1791,7 +1792,7 @@ Helt native paginering och nästa/föregående-knappar för scroll-snap-karusell
     flex: 0 0 100%;
   }
 
-  /* Skapar automatiskt en knapp per slide */
+  /* Automatically creates one button per slide */
   .carousel > .slide::scroll-marker {
     content: "";
     inline-size: .6rem;
@@ -1807,7 +1808,7 @@ Helt native paginering och nästa/föregående-knappar för scroll-snap-karusell
     transform: scale(1.4);
   }
 
-  /* Native scroll-knappar */
+  /* Native scroll buttons */
   .carousel::scroll-button(left),
   .carousel::scroll-button(right) {
     content: "";
@@ -1827,19 +1828,19 @@ Helt native paginering och nästa/föregående-knappar för scroll-snap-karusell
 ### 70. Native Tree View Navigation (`<details>`)
 *Layout · Baseline · Markup*
 
-Trädvy för dokumentation eller sidomenyer byggd med nästlade `<details>`-element utan JS.
+A tree view for documentation or sidebars built from nested `<details>` elements, with no JS.
 
 ```html
 <nav class="tree-nav">
   <details open>
-    <summary>Dokumentation</summary>
+    <summary>Documentation</summary>
     <div class="tree-group">
-      <a href="/docs/start">Kom igång</a>
+      <a href="/docs/start">Get started</a>
       <details>
-        <summary>Komponenter</summary>
+        <summary>Components</summary>
         <div class="tree-group">
-          <a href="/docs/buttons">Knappar</a>
-          <a href="/docs/cards">Kort</a>
+          <a href="/docs/buttons">Buttons</a>
+          <a href="/docs/cards">Cards</a>
         </div>
       </details>
     </div>
@@ -1900,11 +1901,11 @@ Trädvy för dokumentation eller sidomenyer byggd med nästlade `<details>`-elem
 ### 77. Responsive Sheet Modal
 *Layout · Newer · Markup*
 
-Dialog som automatiskt uppför sig som en Bottom Sheet på mobiler och en centrerad modal på större skärmar.
+A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.
 
 ```css
 dialog.responsive-sheet {
-  margin: auto auto 0 auto; /* Bottenplacerad på mobil */
+  margin: auto auto 0 auto; /* Bottom-aligned on mobile */
   width: 100%;
   max-width: 100%;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -1923,7 +1924,7 @@ dialog.responsive-sheet[open] {
   }
 }
 
-/* Centrerad modal på desktop */
+/* Centered modal on desktop */
 @media (min-width: 640px) {
   dialog.responsive-sheet {
     margin: auto;
@@ -1942,12 +1943,12 @@ dialog.responsive-sheet[open] {
 
 ---
 
-## Anchor & positionering
+## Anchor & positioning
 
 ### 18. Micro-Tooltips (`attr(data-tooltip)`)
-*Anchor (legacy) · Baseline · 0 JS · → 34 är modernare*
+*Anchor (legacy) · Baseline · 0 JS · → 34 is more modern*
 
-Behåll för enkel hover-text på element där `overflow: hidden` inte är ett problem.
+Keep this for simple hover text on elements where `overflow: hidden` is not a problem.
 
 ```css
 [data-tooltip] { position: relative; }
@@ -1980,7 +1981,7 @@ Behåll för enkel hover-text på element där `overflow: hidden` inte är ett p
 ### 34. Anchor-Positioned Tooltips
 *Anchor · Newer · 0 JS*
 
-Tooltips fästa via `anchor-name` / `position-anchor`. Inga overflow-problem.
+Tooltips pinned via `anchor-name` / `position-anchor`. No overflow problems.
 
 ```css
 .tooltip-trigger {
@@ -1999,7 +2000,7 @@ Tooltips fästa via `anchor-name` / `position-anchor`. Inga overflow-problem.
 ### 48. Anchored Error Bubble
 *Anchor · Newer · 0 JS*
 
-Fältvalideringsfel fästs till input-fältet utan att trycka ned layouten.
+Field validation errors pin to the input without pushing the layout down.
 
 ```css
 .field {
@@ -2037,7 +2038,7 @@ Fältvalideringsfel fästs till input-fältet utan att trycka ned layouten.
 ### 49. Anchored Filter Panel
 *Anchor · Newer · 0 JS*
 
-Filtermenyer, sorteringspaneler och account-menus fästa till sin trigger.
+Filter menus, sort panels, and account menus pinned to their trigger.
 
 ```css
 .filterbar {
@@ -2065,7 +2066,7 @@ Filtermenyer, sorteringspaneler och account-menus fästa till sin trigger.
 ### 50. Focus Help Rail
 *Anchor · Newer · 0 JS*
 
-Kontextuellt hjälpinnehåll dyker upp bredvid ett fält vid `:focus-within`.
+Contextual help appears beside a field on `:focus-within`.
 
 ```css
 .form-row {
@@ -2096,10 +2097,10 @@ Kontextuellt hjälpinnehåll dyker upp bredvid ett fält vid `:focus-within`.
 
 ---
 
-## Typografi
+## Typography
 
 ### 10. Selection Skin
-*Typografi · Baseline · 0 JS*
+*Typography · Baseline · 0 JS*
 
 ```css
 ::selection {
@@ -2108,8 +2109,8 @@ Kontextuellt hjälpinnehåll dyker upp bredvid ett fält vid `:focus-within`.
 }
 ```
 
-### Bonus. Typografisk Harmoni (`text-wrap`)
-*Typografi · Baseline · 0 JS*
+### Bonus. Typographic Harmony (`text-wrap`)
+*Typography · Baseline · 0 JS*
 
 ```css
 h1, h2, h3, h4, .text-balance { text-wrap: balance; }
@@ -2117,9 +2118,9 @@ p, li, .text-pretty { text-wrap: pretty; }
 ```
 
 ### 53. Text-Box-Trim
-*Typografi · Newer · 0 JS*
+*Typography · Newer · 0 JS*
 
-Klipper bort fontens osynliga luft (leading) ovanför versaler och under baslinje. `padding: 1rem` blir nu exakt 1rem från bokstävernas kant.
+Trims the font’s invisible leading above capitals and below the baseline. `padding: 1rem` is now exactly 1rem from the letter edges.
 
 ```css
 .btn, .badge, .pill, .chip {
@@ -2129,35 +2130,35 @@ Klipper bort fontens osynliga luft (leading) ovanför versaler och under baslinj
 }
 ```
 
-Använd stenhårt på alla knappar, brickor och kortrubriker. Fallbacken är osynlig.
+Use this relentlessly on every button, chip, and card heading. The fallback is invisible.
 
 ### 63. Smart Hyphenation
-*Typografi · Baseline · 0 JS*
+*Typography · Baseline · 0 JS*
 
-Aktiverar avstavning för smala kolumner och brödtext på en specifik språkkod. Förhindrar både "ravinen" och horribla orphan-rader.
+Enables hyphenation for narrow columns and body copy for a specific language. Prevents both “rivers” and ugly orphan lines.
 
 ```css
 :root { hyphens: auto; }
 
 article p, article li {
   hyphens: auto;
-  hyphenate-character: "\2010";  /* riktigt bindestreck istället för minus */
-  hyphenate-limit-chars: 8 4 4;  /* min 8 tecken, 4 före brytning, 4 efter */
-  hyphenate-limit-lines: 2;       /* max 2 avstavade rader i rad */
-  hyphenate-limit-last: always;   /* aldrig avstava sista raden i ett stycke */
+  hyphenate-character: "\2010";  /* real hyphen instead of a minus */
+  hyphenate-limit-chars: 8 4 4;  /* min 8 chars, 4 before the break, 4 after */
+  hyphenate-limit-lines: 2;       /* max 2 hyphenated lines in a row */
+  hyphenate-limit-last: always;   /* never hyphenate the last line of a paragraph */
 }
 
-html[lang="sv"] body { hyphens: auto; }
+html[lang="en"] body { hyphens: auto; }
 ```
 
-Kräver att `<html lang="sv">` är korrekt satt för att svensk avstavning ska fungera.
+Requires `<html lang="en">` (or the correct language) so hyphenation dictionaries can run.
 
 ---
 
-## Formulär & state
+## Forms & state
 
 ### 6. Focus Glow
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
 ```css
 input, textarea, select { min-block-size: 44px; }
@@ -2171,9 +2172,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 ```
 
 ### 16. Floating Labels
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
-Använd alltid riktig `<label>`. Placeholder-tricket ersätter aldrig etiketten semantiskt.
+Always use a real `<label>`. The placeholder trick never replaces the label semantically.
 
 ```css
 .form-group { position: relative; }
@@ -2197,9 +2198,9 @@ Använd alltid riktig `<label>`. Placeholder-tricket ersätter aldrig etiketten 
 ```
 
 ### 23. Validation Whisper
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
-`:user-valid` / `:user-invalid` triggas först efter interaktion, aldrig vid sidladdning.
+`:user-valid` / `:user-invalid` fire only after interaction, never on page load.
 
 ```css
 input:user-invalid, textarea:user-invalid {
@@ -2212,9 +2213,9 @@ input:user-valid, textarea:user-valid {
 ```
 
 ### 28. Current Step Counter
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
-Wizard-steg numreras med CSS counters utan markup-logik.
+Wizard steps are numbered with CSS counters and no markup logic.
 
 ```css
 .steps { counter-reset: step; }
@@ -2230,9 +2231,9 @@ Wizard-steg numreras med CSS counters utan markup-logik.
 ```
 
 ### 32. Elastic Textarea (`field-sizing`)
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
-Textarea växer med innehåll utan JS-listeners.
+A textarea that grows with its content, with no JS listeners.
 
 ```css
 textarea.auto-grow {
@@ -2244,9 +2245,9 @@ textarea.auto-grow {
 ```
 
 ### 54. Customizable Select (`appearance: base-select`)
-*Formulär · Progressive · 0 JS*
+*Forms · Progressive · 0 JS*
 
-Native `<select>` blir fullt styleable inklusive den utfällda menyn. Dödar headless-bibliotek för standard-dropdowns.
+A native `<select>` becomes fully styleable, including the open menu. Retires headless libraries for standard dropdowns.
 
 ```css
 @supports (appearance: base-select) {
@@ -2274,9 +2275,9 @@ Native `<select>` blir fullt styleable inklusive den utfällda menyn. Dödar hea
 ```
 
 ### 57. Form Gatekeeper
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
-0-JS state-maskin: submit låst tills alla fält är giltiga. Ogiltiga fält shake:ar vid blur.
+A 0-JS state machine: submit stays locked until every field is valid. Invalid fields shake on blur.
 
 ```css
 .checkout-form:has(input:user-invalid, textarea:user-invalid) button[type="submit"] {
@@ -2296,14 +2297,14 @@ Native `<select>` blir fullt styleable inklusive den utfällda menyn. Dödar hea
 ```
 
 ### 76. Modern Wrapper Floating Label (`:has()`)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Modernisering av [Spell 16 (Floating Labels)](#16-floating-labels). Tar bort kravet på att `<label>` måste ligga direkt efter `<input>` i DOM:en via sibling-selektorn (`+`). Fungerar direkt med omslutande etikett-containrar.
+A modernization of [Spell 16 (Floating Labels)](#16-floating-labels). Removes the requirement that `<label>` sit immediately after `<input>` in the DOM via the sibling combinator (`+`). Works with wrapping label containers.
 
 ```html
 <div class="floating-field">
   <input id="email" type="email" placeholder=" " required>
-  <label for="email">E-postadress</label>
+  <label for="email">Email address</label>
 </div>
 ```
 
@@ -2336,9 +2337,9 @@ Modernisering av [Spell 16 (Floating Labels)](#16-floating-labels). Tar bort kra
 ```
 
 ### 85. 0-JS Multi-Step Wizard
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Fullständig flerstegsguide som växlar steg, visar progress och Tillbaka/Nästa — helt utan skript, driven av radio-tillstånd och `:has()`.
+A complete multi-step wizard that switches steps, shows progress, and offers Back/Next — no script, driven by radio state and `:has()`.
 
 ```html
 <form class="wizard">
@@ -2346,25 +2347,25 @@ Fullständig flerstegsguide som växlar steg, visar progress och Tillbaka/Nästa
   <input class="sr-only" type="radio" name="wstep" id="w-2">
   <input class="sr-only" type="radio" name="wstep" id="w-3">
 
-  <ol class="wz-steps" aria-label="Wizard-steg">
-    <li><label for="w-1">1 · Konto</label></li>
-    <li><label for="w-2">2 · Adress</label></li>
-    <li><label for="w-3">3 · Betalning</label></li>
+  <ol class="wz-steps" aria-label="Wizard steps">
+    <li><label for="w-1">1 · Account</label></li>
+    <li><label for="w-2">2 · Address</label></li>
+    <li><label for="w-3">3 · Payment</label></li>
   </ol>
 
   <div class="wz-progress" aria-hidden="true"><span></span></div>
 
   <section class="wz-panel wz-1">
-    <h2>Konto</h2>
-    <div class="wz-nav"><span></span><label class="btn" for="w-2">Nästa →</label></div>
+    <h2>Account</h2>
+    <div class="wz-nav"><span></span><label class="btn" for="w-2">Next →</label></div>
   </section>
   <section class="wz-panel wz-2">
-    <h2>Adress</h2>
-    <div class="wz-nav"><label class="btn ghost" for="w-1">← Tillbaka</label><label class="btn" for="w-3">Nästa →</label></div>
+    <h2>Address</h2>
+    <div class="wz-nav"><label class="btn ghost" for="w-1">← Back</label><label class="btn" for="w-3">Next →</label></div>
   </section>
   <section class="wz-panel wz-3">
-    <h2>Betalning</h2>
-    <div class="wz-nav"><label class="btn ghost" for="w-2">← Tillbaka</label><button class="btn" type="submit">Slutför</button></div>
+    <h2>Payment</h2>
+    <div class="wz-nav"><label class="btn ghost" for="w-2">← Back</label><button class="btn" type="submit">Finish</button></div>
   </section>
 </form>
 ```
@@ -2396,13 +2397,13 @@ Fullständig flerstegsguide som växlar steg, visar progress och Tillbaka/Nästa
 ```
 
 ### 86. Themed Range Slider
-*Formulär · Baseline · 0 JS*
+*Forms · Baseline · 0 JS*
 
-Native `<input type="range">` med temat tumme och spår — behåller inbyggd tangentbords-, steg- och skärmläsarsemantik.
+A native `<input type="range">` with a themed thumb and track — keeps built-in keyboard, step, and screen-reader semantics.
 
 ```html
 <label class="range-field">
-  <span>Volym</span>
+  <span>Volume</span>
   <input type="range" id="vol" min="0" max="100" value="60">
 </label>
 ```
@@ -2424,16 +2425,16 @@ input[type="range"]:focus-visible { outline: 2px solid var(--color-primary); out
 ```
 
 ### 87. Group Error Summary (`:has(:user-invalid)`)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-En felsammanfattning i toppen av en formulärgrupp som dyker upp först när något fält är ogiltigt efter interaktion.
+An error summary at the top of a form group that appears only after a field is invalid following interaction.
 
 ```html
 <fieldset class="field-group">
-  <legend>Leverans</legend>
-  <p class="group-error" role="alert">Vissa fält behöver rättas innan du går vidare.</p>
-  <input type="text" name="street" placeholder="Gatuadress" required>
-  <input type="text" name="zip" placeholder="Postnummer" pattern="\d{3}\s?\d{2}" required>
+  <legend>Delivery</legend>
+  <p class="group-error" role="alert">Some fields need fixing before you continue.</p>
+  <input type="text" name="street" placeholder="Street address" required>
+  <input type="text" name="zip" placeholder="Postal code" pattern="\d{5}" required>
 </fieldset>
 ```
 
@@ -2451,12 +2452,12 @@ En felsammanfattning i toppen av en formulärgrupp som dyker upp först när nå
 
 ---
 
-## Shape & visuell identitet
+## Shape & visual identity
 
 ### 25. Media Scrim Lift
-*Visuell · Baseline · 0 JS*
+*Visual · Baseline · 0 JS*
 
-Bildkort får en mörkare overlay vid hover så rubriken blir läsbar.
+A media card gets a darker overlay on hover so the heading stays readable.
 
 ```css
 .media-card { position: relative; overflow: hidden; }
@@ -2471,7 +2472,7 @@ Bildkort får en mörkare overlay vid hover så rubriken blir läsbar.
 ```
 
 ### 35. Inline Theme Switch (`light-dark()`)
-*Visuell · Baseline · 0 JS*
+*Visual · Baseline · 0 JS*
 
 ```css
 :root { color-scheme: light dark; }
@@ -2484,9 +2485,9 @@ Bildkort får en mörkare overlay vid hover så rubriken blir läsbar.
 ```
 
 ### 51. Ribbon Cut Card (`shape()`)
-*Visuell · Newer · 0 JS*
+*Visual · Newer · 0 JS*
 
-Distinkta notched eller ribbon-formade silhuetter via `shape()` i `clip-path`.
+Distinct notched or ribbon-shaped silhouettes via `shape()` in `clip-path`.
 
 ```css
 .ribbon-card {
@@ -2502,9 +2503,9 @@ Distinkta notched eller ribbon-formade silhuetter via `shape()` i `clip-path`.
 ```
 
 ### 52. Organic Section Divider (`shape()`)
-*Visuell · Newer · 0 JS*
+*Visual · Newer · 0 JS*
 
-Responsiva avdelare mellan sektioner som känns redaktionella.
+Responsive dividers between sections that feel editorial.
 
 ```css
 .section-divider {
@@ -2524,9 +2525,9 @@ Responsiva avdelare mellan sektioner som känns redaktionella.
 ```
 
 ### 58. Breathing Conic Border (`@property`)
-*Visuell · Baseline · 0 JS*
+*Visual · Baseline · 0 JS*
 
-Färggradient som roterar längs kortets kant. Möjligt eftersom `@property` tillåter typad interpolation av en `<angle>`.
+A color gradient that rotates along the card’s edge. Possible because `@property` allows typed interpolation of an `<angle>`.
 
 ```css
 @property --border-angle {
@@ -2551,9 +2552,9 @@ Färggradient som roterar längs kortets kant. Möjligt eftersom `@property` til
 ```
 
 ### 64. Path Motion (`offset-path`)
-*Visuell · Baseline · 0 JS*
+*Visual · Baseline · 0 JS*
 
-Animera ett element längs en kurvad bana för dekorativa flytande element (bakgrundsformer, pricks-spår, ikon-cirkulering).
+Animate an element along a curved path for decorative floating pieces (background shapes, dotted trails, orbiting icons).
 
 ```css
 .floating-orb {
@@ -2575,15 +2576,15 @@ Animera ett element längs en kurvad bana för dekorativa flytande element (bakg
 ```
 
 ### 74. Auto-Inverting Contrast Scrim (`mix-blend-mode`)
-*Visuell · Baseline · 0 JS*
+*Visual · Baseline · 0 JS*
 
-Text eller ikoner som automatiskt skiftar färg över bakomliggande bilder/mönster.
+Text or icons that automatically invert over the images or patterns behind them.
 
-**WCAG-Varning:** Fungerar med maximal kontrast mot svarta/vita ytor. Undvik mot 50% mellan-grå bakgrunder där kontrastförhållandet 4.5:1 inte kan garanteras. Lägg till `isolation: isolate` på överordnad container för att förhindra att blend-moden läcker till hela sidan.
+**WCAG warning:** Maximum contrast is guaranteed against black or white surfaces. Avoid 50% mid-grey backgrounds where a 4.5:1 contrast ratio cannot be guaranteed. Add `isolation: isolate` on the parent container so the blend mode does not leak to the whole page.
 
 ```css
 .blend-container {
-  isolation: isolate; /* Förhindrar läckage till body */
+  isolation: isolate; /* Prevents leaking to the body */
 }
 
 .contrast-text {
@@ -2594,13 +2595,13 @@ Text eller ikoner som automatiskt skiftar färg över bakomliggande bilder/möns
 ```
 
 ### 78. Smooth Multiline Text Fade Mask (`mask-image`)
-*Visuell · Baseline · 0 JS*
+*Visual · Baseline · 0 JS*
 
-Ersätter den tvära klippningen från `-webkit-line-clamp` med en mjuk tonad alfa-mask längst ner på långa textblock.
+Replaces the hard clip from `-webkit-line-clamp` with a soft faded alpha mask at the bottom of long text blocks.
 
 ```css
 .text-fade-clamp {
-  max-height: 9lh; /* Max 9 rader text */
+  max-height: 9lh; /* Max 9 lines of text */
   overflow: hidden;
   mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
@@ -2609,12 +2610,12 @@ Ersätter den tvära klippningen från `-webkit-line-clamp` med en mjuk tonad al
 
 ---
 
-## State-detektering med `:has`
+## State detection with `:has`
 
 ### 13. Spotlight Focus
 *State · Baseline · 0 JS*
 
-Hovrat kort i en grid skärper sig medan syskonen dämpas.
+The hovered card in a grid sharpens while its siblings recede.
 
 ```css
 .card-grid { display: grid; gap: var(--space-4); }
@@ -2631,7 +2632,7 @@ Hovrat kort i en grid skärper sig medan syskonen dämpas.
 ### 21. `:target` Highlight
 *State · Baseline · 0 JS*
 
-Djuplänkad sektion får ett kort highlight-lager.
+A deep-linked section gets a short highlight flash.
 
 ```css
 section:target {
@@ -2646,7 +2647,7 @@ section:target {
 ### 29. Link Fade Neighbors
 *State · Baseline · 0 JS*
 
-I täta listor och footers får hovrad länk fokus medan syskonen tonas ned.
+In dense lists and footers the hovered link keeps focus while siblings fade.
 
 ```css
 .link-cluster:has(a:hover) a:not(:hover),
@@ -2660,14 +2661,14 @@ I täta listor och footers får hovrad länk fokus medan syskonen tonas ned.
 ### 59. Auto Empty State
 *State · Baseline · 0 JS*
 
-Tom container ritar sin egen empty state utan JS-villkor.
+An empty container draws its own empty state with no JS condition.
 
 ```css
 .data-grid { display: grid; gap: var(--space-4); }
 
 .data-grid:empty::after,
 .data-grid:not(:has(> *:not([hidden])))::after {
-  content: "Inga resultat hittades.";
+  content: "No results found.";
   display: block;
   grid-column: 1 / -1;
   padding: var(--space-8);
@@ -2681,14 +2682,14 @@ Tom container ritar sin egen empty state utan JS-villkor.
 ### 60. Read More Toggle
 *State · Baseline · Markup*
 
-Klassisk "Läs mer"-expansion utan JS via dold checkbox och `:has`. Kombinera med Spell 33 för animerad expansion.
+Classic “Read more” expansion with no JS, via a hidden checkbox and `:has`. Combine with Spell 33 for animated expansion.
 
-**A11y-kritiskt:** använd `.sr-only`-klassen (från Bas-skydd) på checkboxen, inte `hidden`-attributet eller `display: none`. Det behåller checkboxen i tab-ordningen och accessibility-trädet så tangentbordsanvändare kan toggla. `:has(.clamp-toggle:focus-visible)`-regeln nedan ger en synlig fokus-ring på labeln.
+**A11y-critical:** put the `.sr-only` class (from Base safeguards) on the checkbox — not the `hidden` attribute or `display: none`. That keeps the checkbox in the tab order and the accessibility tree so keyboard users can toggle it. The `:has(.clamp-toggle:focus-visible)` rule below paints a visible focus ring on the label.
 
 ```html
 <div class="clamp-wrapper">
   <input type="checkbox" id="read-more" class="clamp-toggle sr-only">
-  <p class="clamp-text">...lång brödtext...</p>
+  <p class="clamp-text">...long body copy...</p>
   <label for="read-more" class="clamp-label"></label>
 </div>
 ```
@@ -2712,10 +2713,10 @@ Klassisk "Läs mer"-expansion utan JS via dold checkbox och `:has`. Kombinera me
   min-block-size: 44px;
   display: inline-grid; align-items: center;
 }
-.clamp-label::after { content: " Läs mer →"; }
-.clamp-wrapper:has(.clamp-toggle:checked) .clamp-label::after { content: " Visa mindre"; }
+.clamp-label::after { content: " Read more →"; }
+.clamp-wrapper:has(.clamp-toggle:checked) .clamp-label::after { content: " Show less"; }
 
-/* Tangentbordsfokus syns på labeln när den dolda checkboxen får fokus */
+/* Keyboard focus is visible on the label when the hidden checkbox is focused */
 .clamp-wrapper:has(.clamp-toggle:focus-visible) .clamp-label {
   outline: 2px solid var(--color-primary);
   outline-offset: 4px;
@@ -2725,12 +2726,12 @@ Klassisk "Läs mer"-expansion utan JS via dold checkbox och `:has`. Kombinera me
 
 ---
 
-## Prestanda
+## Performance
 
 ### 41. Content-Visibility Turbo
-*Prestanda · Baseline · 0 JS*
+*Performance · Baseline · 0 JS*
 
-Renderingsmotorn hoppar över layout för element utanför viewporten. Stor vinst på långa sidor.
+The rendering engine skips layout for elements outside the viewport. A big win on long pages.
 
 ```css
 .lazy-section {
@@ -2741,20 +2742,20 @@ Renderingsmotorn hoppar över layout för element utanför viewporten. Stor vins
 
 ---
 
-## Datavisualisering & Tabeller
+## Data visualization & tables
 
 ### 94. Sticky Header + Zebra Data Table
 *Data · Baseline · 0 JS*
 
-Långa tabeller med fast rubrikrad, zebra-rader och rad-highlight vid hover/fokus — baslinjen för varje datatät SaaS-vy.
+Long tables with a sticky header row, zebra stripes, and row highlight on hover/focus — the baseline for every data-dense SaaS view.
 
 ```html
-<div class="table-scroller" tabindex="0" role="region" aria-label="Transaktioner">
+<div class="table-scroller" tabindex="0" role="region" aria-label="Transactions">
   <table>
-    <thead><tr><th>Datum</th><th>Kund</th><th>Belopp</th></tr></thead>
+    <thead><tr><th>Date</th><th>Customer</th><th>Amount</th></tr></thead>
     <tbody>
-      <tr><td>2026-08-01</td><td>Acme AB</td><td>12 400 kr</td></tr>
-      <tr><td>2026-08-02</td><td>Nordic AB</td><td>8 900 kr</td></tr>
+      <tr><td>2026-08-01</td><td>Acme Inc</td><td>$12,400</td></tr>
+      <tr><td>2026-08-02</td><td>Nordic Inc</td><td>$8,900</td></tr>
     </tbody>
   </table>
 </div>
@@ -2779,10 +2780,10 @@ Långa tabeller med fast rubrikrad, zebra-rader och rad-highlight vid hover/foku
 ### 95. CSS Sparkline / Bar Chart
 *Data · Baseline · Markup*
 
-Miniatyr-stapeldiagram drivet av en inline `--v`-custom-property per stapel — 0-JS datavisualisering för dashboards och KPI-kort.
+A miniature bar chart driven by an inline `--v` custom property per bar — 0-JS data visualization for dashboards and KPI cards.
 
 ```html
-<figure class="spark" role="img" aria-label="Försäljning per kvartal: 34, 58, 41, 72, 66, 90 procent — stigande trend">
+<figure class="spark" role="img" aria-label="Sales by quarter: 34, 58, 41, 72, 66, 90 percent — rising trend">
   <span style="--v:34"></span><span style="--v:58"></span><span style="--v:41"></span>
   <span style="--v:72"></span><span style="--v:66"></span><span style="--v:90"></span>
 </figure>
@@ -2803,11 +2804,11 @@ Miniatyr-stapeldiagram drivet av en inline `--v`-custom-property per stapel — 
 ### 96. Themed `<progress>` & `<meter>`
 *Data · Baseline · 0 JS*
 
-Native `<progress>`/`<meter>` med varumärkesfärger — behåller inbyggd semantik, min/max-logik och skärmläsarstöd för lagring, kvoter och mål.
+Native `<progress>`/`<meter>` with brand colors — keeps built-in semantics, min/max logic, and screen-reader support for storage, quotas, and goals.
 
 ```html
 <label class="prog-field">
-  <span>Lagring <output>72%</output></span>
+  <span>Storage <output>72%</output></span>
   <progress max="100" value="72">72%</progress>
 </label>
 ```
@@ -2833,21 +2834,21 @@ progress::-moz-progress-bar { background: var(--color-primary); border-radius: 9
 ### 97. Invoker Command Drawer (`commandfor` + `closedby`)
 *Navigation · Newer · Markup*
 
-Off-canvas-meny som en nativ `<dialog>` — öppnas och stängs med Invoker Commands, light-dismiss via `closedby="any"`. Ingen `showModal()`, ingen click-outside-lyssnare.
+An off-canvas menu as a native `<dialog>` — opened and closed with Invoker Commands, light-dismissed via `closedby="any"`. No `showModal()`, no click-outside listener.
 
 ```html
-<button class="nav-open" commandfor="site-drawer" command="show-modal" aria-label="Öppna meny">
-  Meny
+<button class="nav-open" commandfor="site-drawer" command="show-modal" aria-label="Open menu">
+  Menu
 </button>
 
 <dialog id="site-drawer" class="nav-drawer" closedby="any">
   <form method="dialog">
-    <button class="nav-close" commandfor="site-drawer" command="close" aria-label="Stäng meny">✕</button>
+    <button class="nav-close" commandfor="site-drawer" command="close" aria-label="Close menu">✕</button>
   </form>
-  <nav aria-label="Mobilnavigering">
-    <a href="/">Hem</a>
-    <a href="/tjanster">Tjänster</a>
-    <a href="/kontakt">Kontakt</a>
+  <nav aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/contact">Contact</a>
   </nav>
 </dialog>
 ```
@@ -2884,13 +2885,13 @@ Off-canvas-meny som en nativ `<dialog>` — öppnas och stängs med Invoker Comm
 ```
 
 ### 98. Interest-Hint Tooltip (`interestfor` + `popover="hint"`)
-*Navigation · Progressive · Markup · → moderniserar 18 / 34*
+*Navigation · Progressive · Markup · → modernizes 18 / 34*
 
-Hover-, fokus- och long-press-tooltip utan `mouseenter`. `popover="hint"` stänger inte öppna `auto`-menyer. Browsern sätter implicit `aria-describedby` — lägg inte till `role="tooltip"` själv.
+A hover, focus, and long-press tooltip with no `mouseenter`. `popover="hint"` does not close open `auto` menus. The browser sets implicit `aria-describedby` — do not add `role="tooltip"` yourself.
 
 ```html
-<button type="button" class="icon-btn" interestfor="tip-save" aria-label="Spara">★</button>
-<div id="tip-save" popover="hint" class="hint-tip">Spara i din lista</div>
+<button type="button" class="icon-btn" interestfor="tip-save" aria-label="Save">★</button>
+<div id="tip-save" popover="hint" class="hint-tip">Save to your list</div>
 ```
 
 ```css
@@ -2925,12 +2926,12 @@ Hover-, fokus- och long-press-tooltip utan `mouseenter`. `popover="hint"` stäng
 ### 99. Scroll-Initial-Target Carousel
 *Navigation · Newer · Markup*
 
-Djuplänka en scroll-snap-karusell till en specifik slide vid första render — utan `scrollIntoView()`. Första elementet med `scroll-initial-target: nearest` i trädordning vinner.
+Deep-link a scroll-snap carousel to a specific slide on first render — no `scrollIntoView()`. The first element with `scroll-initial-target: nearest` in tree order wins.
 
 ```html
 <div class="init-carousel">
   <article class="slide" id="q1">Q1</article>
-  <article class="slide is-initial" id="q2">Q2 — aktuell</article>
+  <article class="slide is-initial" id="q2">Q2 — current</article>
   <article class="slide" id="q3">Q3</article>
 </div>
 ```
@@ -2960,15 +2961,15 @@ Djuplänka en scroll-snap-karusell till en specifik slide vid första render —
 ## Cards & Grids (2026)
 
 ### 100. Grid Lanes Masonry (`display: grid-lanes`)
-*Kort · Progressive · 0 JS*
+*Cards · Progressive · 0 JS*
 
-Pinterest-packning i CSS. `display: grid-lanes` fyller kortaste kolumnen i DOM-ordning (korrekt läsordning, till skillnad från `column-count`). Fallback är vanlig grid.
+Pinterest packing in CSS. `display: grid-lanes` fills the shortest column in DOM order (correct reading order, unlike `column-count`). Fallback is a regular grid.
 
 ```html
 <ul class="lanes">
-  <li><article class="card">Kort 1</article></li>
-  <li><article class="card">Kort 2 med mer text</article></li>
-  <li><article class="card">Kort 3</article></li>
+  <li><article class="card">Card 1</article></li>
+  <li><article class="card">Card 2 with more text</article></li>
+  <li><article class="card">Card 3</article></li>
 </ul>
 ```
 
@@ -2989,13 +2990,13 @@ Pinterest-packning i CSS. `display: grid-lanes` fyller kortaste kolumnen i DOM-o
 ```
 
 ### 101. Sibling-Index Stagger (`sibling-index()`)
-*Kort · Progressive · 0 JS*
+*Cards · Progressive · 0 JS*
 
-Staggerad reveal utan `--i`-custom properties. `sibling-index()` (1-baserat) och `sibling-count()` är CSS Values 5 tree-counting.
+A staggered reveal with no `--i` custom properties. `sibling-index()` (1-based) and `sibling-count()` are CSS Values 5 tree-counting functions.
 
 ```html
 <ul class="stagger">
-  <li>Analys</li><li>Automation</li><li>API</li><li>Support</li>
+  <li>Analytics</li><li>Automation</li><li>API</li><li>Support</li>
 </ul>
 ```
 
@@ -3020,17 +3021,17 @@ Staggerad reveal utan `--i`-custom properties. `sibling-index()` (1-baserat) och
 ## Forms (2026)
 
 ### 102. `:open` Custom Select Chrome
-*Formulär · Newer · 0 JS*
+*Forms · Newer · 0 JS*
 
-Stylea native `<select>` när pickern är öppen med Baseline 2026 `:open`. Kombinera med Spell 54 (`appearance: base-select`).
+Style a native `<select>` while the picker is open with Baseline 2026 `:open`. Combine with Spell 54 (`appearance: base-select`).
 
 ```html
 <label class="select-field">
-  <span>Bransch</span>
+  <span>Industry</span>
   <select class="premium-dropdown" name="industry">
-    <option>Bygg</option>
-    <option>VVS</option>
-    <option>El</option>
+    <option>Construction</option>
+    <option>Plumbing</option>
+    <option>Electrical</option>
   </select>
 </label>
 ```
@@ -3053,13 +3054,13 @@ select:open, select:focus-visible {
 ```
 
 ### 103. Contrast-Safe Chips (`contrast-color()`)
-*Formulär · Progressive · 0 JS*
+*Forms · Progressive · 0 JS*
 
-Automatisk svart/vit text mot dynamisk bakgrund. `contrast-color()` returnerar svart eller vitt — kapsla i `@supports` och ge en manuell fallback.
+Automatic black/white text against a dynamic background. `contrast-color()` returns black or white — wrap it in `@supports` and provide a manual fallback.
 
 ```html
-<span class="chip" style="--chip-bg: var(--color-primary)">Nyhet</span>
-<span class="chip" style="--chip-bg: var(--color-accent)">Kampanj</span>
+<span class="chip" style="--chip-bg: var(--color-primary)">New</span>
+<span class="chip" style="--chip-bg: var(--color-accent)">Sale</span>
 ```
 
 ```css
@@ -3077,9 +3078,9 @@ Automatisk svart/vit text mot dynamisk bakgrund. `contrast-color()` returnerar s
 ```
 
 ### 104. `if()` Inline Theme Tokens
-*Formulär · Progressive · 0 JS*
+*Forms · Progressive · 0 JS*
 
-Villkorliga värden i property-värdet — media, style-query och supports — utan extra klasser. `if()` applicerar på elementet självt (till skillnad från `@container style()` som frågar en förälder).
+Conditional values in the property value itself — media, style query, and supports — with no extra classes. `if()` applies to the element itself (unlike `@container style()`, which queries a parent).
 
 ```css
 .saas-card {
@@ -3097,12 +3098,12 @@ Villkorliga värden i property-värdet — media, style-query och supports — u
 ```
 
 ### 105. Typed `attr()` Field Meter
-*Formulär · Progressive · Markup*
+*Forms · Progressive · Markup*
 
-Läs `data-value` som `<number>` och driv en mätare utan inline `--v` eller JS. Feature-detektera med `attr(x type(*))`.
+Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. Feature-detect with `attr(x type(*))`.
 
 ```html
-<div class="attr-meter" data-value="72" aria-label="Profil komplett till 72 procent">
+<div class="attr-meter" data-value="72" aria-label="Profile complete to 72 percent">
   <span class="attr-meter-fill"></span>
 </div>
 ```
@@ -3129,19 +3130,19 @@ Läs `data-value` som `<number>` och driv en mätare utan inline `--v` eller JS.
 ## Overlays & Modals (2026)
 
 ### 106. Light-Dismiss Confirm Dialog (`closedby="any"`)
-*Overlay · Newer · Markup*
+*Overlays · Newer · Markup*
 
-Bekräftelsedialog som stängs med Esc *och* klick på backdrop. Öppnas med `command="show-modal"`. `closedby="closerequest"` är Esc-only; `"none"` kräver explicit stängknapp.
+A confirm dialog that closes on Escape *and* backdrop click. Opened with `command="show-modal"`. `closedby="closerequest"` is Escape-only; `"none"` requires an explicit close button.
 
 ```html
-<button class="btn" commandfor="confirm-delete" command="show-modal">Ta bort kund</button>
+<button class="btn" commandfor="confirm-delete" command="show-modal">Delete customer</button>
 
 <dialog id="confirm-delete" class="confirm" closedby="any">
-  <h2>Ta bort kund?</h2>
-  <p>Åtgärden går inte att ångra.</p>
+  <h2>Delete customer?</h2>
+  <p>This cannot be undone.</p>
   <div class="confirm-actions">
-    <button class="btn ghost" commandfor="confirm-delete" command="close">Avbryt</button>
-    <button class="btn danger" commandfor="confirm-delete" command="close">Ta bort</button>
+    <button class="btn ghost" commandfor="confirm-delete" command="close">Cancel</button>
+    <button class="btn danger" commandfor="confirm-delete" command="close">Delete</button>
   </div>
 </dialog>
 ```
@@ -3164,9 +3165,9 @@ Bekräftelsedialog som stängs med Esc *och* klick på backdrop. Öppnas med `co
 ```
 
 ### 107. Position-Visibility Auto-Hide (`position-visibility`)
-*Overlay · Newer · 0 JS*
+*Overlays · Newer · 0 JS*
 
-Dölj ett ankarpositionerat element när triggern scrollat ur vyn (`anchors-visible`) eller när själva overlayt overflowar (`no-overflow`). Baseline 2026.
+Hide an anchor-positioned element when the trigger scrolls out of view (`anchors-visible`) or when the overlay itself overflows (`no-overflow`). Baseline 2026.
 
 ```css
 .filter-panel {
@@ -3178,7 +3179,7 @@ Dölj ett ankarpositionerat element när triggern scrollat ur vyn (`anchors-visi
 }
 ```
 
-Använd `no-overflow` när overlayt självt inte får hamna utanför viewporten. Fallback utan stöd: panelen syns som vanligt.
+Use `no-overflow` when the overlay itself must not leave the viewport. Fallback without support: the panel stays visible as usual.
 
 ---
 
@@ -3187,14 +3188,14 @@ Använd `no-overflow` när overlayt självt inte får hamna utanför viewporten.
 ### 108. Find-in-Page Accordion (`hidden="until-found"`)
 *Media · Newer · Markup*
 
-Ihopfälld FAQ som fortfarande matchar webbläsarens Sök på sidan och fragment-länkar. Browsern tar bort `hidden` och scrollar till träffen. Kräver en box (inte `display: none` / `contents` / `inline`).
+A collapsed FAQ that still matches the browser's Find in page and fragment links. The browser removes `hidden` and scrolls to the hit. Requires a box (not `display: none` / `contents` / `inline`).
 
 ```html
 <section class="faq-item">
-  <a href="#moms-svar">Hoppa till svaret om moms</a>
-  <h2>Ingår moms?</h2>
-  <div id="moms-svar" class="faq-answer" hidden="until-found">
-    <p>Ja. Alla priser på sajten anges inklusive moms om inget annat sägs.</p>
+  <a href="#vat-answer">Jump to the VAT answer</a>
+  <h2>Is VAT included?</h2>
+  <div id="vat-answer" class="faq-answer" hidden="until-found">
+    <p>Yes. Every price on the site includes VAT unless stated otherwise.</p>
   </div>
 </section>
 ```
@@ -3214,7 +3215,7 @@ Ihopfälld FAQ som fortfarande matchar webbläsarens Sök på sidan och fragment
 ### 109. Named View-Transition Cards (`view-transition-class` + typed `attr()`)
 *Media · Progressive · 0 JS*
 
-Delad element-transition mellan listkort och detaljsida. `view-transition-name` läses från `id` som `<custom-ident>`; `view-transition-class` grupperar animationen.
+A shared-element transition between a list card and a detail page. `view-transition-name` is read from `id` as a `<custom-ident>`; `view-transition-class` groups the animation.
 
 ```html
 <article class="vt-card" id="case-acme">…</article>
@@ -3246,12 +3247,12 @@ Delad element-transition mellan listkort och detaljsida. `view-transition-name` 
 ## Data Visualization (2026)
 
 ### 110. Typed `attr()` Sparkline
-*Data · Progressive · Markup · → moderniserar 95*
+*Data · Progressive · Markup · → modernizes 95*
 
-Samma sparkline som Spell 95 men värdet bor i `data-v` — ingen inline `style="--v:…"`.
+The same sparkline as Spell 95, but the value lives in `data-v` — no inline `style="--v:…"`.
 
 ```html
-<figure class="attr-spark" role="img" aria-label="Försäljning: 34, 58, 41, 72, 66, 90 procent">
+<figure class="attr-spark" role="img" aria-label="Sales: 34, 58, 41, 72, 66, 90 percent">
   <span data-v="34"></span><span data-v="58"></span><span data-v="41"></span>
   <span data-v="72"></span><span data-v="66"></span><span data-v="90"></span>
 </figure>
@@ -3274,11 +3275,11 @@ Samma sparkline som Spell 95 men värdet bor i `data-v` — ingen inline `style=
 ### 111. View-Timeline KPI Fill
 *Data · Progressive · 0 JS*
 
-KPI-staplar fylls när de kommer in i viewporten via `animation-timeline: view()` — ingen IntersectionObserver.
+KPI bars fill as they enter the viewport via `animation-timeline: view()` — no IntersectionObserver.
 
 ```html
 <div class="kpi" style="--kpi: 72%">
-  <span>Konvertering</span>
+  <span>Conversion</span>
   <div class="kpi-track" aria-hidden="true"><i></i></div>
 </div>
 ```
@@ -3310,9 +3311,9 @@ KPI-staplar fylls när de kommer in i viewporten via `animation-timeline: view()
 ## Typography & Layout (2026)
 
 ### 112. `::target-text` Share Highlight
-*Typografi · Newer · 0 JS*
+*Typography · Newer · 0 JS*
 
-Stylea text-fragment-highlights från delade URL:er (`#:~:text=`). Syns när någon landar via en markerad länk.
+Style text-fragment highlights from shared URLs (`#:~:text=`). Visible when someone lands via a marked link.
 
 ```css
 ::target-text {
@@ -3326,7 +3327,7 @@ Stylea text-fragment-highlights från delade URL:er (`#:~:text=`). Syns när nå
 ### 113. Reading-Flow Grid (`reading-flow`)
 *Layout · Newer · 0 JS*
 
-När grid-objekt packas om med `dense` eller explicit `order` ska Tab och skärmläsare följa den *visuella* radordningen, inte DOM-ordningen.
+When grid items are repacked with `dense` or explicit `order`, Tab and screen readers should follow the *visual* row order, not the DOM order.
 
 ```css
 .pack-grid {
@@ -3340,12 +3341,12 @@ När grid-objekt packas om med `dense` eller explicit `order` ska Tab och skärm
 }
 ```
 
-`flex-visual` / `flex-flow` för flex; `grid-columns` om kolumnordning är den semantiskt rätta.
+`flex-visual` / `flex-flow` for flex; `grid-columns` if column order is the semantically correct one.
 
 ### 114. Themed Scrollbars (`scrollbar-color`)
 *Layout · Baseline · 0 JS*
 
-Varumärkta scrollbars med standard-properties. `scrollbar-width: thin` på inbäddade paneler; behåll `auto` på `html` för discoverability.
+Branded scrollbars with standard properties. Use `scrollbar-width: thin` on embedded panels; keep `auto` on `html` for discoverability.
 
 ```css
 html {
@@ -3364,14 +3365,14 @@ html {
 ## State & Shell (2026)
 
 ### 115. File Dropzone State (`::file-selector-button`)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-0-JS dropzone-yta kring native file input. Stor klickytan är hela zonen; knappen är 44px.
+A 0-JS dropzone around a native file input. The whole zone is the hit target; the button is 44px.
 
 ```html
 <label class="dropzone">
   <input type="file" name="brief" accept=".pdf,.docx">
-  <span>Släpp brief eller välj fil</span>
+  <span>Drop a brief or choose a file</span>
 </label>
 ```
 
@@ -3402,15 +3403,15 @@ html {
 ```
 
 ### 116. Checkbox Theme Switch (`:has()` + `color-scheme`)
-*Visuell · Baseline · Markup*
+*Visual · Baseline · Markup*
 
-Deklarativ ljus/mörk-växel utan JS. Checkboxen sätter `color-scheme` på `:root` via `:has()`; `light-dark()` (Spell 35) följer med.
+A declarative light/dark switch with no JS. The checkbox sets `color-scheme` on `:root` via `:has()`; `light-dark()` (Spell 35) follows along.
 
 ```html
 <label class="theme-switch">
   <input type="checkbox" class="sr-only" name="dark" id="theme-dark">
   <span class="theme-ui" aria-hidden="true"></span>
-  Mörkt läge
+  Dark mode
 </label>
 ```
 
@@ -3440,17 +3441,17 @@ Deklarativ ljus/mörk-växel utan JS. Checkboxen sätter `color-scheme` på `:ro
 ```
 
 ### 117. Split Action Button (`commandfor`)
-*Overlay · Newer · Markup*
+*Overlays · Newer · Markup*
 
-Primär åtgärd + overflow-meny i samma kontroll. Menyn är `[popover=auto]` fäst med anchor positioning.
+A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.
 
 ```html
 <div class="split">
-  <a class="split-main" href="/offert">Begär offert</a>
-  <button class="split-more" commandfor="split-menu" command="toggle-popover" aria-label="Fler åtgärder">▾</button>
+  <a class="split-main" href="/quote">Request quote</a>
+  <button class="split-more" commandfor="split-menu" command="toggle-popover" aria-label="More actions">▾</button>
   <div id="split-menu" popover="auto" class="split-menu">
-    <a href="/offert?plan=pro">Pro-offert</a>
-    <a href="/kontakt">Prata med sälj</a>
+    <a href="/quote?plan=pro">Pro quote</a>
+    <a href="/contact">Talk to sales</a>
   </div>
 </div>
 ```
@@ -3489,9 +3490,9 @@ Primär åtgärd + overflow-meny i samma kontroll. Menyn är `[popover=auto]` f�
 ```
 
 ### 118. Customizable Select Checkmark (`::checkmark` + `::picker-icon`)
-*Formulär · Progressive · 0 JS*
+*Forms · Progressive · 0 JS*
 
-Full native select-krom: egen chevron (`::picker-icon`) och bock i vald option (`::checkmark`). Kräver `appearance: base-select` (Spell 54).
+Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on the selected option (`::checkmark`). Requires `appearance: base-select` (Spell 54).
 
 ```css
 @supports (appearance: base-select) {
@@ -3522,10 +3523,10 @@ Full native select-krom: egen chevron (`::picker-icon`) och bock i vald option (
 ### 119. Native Donut Chart (`conic-gradient` + `mask-image`)
 *Data · Baseline · 0 JS*
 
-Ritar ett donut-diagram via `conic-gradient` där centrum klipps ut med `mask-image`. 
+Draws a donut chart via `conic-gradient` with the center cut out by `mask-image`. 
 
 ```html
-<div class="donut-chart" role="img" aria-label="Fördelning: 65% Kärnverksamhet, 20% Admin, 15% R&D" style="--p1: 65; --p2: 20;">
+<div class="donut-chart" role="img" aria-label="Split: 65% Core, 20% Admin, 15% R&D" style="--p1: 65; --p2: 20;">
   <span class="donut-center">100%</span>
 </div>
 ```
@@ -3549,7 +3550,7 @@ Ritar ett donut-diagram via `conic-gradient` där centrum klipps ut med `mask-im
 ### 120. Faceted Category Filter Matrix (`:has()`)
 *State · Baseline · Markup*
 
-Kortgalleri som filtrerar visade objekt baserat på valda kryssrutor helt utan JavaScript.
+A card gallery that filters visible items from checked boxes, with no JavaScript.
 
 ```html
 <div class="filter-matrix-wrap">
@@ -3559,8 +3560,8 @@ Kortgalleri som filtrerar visade objekt baserat på valda kryssrutor helt utan J
   </div>
 
   <div class="card-matrix">
-    <article class="matrix-card" data-cat="tech">Tech-projekt</article>
-    <article class="matrix-card" data-cat="design">Design-projekt</article>
+    <article class="matrix-card" data-cat="tech">Tech project</article>
+    <article class="matrix-card" data-cat="design">Design project</article>
   </div>
 </div>
 ```
@@ -3581,14 +3582,14 @@ Kortgalleri som filtrerar visade objekt baserat på valda kryssrutor helt utan J
 ### 121. 0-JS Global Cart Counter & Badge (`counter` + Anchor)
 *State · Baseline · Markup*
 
-Inkrementerar en CSS-räknare när produkter bockas i, och ankrar badgen upp till headerns ikon.
+Increments a CSS counter when products are checked, and anchors the badge to the header icon.
 
 ```html
 <header>
-  <button id="cart-icon" class="cart-btn" aria-label="Varukorg">🛒</button>
+  <button id="cart-icon" class="cart-btn" aria-label="Cart">🛒</button>
 </header>
 <main class="cart-shop">
-  <label class="btn"><input type="checkbox" class="add-to-cart sr-only"> Köp Produkt A</label>
+  <label class="btn"><input type="checkbox" class="add-to-cart sr-only"> Buy Product A</label>
 </main>
 <div class="cart-badge-wrap">
   <span class="cart-badge" aria-hidden="true"></span>
@@ -3617,12 +3618,12 @@ body:has(.add-to-cart:checked) .cart-badge { opacity: 1; transform: scale(1); }
 ### 122. CSS Gantt Schedule Grid (`grid-template-columns`)
 *Data · Baseline · Markup*
 
-Projektplanering och tidslinjeschema drivet av CSS Grid och custom properties.
+Project planning and a timeline schedule driven by CSS Grid and custom properties.
 
 ```html
-<figure class="gantt" role="region" aria-label="Projekt tidslinje">
+<figure class="gantt" role="region" aria-label="Project timeline">
   <div class="gantt-row" style="--start: 1; --span: 3;"><span>Research</span></div>
-  <div class="gantt-row" style="--start: 3; --span: 5;"><span>Utveckling</span></div>
+  <div class="gantt-row" style="--start: 3; --span: 5;"><span>Development</span></div>
 </figure>
 ```
 
@@ -3644,12 +3645,12 @@ Projektplanering och tidslinjeschema drivet av CSS Grid och custom properties.
 ### 123. Matrix Heatmap (`color-mix()` + `oklch()`)
 *Data · Baseline · Markup*
 
-Aktivitetskalender där cellens färgintensitet beräknas proportionellt med `color-mix()`.
+An activity calendar where each cell’s color intensity is computed proportionally with `color-mix()`.
 
 ```html
-<div class="heatmap-grid" role="img" aria-label="Aktivitetsmatris">
-  <div class="cell" style="--val: 10" title="10 händelser"></div>
-  <div class="cell" style="--val: 85" title="85 händelser"></div>
+<div class="heatmap-grid" role="img" aria-label="Activity matrix">
+  <div class="cell" style="--val: 10" title="10 events"></div>
+  <div class="cell" style="--val: 85" title="85 events"></div>
 </div>
 ```
 
@@ -3666,10 +3667,10 @@ Aktivitetskalender där cellens färgintensitet beräknas proportionellt med `co
 ### 124. Stacked KPI Segment Bar (`flex` + `color-mix()`)
 *Data · Baseline · Markup*
 
-Horisontellt ytdiagram där segmenten storleksätts automatiskt utifrån viktning.
+A horizontal stacked bar whose segments size themselves from their weights.
 
 ```html
-<figure class="stack-bar" role="img" aria-label="Fördelning: 40% Drift, 60% Sälj">
+<figure class="stack-bar" role="img" aria-label="Split: 40% Ops, 60% Sales">
   <div class="stack-seg" style="--v: 40; --bg: var(--color-primary)">40%</div>
   <div class="stack-seg" style="--v: 60; --bg: var(--color-accent)">60%</div>
 </figure>
@@ -3688,10 +3689,10 @@ Horisontellt ytdiagram där segmenten storleksätts automatiskt utifrån viktnin
 ### 125. Inline SVG Line Chart (0-JS Draw & Fill)
 *Data · Baseline · Markup*
 
-SVG-linjediagram med scroll-driven ritningsanimation via `stroke-dasharray`.
+An SVG line chart with a scroll-driven draw animation via `stroke-dasharray`.
 
 ```html
-<figure class="line-chart-wrap" role="img" aria-label="Försäljningstrend Q1-Q4">
+<figure class="line-chart-wrap" role="img" aria-label="Sales trend Q1–Q4">
   <svg viewBox="0 0 300 100" class="line-chart-svg">
     <path class="line-path" d="M0,80 L75,50 L150,65 L225,20 L300,10" />
   </svg>
@@ -3719,16 +3720,16 @@ SVG-linjediagram med scroll-driven ritningsanimation via `stroke-dasharray`.
 ### 126. Section-Spy Active Navigation (`timeline-scope`)
 *Navigation · Progressive · 0 JS*
 
-Länkar i sidonavigeringen lyser upp baserat på vilken sektion som befinner sig iyn.
+Sidebar links light up based on which section is in view.
 
 ```html
 <nav class="spy-nav">
   <a href="#s1" class="spy-l1">Intro</a>
-  <a href="#s2" class="spy-l2">Funktioner</a>
+  <a href="#s2" class="spy-l2">Features</a>
 </nav>
 <main>
   <section id="s1">Intro</section>
-  <section id="s2">Funktioner</section>
+  <section id="s2">Features</section>
 </main>
 ```
 
@@ -3749,13 +3750,13 @@ html { timeline-scope: --time-s1, --time-s2; }
 ### 127. Nested Cascade Popovers (`popover="auto"` + Anchor)
 *Navigation · Newer · Markup*
 
-Kaskadmenyer i flera nivåer där light-dismiss hanteras automatiskt av webbläsaren.
+Multi-level cascade menus whose light-dismiss is handled automatically by the browser.
 
 ```html
-<button commandfor="m-main" command="toggle-popover" class="btn">Exportera ▾</button>
+<button commandfor="m-main" command="toggle-popover" class="btn">Export ▾</button>
 
 <div id="m-main" popover="auto" class="menu-l1">
-  <button commandfor="m-sub" command="show-popover" id="b-sub" class="sub-trig">Som fil ▸</button>
+  <button commandfor="m-sub" command="show-popover" id="b-sub" class="sub-trig">As file ▸</button>
   <div id="m-sub" popover="auto" class="menu-l2">
     <button>PDF</button>
     <button>CSV</button>
@@ -3778,13 +3779,13 @@ Kaskadmenyer i flera nivåer där light-dismiss hanteras automatiskt av webbläs
 ```
 
 ### 128. 0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Utvärderar lösenordsstyrka dynamiskt via HTML-regex och kör mätaren via `:has()`.
+Evaluates password strength dynamically via HTML regex and drives the meter with `:has()`.
 
 ```html
 <div class="pwd-wrap">
-  <input type="password" class="pwd-input" placeholder="Minst 8 tkn, siffra & versal" 
+  <input type="password" class="pwd-input" placeholder="At least 8 chars, a number & a capital" 
          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
   <div class="pwd-meter" aria-hidden="true"><span></span></div>
 </div>
@@ -3801,13 +3802,13 @@ Utvärderar lösenordsstyrka dynamiskt via HTML-regex och kör mätaren via `:ha
 ```
 
 ### 129. 0-JS Star Rating Input (`row-reverse` + `~`)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Klassiskt stjärnbetyg fyllt från vänster till höger med dolda radios och flex `row-reverse`.
+A classic star rating that fills left to right with hidden radios and flex `row-reverse`.
 
 ```html
 <fieldset class="star-rating">
-  <legend class="sr-only">Betygsätt</legend>
+  <legend class="sr-only">Rate this</legend>
   <input type="radio" id="st5" name="rate" value="5" class="sr-only"><label for="st5">★</label>
   <input type="radio" id="st4" name="rate" value="4" class="sr-only"><label for="st4">★</label>
   <input type="radio" id="st3" name="rate" value="3" class="sr-only"><label for="st3">★</label>
@@ -3824,14 +3825,14 @@ Klassiskt stjärnbetyg fyllt från vänster till höger med dolda radios och fle
 ```
 
 ### 130. Dual-Thumb Range Slider (Overlapping inputs)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Min/Max-intervallväljare med två överlappande native sliders där tummarna förblir interaktiva.
+A min/max range picker with two overlapping native sliders whose thumbs stay interactive.
 
 ```html
 <div class="double-slider">
-  <input type="range" min="0" max="100" value="20" aria-label="Lägsta pris">
-  <input type="range" min="0" max="100" value="80" aria-label="Högsta pris">
+  <input type="range" min="0" max="100" value="20" aria-label="Lowest price">
+  <input type="range" min="0" max="100" value="80" aria-label="Highest price">
   <div class="slider-track" aria-hidden="true"></div>
 </div>
 ```
@@ -3851,15 +3852,15 @@ Min/Max-intervallväljare med två överlappande native sliders där tummarna f�
 ```
 
 ### 131. Auto-Dismiss Transient Toast (`popover="manual"`)
-*Overlay · Newer · Markup*
+*Overlays · Newer · Markup*
 
-Självstängande transient toast driven av CSS Keyframes utan skript.
+A self-dismissing transient toast driven by CSS keyframes, with no script.
 
 ```html
-<button commandfor="auto-toast-1" command="show-popover" class="btn">Spara ändringar</button>
+<button commandfor="auto-toast-1" command="show-popover" class="btn">Save changes</button>
 
 <div id="auto-toast-1" popover="manual" class="auto-toast">
-  ✅ Ändringar sparades i molnet
+  ✅ Changes saved to the cloud
 </div>
 ```
 
@@ -3882,17 +3883,17 @@ Självstängande transient toast driven av CSS Keyframes utan skript.
 ### 132. Exclusive Accordion Group (`<details name="...">`)
 *Layout · Baseline · Markup*
 
-Exklusiv accordion där webbläsaren automatiskt stänger syskonpaneler när en ny öppnas.
+An exclusive accordion where the browser automatically closes sibling panels when a new one opens.
 
 ```html
 <div class="faq-group">
   <details name="faq">
-    <summary>Ingår fri support?</summary>
-    <div class="faq-content">Ja, e-postsupport ingår i alla planer.</div>
+    <summary>Is support included?</summary>
+    <div class="faq-content">Yes, email support is included in every plan.</div>
   </details>
   <details name="faq">
-    <summary>Hur fungerar fakturering?</summary>
-    <div class="faq-content">Fakturering sker månadsvis i förskott.</div>
+    <summary>How does billing work?</summary>
+    <div class="faq-content">Billing is monthly in advance.</div>
   </details>
 </div>
 ```
@@ -3909,19 +3910,19 @@ Exklusiv accordion där webbläsaren automatiskt stänger syskonpaneler när en 
 ### 133. Billing Period Pricing Toggle (`:has()`)
 *State · Baseline · Markup*
 
-Växlar priser mellan månads- och årsdebitering visuellt utan JS.
+Visually switches prices between monthly and yearly billing with no JS.
 
 ```html
 <div class="price-toggle-wrap">
   <fieldset class="billing-switch">
-    <legend class="sr-only">Debiteringstyp</legend>
-    <label><input type="radio" name="billing" id="b-m" checked> Månad</label>
-    <label><input type="radio" name="billing" id="b-y"> År (−20%)</label>
+    <legend class="sr-only">Billing type</legend>
+    <label><input type="radio" name="billing" id="b-m" checked> Monthly</label>
+    <label><input type="radio" name="billing" id="b-y"> Yearly (−20%)</label>
   </fieldset>
 
   <div class="price-card">
-    <p class="price-val price-monthly">199 kr / mån</p>
-    <p class="price-val price-yearly">159 kr / mån</p>
+    <p class="price-val price-monthly">$19 / mo</p>
+    <p class="price-val price-yearly">$15 / mo</p>
   </div>
 </div>
 ```
@@ -3938,15 +3939,15 @@ Växlar priser mellan månads- och årsdebitering visuellt utan JS.
 ```
 
 ### 134. Mobile Swipe-to-Action List (`scroll-snap`)
-*Interaktion · Baseline · Markup*
+*Interaction · Baseline · Markup*
 
-Mobiloptimerad sveplista där en radera-knapp uppenbarar sig vid horisontell svepning.
+A mobile-first swipe list where a delete button appears on a horizontal swipe.
 
 ```html
 <ul class="swipe-list">
   <li class="swipe-item">
-    <div class="swipe-content">Dokument_v1.pdf</div>
-    <button class="swipe-action">Radera</button>
+    <div class="swipe-content">Document_v1.pdf</div>
+    <button class="swipe-action">Delete</button>
   </li>
 </ul>
 ```
@@ -3962,12 +3963,12 @@ Mobiloptimerad sveplista där en radera-knapp uppenbarar sig vid horisontell sve
 ### 135. Hero Parallax Lockup & Depth (`view-timeline`)
 *Scroll-driven · Progressive · 0 JS*
 
-Flerlagers-parallax där bakgrunds- och förgrundselement rör sig i asynkrona hastigheter vid scroll.
+Multi-layer parallax where background and foreground move at different speeds on scroll.
 
 ```html
 <header class="plx-hero">
   <div class="plx-layer plx-bg" aria-hidden="true"></div>
-  <div class="plx-layer plx-fg"><h1>Framtidens UI</h1></div>
+  <div class="plx-layer plx-fg"><h1>The future of UI</h1></div>
 </header>
 ```
 
@@ -3984,17 +3985,17 @@ Flerlagers-parallax där bakgrunds- och förgrundselement rör sig i asynkrona h
 ```
 
 ### 136. Native Datalist Autocomplete Search
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Sökfält med native autokompletteringsmeny via `<datalist>`.
+A search field with a native autocomplete menu via `<datalist>`.
 
 ```html
-<label for="city-search">Sök stad</label>
-<input type="search" id="city-search" list="cities" placeholder="T.ex. Stockholm">
+<label for="city-search">Search city</label>
+<input type="search" id="city-search" list="cities" placeholder="e.g. London">
 <datalist id="cities">
-  <option value="Stockholm"></option>
-  <option value="Göteborg"></option>
-  <option value="Malmö"></option>
+  <option value="London"></option>
+  <option value="Berlin"></option>
+  <option value="Paris"></option>
 </datalist>
 ```
 
@@ -4008,14 +4009,14 @@ input[type="search"]:focus-visible { outline: 2px solid var(--color-primary); ou
 ```
 
 ### 137. Expandable Icon Search Field (`:focus-within`)
-*Formulär · Baseline · Markup*
+*Forms · Baseline · Markup*
 
-Kompakt söknapp som expanderar till ett fullskaligt sökfält vid klick/fokus.
+A compact search button that expands into a full search field on click/focus.
 
 ```html
 <form class="search-expand">
-  <input type="search" placeholder="Sök..." aria-label="Sök">
-  <button type="submit" aria-label="Genomför sökning">🔍</button>
+  <input type="search" placeholder="Search…" aria-label="Search">
+  <button type="submit" aria-label="Submit search">🔍</button>
 </form>
 ```
 
@@ -4032,12 +4033,12 @@ Kompakt söknapp som expanderar till ett fullskaligt sökfält vid klick/fokus.
 ```
 
 ### 138. Drop Cap & Editorial Typography (`initial-letter`)
-*Typografi · Newer · 0 JS*
+*Typography · Newer · 0 JS*
 
-Redaktionell anfangen/drop cap för ingressparagrafer.
+An editorial drop cap for lead paragraphs.
 
 ```html
-<p class="prose-dropcap">Det var en gång en ny standard för webben...</p>
+<p class="prose-dropcap">Once upon a time there was a new standard for the web…</p>
 ```
 
 ```css
@@ -4055,10 +4056,10 @@ Redaktionell anfangen/drop cap för ingressparagrafer.
 ### 139. Scroll-Driven Image Wipe (`clip-path: inset()`)
 *Reveal · Progressive · 0 JS*
 
-Taktil bildavslöjning med `clip-path` som torkar in bilden synkat med scroll.
+A tactile image reveal with `clip-path` that wipes the image in, synced to scroll.
 
 ```html
-<figure class="img-wipe"><img src="/photo.jpg" alt="Beskrivning"></figure>
+<figure class="img-wipe"><img src="/photo.jpg" alt="Description"></figure>
 ```
 
 ```css
@@ -4079,10 +4080,10 @@ Taktil bildavslöjning med `clip-path` som torkar in bilden synkat med scroll.
 ### 140. Sticky Footer Reveal Layout
 *Layout · Baseline · 0 JS*
 
-Sidans footer ligger placerad i botten och avtäcks när det huvudsakliga innehållet rullar uppåt.
+The page footer sits at the bottom and is revealed as the main content scrolls up.
 
 ```html
-<main class="main-reveal">Huvudinnehåll</main>
+<main class="main-reveal">Main content</main>
 <footer class="footer-reveal">Footer</footer>
 ```
 
@@ -4100,10 +4101,10 @@ Sidans footer ligger placerad i botten och avtäcks när det huvudsakliga inneh�
 ### 141. Accessible Skip Link (`:focus-visible` Slide-In)
 *Navigation · Baseline · 0 JS*
 
-Tangentbordsanpassad hopplänk som glider in överst på skärmen vid fokus.
+A keyboard-first skip link that slides in at the top of the screen on focus.
 
 ```html
-<a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 ```
 
 ```css
@@ -4118,14 +4119,14 @@ Tangentbordsanpassad hopplänk som glider in överst på skärmen vid fokus.
 ```
 
 ### 142. Interactive Map Pin Popover (`anchor-name` + `position-anchor`)
-*Overlay · Newer · Markup*
+*Overlays · Newer · Markup*
 
-Kartnålar som öppnar förankrade popovers vid klick.
+Map pins that open anchored popovers on click.
 
 ```html
 <div class="map-container">
   <button id="pin-1" commandfor="pop-pin-1" command="toggle-popover" class="map-pin" style="top: 30%; left: 40%;">📍</button>
-  <div id="pop-pin-1" popover="auto" class="pin-pop">Stockholm HK</div>
+  <div id="pop-pin-1" popover="auto" class="pin-pop">London HQ</div>
 </div>
 ```
 
@@ -4142,7 +4143,7 @@ Kartnålar som öppnar förankrade popovers vid klick.
 ### 143. Print-Friendly Article Stylesheet (`@media print`)
 *Layout · Baseline · 0 JS*
 
-Regelsett för utskrifter som döljer krom och skriver ut URL:er i klartext.
+A print stylesheet that hides chrome and prints URLs in plaintext.
 
 ```css
 @media print {
@@ -4157,12 +4158,12 @@ Regelsett för utskrifter som döljer krom och skriver ut URL:er i klartext.
 ### 144. Dynamic Counter Summary (`counter-increment` + `:has()`)
 *State · Baseline · Markup*
 
-Räknar antalet valda checkboxes i en lista och visar summan i en rubrik utan skript.
+Counts checked boxes in a list and shows the total in a heading, with no script.
 
 ```html
 <div class="count-summary-group">
-  <h3>Valda tjänster (<span class="count-output"></span>)</h3>
-  <label><input type="checkbox" class="count-item"> Webbdesign</label>
+  <h3>Selected services (<span class="count-output"></span>)</h3>
+  <label><input type="checkbox" class="count-item"> Web design</label>
   <label><input type="checkbox" class="count-item"> SEO</label>
 </div>
 ```
@@ -4175,9 +4176,9 @@ Räknar antalet valda checkboxes i en lista och visar summan i en rubrik utan sk
 ```
 
 ### 145. Animated Number Counter (`@property` + `@keyframes`)
-*Typografi · Progressive · 0 JS*
+*Typography · Progressive · 0 JS*
 
-Räknar upp ett numeriskt värde från 0 till ett målvärde med ren CSS.
+Counts a numeric value from 0 to a target with pure CSS.
 
 ```html
 <div class="num-counter" style="--target: 98;">
@@ -4206,14 +4207,14 @@ Räknar upp ett numeriskt värde från 0 till ett målvärde med ren CSS.
 ```
 
 ### 146. Guardrail Focus-Lock Modal (`overscroll-behavior: contain`)
-*Overlay · Baseline · Markup*
+*Overlays · Baseline · Markup*
 
-Modal-dialog som förhindrar Scroll Chaining (att bakgrunden rör sig vid scroll i modalen).
+A modal dialog that prevents scroll chaining (the background moving while the modal scrolls).
 
 ```html
 <dialog id="guard-modal" class="guard-modal" closedby="any">
-  <h2>Modalinnehåll</h2>
-  <div class="guard-body">Långt skrollbart innehåll...</div>
+  <h2>Modal content</h2>
+  <div class="guard-body">Long scrollable content…</div>
 </dialog>
 ```
 
@@ -4228,13 +4229,13 @@ Modal-dialog som förhindrar Scroll Chaining (att bakgrunden rör sig vid scroll
 
 ---
 
-# Färdiga stacks
+# Ready-made stacks
 
-Komponerade kombinationer för olika projekttyper. Alla använder Bas-skydd som bas. Stacks som innehåller Spell 43 eller 47 markeras med † och kräver Root scroll-state preset.
+Composed combinations for different project types. Every stack starts from Base safeguards. Stacks that include Spell 43 or 47 are marked with † and require the Root scroll-state preset.
 
 ---
 
-## Astro-mappning
+## Astro mapping
 
 ### MainLayout.astro
 - 14
@@ -4513,7 +4514,7 @@ Komponerade kombinationer för olika projekttyper. Alla använder Bas-skydd som 
 
 ---
 
-## Färdiga Astro-stacks
+## Ready-made Astro stacks
 
 ### Astro baseline
 `2 · 5 · 6 · 10 · 19 · 20 · 22 · 33 · 38 · 39 · 41 · 53 · 63 · 103 · 114 · 116 · 141 · 143`
@@ -4534,3 +4535,4 @@ Komponerade kombinationer för olika projekttyper. Alla använder Bas-skydd som 
 `8 · 9 · 10 · 21 · 25 · 41 · 51 · 52 · 53 · 60 · 63 · 64 · 108 · 111 · 112 · 113 · 126 · 138 · 143 · 145`
 
 ---
+

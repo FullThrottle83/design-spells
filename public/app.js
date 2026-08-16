@@ -27,11 +27,20 @@ const CAT_ORDER = [
   "Performance",
 ];
 
+/* Small abstract glyphs (not the trademarked logos) — enough to tell the
+   four browsers apart at a glance while staying monochrome/currentColor. */
+const ICONS = {
+  chrome: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>',
+  edge: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4.6 9.6C5.4 6.8 9.6 6.8 11.4 9.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  firefox: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.6c2.6-1.6 3.6.9 1.8 2.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  safari: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 4.4 9.5 8 8 11.6 6.5 8Z" fill="currentColor"/></svg>',
+};
+
 const BROWSER_META = [
-  { key: "chrome", label: "Chrome", short: "C" },
-  { key: "edge", label: "Edge", short: "E" },
-  { key: "firefox", label: "Firefox", short: "F" },
-  { key: "safari", label: "Safari", short: "S" },
+  { key: "chrome", label: "Chrome" },
+  { key: "edge", label: "Edge" },
+  { key: "firefox", label: "Firefox" },
+  { key: "safari", label: "Safari" },
 ];
 
 const LEVEL_LABEL = { yes: "Supported", partial: "Partial", no: "Not shipped" };
@@ -42,8 +51,8 @@ const TAB_LABEL = {
   html: "HTML",
 };
 
-/* Dark-zinc preview sandbox. The stage paints the canvas surface
-   plus the subtle 16px dot grid; spell markup/CSS sits on top. */
+/* Dark-zinc preview sandbox. The stage paints the canvas surface;
+   spell markup/CSS sits on top. */
 const PREVIEW_TOKENS = `
   :host {
     display: block;
@@ -132,15 +141,28 @@ const esc = (str) =>
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   }[c]));
 
-const catalogue   = $("#catalogue");
-const catChips    = $("#cat-chips");
-const counter     = $("#counter");
-const search      = $("#search");
-const backdrop    = $("#backdrop");
-const drawer      = $("#drawer");
-const closeBtn    = $("#drawer-close");
-const closeBtnFoot= $("#drawer-close-foot");
-const previewHost = $("#preview-host");
+const catalogue    = $("#catalogue");
+const catList      = $("#cat-list");
+const statusList   = $("#status-list");
+const browserLegend= $("#browser-legend");
+const counter      = $("#counter");
+const search       = $("#search");
+const backdrop     = $("#backdrop");
+const drawer       = $("#drawer");
+const closeBtn     = $("#drawer-close");
+const closeBtnFoot = $("#drawer-close-foot");
+const previewHost  = $("#preview-host");
+
+const previewPanel = $("#preview-panel");
+const previewEmpty = $("#preview-empty");
+const previewBody  = $("#preview-body");
+const qpHost        = $("#quick-preview-host");
+const qpId          = $("#qp-id");
+const qpTitle       = $("#qp-title");
+const qpCategory    = $("#qp-category");
+const qpBrowsers    = $("#qp-browsers");
+const qpCopy        = $("#qp-copy");
+const qpDetails      = $("#qp-details");
 
 const drawerId    = $("#drawer-id");
 const drawerJs    = $("#drawer-js");
@@ -162,14 +184,10 @@ const copyStatus  = $("#copy-status");
 
 const STATUS_LINE_IDLE = "Zero JS · copy and paste freely";
 
-const state = { query: "", category: "all", status: "all", active: null, tab: "modern" };
+const state = { query: "", category: "all", status: "all", active: null, tab: "modern", quick: null };
 let lastTrigger = null;
 let closing = false;
 let statusTimer;
-const previewObserver = new IntersectionObserver(onPreviewIntersect, {
-  rootMargin: "120px 0px",
-  threshold: 0.05,
-});
 
 function categories() {
   const present = new Set(SPELLS.map((s) => s.category));
@@ -189,10 +207,14 @@ function matches(spell) {
   return state.query.toLowerCase().split(/\s+/).every((term) => hay.includes(term));
 }
 
+function browserIcon(key, level, label) {
+  return `<span class="brow" data-level="${esc(level)}" title="${esc(label)}: ${esc(LEVEL_LABEL[level] || level)}">${ICONS[key] || ""}</span>`;
+}
+
 function browsersRow(spell) {
   return BROWSER_META.map((b) => {
     const level = spell.browsers?.[b.key] || "no";
-    return `<span class="brow" data-level="${esc(level)}" title="${esc(b.label)}: ${esc(LEVEL_LABEL[level] || level)}">${esc(b.short)}</span>`;
+    return browserIcon(b.key, level, b.label);
   }).join("");
 }
 
@@ -202,51 +224,39 @@ function oneLine(text) {
   return first.length > 140 ? first.slice(0, 137).trimEnd() + "…" : first;
 }
 
-function cardTemplate(spell) {
+/* ---------------- rows ---------------- */
+
+function rowTemplate(spell) {
   return `
-  <li class="card" data-id="${esc(spell.id)}">
-    <header class="card__head">
-      <h2 class="card__title">
-        <button class="card__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
+  <li class="row" data-id="${esc(spell.id)}">
+    <div class="row__main">
+      <h2 class="row__title">
+        <button class="row__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
       </h2>
-      <p class="card__usecase">${esc(oneLine(spell.description))}</p>
-    </header>
-
-    <div class="card__preview" data-preview="${esc(spell.id)}" aria-hidden="true"></div>
-
-    <div class="card__code">
-      <div class="code" data-code data-id="${esc(spell.id)}" data-tab="modern">
-        <div class="code__bar">
-          <div class="code__tabs" role="tablist" aria-label="Source code views">
-            <button class="code__tab" role="tab" data-tab="tailwind" aria-selected="false" type="button">Tailwind v4</button>
-            <button class="code__tab" role="tab" data-tab="modern" aria-selected="true" type="button">Modern CSS</button>
-            <button class="code__tab" role="tab" data-tab="html" aria-selected="false" type="button">HTML</button>
-          </div>
-        </div>
-        <div class="code__view-wrap">
-          <pre class="code__view" role="tabpanel" tabindex="0"><code></code></pre>
-        </div>
-        <button class="code__toggle" type="button" data-code-toggle>Show more</button>
-      </div>
-      <button class="card__copy" type="button" data-copy-code aria-label="Copy source for ${esc(spell.title)}">Copy CSS</button>
+      <p class="row__desc">${esc(oneLine(spell.description))}</p>
     </div>
-
-    <div class="card__meta">
-      <div class="card__cats">
-        <span class="card__id">${esc(spell.id)}</span>
-        <span class="card__cat-name">${esc(spell.category)}</span>
-      </div>
-      <div class="card__browsers" aria-label="Browser support">${browsersRow(spell)}</div>
+    <div class="row__aside">
+      <span class="row__id">${esc(spell.id)}</span>
+      <div class="row__browsers" aria-label="Browser support">${browsersRow(spell)}</div>
+      <button class="row__copy" type="button" data-copy-row aria-label="Copy CSS for ${esc(spell.title)}">Copy</button>
     </div>
   </li>`;
 }
 
-function renderChips() {
-  catChips.innerHTML = categories().map((c) => {
+function renderCategoryNav() {
+  const rows = [`<button class="nav-item${state.category === "all" ? " is-on" : ""}" type="button" data-cat="all"><span>All</span><span class="nav-item__count" aria-hidden="true">${TOTAL_SPELLS}</span></button>`];
+  for (const c of categories()) {
     const count = SPELLS.filter((s) => s.category === c).length;
     const on = state.category === c ? " is-on" : "";
-    return `<button class="chip-btn${on}" type="button" data-cat="${esc(c)}">${esc(c)} <span aria-hidden="true">${count}</span></button>`;
-  }).join("");
+    rows.push(`<button class="nav-item${on}" type="button" data-cat="${esc(c)}"><span>${esc(c)}</span><span class="nav-item__count" aria-hidden="true">${count}</span></button>`);
+  }
+  catList.innerHTML = rows.join("");
+}
+
+function renderBrowserLegendList() {
+  browserLegend.innerHTML = BROWSER_META.map((b) =>
+    `<li>${browserIcon(b.key, "yes", b.label)}<span>${esc(b.label)}</span></li>`
+  ).join("");
 }
 
 function renderGrid() {
@@ -259,7 +269,7 @@ function renderGrid() {
 
   const order = categories().filter((c) => byCat.has(c));
   if (!visible.length) {
-    catalogue.innerHTML = `<ul class="spell-grid"><li class="spell-grid__empty">No spells match “${esc(state.query)}”</li></ul>`;
+    catalogue.innerHTML = `<p class="row-list__empty">No spells match “${esc(state.query)}”</p>`;
   } else {
     catalogue.innerHTML = order.map((cat) => {
       const items = byCat.get(cat);
@@ -269,28 +279,15 @@ function renderGrid() {
             <h2 class="cat-block__title" id="cat-${esc(cat)}">${esc(cat)}</h2>
             <span class="cat-block__count">${items.length} spell${items.length === 1 ? "" : "s"}</span>
           </div>
-          <ul class="spell-grid" aria-label="${esc(cat)}">${items.map(cardTemplate).join("")}</ul>
+          <ul class="row-list" aria-label="${esc(cat)}">${items.map(rowTemplate).join("")}</ul>
         </section>`;
     }).join("");
   }
 
   counter.textContent = `Showing ${visible.length} of ${TOTAL_SPELLS} spells`;
 
-  for (const host of catalogue.querySelectorAll("[data-preview]")) {
-    previewObserver.observe(host);
-  }
-  for (const wrap of catalogue.querySelectorAll("[data-code]")) {
-    renderCodeView(wrap);
-  }
-}
-
-function onPreviewIntersect(entries) {
-  for (const entry of entries) {
-    if (!entry.isIntersecting) continue;
-    const host = entry.target;
-    previewObserver.unobserve(host);
-    const spell = SPELLS.find((s) => s.id === host.dataset.preview);
-    if (spell) hydratePreview(host, spell, true);
+  if (!visible.some((s) => s.id === state.quick?.id)) {
+    showQuickPreview(visible[0] || null);
   }
 }
 
@@ -308,7 +305,7 @@ function hydratePreview(host, spell, compact) {
   `;
 }
 
-/* ---------------- code views ---------------- */
+/* ---------------- code ---------------- */
 
 function modernCssFor(spell) {
   return String(spell.css || "").trim() + "\n";
@@ -351,7 +348,6 @@ function highlightCss(src) {
   while (i < n) {
     const c = src[i];
 
-    // comments
     if (c === "/" && src[i + 1] === "*") {
       const end = src.indexOf("*/", i + 2);
       const stop = end < 0 ? n : end + 2;
@@ -360,7 +356,6 @@ function highlightCss(src) {
       continue;
     }
 
-    // strings
     if (c === '"' || c === "'") {
       let j = i + 1;
       while (j < n && src[j] !== c) {
@@ -373,7 +368,6 @@ function highlightCss(src) {
       continue;
     }
 
-    // at-rules
     if (c === "@") {
       let j = i + 1;
       while (j < n && /[a-zA-Z-]/.test(src[j])) j++;
@@ -382,7 +376,6 @@ function highlightCss(src) {
       continue;
     }
 
-    // braces / punctuation control declaration state
     if (c === "{") { braceDepth++; push("tok-punct", "{"); i++; continue; }
     if (c === "}") { braceDepth = Math.max(0, braceDepth - 1); push("tok-punct", "}"); i++; continue; }
     if (c === ";" || c === "(" || c === ")" || c === ",") {
@@ -390,7 +383,6 @@ function highlightCss(src) {
     }
     if (c === ":") { push("tok-punct", ":"); i++; continue; }
 
-    // numbers / hex colors / lengths
     if (/[0-9#]/.test(c)) {
       let j = i;
       if (c === "#") {
@@ -409,13 +401,11 @@ function highlightCss(src) {
       }
     }
 
-    // identifiers: properties inside declaration blocks, otherwise plain text
     if (/[A-Za-z_]/.test(c) || (c === "-" && /[A-Za-z-]/.test(src[i + 1] || ""))) {
       let j = i;
       if (c === "-") j++;
       while (j < n && /[\w-]/.test(src[j])) j++;
       const ident = src.slice(i, j);
-      // Look ahead for a colon to decide if this is a property name.
       let k = j;
       while (k < n && /\s/.test(src[k])) k++;
       const isProp = braceDepth > 0 && src[k] === ":";
@@ -432,7 +422,6 @@ function highlightCss(src) {
 
 function highlightHtml(src) {
   const escHtml = esc(src);
-  // Tokenize escaped HTML so we never accidentally highlight inside text.
   const tagRe = /&lt;(?:(!--[\s\S]*?--)|\/?)([a-zA-Z][\w-]*)((?:(?!&gt;).)*?)(\/?)&gt;/g;
   let out = "";
   let last = 0;
@@ -464,52 +453,17 @@ function highlight(src, tab) {
   return highlightCss(src);
 }
 
-const COPY_LABEL = { modern: "Copy CSS", html: "Copy HTML", tailwind: "Copy Tailwind" };
-
-function renderCodeView(wrap) {
-  const spell = SPELLS.find((s) => s.id === wrap.dataset.id);
-  if (!spell) return;
-  const tab = wrap.dataset.tab || "modern";
-  const code = codeFor(spell, tab);
-  const codeEl = wrap.querySelector("code");
-  codeEl.innerHTML = highlight(code, tab);
-  for (const btn of wrap.querySelectorAll(".code__tab")) {
-    btn.setAttribute("aria-selected", String(btn.dataset.tab === tab));
-  }
-  const view = wrap.querySelector(".code__view");
-  view.scrollTop = 0;
-  requestAnimationFrame(() => updateCodeToggle(wrap));
-
-  const copyBtn = wrap.parentElement?.querySelector(".card__copy");
-  if (copyBtn && !copyBtn.classList.contains("is-done")) {
-    copyBtn.textContent = COPY_LABEL[tab] || "Copy";
-  }
-}
-
-function updateCodeToggle(wrap) {
-  const view = wrap.querySelector(".code__view");
-  const toggle = wrap.querySelector("[data-code-toggle]");
-  const expanded = wrap.classList.contains("is-expanded");
-  const overflow = view.scrollHeight > 190;
-  toggle.classList.toggle("is-visible", overflow);
-  toggle.textContent = expanded ? "Show less" : "Show more";
-  view.classList.toggle("is-collapsed", overflow && !expanded);
-  view.classList.toggle("is-expanded", expanded);
-}
-
 /* ---------------- filters ---------------- */
 
-document.querySelector(".filters").addEventListener("click", (ev) => {
+catList.addEventListener("click", (ev) => {
   const btn = ev.target.closest("[data-cat]");
   if (!btn) return;
   state.category = btn.dataset.cat;
-  document.querySelectorAll("[data-cat]").forEach((el) => {
-    el.classList.toggle("is-on", el.dataset.cat === state.category);
-  });
+  renderCategoryNav();
   renderGrid();
 });
 
-document.querySelector(".filters--status").addEventListener("click", (ev) => {
+statusList.addEventListener("click", (ev) => {
   const btn = ev.target.closest("[data-status]");
   if (!btn) return;
   state.status = btn.dataset.status;
@@ -525,34 +479,31 @@ search.addEventListener("input", () => {
 });
 $("#search-form").addEventListener("submit", (ev) => ev.preventDefault());
 
-/* ---------------- grid clicks ---------------- */
+/* ---------------- list interaction ---------------- */
+
+function rowSpell(el) {
+  const row = el?.closest?.(".row");
+  return row && SPELLS.find((s) => s.id === row.dataset.id);
+}
+
+catalogue.addEventListener("mouseover", (ev) => {
+  const spell = rowSpell(ev.target);
+  if (spell && spell.id !== state.quick?.id) showQuickPreview(spell);
+});
+
+catalogue.addEventListener("focusin", (ev) => {
+  const spell = rowSpell(ev.target);
+  if (spell && spell.id !== state.quick?.id) showQuickPreview(spell);
+});
 
 catalogue.addEventListener("click", async (ev) => {
-  const tab = ev.target.closest(".code__tab");
-  if (tab) {
-    const wrap = tab.closest("[data-code]");
-    wrap.dataset.tab = tab.dataset.tab;
-    renderCodeView(wrap);
-    return;
-  }
-
-  const toggle = ev.target.closest("[data-code-toggle]");
-  if (toggle) {
-    const wrap = toggle.closest("[data-code]");
-    wrap.classList.toggle("is-expanded");
-    updateCodeToggle(wrap);
-    return;
-  }
-
-  const copyBtn = ev.target.closest("[data-copy-code]");
+  const copyBtn = ev.target.closest("[data-copy-row]");
   if (copyBtn) {
     ev.preventDefault();
-    const wrap = copyBtn.closest(".card__code")?.querySelector("[data-code]");
-    const spell = wrap && SPELLS.find((s) => s.id === wrap.dataset.id);
+    const spell = rowSpell(copyBtn);
     if (!spell) return;
-    const tab = wrap.dataset.tab || "modern";
     try {
-      await copyText(codeFor(spell, tab));
+      await copyText(modernCssFor(spell));
       flashCopy(copyBtn, "Copied!");
     } catch {
       flashCopy(copyBtn, "Failed");
@@ -560,10 +511,11 @@ catalogue.addEventListener("click", async (ev) => {
     return;
   }
 
-  const hit = ev.target.closest(".card__hit");
-  if (!hit) return;
-  const spell = SPELLS.find((s) => s.id === hit.closest(".card")?.dataset.id);
-  if (spell) openDrawer(spell, hit);
+  const hit = ev.target.closest(".row__hit");
+  if (hit) {
+    const spell = rowSpell(hit);
+    if (spell) openDrawer(spell, hit);
+  }
 });
 
 function flashCopy(btn, label) {
@@ -592,6 +544,44 @@ document.addEventListener("keydown", (ev) => {
     ev.preventDefault();
     closeDrawer();
   }
+});
+
+/* ---------------- quick preview panel ---------------- */
+
+function showQuickPreview(spell) {
+  state.quick = spell || null;
+
+  if (!spell) {
+    previewBody.hidden = true;
+    previewEmpty.hidden = false;
+    if (qpHost.shadowRoot) qpHost.shadowRoot.innerHTML = "";
+    return;
+  }
+
+  previewEmpty.hidden = true;
+  previewBody.hidden = false;
+
+  qpId.textContent = spell.id;
+  qpTitle.textContent = spell.title;
+  qpCategory.textContent = spell.category;
+  qpBrowsers.innerHTML = browsersRow(spell);
+  qpCopy.textContent = "Copy CSS";
+  qpCopy.classList.remove("is-done");
+  hydratePreview(qpHost, spell, true);
+}
+
+qpCopy.addEventListener("click", async () => {
+  if (!state.quick) return;
+  try {
+    await copyText(modernCssFor(state.quick));
+    flashCopy(qpCopy, "Copied!");
+  } catch {
+    flashCopy(qpCopy, "Failed");
+  }
+});
+
+qpDetails.addEventListener("click", () => {
+  if (state.quick) openDrawer(state.quick, qpDetails);
 });
 
 /* ---------------- drawer tabs ---------------- */
@@ -681,7 +671,7 @@ function renderBrowserList(spell) {
   drawerBrows.innerHTML = BROWSER_META.map((b) => {
     const level = spell.browsers?.[b.key] || "no";
     return `<li>
-      <span class="bname">${esc(b.label)}</span>
+      <span class="bname">${ICONS[b.key] || ""}${esc(b.label)}</span>
       <span class="blevel" data-level="${esc(level)}">${esc(LEVEL_LABEL[level] || level)}</span>
     </li>`;
   }).join("");
@@ -773,8 +763,9 @@ drawer.addEventListener("keydown", (ev) => {
 /* ---------------- init ---------------- */
 
 if (!SPELLS.length) {
-  catalogue.innerHTML = `<ul class="spell-grid"><li class="spell-grid__empty">Spell data failed to load</li></ul>`;
+  catalogue.innerHTML = `<p class="row-list__empty">Spell data failed to load</p>`;
 } else {
-  renderChips();
+  renderBrowserLegendList();
+  renderCategoryNav();
   renderGrid();
 }

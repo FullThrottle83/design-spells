@@ -35,46 +35,67 @@
     <section class="intro">
       <h1>A catalogue of CSS that does the work itself.</h1>
       <p>
-        One hundred forty-five interaction, layout, and polish techniques.
-        No client JavaScript. Filter by category, preview the result, copy the source,
-        and check browser support before you paste.
+        145 interaction, layout, and polish techniques. No client JavaScript.
+        Hover a spell to preview it, then copy the source.
       </p>
-    </section>
-
-    <div class="toolbar">
       <form class="search" id="search-form" role="search">
-        <label class="search__label" for="search">Search</label>
         <div class="search__field">
           <input class="search__input" id="search" name="q" type="search"
-                 placeholder="Filter by name, category, feature, or status…"
+                 placeholder="Search by name, category, feature, or status…"
+                 aria-label="Search spells"
                  autocomplete="off" autocapitalize="off" spellcheck="false">
           <kbd class="search__kbd" aria-hidden="true">/</kbd>
         </div>
       </form>
+    </section>
+
+    <div class="browse">
+
+      <nav class="browse__nav" aria-label="Browse spells">
+        <div class="nav-group" role="group" aria-label="Categories">
+          <h2 class="nav-group__label">Category</h2>
+          <div class="nav-list" id="cat-list"></div>
+        </div>
+
+        <div class="nav-group" role="group" aria-label="Support status">
+          <h2 class="nav-group__label">Status</h2>
+          <div class="nav-list" id="status-list">
+            <button class="nav-item is-on" type="button" data-status="all"><span>Any status</span></button>
+            <button class="nav-item" type="button" data-status="baseline"><span>Baseline</span></button>
+            <button class="nav-item" type="button" data-status="newer"><span>Newer</span></button>
+            <button class="nav-item" type="button" data-status="progressive"><span>Progressive</span></button>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <h2 class="nav-group__label">Browsers</h2>
+          <ul class="nav-legend" id="browser-legend"></ul>
+          <p class="nav-legend__key">Green supported · amber partial · red missing</p>
+        </div>
+      </nav>
+
+      <div class="browse__list">
+        <div id="catalogue"></div>
+      </div>
+
+      <aside class="browse__preview" id="preview-panel" aria-label="Live preview">
+        <div class="preview-panel__empty" id="preview-empty">
+          <p>Hover or focus a spell to preview it here.</p>
+        </div>
+        <div class="preview-panel__body" id="preview-body" hidden>
+          <div class="preview-panel__head">
+            <p class="preview-panel__eyebrow" id="qp-id">ds-000</p>
+            <h2 class="preview-panel__title" id="qp-title">Untitled spell</h2>
+            <p class="preview-panel__cat" id="qp-category">Category</p>
+          </div>
+          <div class="preview-host preview-host--panel" id="quick-preview-host"></div>
+          <div class="preview-panel__browsers" id="qp-browsers" aria-label="Browser support"></div>
+          <button class="preview-panel__copy" type="button" id="qp-copy">Copy CSS</button>
+          <button class="preview-panel__details" type="button" id="qp-details">Open full details</button>
+        </div>
+      </aside>
+
     </div>
-
-    <div class="filters" role="group" aria-label="Categories">
-      <button class="chip-btn is-on" type="button" data-cat="all">All</button>
-      <div id="cat-chips" class="filters__cats"></div>
-    </div>
-
-    <div class="filters filters--status" role="group" aria-label="Support status">
-      <button class="chip-btn is-on" type="button" data-status="all">Any status</button>
-      <button class="chip-btn" type="button" data-status="baseline">Baseline</button>
-      <button class="chip-btn" type="button" data-status="newer">Newer</button>
-      <button class="chip-btn" type="button" data-status="progressive">Progressive</button>
-    </div>
-
-    <p class="legend">
-      <span class="brow" data-level="yes">C</span> Chrome
-      <span class="brow" data-level="yes">E</span> Edge
-      <span class="brow" data-level="yes">F</span> Firefox
-      <span class="brow" data-level="yes">S</span> Safari
-      <span class="legend__sep" aria-hidden="true">·</span>
-      Green supported · amber partial · red missing
-    </p>
-
-    <div id="catalogue"></div>
 
     <footer class="shell-note">
       <span>Raw CSS only — no JavaScript ships with any spell</span>

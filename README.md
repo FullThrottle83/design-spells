@@ -12,7 +12,7 @@ A single **canonical** reference bank of design spells for modern Astro projects
 
 The document therefore contains only spells marked **`0 JS`** or **`Markup`**. In the original file's terminology, `Markup` still means the spell is JS-free, but it needs a precise HTML pattern — for example `<details>`, checkbox state, `popover`, a `dialog`-compatible structure, or another native state machine.
 
-In total there are **144 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–146** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal).
+In total there are **145 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–146** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal).
 
 ---
 

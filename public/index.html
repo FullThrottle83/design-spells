@@ -3,10 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <title>Design Spells — zero-JS CSS techniques</title>
-  <meta name="description" content="144 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <meta name="description" content="145 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='1' y='13' font-size='13'%3E%E2%9C%B6%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="./styles.css">
   <script src="./spells.js"></script>
   <script src="./app.js" defer></script>
@@ -22,7 +25,7 @@
         <span class="brand__tag">Zero-JS CSS techniques</span>
       </p>
       <div class="head-meta">
-        <p class="counter" id="counter" aria-live="polite">Showing 0 of 144 spells</p>
+        <p class="counter" id="counter" aria-live="polite">Showing 0 of 145 spells</p>
         <a class="sponsor" href="https://github.com/sponsors/FullThrottle83" target="_blank" rel="noopener">
           Sponsor on GitHub <span aria-hidden="true">↗</span>
         </a>
@@ -35,7 +38,7 @@
     <section class="intro">
       <h1>A catalogue of CSS that does the work itself.</h1>
       <p>
-        One hundred forty-four interaction, layout, and polish techniques.
+        One hundred forty-five interaction, layout, and polish techniques.
         No client JavaScript. Filter by category, preview the result, copy the source,
         and check browser support before you paste.
       </p>
@@ -71,7 +74,7 @@
       <span class="brow" data-level="yes">F</span> Firefox
       <span class="brow" data-level="yes">S</span> Safari
       <span class="legend__sep" aria-hidden="true">·</span>
-      Green is supported, amber is partial, red is not shipped.
+Green is supported, amber is partial, red is not shipped. Neutral badges indicate zero-JS state and CSS features.
     </p>
 
     <div id="catalogue"></div>
@@ -97,7 +100,7 @@
         <p class="drawer__meta">
           <span class="drawer__cat" id="drawer-category">category</span>
           <span aria-hidden="true">/</span>
-          <span class="chip" id="drawer-status">status</span>
+          <span class="badge" id="drawer-status">status</span>
         </p>
       </div>
       <button class="drawer__close" id="drawer-close" type="button" aria-label="Close panel">×</button>
@@ -119,18 +122,20 @@
       </section>
 
       <section class="sect" aria-labelledby="source-label">
-        <h3 class="sect__label" id="source-label">Source <span id="source-lang">css</span></h3>
-        <div class="codeblock">
-          <div class="codeblock__bar">
-            <div class="codeblock__tabs" role="tablist" aria-label="Source code views" id="code-tabs">
-              <button class="tab" id="tab-css" role="tab" aria-selected="true" aria-controls="code-view" data-tab="css" type="button">CSS</button>
-              <button class="tab" id="tab-html" role="tab" aria-selected="false" aria-controls="code-view" data-tab="html" type="button">HTML</button>
+        <h3 class="sect__label" id="source-label">Source <span id="source-lang">Modern CSS</span></h3>
+        <div class="code drawer__code">
+          <div class="code__bar">
+            <div class="code__tabs" role="tablist" aria-label="Source code views" id="code-tabs">
+              <button class="code__tab" id="tab-tailwind" role="tab" aria-selected="false" aria-controls="code-view" data-tab="tailwind" type="button">Tailwind v4</button>
+              <button class="code__tab" id="tab-modern" role="tab" aria-selected="true" aria-controls="code-view" data-tab="modern" type="button">Modern CSS</button>
+              <button class="code__tab" id="tab-html" role="tab" aria-selected="false" aria-controls="code-view" data-tab="html" type="button">HTML</button>
             </div>
-            <span class="bar__spacer"></span>
-            <button class="codeblock__export" id="copy-source" type="button">Copy</button>
-            <button class="codeblock__export" id="copy-astro" type="button">Copy as .astro</button>
+            <span class="code__spacer"></span>
+            <button class="code__copy" id="copy-source" type="button">Copy</button>
           </div>
-          <pre class="codeblock__view" id="code-view" role="tabpanel" tabindex="0" aria-labelledby="tab-css"><code id="code-text"></code></pre>
+          <div class="code__view-wrap">
+            <pre class="code__view" id="code-view" role="tabpanel" tabindex="0" aria-labelledby="tab-modern"><code id="code-text"></code></pre>
+          </div>
         </div>
       </section>
 

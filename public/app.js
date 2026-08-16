@@ -34,29 +34,36 @@ const BROWSER_META = [
   { key: "safari", label: "Safari", short: "S" },
 ];
 
-const LEVEL_LABEL = { yes: "Yes", partial: "Partial", no: "No" };
+const LEVEL_LABEL = { yes: "Supported", partial: "Partial", no: "Not shipped" };
 
+const TAB_LABEL = {
+  tailwind: "Tailwind v4",
+  modern: "Modern CSS",
+  html: "HTML",
+};
+
+/* Dark-zinc preview sandbox. The stage paints the canvas surface
+   plus the subtle 16px dot grid; spell markup/CSS sits on top. */
 const PREVIEW_TOKENS = `
   :host {
     display: block;
-    height: 100%;
-    color-scheme: light dark;
-    --color-primary: light-dark(#3b35c7, #a5a1ff);
-    --color-bg: light-dark(#f7f7f9, #111116);
-    --color-text: light-dark(#19191f, #eaeaee);
-    --color-text-muted: light-dark(#53535e, #a0a0aa);
-    --color-text-inverse: light-dark(#fbfbfc, #19191f);
-    --color-border: light-dark(#d8d8de, #2a2a32);
-    --color-surface: light-dark(#ffffff, #18181e);
-    --color-surface-offset: light-dark(#ececf0, #22222a);
-    --color-surface-dynamic: light-dark(#e4e4ea, #2c2c34);
-    --color-surface-dark: #141419;
-    --color-error: light-dark(#c0392b, #f07167);
-    --color-success: light-dark(#0b7a45, #6fd39c);
-    --color-accent: light-dark(#c45c26, #e8a87c);
+    color-scheme: dark;
+    --color-primary: #e4e4e7;
+    --color-bg: #18181b;
+    --color-text: #f4f4f5;
+    --color-text-muted: #a1a1aa;
+    --color-text-inverse: #09090b;
+    --color-border: #27272a;
+    --color-surface: #121215;
+    --color-surface-offset: #1f1f23;
+    --color-surface-dynamic: #27272a;
+    --color-surface-dark: #09090b;
+    --color-error: #fca5a5;
+    --color-success: #86efac;
+    --color-accent: #d4d4d8;
     --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
+    --radius-md: 8px;
+    --radius-lg: 8px;
     --space-1: .25rem;
     --space-2: .5rem;
     --space-3: .75rem;
@@ -66,19 +73,20 @@ const PREVIEW_TOKENS = `
     --space-8: 2rem;
     --header-height: 3rem;
     color: var(--color-text);
-    font: 12.5px/1.45 ui-sans-serif, system-ui, sans-serif;
+    font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
   }
   .stage {
     position: relative;
-    transform: translateZ(0);
     isolation: isolate;
     overflow: hidden;
-    min-height: 100%;
-    height: 100%;
+    width: 100%;
+    min-height: 180px;
     padding: 16px;
     display: grid;
     place-items: center;
-    background: var(--color-bg);
+    background-color: var(--color-bg);
+    background-image: radial-gradient(circle at 1px 1px, #27272a 1px, transparent 0);
+    background-size: 16px 16px;
     color: var(--color-text);
   }
   .stage > * { max-width: 100%; }
@@ -97,7 +105,7 @@ const PREVIEW_TOKENS = `
   }
   .btn-primary {
     background: var(--color-primary);
-    color: white;
+    color: var(--color-text-inverse);
     border-color: transparent;
   }
   .sr-only {
@@ -146,16 +154,17 @@ const drawerFeat  = $("#drawer-feature");
 const drawerBrows = $("#drawer-browsers");
 const drawerNote  = $("#drawer-support-note");
 
-const tabBar     = $("#code-tabs");
-const tabBtns    = [...tabBar.querySelectorAll('[role="tab"]')];
-const codePanel  = $("#code-view");
-const codeText   = $("#code-text");
-const sourceLang = $("#source-lang");
-const copyStatus = $("#copy-status");
+const tabBar      = $("#code-tabs");
+const tabBtns     = [...tabBar.querySelectorAll('[role="tab"]')];
+const codePanel   = $("#code-view");
+const codeText    = $("#code-text");
+const sourceLang  = $("#source-lang");
+const copySource  = $("#copy-source");
+const copyStatus  = $("#copy-status");
 
 const STATUS_LINE_IDLE = "Zero JS · copy and paste freely";
 
-const state = { query: "", category: "all", status: "all", active: null, tab: "css" };
+const state = { query: "", category: "all", status: "all", active: null, tab: "modern" };
 let lastTrigger = null;
 let closing = false;
 let statusTimer;
@@ -189,30 +198,57 @@ function browsersRow(spell) {
   }).join("");
 }
 
-function slug(name) {
-  return String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "cat";
+function oneLine(text) {
+  const clean = String(text || "").replace(/`+/g, "").replace(/\*\*/g, "").replace(/\s+/g, " ").trim();
+  const first = clean.split(/(?<=[.!?])\s+/)[0] || clean;
+  return first.length > 140 ? first.slice(0, 137).trimEnd() + "…" : first;
 }
 
 function cardTemplate(spell) {
+  const feature = spell.feature || "Modern CSS";
   return `
   <li class="card" data-id="${esc(spell.id)}">
-    <div class="card__preview" data-preview="${esc(spell.id)}" aria-hidden="true"></div>
-    <article class="card__inner">
-      <p class="card__row">
-        <span class="card__id">${esc(spell.id)}</span>
-        <span class="chip chip--${esc(spell.status)}">${esc(spell.statusLabel)}</span>
-      </p>
-      <h2 class="card__title">
-        <button class="card__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
-      </h2>
-      <p class="card__row">
-        <span class="card__cat">${esc(spell.category)}</span>
-      </p>
-      <div class="card__foot">
-        <div class="browsers" aria-label="Browser support">${browsersRow(spell)}</div>
-        <button class="copy-btn" type="button" data-copy="${esc(spell.id)}">Copy CSS</button>
+    <header class="card__head">
+      <div class="card__head-main">
+        <h2 class="card__title">
+          <button class="card__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
+        </h2>
+        <p class="card__usecase">${esc(oneLine(spell.description))}</p>
       </div>
-    </article>
+      <div class="card__head-aside">
+        <span class="badge" title="0 JS · ${esc(feature)}">
+          <span class="badge__dot" aria-hidden="true"></span><span class="badge__text">0 JS · ${esc(feature)}</span>
+        </span>
+      </div>
+    </header>
+
+    <div class="card__preview" data-preview="${esc(spell.id)}" aria-hidden="true"></div>
+
+    <div class="card__code">
+      <div class="code" data-code data-id="${esc(spell.id)}" data-tab="modern">
+        <div class="code__bar">
+          <div class="code__tabs" role="tablist" aria-label="Source code views">
+            <button class="code__tab" role="tab" data-tab="tailwind" aria-selected="false" type="button">Tailwind v4</button>
+            <button class="code__tab" role="tab" data-tab="modern" aria-selected="true" type="button">Modern CSS</button>
+            <button class="code__tab" role="tab" data-tab="html" aria-selected="false" type="button">HTML</button>
+          </div>
+          <span class="code__spacer"></span>
+          <button class="code__copy" type="button" data-copy-code aria-label="Copy source">Copy</button>
+        </div>
+        <div class="code__view-wrap">
+          <pre class="code__view" role="tabpanel" tabindex="0"><code></code></pre>
+        </div>
+        <button class="code__toggle" type="button" data-code-toggle>Show more</button>
+      </div>
+    </div>
+
+    <div class="card__meta">
+      <div class="card__cats">
+        <span class="card__id">${esc(spell.id)}</span>
+        <span class="badge badge--muted">${esc(spell.category)}</span>
+      </div>
+      <div class="card__browsers" aria-label="Browser support">${browsersRow(spell)}</div>
+    </div>
   </li>`;
 }
 
@@ -254,6 +290,9 @@ function renderGrid() {
   for (const host of catalogue.querySelectorAll("[data-preview]")) {
     previewObserver.observe(host);
   }
+  for (const wrap of catalogue.querySelectorAll("[data-code]")) {
+    renderCodeView(wrap);
+  }
 }
 
 function onPreviewIntersect(entries) {
@@ -270,15 +309,196 @@ function hydratePreview(host, spell, compact) {
   const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
   const css = spell.previewCss || spell.css || "";
   const html = spell.previewHtml || spell.html || "";
-  const pad = compact ? "12px" : "20px";
+  const minHeight = compact ? 180 : 280;
   root.innerHTML = `
     <style>
       ${PREVIEW_TOKENS}
-      .stage { padding: ${pad}; }
       ${css}
     </style>
-    <div class="stage">${html}</div>
+    <div class="stage" style="min-height:${minHeight}px">${html}</div>
   `;
+}
+
+/* ---------------- code views ---------------- */
+
+function modernCssFor(spell) {
+  return String(spell.css || "").trim() + "\n";
+}
+
+function htmlFor(spell) {
+  return String(spell.previewHtml || spell.html || "").trim() ||
+    "<!-- This spell is CSS-only; no extra markup is required. -->\n";
+}
+
+function tailwindFor(spell) {
+  const css = modernCssFor(spell).trimEnd();
+  const indented = css.split("\n").map((line) => (line ? "  " + line : line)).join("\n");
+  return [
+    "/* Tailwind v4 — drop into a global stylesheet processed by Tailwind. */",
+    '@import "tailwindcss";',
+    "",
+    "@layer components {",
+    indented,
+    "}",
+    "",
+  ].join("\n");
+}
+
+function codeFor(spell, tab) {
+  if (tab === "html") return htmlFor(spell);
+  if (tab === "tailwind") return tailwindFor(spell);
+  return modernCssFor(spell);
+}
+
+function highlightCss(src) {
+  let out = "";
+  let i = 0;
+  let braceDepth = 0;
+  const n = src.length;
+  const push = (cls, text) => {
+    const e = esc(text);
+    out += cls ? `<span class="${cls}">${e}</span>` : e;
+  };
+  while (i < n) {
+    const c = src[i];
+
+    // comments
+    if (c === "/" && src[i + 1] === "*") {
+      const end = src.indexOf("*/", i + 2);
+      const stop = end < 0 ? n : end + 2;
+      push("tok-com", src.slice(i, stop));
+      i = stop;
+      continue;
+    }
+
+    // strings
+    if (c === '"' || c === "'") {
+      let j = i + 1;
+      while (j < n && src[j] !== c) {
+        if (src[j] === "\\") j++;
+        j++;
+      }
+      j = Math.min(j + 1, n);
+      push("tok-str", src.slice(i, j));
+      i = j;
+      continue;
+    }
+
+    // at-rules
+    if (c === "@") {
+      let j = i + 1;
+      while (j < n && /[a-zA-Z-]/.test(src[j])) j++;
+      push("tok-kw", src.slice(i, j));
+      i = j;
+      continue;
+    }
+
+    // braces / punctuation control declaration state
+    if (c === "{") { braceDepth++; push("tok-punct", "{"); i++; continue; }
+    if (c === "}") { braceDepth = Math.max(0, braceDepth - 1); push("tok-punct", "}"); i++; continue; }
+    if (c === ";" || c === "(" || c === ")" || c === ",") {
+      push("tok-punct", c); i++; continue;
+    }
+    if (c === ":") { push("tok-punct", ":"); i++; continue; }
+
+    // numbers / hex colors / lengths
+    if (/[0-9#]/.test(c)) {
+      let j = i;
+      if (c === "#") {
+        j++;
+        while (j < n && /[0-9a-fA-F]/.test(src[j])) j++;
+        if (j - i >= 4) { push("tok-num", src.slice(i, j)); i = j; continue; }
+        j = i;
+      }
+      if (/[0-9]/.test(c)) {
+        j = i + 1;
+        while (j < n && /[0-9.]/.test(src[j])) j++;
+        while (j < n && /[a-zA-Z%]/.test(src[j])) j++;
+        push("tok-num", src.slice(i, j));
+        i = j;
+        continue;
+      }
+    }
+
+    // identifiers: properties inside declaration blocks, otherwise plain text
+    if (/[A-Za-z_]/.test(c) || (c === "-" && /[A-Za-z-]/.test(src[i + 1] || ""))) {
+      let j = i;
+      if (c === "-") j++;
+      while (j < n && /[\w-]/.test(src[j])) j++;
+      const ident = src.slice(i, j);
+      // Look ahead for a colon to decide if this is a property name.
+      let k = j;
+      while (k < n && /\s/.test(src[k])) k++;
+      const isProp = braceDepth > 0 && src[k] === ":";
+      push(isProp ? "tok-prop" : null, ident);
+      i = j;
+      continue;
+    }
+
+    push(null, c);
+    i++;
+  }
+  return out;
+}
+
+function highlightHtml(src) {
+  const escHtml = esc(src);
+  // Tokenize escaped HTML so we never accidentally highlight inside text.
+  const tagRe = /&lt;(?:(!--[\s\S]*?--)|\/?)([a-zA-Z][\w-]*)((?:(?!&gt;).)*?)(\/?)&gt;/g;
+  let out = "";
+  let last = 0;
+  let m;
+  while ((m = tagRe.exec(escHtml)) !== null) {
+    out += escHtml.slice(last, m.index);
+    if (m[1]) {
+      out += `&lt;<span class="tok-com">--${m[1].slice(0, -2)}</span>--&gt;`;
+    } else {
+      const name = m[2];
+      const attrs = m[3] || "";
+      const close = m[4] || "";
+      const attrsHl = attrs.replace(
+        /(\s+)([a-zA-Z_:][\w:.-]*)(?:(=)(&quot;.*?&quot;|&#39;.*?&#39;|[^\s]+))?/g,
+        (_all, ws, an, eq, av) =>
+          `${ws}<span class="tok-attr">${an}</span>` +
+          (eq ? `=<span class="tok-str">${av}</span>` : "")
+      );
+      out += `&lt;${m[0].startsWith("&lt;/") ? "/" : ""}<span class="tok-tag">${name}</span>${attrsHl}${close}&gt;`;
+    }
+    last = m.index + m[0].length;
+  }
+  out += escHtml.slice(last);
+  return out;
+}
+
+function highlight(src, tab) {
+  if (tab === "html") return highlightHtml(src);
+  return highlightCss(src);
+}
+
+function renderCodeView(wrap) {
+  const spell = SPELLS.find((s) => s.id === wrap.dataset.id);
+  if (!spell) return;
+  const tab = wrap.dataset.tab || "modern";
+  const code = codeFor(spell, tab);
+  const codeEl = wrap.querySelector("code");
+  codeEl.innerHTML = highlight(code, tab);
+  for (const btn of wrap.querySelectorAll(".code__tab")) {
+    btn.setAttribute("aria-selected", String(btn.dataset.tab === tab));
+  }
+  const view = wrap.querySelector(".code__view");
+  view.scrollTop = 0;
+  requestAnimationFrame(() => updateCodeToggle(wrap));
+}
+
+function updateCodeToggle(wrap) {
+  const view = wrap.querySelector(".code__view");
+  const toggle = wrap.querySelector("[data-code-toggle]");
+  const expanded = wrap.classList.contains("is-expanded");
+  const overflow = view.scrollHeight > 190;
+  toggle.classList.toggle("is-visible", overflow);
+  toggle.textContent = expanded ? "Show less" : "Show more";
+  view.classList.toggle("is-collapsed", overflow && !expanded);
+  view.classList.toggle("is-expanded", expanded);
 }
 
 /* ---------------- filters ---------------- */
@@ -312,20 +532,37 @@ $("#search-form").addEventListener("submit", (ev) => ev.preventDefault());
 /* ---------------- grid clicks ---------------- */
 
 catalogue.addEventListener("click", async (ev) => {
-  const copyBtn = ev.target.closest("[data-copy]");
+  const tab = ev.target.closest(".code__tab");
+  if (tab) {
+    const wrap = tab.closest("[data-code]");
+    wrap.dataset.tab = tab.dataset.tab;
+    renderCodeView(wrap);
+    return;
+  }
+
+  const toggle = ev.target.closest("[data-code-toggle]");
+  if (toggle) {
+    const wrap = toggle.closest("[data-code]");
+    wrap.classList.toggle("is-expanded");
+    updateCodeToggle(wrap);
+    return;
+  }
+
+  const copyBtn = ev.target.closest("[data-copy-code]");
   if (copyBtn) {
     ev.preventDefault();
-    ev.stopPropagation();
-    const spell = SPELLS.find((s) => s.id === copyBtn.dataset.copy);
+    const wrap = copyBtn.closest("[data-code]");
+    const spell = SPELLS.find((s) => s.id === wrap.dataset.id);
     if (!spell) return;
     try {
-      await copyText(spell.css.trim());
-      flashCopy(copyBtn, "Copied");
+      await copyText(codeFor(spell, wrap.dataset.tab || "modern"));
+      flashCopy(copyBtn, "Copied!");
     } catch {
       flashCopy(copyBtn, "Failed");
     }
     return;
   }
+
   const hit = ev.target.closest(".card__hit");
   if (!hit) return;
   const spell = SPELLS.find((s) => s.id === hit.closest(".card")?.dataset.id);
@@ -339,7 +576,7 @@ function flashCopy(btn, label) {
   window.setTimeout(() => {
     btn.textContent = prev;
     btn.classList.remove("is-done");
-  }, 1400);
+  }, 1500);
 }
 
 /* ---------------- search shortcut ---------------- */
@@ -360,7 +597,7 @@ document.addEventListener("keydown", (ev) => {
   }
 });
 
-/* ---------------- tabs ---------------- */
+/* ---------------- drawer tabs ---------------- */
 
 function setTab(name) {
   state.tab = name;
@@ -369,9 +606,14 @@ function setTab(name) {
     btn.setAttribute("aria-selected", String(on));
     if (on) codePanel.setAttribute("aria-labelledby", btn.id);
   }
-  sourceLang.textContent = name;
+  sourceLang.textContent = TAB_LABEL[name] || name;
   const spell = state.active;
-  codeText.textContent = !spell ? "" : name === "css" ? spell.css : (spell.html || "<!-- This spell is CSS-only. Preview markup is generated. -->\n");
+  if (!spell) {
+    codeText.textContent = "";
+  } else {
+    const code = codeFor(spell, name);
+    codeText.innerHTML = highlight(code, name);
+  }
   codePanel.scrollTop = 0;
   codePanel.scrollLeft = 0;
 }
@@ -389,16 +631,6 @@ tabBar.addEventListener("keydown", (ev) => {
 });
 
 /* ---------------- clipboard ---------------- */
-
-function toAstro(spell) {
-  const head = [
-    `// ${spell.id} — ${spell.title}`,
-    `// design-spells · category: ${spell.category} · status: ${spell.statusLabel} · js: ${spell.jsLabel}`,
-    `// ${spell.feature} · ${spell.supportNote}`,
-  ].join("\n");
-  const markup = (spell.html || spell.previewHtml || "").trim();
-  return `---\n${head}\n---\n\n${markup}\n\n<style>\n${spell.css.trim()}\n</style>\n`;
-}
 
 async function copyText(text) {
   if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
@@ -423,24 +655,11 @@ function announce(message) {
   }, 2200);
 }
 
-$("#copy-source").addEventListener("click", async () => {
-  if (!state.active) return;
-  const text = state.tab === "css"
-    ? state.active.css.trim()
-    : (state.active.html || state.active.previewHtml || "").trim();
-  try {
-    await copyText(text);
-    announce(state.tab === "css" ? "Copied CSS" : "Copied HTML");
-  } catch {
-    announce("Copy failed — clipboard unavailable");
-  }
-});
-
-$("#copy-astro").addEventListener("click", async () => {
+copySource.addEventListener("click", async () => {
   if (!state.active) return;
   try {
-    await copyText(toAstro(state.active));
-    announce("Copied .astro source — paste into any Astro component");
+    await copyText(codeFor(state.active, state.tab));
+    announce(`Copied ${TAB_LABEL[state.tab]}`);
   } catch {
     announce("Copy failed — clipboard unavailable");
   }
@@ -469,11 +688,11 @@ function openDrawer(spell, trigger) {
   lastTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
 
   drawerId.textContent = spell.id;
-  drawerJs.textContent = `JS: ${spell.jsLabel}`;
+  drawerJs.textContent = spell.jsLabel;
   drawerTitle.textContent = spell.title;
   drawerCat.textContent = spell.category;
   drawerChip.textContent = spell.statusLabel;
-  drawerChip.className = `chip chip--${spell.status}`;
+  drawerChip.className = `badge badge--${spell.status === "baseline" ? "ok" : spell.status === "newer" ? "warn" : "muted"}`;
   drawerDesc.textContent = spell.description || "A zero-JS CSS technique.";
   drawerFeat.textContent = spell.feature;
   drawerNote.textContent = spell.supportNote;
@@ -481,7 +700,7 @@ function openDrawer(spell, trigger) {
   copyStatus.textContent = STATUS_LINE_IDLE;
 
   hydratePreview(previewHost, spell, false);
-  setTab("css");
+  setTab("modern");
 
   backdrop.hidden = false;
   drawer.hidden = false;

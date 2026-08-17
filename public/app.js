@@ -331,22 +331,40 @@ function renderGrid() {
   }
 }
 
+function triggerFlags(css) {
+  return {
+    hover: /:hover\b/.test(css),
+    focus: /:focus(-within|-visible)?\b/.test(css),
+    active: /:active\b/.test(css),
+  };
+}
+
 /* Most spells only change appearance on :hover/:focus/:active/etc — the
    resting state looks like plain markup, so without a hint every preview
    looks the same until you happen to interact with the right element. */
-function detectTrigger(css, hasTimeline) {
+function detectTrigger(css, hasTimeline, flags) {
   if (hasTimeline) return "Scroll to preview";
   if (/:target(?!-)/.test(css)) return "Click the link to preview";
   if (/::selection\b/.test(css)) return "Select the text";
   if (/:checked\b/.test(css)) return "Click to toggle";
-  const hover = /:hover\b/.test(css);
-  const focus = /:focus(-within|-visible)?\b/.test(css);
-  const active = /:active\b/.test(css);
+  const { hover, focus, active } = flags;
   if (hover && focus) return "Hover or focus to preview";
   if (hover) return "Hover to preview";
   if (focus) return "Focus to preview";
   if (active) return "Press to preview";
   return null;
+}
+
+/* hover/focus/active effects are frequently too subtle to notice in a small
+   static box (a 2% scale-down, a faint color shift) — visitors would have to
+   guess where to point the mouse. Mirror those pseudo-classes onto a plain
+   attribute so a timer can "act out" the interaction automatically, on a
+   loop, alongside genuine hover/focus/press. */
+function shimDemoCss(css) {
+  return css.replace(/:(hover|active|focus-visible|focus-within|focus)\b/g, (match, kind) => {
+    const demoKind = kind.startsWith("focus") ? "focus" : kind;
+    return `:is(${match}, [data-ds-demo~="${demoKind}"])`;
+  });
 }
 
 /* :target only ever matches against the *document's* URL fragment, which
@@ -367,14 +385,23 @@ function hasScrollTimeline(css) {
   return /(animation-timeline|scroll-timeline|timeline-scope)\s*:/.test(css);
 }
 
+function clearDemoTimer(root) {
+  if (root?.__dsDemoTimer) {
+    window.clearTimeout(root.__dsDemoTimer);
+    root.__dsDemoTimer = null;
+  }
+}
+
 function hydratePreview(host, spell, compact) {
   const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
+  clearDemoTimer(root);
   const rawCss = spell.previewCss || spell.css || "";
-  const css = shimTargetCss(rawCss);
+  const flags = triggerFlags(rawCss);
+  const css = shimDemoCss(shimTargetCss(rawCss));
   const html = spell.previewHtml || spell.html || "";
   const minHeight = compact ? 180 : 280;
   const timeline = hasScrollTimeline(rawCss);
-  const hint = detectTrigger(rawCss, timeline);
+  const hint = detectTrigger(rawCss, timeline, flags);
   const stage = `
     <div class="stage" style="min-height:${minHeight}px">
       ${html}
@@ -426,6 +453,22 @@ function hydratePreview(host, spell, compact) {
       const targetEl = id && root.getElementById(id);
       if (targetEl) targetEl.setAttribute("data-ds-target", "");
     });
+  }
+
+  const demoKinds = [flags.hover && "hover", flags.focus && "focus", flags.active && "active"].filter(Boolean);
+  if (demoKinds.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const demoValue = demoKinds.join(" ");
+    const demoTargets = root.querySelectorAll(".stage *");
+    let on = false;
+    const tick = () => {
+      on = !on;
+      demoTargets.forEach((el) => {
+        if (on) el.setAttribute("data-ds-demo", demoValue);
+        else el.removeAttribute("data-ds-demo");
+      });
+      root.__dsDemoTimer = window.setTimeout(tick, on ? 1200 : 2200);
+    };
+    root.__dsDemoTimer = window.setTimeout(tick, 900);
   }
 }
 
@@ -696,7 +739,10 @@ function showQuickPreview(spell) {
   if (!spell) {
     previewBody.hidden = true;
     previewEmpty.hidden = false;
-    if (qpHost.shadowRoot) qpHost.shadowRoot.innerHTML = "";
+    if (qpHost.shadowRoot) {
+      clearDemoTimer(qpHost.shadowRoot);
+      qpHost.shadowRoot.innerHTML = "";
+    }
     return;
   }
 
@@ -865,7 +911,10 @@ function closeDrawer() {
     closing = false;
     drawer.hidden = true;
     backdrop.hidden = true;
-    if (previewHost.shadowRoot) previewHost.shadowRoot.innerHTML = "";
+    if (previewHost.shadowRoot) {
+      clearDemoTimer(previewHost.shadowRoot);
+      previewHost.shadowRoot.innerHTML = "";
+    }
     state.active = null;
     if (lastTrigger?.isConnected) lastTrigger.focus();
   };

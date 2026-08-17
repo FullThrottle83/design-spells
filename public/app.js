@@ -39,14 +39,13 @@ const ICONS = {
     <circle cx="8" cy="8" r="2.5" fill="#4285f4" stroke="#fff" stroke-width=".6"/>
   </svg>`,
   edge: `<svg viewBox="0 0 16 16" aria-hidden="true">
-    <circle cx="8" cy="8" r="6.4" fill="#0d5fd9"/>
-    <path d="M3.6 9.4c1-3.6 4.6-4.6 7.2-3 1.9 1.1 2.5 2.7 1.9 4.2-1.4-1.8-3.6-2.6-5.6-1.9-1.7.6-2.5 2.1-1.7 3.6-1.1-.6-1.9-1.6-1.8-2.9Z" fill="#35c1f1"/>
-    <path d="M6.1 12.7c-1.9-.5-2.9-2.1-2.5-3.9.4-1.9 2.4-3.1 4.4-2.7-1.6.5-2.5 1.7-2.2 2.8.3 1.2 1.7 1.8 3.1 1.4-.5 1.3-1.7 2.1-2.8 2.4Z" fill="#5cd1f5" opacity=".85"/>
+    <path d="M1.5 8.3C1.3 4.3 4.6 1.3 8.6 1.6c3.3.3 5.9 2.6 6.1 5.5.1 1.9-1 3.2-2.6 3.1-1.3-.1-2.1-1-2.2-2.2-.1-1.6-1.5-2.7-3.2-2.6-2 .1-3.5 1.8-3.4 3.9.2 3.3 3.3 5.5 7 5.1" fill="none" stroke="#0f6cbd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 9.3c-.2-1.6 1-2.9 2.7-2.8 1.3.1 2.2 1 2.4 2.2" fill="none" stroke="#32d4a4" stroke-width="1.6" stroke-linecap="round"/>
   </svg>`,
   firefox: `<svg viewBox="0 0 16 16" aria-hidden="true">
-    <circle cx="8" cy="8" r="6.4" fill="#ff9c39"/>
-    <path d="M8.4 2.4c2.6.6 4.4 2.9 4.2 5.6-.2 3.1-2.9 5.4-6 5.1-2.2-.2-4-1.7-4.5-3.7 1.1 1.1 2.7 1.6 4.2 1.2 1.9-.5 3.1-2.2 2.9-4-.1-1.1-.8-1.9-1.7-2.2.6-.1 1.2 0 1.7.3-.3-1-1-1.8-1.9-2.3Z" fill="#ff4d2e"/>
-    <path d="M6.4 6.4c-.7 1-.6 2.3.3 3 .8.7 2 .6 2.7-.2-1 0-1.9-.5-2.2-1.4-.3-.8 0-1.7.7-2.2-.6-.1-1.1.2-1.5.8Z" fill="#ffd23f"/>
+    <circle cx="8" cy="8.4" r="6.2" fill="#ff8a3d"/>
+    <path d="M12.8 5.6c.5 1.6.3 3.5-.7 5-1.5 2.3-4.5 3.1-6.9 1.9 1.7.3 3.5-.3 4.5-1.8.8-1.2.9-2.6.5-3.8-.3.5-.9.9-1.6.9-1.1 0-2-.9-2-2 0-.7.3-1.3.9-1.7-1 .1-1.9.6-2.4 1.5-.4-1.1-.2-2.4.6-3.4C6.9 1.1 8.4.7 9.7 1.2c-.7 0-1.3.4-1.6 1 1.6-.4 3.3.1 4.3 1.5.5.7.7 1.3.4 1.9Z" fill="#ff4d2e"/>
+    <circle cx="6.6" cy="6.4" r="1.3" fill="#ffd23f"/>
   </svg>`,
   safari: `<svg viewBox="0 0 16 16" aria-hidden="true">
     <circle cx="8" cy="8" r="6.4" fill="#eaf4fc" stroke="#2f7bc7" stroke-width=".8"/>
@@ -317,17 +316,51 @@ function renderGrid() {
   }
 }
 
+/* Most spells only change appearance on :hover/:focus/:active/etc — the
+   resting state looks like plain markup, so without a hint every preview
+   looks the same until you happen to interact with the right element. */
+function detectTrigger(css) {
+  if (/::selection\b/.test(css)) return "Select the text";
+  if (/:checked\b/.test(css)) return "Click to toggle";
+  const hover = /:hover\b/.test(css);
+  const focus = /:focus(-within|-visible)?\b/.test(css);
+  const active = /:active\b/.test(css);
+  if (hover && focus) return "Hover or focus to preview";
+  if (hover) return "Hover to preview";
+  if (focus) return "Focus to preview";
+  if (active) return "Press to preview";
+  return null;
+}
+
 function hydratePreview(host, spell, compact) {
   const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
   const css = spell.previewCss || spell.css || "";
   const html = spell.previewHtml || spell.html || "";
   const minHeight = compact ? 180 : 280;
+  const hint = detectTrigger(css);
   root.innerHTML = `
     <style>
       ${PREVIEW_TOKENS}
       ${css}
+      .ds-hint {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        z-index: 2;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: var(--color-surface-dark);
+        color: var(--color-text-inverse);
+        font: 600 10px/1 var(--ds-sans, ui-sans-serif, system-ui, sans-serif);
+        letter-spacing: .02em;
+        pointer-events: none;
+        opacity: .8;
+      }
     </style>
-    <div class="stage" style="min-height:${minHeight}px">${html}</div>
+    <div class="stage" style="min-height:${minHeight}px">
+      ${html}
+      ${hint ? `<span class="ds-hint" aria-hidden="true">${esc(hint)}</span>` : ""}
+    </div>
   `;
 }
 

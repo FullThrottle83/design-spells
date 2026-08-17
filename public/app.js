@@ -270,7 +270,7 @@ function rowTemplate(spell) {
       <h2 class="row__title">
         <button class="row__hit" type="button" aria-haspopup="dialog">${esc(spell.title)}</button>
       </h2>
-      <p class="row__desc">${esc(oneLine(spell.description))}</p>
+      ${spell.description ? `<p class="row__desc">${esc(oneLine(spell.description))}</p>` : ""}
     </div>
     <div class="row__aside">
       <span class="row__id">${esc(spell.id)}</span>
@@ -296,6 +296,10 @@ function renderBrowserLegendList() {
   ).join("");
 }
 
+function slugify(text) {
+  return String(text).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
 function renderGrid() {
   const visible = SPELLS.filter(matches);
   const byCat = new Map();
@@ -310,10 +314,11 @@ function renderGrid() {
   } else {
     catalogue.innerHTML = order.map((cat) => {
       const items = byCat.get(cat);
+      const catId = `cat-${slugify(cat)}`;
       return `
-        <section class="cat-block" aria-labelledby="cat-${esc(cat)}">
+        <section class="cat-block" aria-labelledby="${catId}">
           <div class="cat-block__head">
-            <h2 class="cat-block__title" id="cat-${esc(cat)}">${esc(cat)}</h2>
+            <h2 class="cat-block__title" id="${catId}">${esc(cat)}</h2>
             <div class="cat-block__head-right">
               <span class="cat-block__count">${items.length} spell${items.length === 1 ? "" : "s"}</span>
               <button class="cat-block__copy-all" type="button" data-copy-cat="${esc(cat)}">Copy all</button>
@@ -324,7 +329,10 @@ function renderGrid() {
     }).join("");
   }
 
-  counter.textContent = `Showing ${visible.length} of ${TOTAL_SPELLS} spells`;
+  const categoryPool = state.category === "all" ? TOTAL_SPELLS : SPELLS.filter((s) => s.category === state.category).length;
+  counter.textContent = state.category === "all"
+    ? `Showing ${visible.length} of ${categoryPool} spells`
+    : `Showing ${visible.length} of ${categoryPool} in ${state.category}`;
 
   if (!visible.some((s) => s.id === state.quick?.id)) {
     showQuickPreview(visible[0] || null);
@@ -732,7 +740,16 @@ catalogue.addEventListener("click", async (ev) => {
   const row = ev.target.closest(".row");
   if (row) {
     const spell = rowSpell(row);
-    if (spell) showQuickPreview(spell);
+    if (spell) {
+      showQuickPreview(spell);
+      // Below 960px the sticky preview sidebar is display:none (see
+      // .browse__preview in styles.css), so a plain row click had nothing
+      // visible to show for it. Open the drawer there instead, since it's
+      // the only preview surface that's actually on screen at that width.
+      if (!window.matchMedia("(min-width: 960px)").matches) {
+        openDrawer(spell, row);
+      }
+    }
   }
 });
 
@@ -955,12 +972,18 @@ function closeDrawer() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     finish();
   } else {
-    drawer.addEventListener("transitionend", function onEnd(ev) {
+    let timeoutId;
+    const onEnd = (ev) => {
       if (ev.propertyName !== "transform") return;
       drawer.removeEventListener("transitionend", onEnd);
+      window.clearTimeout(timeoutId);
       finish();
-    });
-    window.setTimeout(finish, 380);
+    };
+    drawer.addEventListener("transitionend", onEnd);
+    timeoutId = window.setTimeout(() => {
+      drawer.removeEventListener("transitionend", onEnd);
+      finish();
+    }, 380);
   }
 }
 

@@ -224,7 +224,10 @@ FEATURE_BROWSERS = {
 }
 
 
-def detect_feature(css: str, html: str, title: str, status: str) -> str:
+LEVEL_RANK = {"no": 0, "partial": 1, "yes": 2}
+
+
+def detect_features(css: str, html: str, title: str, status: str) -> list[str]:
     src = f"{css}\n{html}\n{title}"
     checks = [
         (r"interestfor|interest-delay|:interest-source", "interest-invokers"),
@@ -265,10 +268,42 @@ def detect_feature(css: str, html: str, title: str, status: str) -> str:
         (r"color-mix\(|oklch\(", "color-mix"),
         (r":has\(", "has"),
     ]
+    hits = []
     for pattern, key in checks:
-        if re.search(pattern, src):
-            return key
-    return "baseline"
+        if re.search(pattern, src) and key not in hits:
+            hits.append(key)
+    return hits or ["baseline"]
+
+
+def combine_support(feature_keys: list[str]) -> dict:
+    """Worst-case support across every feature a spell actually depends on,
+    instead of grading it on whichever risky feature the pattern list hits
+    first (that used to hide a spell's second, less-supported dependency)."""
+    browsers = {"chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes"}
+    for key in feature_keys:
+        support = FEATURE_BROWSERS[key]
+        for b in browsers:
+            if LEVEL_RANK[support[b]] < LEVEL_RANK[browsers[b]]:
+                browsers[b] = support[b]
+    return browsers
+
+
+def feature_label(feature_keys: list[str]) -> str:
+    return " + ".join(FEATURE_BROWSERS[k]["feature"] for k in feature_keys)
+
+
+def feature_note(feature_keys: list[str]) -> str:
+    return " ".join(FEATURE_BROWSERS[k]["note"] for k in feature_keys)
+
+
+def derive_status(browsers: dict) -> str:
+    values = list(browsers.values())
+    no_count = values.count("no")
+    if no_count >= 2:
+        return "Progressive"
+    if no_count == 1 or "partial" in values:
+        return "Newer"
+    return "Baseline"
 
 
 IMG = (
@@ -434,6 +469,10 @@ def parse_spells(md: str) -> list[dict]:
             line = line.strip()
             if not line:
                 continue
+            if line.startswith("---") or line.startswith("## ") or line.startswith("### "):
+                # End of this spell's section — stop before absorbing the
+                # next heading (or the divider right before it) into the text.
+                break
             if line.startswith("Markup:"):
                 continue
             desc_parts.append(line)
@@ -494,11 +533,22 @@ def polish_preview(spell: dict) -> str:
     return html
 
 
+_HOST_TOKEN_RE = re.compile(r"(?<![\w.#-])(:root\b|\bhtml\b|\bbody\b)(?![\w-])")
+
+
 def rewrite_preview_css(css: str) -> str:
-    css = re.sub(r":root\b", ":host", css)
-    css = re.sub(r"\bhtml\b", ":host", css)
-    css = re.sub(r"\bbody\b", ":host", css)
-    return css
+    # Rewrite :root/html/body to :host, but never inside a comment (so
+    # "Prevents leaking to the body" doesn't get mangled) and never as a
+    # substring of a hyphenated class like .ticket-body (the \b boundary in a
+    # bare \bbody\b treats "-" as a word edge, so it used to match there too).
+    parts = re.split(r"(/\*.*?\*/)", css, flags=re.S)
+    for i, part in enumerate(parts):
+        if i % 2 == 0:  # even indices are code, odd indices are comments
+            parts[i] = _HOST_TOKEN_RE.sub(":host", part)
+    css = "".join(parts)
+    # "html body { ... }" both rewrite to :host; collapse the resulting
+    # "html body" → ":host :host" descendant combinator down to one :host.
+    return re.sub(r":host(?:\s+:host)+", ":host", css)
 
 
 def main() -> None:
@@ -506,23 +556,42 @@ def main() -> None:
     print("parsed spells:", len(spells))
 
     payload = []
+    corrected = 0
+    flagged = 0
     for spell in spells:
-        feature_key = detect_feature(spell["css"], spell["html"], spell["title"], spell["status"])
-        support = FEATURE_BROWSERS[feature_key]
+        feature_keys = detect_features(spell["css"], spell["html"], spell["title"], spell["status"])
+        browsers_support = combine_support(feature_keys)
+        derived_status = derive_status(browsers_support)
+        status, status_label = spell["status"], spell["statusLabel"]
+        if derived_status != status_label:
+            if status_label == "Baseline":
+                # "Baseline" is a specific claim — safe everywhere. If the
+                # combined support data has any red/partial browser, the
+                # label is provably wrong (not an editorial judgment call),
+                # so this is the one direction we auto-correct.
+                corrected += 1
+                status, status_label = derived_status.lower(), derived_status
+                print(f"  status corrected {spell['id']}: Baseline -> {derived_status} ({','.join(feature_keys)})")
+            else:
+                # Newer/Progressive are conservative-by-choice labels (e.g. a
+                # feature that's technically shipped everywhere but only in
+                # very recent versions). Flag for human review instead of
+                # silently overriding editorial judgment.
+                flagged += 1
+                print(f"  status flagged {spell['id']}: authored={status_label} derived={derived_status} ({','.join(feature_keys)}) — left as authored")
         item = {
             **spell,
+            "status": status,
+            "statusLabel": status_label,
             "previewHtml": polish_preview(spell),
             "previewCss": rewrite_preview_css(spell["css"]),
-            "feature": support["feature"],
-            "browsers": {
-                "chrome": support["chrome"],
-                "edge": support["edge"],
-                "firefox": support["firefox"],
-                "safari": support["safari"],
-            },
-            "supportNote": support["note"],
+            "feature": feature_label(feature_keys),
+            "browsers": browsers_support,
+            "supportNote": feature_note(feature_keys),
         }
         payload.append(item)
+    print(f"status labels corrected (Baseline was wrong): {corrected}")
+    print(f"status labels flagged for review (Newer/Progressive judgment call): {flagged}")
 
     cats = {}
     for s in payload:

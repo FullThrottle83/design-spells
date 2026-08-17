@@ -402,9 +402,12 @@ function hydratePreview(host, spell, compact) {
   const minHeight = compact ? 180 : 280;
   const timeline = hasScrollTimeline(rawCss);
   const hint = detectTrigger(rawCss, timeline, flags);
+  const demoKinds = [flags.hover && "hover", flags.focus && "focus", flags.active && "active"].filter(Boolean);
+  const demoActive = demoKinds.length > 0 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const stage = `
     <div class="stage" style="min-height:${minHeight}px">
       ${html}
+      ${demoActive ? `<div class="ds-demo-ring" aria-hidden="true"></div>` : ""}
       ${hint ? `<span class="ds-hint" aria-hidden="true">${esc(hint)}</span>` : ""}
     </div>`;
   const body = timeline
@@ -432,6 +435,20 @@ function hydratePreview(host, spell, compact) {
         pointer-events: none;
         opacity: .8;
       }
+      .ds-demo-ring {
+        position: absolute;
+        z-index: 3;
+        pointer-events: none;
+        border: 2px solid var(--color-accent);
+        border-radius: 10px;
+        opacity: 0;
+        transform: scale(.92);
+        transition: opacity 200ms ease, transform 200ms ease;
+      }
+      .ds-demo-ring.is-on {
+        opacity: .85;
+        transform: scale(1);
+      }
       .ds-runway {
         overflow-y: auto;
         overscroll-behavior: contain;
@@ -455,10 +472,24 @@ function hydratePreview(host, spell, compact) {
     });
   }
 
-  const demoKinds = [flags.hover && "hover", flags.focus && "focus", flags.active && "active"].filter(Boolean);
-  if (demoKinds.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (demoActive) {
     const demoValue = demoKinds.join(" ");
     const demoTargets = root.querySelectorAll(".stage *");
+    const stageEl = root.querySelector(".stage");
+    const ring = root.querySelector(".ds-demo-ring");
+    const triggerEl = stageEl?.querySelector(":scope > *:not(.ds-demo-ring):not(.ds-hint)") || stageEl;
+    /* Pin the ring to the trigger element's box so the eye lands there right
+       as the (often subtle) real effect fires — a spotlight, not the effect. */
+    const positionRing = () => {
+      if (!ring || !triggerEl || !stageEl) return;
+      const stageRect = stageEl.getBoundingClientRect();
+      const elRect = triggerEl.getBoundingClientRect();
+      const pad = 6;
+      ring.style.left = `${elRect.left - stageRect.left - pad}px`;
+      ring.style.top = `${elRect.top - stageRect.top - pad}px`;
+      ring.style.width = `${elRect.width + pad * 2}px`;
+      ring.style.height = `${elRect.height + pad * 2}px`;
+    };
     let on = false;
     const tick = () => {
       on = !on;
@@ -466,9 +497,11 @@ function hydratePreview(host, spell, compact) {
         if (on) el.setAttribute("data-ds-demo", demoValue);
         else el.removeAttribute("data-ds-demo");
       });
-      root.__dsDemoTimer = window.setTimeout(tick, on ? 1200 : 2200);
+      if (on) positionRing();
+      ring?.classList.toggle("is-on", on);
+      root.__dsDemoTimer = window.setTimeout(tick, on ? 1400 : 2000);
     };
-    root.__dsDemoTimer = window.setTimeout(tick, 900);
+    root.__dsDemoTimer = window.setTimeout(tick, 700);
   }
 }
 

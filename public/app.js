@@ -226,6 +226,43 @@ let lastTrigger = null;
 let closing = false;
 let statusTimer;
 
+/* ---------------- url state ----------------
+   The catalogue is a single page; filters, search, and the open drawer are
+   mirrored into the query string so a link reproduces the exact view.
+   replaceState (not pushState) keeps back/forward history uncluttered. */
+
+const STATUS_VALUES = ["all", "baseline", "newer", "progressive"];
+
+function syncUrl() {
+  const params = new URLSearchParams();
+  if (state.category !== "all") params.set("category", state.category);
+  if (state.status !== "all") params.set("status", state.status);
+  if (state.query) params.set("q", state.query);
+  if (state.active) params.set("spell", state.active.id);
+  const qs = params.toString();
+  history.replaceState(null, "", qs ? `${location.pathname}?${qs}` : location.pathname);
+}
+
+/* Returns the drawer spell named in the URL (if any), so init can re-open it
+   after the first render. Filters are validated against the data. */
+function readStateFromUrl() {
+  const params = new URLSearchParams(location.search);
+
+  const category = params.get("category");
+  if (category === "all" || (category && SPELLS.some((s) => s.category === category))) {
+    state.category = category;
+  }
+
+  const status = params.get("status");
+  if (STATUS_VALUES.includes(status)) state.status = status;
+
+  const query = params.get("q");
+  if (query) state.query = query;
+
+  const spellId = params.get("spell");
+  return spellId ? SPELLS.find((s) => s.id === spellId) || null : null;
+}
+
 function categories() {
   const present = new Set(SPELLS.map((s) => s.category));
   const ordered = CAT_ORDER.filter((c) => present.has(c));
@@ -278,6 +315,12 @@ function rowTemplate(spell) {
       <button class="row__copy" type="button" data-copy-row aria-label="Copy CSS for ${esc(spell.title)}">Copy</button>
     </div>
   </li>`;
+}
+
+function renderStatusNav() {
+  document.querySelectorAll("[data-status]").forEach((el) => {
+    el.classList.toggle("is-on", el.dataset.status === state.status);
+  });
 }
 
 function renderCategoryNav() {
@@ -667,6 +710,7 @@ catList.addEventListener("click", (ev) => {
   const btn = ev.target.closest("[data-cat]");
   if (!btn) return;
   state.category = btn.dataset.cat;
+  syncUrl();
   renderCategoryNav();
   renderGrid();
 });
@@ -675,14 +719,14 @@ statusList.addEventListener("click", (ev) => {
   const btn = ev.target.closest("[data-status]");
   if (!btn) return;
   state.status = btn.dataset.status;
-  document.querySelectorAll("[data-status]").forEach((el) => {
-    el.classList.toggle("is-on", el.dataset.status === state.status);
-  });
+  syncUrl();
+  renderStatusNav();
   renderGrid();
 });
 
 search.addEventListener("input", () => {
   state.query = search.value.trim();
+  syncUrl();
   renderGrid();
 });
 $("#search-form").addEventListener("submit", (ev) => ev.preventDefault());
@@ -917,6 +961,7 @@ function renderBrowserList(spell) {
 
 function openDrawer(spell, trigger) {
   state.active = spell;
+  syncUrl();
   lastTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
 
   drawerId.textContent = spell.id;
@@ -966,6 +1011,7 @@ function closeDrawer() {
       previewHost.shadowRoot.innerHTML = "";
     }
     state.active = null;
+    syncUrl();
     if (lastTrigger?.isConnected) lastTrigger.focus();
   };
 
@@ -1014,7 +1060,11 @@ document.body.insertAdjacentHTML("afterbegin", ICON_SPRITE);
 if (!SPELLS.length) {
   catalogue.innerHTML = `<p class="row-list__empty">Spell data failed to load</p>`;
 } else {
+  const openSpell = readStateFromUrl();
+  search.value = state.query;
   renderBrowserLegendList();
   renderCategoryNav();
+  renderStatusNav();
   renderGrid();
+  if (openSpell) openDrawer(openSpell, null);
 }

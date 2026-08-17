@@ -39,13 +39,13 @@ const ICONS = {
     <circle cx="8" cy="8" r="2.5" fill="#4285f4" stroke="#fff" stroke-width=".6"/>
   </svg>`,
   edge: `<svg viewBox="0 0 16 16" aria-hidden="true">
-    <path d="M1.5 8.3C1.3 4.3 4.6 1.3 8.6 1.6c3.3.3 5.9 2.6 6.1 5.5.1 1.9-1 3.2-2.6 3.1-1.3-.1-2.1-1-2.2-2.2-.1-1.6-1.5-2.7-3.2-2.6-2 .1-3.5 1.8-3.4 3.9.2 3.3 3.3 5.5 7 5.1" fill="none" stroke="#0f6cbd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M6 9.3c-.2-1.6 1-2.9 2.7-2.8 1.3.1 2.2 1 2.4 2.2" fill="none" stroke="#32d4a4" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="8" cy="8" r="7.2" fill="#0f6cbd"/>
+    <path d="M8 2.4c3.6 0 6.2 2.5 6.4 5.7.1 2.1-1.2 3.5-2.9 3.4-1.5-.1-2.4-1.2-2.5-2.6-.1-1.9-1.6-3.1-3.5-2.9-2.2.2-3.7 2.1-3.5 4.4.3 3.6 3.7 5.9 7.6 5.3-4.9 1.8-10-1.5-10.4-6.5C-1 4.9 3 2.4 8 2.4Z" fill="#2ec4a4"/>
+    <path d="M8.4 7.6c.9-.1 1.7.3 2.1 1-.1-.9-.8-1.6-1.7-1.7-1-.1-1.9.5-2.1 1.5 0 .5.1.9.4 1.3-.6-.2-1-.7-1-1.3.1-1.4 1.2-2.5 2.6-2.6-.5-.3-1.1-.4-1.7-.3 1-1 2.5-1.3 3.9-.8-.4-.5-1-.8-1.6-.9 1.4-.3 2.9.2 3.8 1.4-.2-.1-.5-.1-.7-.1.9.7 1.4 1.8 1.3 3-.3 3.1-3.2 5.3-6.3 4.9-1.1-.1-2.1-.6-2.9-1.4 1.6.6 3.4.3 4.6-.9-1 .1-2-.3-2.6-1.1-.5-.6-.6-1.4-.4-2.1.3.4.8.7 1.3.6Z" fill="#0b5394" opacity=".55"/>
   </svg>`,
   firefox: `<svg viewBox="0 0 16 16" aria-hidden="true">
-    <circle cx="8" cy="8.4" r="6.2" fill="#ff8a3d"/>
-    <path d="M12.8 5.6c.5 1.6.3 3.5-.7 5-1.5 2.3-4.5 3.1-6.9 1.9 1.7.3 3.5-.3 4.5-1.8.8-1.2.9-2.6.5-3.8-.3.5-.9.9-1.6.9-1.1 0-2-.9-2-2 0-.7.3-1.3.9-1.7-1 .1-1.9.6-2.4 1.5-.4-1.1-.2-2.4.6-3.4C6.9 1.1 8.4.7 9.7 1.2c-.7 0-1.3.4-1.6 1 1.6-.4 3.3.1 4.3 1.5.5.7.7 1.3.4 1.9Z" fill="#ff4d2e"/>
-    <circle cx="6.6" cy="6.4" r="1.3" fill="#ffd23f"/>
+    <path d="M13.6 4.9c-.4-1-1-1.8-1.6-2.4.2.6.3 1.2.2 1.7-.6-1.3-1.6-2-2.7-2.3.5.5.8 1 1 1.5-1-.6-2.1-.8-3.2-.5-2 .5-3.5 2.3-3.6 4.4-.9-.1-1.7.2-2.3.9-.3.4-.4.9-.3 1.4-.4.3-.7.7-.8 1.2-.5 1.9.5 3.9 2.3 4.9C4 16.6 6.1 17 8 16.5c3.1-.8 5.3-3.7 5.3-7 0-1.6-.3-3.2-.9-4.6Z" fill="#f2600c"/>
+    <path d="M6.4 3.9c-.6 1.1-.6 2.5.1 3.6-.5-.1-1-.4-1.3-.8-.2 1.1.2 2.3 1.1 3-1 0-1.9-.6-2.3-1.5-.3 1.5.6 3 2.1 3.5-1.2.2-2.4-.3-3.1-1.3-.1 1.7 1.1 3.2 2.8 3.5-1 .5-2.2.4-3.1-.3.9 2.7 3.9 4.1 6.5 3.2-2.6-.2-4.6-2.4-4.6-5 0-2.1 1.4-4 3.4-4.6-.4.7-.5 1.6-.2 2.4.3-.9 1-1.6 1.9-1.9-.4.6-.5 1.4-.3 2.1.4-.9 1.2-1.5 2.1-1.7-1-2.4-3.5-3.8-6-3.2.4-.3.9-.5 1.4-.6-1.4-.1-2.7.6-3.3 1.8Z" fill="#ffce54" opacity=".55"/>
   </svg>`,
   safari: `<svg viewBox="0 0 16 16" aria-hidden="true">
     <circle cx="8" cy="8" r="6.4" fill="#eaf4fc" stroke="#2f7bc7" stroke-width=".8"/>
@@ -125,7 +125,7 @@ const PREVIEW_TOKENS = `
     font: inherit;
     color: inherit;
   }
-  .btn, .btn-primary {
+  :where(button), .btn, .btn-primary {
     padding: 0 .9rem;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
@@ -137,6 +137,30 @@ const PREVIEW_TOKENS = `
     color: var(--color-text-inverse);
     border-color: transparent;
   }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"])),
+  :where(select),
+  :where(textarea) {
+    font: inherit;
+    color: inherit;
+    padding: .45rem .65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  :where(select) { padding-inline-end: 1.6rem; }
+  :where(textarea) { resize: vertical; min-block-size: 5rem; }
+  :where(input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  :where(input[type="checkbox"], input[type="radio"]) {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+  :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; }
+  :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+  :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
   .sr-only {
     position: absolute;
     inline-size: 1px; block-size: 1px;
@@ -319,7 +343,9 @@ function renderGrid() {
 /* Most spells only change appearance on :hover/:focus/:active/etc — the
    resting state looks like plain markup, so without a hint every preview
    looks the same until you happen to interact with the right element. */
-function detectTrigger(css) {
+function detectTrigger(css, hasTimeline) {
+  if (hasTimeline) return "Scroll to preview";
+  if (/:target(?!-)/.test(css)) return "Click the link to preview";
   if (/::selection\b/.test(css)) return "Select the text";
   if (/:checked\b/.test(css)) return "Click to toggle";
   const hover = /:hover\b/.test(css);
@@ -332,12 +358,44 @@ function detectTrigger(css) {
   return null;
 }
 
+/* :target only ever matches against the *document's* URL fragment, which
+   can't reach into a shadow tree — so a spell's own `#anchor` link can
+   never activate its `:target` rule inside this sandboxed preview. Shim it:
+   mirror :target onto a plain attribute, then flip that attribute by hand
+   whenever a same-shadow-root #link is clicked. */
+function shimTargetCss(css) {
+  return css.replace(/:target(?!-)/g, ":is(:target, [data-ds-target])");
+}
+
+/* Scroll/view-timeline animations resolve against the nearest *scrollable*
+   ancestor — our stage has none, so the animation is stuck permanently at
+   whatever progress its static layout happens to freeze it at (often fully
+   hidden). Give it a real scroller with runway above/below the content so
+   scrolling the preview itself drives the timeline, same as a real page. */
+function hasScrollTimeline(css) {
+  return /(animation-timeline|scroll-timeline|timeline-scope)\s*:/.test(css);
+}
+
 function hydratePreview(host, spell, compact) {
   const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
-  const css = spell.previewCss || spell.css || "";
+  const rawCss = spell.previewCss || spell.css || "";
+  const css = shimTargetCss(rawCss);
   const html = spell.previewHtml || spell.html || "";
   const minHeight = compact ? 180 : 280;
-  const hint = detectTrigger(css);
+  const timeline = hasScrollTimeline(rawCss);
+  const hint = detectTrigger(rawCss, timeline);
+  const stage = `
+    <div class="stage" style="min-height:${minHeight}px">
+      ${html}
+      ${hint ? `<span class="ds-hint" aria-hidden="true">${esc(hint)}</span>` : ""}
+    </div>`;
+  const body = timeline
+    ? `<div class="ds-runway" style="max-height:${minHeight}px">
+        <div class="ds-runway__pad" aria-hidden="true"></div>
+        ${stage}
+        <div class="ds-runway__pad" aria-hidden="true"></div>
+      </div>`
+    : stage;
   root.innerHTML = `
     <style>
       ${PREVIEW_TOKENS}
@@ -356,12 +414,28 @@ function hydratePreview(host, spell, compact) {
         pointer-events: none;
         opacity: .8;
       }
+      .ds-runway {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+      }
+      .ds-runway__pad { block-size: 60vh; }
     </style>
-    <div class="stage" style="min-height:${minHeight}px">
-      ${html}
-      ${hint ? `<span class="ds-hint" aria-hidden="true">${esc(hint)}</span>` : ""}
-    </div>
+    ${body}
   `;
+
+  if (!root.__dsTargetShim) {
+    root.__dsTargetShim = true;
+    root.addEventListener("click", (ev) => {
+      const link = ev.target.closest('a[href^="#"]');
+      if (!link) return;
+      ev.preventDefault();
+      root.querySelectorAll("[data-ds-target]").forEach((el) => el.removeAttribute("data-ds-target"));
+      const id = link.getAttribute("href").slice(1);
+      const targetEl = id && root.getElementById(id);
+      if (targetEl) targetEl.setAttribute("data-ds-target", "");
+    });
+  }
 }
 
 /* ---------------- code ---------------- */

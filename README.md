@@ -678,7 +678,7 @@ A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `
 ```
 
 ### 80. Squircle Chips & Nav (`corner-shape`)
-*Navigation · Newer · 0 JS*
+*Navigation · Progressive · 0 JS*
 
 Pill navigation and chips with a true “squircle” silhouette (superellipse corner rounding) instead of ordinary `border-radius` arcs.
 
@@ -711,7 +711,7 @@ Pill navigation and chips with a true “squircle” silhouette (superellipse co
 ```
 
 ### 81. Overflow-Aware Breadcrumbs
-*Navigation · Newer · Markup*
+*Navigation · Progressive · Markup*
 
 Breadcrumbs that show a discreet “+N” hint and edge masking only when the row is actually scrollable.
 
@@ -1070,7 +1070,7 @@ A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[pop
 ```
 
 ### 65. Scroll-Driven Header Compression
-*Scroll-driven · Baseline · 0 JS*
+*Scroll-driven · Newer · 0 JS*
 
 Shrinks the sticky header and scales the logo down as the user scrolls, without layout shifts.
 
@@ -1303,7 +1303,7 @@ A headline filled with an image or gradient via `background-clip: text`.
 ```
 
 ### 93. Snapped Caption Reveal
-*Media · Newer · Markup*
+*Media · Progressive · Markup*
 
 Captions in a scroll-snap carousel fade in only once the slide is “snapped”.
 
@@ -1408,7 +1408,7 @@ A thin progress indicator driven entirely by scroll position.
 Markup: `<div class="scroll-progress"></div>`.
 
 ### 43. Auto-Hide Header
-*Scroll-state · Newer · 0 JS*
+*Scroll-state · Progressive · 0 JS*
 
 The header slides away on scroll down and returns on scroll up. **Requires the Root scroll-state preset.**
 
@@ -1429,7 +1429,7 @@ The header slides away on scroll down and returns on scroll up. **Requires the R
 ```
 
 ### 44. Sticky Shadow When Stuck
-*Scroll-state · Newer · 0 JS*
+*Scroll-state · Progressive · 0 JS*
 
 A sticky element gains extra shadow and border only once it is actually stuck. Much more premium than a permanent shadow.
 
@@ -1455,7 +1455,7 @@ A sticky element gains extra shadow and border only once it is actually stuck. M
 ```
 
 ### 45. Snapped Spotlight
-*Scroll-state · Newer · 0 JS*
+*Scroll-state · Progressive · 0 JS*
 
 The active slide in a scroll-snap container gets full sharpness while siblings fade down.
 
@@ -1488,7 +1488,7 @@ The active slide in a scroll-snap container gets full sharpness while siblings f
 ```
 
 ### 46. Real Overflow Hint
-*Scroll-state · Newer · 0 JS*
+*Scroll-state · Progressive · 0 JS*
 
 Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.
 
@@ -1510,7 +1510,7 @@ Show edge fades, arrows, or “swipe me” hints only when the content is actual
 ```
 
 ### 47. Scroll-Awake Back-to-Top
-*Scroll-state · Newer · 0 JS*
+*Scroll-state · Progressive · 0 JS*
 
 A floating button that wakes only after the user has moved the page. **Requires the Root scroll-state preset.**
 
@@ -1567,7 +1567,7 @@ Cards stack like a deck as the user scrolls. Scale and dimming stay synced to th
 ```
 
 ### 69. Scroll-Aware Table Boundaries (`container-type: scroll-state`)
-*Scroll-state · Newer · 0 JS*
+*Scroll-state · Progressive · 0 JS*
 
 Tables with `position: sticky` show edge shadows and dividers *only* when the content has actually been scrolled horizontally.
 
@@ -2924,7 +2924,7 @@ A hover, focus, and long-press tooltip with no `mouseenter`. `popover="hint"` do
 ```
 
 ### 99. Scroll-Initial-Target Carousel
-*Navigation · Newer · Markup*
+*Navigation · Progressive · Markup*
 
 Deep-link a scroll-snap carousel to a specific slide on first render — no `scrollIntoView()`. The first element with `scroll-initial-target: nearest` in tree order wins.
 
@@ -3325,7 +3325,7 @@ Style text-fragment highlights from shared URLs (`#:~:text=`). Visible when some
 ```
 
 ### 113. Reading-Flow Grid (`reading-flow`)
-*Layout · Newer · 0 JS*
+*Layout · Progressive · 0 JS*
 
 When grid items are repacked with `dense` or explicit `order`, Tab and screen readers should follow the *visual* row order, not the DOM order.
 
@@ -3687,7 +3687,7 @@ A horizontal stacked bar whose segments size themselves from their weights.
 ```
 
 ### 125. Inline SVG Line Chart (0-JS Draw & Fill)
-*Data · Baseline · Markup*
+*Data · Newer · Markup*
 
 An SVG line chart with a scroll-driven draw animation via `stroke-dasharray`.
 

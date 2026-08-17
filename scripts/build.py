@@ -49,17 +49,17 @@ FEATURE_BROWSERS = {
     "starting-style": {
         "feature": "@starting-style / popover",
         "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
-        "note": "@starting-style and the Popover API are Baseline 2024–25.",
+        "note": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.",
     },
     "scroll-timeline": {
         "feature": "animation-timeline: scroll()",
-        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
-        "note": "Scroll-driven animations: Chrome 115+, Firefox 136+, Safari 26+.",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
+        "note": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
     },
     "view-timeline": {
         "feature": "animation-timeline: view()",
-        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
-        "note": "view() timelines: Chrome 115+, Firefox 136+, Safari 26+.",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
+        "note": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
     },
     "anchor": {
         "feature": "CSS Anchor Positioning",
@@ -83,8 +83,8 @@ FEATURE_BROWSERS = {
     },
     "text-box-trim": {
         "feature": "text-box-trim",
-        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
-        "note": "Chrome 133+, Safari 18.2+, Firefox 154+.",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
+        "note": "Chrome/Edge 133+, Safari 18.2+. Firefox 154 support is preview; stable Firefox 153 does not support it.",
     },
     "scroll-state": {
         "feature": "scroll-state container queries",
@@ -94,7 +94,7 @@ FEATURE_BROWSERS = {
     "invoker-commands": {
         "feature": "Invoker Commands (commandfor)",
         "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
-        "note": "Chrome 135+, Safari 26.2+, Firefox 153+.",
+        "note": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025.",
     },
     "interest-invokers": {
         "feature": "Interest Invokers (interestfor)",
@@ -105,6 +105,16 @@ FEATURE_BROWSERS = {
         "feature": "dialog closedby",
         "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
         "note": "Chrome 134+, Safari 18.4+. Firefox still needs a close button.",
+    },
+    "open-pseudo": {
+        "feature": ":open",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": ":open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026.",
+    },
+    "scroll-initial-target": {
+        "feature": "scroll-initial-target",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
+        "note": "Chrome/Edge 133+ only in stable browsers. Firefox and Safari do not support scroll-initial-target.",
     },
     "until-found": {
         "feature": 'hidden="until-found"',
@@ -118,13 +128,13 @@ FEATURE_BROWSERS = {
     },
     "base-select": {
         "feature": "appearance: base-select",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
-        "note": "Chrome 135+, Safari 18.4+. Firefox keeps the native picker.",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
+        "note": "Chrome/Edge 135+ in stable browsers. Firefox has no stable support; Safari 27 support is preview.",
     },
     "select-pseudos": {
         "feature": "::checkmark / ::picker-icon",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
-        "note": "Requires appearance: base-select. Chrome 135+, Safari 18.4+.",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
+        "note": "The pseudo-elements are Chrome/Edge 133+ and require customizable-select/base-select (Chrome/Edge 135+). Firefox has no stable support; Safari 27 is preview.",
     },
     "corner-shape": {
         "feature": "corner-shape",
@@ -238,6 +248,8 @@ def detect_features(css: str, html: str, title: str, status: str) -> list[str]:
         (r"\bif\(", "if"),
         (r"attr\([^)]*type\(", "typed-attr"),
         (r"closedby", "closedby"),
+        (r"scroll-initial-target", "scroll-initial-target"),
+        (r":open\b", "open-pseudo"),
         (r"hidden=[\"']until-found", "until-found"),
         (r"::scroll-marker|::scroll-button", "scroll-markers"),
         (r"::checkmark|::picker-icon", "select-pseudos"),

@@ -665,6 +665,16 @@ button { font: inherit; color: inherit; }
   line-height: 1.6;
   text-wrap: pretty;
 }
+.drawer__desc code {
+  font: 0.92em/1 var(--mono);
+  padding: 1px 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--canvas);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.drawer__desc strong { color: var(--ink); font-weight: 700; }
 
 .sect {
   padding: 18px;

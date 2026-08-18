@@ -292,6 +292,32 @@ function browsersRow(spell) {
   }).join("");
 }
 
+/* Descriptions come straight from the README, so they carry inline markdown:
+   `code` spans (often containing literal <tags>) and **bold** runs. oneLine()
+   strips the markers for the row list, but the drawer shows the full text and
+   used to print them verbatim. Convert just those two inline forms to real
+   elements. Injection safety: every character of source text passes through
+   esc() BEFORE any tags are added — the only markup in the output is the
+   <code>/<strong> wrappers we emit ourselves, so a description containing
+   e.g. "<img onerror=…>" renders as visible text, never as HTML. Code spans
+   are split out first and bolding is applied per plain-text segment, so a
+   stray ** can never wrap across a code boundary. */
+function inlineMd(text) {
+  const bold = (seg) => seg.replace(/\*\*([^*]+(?:\*(?!\*)[^*]*)*)\*\*/g, "<strong>$1</strong>");
+  const src = String(text ?? "");
+  const codeRe = /`([^`]+)`/g;
+  let out = "";
+  let last = 0;
+  let m;
+  while ((m = codeRe.exec(src)) !== null) {
+    out += bold(esc(src.slice(last, m.index)));
+    out += `<code>${esc(m[1])}</code>`;
+    last = m.index + m[0].length;
+  }
+  out += bold(esc(src.slice(last)));
+  return out;
+}
+
 function oneLine(text) {
   const clean = String(text || "").replace(/`+/g, "").replace(/\*\*/g, "").replace(/\s+/g, " ").trim();
   const first = clean.split(/(?<=[.!?])\s+/)[0] || clean;
@@ -970,7 +996,9 @@ function openDrawer(spell, trigger) {
   drawerCat.textContent = spell.category;
   drawerChip.className = `label label--${spell.status === "baseline" ? "ok" : spell.status === "newer" ? "warn" : "muted"}`;
   drawerChip.innerHTML = `<span class="label__dot" aria-hidden="true"></span>${esc(spell.statusLabel)}`;
-  drawerDesc.textContent = spell.description || "A zero-JS CSS technique.";
+  drawerDesc.innerHTML = spell.description
+    ? inlineMd(spell.description)
+    : "A zero-JS CSS technique.";
   drawerFeat.textContent = spell.feature;
   drawerNote.textContent = spell.supportNote;
   renderBrowserList(spell);

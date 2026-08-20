@@ -357,19 +357,27 @@ PREVIEW_HTML: dict[str, str] = {
     "11": '<div class="skeleton" style="inline-size:16rem;block-size:4.5rem;border-radius:8px"></div>',
     "14": '<p class="demo-note">View Transitions run on real page navigations. This preview shows the CSS only.</p>',
     "31": '<button popovertarget="ph-pop" class="btn">Open menu</button><div id="ph-pop" popover class="popover-menu">Phantom entry</div>',
-    "65": '<header class="site-header"><strong class="header-logo">Brand</strong></header><p style="height:8rem">Scroll the page to compress.</p>',
+    "65": '<header class="site-header"><strong class="header-logo">Brand</strong></header><p class="demo-note">Bound to the real page scroll — scroll the whole catalogue, not this box.</p>',
     "66": '<p class="demo-note">Backdrop fade applies to native dialogs and popovers.</p><button popovertarget="bd-pop">Open</button><div id="bd-pop" popover>Hello</div>',
     "72": '<ul class="stagger-list"><li>One</li><li>Two</li><li>Three</li></ul>',
-    "17": '<header class="site-header">Frosted after scroll</header>',
+    "17": '<header class="site-header">Frosted after scroll</header><p class="demo-note">Bound to the real page scroll — scroll the whole catalogue, not this box.</p>',
     "30": '<p style="min-height:4rem">Content</p><div class="sticky-cta">Continue →</div>',
     "36": '<div class="scroll-progress"></div><p class="demo-note">A 3px bar tracks root scroll.</p>',
     "43": '<header class="site-header">Auto-hide header</header><p class="demo-note">Needs the root scroll-state preset.</p>',
     "44": '<nav class="toc"><div class="toc__inner">On this page</div></nav>',
-    "45": '<div class="carousel"><div class="slide"><article>01</article></div><div class="slide"><article>02</article></div><div class="slide"><article>03</article></div></div>',
-    "46": '<div class="tabs-wrap"><div class="fade-hint">→</div><p>Scrollable tabs live here.</p></div>',
+    "45": '<div class="carousel" style="max-width:20rem">' + "".join(
+        f'<div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">{n}</article></div>'
+        for n in ("01", "02", "03")
+    ) + '</div>',
+    "46": '<div class="tabs-wrap" style="max-width:20rem"><div style="display:flex;gap:1rem;white-space:nowrap;padding-inline-end:3rem;min-width:44rem">'
+        + "".join(f"<span>{label}</span>" for label in ("Overview", "Getting started", "Pricing", "Documentation", "Changelog", "Support", "Community", "Careers"))
+        + '</div><div class="fade-hint">→</div></div>',
     "47": '<a class="backtotop" href="#">↑</a><p class="demo-note">Wakes after the page has been scrolled.</p>',
     "55": '<div class="card-stack"><article class="card">Card A</article><article class="card">Card B</article><article class="card">Card C</article></div>',
-    "69": '<div class="table-wrapper"><table><tr><th>Name</th><th>Plan</th><th>Seats</th></tr><tr><td>Acme</td><td>Pro</td><td>24</td></tr></table></div>',
+    "69": '<div class="table-wrapper" style="max-width:20rem"><table style="min-width:44rem">'
+        '<tr><th>Name</th><th>Plan</th><th>Seats</th><th>Region</th><th>Owner</th><th>Renewal date</th><th>Status</th></tr>'
+        '<tr><td>Acme Corporation</td><td>Pro</td><td>24</td><td>EU-West</td><td>Jonas Andersson</td><td>2026-11-04</td><td>Active</td></tr></table>'
+        '<p class="demo-note">Scroll the table sideways.</p></div>',
     "12": f'<div class="gallery"><figure><img src="{IMG}" alt=""></figure><figure><img src="{IMG_B}" alt=""></figure><figure><img src="{IMG}" alt=""></figure></div>',
     "15": '<details><summary>Open panel</summary><div class="accordion-panel"><div class="accordion-inner">Animated with 0fr → 1fr.</div></div></details>',
     "27": '<div class="scroller-wrap"><div style="display:flex;gap:1rem;overflow:auto"><span>Alpha</span><span>Bravo</span><span>Charlie</span><span>Delta</span></div></div>',
@@ -404,7 +412,10 @@ PREVIEW_HTML: dict[str, str] = {
     "64": '<div class="floating-orb"></div>',
     "74": f'<div class="blend-container" style="position:relative"><img src="{IMG}" alt="" style="width:100%;display:block"><p class="contrast-text" style="position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem">Contrast</p></div>',
     "78": '<p class="text-fade-clamp">The faded mask replaces a hard line-clamp so the last visible line dissolves instead of being chopped mid-word. Extra copy keeps the fade honest.</p>',
-    "13": '<div class="card-grid"><article class="destination-card">Alpha</article><article class="destination-card">Bravo</article><article class="destination-card">Charlie</article></div>',
+    "13": '<div class="card-grid">' + "".join(
+        f'<article class="destination-card" style="padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)">{name}</article>'
+        for name in ("Alpha", "Bravo", "Charlie")
+    ) + '</div>',
     "21": '<section id="preview-target">Deep-linked highlight</section>',
     "29": '<div class="link-cluster"><a href="#">Docs</a> <a href="#">Blog</a> <a href="#">Careers</a></div>',
     "59": '<div class="data-grid"></div>',
@@ -416,6 +427,9 @@ PREVIEW_HTML: dict[str, str] = {
     "118": '<select class="premium-dropdown"><option>One</option><option selected>Two</option><option>Three</option></select>',
     "143": '<p class="demo-note">Print rules hide chrome and append URLs. Open a print preview to see them.</p>',
     "104": '<article class="saas-card">if() tokens follow the scheme.</article>',
+    "146": '<button commandfor="guard-modal" command="show-modal" class="btn">Open modal</button>'
+        '<dialog id="guard-modal" class="guard-modal" closedby="any"><h2>Modal content</h2>'
+        '<div class="guard-body">Long scrollable content…</div></dialog>',
 }
 
 

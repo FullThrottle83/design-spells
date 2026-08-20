@@ -108,6 +108,11 @@ const PREVIEW_TOKENS = `
     place-items: center;
     background-color: var(--color-bg);
     color: var(--color-text);
+    /* Without this, position:fixed descendants (FABs, toasts, progress
+       bars) use the real page as their containing block and render
+       somewhere else on the catalogue entirely instead of inside the
+       preview box. */
+    contain: layout;
   }
   .stage > * { max-width: 100%; }
   /* <details> grows taller when opened; centering it vertically would
@@ -398,7 +403,12 @@ function triggerFlags(css) {
    resting state looks like plain markup, so without a hint every preview
    looks the same until you happen to interact with the right element. */
 function detectTrigger(css, hasTimeline, flags) {
-  if (hasTimeline) return "Scroll to preview";
+  if (hasTimeline) {
+    // scroll(root ...) binds to the real document scroller, not this
+    // sandbox — scrolling the preview itself does nothing for these.
+    return isRootBoundTimeline(css) ? "Scroll the page to preview" : "Scroll to preview";
+  }
+  if (/container-type:\s*scroll-state/.test(css)) return "Scroll to preview";
   if (/:target(?!-)/.test(css)) return "Click the link to preview";
   if (/::selection\b/.test(css)) return "Select the text";
   if (/:checked\b/.test(css)) return "Click to toggle";
@@ -429,21 +439,35 @@ function hasScrollTimeline(css) {
   return /(animation-timeline|scroll-timeline|timeline-scope)\s*:/.test(css);
 }
 
+/* `timeline-scope` means the spell exports its own named timeline from a
+   scroller it already ships (e.g. a local overflow:auto element) — it
+   doesn't need (and shouldn't get) the generic runway wrapper. */
+function hasSelfContainedTimeline(css) {
+  return /timeline-scope\s*:/.test(css);
+}
+
+/* scroll(root ...) explicitly binds to the document's root scroller —
+   wrapping it in a runway that scrolls the *preview* does nothing. */
+function isRootBoundTimeline(css) {
+  return /scroll\(\s*root\b/.test(css);
+}
+
 function hydratePreview(host, spell, compact) {
   const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
   const rawCss = spell.previewCss || spell.css || "";
   const flags = triggerFlags(rawCss);
   const css = shimTargetCss(rawCss);
   const html = spell.previewHtml || spell.html || "";
-  const minHeight = compact ? 180 : 280;
+  const minHeight = compact ? 200 : 280;
   const timeline = hasScrollTimeline(rawCss);
+  const needsRunway = timeline && !hasSelfContainedTimeline(rawCss) && !isRootBoundTimeline(rawCss);
   const hint = detectTrigger(rawCss, timeline, flags);
   const stage = `
     <div class="stage" style="min-height:${minHeight}px">
       ${html}
       ${hint ? `<span class="ds-hint" aria-hidden="true">${esc(hint)}</span>` : ""}
     </div>`;
-  const body = timeline
+  const body = needsRunway
     ? `<div class="ds-runway" style="max-height:${minHeight}px">
         <div class="ds-runway__pad" aria-hidden="true"></div>
         ${stage}

@@ -771,7 +771,7 @@
       "description": "Shrinks the sticky header and scales the logo down as the user scrolls, without layout shifts.",
       "html": "",
       "css": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  padding-block: 1.25rem;\n  transition: padding 150ms ease;\n}\n\n.header-logo {\n  transform-origin: left center;\n  transition: transform 150ms ease;\n}\n\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: shrink-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 120px;\n  }\n  \n  .header-logo {\n    animation: scale-logo linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 120px;\n  }\n\n  @keyframes shrink-header { to { padding-block: 0.5rem; } }\n  @keyframes scale-logo { to { transform: scale(0.85); } }\n}\n",
-      "previewHtml": "<header class=\"site-header\"><strong class=\"header-logo\">Brand</strong></header><p style=\"height:8rem\">Scroll the page to compress.</p>",
+      "previewHtml": "<header class=\"site-header\"><strong class=\"header-logo\">Brand</strong></header><p class=\"demo-note\">Bound to the real page scroll — scroll the whole catalogue, not this box.</p>",
       "previewCss": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  padding-block: 1.25rem;\n  transition: padding 150ms ease;\n}\n\n.header-logo {\n  transform-origin: left center;\n  transition: transform 150ms ease;\n}\n\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: shrink-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 120px;\n  }\n  \n  .header-logo {\n    animation: scale-logo linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 120px;\n  }\n\n  @keyframes shrink-header { to { padding-block: 0.5rem; } }\n  @keyframes scale-logo { to { transform: scale(0.85); } }\n}\n",
       "feature": "animation-timeline: scroll()",
       "browsers": {
@@ -979,7 +979,7 @@
       "description": "The header becomes frosted glass only after the user has scrolled a little.",
       "html": "",
       "css": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  background: transparent;\n  border-bottom: 1px solid transparent;\n}\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: frost-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 80px;\n  }\n  @keyframes frost-header {\n    to {\n      background: oklch(from var(--color-bg) l c h / 0.82);\n      backdrop-filter: blur(12px) saturate(160%);\n      -webkit-backdrop-filter: blur(12px) saturate(160%);\n      border-bottom-color: var(--color-border);\n      box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);\n    }\n  }\n}\n",
-      "previewHtml": "<header class=\"site-header\">Frosted after scroll</header>",
+      "previewHtml": "<header class=\"site-header\">Frosted after scroll</header><p class=\"demo-note\">Bound to the real page scroll — scroll the whole catalogue, not this box.</p>",
       "previewCss": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  background: transparent;\n  border-bottom: 1px solid transparent;\n}\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: frost-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 80px;\n  }\n  @keyframes frost-header {\n    to {\n      background: oklch(from var(--color-bg) l c h / 0.82);\n      backdrop-filter: blur(12px) saturate(160%);\n      -webkit-backdrop-filter: blur(12px) saturate(160%);\n      border-bottom-color: var(--color-border);\n      box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);\n    }\n  }\n}\n",
       "feature": "animation-timeline: scroll() + color-mix() / oklch()",
       "browsers": {
@@ -1109,7 +1109,7 @@
       "description": "The active slide in a scroll-snap container gets full sharpness while siblings fade down.",
       "html": "",
       "css": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
-      "previewHtml": "<div class=\"carousel\"><div class=\"slide\"><article>01</article></div><div class=\"slide\"><article>02</article></div><div class=\"slide\"><article>03</article></div></div>",
+      "previewHtml": "<div class=\"carousel\" style=\"max-width:20rem\"><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">01</article></div><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">02</article></div><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">03</article></div></div>",
       "previewCss": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
       "feature": "scroll-state container queries + @container size queries",
       "browsers": {
@@ -1135,7 +1135,7 @@
       "description": "Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.",
       "html": "",
       "css": ".tabs-wrap {\n  position: relative;\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.tabs-wrap .fade-hint {\n  opacity: 0;\n  transition: opacity 180ms ease;\n}\n\n@container scroll-state(scrollable: inline) {\n  .fade-hint { opacity: 1; }\n}\n",
-      "previewHtml": "<div class=\"tabs-wrap\"><div class=\"fade-hint\">→</div><p>Scrollable tabs live here.</p></div>",
+      "previewHtml": "<div class=\"tabs-wrap\" style=\"max-width:20rem\"><div style=\"display:flex;gap:1rem;white-space:nowrap;padding-inline-end:3rem;min-width:44rem\"><span>Overview</span><span>Getting started</span><span>Pricing</span><span>Documentation</span><span>Changelog</span><span>Support</span><span>Community</span><span>Careers</span></div><div class=\"fade-hint\">→</div></div>",
       "previewCss": ".tabs-wrap {\n  position: relative;\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.tabs-wrap .fade-hint {\n  opacity: 0;\n  transition: opacity 180ms ease;\n}\n\n@container scroll-state(scrollable: inline) {\n  .fade-hint { opacity: 1; }\n}\n",
       "feature": "scroll-state container queries + @container size queries",
       "browsers": {
@@ -1213,7 +1213,7 @@
       "description": "Tables with `position: sticky` show edge shadows and dividers *only* when the content has actually been scrolled horizontally.",
       "html": "",
       "css": ".table-wrapper {\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.table-wrapper th:first-child,\n.table-wrapper td:first-child {\n  position: sticky;\n  left: 0;\n  background: var(--color-bg);\n  transition: box-shadow 200ms ease;\n}\n\n@container scroll-state(scrolled: inline) {\n  .table-wrapper th:first-child,\n  .table-wrapper td:first-child {\n    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);\n  }\n}\n",
-      "previewHtml": "<div class=\"table-wrapper\"><table><tr><th>Name</th><th>Plan</th><th>Seats</th></tr><tr><td>Acme</td><td>Pro</td><td>24</td></tr></table></div>",
+      "previewHtml": "<div class=\"table-wrapper\" style=\"max-width:20rem\"><table style=\"min-width:44rem\"><tr><th>Name</th><th>Plan</th><th>Seats</th><th>Region</th><th>Owner</th><th>Renewal date</th><th>Status</th></tr><tr><td>Acme Corporation</td><td>Pro</td><td>24</td><td>EU-West</td><td>Jonas Andersson</td><td>2026-11-04</td><td>Active</td></tr></table><p class=\"demo-note\">Scroll the table sideways.</p></div>",
       "previewCss": ".table-wrapper {\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.table-wrapper th:first-child,\n.table-wrapper td:first-child {\n  position: sticky;\n  left: 0;\n  background: var(--color-bg);\n  transition: box-shadow 200ms ease;\n}\n\n@container scroll-state(scrolled: inline) {\n  .table-wrapper th:first-child,\n  .table-wrapper td:first-child {\n    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);\n  }\n}\n",
       "feature": "scroll-state container queries + @container size queries + color-mix() / oklch()",
       "browsers": {
@@ -2044,9 +2044,9 @@
       "note": "",
       "description": "A media card gets a darker overlay on hover so the heading stays readable.",
       "html": "",
-      "css": ".media-card { position: relative; overflow: hidden; }\n.media-card::after {\n  content: \"\";\n  position: absolute; inset: 0;\n  background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);\n}\n.media-card:hover::after,\n.media-card:focus-within::after { opacity: .86; }\n",
+      "css": ".media-card { position: relative; overflow: hidden; }\n.media-card::after {\n  content: \"\";\n  position: absolute; inset: 0;\n  background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));\n  opacity: .5;\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);\n}\n.media-card:hover::after,\n.media-card:focus-within::after { opacity: 1; }\n",
       "previewHtml": "<article class=\"media-card\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" style=\"display:block;width:100%\"><h3 style=\"position:absolute;bottom:1rem;left:1rem;z-index:1;color:white\">Stay</h3></article>",
-      "previewCss": ".media-card { position: relative; overflow: hidden; }\n.media-card::after {\n  content: \"\";\n  position: absolute; inset: 0;\n  background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);\n}\n.media-card:hover::after,\n.media-card:focus-within::after { opacity: .86; }\n",
+      "previewCss": ".media-card { position: relative; overflow: hidden; }\n.media-card::after {\n  content: \"\";\n  position: absolute; inset: 0;\n  background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));\n  opacity: .5;\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);\n}\n.media-card:hover::after,\n.media-card:focus-within::after { opacity: 1; }\n",
       "feature": "color-mix() / oklch()",
       "browsers": {
         "chrome": "yes",
@@ -2253,7 +2253,7 @@
       "description": "The hovered card in a grid sharpens while its siblings recede.",
       "html": "",
       "css": ".card-grid { display: grid; gap: var(--space-4); }\n.card-grid:has(.destination-card:hover) .destination-card:not(:hover),\n.card-grid:has(.destination-card:focus-within) .destination-card:not(:focus-within) {\n  opacity: 0.65;\n  transform: scale(0.985);\n}\n.destination-card {\n  transition: opacity 300ms cubic-bezier(0.16,1,0.3,1), transform 300ms cubic-bezier(0.16,1,0.3,1);\n}\n",
-      "previewHtml": "<div class=\"card-grid\"><article class=\"destination-card\">Alpha</article><article class=\"destination-card\">Bravo</article><article class=\"destination-card\">Charlie</article></div>",
+      "previewHtml": "<div class=\"card-grid\"><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Alpha</article><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Bravo</article><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Charlie</article></div>",
       "previewCss": ".card-grid { display: grid; gap: var(--space-4); }\n.card-grid:has(.destination-card:hover) .destination-card:not(:hover),\n.card-grid:has(.destination-card:focus-within) .destination-card:not(:focus-within) {\n  opacity: 0.65;\n  transform: scale(0.985);\n}\n.destination-card {\n  transition: opacity 300ms cubic-bezier(0.16,1,0.3,1), transform 300ms cubic-bezier(0.16,1,0.3,1);\n}\n",
       "feature": ":has()",
       "browsers": {
@@ -3761,7 +3761,7 @@
       "description": "A modal dialog that prevents scroll chaining (the background moving while the modal scrolls).",
       "html": "<dialog id=\"guard-modal\" class=\"guard-modal\" closedby=\"any\">\n  <h2>Modal content</h2>\n  <div class=\"guard-body\">Long scrollable content…</div>\n</dialog>\n",
       "css": ".guard-modal {\n  max-block-size: 80vh; max-inline-size: min(90vw, 36rem); margin: auto;\n  padding: var(--space-6); border: 0; border-radius: var(--radius-lg);\n  overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;\n}\n.guard-modal::backdrop { overscroll-behavior: none; background: oklch(0 0 0 / .4); }\n",
-      "previewHtml": "<dialog id=\"guard-modal\" class=\"guard-modal\" closedby=\"any\">\n  <h2>Modal content</h2>\n  <div class=\"guard-body\">Long scrollable content…</div>\n</dialog>",
+      "previewHtml": "<button commandfor=\"guard-modal\" command=\"show-modal\" class=\"btn\">Open modal</button><dialog id=\"guard-modal\" class=\"guard-modal\" closedby=\"any\"><h2>Modal content</h2><div class=\"guard-body\">Long scrollable content…</div></dialog>",
       "previewCss": ".guard-modal {\n  max-block-size: 80vh; max-inline-size: min(90vw, 36rem); margin: auto;\n  padding: var(--space-6); border: 0; border-radius: var(--radius-lg);\n  overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;\n}\n.guard-modal::backdrop { overscroll-behavior: none; background: oklch(0 0 0 / .4); }\n",
       "feature": "dialog closedby + color-mix() / oklch()",
       "browsers": {

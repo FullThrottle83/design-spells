@@ -2480,10 +2480,11 @@ A media card gets a darker overlay on hover so the heading stays readable.
   content: "";
   position: absolute; inset: 0;
   background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));
+  opacity: .5;
   transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);
 }
 .media-card:hover::after,
-.media-card:focus-within::after { opacity: .86; }
+.media-card:focus-within::after { opacity: 1; }
 ```
 
 ### 35. Inline Theme Switch (`light-dark()`)

@@ -959,11 +959,18 @@ function renderBrowserList(spell) {
   }).join("");
 }
 
-function openDrawer(spell, trigger) {
-  state.active = spell;
-  syncUrl();
-  lastTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
+/* The View Transitions API is used to morph the clicked list row into the
+   drawer (and back) — the same native technique the catalogue sells, dogfooded
+   in the site's own UI. Falls back to the CSS slide transition wherever the
+   API or a matching source element isn't available. */
+function supportsViewTransition() {
+  return (
+    typeof document.startViewTransition === "function" &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
 
+function populateDrawer(spell) {
   drawerId.textContent = spell.id;
   drawerJs.textContent = spell.jsLabel;
   drawerTitle.textContent = spell.title;
@@ -982,13 +989,49 @@ function openDrawer(spell, trigger) {
   backdrop.hidden = false;
   drawer.hidden = false;
   document.body.classList.add("is-locked");
+}
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      backdrop.classList.add("is-shown");
-      drawer.classList.add("is-open");
+function openDrawer(spell, trigger) {
+  state.active = spell;
+  lastTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
+
+  const sourceRow =
+    lastTrigger instanceof HTMLElement && lastTrigger.closest(".row") || null;
+  const morph = supportsViewTransition() && sourceRow;
+
+  const show = () => {
+    populateDrawer(spell);
+    syncUrl();
+    backdrop.classList.add("is-shown");
+    drawer.classList.add("is-open");
+  };
+
+  if (morph) {
+    sourceRow.style.viewTransitionName = "spell-card";
+    const vt = document.startViewTransition(() => {
+      sourceRow.style.viewTransitionName = "";
+      drawer.style.viewTransitionName = "spell-card";
+      // The morph interpolates the box itself; suppress the drawer's own
+      // translateX transition so its "new" snapshot is captured in its final
+      // resting position rather than mid-slide.
+      drawer.style.transition = "none";
+      show();
     });
-  });
+    vt.finished.finally(() => {
+      sourceRow.style.viewTransitionName = "";
+      drawer.style.viewTransitionName = "";
+      drawer.style.transition = "";
+    });
+  } else {
+    syncUrl();
+    populateDrawer(spell);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        backdrop.classList.add("is-shown");
+        drawer.classList.add("is-open");
+      });
+    });
+  }
 
   closeBtn.focus();
 }
@@ -997,9 +1040,8 @@ function closeDrawer() {
   if (drawer.hidden || closing) return;
   closing = true;
 
-  drawer.classList.remove("is-open");
-  backdrop.classList.remove("is-shown");
-  document.body.classList.remove("is-locked");
+  const sourceRow =
+    lastTrigger instanceof HTMLElement && lastTrigger.closest(".row") || null;
 
   const finish = () => {
     if (!closing) return;
@@ -1014,6 +1056,29 @@ function closeDrawer() {
     syncUrl();
     if (lastTrigger?.isConnected) lastTrigger.focus();
   };
+
+  const morph = supportsViewTransition() && sourceRow && sourceRow.isConnected;
+
+  if (morph) {
+    drawer.style.viewTransitionName = "spell-card";
+    const vt = document.startViewTransition(() => {
+      drawer.style.viewTransitionName = "";
+      sourceRow.style.viewTransitionName = "spell-card";
+      drawer.classList.remove("is-open");
+      backdrop.classList.remove("is-shown");
+      document.body.classList.remove("is-locked");
+      finish();
+    });
+    vt.finished.finally(() => {
+      sourceRow.style.viewTransitionName = "";
+      drawer.style.viewTransitionName = "";
+    });
+    return;
+  }
+
+  drawer.classList.remove("is-open");
+  backdrop.classList.remove("is-shown");
+  document.body.classList.remove("is-locked");
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     finish();

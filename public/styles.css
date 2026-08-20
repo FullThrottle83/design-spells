@@ -9,26 +9,28 @@
   color-scheme: light;
 
   /* Palette — warm paper canvas, near-black ink, one spot accent.
-     Swiss poster, not developer-tool dark mode. */
-  --bg:          #f7f4ee;
-  --surface:     #ffffff;
-  --canvas:      #efeade;
-  --line:        #e2dcce;
-  --line-strong: #c7bea9;
+     Swiss poster, not developer-tool dark mode. Colors are oklch() so any
+     transition between them stays perceptually uniform (the same model the
+     catalogue itself recommends). */
+  --bg:          oklch(0.968 0.009 84.6);
+  --surface:     oklch(1 0 0);
+  --canvas:      oklch(0.938 0.017 88);
+  --line:        oklch(0.895 0.02 87.5);
+  --line-strong: oklch(0.803 0.031 87.6);
 
-  --ink:         #18181b;
-  --ink-1:       #514e46;
-  --ink-2:       #6e6a5c;
+  --ink:         oklch(0.21 0.006 285.9);
+  --ink-1:       oklch(0.424 0.013 89.8);
+  --ink-2:       oklch(0.524 0.022 93.8);
 
   /* Status — used only where it carries real meaning (browser support) */
-  --ok:          #2f7d4f;
-  --warn:        #a3690a;
-  --no:          #b23b2e;
+  --ok:          oklch(0.529 0.106 154.4);
+  --warn:        oklch(0.57 0.12 70.7);
+  --no:          oklch(0.522 0.157 29.6);
 
   /* One confident spot color — the primary action, active state, brand mark */
-  --accent:      #cf4520;
-  --accent-ink:  #fff6f2;
-  --accent-hover:#a8380f;
+  --accent:      oklch(0.581 0.181 35.3);
+  --accent-ink:  oklch(0.979 0.011 45.7);
+  --accent-hover:oklch(0.499 0.155 37.8);
 
   /* Type — system stacks only. No webfonts: keeps the page at
      true zero external requests, matching the zero-JS premise. */
@@ -134,7 +136,7 @@ button { font: inherit; color: inherit; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(247, 244, 238, .92);
+  background: oklch(0.968 0.009 84.6 / .92);
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -474,15 +476,15 @@ button { font: inherit; color: inherit; }
 }
 
 /* mini syntax highlight tokens — desaturated, text stays the star */
-.tok-tag    { color: #b7a7f2; }
-.tok-attr   { color: #8ec2f0; }
-.tok-str    { color: #8fcf9f; }
+.tok-tag    { color: oklch(0.769 0.107 293.5); }
+.tok-attr   { color: oklch(0.795 0.085 245.8); }
+.tok-str    { color: oklch(0.798 0.094 151.6); }
 .tok-punct  { color: var(--ink-2); }
-.tok-kw     { color: #e2a0e6; }
-.tok-prop   { color: #7fc4e6; }
-.tok-num    { color: #e3c069; }
+.tok-kw     { color: oklch(0.792 0.12 324.7); }
+.tok-prop   { color: oklch(0.787 0.085 230.6); }
+.tok-num    { color: oklch(0.82 0.114 87.9); }
 .tok-com    { color: var(--ink-2); font-style: italic; }
-.tok-fn     { color: #e08a80; }
+.tok-fn     { color: oklch(0.721 0.107 27.2); }
 
 .shell-note {
   margin-top: 40px;
@@ -589,7 +591,7 @@ button { font: inherit; color: inherit; }
   position: fixed;
   inset: 0;
   z-index: 40;
-  background: rgba(0, 0, 0, .64);
+  background: oklch(0 0 0 / .64);
   opacity: 0;
   transition: opacity .18s ease;
 }
@@ -610,6 +612,15 @@ button { font: inherit; color: inherit; }
   transition: transform .26s var(--ease);
 }
 .drawer.is-open { transform: translateX(0); }
+
+/* View Transition morph: when the drawer opens/closes, the clicked row and the
+   drawer share the `spell-card` name so the browser animates the row's box into
+   the drawer (and back) natively. Tune only timing; position/size/cross-fade
+   are interpolated by the browser. */
+::view-transition-group(spell-card) {
+  animation-duration: .3s;
+  animation-timing-function: var(--ease);
+}
 
 .drawer__head {
   display: flex;
@@ -728,37 +739,37 @@ button { font: inherit; color: inherit; }
    palette below legible without a second color system. */
 .code {
   border: 1px solid var(--line-strong);
-  background: #18181b;
+  background: oklch(0.21 0.006 285.9);
   overflow: hidden;
 }
 .code__bar {
   display: flex;
   align-items: stretch;
-  border-bottom: 1px solid #2c2c31;
+  border-bottom: 1px solid oklch(0.295 0.009 285.8);
 }
 .code__tabs { display: flex; }
 .code__tab {
   appearance: none;
   background: none;
   border: 0;
-  border-right: 1px solid #2c2c31;
+  border-right: 1px solid oklch(0.295 0.009 285.8);
   padding: 7px 11px;
   cursor: pointer;
   font: 600 10.5px/1 var(--sans);
   letter-spacing: .03em;
-  color: #8c8778;
+  color: oklch(0.623 0.023 91.7);
   transition: background-color .12s ease, color .12s ease;
 }
-.code__tab:hover { color: #d8d3c6; }
+.code__tab:hover { color: oklch(0.867 0.018 89.4); }
 .code__tab[aria-selected="true"] {
-  background: #2c2c31;
-  color: #f5f4f0;
+  background: oklch(0.295 0.009 285.8);
+  color: oklch(0.967 0.005 95.1);
 }
 .code__spacer { flex: 1; }
 
 .code__copy {
   appearance: none;
-  background: #f5f4f0;
+  background: oklch(0.967 0.005 95.1);
   border: 0;
   padding: 0 16px;
   margin: 5px 5px 5px auto;
@@ -766,11 +777,11 @@ button { font: inherit; color: inherit; }
   font: 700 10.5px/1 var(--sans);
   letter-spacing: .05em;
   text-transform: uppercase;
-  color: #18181b;
+  color: oklch(0.21 0.006 285.9);
   transition: background-color .12s ease;
 }
-.code__copy:hover { background: #ffffff; }
-.code__copy.is-done { background: var(--ok); color: #fff; }
+.code__copy:hover { background: oklch(1 0 0); }
+.code__copy.is-done { background: var(--ok); color: oklch(1 0 0); }
 
 .code__view-wrap { position: relative; }
 .code__view {
@@ -779,11 +790,11 @@ button { font: inherit; color: inherit; }
   overflow: auto;
   padding: 14px 16px;
   font: 12px/1.7 var(--mono);
-  color: #d8d3c6;
+  color: oklch(0.867 0.018 89.4);
   white-space: pre;
   tab-size: 2;
   scrollbar-width: thin;
-  background: #18181b;
+  background: oklch(0.21 0.006 285.9);
 }
 .code__view:focus-visible { outline: none; }
 
@@ -819,7 +830,7 @@ button { font: inherit; color: inherit; }
   color: var(--bg);
   border-color: var(--ink);
 }
-.btn--primary:hover { background: #2c2c30; color: var(--bg); }
+.btn--primary:hover { background: oklch(0.295 0.007 286); color: var(--bg); }
 .btn--primary.is-done { background: var(--ok); border-color: var(--ok); }
 
 /* ---------------- responsive ---------------- */

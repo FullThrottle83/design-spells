@@ -209,14 +209,14 @@ A subtle light gleam sweeps across the button on hover.
 ### 2. Soft Push
 *Interaction · Baseline · 0 JS*
 
-A microscopic scale-down on `:active` for tactile feedback.
+A confident scale-down on `:active` for tactile feedback.
 
 ```css
 .btn, .card-interactive {
   min-block-size: 44px;
   transition: transform 100ms cubic-bezier(0.16,1,0.3,1);
 }
-.btn:active, .card-interactive:active { transform: scale(0.98); }
+.btn:active, .card-interactive:active { transform: scale(0.94); }
 ```
 
 ### 3. Lift & Zoom on cards
@@ -227,14 +227,23 @@ The card lifts and the image zooms in slowly.
 ```css
 .destination-card {
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px oklch(0.2 0.01 80 / 0.08);
   transition: transform 350ms cubic-bezier(0.16,1,0.3,1), box-shadow 350ms cubic-bezier(0.16,1,0.3,1);
 }
+.destination-card img {
+  display: block; aspect-ratio: 16 / 10; object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.16,1,0.3,1);
+}
+.destination-card :is(h3, p) { margin: 0; padding-inline: 1rem; }
+.destination-card h3 { padding-block-start: .85rem; }
+.destination-card p { padding-block-end: 1rem; color: var(--color-text-muted); }
 .destination-card:hover,
 .destination-card:focus-within {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px oklch(0.2 0.01 80 / 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px oklch(0.2 0.01 80 / 0.18);
 }
-.destination-card img { transition: transform 600ms cubic-bezier(0.16,1,0.3,1); }
 .destination-card:hover img,
 .destination-card:focus-within img { transform: scale(1.05); }
 @media (hover: none) {
@@ -273,9 +282,12 @@ The underline slides in instead of blinking on.
   color: var(--color-text-muted);
   min-block-size: 44px; min-inline-size: 44px;
   display: inline-grid; place-items: center;
-  transition: color 180ms cubic-bezier(0.16,1,0.3,1);
+  transition: color 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
 }
-.icon:hover, .icon:focus-visible { color: var(--color-primary); }
+.icon:hover, .icon:focus-visible {
+  color: var(--color-accent);
+  transform: scale(1.12);
+}
 ```
 
 ### 19. Focus-Within Halo
@@ -355,11 +367,13 @@ details[open] summary .chevron { transform: rotate(180deg); }
 
 ```css
 a[target="_blank"] .external-icon {
+  display: inline-block;
+  opacity: .55;
   transition: transform 180ms cubic-bezier(0.16,1,0.3,1), opacity 180ms cubic-bezier(0.16,1,0.3,1);
 }
 a[target="_blank"]:hover .external-icon,
 a[target="_blank"]:focus-visible .external-icon {
-  transform: translate(.12rem, -.12rem);
+  transform: translate(.3rem, -.3rem);
   opacity: 1;
 }
 ```

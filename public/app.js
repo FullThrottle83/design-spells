@@ -54,9 +54,6 @@ const BROWSER_META = [
 ];
 
 const LEVEL_LABEL = { yes: "Supported", partial: "Partial", no: "Not shipped" };
-/* Auto-demo effects run in slow motion so quick transitions are legible
-   without the user having to interact — see slowDownDemo() in hydratePreview. */
-const DEMO_PLAYBACK_RATE = 0.4;
 
 const TAB_LABEL = {
   tailwind: "Tailwind v4",
@@ -113,6 +110,10 @@ const PREVIEW_TOKENS = `
     color: var(--color-text);
   }
   .stage > * { max-width: 100%; }
+  /* <details> grows taller when opened; centering it vertically would
+     re-center the whole box and make the trigger appear to jump. Pin it
+     to the top instead so only the revealed content pushes downward. */
+  .stage:has(details) { align-items: start; }
   img { max-width: 100%; height: auto; display: block; }
   button, .btn, a.btn {
     min-block-size: 36px;
@@ -401,24 +402,13 @@ function detectTrigger(css, hasTimeline, flags) {
   if (/:target(?!-)/.test(css)) return "Click the link to preview";
   if (/::selection\b/.test(css)) return "Select the text";
   if (/:checked\b/.test(css)) return "Click to toggle";
+  if (/\[aria-pressed/.test(css)) return "Click to toggle";
   const { hover, focus, active } = flags;
   if (hover && focus) return "Hover or focus to preview";
   if (hover) return "Hover to preview";
   if (focus) return "Focus to preview";
   if (active) return "Press to preview";
   return null;
-}
-
-/* hover/focus/active effects are frequently too subtle to notice in a small
-   static box (a 2% scale-down, a faint color shift) — visitors would have to
-   guess where to point the mouse. Mirror those pseudo-classes onto a plain
-   attribute so a timer can "act out" the interaction automatically, on a
-   loop, alongside genuine hover/focus/press. */
-function shimDemoCss(css) {
-  return css.replace(/:(hover|active|focus-visible|focus-within|focus)\b/g, (match, kind) => {
-    const demoKind = kind.startsWith("focus") ? "focus" : kind;
-    return `:is(${match}, [data-ds-demo~="${demoKind}"])`;
-  });
 }
 
 /* :target only ever matches against the *document's* URL fragment, which
@@ -439,25 +429,15 @@ function hasScrollTimeline(css) {
   return /(animation-timeline|scroll-timeline|timeline-scope)\s*:/.test(css);
 }
 
-function clearDemoTimer(root) {
-  if (root?.__dsDemoTimer) {
-    window.clearTimeout(root.__dsDemoTimer);
-    root.__dsDemoTimer = null;
-  }
-}
-
 function hydratePreview(host, spell, compact) {
   const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
-  clearDemoTimer(root);
   const rawCss = spell.previewCss || spell.css || "";
   const flags = triggerFlags(rawCss);
-  const css = shimDemoCss(shimTargetCss(rawCss));
+  const css = shimTargetCss(rawCss);
   const html = spell.previewHtml || spell.html || "";
   const minHeight = compact ? 180 : 280;
   const timeline = hasScrollTimeline(rawCss);
   const hint = detectTrigger(rawCss, timeline, flags);
-  const demoKinds = [flags.hover && "hover", flags.focus && "focus", flags.active && "active"].filter(Boolean);
-  const demoActive = demoKinds.length > 0 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const stage = `
     <div class="stage" style="min-height:${minHeight}px">
       ${html}
@@ -511,32 +491,27 @@ function hydratePreview(host, spell, compact) {
     });
   }
 
-  if (demoActive) {
-    const demoValue = demoKinds.join(" ");
-    const demoTargets = root.querySelectorAll(".stage *");
-    const stageEl = root.querySelector(".stage");
-    /* Most real hover/focus transitions run in ~150-300ms — too fast to
-       register during an unattended auto-demo. Slow the resulting CSS
-       transitions/animations down via the Web Animations API so the eye
-       actually catches them, without touching genuine user-triggered speed. */
-    const slowDownDemo = () => {
-      if (!stageEl?.getAnimations) return;
-      stageEl.getAnimations({ subtree: true }).forEach((anim) => {
-        anim.playbackRate = DEMO_PLAYBACK_RATE;
-      });
-    };
-    let on = false;
-    const tick = () => {
-      on = !on;
-      demoTargets.forEach((el) => {
-        if (on) el.setAttribute("data-ds-demo", demoValue);
-        else el.removeAttribute("data-ds-demo");
-      });
-      requestAnimationFrame(slowDownDemo);
-      root.__dsDemoTimer = window.setTimeout(tick, on ? 1400 : 2000);
-    };
-    root.__dsDemoTimer = window.setTimeout(tick, 700);
+  /* [aria-pressed] toggle buttons (segmented controls, pressed icon
+     buttons, ...) are CSS-only spells — nothing in the sandbox wires the
+     click that a real app would. Fake it: clicking any button in a group
+     that has a pressed member makes the clicked one the pressed one (only
+     the initial button carries aria-pressed in markup, siblings don't);
+     a lone pressed button just toggles. */
+  if (!root.__dsPressedShim) {
+    root.__dsPressedShim = true;
+    root.addEventListener("click", (ev) => {
+      const btn = ev.target.closest("button");
+      if (!btn || !btn.parentElement) return;
+      const group = Array.from(btn.parentElement.children).filter((el) => el.tagName === "BUTTON");
+      if (!group.some((el) => el.hasAttribute("aria-pressed"))) return;
+      if (group.length > 1) {
+        group.forEach((el) => el.setAttribute("aria-pressed", String(el === btn)));
+      } else {
+        btn.setAttribute("aria-pressed", String(btn.getAttribute("aria-pressed") !== "true"));
+      }
+    });
   }
+
 }
 
 /* ---------------- code ---------------- */
@@ -817,7 +792,6 @@ function showQuickPreview(spell) {
     previewBody.hidden = true;
     previewEmpty.hidden = false;
     if (qpHost.shadowRoot) {
-      clearDemoTimer(qpHost.shadowRoot);
       qpHost.shadowRoot.innerHTML = "";
     }
     return;
@@ -1032,7 +1006,6 @@ function closeDrawer() {
     drawer.hidden = true;
     backdrop.hidden = true;
     if (previewHost.shadowRoot) {
-      clearDemoTimer(previewHost.shadowRoot);
       previewHost.shadowRoot.innerHTML = "";
     }
     state.active = null;

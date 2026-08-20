@@ -54,6 +54,9 @@ const BROWSER_META = [
 ];
 
 const LEVEL_LABEL = { yes: "Supported", partial: "Partial", no: "Not shipped" };
+/* Auto-demo effects run in slow motion so quick transitions are legible
+   without the user having to interact — see slowDownDemo() in hydratePreview. */
+const DEMO_PLAYBACK_RATE = 0.4;
 
 const TAB_LABEL = {
   tailwind: "Tailwind v4",
@@ -458,7 +461,6 @@ function hydratePreview(host, spell, compact) {
   const stage = `
     <div class="stage" style="min-height:${minHeight}px">
       ${html}
-      ${demoActive ? `<div class="ds-demo-ring" aria-hidden="true"></div>` : ""}
       ${hint ? `<span class="ds-hint" aria-hidden="true">${esc(hint)}</span>` : ""}
     </div>`;
   const body = timeline
@@ -485,20 +487,6 @@ function hydratePreview(host, spell, compact) {
         letter-spacing: .02em;
         pointer-events: none;
         opacity: .8;
-      }
-      .ds-demo-ring {
-        position: absolute;
-        z-index: 3;
-        pointer-events: none;
-        border: 2px solid var(--color-accent);
-        border-radius: 10px;
-        opacity: 0;
-        transform: scale(.92);
-        transition: opacity 200ms ease, transform 200ms ease;
-      }
-      .ds-demo-ring.is-on {
-        opacity: .85;
-        transform: scale(1);
       }
       .ds-runway {
         overflow-y: auto;
@@ -527,19 +515,15 @@ function hydratePreview(host, spell, compact) {
     const demoValue = demoKinds.join(" ");
     const demoTargets = root.querySelectorAll(".stage *");
     const stageEl = root.querySelector(".stage");
-    const ring = root.querySelector(".ds-demo-ring");
-    const triggerEl = stageEl?.querySelector(":scope > *:not(.ds-demo-ring):not(.ds-hint)") || stageEl;
-    /* Pin the ring to the trigger element's box so the eye lands there right
-       as the (often subtle) real effect fires — a spotlight, not the effect. */
-    const positionRing = () => {
-      if (!ring || !triggerEl || !stageEl) return;
-      const stageRect = stageEl.getBoundingClientRect();
-      const elRect = triggerEl.getBoundingClientRect();
-      const pad = 6;
-      ring.style.left = `${elRect.left - stageRect.left - pad}px`;
-      ring.style.top = `${elRect.top - stageRect.top - pad}px`;
-      ring.style.width = `${elRect.width + pad * 2}px`;
-      ring.style.height = `${elRect.height + pad * 2}px`;
+    /* Most real hover/focus transitions run in ~150-300ms — too fast to
+       register during an unattended auto-demo. Slow the resulting CSS
+       transitions/animations down via the Web Animations API so the eye
+       actually catches them, without touching genuine user-triggered speed. */
+    const slowDownDemo = () => {
+      if (!stageEl?.getAnimations) return;
+      stageEl.getAnimations({ subtree: true }).forEach((anim) => {
+        anim.playbackRate = DEMO_PLAYBACK_RATE;
+      });
     };
     let on = false;
     const tick = () => {
@@ -548,8 +532,7 @@ function hydratePreview(host, spell, compact) {
         if (on) el.setAttribute("data-ds-demo", demoValue);
         else el.removeAttribute("data-ds-demo");
       });
-      if (on) positionRing();
-      ring?.classList.toggle("is-on", on);
+      requestAnimationFrame(slowDownDemo);
       root.__dsDemoTimer = window.setTimeout(tick, on ? 1400 : 2000);
     };
     root.__dsDemoTimer = window.setTimeout(tick, 700);

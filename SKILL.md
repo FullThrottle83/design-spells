@@ -34,6 +34,7 @@ In total there are **145 Astro-relevant spells**. Excluded `+ JS` spells: **4, 4
 - Selection priority: **Baseline → Newer → Progressive**.
 - Prefer spells that drop straight into `.astro` components or layout CSS.
 - Do not introduce client JS for something this document already solves with a JS-free spell.
+- For programmatic access, the catalogue is also exposed as an **MCP server** (`mcp/server.mjs` — `list_categories`, `search_spells`, `get_spell`), backed by the machine-readable `public/spells.json` and its strict contract in `public/spells.schema.json` (JSON Schema) and `schema/spells.d.ts` (TypeScript).
 
 ---
 

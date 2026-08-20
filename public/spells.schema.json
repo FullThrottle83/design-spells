@@ -7,6 +7,10 @@
   "required": ["total", "spells"],
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Points back at this schema document; present in public/spells.json."
+    },
     "total": {
       "type": "integer",
       "minimum": 0,

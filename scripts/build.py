@@ -382,7 +382,7 @@ PREVIEW_HTML: dict[str, str] = {
     "15": '<details><summary>Open panel</summary><div class="accordion-panel"><div class="accordion-inner">Animated with 0fr → 1fr.</div></div></details>',
     "27": '<div class="scroller-wrap"><div style="display:flex;gap:1rem;overflow:auto"><span>Alpha</span><span>Bravo</span><span>Charlie</span><span>Delta</span></div></div>',
     "33": '<details><summary>True auto height</summary><div class="accordion-panel">Animates to auto.</div></details>',
-    "37": f'<div class="card-container"><article class="adaptive-card"><img class="card-media" src="{IMG}" alt=""><div><h3>Adaptive</h3><p>Layout follows the container.</p></div></article></div>',
+    "37": f'<div class="card-container" style="resize:horizontal;overflow:auto;width:220px;min-width:180px;max-width:100%;padding:.5rem;border:1px dashed var(--color-border)"><article class="adaptive-card"><img class="card-media" src="{IMG}" alt=""><div><h3>Adaptive</h3><p>Layout follows the container.</p></div></article></div>',
     "40": '<div class="card-grid"><article class="card"><h3>One</h3><p>Short</p><button>Go</button></article><article class="card"><h3>Two</h3><p>A little more copy in this card.</p><button>Go</button></article></div>',
     "56": f'<div class="scroll-gallery" style="display:flex;gap:1rem"><img src="{IMG}" alt="" width="180"><img src="{IMG_B}" alt="" width="180"><img src="{IMG}" alt="" width="180"></div>',
     "61": '<div class="tabs-container"><details name="ui-tabs" open><summary>Overview</summary><p>First panel.</p></details><details name="ui-tabs"><summary>Details</summary><p>Second panel.</p></details></div>',
@@ -430,6 +430,35 @@ PREVIEW_HTML: dict[str, str] = {
     "146": '<button commandfor="guard-modal" command="show-modal" class="btn">Open modal</button>'
         '<dialog id="guard-modal" class="guard-modal" closedby="any"><h2>Modal content</h2>'
         '<div class="guard-body">Long scrollable content…</div></dialog>',
+    "67": '<div class="compare-container" style="width:100%;max-width:24rem">'
+        f'<img src="{IMG_B}" alt="After" class="compare-img compare-after">'
+        '<div class="compare-before-wrap">'
+        f'<img src="{IMG}" alt="Before" class="compare-img compare-before">'
+        '</div>'
+        '<div class="compare-scroller" tabindex="0" role="region" aria-label="Compare before and after. Swipe or use the arrow keys.">'
+        '<div class="scroller-spacer"></div>'
+        '</div>'
+        '</div>',
+    "98": '<button type="button" class="icon-btn" interestfor="tip-save" aria-label="Save">★</button>'
+        '<div id="tip-save" popover="hint" class="hint-tip">Save to your list</div>'
+        '<p class="demo-note">The ~400ms pause before it appears is intentional (interest-delay) — it avoids flashing on every incidental hover.</p>',
+    "99": '<div class="init-carousel">'
+        '<article class="slide" id="q1" style="flex:0 0 9rem">Q1</article>'
+        '<article class="slide is-initial" id="q2" style="flex:0 0 9rem">Q2 — current</article>'
+        '<article class="slide" id="q3" style="flex:0 0 9rem">Q3</article>'
+        '</div>'
+        '<p class="demo-note">Notice it opens already scrolled to Q2 — scroll-initial-target places it there on first paint, no JS.</p>',
+    "100": '<ul class="lanes" style="max-width:26rem">' + "".join(
+        f'<li><article class="card" style="padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)">{label}</article></li>'
+        for label in ("Card 1", "Card 2 with more text", "Card 3", "Card 4")
+    ) + '</ul><p class="demo-note">display: grid-lanes has no browser support yet — this shows the auto-fill grid fallback.</p>',
+    "126": '<nav class="spy-nav"><a href="#s1" class="spy-l1">Intro</a> <a href="#s2" class="spy-l2">Features</a></nav>'
+        '<main><section id="s1" style="min-height:180px;display:grid;place-items:center">Intro</section>'
+        '<section id="s2" style="min-height:180px;display:grid;place-items:center">Features</section></main>',
+    "134": '<ul class="swipe-list" style="max-width:20rem">'
+        '<li class="swipe-item"><div class="swipe-content">Document_v1.pdf</div><button class="swipe-action">Delete</button></li>'
+        '<li class="swipe-item"><div class="swipe-content">Invoice_Q3.pdf</div><button class="swipe-action">Delete</button></li>'
+        '</ul>',
 }
 
 

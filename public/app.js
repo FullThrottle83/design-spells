@@ -392,9 +392,13 @@ function renderGrid() {
 }
 
 function triggerFlags(css) {
+  const focusVisible = /:focus-visible\b/.test(css);
+  const focusWithin = /:focus-within\b/.test(css);
+  const focusPlain = /:focus\b(?!-)/.test(css);
   return {
     hover: /:hover\b/.test(css),
-    focus: /:focus(-within|-visible)?\b/.test(css),
+    focus: focusVisible || focusWithin || focusPlain,
+    focusVisibleOnly: focusVisible && !focusWithin && !focusPlain,
     active: /:active\b/.test(css),
   };
 }
@@ -409,13 +413,21 @@ function detectTrigger(css, hasTimeline, flags) {
     return isRootBoundTimeline(css) ? "Scroll the page to preview" : "Scroll to preview";
   }
   if (/container-type:\s*scroll-state/.test(css)) return "Scroll to preview";
+  // A sized (non scroll-state) @container query needs its container to
+  // actually change width — nothing to hover/click, the box must be resized.
+  if (/@container\s+[\w-]*\s*\(/.test(css)) return "Drag the corner to resize →";
+  if (/scroll-snap-type\s*:/.test(css)) return "Swipe to preview";
   if (/:target(?!-)/.test(css)) return "Click the link to preview";
   if (/::selection\b/.test(css)) return "Select the text";
   if (/:checked\b/.test(css)) return "Click to toggle";
   if (/\[aria-pressed/.test(css)) return "Click to toggle";
-  const { hover, focus, active } = flags;
+  const { hover, focus, focusVisibleOnly, active } = flags;
   if (hover && focus) return "Hover or focus to preview";
   if (hover) return "Hover to preview";
+  // :focus-visible with no hover and no :focus-within essentially only ever
+  // fires from real keyboard navigation — a mouse click on the element
+  // usually won't trigger it, so tell people to actually press Tab.
+  if (focusVisibleOnly) return "Press Tab to preview";
   if (focus) return "Focus to preview";
   if (active) return "Press to preview";
   return null;
@@ -439,11 +451,14 @@ function hasScrollTimeline(css) {
   return /(animation-timeline|scroll-timeline|timeline-scope)\s*:/.test(css);
 }
 
-/* `timeline-scope` means the spell exports its own named timeline from a
-   scroller it already ships (e.g. a local overflow:auto element) — it
-   doesn't need (and shouldn't get) the generic runway wrapper. */
+/* `timeline-scope` alone isn't enough to call a timeline self-contained —
+   it can just re-export a `view-timeline-name` that still tracks the
+   nearest *scrollable ancestor* (e.g. section-spy nav scoped from <html>).
+   Only skip the runway when the spell also ships its own local scroller
+   (an `overflow: auto/scroll` element) that the timeline actually reads
+   scroll position from — that's what makes it truly self-contained. */
 function hasSelfContainedTimeline(css) {
-  return /timeline-scope\s*:/.test(css);
+  return /timeline-scope\s*:/.test(css) && /overflow(-x|-y)?\s*:\s*(auto|scroll)\b/.test(css);
 }
 
 /* scroll(root ...) explicitly binds to the document's root scroller —
@@ -533,6 +548,22 @@ function hydratePreview(host, spell, compact) {
       } else {
         btn.setAttribute("aria-pressed", String(btn.getAttribute("aria-pressed") !== "true"));
       }
+    });
+  }
+
+  /* Some recipes keep their real, documented hrefs (nav/breadcrumb demos)
+     so the copied markup is production-ready. Inside this sandbox a real
+     relative href just navigates the actual catalogue page and 404s.
+     Only #fragment links (handled above) and deliberate target="_blank"
+     demos (e.g. the external-link spell) are allowed to act like real links. */
+  if (!root.__dsLinkGuard) {
+    root.__dsLinkGuard = true;
+    root.addEventListener("click", (ev) => {
+      const link = ev.target.closest("a[href]");
+      if (!link || link.target === "_blank") return;
+      const href = link.getAttribute("href") || "";
+      if (href.startsWith("#")) return;
+      ev.preventDefault();
     });
   }
 

@@ -394,7 +394,8 @@ a[target="_blank"]:focus-visible .external-icon {
 }
 .segmented button[aria-pressed="true"] {
   background: var(--color-bg);
-  box-shadow: 0 1px 3px oklch(0 0 0 / .08), inset 0 1px 0 oklch(1 0 0 / .3);
+  box-shadow: 0 1px 3px oklch(0 0 0 / .08), inset 0 1px 0 oklch(1 0 0 / .3),
+    0 0 0 3px color-mix(in oklch, var(--color-primary), transparent 78%);
 }
 ```
 
@@ -745,6 +746,7 @@ Breadcrumbs that show a discreet “+N” hint and edge masking only when the ro
 ```css
 .crumbs-wrap {
   position: relative; overflow-x: auto; container-type: scroll-state;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   mask-image: linear-gradient(to right, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, black 92%, transparent);

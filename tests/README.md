@@ -8,6 +8,9 @@ npm run test:build    # data only, no browser, no install
 npm run test:previews # live previews in Chromium
 ```
 
+The browser layer is two spec files: `previews.spec.mjs` (the preview sandbox)
+and `drawer.spec.mjs` (how the drawer renders description text).
+
 ## `test_build.py` — the generated data
 
 Pure Python, stdlib only, sub-second. `python3 -m unittest discover -s tests`
@@ -60,3 +63,18 @@ convenient:
 - sizes are read with `offsetWidth`/`offsetHeight`, not the bounding box, so a
   scroll-driven `transform: scaleX(0)` (a progress bar at scroll top) reads as
   the correct state it is rather than a collapsed layout.
+
+## `drawer.spec.mjs` — description rendering
+
+67 of the 145 descriptions come out of the README carrying inline markdown, and
+17 of those have literal HTML tags inside their backticks. `inlineMd()` in
+`app.js` turns the markers into elements after escaping every source character,
+so the same test covers both halves of that: the markers must become `<code>`
+and `<strong>` with their text intact, and **no element may come from the source
+text itself** — a description mentioning `<dialog>` that produced a `DIALOG`
+node would mean the text was parsed as markup rather than escaped.
+
+Runs under `reducedMotion: "reduce"`, which is the path `supportsViewTransition()`
+in `app.js` already takes for that preference. Without it the drawer's
+open/close View Transition leaves a snapshot overlay swallowing pointer events,
+and 67 open/close cycles cannot outrun it.

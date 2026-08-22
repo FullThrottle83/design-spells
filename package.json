@@ -1,0 +1,20 @@
+{
+  "name": "design-spells",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zero-JS CSS catalogue — verification harness for the generated spell data and the live previews.",
+  "type": "module",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "test": "npm run test:build && npm run test:previews",
+    "test:build": "python3 -m unittest discover -s tests",
+    "test:previews": "playwright test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  },
+  "license": "MIT"
+}

@@ -339,6 +339,12 @@ IMG_B = (
 )
 
 
+# The placeholder photo paths the catalogue's recipes reference. Nothing
+# serves them, so both the markup and the CSS swap them for inline gradients.
+LOCAL_IMG_A = r"(?:after|photo-full|hero-1|hero-bg|a|photo)\.jpg"
+LOCAL_IMG_B = r"(?:before|photo-thumb|b)\.jpg"
+
+
 PREVIEW_HTML: dict[str, str] = {
     "1": f'<button class="btn-primary">Get started</button>',
     "2": '<button class="btn">Press me</button>',
@@ -407,7 +413,9 @@ PREVIEW_HTML: dict[str, str] = {
     "25": f'<article class="media-card"><img src="{IMG}" alt="" style="display:block;width:100%"><h3 style="position:absolute;bottom:1rem;left:1rem;z-index:1;color:white">Stay</h3></article>',
     "35": '<article class="premium-card" style="padding:1rem">light-dark() follows the OS.</article>',
     "51": '<article class="ribbon-card" style="padding:1.5rem;background:var(--color-surface)">Ribbon cut</article>',
-    "52": '<div class="section-divider"></div>',
+    # See the ZERO-WIDTH note further down: full-bleed in real use, so the
+    # preview has to say how wide it is.
+    "52": '<div class="section-divider" style="inline-size:min(22rem, 100%)"></div>',
     "58": '<article class="premium-glow-card" style="padding:1.25rem">Breathing border</article>',
     "64": '<div class="floating-orb"></div>',
     "74": f'<div class="blend-container" style="position:relative"><img src="{IMG}" alt="" style="width:100%;display:block"><p class="contrast-text" style="position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem">Contrast</p></div>',
@@ -427,6 +435,19 @@ PREVIEW_HTML: dict[str, str] = {
     "118": '<select class="premium-dropdown"><option>One</option><option selected>Two</option><option>Three</option></select>',
     "143": '<p class="demo-note">Print rules hide chrome and append URLs. Open a print preview to see them.</p>',
     "104": '<article class="saas-card">if() tokens follow the scheme.</article>',
+    # ZERO-WIDTH: the stage centres its children on a grid, so a block whose
+    # only contents are empty or absolutely positioned has nothing to derive an
+    # inline size from and collapses to 0px wide — the effect renders, just
+    # infinitely thin. These are full-bleed in real pages; state a width here.
+    "105": '<div class="attr-meter" data-value="72" style="inline-size:min(18rem, 100%)"'
+        ' aria-label="Profile complete to 72 percent"><span class="attr-meter-fill"></span></div>',
+    "130": '<div class="double-slider" style="inline-size:min(20rem, 100%)">'
+        '<input type="range" min="0" max="100" value="20" aria-label="Lowest price">'
+        '<input type="range" min="0" max="100" value="80" aria-label="Highest price">'
+        '<div class="slider-track" aria-hidden="true"></div></div>',
+    "135": '<header class="plx-hero" style="inline-size:100%">'
+        '<div class="plx-layer plx-bg" aria-hidden="true"></div>'
+        '<div class="plx-layer plx-fg"><h1>The future of UI</h1></div></header>',
     "146": '<button commandfor="guard-modal" command="show-modal" class="btn">Open modal</button>'
         '<dialog id="guard-modal" class="guard-modal" closedby="any"><h2>Modal content</h2>'
         '<div class="guard-body">Long scrollable content…</div></dialog>',
@@ -575,17 +596,21 @@ def polish_preview(spell: dict) -> str:
         cls = classes[0] if classes else "demo"
         html = f'<div class="{cls}">Preview · {spell["title"]}</div>'
     # Swap remote images for local gradients so previews never depend on /photo.jpg.
-    html = re.sub(
-        r'src="/(?:after|photo-full|hero-1|hero-bg|a|photo)\.jpg"',
-        f'src="{IMG}"',
-        html,
-    )
-    html = re.sub(
-        r'src="/(?:before|photo-thumb|b)\.jpg"',
-        f'src="{IMG_B}"',
-        html,
-    )
+    html = re.sub(rf'src="/{LOCAL_IMG_A}"', f'src="{IMG}"', html)
+    html = re.sub(rf'src="/{LOCAL_IMG_B}"', f'src="{IMG_B}"', html)
     return html
+
+
+def rewrite_preview_assets(css: str) -> str:
+    """Same swap as polish_preview, but for CSS background images.
+
+    Only the markup used to be rewritten, so a recipe like
+    `background: url('/hero-bg.jpg')` still 404'd inside the sandbox and the
+    layer it painted came out empty.
+    """
+    css = re.sub(rf"""url\(\s*['"]?/{LOCAL_IMG_A}['"]?\s*\)""", lambda _: f'url("{IMG}")', css)
+    css = re.sub(rf"""url\(\s*['"]?/{LOCAL_IMG_B}['"]?\s*\)""", lambda _: f'url("{IMG_B}")', css)
+    return css
 
 
 _HOST_TOKEN_RE = re.compile(r"(?<![\w.#-])(:root\b|\bhtml\b|\bbody\b)(?![\w-])")
@@ -639,7 +664,7 @@ def main() -> None:
             "status": status,
             "statusLabel": status_label,
             "previewHtml": polish_preview(spell),
-            "previewCss": rewrite_preview_css(spell["css"]),
+            "previewCss": rewrite_preview_assets(rewrite_preview_css(spell["css"])),
             "feature": feature_label(feature_keys),
             "browsers": browsers_support,
             "supportNote": feature_note(feature_keys),

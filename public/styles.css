@@ -316,7 +316,8 @@ button { font: inherit; color: inherit; }
   transition: background-color .12s ease, color .12s ease, border-color .12s ease;
 }
 .nav-item:hover { background: var(--surface); color: var(--ink); }
-.nav-item.is-on {
+.nav-item.is-on,
+.nav-item:has(input:checked) {
   background: var(--surface);
   border-left-color: var(--accent);
   color: var(--ink);
@@ -326,6 +327,37 @@ button { font: inherit; color: inherit; }
   font: 500 10.5px/1 var(--mono);
   color: var(--ink-2);
   font-variant-numeric: tabular-nums;
+}
+
+/* Zero-JS CSS :has() Category and Status Filtering */
+.browse:has(input[name="cat"][value="Interaction"]:checked) .cat-block:not([data-cat="Interaction"]),
+.browse:has(input[name="cat"][value="Navigation"]:checked) .cat-block:not([data-cat="Navigation"]),
+.browse:has(input[name="cat"][value="Cards"]:checked) .cat-block:not([data-cat="Cards"]),
+.browse:has(input[name="cat"][value="Layout"]:checked) .cat-block:not([data-cat="Layout"]),
+.browse:has(input[name="cat"][value="Scroll"]:checked) .cat-block:not([data-cat="Scroll"]),
+.browse:has(input[name="cat"][value="Reveal & motion"]:checked) .cat-block:not([data-cat="Reveal & motion"]),
+.browse:has(input[name="cat"][value="Forms"]:checked) .cat-block:not([data-cat="Forms"]),
+.browse:has(input[name="cat"][value="Overlays"]:checked) .cat-block:not([data-cat="Overlays"]),
+.browse:has(input[name="cat"][value="Typography"]:checked) .cat-block:not([data-cat="Typography"]),
+.browse:has(input[name="cat"][value="Media"]:checked) .cat-block:not([data-cat="Media"]),
+.browse:has(input[name="cat"][value="Visual"]:checked) .cat-block:not([data-cat="Visual"]),
+.browse:has(input[name="cat"][value="State"]:checked) .cat-block:not([data-cat="State"]),
+.browse:has(input[name="cat"][value="Data"]:checked) .cat-block:not([data-cat="Data"]),
+.browse:has(input[name="cat"][value="Anchor"]:checked) .cat-block:not([data-cat="Anchor"]),
+.browse:has(input[name="cat"][value="Performance"]:checked) .cat-block:not([data-cat="Performance"]) {
+  display: none;
+}
+
+.browse:has(input[name="status"][value="baseline"]:checked) .row:not([data-status="baseline"]),
+.browse:has(input[name="status"][value="newer"]:checked) .row:not([data-status="newer"]),
+.browse:has(input[name="status"][value="progressive"]:checked) .row:not([data-status="progressive"]) {
+  display: none;
+}
+
+.browse:has(input[name="status"][value="baseline"]:checked) .cat-block:not(:has(.row[data-status="baseline"])),
+.browse:has(input[name="status"][value="newer"]:checked) .cat-block:not(:has(.row[data-status="newer"])),
+.browse:has(input[name="status"][value="progressive"]:checked) .cat-block:not(:has(.row[data-status="progressive"])) {
+  display: none;
 }
 
 .nav-legend {
@@ -451,10 +483,16 @@ button { font: inherit; color: inherit; }
   flex: none;
 }
 .row__id {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   font: 500 11px/1 var(--mono);
   color: var(--ink-2);
   display: none;
 }
+.row__id:hover { color: var(--ink); text-decoration: underline; }
 .row__browsers { display: flex; gap: 2px; }
 .row__copy {
   appearance: none;
@@ -619,7 +657,7 @@ button { font: inherit; color: inherit; }
 }
 .backdrop.is-shown { opacity: 1; }
 
-.drawer {
+.drawer:not([popover]) {
   position: fixed;
   top: 0;
   right: 0;
@@ -633,7 +671,50 @@ button { font: inherit; color: inherit; }
   transform: translateX(100%);
   transition: transform .26s var(--ease);
 }
-.drawer.is-open { transform: translateX(0); }
+.drawer:not([popover]).is-open { transform: translateX(0); }
+
+.drawer[popover] {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 41;
+  width: min(680px, 100vw);
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-1);
+  box-shadow: -16px 0 48px oklch(0.21 0.006 285.9 / .16);
+  transform: translateX(100%);
+  transition: transform 0.28s var(--ease), overlay 0.28s allow-discrete, display 0.28s allow-discrete;
+}
+.drawer[popover]:popover-open {
+  display: flex;
+  flex-direction: column;
+  transform: translateX(0);
+}
+@starting-style {
+  .drawer[popover]:popover-open {
+    transform: translateX(100%);
+  }
+}
+.drawer[popover]::backdrop {
+  background: oklch(0.21 0.006 285.9 / 0);
+  backdrop-filter: blur(0);
+  transition: background-color 0.24s ease, backdrop-filter 0.24s ease, overlay 0.24s allow-discrete, display 0.24s allow-discrete;
+}
+.drawer[popover]:popover-open::backdrop {
+  background: oklch(0.21 0.006 285.9 / .45);
+  backdrop-filter: blur(2px);
+}
+@starting-style {
+  .drawer[popover]:popover-open::backdrop {
+    background: oklch(0.21 0.006 285.9 / 0);
+    backdrop-filter: blur(0);
+  }
+}
 
 /* View Transition morph: when the drawer opens/closes, the clicked row and the
    drawer share the `spell-card` name so the browser animates the row's box into
@@ -779,7 +860,44 @@ button { font: inherit; color: inherit; }
   align-items: stretch;
   border-bottom: 1px solid oklch(0.295 0.009 285.8);
 }
-.code__tabs { display: flex; }
+.code__tabs {
+  display: grid;
+  grid-template-columns: repeat(3, auto) 1fr;
+  background: oklch(0.21 0.006 285.9);
+}
+.code__tab-group {
+  display: contents;
+}
+.code__tab-group summary.code__tab {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: 0;
+  border-right: 1px solid oklch(0.295 0.009 285.8);
+  border-bottom: 1px solid oklch(0.295 0.009 285.8);
+  padding: 8px 12px;
+  cursor: pointer;
+  font: 600 10.5px/1 var(--sans);
+  letter-spacing: .03em;
+  color: oklch(0.623 0.023 91.7);
+  list-style: none;
+  user-select: none;
+  transition: background-color .12s ease, color .12s ease;
+}
+.code__tab-group summary.code__tab::-webkit-details-marker { display: none; }
+.code__tab-group summary.code__tab:hover { color: oklch(0.867 0.018 89.4); }
+.code__tab-group[open] > summary.code__tab {
+  background: oklch(0.295 0.009 285.8);
+  color: oklch(0.967 0.005 95.1);
+  border-bottom-color: transparent;
+}
+.code__tab-group .code__view-wrap {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
 .code__tab {
   appearance: none;
   background: none;
@@ -884,7 +1002,8 @@ button { font: inherit; color: inherit; }
     border: 1px solid var(--line);
     padding: 6px 10px;
   }
-  .nav-item.is-on { border-color: var(--ink); }
+  .nav-item.is-on,
+  .nav-item:has(input:checked) { border-color: var(--ink); }
   .row { flex-wrap: wrap; }
   .row__aside { margin-left: auto; }
 }

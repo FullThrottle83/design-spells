@@ -3,12 +3,31 @@
 
 from __future__ import annotations
 
+import html
 import json
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = (ROOT / "README.md").read_text(encoding="utf-8")
+
+CAT_ORDER = [
+    "Interaction",
+    "Navigation",
+    "Cards",
+    "Layout",
+    "Scroll",
+    "Reveal & motion",
+    "Forms",
+    "Overlays",
+    "Typography",
+    "Media",
+    "Visual",
+    "State",
+    "Data",
+    "Anchor",
+    "Performance",
+]
 
 CATEGORY_UI = {
     "Interaction": "Interaction",
@@ -824,6 +843,762 @@ def rewrite_preview_css(css: str) -> str:
     return _rewrite_rule_list(css)
 
 
+ICON_SPRITE = """<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ds-icon-chrome" viewBox="0 0 512 512"><path fill="#FFFFFF" d="M255.73,383.71c70.3,0,127.3-56.99,127.3-127.3s-56.99-127.3-127.3-127.3s-127.3,56.99-127.3,127.3S185.42,383.71,255.73,383.71z"/><linearGradient id="chrome-SVGID_1_" gradientUnits="userSpaceOnUse" x1="283.2852" y1="18.9008" x2="62.8264" y2="400.7473" gradientTransform="matrix(1 0 0 -1 0 514)"><stop offset="0" style="stop-color:#1E8E3E"/><stop offset="1" style="stop-color:#34A853"/></linearGradient><path fill="url(#chrome-SVGID_1_)" d="M145.48,320.08L35.26,129.17c-22.35,38.7-34.12,82.6-34.12,127.29s11.76,88.59,34.11,127.29c22.35,38.7,54.49,70.83,93.2,93.17c38.71,22.34,82.61,34.09,127.3,34.08l110.22-190.92v-0.03c-11.16,19.36-27.23,35.44-46.58,46.62c-19.35,11.18-41.3,17.07-63.65,17.07s-44.3-5.88-63.66-17.05C172.72,355.52,156.65,339.44,145.48,320.08z"/><linearGradient id="chrome-SVGID_2_" gradientUnits="userSpaceOnUse" x1="218.5901" y1="2.3333" x2="439.0491" y2="384.1796" gradientTransform="matrix(1 0 0 -1 0 514)"><stop offset="0" style="stop-color:#FCC934"/><stop offset="1" style="stop-color:#FBBC04"/></linearGradient><path fill="url(#chrome-SVGID_2_)" d="M365.96,320.08L255.74,510.99c44.69,0.01,88.59-11.75,127.29-34.1c38.7-22.34,70.84-54.48,93.18-93.18c22.34-38.7,34.1-82.61,34.09-127.3c-0.01-44.69-11.78-88.59-34.14-127.28H255.72l-0.03,0.02c22.35-0.01,44.31,5.86,63.66,17.03c19.36,11.17,35.43,27.24,46.61,46.59c11.18,19.35,17.06,41.31,17.06,63.66C383.03,278.77,377.14,300.72,365.96,320.08L365.96,320.08z"/><path fill="#1A73E8" d="M255.73,357.21c55.66,0,100.78-45.12,100.78-100.78s-45.12-100.78-100.78-100.78s-100.78,45.12-100.78,100.78S200.07,357.21,255.73,357.21z"/><linearGradient id="chrome-SVGID_3_" gradientUnits="userSpaceOnUse" x1="35.2587" y1="353.0303" x2="476.177" y2="353.0303" gradientTransform="matrix(1 0 0 -1 0 514)"><stop offset="0" style="stop-color:#D93025"/><stop offset="1" style="stop-color:#EA4335"/></linearGradient><path fill="url(#chrome-SVGID_3_)" d="M255.73,129.14h220.45C453.84,90.43,421.7,58.29,383,35.95C344.3,13.6,300.4,1.84,255.71,1.84c-44.69,0-88.59,11.77-127.29,34.12c-38.7,22.35-70.83,54.5-93.16,93.2l110.22,190.92l0.03,0.02c-11.18-19.35-17.08-41.3-17.08-63.65s5.87-44.31,17.04-63.66c11.17-19.36,27.24-35.43,46.6-46.6C211.42,135.01,233.38,129.13,255.73,129.14z"/></symbol>
+  <symbol id="ds-icon-edge" viewBox="0 0 256 256"><defs><radialGradient id="edge-b" cx="161.83" cy="68.91" r="95.38" gradientTransform="matrix(1 0 0 -.95 0 248.84)" gradientUnits="userSpaceOnUse"><stop offset=".72" stop-opacity="0"/><stop offset=".95" stop-opacity=".53"/><stop offset="1"/></radialGradient><radialGradient id="edge-d" cx="-340.29" cy="62.99" r="143.24" gradientTransform="matrix(.15 -.99 -.8 -.12 176.64 -125.4)" gradientUnits="userSpaceOnUse"><stop offset=".76" stop-opacity="0"/><stop offset=".95" stop-opacity=".5"/><stop offset="1"/></radialGradient><radialGradient id="edge-e" cx="113.37" cy="570.21" r="202.43" gradientTransform="matrix(-.04 1 2.13 .08 -1179.54 -106.69)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#35c1f1"/><stop offset=".11" stop-color="#34c1ed"/><stop offset=".23" stop-color="#2fc2df"/><stop offset=".31" stop-color="#2bc3d2"/><stop offset=".67" stop-color="#36c752"/></radialGradient><radialGradient id="edge-f" cx="376.52" cy="567.97" r="97.34" gradientTransform="matrix(.28 .96 .78 -.23 -303.76 -148.5)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#66eb6e"/><stop offset="1" stop-color="#66eb6e" stop-opacity="0"/></radialGradient><linearGradient id="edge-a" x1="63.33" y1="84.03" x2="241.67" y2="84.03" gradientTransform="matrix(1 0 0 -1 0 266)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c59a4"/><stop offset="1" stop-color="#114a8b"/></linearGradient><linearGradient id="edge-c" x1="157.35" y1="161.39" x2="45.96" y2="40.06" gradientTransform="matrix(1 0 0 -1 0 266)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1b9de2"/><stop offset=".16" stop-color="#1595df"/><stop offset=".67" stop-color="#0680d7"/><stop offset="1" stop-color="#0078d4"/></linearGradient></defs><path d="M235.68 195.46a93.73 93.73 0 01-10.54 4.71 101.87 101.87 0 01-35.9 6.46c-47.32 0-88.54-32.55-88.54-74.32A31.48 31.48 0 01117.13 105c-42.8 1.8-53.8 46.4-53.8 72.53 0 73.88 68.09 81.37 82.76 81.37 7.91 0 19.84-2.3 27-4.56l1.31-.44a128.34 128.34 0 0066.6-52.8 4 4 0 00-5.32-5.64z" transform="translate(-4.63 -4.92)" fill="url(#edge-a)"/><path d="M235.68 195.46a93.73 93.73 0 01-10.54 4.71 101.87 101.87 0 01-35.9 6.46c-47.32 0-88.54-32.55-88.54-74.32A31.48 31.48 0 01117.13 105c-42.8 1.8-53.8 46.4-53.8 72.53 0 73.88 68.09 81.37 82.76 81.37 7.91 0 19.84-2.3 27-4.56l1.31-.44a128.34 128.34 0 0066.6-52.8 4 4 0 00-5.32-5.64z" transform="translate(-4.63 -4.92)" style="isolation:isolate" opacity=".35" fill="url(#edge-b)"/><path d="M110.34 246.34A79.2 79.2 0 0187.6 225a80.72 80.72 0 0129.53-120c3.12-1.47 8.45-4.13 15.54-4a32.35 32.35 0 0125.69 13 31.88 31.88 0 016.36 18.66c0-.21 24.46-79.6-80-79.6-43.9 0-80 41.66-80 78.21a130.15 130.15 0 0012.11 56 128 128 0 00156.38 67.11 75.55 75.55 0 01-62.78-8z" transform="translate(-4.63 -4.92)" fill="url(#edge-c)"/><path d="M110.34 246.34A79.2 79.2 0 0187.6 225a80.72 80.72 0 0129.53-120c3.12-1.47 8.45-4.13 15.54-4a32.35 32.35 0 0125.69 13 31.88 31.88 0 016.36 18.66c0-.21 24.46-79.6-80-79.6-43.9 0-80 41.66-80 78.21a130.15 130.15 0 0012.11 56 128 128 0 00156.38 67.11 75.55 75.55 0 01-62.78-8z" transform="translate(-4.63 -4.92)" style="isolation:isolate" opacity=".41" fill="url(#edge-d)"/><path d="M156.94 153.78c-.81 1.05-3.3 2.5-3.3 5.66 0 2.61 1.7 5.12 4.72 7.23 14.38 10 41.49 8.68 41.56 8.68a59.56 59.56 0 0030.27-8.35 61.38 61.38 0 0030.43-52.88c.26-22.41-8-37.31-11.34-43.91-21.19-41.45-66.93-65.29-116.67-65.29a128 128 0 00-128 126.2c.48-36.54 36.8-66.05 80-66.05 3.5 0 23.46.34 42 10.07 16.34 8.58 24.9 18.94 30.85 29.21 6.18 10.67 7.28 24.15 7.28 29.52s-2.74 13.33-7.8 19.91z" transform="translate(-4.63 -4.92)" fill="url(#edge-e)"/><path d="M156.94 153.78c-.81 1.05-3.3 2.5-3.3 5.66 0 2.61 1.7 5.12 4.72 7.23 14.38 10 41.49 8.68 41.56 8.68a59.56 59.56 0 0030.27-8.35 61.38 61.38 0 0030.43-52.88c.26-22.41-8-37.31-11.34-43.91-21.19-41.45-66.93-65.29-116.67-65.29a128 128 0 00-128 126.2c.48-36.54 36.8-66.05 80-66.05 3.5 0 23.46.34 42 10.07 16.34 8.58 24.9 18.94 30.85 29.21 6.18 10.67 7.28 24.15 7.28 29.52s-2.74 13.33-7.8 19.91z" transform="translate(-4.63 -4.92)" fill="url(#edge-f)"/></symbol>
+  <symbol id="ds-icon-firefox" viewBox="0 0 87.419 81.967"><defs><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="80.797" cy="-8515.121" cx="-7907.187" id="ff-b"><stop stop-color="#ffbd4f" offset=".129"/><stop stop-color="#ffac31" offset=".186"/><stop stop-color="#ff9d17" offset=".247"/><stop stop-color="#ff980e" offset=".283"/><stop stop-color="#ff563b" offset=".403"/><stop stop-color="#ff3750" offset=".467"/><stop stop-color="#f5156c" offset=".71"/><stop stop-color="#eb0878" offset=".782"/><stop stop-color="#e50080" offset=".86"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="80.797" cy="-8482.089" cx="-7936.711" id="ff-c"><stop stop-color="#960e18" offset=".3"/><stop stop-opacity=".74" stop-color="#b11927" offset=".351"/><stop stop-opacity=".343" stop-color="#db293d" offset=".435"/><stop stop-opacity=".094" stop-color="#f5334b" offset=".497"/><stop stop-opacity="0" stop-color="#ff3750" offset=".53"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="58.534" cy="-8533.457" cx="-7926.97" id="ff-d"><stop stop-color="#fff44f" offset=".132"/><stop stop-color="#ffdc3e" offset=".252"/><stop stop-color="#ff9d12" offset=".506"/><stop stop-color="#ff980e" offset=".526"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="38.471" cy="-8460.984" cx="-7945.648" id="ff-e"><stop stop-color="#3a8ee6" offset=".353"/><stop stop-color="#5c79f0" offset=".472"/><stop stop-color="#9059ff" offset=".669"/><stop stop-color="#c139e6" offset="1"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="matrix(.972 -.235 .275 1.138 10095.002 7833.794)" r="20.397" cy="-8491.546" cx="-7935.62" id="ff-f"><stop stop-opacity="0" stop-color="#9059ff" offset=".206"/><stop stop-opacity=".064" stop-color="#8c4ff3" offset=".278"/><stop stop-opacity=".45" stop-color="#7716a8" offset=".747"/><stop stop-opacity=".6" stop-color="#6e008b" offset=".975"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="27.676" cy="-8518.427" cx="-7937.731" id="ff-g"><stop stop-color="#ffe226" offset="0"/><stop stop-color="#ffdb27" offset=".121"/><stop stop-color="#ffc82a" offset=".295"/><stop stop-color="#ffa930" offset=".502"/><stop stop-color="#ff7e37" offset=".732"/><stop stop-color="#ff7139" offset=".792"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="118.081" cy="-8535.981" cx="-7915.977" id="ff-h"><stop stop-color="#fff44f" offset=".113"/><stop stop-color="#ff980e" offset=".456"/><stop stop-color="#ff5634" offset=".622"/><stop stop-color="#ff3647" offset=".716"/><stop stop-color="#e31587" offset=".904"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="matrix(.105 .995 -.653 .069 -4680.304 8470.187)" r="86.499" cy="-8522.859" cx="-7927.165" id="ff-i"><stop stop-color="#fff44f" offset="0"/><stop stop-color="#ffe847" offset=".06"/><stop stop-color="#ffc830" offset=".168"/><stop stop-color="#ff980e" offset=".304"/><stop stop-color="#ff8b16" offset=".356"/><stop stop-color="#ff672a" offset=".455"/><stop stop-color="#ff3647" offset=".57"/><stop stop-color="#e31587" offset=".737"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="73.72" cy="-8508.176" cx="-7938.383" id="ff-j"><stop stop-color="#fff44f" offset=".137"/><stop stop-color="#ff980e" offset=".48"/><stop stop-color="#ff5634" offset=".592"/><stop stop-color="#ff3647" offset=".655"/><stop stop-color="#e31587" offset=".904"/></radialGradient><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(7978.7 8523.996)" r="80.686" cy="-8503.861" cx="-7918.923" id="ff-k"><stop stop-color="#fff44f" offset=".094"/><stop stop-color="#ffe141" offset=".231"/><stop stop-color="#ffaf1e" offset=".509"/><stop stop-color="#ff980e" offset=".626"/></radialGradient><linearGradient gradientTransform="translate(3.7 -.004)" gradientUnits="userSpaceOnUse" y2="74.468" x2="6.447" y1="12.393" x1="70.786" id="ff-a"><stop stop-color="#fff44f" offset=".048"/><stop stop-color="#ffe847" offset=".111"/><stop stop-color="#ffc830" offset=".225"/><stop stop-color="#ff980e" offset=".368"/><stop stop-color="#ff8b16" offset=".401"/><stop stop-color="#ff672a" offset=".462"/><stop stop-color="#ff3647" offset=".534"/><stop stop-color="#e31587" offset=".705"/></linearGradient><linearGradient gradientTransform="translate(3.7 -.004)" gradientUnits="userSpaceOnUse" y2="66.806" x2="15.267" y1="12.061" x1="70.013" id="ff-l"><stop stop-opacity=".8" stop-color="#fff44f" offset=".167"/><stop stop-opacity=".634" stop-color="#fff44f" offset=".266"/><stop stop-opacity=".217" stop-color="#fff44f" offset=".489"/><stop stop-opacity="0" stop-color="#fff44f" offset=".6"/></linearGradient></defs><path d="M79.616 26.827c-1.684-4.052-5.1-8.427-7.775-9.81a40.266 40.266 0 013.925 11.764l.007.065C71.391 17.92 63.96 13.516 57.891 3.924a47.099 47.099 0 01-.913-1.484 12.24 12.24 0 01-.427-.8 7.053 7.053 0 01-.578-1.535.1.1 0 00-.088-.1.138.138 0 00-.073 0c-.005 0-.013.009-.019.01l-.028.016.015-.026c-9.735 5.7-13.038 16.252-13.342 21.53a19.387 19.387 0 00-10.666 4.11 11.587 11.587 0 00-1-.757 17.968 17.968 0 01-.109-9.473 28.705 28.705 0 00-9.329 7.21h-.018c-1.536-1.947-1.428-8.367-1.34-9.708a6.928 6.928 0 00-1.294.687 28.225 28.225 0 00-3.788 3.245 33.845 33.845 0 00-3.623 4.347v.006-.007a32.733 32.733 0 00-5.2 11.743l-.052.256a61.89 61.89 0 00-.381 2.42c0 .029-.006.056-.009.085A36.937 36.937 0 005 41.042v.2a38.759 38.759 0 0076.954 6.554c.065-.5.118-.995.176-1.5a39.857 39.857 0 00-2.514-19.47zm-44.67 30.338c.181.087.351.18.537.264l.027.017q-.282-.135-.564-.281zm8.878-23.376zm31.952-4.934v-.037l.007.04z" fill="url(#ff-a)"/><path d="M79.616 26.827c-1.684-4.052-5.1-8.427-7.775-9.81a40.266 40.266 0 013.925 11.764v.037l.007.04a35.1 35.1 0 01-1.206 26.159c-4.442 9.53-15.194 19.3-32.024 18.825-18.185-.515-34.2-14.01-37.194-31.683-.545-2.787 0-4.2.274-6.465A28.876 28.876 0 005 41.042v.2a38.759 38.759 0 0076.954 6.554c.065-.5.118-.995.176-1.5a39.857 39.857 0 00-2.514-19.47z" fill="url(#ff-b)"/><path d="M79.616 26.827c-1.684-4.052-5.1-8.427-7.775-9.81a40.266 40.266 0 013.925 11.764v.037l.007.04a35.1 35.1 0 01-1.206 26.159c-4.442 9.53-15.194 19.3-32.024 18.825-18.185-.515-34.2-14.01-37.194-31.683-.545-2.787 0-4.2.274-6.465A28.876 28.876 0 005 41.042v.2a38.759 38.759 0 0076.954 6.554c.065-.5.118-.995.176-1.5a39.857 39.857 0 00-2.514-19.47z" fill="url(#ff-c)"/><path d="M60.782 31.383c.084.059.162.118.241.177a21.1 21.1 0 00-3.6-4.695C45.377 14.817 54.266.742 55.765.027l.015-.022c-9.735 5.7-13.038 16.252-13.342 21.53.452-.031.9-.07 1.362-.07a19.56 19.56 0 0116.982 9.918z" fill="url(#ff-d)"/><path d="M43.825 33.789c-.064.964-3.47 4.289-4.661 4.289-11.021 0-12.81 6.667-12.81 6.667.488 5.614 4.4 10.238 9.129 12.684.216.112.435.213.654.312q.569.252 1.138.466a17.235 17.235 0 005.043.973c19.317.906 23.059-23.1 9.119-30.066a13.38 13.38 0 019.345 2.269A19.56 19.56 0 0043.8 21.466c-.46 0-.91.038-1.362.069a19.387 19.387 0 00-10.666 4.11c.591.5 1.258 1.169 2.663 2.554 2.63 2.59 9.375 5.275 9.39 5.59z" fill="url(#ff-e)"/><path d="M43.825 33.789c-.064.964-3.47 4.289-4.661 4.289-11.021 0-12.81 6.667-12.81 6.667.488 5.614 4.4 10.238 9.129 12.684.216.112.435.213.654.312q.569.252 1.138.466a17.235 17.235 0 005.043.973c19.317.906 23.059-23.1 9.119-30.066a13.38 13.38 0 019.345 2.269A19.56 19.56 0 0043.8 21.466c-.46 0-.91.038-1.362.069a19.387 19.387 0 00-10.666 4.11c.591.5 1.258 1.169 2.663 2.554 2.63 2.59 9.375 5.275 9.39 5.59z" fill="url(#ff-f)"/><path d="M29.965 24.357c.314.2.573.374.8.53a17.968 17.968 0 01-.109-9.472 28.705 28.705 0 00-9.329 7.21c.189-.005 5.811-.106 8.638 1.732z" fill="url(#ff-g)"/><path d="M5.354 42.159c2.991 17.674 19.009 31.168 37.194 31.683 16.83.476 27.582-9.294 32.024-18.825a35.1 35.1 0 001.206-26.158v-.037c0-.03-.006-.046 0-.037l.007.065c1.375 8.977-3.191 17.674-10.329 23.555l-.022.05c-13.908 11.327-27.218 6.834-29.912 5q-.282-.135-.564-.281c-8.109-3.876-11.459-11.264-10.741-17.6a9.953 9.953 0 01-9.181-5.775 14.618 14.618 0 0114.249-.572 19.3 19.3 0 0014.552.572c-.015-.315-6.76-3-9.39-5.59-1.405-1.385-2.072-2.052-2.663-2.553a11.587 11.587 0 00-1-.758c-.23-.157-.489-.327-.8-.531-2.827-1.838-8.449-1.737-8.635-1.732h-.018c-1.536-1.947-1.428-8.367-1.34-9.708a6.928 6.928 0 00-1.294.687 28.225 28.225 0 00-3.788 3.245 33.845 33.845 0 00-3.638 4.337v.006-.007a32.733 32.733 0 00-5.2 11.743c-.019.079-1.396 6.099-.717 9.22z" fill="url(#ff-h)"/><path d="M57.425 26.865a21.1 21.1 0 013.6 4.7c.213.16.412.32.581.476 8.787 8.1 4.183 19.55 3.84 20.365 7.138-5.881 11.7-14.578 10.329-23.555C71.391 17.92 63.96 13.516 57.891 3.924a47.099 47.099 0 01-.913-1.484 12.24 12.24 0 01-.427-.8 7.053 7.053 0 01-.578-1.535.1.1 0 00-.088-.1.138.138 0 00-.073 0c-.005 0-.013.009-.019.01l-.028.016c-1.499.71-10.388 14.786 1.66 26.834z" fill="url(#ff-i)"/><path d="M61.6 32.036a8.083 8.083 0 00-.581-.476c-.079-.06-.157-.118-.241-.177a13.38 13.38 0 00-9.345-2.27c13.94 6.97 10.2 30.973-9.119 30.067a17.235 17.235 0 01-5.043-.973q-.569-.213-1.138-.466c-.219-.1-.438-.2-.654-.312l.027.017c2.694 1.839 16 6.332 29.912-5l.022-.05c.347-.81 4.951-12.263-3.84-20.36z" fill="url(#ff-j)"/><path d="M26.354 44.745s1.789-6.667 12.81-6.667c1.191 0 4.6-3.325 4.661-4.29a19.3 19.3 0 01-14.552-.571 14.618 14.618 0 00-14.249.572 9.953 9.953 0 009.181 5.775c-.718 6.337 2.632 13.725 10.741 17.6.181.087.351.18.537.264-4.733-2.445-8.641-7.07-9.129-12.683z" fill="url(#ff-k)"/><path d="M79.616 26.827c-1.684-4.052-5.1-8.427-7.775-9.81a40.266 40.266 0 013.925 11.764l.007.065C71.391 17.92 63.96 13.516 57.891 3.924a47.099 47.099 0 01-.913-1.484 12.24 12.24 0 01-.427-.8 7.053 7.053 0 01-.578-1.535.1.1 0 00-.088-.1.138.138 0 00-.073 0c-.005 0-.013.009-.019.01l-.028.016.015-.026c-9.735 5.7-13.038 16.252-13.342 21.53.452-.031.9-.07 1.362-.07a19.56 19.56 0 0116.982 9.918 13.38 13.38 0 00-9.345-2.27c13.94 6.97 10.2 30.973-9.119 30.067a17.235 17.235 0 01-5.043-.973q-.569-.213-1.138-.466c-.219-.1-.438-.2-.654-.312l.027.017q-.282-.135-.564-.281c.181.087.351.18.537.264-4.733-2.446-8.641-7.07-9.129-12.684 0 0 1.789-6.667 12.81-6.667 1.191 0 4.6-3.325 4.661-4.29-.015-.314-6.76-3-9.39-5.59-1.405-1.384-2.072-2.051-2.663-2.552a11.587 11.587 0 00-1-.758 17.968 17.968 0 01-.109-9.473 28.705 28.705 0 00-9.329 7.21h-.018c-1.536-1.947-1.428-8.367-1.34-9.708a6.928 6.928 0 00-1.294.687 28.225 28.225 0 00-3.788 3.245 33.845 33.845 0 00-3.623 4.347v.006-.007a32.733 32.733 0 00-5.2 11.743l-.052.256c-.073.34-.4 2.073-.447 2.445 0 .028 0-.03 0 0A45.094 45.094 0 005 41.042v.2a38.759 38.759 0 0076.954 6.554c.065-.5.118-.995.176-1.5a39.857 39.857 0 00-2.514-19.47zm-3.845 1.99l.007.042z" fill="url(#ff-l)"/></symbol>
+  <symbol id="ds-icon-safari" viewBox="0 0 256 256"><defs><linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="safari-a"><stop stop-color="#DBDBDA" offset="25%"/><stop stop-color="#FFF" offset="100%"/></linearGradient><linearGradient x1="49.05%" y1="35.703%" x2="25.713%" y2="77.572%" id="safari-d"><stop stop-opacity="0" offset="0%"/><stop offset="100%"/></linearGradient><filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="safari-b"><feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/><feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.266007133 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/><feMerge><feMergeNode in="shadowMatrixOuter1"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="safari-e"><feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/><feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 13 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/><feMerge><feMergeNode in="shadowMatrixOuter1"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient cx="57.025%" cy="39.017%" fx="57.025%" fy="39.017%" r="61.032%" id="safari-c"><stop stop-color="#2ABCE1" offset="0%"/><stop stop-color="#2ABBE1" offset="11.363%"/><stop stop-color="#3375F8" offset="100%"/></radialGradient></defs><g transform="translate(4 2)"><circle fill="url(#safari-a)" filter="url(#safari-b)" cx="124" cy="124" r="124"/><circle fill="url(#safari-c)" cx="124" cy="124" r="114.7"/><g transform="translate(9.688 8.719)"><path d="M114.506 28.481c-.775 0-1.453-.581-1.453-1.356V6.878c0-.775.678-1.356 1.453-1.356s1.453.581 1.453 1.356v20.247c-.097.775-.678 1.356-1.453 1.356z" fill="#F3F3F3"/></g></g></symbol>
+</svg>"""
+
+ICONS = {
+    "chrome": '<svg viewBox="0 0 512 512" aria-hidden="true"><use href="#ds-icon-chrome"></use></svg>',
+    "edge": '<svg viewBox="0 0 256 256" aria-hidden="true"><use href="#ds-icon-edge"></use></svg>',
+    "firefox": '<svg viewBox="0 0 87.419 81.967" aria-hidden="true"><use href="#ds-icon-firefox"></use></svg>',
+    "safari": '<svg viewBox="0 0 256 256" aria-hidden="true"><use href="#ds-icon-safari"></use></svg>',
+}
+
+BROWSER_META = [
+    {"key": "chrome", "label": "Chrome"},
+    {"key": "edge", "label": "Edge"},
+    {"key": "firefox", "label": "Firefox"},
+    {"key": "safari", "label": "Safari"},
+]
+
+LEVEL_LABEL = {"yes": "Supported", "partial": "Partial", "no": "Not shipped"}
+
+PREVIEW_TOKENS = """
+  :host, :host *, :host *::before, :host *::after {
+    box-sizing: border-box;
+  }
+  :host {
+    display: block;
+    color-scheme: light dark;
+    --color-primary: #18181b;
+    --color-bg: #fbfaf8;
+    --color-text: #18181b;
+    --color-text-muted: #75716a;
+    --color-text-inverse: #fbfaf8;
+    --color-border: #e3ddd0;
+    --color-surface: #ffffff;
+    --color-surface-offset: #f2efe8;
+    --color-surface-dynamic: #e3ddd0;
+    --color-surface-dark: #18181b;
+    --color-error: #b3261e;
+    --color-success: #2f7d4f;
+    --color-accent: #cf4520;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 8px;
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --header-height: 3rem;
+    color: var(--color-text);
+    font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  }
+  @media (prefers-color-scheme: dark) {
+    :host {
+      --color-primary: #f4f4f5;
+      --color-bg: #18181b;
+      --color-text: #f4f4f5;
+      --color-text-muted: #a1a1aa;
+      --color-text-inverse: #18181b;
+      --color-border: #27272a;
+      --color-surface: #27272a;
+      --color-surface-offset: #202023;
+      --color-surface-dynamic: #3f3f46;
+      --color-surface-dark: #09090b;
+      --color-accent: #f97316;
+    }
+  }
+  .stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    min-height: 180px;
+    padding: 16px;
+    display: grid;
+    place-items: center;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    contain: layout;
+  }
+  .stage > * { max-width: 100%; }
+  .stage:has(details) { align-items: start; }
+  img { max-width: 100%; height: auto; display: block; }
+  button, .btn, a.btn {
+    min-block-size: 36px;
+    font: inherit;
+    color: inherit;
+  }
+  :where(button), .btn, .btn-primary {
+    padding: 0 .9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: transparent;
+  }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"])),
+  :where(select),
+  :where(textarea) {
+    font: inherit;
+    color: inherit;
+    padding: .45rem .65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  :where(select) { padding-inline-end: 1.6rem; }
+  :where(textarea) { resize: vertical; min-block-size: 5rem; }
+  :where(input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  :where(input[type="checkbox"], input[type="radio"]) {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+  :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; }
+  :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+  :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .demo-note {
+    margin: 0;
+    max-inline-size: 36ch;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 12px;
+  }
+"""
+
+DOCUMENT_TOKENS = """
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    color-scheme: light dark;
+    --color-primary: light-dark(#18181b, #f4f4f5);
+    --color-bg: light-dark(#fbfaf8, #18181b);
+    --color-text: light-dark(#18181b, #f4f4f5);
+    --color-text-muted: light-dark(#75716a, #a1a1aa);
+    --color-text-inverse: light-dark(#fbfaf8, #18181b);
+    --color-border: light-dark(#e3ddd0, #27272a);
+    --color-surface: light-dark(#ffffff, #27272a);
+    --color-surface-offset: light-dark(#f2efe8, #202023);
+    --color-surface-dynamic: light-dark(#e3ddd0, #3f3f46);
+    --color-surface-dark: light-dark(#18181b, #09090b);
+    --color-error: #b3261e;
+    --color-success: #2f7d4f;
+    --color-accent: light-dark(#cf4520, #f97316);
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 8px;
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --header-height: 3rem;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  }
+  body {
+    padding: 16px;
+    display: grid;
+    place-items: center;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  button, .btn, a.btn { min-block-size: 36px; font: inherit; color: inherit; }
+  :where(button), .btn, .btn-primary {
+    padding: 0 .9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: transparent;
+  }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"])),
+  :where(select),
+  :where(textarea) {
+    font: inherit;
+    color: inherit;
+    padding: .45rem .65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  :where(select) { padding-inline-end: 1.6rem; }
+  :where(textarea) { resize: vertical; min-block-size: 5rem; }
+  :where(input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  :where(input[type="checkbox"], input[type="radio"]) {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+  :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; }
+  :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+  :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .demo-note {
+    margin: 0;
+    max-inline-size: 36ch;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 12px;
+  }
+"""
+
+
+def inline_md_to_html(text: str) -> str:
+    """Build-time port of inlineMd(). Escapes source text before adding <code> and <strong>."""
+    src = str(text or "")
+    code_re = re.compile(r"`([^`]+)`")
+    bold_re = re.compile(r"\*\*([^*]+(?:\*(?!\*)[^*]*)*)\*\*")
+    
+    def apply_bold(seg: str) -> str:
+        return bold_re.sub(r"<strong>\1</strong>", seg)
+        
+    out = []
+    last = 0
+    for m in code_re.finditer(src):
+        pre = html.escape(src[last:m.start()], quote=False)
+        out.append(apply_bold(pre))
+        out.append(f"<code>{html.escape(m.group(1), quote=False)}</code>")
+        last = m.end()
+    
+    post = html.escape(src[last:], quote=False)
+    out.append(apply_bold(post))
+    return "".join(out)
+
+
+def one_line(text: str) -> str:
+    clean = re.sub(r"`+", "", str(text or ""))
+    clean = re.sub(r"\*\*", "", clean)
+    clean = re.sub(r"\s+", " ", clean).strip()
+    first = re.split(r"(?<=[.!?])\s+", clean)[0] if clean else ""
+    return (first[:137].rstrip() + "…") if len(first) > 140 else first
+
+
+def highlight_css(src: str) -> str:
+    out = []
+    i = 0
+    brace_depth = 0
+    n = len(src)
+    
+    def push(cls: str | None, text: str) -> None:
+        e = html.escape(text, quote=True)
+        if cls:
+            out.append(f'<span class="{cls}">{e}</span>')
+        else:
+            out.append(e)
+            
+    while i < n:
+        c = src[i]
+        
+        if c == "/" and i + 1 < n and src[i + 1] == "*":
+            end = src.find("*/", i + 2)
+            stop = n if end < 0 else end + 2
+            push("tok-com", src[i:stop])
+            i = stop
+            continue
+            
+        if c in {'"', "'"}:
+            j = i + 1
+            while j < n and src[j] != c:
+                if src[j] == "\\":
+                    j += 1
+                j += 1
+            j = min(j + 1, n)
+            push("tok-str", src[i:j])
+            i = j
+            continue
+            
+        if c == "@":
+            j = i + 1
+            while j < n and (src[j].isalpha() or src[j] == "-"):
+                j += 1
+            push("tok-kw", src[i:j])
+            i = j
+            continue
+            
+        if c == "{":
+            brace_depth += 1
+            push("tok-punct", "{")
+            i += 1
+            continue
+        if c == "}":
+            brace_depth = max(0, brace_depth - 1)
+            push("tok-punct", "}")
+            i += 1
+            continue
+        if c in {";", "(", ")", ","}:
+            push("tok-punct", c)
+            i += 1
+            continue
+        if c == ":":
+            push("tok-punct", ":")
+            i += 1
+            continue
+            
+        if c.isdigit() or c == "#":
+            j = i
+            if c == "#":
+                j += 1
+                while j < n and (src[j].isalnum()):
+                    j += 1
+                if j - i >= 4:
+                    push("tok-num", src[i:j])
+                    i = j
+                    continue
+                j = i
+            if c.isdigit():
+                j = i + 1
+                while j < n and (src[j].isdigit() or src[j] == "."):
+                    j += 1
+                while j < n and (src[j].isalpha() or src[j] == "%"):
+                    j += 1
+                push("tok-num", src[i:j])
+                i = j
+                continue
+                
+        if c.isalpha() or c == "_" or (c == "-" and i + 1 < n and (src[i + 1].isalpha() or src[i + 1] == "-")):
+            j = i
+            if c == "-":
+                j += 1
+            while j < n and (src[j].isalnum() or src[j] in {"_", "-"}):
+                j += 1
+            ident = src[i:j]
+            k = j
+            while k < n and src[k].isspace():
+                k += 1
+            is_prop = brace_depth > 0 and k < n and src[k] == ":"
+            push("tok-prop" if is_prop else None, ident)
+            i = j
+            continue
+            
+        push(None, c)
+        i += 1
+        
+    return "".join(out)
+
+
+def highlight_html(src: str) -> str:
+    esc_html = html.escape(src, quote=True)
+    tag_re = re.compile(r"&lt;(?:(!--[\s\S]*?--)|\/?)([a-zA-Z][\w-]*)((?:(?!&gt;).)*?)(\/?)&gt;")
+    out = []
+    last = 0
+    for m in tag_re.finditer(esc_html):
+        out.append(esc_html[last:m.start()])
+        if m.group(1):
+            out.append(f'&lt;<span class="tok-com">--{m.group(1)[:-2]}</span>--&gt;')
+        else:
+            name = m.group(2)
+            attrs = m.group(3) or ""
+            close = m.group(4) or ""
+            def replace_attr(am):
+                ws, an, eq, av = am.group(1), am.group(2), am.group(3), am.group(4)
+                res = f'{ws}<span class="tok-attr">{an}</span>'
+                if eq:
+                    res += f'=<span class="tok-str">{av}</span>'
+                return res
+            attrs_hl = re.sub(
+                r'(\s+)([a-zA-Z_:][\w:.-]*)(?:(=)(&quot;.*?&quot;|&#39;.*?&#39;|[^\s]+))?',
+                replace_attr,
+                attrs,
+            )
+            is_closing = m.group(0).startswith("&lt;/")
+            out.append(f'&lt;{"/" if is_closing else ""}<span class="tok-tag">{name}</span>{attrs_hl}{close}&gt;')
+        last = m.end()
+    out.append(esc_html[last:])
+    return "".join(out)
+
+
+def tailwind_for(spell: dict) -> str:
+    css = str(spell.get("css", "")).strip()
+    if not css:
+        return ""
+    indented = "\n".join(("  " + line) if line else line for line in css.split("\n"))
+    return "\n".join([
+        "/* Tailwind v4 — drop into a global stylesheet processed by Tailwind. */",
+        '@import "tailwindcss";',
+        "",
+        "@layer components {",
+        indented,
+        "}",
+        "",
+    ])
+
+
+def slugify(text: str) -> str:
+    return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", text.lower())).strip("-")
+
+
+def browser_icon(key: str, level: str, label: str) -> str:
+    icon_svg = ICONS.get(key, "")
+    lvl_label = LEVEL_LABEL.get(level, level)
+    return f'<span class="brow" data-level="{html.escape(level, quote=True)}" title="{html.escape(label, quote=True)}: {html.escape(lvl_label, quote=True)}">{icon_svg}</span>'
+
+
+def browsers_row(spell: dict) -> str:
+    return "".join(
+        browser_icon(b["key"], spell.get("browsers", {}).get(b["key"], "no"), b["label"])
+        for b in BROWSER_META
+    )
+
+
+def render_preview_box(spell: dict) -> str:
+    env = spell.get("previewEnvironment", "shadow")
+    raw_css = spell.get("previewCss") or spell.get("css") or ""
+    raw_html = spell.get("previewHtml") or spell.get("html") or ""
+    action = spell.get("previewAction", {})
+    hint = action.get("hint", "")
+    hint_tag = f'<span class="ds-hint" aria-hidden="true">{html.escape(hint)}</span>' if hint else ""
+    
+    if env == "document":
+        doc_src = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    {DOCUMENT_TOKENS}
+    {raw_css}
+  </style>
+</head>
+<body>
+  {raw_html}
+</body>
+</html>"""
+        esc_doc = html.escape(doc_src, quote=True)
+        return f"""<iframe class="ds-document" sandbox="allow-same-origin" srcdoc="{esc_doc}" aria-label="Live preview: {html.escape(spell['title'])}" style="width:100%;min-height:280px;border:0;display:block;background:var(--color-bg, #fbfaf8);"></iframe>{hint_tag}"""
+    else:
+        return f"""<template shadowrootmode="open">
+  <style>
+    {PREVIEW_TOKENS}
+    {raw_css}
+    .ds-hint {{
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      z-index: 2;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--color-surface-dark);
+      color: var(--color-text-inverse);
+      font: 600 10px/1 var(--ds-sans, ui-sans-serif, system-ui, sans-serif);
+      letter-spacing: .02em;
+      pointer-events: none;
+      opacity: .8;
+    }}
+    .ds-runway {{
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }}
+    .ds-runway__pad {{ block-size: 60vh; }}
+  </style>
+  <div class="stage" style="min-height:280px">
+    {raw_html}
+    {hint_tag}
+  </div>
+</template>"""
+
+
+def render_drawer(spell: dict) -> str:
+    status_cls = "ok" if spell["status"] == "baseline" else "warn" if spell["status"] == "newer" else "muted"
+    browser_items = "".join(
+        f'<li><span class="bname"><span class="brow" data-level="{html.escape(spell.get("browsers", {}).get(b["key"], "no"))}">{ICONS.get(b["key"], "")}</span>{html.escape(b["label"])}</span><span class="blevel" data-level="{html.escape(spell.get("browsers", {}).get(b["key"], "no"))}">{html.escape(LEVEL_LABEL.get(spell.get("browsers", {}).get(b["key"], "no"), ""))}</span></li>'
+        for b in BROWSER_META
+    )
+    desc_html = inline_md_to_html(spell.get("description", "")) or "A zero-JS CSS technique."
+    tailwind_src = tailwind_for(spell)
+    preview_box = render_preview_box(spell)
+    
+    return f"""
+  <div class="drawer" id="drawer-{spell['id']}" popover="auto" role="dialog" aria-modal="true" aria-labelledby="drawer-title-{spell['id']}">
+    <header class="drawer__head">
+      <div class="drawer__head-main">
+        <p class="drawer__eyebrow">
+          <span>{spell['id']}</span>
+          <span aria-hidden="true">·</span>
+          <span>{spell['jsLabel']}</span>
+        </p>
+        <h2 class="drawer__title" id="drawer-title-{spell['id']}">{html.escape(spell['title'])}</h2>
+        <p class="drawer__meta">
+          <span class="drawer__cat">{html.escape(spell['category'])}</span>
+          <span aria-hidden="true">/</span>
+          <span class="label label--{status_cls}"><span class="label__dot" aria-hidden="true"></span>{html.escape(spell['statusLabel'])}</span>
+        </p>
+      </div>
+      <button class="drawer__close" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide" aria-label="Close panel">×</button>
+    </header>
+
+    <div class="drawer__scroll">
+      <p class="drawer__desc">{desc_html}</p>
+
+      <section class="sect" aria-labelledby="browsers-label-{spell['id']}">
+        <h3 class="sect__label" id="browsers-label-{spell['id']}">Browser support <span>{html.escape(spell['feature'])}</span></h3>
+        <ul class="browser-list">{browser_items}</ul>
+        <p class="support-note">{html.escape(spell['supportNote'])}</p>
+      </section>
+
+      <section class="sect" aria-labelledby="preview-label-{spell['id']}">
+        <h3 class="sect__label" id="preview-label-{spell['id']}">Live preview <span>isolated sandbox</span></h3>
+        <div class="preview-host preview-host--lg" id="preview-host-{spell['id']}">
+          {preview_box}
+        </div>
+      </section>
+
+      <section class="sect" aria-labelledby="source-label-{spell['id']}">
+        <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind v4 / HTML</span></h3>
+        <div class="code drawer__code code__tabs">
+          <details name="tabs-{spell['id']}" class="code__tab-group" open>
+            <summary class="code__tab">Modern CSS</summary>
+            <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_css(spell['css'])}</code></pre></div>
+          </details>
+          <details name="tabs-{spell['id']}" class="code__tab-group">
+            <summary class="code__tab">Tailwind v4</summary>
+            <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_css(tailwind_src)}</code></pre></div>
+          </details>
+          <details name="tabs-{spell['id']}" class="code__tab-group">
+            <summary class="code__tab">HTML</summary>
+            <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_html(spell['previewHtml'] or spell['html'] or '<!-- CSS-only; no extra markup required. -->')}</code></pre></div>
+          </details>
+        </div>
+      </section>
+    </div>
+
+    <footer class="drawer__foot">
+      <p class="drawer__hint">Zero JS · copy and paste freely</p>
+      <button class="btn btn--primary" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide">Close</button>
+    </footer>
+  </div>"""
+
+
+def render_row(spell: dict) -> str:
+    desc = one_line(spell.get("description", ""))
+    desc_p = f'<p class="row__desc">{html.escape(desc)}</p>' if desc else ""
+    browsers = browsers_row(spell)
+    tags = html.escape(f"{spell['category']} {spell['status']} {spell.get('feature', '')} {spell['title']}".lower(), quote=True)
+    return f"""
+  <li class="row" data-id="{spell['id']}" data-cat="{html.escape(spell['category'], quote=True)}" data-status="{html.escape(spell['status'], quote=True)}" data-tags="{tags}">
+    <div class="row__main">
+      <h2 class="row__title">
+        <button class="row__hit" type="button" popovertarget="drawer-{spell['id']}" aria-haspopup="dialog">{html.escape(spell['title'])}</button>
+      </h2>
+      {desc_p}
+    </div>
+    <div class="row__aside">
+      <button class="row__id" type="button" popovertarget="drawer-{spell['id']}" aria-label="Open {spell['id']} details">{spell['id']}</button>
+      <div class="row__browsers" aria-label="Browser support">{browsers}</div>
+      <button class="row__copy" type="button" popovertarget="drawer-{spell['id']}" aria-label="Inspect {html.escape(spell['title'], quote=True)}">Inspect</button>
+    </div>
+  </li>"""
+
+
+def render_index_html(catalogue: dict, out_path: Path) -> None:
+    spells = catalogue["spells"]
+    total = len(spells)
+    
+    by_cat = {}
+    for s in spells:
+        by_cat.setdefault(s["category"], []).append(s)
+    
+    order = [c for c in CAT_ORDER if c in by_cat]
+    for c in by_cat:
+        if c not in order:
+            order.append(c)
+            
+    cat_radios = [f'<label class="nav-item"><input type="radio" name="cat" value="all" checked class="sr-only"><span>All</span><span class="nav-item__count" aria-hidden="true">{total}</span></label>']
+    for c in order:
+        cnt = len(by_cat[c])
+        cat_radios.append(f'<label class="nav-item"><input type="radio" name="cat" value="{html.escape(c, quote=True)}" class="sr-only"><span>{html.escape(c)}</span><span class="nav-item__count" aria-hidden="true">{cnt}</span></label>')
+    cat_nav = "\n            ".join(cat_radios)
+    
+    status_radios = [
+        '<label class="nav-item"><input type="radio" name="status" value="all" checked class="sr-only"><span>Any status</span></label>',
+        '<label class="nav-item"><input type="radio" name="status" value="baseline" class="sr-only"><span>Baseline</span></label>',
+        '<label class="nav-item"><input type="radio" name="status" value="newer" class="sr-only"><span>Newer</span></label>',
+        '<label class="nav-item"><input type="radio" name="status" value="progressive" class="sr-only"><span>Progressive</span></label>',
+    ]
+    status_nav = "\n            ".join(status_radios)
+    
+    browser_legend_items = "".join(
+        f'<li>{browser_icon(b["key"], "yes", b["label"])}<span>{html.escape(b["label"])}</span></li>'
+        for b in BROWSER_META
+    )
+    
+    cat_blocks = []
+    for c in order:
+        items = by_cat[c]
+        c_slug = slugify(c)
+        rows_html = "".join(render_row(s) for s in items)
+        cat_blocks.append(f"""
+        <section class="cat-block" data-cat="{html.escape(c, quote=True)}" aria-labelledby="cat-{c_slug}">
+          <div class="cat-block__head">
+            <h2 class="cat-block__title" id="cat-{c_slug}">{html.escape(c)}</h2>
+            <div class="cat-block__head-right">
+              <span class="cat-block__count">{len(items)} spell{'s' if len(items) != 1 else ''}</span>
+            </div>
+          </div>
+          <ul class="row-list" aria-label="{html.escape(c, quote=True)}">{rows_html}
+          </ul>
+        </section>""")
+    catalogue_content = "\n".join(cat_blocks)
+    
+    drawers_html = "\n".join(render_drawer(s) for s in spells)
+    
+    full_html = f"""<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Design Spells — zero-JS CSS techniques</title>
+  <meta name="description" content="150 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Design Spells — zero-JS CSS techniques">
+  <meta property="og:description" content="150 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Design Spells — zero-JS CSS techniques">
+  <meta name="twitter:description" content="150 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='1' y='13' font-size='13'%3E%E2%9C%B6%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./search.js" defer></script>
+</head>
+<body>
+
+  {ICON_SPRITE}
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <div class="site-head__row">
+      <p class="brand">
+        Design Spells<span class="brand__star" aria-hidden="true">*</span>
+        <span class="brand__tag">Zero-JS CSS techniques</span>
+      </p>
+      <div class="head-meta">
+        <p class="counter" id="counter" aria-live="polite">Showing {total} of {total} spells</p>
+        <a class="sponsor" href="https://github.com/sponsors/FullThrottle83" target="_blank" rel="noopener">
+          Sponsor on GitHub <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell" id="main">
+
+    <section class="intro">
+      <h1>A catalogue of CSS that does the work itself.</h1>
+      <p>
+        {total} interaction, layout, and polish techniques. No client JavaScript.
+        Click a spell to preview it, then copy the source.
+      </p>
+      <form class="search" id="search-form" role="search" action="#main">
+        <div class="search__field">
+          <input class="search__input" id="search" name="q" type="search"
+                 placeholder="Search by name, category, feature, or status…"
+                 aria-label="Search spells"
+                 autocomplete="off" autocapitalize="off" spellcheck="false">
+          <kbd class="search__kbd" aria-hidden="true">/</kbd>
+        </div>
+      </form>
+    </section>
+
+    <div class="browse">
+
+      <nav class="browse__nav" aria-label="Browse spells">
+        <div class="nav-group" role="group" aria-label="Categories">
+          <h2 class="nav-group__label">Category</h2>
+          <div class="nav-list" id="cat-list">
+            {cat_nav}
+          </div>
+        </div>
+
+        <div class="nav-group" role="group" aria-label="Support status">
+          <h2 class="nav-group__label">Status</h2>
+          <div class="nav-list" id="status-list">
+            {status_nav}
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <h2 class="nav-group__label">Browsers</h2>
+          <ul class="nav-legend" id="browser-legend">
+            {browser_legend_items}
+          </ul>
+          <p class="nav-legend__key">Green supported · amber partial · red missing</p>
+        </div>
+      </nav>
+
+      <div class="browse__list" id="catalogue">
+{catalogue_content}
+      </div>
+
+    </div>
+
+    <footer class="shell-note">
+      <span>Raw CSS only — no JavaScript ships with any spell</span>
+      <span>Open source · contributions via pull request</span>
+    </footer>
+  </main>
+
+  <!-- Pre-rendered modal drawers for all 150 spells with Declarative Shadow DOM and native code tabs -->
+  <div class="drawers-layer" id="drawers-layer">
+{drawers_html}
+  </div>
+
+</body>
+</html>
+"""
+    out_path.write_text(full_html, encoding="utf-8")
+    print(f"wrote {out_path.name} {out_path.stat().st_size} bytes")
+
+
 def main() -> None:
     spells = parse_spells(SRC)
     print("parsed spells:", len(spells))
@@ -871,15 +1646,6 @@ def main() -> None:
         "spells": payload,
     }
 
-    classic = (
-        "/* generated by scripts/build.py — do not edit by hand */\n"
-        "window.DESIGN_SPELLS = "
-        + json.dumps(catalogue, ensure_ascii=False)
-        + ";\n"
-    )
-    (ROOT / "public" / "spells.js").write_text(classic, encoding="utf-8")
-    print("wrote public/spells.js", (ROOT / "public" / "spells.js").stat().st_size, "bytes")
-
     # Machine-readable copy for AI agents, MCP servers, and tooling. It is
     # described by schema/spells.schema.json (and schema/spells.d.ts for
     # TypeScript consumers) — the strict contract everything else keys off.
@@ -890,6 +1656,9 @@ def main() -> None:
     json_text = json.dumps(json_doc, ensure_ascii=False, indent=2) + "\n"
     (ROOT / "public" / "spells.json").write_text(json_text, encoding="utf-8")
     print("wrote public/spells.json", (ROOT / "public" / "spells.json").stat().st_size, "bytes")
+
+    # Static HTML emission for the Zero-JS catalogue
+    render_index_html(catalogue, ROOT / "public" / "index.html")
 
 
 if __name__ == "__main__":

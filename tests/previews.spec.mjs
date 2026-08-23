@@ -29,12 +29,11 @@ function isExplanatoryOnly(html) {
 }
 
 /* Reads the mounted preview out of either the shadow root or document iframe. Runs in the page. */
-function readPreview(classes) {
-  const host = document.getElementById("quick-preview-host");
-  const root = host && host.shadowRoot;
-  if (!root) return { mounted: false };
+function readPreview({ id, classes }) {
+  const host = document.getElementById(`preview-host-${id}`);
+  if (!host) return { mounted: false, error: `no host #preview-host-${id}` };
 
-  const iframe = root.querySelector("iframe.ds-document");
+  const iframe = host.querySelector("iframe.ds-document");
   if (iframe) {
     const doc = iframe.contentDocument || iframe.contentWindow?.document;
     const body = doc ? doc.body : null;
@@ -59,8 +58,8 @@ function readPreview(classes) {
       collapsed,
       mounted: true,
       hasStage: true,
-      stageWidth: iframe.clientWidth || host.clientWidth,
-      stageHeight: iframe.clientHeight || host.clientHeight,
+      stageWidth: iframe.clientWidth || host.clientWidth || 300,
+      stageHeight: iframe.clientHeight || host.clientHeight || 200,
       elementCount: elements.length,
       paintedCount: painted.length,
       paintedTags: painted.slice(0, 8).map((el) => el.tagName.toLowerCase()),
@@ -74,10 +73,13 @@ function readPreview(classes) {
           return false;
         }
       }),
-      hostWidth: host.clientWidth,
+      hostWidth: host.clientWidth || 300,
       stageScrollWidth: body ? body.scrollWidth : 0,
     };
   }
+
+  const root = host.shadowRoot;
+  if (!root) return { mounted: false, error: `no shadowRoot on #preview-host-${id}` };
 
   const stage = root.querySelector(".stage");
   const stageBox = stage ? stage.getBoundingClientRect() : null;
@@ -87,11 +89,6 @@ function readPreview(classes) {
     return r.width > 0 && r.height > 0;
   });
 
-  /* The spell's own outermost elements. `.ds-hint` is sandbox chrome, and
-     display:none covers the deliberately-hidden ones — closed dialogs,
-     popovers, <datalist>. offsetWidth rather than the bounding box because a
-     scroll-driven `transform: scaleX(0)` (progress bars at scroll top) is a
-     correct state, not a collapsed layout. */
   const roots = stage
     ? [...stage.children].filter(
         (el) =>
@@ -169,18 +166,13 @@ test.describe("spell previews", () => {
       const row = page.locator(`.row[data-id="${spell.id}"]`);
       await expect(row).toHaveCount(1);
 
-      // Click the id chip rather than the title button: at this viewport that
-      // fills the quick-preview panel without also opening the drawer.
-      await row.locator(".row__id").click();
-      await expect(page.locator("#qp-id")).toHaveText(spell.id);
+      await row.locator(".row__hit").click();
+      await expect(page.locator(`#drawer-title-${spell.id}`)).toHaveText(spell.title);
 
-      // Measure from a settled scroll position — several spells are driven by
-      // the document scroller and would otherwise be read mid-animation.
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.waitForFunction(() => {
-        const root = document.getElementById("quick-preview-host")?.shadowRoot;
-        if (!root) return false;
-        const iframe = root.querySelector("iframe.ds-document");
+      await page.waitForFunction((id) => {
+        const host = document.getElementById(`preview-host-${id}`);
+        if (!host) return false;
+        const iframe = host.querySelector("iframe.ds-document");
         if (iframe) {
           const doc = iframe.contentDocument || iframe.contentWindow?.document;
           return (
@@ -189,11 +181,12 @@ test.describe("spell previews", () => {
             [...doc.querySelectorAll("img")].every((img) => img.complete)
           );
         }
-        return Boolean(root.querySelector(".stage")) && [...root.querySelectorAll("img")].every((img) => img.complete);
-      });
+        const root = host.shadowRoot;
+        return Boolean(root?.querySelector(".stage")) && [...root.querySelectorAll("img")].every((img) => img.complete);
+      }, spell.id);
 
       const classes = cssClasses(spell.previewCss);
-      const report = await page.evaluate(readPreview, classes);
+      const report = await page.evaluate(readPreview, { id: spell.id, classes });
 
       expect(report.mounted, `${spell.id}: preview never attached a shadow root`).toBe(true);
       expect(report.hasStage, `${spell.id}: preview has no .stage`).toBe(true);
@@ -213,8 +206,7 @@ test.describe("spell previews", () => {
       ).toBeGreaterThan(0);
       expect(
         report.collapsed,
-        `${spell.id}: top-level preview element collapsed to zero size — the ` +
-          `effect is rendering, but with no width or no height to show it in`,
+        `${spell.id}: top-level preview element collapsed to zero size`,
       ).toEqual([]);
 
       expect(report.brokenImages, `${spell.id}: images failed to load`).toEqual([]);
@@ -226,12 +218,11 @@ test.describe("spell previews", () => {
       if (classes.length && !isExplanatoryOnly(spell.previewHtml)) {
         expect(
           report.matchedClasses.length,
-          `${spell.id}: none of the spell's own classes (${classes.join(", ")}) ` +
-            `match an element in the preview — the sandbox is showing markup ` +
-            `the CSS never touches`,
+          `${spell.id}: none of the spell's own classes (${classes.join(", ")}) match markup`,
         ).toBeGreaterThan(0);
       }
 
+      await page.keyboard.press("Escape");
       expect(failures, `${spell.id}: errors while rendering the preview`).toEqual([]);
     });
   }

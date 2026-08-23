@@ -14,6 +14,7 @@ rely on. No browser, no network.
 
 from __future__ import annotations
 
+import html
 import json
 import re
 import shutil
@@ -24,12 +25,18 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
-from scripts.build import rewrite_preview_css
+from scripts.build import (
+    CAT_ORDER,
+    highlight_css,
+    highlight_html,
+    inline_md_to_html,
+    rewrite_preview_css,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 SPELLS_JSON = PUBLIC / "spells.json"
-SPELLS_JS = PUBLIC / "spells.js"
+INDEX_HTML = PUBLIC / "index.html"
 SCHEMA_PATH = PUBLIC / "spells.schema.json"
 
 
@@ -155,7 +162,7 @@ class BuildOutputTest(unittest.TestCase):
                 f"scripts/build.py failed:\n{result.stdout}\n{result.stderr}",
             )
 
-            for name in ("spells.js", "spells.json"):
+            for name in ("spells.json", "index.html"):
                 with self.subTest(artefact=name):
                     rebuilt = (sandbox / "public" / name).read_bytes()
                     committed = (PUBLIC / name).read_bytes()
@@ -180,19 +187,6 @@ class BuildOutputTest(unittest.TestCase):
                 )
                 outputs.append((sandbox / "public" / "spells.json").read_bytes())
         self.assertEqual(outputs[0], outputs[1], "build.py output is not deterministic")
-
-    def test_spells_js_payload_matches_spells_json(self):
-        js = SPELLS_JS.read_text(encoding="utf-8")
-        match = re.search(r"window\.DESIGN_SPELLS = ([\s\S]+);\n$", js)
-        self.assertIsNotNone(match, "public/spells.js does not assign window.DESIGN_SPELLS")
-        payload = json.loads(match.group(1))
-
-        doc = load_catalogue()
-        doc.pop("$schema", None)
-        self.assertEqual(
-            payload, doc,
-            "public/spells.js and public/spells.json describe different catalogues",
-        )
 
 
 class SchemaTest(unittest.TestCase):
@@ -323,15 +317,12 @@ class SpellInvariantTest(unittest.TestCase):
                 )
 
     def test_categories_are_known_to_the_app(self):
-        app = (PUBLIC / "app.js").read_text(encoding="utf-8")
-        block = re.search(r"const CAT_ORDER = \[([\s\S]*?)\];", app)
-        self.assertIsNotNone(block, "could not find CAT_ORDER in public/app.js")
-        known = set(re.findall(r'"([^"]+)"', block.group(1)))
+        known = set(CAT_ORDER)
         used = {s["category"] for s in self.spells}
         unknown = sorted(used - known)
         self.assertEqual(
             unknown, [],
-            f"categories missing from CAT_ORDER in app.js (they sort last): {unknown}",
+            f"categories missing from CAT_ORDER in scripts/build.py: {unknown}",
         )
 
 
@@ -425,6 +416,101 @@ class PreviewInvariantTest(unittest.TestCase):
             orphans, [],
             f"preview markup matches none of the spell's classes: {orphans}",
         )
+
+
+class MarkdownRenderingTest(unittest.TestCase):
+    """The XSS-safe description renderer used to live in public/app.js (inlineMd).
+    It now lives in scripts/build.py (inline_md_to_html) and is applied at build time."""
+
+    def setUp(self):
+        self.render = inline_md_to_html
+        self.spells = load_catalogue()["spells"]
+
+    def test_marked_descriptions_produce_only_code_and_strong(self):
+        bad = []
+        for spell in self.spells:
+            desc = spell.get("description") or ""
+            if not re.search(r"`[^`]+`|\*\*[^*]+\*\*", desc):
+                continue
+            html_out = self.render(desc)
+            tag_re = re.compile(r"<(?!/?(code|strong)\b)([a-zA-Z][\w-]*)")
+            stray = sorted(set(tag_re.findall(html_out)))
+            if stray:
+                bad.append(f"{spell['id']}: produced {stray}")
+        self.assertEqual(bad, [], f"Disallowed HTML elements rendered: {bad}")
+
+    def test_code_spans_and_bold_runs_survive_intact(self):
+        bad = []
+        for spell in self.spells:
+            desc = spell.get("description") or ""
+            if not re.search(r"`[^`]+`|\*\*[^*]+\*\*", desc):
+                continue
+            html_out = self.render(desc)
+            want_codes = [html.escape(c, quote=False) for c in re.findall(r"`([^`]+)`", desc)]
+            got_codes = re.findall(r"<code>([^<]+)</code>", html_out)
+            want_bolds = [html.escape(b, quote=False) for b in re.findall(r"\*\*([^*]+(?:\*(?!\*)[^*]*)*)\*\*", desc)]
+            got_bolds = re.findall(r"<strong>([^<]+)</strong>", html_out)
+            if got_codes != want_codes or got_bolds != want_bolds:
+                bad.append(f"{spell['id']}: codes={got_codes} vs {want_codes}, bolds={got_bolds} vs {want_bolds}")
+        self.assertEqual(bad, [], f"Markdown spans corrupted: {bad}")
+
+    def test_html_tags_in_markdown_are_escaped(self):
+        raw = "Uses `<details>` and `<dialog>` elements."
+        rendered = self.render(raw)
+        self.assertIn("<code>&lt;details&gt;</code>", rendered)
+        self.assertIn("<code>&lt;dialog&gt;</code>", rendered)
+        self.assertNotIn("<details>", rendered)
+
+
+class SyntaxHighlightingTest(unittest.TestCase):
+    """Build-time token highlighters for CSS and HTML."""
+
+    def test_highlight_css_produces_token_spans(self):
+        css = ".card { color: #fff; background: oklch(0.5 0.2 30); }"
+        hl = highlight_css(css)
+        self.assertIn('class="tok-punct"', hl)
+        self.assertIn('class="tok-prop"', hl)
+        self.assertIn('class="tok-num"', hl)
+
+    def test_highlight_html_produces_token_spans(self):
+        html_src = '<button class="btn-primary" type="button">Click</button>'
+        hl = highlight_html(html_src)
+        self.assertIn('class="tok-tag"', hl)
+        self.assertIn('class="tok-attr"', hl)
+        self.assertIn('class="tok-str"', hl)
+
+
+class EmittedHtmlTest(unittest.TestCase):
+    """public/index.html is a fully pre-rendered static catalogue with zero blocking JS."""
+
+    def setUp(self):
+        self.html = INDEX_HTML.read_text(encoding="utf-8")
+        self.spells = load_catalogue()["spells"]
+
+    def test_emitted_index_html_contains_every_spell_id(self):
+        for spell in self.spells:
+            with self.subTest(spell=spell["id"]):
+                self.assertIn(f'data-id="{spell["id"]}"', self.html)
+
+    def test_emitted_index_html_contains_every_drawer_popover(self):
+        for spell in self.spells:
+            with self.subTest(spell=spell["id"]):
+                self.assertIn(f'id="drawer-{spell["id"]}"', self.html)
+                self.assertIn(f'popovertarget="drawer-{spell["id"]}"', self.html)
+
+    def test_emitted_index_html_has_no_remaining_app_js_or_spells_js_references(self):
+        self.assertNotIn('src="./app.js"', self.html)
+        self.assertNotIn('src="./spells.js"', self.html)
+
+    def test_emitted_index_html_uses_declarative_shadow_dom_or_iframe(self):
+        self.assertIn('shadowrootmode="open"', self.html)
+        self.assertIn('class="ds-document"', self.html)
+
+    def test_emitted_index_html_contains_code_tabs(self):
+        self.assertIn('name="tabs-ds-1"', self.html)
+        self.assertIn('<summary class="code__tab">Modern CSS</summary>', self.html)
+        self.assertIn('<summary class="code__tab">Tailwind v4</summary>', self.html)
+        self.assertIn('<summary class="code__tab">HTML</summary>', self.html)
 
 
 if __name__ == "__main__":

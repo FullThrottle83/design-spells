@@ -12,7 +12,7 @@ A single **canonical** reference bank of design spells for modern Astro projects
 
 The document therefore contains only spells marked **`0 JS`** or **`Markup`**. In the original file's terminology, `Markup` still means the spell is JS-free, but it needs a precise HTML pattern — for example `<details>`, checkbox state, `popover`, a `dialog`-compatible structure, or another native state machine.
 
-In total there are **145 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–146** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal).
+In total there are **150 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–151** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal, Fluid Rhythm Function, Donut-Scoped Callout, Snapped Product State, Semantic Metrics Dividers, Organic Avatar Cluster).
 
 ---
 
@@ -4243,6 +4243,251 @@ A modal dialog that prevents scroll chaining (the background moving while the mo
   overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;
 }
 .guard-modal::backdrop { overscroll-behavior: none; background: oklch(0 0 0 / .4); }
+```
+
+### 147. Fluid Rhythm Function (`@function`)
+*Layout · Progressive · 0 JS*
+
+Centralize fluid spacing calculations with typed custom CSS functions. Unsupported engines fall back cleanly to the baseline `clamp()`.
+
+```html
+<article class="fluid-rhythm-card">
+  <p class="eyebrow">Quarterly report</p>
+  <h2>Spacing that scales</h2>
+  <p>Responsive rhythm with typed @function.</p>
+</article>
+```
+
+```css
+.fluid-rhythm-card {
+  inline-size: min(32rem, 100%);
+  padding: clamp(1rem, 4cqi, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+@function --fluid-space(
+  --minimum <length>,
+  --preferred <length>,
+  --maximum <length>
+) returns <length> {
+  result: clamp(var(--minimum), var(--preferred), var(--maximum));
+}
+.fluid-rhythm-card {
+  padding: --fluid-space(1rem, 4cqi, 2rem);
+}
+.fluid-rhythm-card .eyebrow {
+  color: var(--color-text-muted);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+```
+
+### 148. Donut-Scoped Documentation Callout (`@scope`)
+*Layout · Baseline · 0 JS*
+
+Style component guidance with `@scope` while explicitly preventing accent styles from leaking into nested demo regions.
+
+```html
+<article class="docs-card">
+  <h2><span class="accent">Scoped</span> component guidance</h2>
+  <p>The outer accent belongs to the card.</p>
+  <section class="example" aria-label="Unstyled embedded example">
+    <p><span class="accent">Embedded content</span> keeps its own theme.</p>
+  </section>
+</article>
+```
+
+```css
+.docs-card {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.docs-card > h2 .accent,
+.docs-card > p .accent {
+  color: var(--color-accent);
+  font-weight: 750;
+}
+.docs-card .example {
+  margin-block-start: 1rem;
+  padding: .75rem;
+  border-inline-start: 3px solid var(--color-border);
+}
+@scope (.docs-card) to (.example) {
+  .accent {
+    color: var(--color-accent);
+    font-weight: 750;
+  }
+}
+```
+
+### 149. Snapped Product State (`scroll-state()`)
+*Scroll · Progressive · 0 JS*
+
+Highlight the active card aligned to a scroll-snap point using `@container scroll-state(snapped: inline)` without JavaScript observers.
+
+```html
+<div class="snap-products" aria-label="Featured products">
+  <article class="snap-product">
+    <div class="snap-product__body"><strong>Starter</strong><span>$12</span></div>
+  </article>
+  <article class="snap-product">
+    <div class="snap-product__body"><strong>Studio</strong><span>$28</span></div>
+  </article>
+  <article class="snap-product">
+    <div class="snap-product__body"><strong>Agency</strong><span>$64</span></div>
+  </article>
+</div>
+```
+
+```css
+.snap-products {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(80%, 16rem);
+  gap: .75rem;
+  overflow-x: auto;
+  padding: .5rem;
+  scroll-snap-type: inline mandatory;
+  overscroll-behavior-inline: contain;
+}
+.snap-product {
+  container-type: scroll-state;
+  scroll-snap-align: center;
+}
+.snap-product__body {
+  min-block-size: 8rem;
+  padding: 1rem;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+@supports (container-type: scroll-state) {
+  .snap-product__body {
+    opacity: .62;
+    scale: .96;
+    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;
+  }
+  @container scroll-state(snapped: inline) {
+    .snap-product__body {
+      opacity: 1;
+      scale: 1;
+      border-color: var(--color-primary);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snap-product__body { transition: none; }
+}
+```
+
+### 150. Semantic Metrics Dividers (`column-rule`)
+*Data · Progressive · 0 JS*
+
+Draw clean separators directly in grid and flex gaps using `column-rule` without first/last-child border overrides.
+
+```html
+<dl class="metric-strip">
+  <div><dt>Revenue</dt><dd>$84k</dd></div>
+  <div><dt>Retention</dt><dd>94%</dd></div>
+  <div><dt>Latency</dt><dd>82ms</dd></div>
+</dl>
+```
+
+```css
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.metric-strip > div {
+  min-inline-size: 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 1px solid var(--color-border);
+}
+.metric-strip > div:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+.metric-strip dt {
+  color: var(--color-text-muted);
+  font-size: .75rem;
+}
+.metric-strip dd {
+  margin: .2rem 0 0;
+  font-size: clamp(1.1rem, 4cqi, 1.6rem);
+  font-weight: 750;
+}
+@supports (row-rule: 1px solid transparent) {
+  .metric-strip {
+    column-rule: 1px solid var(--color-border);
+  }
+  .metric-strip > div,
+  .metric-strip > div:first-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+}
+```
+
+### 151. Organic Avatar Cluster (`random()`)
+*Visual · Progressive · 0 JS*
+
+Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.
+
+```html
+<ul class="avatar-cluster" aria-label="Project contributors">
+  <li aria-label="Ari">A</li>
+  <li aria-label="Bea">B</li>
+  <li aria-label="Chen">C</li>
+  <li aria-label="Dara">D</li>
+  <li aria-label="Eli">E</li>
+</ul>
+```
+
+```css
+.avatar-cluster {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: 1rem;
+  margin: 0;
+  list-style: none;
+}
+.avatar-cluster > li {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--color-bg);
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 750;
+}
+.avatar-cluster > li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }
+.avatar-cluster > li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }
+.avatar-cluster > li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }
+@supports (rotate: random(-1deg, 1deg)) {
+  .avatar-cluster > li {
+    rotate: random(-6deg, 6deg);
+    translate: 0 random(-3px, 3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .avatar-cluster > li {
+    rotate: 0deg;
+    translate: 0;
+  }
+}
 ```
 
 ---

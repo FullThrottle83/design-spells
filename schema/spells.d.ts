@@ -22,6 +22,31 @@ export type JsNeed = "none" | "markup";
 
 export type JsLabel = "0 JS" | "Markup";
 
+export type PreviewEnvironment = "shadow" | "document";
+
+export type PreviewActionKind =
+  | "none"
+  | "invalid-input"
+  | "activate-control"
+  | "toggle-disclosure"
+  | "adjust-range"
+  | "scroll"
+  | "resize"
+  | "swipe"
+  | "activate-link"
+  | "select-text"
+  | "toggle-control"
+  | "hover-or-focus"
+  | "hover"
+  | "keyboard-focus"
+  | "focus"
+  | "press";
+
+export interface PreviewAction {
+  kind: PreviewActionKind;
+  hint: string;
+}
+
 export interface BrowserSupport {
   chrome: BrowserLevel;
   edge: BrowserLevel;
@@ -51,10 +76,16 @@ export interface Spell {
   html: string;
   /** The modern-CSS source to copy. */
   css: string;
+  /** Isolation model used by the live preview. */
+  previewEnvironment: PreviewEnvironment;
+  /** Trigger metadata and interaction guidance. */
+  previewAction: PreviewAction;
   /** Self-contained markup used by the live preview. */
   previewHtml: string;
   /** Preview CSS with :root/html/body rewritten to :host. */
   previewCss: string;
+  /** All detected compatibility feature keys in registry order. */
+  featureKeys: string[];
   /** Summary of the CSS features the spell depends on. */
   feature: string;
   browsers: BrowserSupport;
@@ -63,6 +94,8 @@ export interface Spell {
 }
 
 export interface Catalogue {
+  /** UTC date on which the browser-support registry was verified. */
+  supportAsOf: string;
   total: number;
   spells: Spell[];
 }

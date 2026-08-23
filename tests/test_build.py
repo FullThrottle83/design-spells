@@ -24,6 +24,8 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
+from scripts.build import rewrite_preview_css
+
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 SPELLS_JSON = PUBLIC / "spells.json"
@@ -212,6 +214,48 @@ class SchemaTest(unittest.TestCase):
     def test_total_matches_the_number_of_spells(self):
         self.assertEqual(self.doc["total"], len(self.doc["spells"]))
 
+    def test_typescript_and_schema_have_bidirectional_field_parity(self):
+        types = (ROOT / "schema" / "spells.d.ts").read_text(encoding="utf-8")
+
+        def interface_fields(name):
+            match = re.search(
+                rf"export interface {name}\s*{{([\s\S]*?)^}}",
+                types,
+                re.M,
+            )
+            self.assertIsNotNone(match, f"missing TypeScript interface {name}")
+            return set(re.findall(r"^\s{2}([A-Za-z]\w*)\??\s*:", match.group(1), re.M))
+
+        spell_schema = self.schema["$defs"]["spell"]
+        self.assertEqual(
+            interface_fields("Spell"),
+            set(spell_schema["required"]),
+            "Spell fields differ between JSON Schema and TypeScript",
+        )
+        self.assertEqual(
+            interface_fields("BrowserSupport"),
+            set(spell_schema["properties"]["browsers"]["properties"]),
+            "BrowserSupport fields differ between JSON Schema and TypeScript",
+        )
+
+    def test_typescript_and_schema_have_enum_parity(self):
+        types = (ROOT / "schema" / "spells.d.ts").read_text(encoding="utf-8")
+
+        def union_values(name):
+            match = re.search(rf"export type {name}\s*=([\s\S]*?);", types)
+            self.assertIsNotNone(match, f"missing TypeScript union {name}")
+            return set(re.findall(r'"([^"]+)"', match.group(1)))
+
+        spell = self.schema["$defs"]["spell"]["properties"]
+        self.assertEqual(union_values("Status"), set(spell["status"]["enum"]))
+        self.assertEqual(union_values("StatusLabel"), set(spell["statusLabel"]["enum"]))
+        self.assertEqual(union_values("JsNeed"), set(spell["jsNeed"]["enum"]))
+        self.assertEqual(union_values("JsLabel"), set(spell["jsLabel"]["enum"]))
+        self.assertEqual(
+            union_values("PreviewActionKind"),
+            set(self.schema["$defs"]["previewAction"]["properties"]["kind"]["enum"]),
+        )
+
 
 class SpellInvariantTest(unittest.TestCase):
     """Guarantees every consumer (site, MCP server, agents) keys off."""
@@ -261,24 +305,21 @@ class SpellInvariantTest(unittest.TestCase):
         self.assertEqual(wrong, [], f"jsNeed/jsLabel mismatch: {wrong}")
 
     def test_progressive_status_matches_browser_support(self):
-        """derive_status() in build.py is the rule; the data must obey it."""
+        """Every status is a deterministic projection of browser support."""
         for spell in self.spells:
             with self.subTest(spell=spell["id"]):
                 levels = list(spell["browsers"].values())
                 missing = levels.count("no")
                 if missing >= 2:
-                    expected = "Progressive"
+                    expected = "progressive"
                 elif missing == 1 or "partial" in levels:
-                    expected = "Newer"
+                    expected = "newer"
                 else:
-                    expected = "Baseline"
-                if expected == "Baseline":
-                    # Newer/Progressive are allowed to be conservative by hand;
-                    # claiming Baseline when support says otherwise is not.
-                    continue
-                self.assertNotEqual(
-                    spell["statusLabel"], "Baseline",
-                    f"{spell['id']} is labelled Baseline but support is {spell['browsers']}",
+                    expected = "baseline"
+                self.assertEqual(
+                    spell["status"],
+                    expected,
+                    f"{spell['id']} status disagrees with {spell['browsers']}",
                 )
 
     def test_categories_are_known_to_the_app(self):
@@ -308,10 +349,35 @@ class PreviewInvariantTest(unittest.TestCase):
         """
         leaked = []
         for spell in self.spells:
+            if spell.get("previewEnvironment") == "document":
+                continue
             css = strip_css_comments(spell["previewCss"])
             if re.search(r"(?<![\w.#-])(:root\b|\bhtml\b|\bbody\b)(?![\w-])", css):
                 leaked.append(spell["id"])
         self.assertEqual(leaked, [], f"previewCss still targets the document: {leaked}")
+
+    def test_preview_rewriter_only_changes_selector_preludes(self):
+        source = (
+            '/* body :root html */\n'
+            '.copy { content: "body :root html"; --label: body; }\n'
+            'html > body .copy { color: red; }\n'
+        )
+        rewritten = rewrite_preview_css(source)
+        self.assertIn('/* body :root html */', rewritten)
+        self.assertIn('content: "body :root html"', rewritten)
+        self.assertIn("--label: body", rewritten)
+        self.assertIn(":host > .stage .copy", rewritten)
+        self.assertNotIn(":host > :host", rewritten)
+
+    def test_preview_rewriter_handles_nested_rule_lists(self):
+        source = (
+            "@media (width > 10px) { "
+            "body > .card { color: red; } "
+            ".card { content: 'body'; } }"
+        )
+        rewritten = rewrite_preview_css(source)
+        self.assertIn(".stage > .card", rewritten)
+        self.assertIn("content: 'body'", rewritten)
 
     def test_preview_html_has_no_remote_assets(self):
         """Previews must render offline — images are inlined as data: URIs."""

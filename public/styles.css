@@ -539,7 +539,29 @@ button { font: inherit; color: inherit; }
   color: var(--ink-1);
 }
 
-.preview-host { background: var(--canvas); }
+.preview-host {
+  position: relative;
+  background: var(--canvas);
+}
+.preview-host .ds-document {
+  width: 100%;
+  border: 0;
+  display: block;
+}
+.ds-hint--document {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font: 600 10px/1 var(--sans);
+  letter-spacing: .02em;
+  pointer-events: none;
+  opacity: .85;
+}
 .preview-host--panel {
   margin: 14px 16px 0;
   border: 1px solid var(--line);

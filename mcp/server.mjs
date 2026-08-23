@@ -34,6 +34,7 @@ const SUPPORTED_PROTOCOL_VERSIONS = ["2024-11-05", "2025-03-26", "2025-06-18"];
 const catalogue = JSON.parse(readFileSync(DATA_PATH, "utf-8"));
 const SPELLS = catalogue.spells ?? [];
 const TOTAL = catalogue.total ?? SPELLS.length;
+const SUPPORT_AS_OF = catalogue.supportAsOf ?? "2026-08-24";
 
 function categories() {
   const counts = new Map();
@@ -43,6 +44,16 @@ function categories() {
 
 const STATUSES = ["baseline", "newer", "progressive"];
 const JS_NEEDS = ["none", "markup"];
+
+/* ------------------------------------------------------------- error types */
+
+class RpcError extends Error {
+  constructor(code, message, data = undefined) {
+    super(message);
+    this.code = code;
+    this.data = data;
+  }
+}
 
 /* ------------------------------------------------------------- matching */
 
@@ -147,17 +158,67 @@ function summary(spell) {
     statusLabel: spell.statusLabel,
     jsNeed: spell.jsNeed,
     jsLabel: spell.jsLabel,
+    featureKeys: spell.featureKeys,
     feature: spell.feature,
     browsers: spell.browsers,
     supportNote: spell.supportNote,
+    previewEnvironment: spell.previewEnvironment,
+    previewAction: spell.previewAction,
     description: spell.description,
   };
 }
 
-function callTool(name, args = {}) {
+function validateArgs(name, args) {
+  if (args !== undefined && (typeof args !== "object" || args === null || Array.isArray(args))) {
+    throw new RpcError(-32602, `Invalid arguments: expected an object, got ${typeof args}`);
+  }
+  const safeArgs = args ?? {};
+
+  switch (name) {
+    case "list_categories":
+      return safeArgs;
+
+    case "search_spells": {
+      if (safeArgs.limit !== undefined) {
+        const num = Number(safeArgs.limit);
+        if (!Number.isInteger(num) || num < 1 || num > 200) {
+          throw new RpcError(-32602, `Invalid argument "limit": expected integer between 1 and 200, got ${safeArgs.limit}`);
+        }
+      }
+      if (safeArgs.status !== undefined && !STATUSES.includes(safeArgs.status)) {
+        throw new RpcError(-32602, `Invalid argument "status": expected one of ${JSON.stringify(STATUSES)}, got "${safeArgs.status}"`);
+      }
+      if (safeArgs.jsNeed !== undefined && !JS_NEEDS.includes(safeArgs.jsNeed)) {
+        throw new RpcError(-32602, `Invalid argument "jsNeed": expected one of ${JSON.stringify(JS_NEEDS)}, got "${safeArgs.jsNeed}"`);
+      }
+      if (safeArgs.query !== undefined && typeof safeArgs.query !== "string") {
+        throw new RpcError(-32602, `Invalid argument "query": expected string, got ${typeof safeArgs.query}`);
+      }
+      if (safeArgs.category !== undefined && typeof safeArgs.category !== "string") {
+        throw new RpcError(-32602, `Invalid argument "category": expected string, got ${typeof safeArgs.category}`);
+      }
+      return safeArgs;
+    }
+
+    case "get_spell": {
+      if (!safeArgs.id || typeof safeArgs.id !== "string" || !safeArgs.id.trim()) {
+        throw new RpcError(-32602, `Missing or invalid required argument "id": expected non-empty string`);
+      }
+      return safeArgs;
+    }
+
+    default:
+      throw new RpcError(-32602, `Unknown tool "${name}".`);
+  }
+}
+
+function callTool(name, rawArgs = {}) {
+  const args = validateArgs(name, rawArgs);
+
   switch (name) {
     case "list_categories":
       return {
+        supportAsOf: SUPPORT_AS_OF,
         total: TOTAL,
         categories: categories(),
         statuses: STATUSES,
@@ -167,7 +228,11 @@ function callTool(name, args = {}) {
     case "search_spells": {
       const limit = Math.min(200, Math.max(1, Number(args.limit) || 20));
       const results = SPELLS.filter((s) => matches(s, args)).slice(0, limit);
-      return { count: results.length, spells: results.map(summary) };
+      return {
+        supportAsOf: SUPPORT_AS_OF,
+        count: results.length,
+        spells: results.map(summary),
+      };
     }
 
     case "get_spell": {
@@ -180,16 +245,21 @@ function callTool(name, args = {}) {
         html: spell.html,
         css: spell.css,
         tailwind: tailwindFor(spell),
+        previewEnvironment: spell.previewEnvironment,
+        previewAction: spell.previewAction,
         previewHtml: spell.previewHtml,
+        previewCss: spell.previewCss,
       };
     }
 
     default:
-      throw new Error(`Unknown tool "${name}".`);
+      throw new RpcError(-32602, `Unknown tool "${name}".`);
   }
 }
 
 /* ----------------------------------------------------------- MCP framing */
+
+let lifecycleState = "UNINITIALIZED"; // UNINITIALIZED | INITIALIZING | READY
 
 function send(msg) {
   process.stdout.write(JSON.stringify(msg) + "\n");
@@ -199,44 +269,72 @@ function respond(id, result) {
   send({ jsonrpc: "2.0", id, result });
 }
 
-function respondError(id, code, message) {
-  send({ jsonrpc: "2.0", id, error: { code, message } });
+function respondError(id, code, message, data = undefined) {
+  const errObj = { code, message };
+  if (data !== undefined) errObj.data = data;
+  send({ jsonrpc: "2.0", id, error: errObj });
 }
 
 function handle(message) {
-  if (!message || typeof message !== "object") return;
-
-  // Notifications (no id) require no response.
-  if (message.id === undefined) return;
+  if (!message || typeof message !== "object" || Array.isArray(message)) {
+    respondError(null, -32600, "Invalid Request");
+    return;
+  }
 
   const { id, method, params } = message;
 
+  // Handle notifications (no id)
+  if (id === undefined) {
+    if (method === "notifications/initialized") {
+      lifecycleState = "READY";
+    }
+    return;
+  }
+
   try {
     switch (method) {
-      case "initialize":
+      case "initialize": {
+        lifecycleState = "INITIALIZING";
+        let protocolVersion = SUPPORTED_PROTOCOL_VERSIONS[SUPPORTED_PROTOCOL_VERSIONS.length - 1];
+        if (params?.protocolVersion && SUPPORTED_PROTOCOL_VERSIONS.includes(params.protocolVersion)) {
+          protocolVersion = params.protocolVersion;
+        }
         respond(id, {
-          protocolVersion: SUPPORTED_PROTOCOL_VERSIONS[SUPPORTED_PROTOCOL_VERSIONS.length - 1],
+          protocolVersion,
           capabilities: { tools: {} },
           serverInfo: { name: NAME, version: VERSION },
         });
         break;
+      }
 
       case "ping":
         respond(id, {});
         break;
 
       case "tools/list":
+        if (lifecycleState === "UNINITIALIZED") {
+          throw new RpcError(-32002, "Server not initialized");
+        }
         respond(id, { tools: TOOLS });
         break;
 
       case "tools/call":
+        if (lifecycleState === "UNINITIALIZED") {
+          throw new RpcError(-32002, "Server not initialized");
+        }
+        if (!params || typeof params !== "object" || !params.name) {
+          throw new RpcError(-32602, "Invalid params: missing tool name");
+        }
         try {
-          const result = callTool(params?.name, params?.arguments ?? {});
+          const result = callTool(params.name, params.arguments ?? {});
           respond(id, {
             content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
             isError: false,
           });
         } catch (err) {
+          if (err instanceof RpcError) {
+            throw err;
+          }
           respond(id, {
             content: [{ type: "text", text: String(err.message || err) }],
             isError: true,
@@ -248,7 +346,11 @@ function handle(message) {
         respondError(id, -32601, `Method not found: ${method}`);
     }
   } catch (err) {
-    respondError(id, -32603, String(err.message || err));
+    if (err instanceof RpcError) {
+      respondError(id, err.code, err.message, err.data);
+    } else {
+      respondError(id, -32603, String(err.message || err));
+    }
   }
 }
 
@@ -261,9 +363,10 @@ rl.on("line", (line) => {
   const text = line.trim();
   if (!text) return;
   try {
-    handle(JSON.parse(text));
+    const parsed = JSON.parse(text);
+    handle(parsed);
   } catch {
-    // Malformed frame — ignore rather than crash the session.
+    respondError(null, -32700, "Parse error");
   }
 });
 

@@ -30,6 +30,8 @@ CATEGORY_UI = {
     "Media": "Media",
 }
 
+SUPPORT_AS_OF = "2026-08-24"
+
 FEATURE_BROWSERS = {
     "baseline": {
         "feature": "Widely available CSS",
@@ -63,13 +65,18 @@ FEATURE_BROWSERS = {
     },
     "anchor": {
         "feature": "CSS Anchor Positioning",
-        "chrome": "yes", "edge": "yes", "firefox": "partial", "safari": "yes",
-        "note": "Chrome 125+, Safari 26+. Firefox support is still partial.",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Chrome/Edge 125+, Safari 26+, Firefox 147+.",
     },
-    "view-transitions": {
-        "feature": "View Transitions",
+    "view-transitions-same": {
+        "feature": "Same-document View Transitions",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Same-document View Transitions are available in current engines.",
+    },
+    "view-transitions-cross": {
+        "feature": "Cross-document View Transitions",
         "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
-        "note": "Chrome 111+, Safari 18+. Firefox has not shipped this yet.",
+        "note": "Cross-document navigation transitions remain unavailable in Firefox.",
     },
     "interpolate-size": {
         "feature": "interpolate-size",
@@ -78,8 +85,8 @@ FEATURE_BROWSERS = {
     },
     "field-sizing": {
         "feature": "field-sizing",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
-        "note": "Chrome 123+, Safari 17.4+. Firefox has not shipped field-sizing.",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Chrome/Edge 123+, Firefox 152+, Safari 26.2+.",
     },
     "text-box-trim": {
         "feature": "text-box-trim",
@@ -103,8 +110,8 @@ FEATURE_BROWSERS = {
     },
     "closedby": {
         "feature": "dialog closedby",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
-        "note": "Chrome 134+, Safari 18.4+. Firefox still needs a close button.",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "no",
+        "note": "Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path.",
     },
     "open-pseudo": {
         "feature": ":open",
@@ -118,8 +125,8 @@ FEATURE_BROWSERS = {
     },
     "until-found": {
         "feature": 'hidden="until-found"',
-        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "no",
-        "note": "Chrome 102+, Firefox 139+. Safari has not shipped until-found.",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Chrome/Edge 102+, Firefox 148+, Safari 26.2+.",
     },
     "scroll-markers": {
         "feature": "::scroll-marker / ::scroll-button",
@@ -143,18 +150,18 @@ FEATURE_BROWSERS = {
     },
     "grid-lanes": {
         "feature": "display: grid-lanes",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
-        "note": "Chromium-only masonry in 2026. Fallback is a regular grid.",
+        "chrome": "no", "edge": "no", "firefox": "no", "safari": "yes",
+        "note": "Safari 26.4+ only in stable browsers. Fallback is a regular grid.",
     },
     "sibling-index": {
         "feature": "sibling-index()",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
-        "note": "Chromium-only CSS Values 5 tree counting.",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
+        "note": "Chrome/Edge and Safari 26.2+; Firefox has not shipped it.",
     },
     "contrast-color": {
         "feature": "contrast-color()",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
-        "note": "Chromium-only. Provide an explicit color fallback.",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Chrome/Edge 147+, Firefox 146+, Safari 26+.",
     },
     "if": {
         "feature": "CSS if()",
@@ -168,8 +175,8 @@ FEATURE_BROWSERS = {
     },
     "details-content": {
         "feature": "::details-content",
-        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "yes",
-        "note": "Chrome 131+, Safari 18.4+. Firefox still uses the older 0fr pattern.",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Chrome/Edge 131+, Firefox 143+, Safari 18.4+.",
     },
     "reading-flow": {
         "feature": "reading-flow",
@@ -231,6 +238,26 @@ FEATURE_BROWSERS = {
         "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
         "note": "color-mix() and oklch() are Baseline 2023.",
     },
+    "custom-functions": {
+        "feature": "CSS Functions (@function)",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
+        "note": "Chrome/Edge 139+; Firefox and Safari unsupported.",
+    },
+    "css-scope": {
+        "feature": "CSS Scoping (@scope)",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "Baseline: Chrome/Edge 118+, Safari 17.4+, Firefox 146+.",
+    },
+    "gap-decorations": {
+        "feature": "CSS Gap Decorations (column-rule)",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
+        "note": "Chrome/Edge 149+; Firefox and Safari unsupported.",
+    },
+    "css-random": {
+        "feature": "CSS random()",
+        "chrome": "no", "edge": "no", "firefox": "no", "safari": "yes",
+        "note": "Safari 26.2+; Chromium and Firefox unsupported.",
+    },
 }
 
 
@@ -240,6 +267,10 @@ LEVEL_RANK = {"no": 0, "partial": 1, "yes": 2}
 def detect_features(css: str, html: str, title: str, status: str) -> list[str]:
     src = f"{css}\n{html}\n{title}"
     checks = [
+        (r"@function\b", "custom-functions"),
+        (r"@scope\b", "css-scope"),
+        (r"column-rule|row-rule", "gap-decorations"),
+        (r"\brandom\(", "css-random"),
         (r"interestfor|interest-delay|:interest-source", "interest-invokers"),
         (r"commandfor|command=", "invoker-commands"),
         (r"grid-lanes", "grid-lanes"),
@@ -255,10 +286,11 @@ def detect_features(css: str, html: str, title: str, status: str) -> list[str]:
         (r"::checkmark|::picker-icon", "select-pseudos"),
         (r"appearance:\s*base-select", "base-select"),
         (r"corner-shape", "corner-shape"),
-        (r"container-type:\s*scroll-state|@container scroll-state", "scroll-state"),
+        (r"container-type:\s*scroll-state|@container\s+scroll-state", "scroll-state"),
         (r"animation-timeline:\s*view\(", "view-timeline"),
         (r"animation-timeline:\s*scroll\(", "scroll-timeline"),
-        (r"@view-transition|view-transition-name|view-transition-class", "view-transitions"),
+        (r"@view-transition\s*\{[^}]*navigation\s*:\s*auto", "view-transitions-cross"),
+        (r"@view-transition|view-transition-name|view-transition-class|::view-transition", "view-transitions-same"),
         (r"anchor-name|position-anchor|position-area", "anchor"),
         (r"interpolate-size", "interpolate-size"),
         (r"field-sizing", "field-sizing"),
@@ -480,6 +512,20 @@ PREVIEW_HTML: dict[str, str] = {
         '<li class="swipe-item"><div class="swipe-content">Document_v1.pdf</div><button class="swipe-action">Delete</button></li>'
         '<li class="swipe-item"><div class="swipe-content">Invoice_Q3.pdf</div><button class="swipe-action">Delete</button></li>'
         '</ul>',
+    "147": '<article class="fluid-rhythm-card" style="inline-size:min(22rem, 100%)">'
+        '<p class="eyebrow">Quarterly report</p><h2>Spacing that scales</h2>'
+        '<p>Responsive rhythm with typed @function.</p></article>',
+    "148": '<article class="docs-card" style="inline-size:min(24rem, 100%)">'
+        '<h2><span class="accent">Scoped</span> component guidance</h2><p>The outer accent belongs to the card.</p>'
+        '<section class="example"><p><span class="accent">Embedded content</span> keeps its own theme.</p></section></article>',
+    "149": '<div class="snap-products" style="max-width:22rem">'
+        '<article class="snap-product"><div class="snap-product__body"><strong>Starter</strong><span>$12</span></div></article>'
+        '<article class="snap-product"><div class="snap-product__body"><strong>Studio</strong><span>$28</span></div></article>'
+        '<article class="snap-product"><div class="snap-product__body"><strong>Agency</strong><span>$64</span></div></article></div>',
+    "150": '<dl class="metric-strip" style="inline-size:min(24rem, 100%)">'
+        '<div><dt>Revenue</dt><dd>$84k</dd></div><div><dt>Retention</dt><dd>94%</dd></div><div><dt>Latency</dt><dd>82ms</dd></div></dl>',
+    "151": '<ul class="avatar-cluster" style="max-width:20rem">'
+        '<li aria-label="Ari">A</li><li aria-label="Bea">B</li><li aria-label="Chen">C</li><li aria-label="Dara">D</li><li aria-label="Eli">E</li></ul>',
 }
 
 
@@ -602,33 +648,180 @@ def polish_preview(spell: dict) -> str:
 
 
 def rewrite_preview_assets(css: str) -> str:
-    """Same swap as polish_preview, but for CSS background images.
-
-    Only the markup used to be rewritten, so a recipe like
-    `background: url('/hero-bg.jpg')` still 404'd inside the sandbox and the
-    layer it painted came out empty.
-    """
+    """Same swap as polish_preview, but for CSS background images."""
     css = re.sub(rf"""url\(\s*['"]?/{LOCAL_IMG_A}['"]?\s*\)""", lambda _: f'url("{IMG}")', css)
     css = re.sub(rf"""url\(\s*['"]?/{LOCAL_IMG_B}['"]?\s*\)""", lambda _: f'url("{IMG_B}")', css)
     return css
 
 
-_HOST_TOKEN_RE = re.compile(r"(?<![\w.#-])(:root\b|\bhtml\b|\bbody\b)(?![\w-])")
+_CSS_LITERAL_RE = re.compile(
+    r"/\*.*?\*/|\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*'",
+    re.S,
+)
+
+
+def preview_environment(css: str) -> str:
+    """Select document isolation for CSS whose semantics require a document."""
+    code = _CSS_LITERAL_RE.sub("", css)
+    document_bound = (
+        re.search(r"(?<![\w.#-])(?:html|body|:root)\b", code)
+        or re.search(r"\bposition\s*:\s*fixed\b", code)
+        or re.search(r":target(?!-)", code)
+        or re.search(r"scroll\(\s*root\b", code)
+    )
+    return "document" if document_bound else "shadow"
+
+
+def preview_action(css: str, html: str) -> dict:
+    """Emit the interaction contract consumed by both the UI and tests."""
+    src = f"{css}\n{html}"
+    actions = [
+        (
+            r":user-invalid|:user-valid",
+            "invalid-input",
+            "Enter an invalid value, then leave the field",
+        ),
+        (
+            r"commandfor|popovertarget|<dialog\b|popover(?:=|\s|>)",
+            "activate-control",
+            "Activate the control to preview",
+        ),
+        (
+            r"<details\b|:open\b|\[open\]",
+            "toggle-disclosure",
+            "Open the disclosure to preview",
+        ),
+        (
+            r'type=["\']range["\']',
+            "adjust-range",
+            "Drag the range control to preview",
+        ),
+        (
+            r"animation-timeline|scroll-timeline|timeline-scope|container-type:\s*scroll-state",
+            "scroll",
+            "Scroll to preview",
+        ),
+        (r"@container\s+[\w-]*\s*\(", "resize", "Drag the corner to resize"),
+        (r"scroll-snap-type\s*:", "swipe", "Swipe to preview"),
+        (r":target(?!-)", "activate-link", "Activate the link to preview"),
+        (r"::selection\b", "select-text", "Select the text to preview"),
+        (r":checked\b|\[aria-pressed", "toggle-control", "Toggle the control to preview"),
+        (
+            r":hover\b.*:focus|:focus\b.*:hover",
+            "hover-or-focus",
+            "Hover or focus to preview",
+        ),
+        (r":hover\b", "hover", "Hover to preview"),
+        (r":focus-visible\b", "keyboard-focus", "Press Tab to preview"),
+        (r":focus(?:-within)?\b", "focus", "Focus to preview"),
+        (r":active\b", "press", "Press and hold to preview"),
+    ]
+    for pattern, kind, hint in actions:
+        if re.search(pattern, src, re.S):
+            return {"kind": kind, "hint": hint}
+    return {"kind": "none", "hint": ""}
+
+
+_ROOT_SELECTOR_RE = re.compile(
+    r"(?<![\w.#-])(?P<root>:root\b|\bhtml\b|\bbody\b)(?![\w-])"
+)
+
+
+def _skip_css_literal(css: str, start: int) -> int:
+    """Return the first index after a quoted string or block comment."""
+    if css.startswith("/*", start):
+        end = css.find("*/", start + 2)
+        return len(css) if end < 0 else end + 2
+    quote = css[start]
+    i = start + 1
+    while i < len(css):
+        if css[i] == "\\":
+            i += 2
+        elif css[i] == quote:
+            return i + 1
+        else:
+            i += 1
+    return len(css)
+
+
+def _rewrite_root_code(code: str) -> str:
+    def replace(match: re.Match) -> str:
+        return ".stage" if match.group("root") == "body" else ":host"
+
+    return _ROOT_SELECTOR_RE.sub(replace, code)
+
+
+def _rewrite_prelude(prelude: str) -> str:
+    """Rewrite document selectors while preserving strings and comments."""
+    out: list[str] = []
+    cursor = 0
+    i = 0
+    while i < len(prelude):
+        if prelude.startswith("/*", i) or prelude[i] in {'"', "'"}:
+            out.append(_rewrite_root_code(prelude[cursor:i]))
+            end = _skip_css_literal(prelude, i)
+            out.append(prelude[i:end])
+            cursor = end
+            i = end
+        else:
+            i += 1
+    out.append(_rewrite_root_code(prelude[cursor:]))
+    return "".join(out)
+
+
+def _find_block_end(css: str, opening: int) -> int:
+    depth = 1
+    i = opening + 1
+    while i < len(css):
+        if css.startswith("/*", i) or css[i] in {'"', "'"}:
+            i = _skip_css_literal(css, i)
+            continue
+        if css[i] == "{":
+            depth += 1
+        elif css[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return len(css) - 1
+
+
+def _rewrite_rule_list(css: str) -> str:
+    out: list[str] = []
+    cursor = statement = i = 0
+    round_depth = square_depth = 0
+    while i < len(css):
+        if css.startswith("/*", i) or css[i] in {'"', "'"}:
+            i = _skip_css_literal(css, i)
+            continue
+        char = css[i]
+        if char == "(":
+            round_depth += 1
+        elif char == ")":
+            round_depth = max(0, round_depth - 1)
+        elif char == "[":
+            square_depth += 1
+        elif char == "]":
+            square_depth = max(0, square_depth - 1)
+        elif char == ";" and round_depth == square_depth == 0:
+            statement = i + 1
+        elif char == "{" and round_depth == square_depth == 0:
+            closing = _find_block_end(css, i)
+            out.append(css[cursor:statement])
+            out.append(_rewrite_prelude(css[statement:i]))
+            out.append("{")
+            out.append(_rewrite_rule_list(css[i + 1:closing]))
+            out.append("}")
+            cursor = statement = closing + 1
+            i = closing
+        i += 1
+    out.append(css[cursor:])
+    return "".join(out)
 
 
 def rewrite_preview_css(css: str) -> str:
-    # Rewrite :root/html/body to :host, but never inside a comment (so
-    # "Prevents leaking to the body" doesn't get mangled) and never as a
-    # substring of a hyphenated class like .ticket-body (the \b boundary in a
-    # bare \bbody\b treats "-" as a word edge, so it used to match there too).
-    parts = re.split(r"(/\*.*?\*/)", css, flags=re.S)
-    for i, part in enumerate(parts):
-        if i % 2 == 0:  # even indices are code, odd indices are comments
-            parts[i] = _HOST_TOKEN_RE.sub(":host", part)
-    css = "".join(parts)
-    # "html body { ... }" both rewrite to :host; collapse the resulting
-    # "html body" → ":host :host" descendant combinator down to one :host.
-    return re.sub(r":host(?:\s+:host)+", ":host", css)
+    """Adapt selector preludes without touching declaration text."""
+    return _rewrite_rule_list(css)
 
 
 def main() -> None:
@@ -637,48 +830,46 @@ def main() -> None:
 
     payload = []
     corrected = 0
-    flagged = 0
     for spell in spells:
         feature_keys = detect_features(spell["css"], spell["html"], spell["title"], spell["status"])
         browsers_support = combine_support(feature_keys)
         derived_status = derive_status(browsers_support)
-        status, status_label = spell["status"], spell["statusLabel"]
-        if derived_status != status_label:
-            if status_label == "Baseline":
-                # "Baseline" is a specific claim — safe everywhere. If the
-                # combined support data has any red/partial browser, the
-                # label is provably wrong (not an editorial judgment call),
-                # so this is the one direction we auto-correct.
-                corrected += 1
-                status, status_label = derived_status.lower(), derived_status
-                print(f"  status corrected {spell['id']}: Baseline -> {derived_status} ({','.join(feature_keys)})")
-            else:
-                # Newer/Progressive are conservative-by-choice labels (e.g. a
-                # feature that's technically shipped everywhere but only in
-                # very recent versions). Flag for human review instead of
-                # silently overriding editorial judgment.
-                flagged += 1
-                print(f"  status flagged {spell['id']}: authored={status_label} derived={derived_status} ({','.join(feature_keys)}) — left as authored")
+        environment = preview_environment(spell["css"])
+        status_label = derived_status
+        status = derived_status.lower()
+        if derived_status != spell["statusLabel"]:
+            corrected += 1
+            print(f"  status corrected {spell['id']}: {spell['statusLabel']} -> {derived_status} ({','.join(feature_keys)})")
         item = {
             **spell,
             "status": status,
             "statusLabel": status_label,
+            "previewEnvironment": environment,
+            "previewAction": preview_action(spell["css"], spell["html"]),
             "previewHtml": polish_preview(spell),
-            "previewCss": rewrite_preview_assets(rewrite_preview_css(spell["css"])),
+            "previewCss": rewrite_preview_assets(
+                spell["css"]
+                if environment == "document"
+                else rewrite_preview_css(spell["css"])
+            ),
+            "featureKeys": feature_keys,
             "feature": feature_label(feature_keys),
             "browsers": browsers_support,
             "supportNote": feature_note(feature_keys),
         }
         payload.append(item)
-    print(f"status labels corrected (Baseline was wrong): {corrected}")
-    print(f"status labels flagged for review (Newer/Progressive judgment call): {flagged}")
+    print(f"status labels corrected from support data: {corrected}")
 
     cats = {}
     for s in payload:
         cats[s["category"]] = cats.get(s["category"], 0) + 1
     print("categories:", cats)
 
-    catalogue = {"total": len(payload), "spells": payload}
+    catalogue = {
+        "supportAsOf": SUPPORT_AS_OF,
+        "total": len(payload),
+        "spells": payload,
+    }
 
     classic = (
         "/* generated by scripts/build.py — do not edit by hand */\n"

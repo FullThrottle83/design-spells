@@ -69,7 +69,7 @@ const PREVIEW_TOKENS = `
   }
   :host {
     display: block;
-    color-scheme: light;
+    color-scheme: light dark;
     --color-primary: #18181b;
     --color-bg: #fbfaf8;
     --color-text: #18181b;
@@ -96,6 +96,21 @@ const PREVIEW_TOKENS = `
     --header-height: 3rem;
     color: var(--color-text);
     font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  }
+  @media (prefers-color-scheme: dark) {
+    :host {
+      --color-primary: #f4f4f5;
+      --color-bg: #18181b;
+      --color-text: #f4f4f5;
+      --color-text-muted: #a1a1aa;
+      --color-text-inverse: #18181b;
+      --color-border: #27272a;
+      --color-surface: #27272a;
+      --color-surface-offset: #202023;
+      --color-surface-dynamic: #3f3f46;
+      --color-surface-dark: #09090b;
+      --color-accent: #f97316;
+    }
   }
   .stage {
     position: relative;
@@ -125,6 +140,105 @@ const PREVIEW_TOKENS = `
     font: inherit;
     color: inherit;
   }
+  :where(button), .btn, .btn-primary {
+    padding: 0 .9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: transparent;
+  }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"])),
+  :where(select),
+  :where(textarea) {
+    font: inherit;
+    color: inherit;
+    padding: .45rem .65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  :where(select) { padding-inline-end: 1.6rem; }
+  :where(textarea) { resize: vertical; min-block-size: 5rem; }
+  :where(input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  :where(input[type="checkbox"], input[type="radio"]) {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+  :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; }
+  :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+  :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .demo-note {
+    margin: 0;
+    max-inline-size: 36ch;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 12px;
+  }
+`;
+
+const DOCUMENT_TOKENS = `
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    color-scheme: light dark;
+    --color-primary: light-dark(#18181b, #f4f4f5);
+    --color-bg: light-dark(#fbfaf8, #18181b);
+    --color-text: light-dark(#18181b, #f4f4f5);
+    --color-text-muted: light-dark(#75716a, #a1a1aa);
+    --color-text-inverse: light-dark(#fbfaf8, #18181b);
+    --color-border: light-dark(#e3ddd0, #27272a);
+    --color-surface: light-dark(#ffffff, #27272a);
+    --color-surface-offset: light-dark(#f2efe8, #202023);
+    --color-surface-dynamic: light-dark(#e3ddd0, #3f3f46);
+    --color-surface-dark: light-dark(#18181b, #09090b);
+    --color-error: #b3261e;
+    --color-success: #2f7d4f;
+    --color-accent: light-dark(#cf4520, #f97316);
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 8px;
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --header-height: 3rem;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  }
+  body {
+    padding: 16px;
+    display: grid;
+    place-items: center;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  button, .btn, a.btn { min-block-size: 36px; font: inherit; color: inherit; }
   :where(button), .btn, .btn-primary {
     padding: 0 .9rem;
     border: 1px solid var(--color-border);
@@ -494,15 +608,67 @@ function isRootBoundTimeline(css) {
 }
 
 function hydratePreview(host, spell, compact) {
-  const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
-  const rawCss = spell.previewCss || spell.css || "";
-  const flags = triggerFlags(rawCss);
-  const css = shimTargetCss(rawCss);
-  const html = spell.previewHtml || spell.html || "";
   const minHeight = compact ? 200 : 280;
+  const rawCss = spell.previewCss || spell.css || "";
+  const html = spell.previewHtml || spell.html || "";
   const timeline = hasScrollTimeline(rawCss);
+  const flags = triggerFlags(rawCss);
+  const hint = spell.previewAction?.hint || detectTrigger(rawCss, timeline, flags);
+
+  const root = host.shadowRoot ?? host.attachShadow({ mode: "open" });
+
+  if (spell.previewEnvironment === "document") {
+    const docSrc = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    ${DOCUMENT_TOKENS}
+    ${rawCss}
+  </style>
+</head>
+<body>
+  ${html}
+</body>
+</html>`;
+    root.innerHTML = `
+      <style>
+        :host { display: block; position: relative; width: 100%; }
+        .ds-document {
+          width: 100%;
+          min-height: ${minHeight}px;
+          border: 0;
+          display: block;
+          background: var(--color-bg, #fbfaf8);
+        }
+        .ds-hint {
+          position: absolute;
+          right: 8px;
+          bottom: 8px;
+          z-index: 2;
+          padding: 4px 8px;
+          border-radius: 999px;
+          background: var(--color-surface-dark, #18181b);
+          color: var(--color-text-inverse, #fbfaf8);
+          font: 600 10px/1 var(--ds-sans, ui-sans-serif, system-ui, sans-serif);
+          letter-spacing: .02em;
+          pointer-events: none;
+          opacity: .8;
+        }
+      </style>
+      <iframe
+        class="ds-document"
+        sandbox="allow-same-origin"
+        srcdoc="${esc(docSrc)}"
+        aria-label="Live preview: ${esc(spell.title)}"
+      ></iframe>${
+        hint ? `<span class="ds-hint ds-hint--document" aria-hidden="true">${esc(hint)}</span>` : ""
+      }`;
+    return;
+  }
+  const css = shimTargetCss(rawCss);
   const needsRunway = timeline && !hasSelfContainedTimeline(rawCss) && !isRootBoundTimeline(rawCss);
-  const hint = detectTrigger(rawCss, timeline, flags);
   const stage = `
     <div class="stage" style="min-height:${minHeight}px">
       ${html}

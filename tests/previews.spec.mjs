@@ -28,11 +28,56 @@ function isExplanatoryOnly(html) {
   return !/<[a-zA-Z]/.test(html.replace(/<p class=["']demo-note["']>[\s\S]*?<\/p>/g, ""));
 }
 
-/* Reads the mounted preview out of the shadow root. Runs in the page. */
+/* Reads the mounted preview out of either the shadow root or document iframe. Runs in the page. */
 function readPreview(classes) {
   const host = document.getElementById("quick-preview-host");
   const root = host && host.shadowRoot;
   if (!root) return { mounted: false };
+
+  const iframe = root.querySelector("iframe.ds-document");
+  if (iframe) {
+    const doc = iframe.contentDocument || iframe.contentWindow?.document;
+    const body = doc ? doc.body : null;
+    const elements = body ? [...body.querySelectorAll("*")] : [];
+    const painted = elements.filter((el) => {
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.height > 0;
+    });
+    const roots = body
+      ? [...body.children].filter(
+          (el) =>
+            !el.classList.contains("ds-hint") &&
+            doc.defaultView?.getComputedStyle(el).display !== "none",
+        )
+      : [];
+    const collapsed = roots
+      .filter((el) => el.offsetWidth === 0 || el.offsetHeight === 0)
+      .map((el) => `${el.tagName.toLowerCase()}.${el.className || "-"} ` +
+        `${el.offsetWidth}×${el.offsetHeight}`);
+    return {
+      rootCount: roots.length,
+      collapsed,
+      mounted: true,
+      hasStage: true,
+      stageWidth: iframe.clientWidth || host.clientWidth,
+      stageHeight: iframe.clientHeight || host.clientHeight,
+      elementCount: elements.length,
+      paintedCount: painted.length,
+      paintedTags: painted.slice(0, 8).map((el) => el.tagName.toLowerCase()),
+      brokenImages: doc ? [...doc.querySelectorAll("img")]
+        .filter((img) => !img.complete || img.naturalWidth === 0)
+        .map((img) => (img.getAttribute("src") || "").slice(0, 72)) : [],
+      matchedClasses: classes.filter((name) => {
+        try {
+          return Boolean(doc && doc.querySelector(`.${CSS.escape(name)}`));
+        } catch {
+          return false;
+        }
+      }),
+      hostWidth: host.clientWidth,
+      stageScrollWidth: body ? body.scrollWidth : 0,
+    };
+  }
 
   const stage = root.querySelector(".stage");
   const stageBox = stage ? stage.getBoundingClientRect() : null;
@@ -98,9 +143,10 @@ function countOwnRules(css) {
 
 test.describe("spell previews", () => {
   let page;
-  let failures;
+  let failures = [];
 
   test.beforeAll(async ({ browser }) => {
+    failures = [];
     page = await browser.newPage();
     page.on("pageerror", (error) => failures.push(`pageerror: ${error.message}`));
     page.on("console", (msg) => {
@@ -133,7 +179,17 @@ test.describe("spell previews", () => {
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction(() => {
         const root = document.getElementById("quick-preview-host")?.shadowRoot;
-        return Boolean(root) && [...root.querySelectorAll("img")].every((img) => img.complete);
+        if (!root) return false;
+        const iframe = root.querySelector("iframe.ds-document");
+        if (iframe) {
+          const doc = iframe.contentDocument || iframe.contentWindow?.document;
+          return (
+            Boolean(doc?.body) &&
+            doc.body.children.length > 0 &&
+            [...doc.querySelectorAll("img")].every((img) => img.complete)
+          );
+        }
+        return Boolean(root.querySelector(".stage")) && [...root.querySelectorAll("img")].every((img) => img.complete);
       });
 
       const classes = cssClasses(spell.previewCss);

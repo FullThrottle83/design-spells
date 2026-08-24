@@ -1417,6 +1417,27 @@ def render_drawer(spell: dict) -> str:
   </div>"""
 
 
+def render_quick_preview(spell: dict) -> str:
+    browsers = browsers_row(spell)
+    preview_box = render_preview_box(spell)
+    return f"""
+        <div class="preview-panel__card" data-preview="{spell['id']}">
+          <div class="preview-panel__head">
+            <p class="preview-panel__eyebrow">{spell['id']}</p>
+            <h2 class="preview-panel__title">{html.escape(spell['title'])}</h2>
+            <p class="preview-panel__cat">{html.escape(spell['category'])}</p>
+          </div>
+          <div class="preview-host preview-host--panel">
+            {preview_box}
+          </div>
+          <div class="preview-panel__browsers" aria-label="Browser support">
+            {browsers}
+          </div>
+          <button class="preview-panel__copy" type="button" data-copy-row data-spell-id="{spell['id']}">Copy CSS</button>
+          <button class="preview-panel__details" type="button" popovertarget="drawer-{spell['id']}">Open full details</button>
+        </div>"""
+
+
 def render_row(spell: dict) -> str:
     desc = one_line(spell.get("description", ""))
     desc_p = f'<p class="row__desc">{html.escape(desc)}</p>' if desc else ""
@@ -1424,6 +1445,8 @@ def render_row(spell: dict) -> str:
     tags = html.escape(f"{spell['category']} {spell['status']} {spell.get('feature', '')} {spell['title']}".lower(), quote=True)
     return f"""
   <li class="row" data-id="{spell['id']}" data-cat="{html.escape(spell['category'], quote=True)}" data-status="{html.escape(spell['status'], quote=True)}" data-tags="{tags}">
+    <input type="radio" name="preview-select" id="select-{spell['id']}" value="{spell['id']}" class="sr-only">
+    <label for="select-{spell['id']}" class="row__select-overlay" aria-hidden="true"></label>
     <div class="row__main">
       <h2 class="row__title">
         <button class="row__hit" type="button" popovertarget="drawer-{spell['id']}" aria-haspopup="dialog">{html.escape(spell['title'])}</button>
@@ -1433,7 +1456,7 @@ def render_row(spell: dict) -> str:
     <div class="row__aside">
       <button class="row__id" type="button" popovertarget="drawer-{spell['id']}" aria-label="Open {spell['id']} details">{spell['id']}</button>
       <div class="row__browsers" aria-label="Browser support">{browsers}</div>
-      <button class="row__copy" type="button" popovertarget="drawer-{spell['id']}" aria-label="Inspect {html.escape(spell['title'], quote=True)}">Inspect</button>
+      <button class="row__copy" type="button" data-copy-row data-spell-id="{spell['id']}" aria-label="Copy CSS for {html.escape(spell['title'], quote=True)}">Copy</button>
     </div>
   </li>"""
 
@@ -1489,6 +1512,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
     catalogue_content = "\n".join(cat_blocks)
     
     drawers_html = "\n".join(render_drawer(s) for s in spells)
+    quick_previews_html = "\n".join(render_quick_preview(s) for s in spells)
     
     full_html = f"""<!doctype html>
 <html lang="en" dir="ltr">
@@ -1578,6 +1602,10 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
       <div class="browse__list" id="catalogue">
 {catalogue_content}
       </div>
+
+      <aside class="browse__preview" id="preview-panel" aria-label="Live preview">
+{quick_previews_html}
+      </aside>
 
     </div>
 

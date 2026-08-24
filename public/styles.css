@@ -78,6 +78,19 @@ button { font: inherit; color: inherit; }
 
 [hidden] { display: none !important; }
 
+/* Accessibility visually-hidden utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .skip-link {
   position: absolute;
   top: -48px;
@@ -445,17 +458,29 @@ button { font: inherit; color: inherit; }
 }
 
 .row {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 13px 4px;
+  padding: 13px 8px;
   border-bottom: 1px solid var(--line);
   cursor: pointer;
-  transition: background-color .12s ease;
+  transition: background-color .12s ease, border-color .12s ease;
 }
 .row:hover, .row:focus-within { background: var(--surface); }
-
-.row__main { min-width: 0; flex: 1; }
+.row:has(input[name="preview-select"]:checked) {
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  padding-left: 6px;
+}
+.row__select-overlay {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  z-index: 0;
+}
+.row__main { min-width: 0; flex: 1; position: relative; z-index: 1; }
+.row__aside { position: relative; z-index: 1; }
 .row__title {
   font: 600 14px/1.3 var(--sans);
   letter-spacing: -.005em;
@@ -535,6 +560,165 @@ button { font: inherit; color: inherit; }
   font: 500 11px/1.6 var(--sans);
   letter-spacing: .01em;
   color: var(--ink-2);
+}
+
+/* Zero-JS Sticky Quick-Preview Panel Selection */
+.preview-panel__card {
+  display: none;
+  flex-direction: column;
+}
+.browse:not(:has(input[name="preview-select"]:checked)) .preview-panel__card:first-child,
+.browse:has(input[name="preview-select"][value="ds-1"]:checked) .preview-panel__card[data-preview="ds-1"],
+.browse:has(input[name="preview-select"][value="ds-2"]:checked) .preview-panel__card[data-preview="ds-2"],
+.browse:has(input[name="preview-select"][value="ds-3"]:checked) .preview-panel__card[data-preview="ds-3"],
+.browse:has(input[name="preview-select"][value="ds-5"]:checked) .preview-panel__card[data-preview="ds-5"],
+.browse:has(input[name="preview-select"][value="ds-7"]:checked) .preview-panel__card[data-preview="ds-7"],
+.browse:has(input[name="preview-select"][value="ds-19"]:checked) .preview-panel__card[data-preview="ds-19"],
+.browse:has(input[name="preview-select"][value="ds-20"]:checked) .preview-panel__card[data-preview="ds-20"],
+.browse:has(input[name="preview-select"][value="ds-22"]:checked) .preview-panel__card[data-preview="ds-22"],
+.browse:has(input[name="preview-select"][value="ds-24"]:checked) .preview-panel__card[data-preview="ds-24"],
+.browse:has(input[name="preview-select"][value="ds-26"]:checked) .preview-panel__card[data-preview="ds-26"],
+.browse:has(input[name="preview-select"][value="ds-38"]:checked) .preview-panel__card[data-preview="ds-38"],
+.browse:has(input[name="preview-select"][value="ds-39"]:checked) .preview-panel__card[data-preview="ds-39"],
+.browse:has(input[name="preview-select"][value="ds-67"]:checked) .preview-panel__card[data-preview="ds-67"],
+.browse:has(input[name="preview-select"][value="ds-71"]:checked) .preview-panel__card[data-preview="ds-71"],
+.browse:has(input[name="preview-select"][value="ds-73"]:checked) .preview-panel__card[data-preview="ds-73"],
+.browse:has(input[name="preview-select"][value="ds-79"]:checked) .preview-panel__card[data-preview="ds-79"],
+.browse:has(input[name="preview-select"][value="ds-80"]:checked) .preview-panel__card[data-preview="ds-80"],
+.browse:has(input[name="preview-select"][value="ds-81"]:checked) .preview-panel__card[data-preview="ds-81"],
+.browse:has(input[name="preview-select"][value="ds-82"]:checked) .preview-panel__card[data-preview="ds-82"],
+.browse:has(input[name="preview-select"][value="ds-83"]:checked) .preview-panel__card[data-preview="ds-83"],
+.browse:has(input[name="preview-select"][value="ds-84"]:checked) .preview-panel__card[data-preview="ds-84"],
+.browse:has(input[name="preview-select"][value="ds-88"]:checked) .preview-panel__card[data-preview="ds-88"],
+.browse:has(input[name="preview-select"][value="ds-89"]:checked) .preview-panel__card[data-preview="ds-89"],
+.browse:has(input[name="preview-select"][value="ds-90"]:checked) .preview-panel__card[data-preview="ds-90"],
+.browse:has(input[name="preview-select"][value="ds-8"]:checked) .preview-panel__card[data-preview="ds-8"],
+.browse:has(input[name="preview-select"][value="ds-9"]:checked) .preview-panel__card[data-preview="ds-9"],
+.browse:has(input[name="preview-select"][value="ds-11"]:checked) .preview-panel__card[data-preview="ds-11"],
+.browse:has(input[name="preview-select"][value="ds-14"]:checked) .preview-panel__card[data-preview="ds-14"],
+.browse:has(input[name="preview-select"][value="ds-31"]:checked) .preview-panel__card[data-preview="ds-31"],
+.browse:has(input[name="preview-select"][value="ds-65"]:checked) .preview-panel__card[data-preview="ds-65"],
+.browse:has(input[name="preview-select"][value="ds-66"]:checked) .preview-panel__card[data-preview="ds-66"],
+.browse:has(input[name="preview-select"][value="ds-68"]:checked) .preview-panel__card[data-preview="ds-68"],
+.browse:has(input[name="preview-select"][value="ds-72"]:checked) .preview-panel__card[data-preview="ds-72"],
+.browse:has(input[name="preview-select"][value="ds-75"]:checked) .preview-panel__card[data-preview="ds-75"],
+.browse:has(input[name="preview-select"][value="ds-91"]:checked) .preview-panel__card[data-preview="ds-91"],
+.browse:has(input[name="preview-select"][value="ds-92"]:checked) .preview-panel__card[data-preview="ds-92"],
+.browse:has(input[name="preview-select"][value="ds-93"]:checked) .preview-panel__card[data-preview="ds-93"],
+.browse:has(input[name="preview-select"][value="ds-17"]:checked) .preview-panel__card[data-preview="ds-17"],
+.browse:has(input[name="preview-select"][value="ds-30"]:checked) .preview-panel__card[data-preview="ds-30"],
+.browse:has(input[name="preview-select"][value="ds-36"]:checked) .preview-panel__card[data-preview="ds-36"],
+.browse:has(input[name="preview-select"][value="ds-43"]:checked) .preview-panel__card[data-preview="ds-43"],
+.browse:has(input[name="preview-select"][value="ds-44"]:checked) .preview-panel__card[data-preview="ds-44"],
+.browse:has(input[name="preview-select"][value="ds-45"]:checked) .preview-panel__card[data-preview="ds-45"],
+.browse:has(input[name="preview-select"][value="ds-46"]:checked) .preview-panel__card[data-preview="ds-46"],
+.browse:has(input[name="preview-select"][value="ds-47"]:checked) .preview-panel__card[data-preview="ds-47"],
+.browse:has(input[name="preview-select"][value="ds-55"]:checked) .preview-panel__card[data-preview="ds-55"],
+.browse:has(input[name="preview-select"][value="ds-69"]:checked) .preview-panel__card[data-preview="ds-69"],
+.browse:has(input[name="preview-select"][value="ds-12"]:checked) .preview-panel__card[data-preview="ds-12"],
+.browse:has(input[name="preview-select"][value="ds-15"]:checked) .preview-panel__card[data-preview="ds-15"],
+.browse:has(input[name="preview-select"][value="ds-27"]:checked) .preview-panel__card[data-preview="ds-27"],
+.browse:has(input[name="preview-select"][value="ds-33"]:checked) .preview-panel__card[data-preview="ds-33"],
+.browse:has(input[name="preview-select"][value="ds-37"]:checked) .preview-panel__card[data-preview="ds-37"],
+.browse:has(input[name="preview-select"][value="ds-40"]:checked) .preview-panel__card[data-preview="ds-40"],
+.browse:has(input[name="preview-select"][value="ds-56"]:checked) .preview-panel__card[data-preview="ds-56"],
+.browse:has(input[name="preview-select"][value="ds-61"]:checked) .preview-panel__card[data-preview="ds-61"],
+.browse:has(input[name="preview-select"][value="ds-62"]:checked) .preview-panel__card[data-preview="ds-62"],
+.browse:has(input[name="preview-select"][value="ds-70"]:checked) .preview-panel__card[data-preview="ds-70"],
+.browse:has(input[name="preview-select"][value="ds-77"]:checked) .preview-panel__card[data-preview="ds-77"],
+.browse:has(input[name="preview-select"][value="ds-18"]:checked) .preview-panel__card[data-preview="ds-18"],
+.browse:has(input[name="preview-select"][value="ds-34"]:checked) .preview-panel__card[data-preview="ds-34"],
+.browse:has(input[name="preview-select"][value="ds-48"]:checked) .preview-panel__card[data-preview="ds-48"],
+.browse:has(input[name="preview-select"][value="ds-49"]:checked) .preview-panel__card[data-preview="ds-49"],
+.browse:has(input[name="preview-select"][value="ds-50"]:checked) .preview-panel__card[data-preview="ds-50"],
+.browse:has(input[name="preview-select"][value="ds-10"]:checked) .preview-panel__card[data-preview="ds-10"],
+.browse:has(input[name="preview-select"][value="ds-bonus"]:checked) .preview-panel__card[data-preview="ds-bonus"],
+.browse:has(input[name="preview-select"][value="ds-53"]:checked) .preview-panel__card[data-preview="ds-53"],
+.browse:has(input[name="preview-select"][value="ds-63"]:checked) .preview-panel__card[data-preview="ds-63"],
+.browse:has(input[name="preview-select"][value="ds-6"]:checked) .preview-panel__card[data-preview="ds-6"],
+.browse:has(input[name="preview-select"][value="ds-16"]:checked) .preview-panel__card[data-preview="ds-16"],
+.browse:has(input[name="preview-select"][value="ds-23"]:checked) .preview-panel__card[data-preview="ds-23"],
+.browse:has(input[name="preview-select"][value="ds-28"]:checked) .preview-panel__card[data-preview="ds-28"],
+.browse:has(input[name="preview-select"][value="ds-32"]:checked) .preview-panel__card[data-preview="ds-32"],
+.browse:has(input[name="preview-select"][value="ds-54"]:checked) .preview-panel__card[data-preview="ds-54"],
+.browse:has(input[name="preview-select"][value="ds-57"]:checked) .preview-panel__card[data-preview="ds-57"],
+.browse:has(input[name="preview-select"][value="ds-76"]:checked) .preview-panel__card[data-preview="ds-76"],
+.browse:has(input[name="preview-select"][value="ds-85"]:checked) .preview-panel__card[data-preview="ds-85"],
+.browse:has(input[name="preview-select"][value="ds-86"]:checked) .preview-panel__card[data-preview="ds-86"],
+.browse:has(input[name="preview-select"][value="ds-87"]:checked) .preview-panel__card[data-preview="ds-87"],
+.browse:has(input[name="preview-select"][value="ds-25"]:checked) .preview-panel__card[data-preview="ds-25"],
+.browse:has(input[name="preview-select"][value="ds-35"]:checked) .preview-panel__card[data-preview="ds-35"],
+.browse:has(input[name="preview-select"][value="ds-51"]:checked) .preview-panel__card[data-preview="ds-51"],
+.browse:has(input[name="preview-select"][value="ds-52"]:checked) .preview-panel__card[data-preview="ds-52"],
+.browse:has(input[name="preview-select"][value="ds-58"]:checked) .preview-panel__card[data-preview="ds-58"],
+.browse:has(input[name="preview-select"][value="ds-64"]:checked) .preview-panel__card[data-preview="ds-64"],
+.browse:has(input[name="preview-select"][value="ds-74"]:checked) .preview-panel__card[data-preview="ds-74"],
+.browse:has(input[name="preview-select"][value="ds-78"]:checked) .preview-panel__card[data-preview="ds-78"],
+.browse:has(input[name="preview-select"][value="ds-13"]:checked) .preview-panel__card[data-preview="ds-13"],
+.browse:has(input[name="preview-select"][value="ds-21"]:checked) .preview-panel__card[data-preview="ds-21"],
+.browse:has(input[name="preview-select"][value="ds-29"]:checked) .preview-panel__card[data-preview="ds-29"],
+.browse:has(input[name="preview-select"][value="ds-59"]:checked) .preview-panel__card[data-preview="ds-59"],
+.browse:has(input[name="preview-select"][value="ds-60"]:checked) .preview-panel__card[data-preview="ds-60"],
+.browse:has(input[name="preview-select"][value="ds-41"]:checked) .preview-panel__card[data-preview="ds-41"],
+.browse:has(input[name="preview-select"][value="ds-94"]:checked) .preview-panel__card[data-preview="ds-94"],
+.browse:has(input[name="preview-select"][value="ds-95"]:checked) .preview-panel__card[data-preview="ds-95"],
+.browse:has(input[name="preview-select"][value="ds-96"]:checked) .preview-panel__card[data-preview="ds-96"],
+.browse:has(input[name="preview-select"][value="ds-97"]:checked) .preview-panel__card[data-preview="ds-97"],
+.browse:has(input[name="preview-select"][value="ds-98"]:checked) .preview-panel__card[data-preview="ds-98"],
+.browse:has(input[name="preview-select"][value="ds-99"]:checked) .preview-panel__card[data-preview="ds-99"],
+.browse:has(input[name="preview-select"][value="ds-100"]:checked) .preview-panel__card[data-preview="ds-100"],
+.browse:has(input[name="preview-select"][value="ds-101"]:checked) .preview-panel__card[data-preview="ds-101"],
+.browse:has(input[name="preview-select"][value="ds-102"]:checked) .preview-panel__card[data-preview="ds-102"],
+.browse:has(input[name="preview-select"][value="ds-103"]:checked) .preview-panel__card[data-preview="ds-103"],
+.browse:has(input[name="preview-select"][value="ds-104"]:checked) .preview-panel__card[data-preview="ds-104"],
+.browse:has(input[name="preview-select"][value="ds-105"]:checked) .preview-panel__card[data-preview="ds-105"],
+.browse:has(input[name="preview-select"][value="ds-106"]:checked) .preview-panel__card[data-preview="ds-106"],
+.browse:has(input[name="preview-select"][value="ds-107"]:checked) .preview-panel__card[data-preview="ds-107"],
+.browse:has(input[name="preview-select"][value="ds-108"]:checked) .preview-panel__card[data-preview="ds-108"],
+.browse:has(input[name="preview-select"][value="ds-109"]:checked) .preview-panel__card[data-preview="ds-109"],
+.browse:has(input[name="preview-select"][value="ds-110"]:checked) .preview-panel__card[data-preview="ds-110"],
+.browse:has(input[name="preview-select"][value="ds-111"]:checked) .preview-panel__card[data-preview="ds-111"],
+.browse:has(input[name="preview-select"][value="ds-112"]:checked) .preview-panel__card[data-preview="ds-112"],
+.browse:has(input[name="preview-select"][value="ds-113"]:checked) .preview-panel__card[data-preview="ds-113"],
+.browse:has(input[name="preview-select"][value="ds-114"]:checked) .preview-panel__card[data-preview="ds-114"],
+.browse:has(input[name="preview-select"][value="ds-115"]:checked) .preview-panel__card[data-preview="ds-115"],
+.browse:has(input[name="preview-select"][value="ds-116"]:checked) .preview-panel__card[data-preview="ds-116"],
+.browse:has(input[name="preview-select"][value="ds-117"]:checked) .preview-panel__card[data-preview="ds-117"],
+.browse:has(input[name="preview-select"][value="ds-118"]:checked) .preview-panel__card[data-preview="ds-118"],
+.browse:has(input[name="preview-select"][value="ds-119"]:checked) .preview-panel__card[data-preview="ds-119"],
+.browse:has(input[name="preview-select"][value="ds-120"]:checked) .preview-panel__card[data-preview="ds-120"],
+.browse:has(input[name="preview-select"][value="ds-121"]:checked) .preview-panel__card[data-preview="ds-121"],
+.browse:has(input[name="preview-select"][value="ds-122"]:checked) .preview-panel__card[data-preview="ds-122"],
+.browse:has(input[name="preview-select"][value="ds-123"]:checked) .preview-panel__card[data-preview="ds-123"],
+.browse:has(input[name="preview-select"][value="ds-124"]:checked) .preview-panel__card[data-preview="ds-124"],
+.browse:has(input[name="preview-select"][value="ds-125"]:checked) .preview-panel__card[data-preview="ds-125"],
+.browse:has(input[name="preview-select"][value="ds-126"]:checked) .preview-panel__card[data-preview="ds-126"],
+.browse:has(input[name="preview-select"][value="ds-127"]:checked) .preview-panel__card[data-preview="ds-127"],
+.browse:has(input[name="preview-select"][value="ds-128"]:checked) .preview-panel__card[data-preview="ds-128"],
+.browse:has(input[name="preview-select"][value="ds-129"]:checked) .preview-panel__card[data-preview="ds-129"],
+.browse:has(input[name="preview-select"][value="ds-130"]:checked) .preview-panel__card[data-preview="ds-130"],
+.browse:has(input[name="preview-select"][value="ds-131"]:checked) .preview-panel__card[data-preview="ds-131"],
+.browse:has(input[name="preview-select"][value="ds-132"]:checked) .preview-panel__card[data-preview="ds-132"],
+.browse:has(input[name="preview-select"][value="ds-133"]:checked) .preview-panel__card[data-preview="ds-133"],
+.browse:has(input[name="preview-select"][value="ds-134"]:checked) .preview-panel__card[data-preview="ds-134"],
+.browse:has(input[name="preview-select"][value="ds-135"]:checked) .preview-panel__card[data-preview="ds-135"],
+.browse:has(input[name="preview-select"][value="ds-136"]:checked) .preview-panel__card[data-preview="ds-136"],
+.browse:has(input[name="preview-select"][value="ds-137"]:checked) .preview-panel__card[data-preview="ds-137"],
+.browse:has(input[name="preview-select"][value="ds-138"]:checked) .preview-panel__card[data-preview="ds-138"],
+.browse:has(input[name="preview-select"][value="ds-139"]:checked) .preview-panel__card[data-preview="ds-139"],
+.browse:has(input[name="preview-select"][value="ds-140"]:checked) .preview-panel__card[data-preview="ds-140"],
+.browse:has(input[name="preview-select"][value="ds-141"]:checked) .preview-panel__card[data-preview="ds-141"],
+.browse:has(input[name="preview-select"][value="ds-142"]:checked) .preview-panel__card[data-preview="ds-142"],
+.browse:has(input[name="preview-select"][value="ds-143"]:checked) .preview-panel__card[data-preview="ds-143"],
+.browse:has(input[name="preview-select"][value="ds-144"]:checked) .preview-panel__card[data-preview="ds-144"],
+.browse:has(input[name="preview-select"][value="ds-145"]:checked) .preview-panel__card[data-preview="ds-145"],
+.browse:has(input[name="preview-select"][value="ds-146"]:checked) .preview-panel__card[data-preview="ds-146"],
+.browse:has(input[name="preview-select"][value="ds-147"]:checked) .preview-panel__card[data-preview="ds-147"],
+.browse:has(input[name="preview-select"][value="ds-148"]:checked) .preview-panel__card[data-preview="ds-148"],
+.browse:has(input[name="preview-select"][value="ds-149"]:checked) .preview-panel__card[data-preview="ds-149"],
+.browse:has(input[name="preview-select"][value="ds-150"]:checked) .preview-panel__card[data-preview="ds-150"],
+.browse:has(input[name="preview-select"][value="ds-151"]:checked) .preview-panel__card[data-preview="ds-151"] {
+  display: flex;
 }
 
 /* ---------------- sticky quick-preview panel ---------------- */

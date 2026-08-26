@@ -269,8 +269,6 @@ The underline slides in instead of blinking on.
 
 Icons transition smoothly through brand color tones on hover and focus.
 
-Icons transition smoothly through brand color tones on hover and focus.
-
 ```css
 .icon {
   color: var(--color-text-muted);
@@ -360,8 +358,6 @@ details[open] summary .chevron { transform: rotate(180deg); }
 
 An outbound link indicator icon that nudges outward on hover.
 
-An outbound link indicator icon that nudges outward on hover.
-
 ```css
 a[target="_blank"] .external-icon {
   transition: transform 180ms cubic-bezier(0.16,1,0.3,1), opacity 180ms cubic-bezier(0.16,1,0.3,1);
@@ -375,8 +371,6 @@ a[target="_blank"]:focus-visible .external-icon {
 
 ### 26. Pill Segmented Control Glow
 *Interaction · Baseline · 0 JS*
-
-Segmented pill selector with smooth active tab highlight and focus indicator.
 
 Segmented pill selector with smooth active tab highlight and focus indicator.
 
@@ -2099,8 +2093,6 @@ Contextual help appears beside a field on `:focus-within`.
 
 Custom text highlight styling using `::selection` to match brand identity.
 
-Custom text highlight styling using `::selection` to match brand identity.
-
 ```css
 ::selection {
   background: oklch(from var(--color-primary) l c h / 0.25);
@@ -2110,8 +2102,6 @@ Custom text highlight styling using `::selection` to match brand identity.
 
 ### Bonus. Typographic Harmony (`text-wrap`)
 *Typography · Baseline · 0 JS*
-
-Prevents orphaned single words at heading line ends using text-wrap balance and pretty.
 
 Prevents orphaned single words at heading line ends using text-wrap balance and pretty.
 
@@ -2480,8 +2470,6 @@ A media card gets a darker overlay on hover so the heading stays readable.
 
 Native CSS color scheme switching without JavaScript or duplicate CSS rules.
 
-Native CSS color scheme switching without JavaScript or duplicate CSS rules.
-
 ```css
 :root { color-scheme: light dark; }
 
@@ -2831,9 +2819,6 @@ progress::-webkit-progress-value { background: var(--color-primary); border-radi
   transition: inline-size 400ms cubic-bezier(.16,1,.3,1); }
 progress::-moz-progress-bar { background: var(--color-primary); border-radius: 999px; }
 ```
-
----
-
 
 ---
 

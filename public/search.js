@@ -191,50 +191,50 @@
 
   // ------------------------------------------------------------- 4. Live Browser Feature Check (CSS.supports)
   const FEATURE_SUPPORTS = {
-    "custom-functions": "CSS.supports('@function --f() {}')",
-    "css-scope": "CSS.supports('@scope')",
-    "gap-decorations": "CSS.supports('column-rule: 1px solid red')",
-    "css-random": "CSS.supports('width: random(1px, 10px)')",
-    "interest-invokers": "'interestfor' in HTMLButtonElement.prototype",
-    "invoker-commands": "'commandfor' in HTMLButtonElement.prototype",
-    "grid-lanes": "CSS.supports('display: grid-lanes')",
-    "sibling-index": "CSS.supports('top: sibling-index()')",
-    "contrast-color": "CSS.supports('color: contrast-color(red)')",
-    "if": "CSS.supports('color: if(style(--x: 1): red)')",
-    "typed-attr": "CSS.supports('width: attr(data-w type(<length>))')",
-    "closedby": "'closedBy' in HTMLDialogElement.prototype || 'closedby' in HTMLElement.prototype",
-    "scroll-initial-target": "CSS.supports('scroll-initial-target: nearest')",
-    "open-pseudo": "CSS.supports('selector(:open)')",
-    "until-found": "'onbeforematch' in window",
-    "scroll-markers": "CSS.supports('selector(::scroll-marker)')",
-    "select-pseudos": "CSS.supports('selector(::checkmark)')",
-    "base-select": "CSS.supports('appearance: base-select')",
-    "corner-shape": "CSS.supports('corner-shape: round')",
-    "scroll-state": "CSS.supports('container-type: scroll-state')",
-    "view-timeline": "CSS.supports('animation-timeline: view()')",
-    "scroll-timeline": "CSS.supports('animation-timeline: scroll()')",
-    "view-transitions-cross": "CSS.supports('@view-transition { navigation: auto; }')",
-    "view-transitions-same": "CSS.supports('view-transition-name: test')",
-    "anchor": "CSS.supports('anchor-name: --a')",
-    "interpolate-size": "CSS.supports('interpolate-size: allow-keywords')",
-    "field-sizing": "CSS.supports('field-sizing: content')",
-    "text-box-trim": "CSS.supports('text-box-trim: both')",
-    "details-content": "CSS.supports('selector(::details-content)')",
-    "reading-flow": "CSS.supports('reading-flow: grid-rows')",
-    "target-text": "CSS.supports('selector(::target-text)')",
-    "initial-letter": "CSS.supports('initial-letter: 2')",
-    "position-visibility": "CSS.supports('position-visibility: anchors-visible')",
-    "shape": "CSS.supports('clip-path: shape()')",
-    "offset-path": "CSS.supports('offset-path: path(\"M0 0\")')",
-    "property": "CSS.supports('@property --p { syntax: \"<number>\"; inherits: false; initial-value: 0; }')",
-    "subgrid": "CSS.supports('grid-template-columns: subgrid')",
-    "container": "CSS.supports('container-type: inline-size')",
-    "content-visibility": "CSS.supports('content-visibility: auto')",
-    "scrollbar-color": "CSS.supports('scrollbar-color: auto')",
-    "light-dark": "CSS.supports('color: light-dark(#fff, #000)')",
-    "starting-style": "CSS.supports('@starting-style {}')",
-    "color-mix": "CSS.supports('color: color-mix(in srgb, red 50%, blue)')",
-    "has": "CSS.supports('selector(:has(*))')"
+    "custom-functions": () => window.CSS && CSS.supports && CSS.supports("@function --f() {}"),
+    "css-scope": () => window.CSS && CSS.supports && CSS.supports("@scope"),
+    "gap-decorations": () => window.CSS && CSS.supports && CSS.supports("column-rule: 1px solid red"),
+    "css-random": () => window.CSS && CSS.supports && CSS.supports("width: random(1px, 10px)"),
+    "interest-invokers": () => typeof HTMLButtonElement !== "undefined" && "interestfor" in HTMLButtonElement.prototype,
+    "invoker-commands": () => typeof HTMLButtonElement !== "undefined" && "commandfor" in HTMLButtonElement.prototype,
+    "grid-lanes": () => window.CSS && CSS.supports && CSS.supports("display: grid-lanes"),
+    "sibling-index": () => window.CSS && CSS.supports && CSS.supports("top: sibling-index()"),
+    "contrast-color": () => window.CSS && CSS.supports && CSS.supports("color: contrast-color(red)"),
+    "if": () => window.CSS && CSS.supports && CSS.supports("color: if(style(--x: 1): red)"),
+    "typed-attr": () => window.CSS && CSS.supports && CSS.supports("width: attr(data-w type(<length>))"),
+    "closedby": () => (typeof HTMLDialogElement !== "undefined" && "closedBy" in HTMLDialogElement.prototype) || "closedby" in HTMLElement.prototype,
+    "scroll-initial-target": () => window.CSS && CSS.supports && CSS.supports("scroll-initial-target: nearest"),
+    "open-pseudo": () => window.CSS && CSS.supports && CSS.supports("selector(:open)"),
+    "until-found": () => "onbeforematch" in window,
+    "scroll-markers": () => window.CSS && CSS.supports && CSS.supports("selector(::scroll-marker)"),
+    "select-pseudos": () => window.CSS && CSS.supports && CSS.supports("selector(::checkmark)"),
+    "base-select": () => window.CSS && CSS.supports && CSS.supports("appearance: base-select"),
+    "corner-shape": () => window.CSS && CSS.supports && CSS.supports("corner-shape: round"),
+    "scroll-state": () => window.CSS && CSS.supports && CSS.supports("container-type: scroll-state"),
+    "view-timeline": () => window.CSS && CSS.supports && CSS.supports("animation-timeline: view()"),
+    "scroll-timeline": () => window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()"),
+    "view-transitions-cross": () => window.CSS && CSS.supports && CSS.supports("@view-transition { navigation: auto; }"),
+    "view-transitions-same": () => window.CSS && CSS.supports && CSS.supports("view-transition-name: test"),
+    "anchor": () => window.CSS && CSS.supports && CSS.supports("anchor-name: --a"),
+    "interpolate-size": () => window.CSS && CSS.supports && CSS.supports("interpolate-size: allow-keywords"),
+    "field-sizing": () => window.CSS && CSS.supports && CSS.supports("field-sizing: content"),
+    "text-box-trim": () => window.CSS && CSS.supports && CSS.supports("text-box-trim: both"),
+    "details-content": () => window.CSS && CSS.supports && CSS.supports("selector(::details-content)"),
+    "reading-flow": () => window.CSS && CSS.supports && CSS.supports("reading-flow: grid-rows"),
+    "target-text": () => window.CSS && CSS.supports && CSS.supports("selector(::target-text)"),
+    "initial-letter": () => window.CSS && CSS.supports && CSS.supports("initial-letter: 2"),
+    "position-visibility": () => window.CSS && CSS.supports && CSS.supports("position-visibility: anchors-visible"),
+    "shape": () => window.CSS && CSS.supports && CSS.supports("clip-path: shape()"),
+    "offset-path": () => window.CSS && CSS.supports && CSS.supports("offset-path: path('M0 0')"),
+    "property": () => window.CSS && CSS.supports && CSS.supports("@property --p { syntax: '<number>'; inherits: false; initial-value: 0; }"),
+    "subgrid": () => window.CSS && CSS.supports && CSS.supports("grid-template-columns: subgrid"),
+    "container": () => window.CSS && CSS.supports && CSS.supports("container-type: inline-size"),
+    "content-visibility": () => window.CSS && CSS.supports && CSS.supports("content-visibility: auto"),
+    "scrollbar-color": () => window.CSS && CSS.supports && CSS.supports("scrollbar-color: auto"),
+    "light-dark": () => window.CSS && CSS.supports && CSS.supports("color: light-dark(#fff, #000)"),
+    "starting-style": () => window.CSS && CSS.supports && CSS.supports("@starting-style {}"),
+    "color-mix": () => window.CSS && CSS.supports && CSS.supports("color: color-mix(in srgb, red 50%, blue)"),
+    "has": () => window.CSS && CSS.supports && CSS.supports("selector(:has(*))")
   };
 
   function checkFeatureSupport(featureKeys) {
@@ -242,13 +242,13 @@
 
     let supportedCount = 0;
     for (const key of featureKeys) {
-      const expr = FEATURE_SUPPORTS[key];
-      if (!expr) {
+      const fn = FEATURE_SUPPORTS[key];
+      if (!fn) {
         supportedCount++;
         continue;
       }
       try {
-        const res = eval(expr);
+        const res = typeof fn === "function" ? fn() : Boolean(fn);
         if (res) supportedCount++;
       } catch (e) {
         // Feature check failed

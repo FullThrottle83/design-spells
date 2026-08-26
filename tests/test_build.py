@@ -27,6 +27,7 @@ from pathlib import Path
 
 from scripts.build import (
     CAT_ORDER,
+    astro_for,
     highlight_css,
     highlight_html,
     inline_md_to_html,
@@ -510,7 +511,26 @@ class EmittedHtmlTest(unittest.TestCase):
         self.assertIn('name="tabs-ds-1"', self.html)
         self.assertIn('<summary class="code__tab">Modern CSS</summary>', self.html)
         self.assertIn('<summary class="code__tab">Tailwind v4</summary>', self.html)
+        self.assertIn('<summary class="code__tab">Astro Component</summary>', self.html)
         self.assertIn('<summary class="code__tab">HTML</summary>', self.html)
+
+    def test_emitted_index_html_contains_data_features(self):
+        self.assertIn('data-features="', self.html)
+
+    def test_astro_for_generates_astro_sfc_format(self):
+        sample = {
+            "id": "ds-1",
+            "title": "Shimmer on primary buttons",
+            "category": "Interaction",
+            "statusLabel": "Baseline",
+            "css": ".btn-primary { color: red; }",
+            "html": "<button class=\"btn-primary\">Click</button>",
+        }
+        res = astro_for(sample)
+        self.assertTrue(res.startswith("---"))
+        self.assertIn("// ds-1 — Shimmer on primary buttons", res)
+        self.assertIn("<button class=\"btn-primary\">Click</button>", res)
+        self.assertIn("<style>\n.btn-primary { color: red; }\n</style>", res)
 
 
 if __name__ == "__main__":

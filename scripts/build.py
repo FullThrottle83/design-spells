@@ -1346,6 +1346,26 @@ def render_preview_box(spell: dict) -> str:
 </template>"""
 
 
+def astro_for(spell: dict) -> str:
+    title = spell.get("title", "")
+    sid = spell.get("id", "")
+    category = spell.get("category", "")
+    status = spell.get("statusLabel", "")
+    css = (spell.get("css") or "").strip()
+    html_src = (spell.get("previewHtml") or spell.get("html") or "").strip()
+    return f"""---
+// {sid} — {title}
+// Category: {category} | Status: {status}
+// Modern CSS / Astro 7 (Zero Client JS)
+---
+
+{html_src}
+
+<style>
+{css}
+</style>"""
+
+
 def render_drawer(spell: dict) -> str:
     status_cls = "ok" if spell["status"] == "baseline" else "warn" if spell["status"] == "newer" else "muted"
     browser_items = "".join(
@@ -1354,7 +1374,9 @@ def render_drawer(spell: dict) -> str:
     )
     desc_html = inline_md_to_html(spell.get("description", "")) or "A zero-JS CSS technique."
     tailwind_src = tailwind_for(spell)
+    astro_src = astro_for(spell)
     preview_box = render_preview_box(spell)
+    feature_keys_json = html.escape(json.dumps(spell.get("featureKeys", [])), quote=True)
     
     return f"""
   <div class="drawer" id="drawer-{spell['id']}" popover="auto" role="dialog" aria-modal="true" aria-labelledby="drawer-title-{spell['id']}">
@@ -1381,18 +1403,29 @@ def render_drawer(spell: dict) -> str:
       <section class="sect" aria-labelledby="browsers-label-{spell['id']}">
         <h3 class="sect__label" id="browsers-label-{spell['id']}">Browser support <span>{html.escape(spell['feature'])}</span></h3>
         <ul class="browser-list">{browser_items}</ul>
+        <div class="feature-check" data-features="{feature_keys_json}">
+          <span class="feature-check__text">Checking compatibility with your current browser...</span>
+        </div>
         <p class="support-note">{html.escape(spell['supportNote'])}</p>
       </section>
 
       <section class="sect" aria-labelledby="preview-label-{spell['id']}">
-        <h3 class="sect__label" id="preview-label-{spell['id']}">Live preview <span>isolated sandbox</span></h3>
+        <div class="sect__head-row">
+          <h3 class="sect__label" id="preview-label-{spell['id']}">Live preview <span>isolated sandbox</span></h3>
+          <div class="stage-controls">
+            <button type="button" class="btn-stage is-active" data-stage-width="100%">100%</button>
+            <button type="button" class="btn-stage" data-stage-width="768px">768px</button>
+            <button type="button" class="btn-stage" data-stage-width="375px">375px</button>
+            <button type="button" class="btn-stage btn-stage--theme" data-stage-theme-toggle title="Toggle light/dark preview stage">☀️/🌙</button>
+          </div>
+        </div>
         <div class="preview-host preview-host--lg" id="preview-host-{spell['id']}">
           {preview_box}
         </div>
       </section>
 
       <section class="sect" aria-labelledby="source-label-{spell['id']}">
-        <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind v4 / HTML</span></h3>
+        <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind v4 / Astro / HTML</span></h3>
         <div class="code drawer__code code__tabs">
           <details name="tabs-{spell['id']}" class="code__tab-group" open>
             <summary class="code__tab">Modern CSS</summary>
@@ -1403,6 +1436,10 @@ def render_drawer(spell: dict) -> str:
             <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_css(tailwind_src)}</code></pre></div>
           </details>
           <details name="tabs-{spell['id']}" class="code__tab-group">
+            <summary class="code__tab">Astro Component</summary>
+            <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_html(astro_src)}</code></pre></div>
+          </details>
+          <details name="tabs-{spell['id']}" class="code__tab-group">
             <summary class="code__tab">HTML</summary>
             <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_html(spell['previewHtml'] or spell['html'] or '<!-- CSS-only; no extra markup required. -->')}</code></pre></div>
           </details>
@@ -1411,6 +1448,7 @@ def render_drawer(spell: dict) -> str:
     </div>
 
     <footer class="drawer__foot">
+      <button class="btn btn--stack" type="button" data-stack-add="{spell['id']}">+ Add to Stack</button>
       <p class="drawer__hint">Zero JS · copy and paste freely</p>
       <button class="btn btn--primary" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide">Close</button>
     </footer>
@@ -1433,7 +1471,10 @@ def render_quick_preview(spell: dict) -> str:
           <div class="preview-panel__browsers" aria-label="Browser support">
             {browsers}
           </div>
-          <button class="preview-panel__copy" type="button" data-copy-row data-spell-id="{spell['id']}">Copy CSS</button>
+          <div class="preview-panel__actions">
+            <button class="preview-panel__copy" type="button" data-copy-row data-spell-id="{spell['id']}">Copy CSS</button>
+            <button class="preview-panel__stack" type="button" data-stack-add="{spell['id']}">+ Stack</button>
+          </div>
           <button class="preview-panel__details" type="button" popovertarget="drawer-{spell['id']}">Open full details</button>
         </div>"""
 
@@ -1442,7 +1483,7 @@ def render_row(spell: dict) -> str:
     desc = one_line(spell.get("description", ""))
     desc_p = f'<p class="row__desc">{html.escape(desc)}</p>' if desc else ""
     browsers = browsers_row(spell)
-    tags = html.escape(f"{spell['category']} {spell['status']} {spell.get('feature', '')} {spell['title']}".lower(), quote=True)
+    tags = html.escape(f"{spell['category']} {spell['status']} {spell.get('feature', '')} {' '.join(spell.get('featureKeys', []))} {spell['title']} {spell['id']} {spell.get('css', '')}".lower(), quote=True)
     return f"""
   <li class="row" data-id="{spell['id']}" data-cat="{html.escape(spell['category'], quote=True)}" data-status="{html.escape(spell['status'], quote=True)}" data-tags="{tags}">
     <input type="radio" name="preview-select" id="select-{spell['id']}" value="{spell['id']}" class="sr-only">
@@ -1454,6 +1495,7 @@ def render_row(spell: dict) -> str:
       {desc_p}
     </div>
     <div class="row__aside">
+      <button class="btn-row-stack" type="button" data-stack-add="{spell['id']}" title="Add to stack">+</button>
       <button class="row__id" type="button" popovertarget="drawer-{spell['id']}" aria-label="Open {spell['id']} details">{spell['id']}</button>
       <div class="row__browsers" aria-label="Browser support">{browsers}</div>
       <button class="row__copy" type="button" data-copy-row data-spell-id="{spell['id']}" aria-label="Copy CSS for {html.escape(spell['title'], quote=True)}">Copy</button>
@@ -1519,16 +1561,16 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>Design Spells — zero-JS CSS techniques</title>
-  <meta name="description" content="150 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <meta name="description" content="{total} zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Design Spells — zero-JS CSS techniques">
-  <meta property="og:description" content="150 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <meta property="og:description" content="{total} zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Design Spells — zero-JS CSS techniques">
-  <meta name="twitter:description" content="150 zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
+  <meta name="twitter:description" content="{total} zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='1' y='13' font-size='13'%3E%E2%9C%B6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
   <script src="./search.js" defer></script>
@@ -1546,6 +1588,12 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
         <span class="brand__tag">Zero-JS CSS techniques</span>
       </p>
       <div class="head-meta">
+        <div class="theme-switch">
+          <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle theme (Light / Dark / Auto)" title="Toggle Theme (Auto / Light / Dark)">
+            <span class="theme-btn__icon">💻</span>
+            <span class="theme-btn__label">Auto</span>
+          </button>
+        </div>
         <p class="counter" id="counter" aria-live="polite">Showing {total} of {total} spells</p>
         <a class="sponsor" href="https://github.com/sponsors/FullThrottle83" target="_blank" rel="noopener">
           Sponsor on GitHub <span aria-hidden="true">↗</span>
@@ -1562,10 +1610,18 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
         {total} interaction, layout, and polish techniques. No client JavaScript.
         Click a spell to preview it, then copy the source.
       </p>
+      <div class="preset-stacks" aria-label="Ready-made stacks">
+        <span class="preset-stacks__label">Presets:</span>
+        <button type="button" class="preset-btn" data-preset="baseline">⚡ Astro Baseline</button>
+        <button type="button" class="preset-btn" data-preset="marketing">🚀 Marketing</button>
+        <button type="button" class="preset-btn" data-preset="forms">📝 Forms</button>
+        <button type="button" class="preset-btn" data-preset="data">📊 Data & Charts</button>
+        <button type="button" class="preset-btn" data-preset="micro">✨ Micro-Interactions</button>
+      </div>
       <form class="search" id="search-form" role="search" action="#main">
         <div class="search__field">
           <input class="search__input" id="search" name="q" type="search"
-                 placeholder="Search by name, category, feature, or status…"
+                 placeholder="Search by name, category, feature, CSS property, or status…"
                  aria-label="Search spells"
                  autocomplete="off" autocapitalize="off" spellcheck="false">
           <kbd class="search__kbd" aria-hidden="true">/</kbd>
@@ -1614,6 +1670,36 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
       <span>Open source · contributions via pull request</span>
     </footer>
   </main>
+
+  <aside class="stack-bar" id="stack-bar" hidden aria-label="Spell stack builder">
+    <button type="button" class="stack-bar__toggle" id="stack-toggle" popovertarget="stack-drawer">
+      <span class="stack-bar__icon">📦</span>
+      <span class="stack-bar__text">My Stack</span>
+      <span class="stack-bar__count" id="stack-count">0</span>
+    </button>
+  </aside>
+
+  <div class="drawer drawer--stack" id="stack-drawer" popover="auto" role="dialog" aria-modal="true" aria-labelledby="stack-title">
+    <header class="drawer__head">
+      <div class="drawer__head-main">
+        <p class="drawer__eyebrow">Stack Builder</p>
+        <h2 class="drawer__title" id="stack-title">Selected Design Spells</h2>
+      </div>
+      <button class="drawer__close" type="button" popovertarget="stack-drawer" popovertargetaction="hide" aria-label="Close stack panel">×</button>
+    </header>
+    <div class="drawer__scroll">
+      <p class="drawer__desc">Combine spells into a single consolidated CSS bundle with a unified <code>:root</code> token block.</p>
+      <div class="stack-items" id="stack-items">
+        <p class="stack-empty">Your stack is currently empty. Click <strong>+ Add to Stack</strong> on any spell or preset above to build your bundle.</p>
+      </div>
+      <div class="stack-actions">
+        <button type="button" class="btn btn--primary" id="stack-copy-css">Copy Combined CSS</button>
+        <button type="button" class="btn btn--secondary" id="stack-download-css">Download stack.css</button>
+        <button type="button" class="btn btn--secondary" id="stack-share-url">Share Stack Link</button>
+        <button type="button" class="btn btn--danger" id="stack-clear">Clear Stack</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Pre-rendered modal drawers for all 150 spells with Declarative Shadow DOM and native code tabs -->
   <div class="drawers-layer" id="drawers-layer">

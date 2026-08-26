@@ -88,7 +88,6 @@ This is the foundation every spell builds on. Load it before anything else.
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
 
 html {
   /* Prevents layout shift when a dialog/popover opens and locks the scrollbar */
@@ -277,6 +276,10 @@ The underline slides in instead of blinking on.
 ### 7. Icon Color Shift
 *Interaction · Baseline · 0 JS*
 
+Icons transition smoothly through brand color tones on hover and focus.
+
+Icons transition smoothly through brand color tones on hover and focus.
+
 ```css
 .icon {
   color: var(--color-text-muted);
@@ -348,6 +351,8 @@ input[type="checkbox"]:checked::before { transform: scale(1); }
 ### 22. Details Chevron Rotate
 *Interaction · Baseline · Markup*
 
+Smooth rotation indicator for details disclosure triangles on open state.
+
 ```css
 summary {
   list-style: none;
@@ -365,6 +370,10 @@ details[open] summary .chevron { transform: rotate(180deg); }
 ### 24. External Link Nudge
 *Interaction · Baseline · 0 JS*
 
+An outbound link indicator icon that nudges outward on hover.
+
+An outbound link indicator icon that nudges outward on hover.
+
 ```css
 a[target="_blank"] .external-icon {
   display: inline-block;
@@ -380,6 +389,10 @@ a[target="_blank"]:focus-visible .external-icon {
 
 ### 26. Pill Segmented Control Glow
 *Interaction · Baseline · 0 JS*
+
+Segmented pill selector with smooth active tab highlight and focus indicator.
+
+Segmented pill selector with smooth active tab highlight and focus indicator.
 
 ```css
 .segmented {
@@ -443,7 +456,6 @@ A touch-friendly, accessible before/after image comparison with no JavaScript. T
   <div class="compare-scroller" tabindex="0" role="region" aria-label="Compare before and after. Swipe or use the arrow keys.">
     <div class="scroller-spacer"></div>
   </div>
-</div>
 ```
 
 ```css
@@ -500,7 +512,6 @@ A touch-friendly, accessible before/after image comparison with no JavaScript. T
     from { clip-path: inset(0 0% 0 0); }
     to   { clip-path: inset(0 100% 0 0); }
   }
-}
 ```
 
 ### 71. Sliding Segment Indicator
@@ -634,7 +645,6 @@ details[open] .fab-actions {
     opacity: 0;
     transform: translateY(12px);
   }
-}
 ```
 
 ### 79. Anchor-Positioned Mega Menu (`[popover]`)
@@ -907,7 +917,6 @@ A click-driven action menu (⋯) pinned to its trigger with anchor positioning a
     <hr>
     <button role="menuitem" class="danger">Delete</button>
   </div>
-</div>
 ```
 
 ```css
@@ -1054,7 +1063,6 @@ A large premium effect for multi-page sites. The browser handles MPA navigation 
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-}
 ```
 
 ### 31. Phantom Entry (`@starting-style`)
@@ -1083,7 +1091,6 @@ A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[pop
     opacity: 0;
     transform: translateY(-8px) scale(0.96);
   }
-}
 ```
 
 ### 65. Scroll-Driven Header Compression
@@ -1148,7 +1155,6 @@ dialog[open]::backdrop,
   [popover]:popover-open::backdrop {
     opacity: 0;
   }
-}
 ```
 
 ### 68. Infinite Logo Marquee
@@ -1167,7 +1173,6 @@ A smooth infinite logo marquee with edge fades via `mask-image`.
   <div class="marquee-track" aria-hidden="true">
     <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>
   </div>
-</div>
 ```
 
 ```css
@@ -1222,7 +1227,6 @@ List and card items fade in sequence as the user scrolls, synced to viewport pos
       opacity: 1;
       transform: translateY(0) scale(1);
     }
-  }
 }
 ```
 
@@ -1269,7 +1273,6 @@ Click an image to enlarge it to a fullscreen view with a native `popover` — no
     opacity: 0;
     transform: scale(0.92);
   }
-}
 ```
 
 ### 91. Ken Burns Scroll Gallery
@@ -1295,7 +1298,6 @@ Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in th
     50%  { transform: scale(1)    translateY(0); }
     100% { transform: scale(1.12) translateY(-2%); }
   }
-}
 ```
 
 ### 92. Image-Clipped Gradient Headline
@@ -1381,7 +1383,6 @@ The header becomes frosted glass only after the user has scrolled a little.
       border-bottom-color: var(--color-border);
       box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);
     }
-  }
 }
 ```
 
@@ -1468,7 +1469,6 @@ A sticky element gains extra shadow and border only once it is actually stuck. M
     border-color: var(--color-border);
     box-shadow: 0 12px 32px oklch(0 0 0 / .10);
   }
-}
 ```
 
 ### 45. Snapped Spotlight
@@ -1501,7 +1501,6 @@ The active slide in a scroll-snap container gets full sharpness while siblings f
     opacity: 1;
     transform: scale(1);
   }
-}
 ```
 
 ### 46. Real Overflow Hint
@@ -1551,7 +1550,6 @@ A floating button that wakes only after the user has moved the page. **Requires 
     transform: none;
     pointer-events: auto;
   }
-}
 ```
 
 ### 55. Sticky Card Deck
@@ -1579,7 +1577,6 @@ Cards stack like a deck as the user scrolls. Scale and dimming stay synced to th
       transform: scale(0.92) translateY(-0.5rem);
       filter: brightness(0.6);
     }
-  }
 }
 ```
 
@@ -1607,7 +1604,6 @@ Tables with `position: sticky` show edge shadows and dividers *only* when the co
   .table-wrapper td:first-child {
     box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
   }
-}
 ```
 
 ---
@@ -1616,6 +1612,8 @@ Tables with `position: sticky` show edge shadows and dividers *only* when the co
 
 ### 12. Scroll Snap gallery
 *Layout · Baseline · 0 JS*
+
+Touch-friendly horizontal scroll carousel with native CSS scroll snapping.
 
 ```css
 .gallery {
@@ -1718,7 +1716,6 @@ A card that adapts its layout to its container, not the viewport.
     aspect-ratio: 1;
     border-radius: var(--radius-md) 0 0 var(--radius-md);
   }
-}
 ```
 
 ### 40. Subgrid Alignment
@@ -1939,7 +1936,6 @@ dialog.responsive-sheet[open] {
   dialog.responsive-sheet[open] {
     transform: translateY(100%);
   }
-}
 
 /* Centered modal on desktop */
 @media (min-width: 640px) {
@@ -1954,7 +1950,6 @@ dialog.responsive-sheet[open] {
     dialog.responsive-sheet[open] {
       transform: scale(0.95);
     }
-  }
 }
 ```
 
@@ -1988,7 +1983,6 @@ Keep this for simple hover text on elements where `overflow: hidden` is not a pr
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
   }
-}
 [data-tooltip]:focus-visible::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0) scale(1);
@@ -2119,6 +2113,10 @@ Contextual help appears beside a field on `:focus-within`.
 ### 10. Selection Skin
 *Typography · Baseline · 0 JS*
 
+Custom text highlight styling using `::selection` to match brand identity.
+
+Custom text highlight styling using `::selection` to match brand identity.
+
 ```css
 ::selection {
   background: oklch(from var(--color-primary) l c h / 0.25);
@@ -2128,6 +2126,10 @@ Contextual help appears beside a field on `:focus-within`.
 
 ### Bonus. Typographic Harmony (`text-wrap`)
 *Typography · Baseline · 0 JS*
+
+Prevents orphaned single words at heading line ends using text-wrap balance and pretty.
+
+Prevents orphaned single words at heading line ends using text-wrap balance and pretty.
 
 ```css
 h1, h2, h3, h4, .text-balance { text-wrap: balance; }
@@ -2176,6 +2178,8 @@ Requires `<html lang="en">` (or the correct language) so hyphenation dictionarie
 
 ### 6. Focus Glow
 *Forms · Baseline · 0 JS*
+
+An animated halo glow on input focus that communicates active focus with soft elevation.
 
 ```css
 input, textarea, select { min-block-size: 44px; }
@@ -2288,7 +2292,6 @@ A native `<select>` becomes fully styleable, including the open menu. Retires he
     background: var(--color-surface-offset);
     border-radius: var(--radius-sm);
   }
-}
 ```
 
 ### 57. Form Gatekeeper
@@ -2491,6 +2494,10 @@ A media card gets a darker overlay on hover so the heading stays readable.
 
 ### 35. Inline Theme Switch (`light-dark()`)
 *Visual · Baseline · 0 JS*
+
+Native CSS color scheme switching without JavaScript or duplicate CSS rules.
+
+Native CSS color scheme switching without JavaScript or duplicate CSS rules.
 
 ```css
 :root { color-scheme: light dark; }
@@ -3004,7 +3011,6 @@ Pinterest packing in CSS. `display: grid-lanes` fills the shortest column in DOM
     display: grid-lanes;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   }
-}
 ```
 
 ### 101. Sibling-Index Stagger (`sibling-index()`)
@@ -3028,7 +3034,6 @@ A staggered reveal with no `--i` custom properties. `sibling-index()` (1-based) 
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: none; }
   }
-}
 @media (prefers-reduced-motion: reduce) {
   .stagger > * { animation: none; }
 }
@@ -3140,7 +3145,6 @@ Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. 
   .attr-meter-fill {
     inline-size: calc(attr(data-value type(<number>), 0) * 1%);
   }
-}
 ```
 
 ---
@@ -3248,7 +3252,6 @@ A shared-element transition between a list card and a detail page. `view-transit
     view-transition-name: attr(id type(<custom-ident>), none);
     view-transition-class: card;
   }
-}
 ::view-transition-group(*.card) {
   animation-duration: 320ms;
   animation-timing-function: cubic-bezier(.16,1,.3,1);
@@ -3286,7 +3289,6 @@ The same sparkline as Spell 95, but the value lives in `data-v` — no inline `s
   .attr-spark span {
     block-size: calc(attr(data-v type(<number>), 0) * 1%);
   }
-}
 .attr-spark span:last-child { background: var(--color-primary); }
 ```
 
@@ -3471,7 +3473,6 @@ A primary action plus overflow menu in the same control. The menu is `[popover=a
     <a href="/quote?plan=pro">Pro quote</a>
     <a href="/contact">Talk to sales</a>
   </div>
-</div>
 ```
 
 ```css
@@ -3534,7 +3535,6 @@ Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on
     color: var(--color-primary);
     font-weight: 700;
   }
-}
 ```
 
 
@@ -3581,7 +3581,6 @@ A card gallery that filters visible items from checked boxes, with no JavaScript
     <article class="matrix-card" data-cat="tech">Tech project</article>
     <article class="matrix-card" data-cat="design">Design project</article>
   </div>
-</div>
 ```
 
 ```css
@@ -3779,7 +3778,6 @@ Multi-level cascade menus whose light-dismiss is handled automatically by the br
     <button>PDF</button>
     <button>CSV</button>
   </div>
-</div>
 ```
 
 ```css
@@ -3942,7 +3940,6 @@ Visually switches prices between monthly and yearly billing with no JS.
     <p class="price-val price-monthly">$19 / mo</p>
     <p class="price-val price-yearly">$15 / mo</p>
   </div>
-</div>
 ```
 
 ```css
@@ -4092,7 +4089,6 @@ A tactile image reveal with `clip-path` that wipes the image in, synced to scrol
     from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }
     to { clip-path: inset(0 0 0 0); transform: scale(1); }
   }
-}
 ```
 
 ### 140. Sticky Footer Reveal Layout
@@ -4320,7 +4316,6 @@ Style component guidance with `@scope` while explicitly preventing accent styles
     color: var(--color-accent);
     font-weight: 750;
   }
-}
 ```
 
 ### 149. Snapped Product State (`scroll-state()`)
@@ -4378,7 +4373,6 @@ Highlight the active card aligned to a scroll-snap point using `@container scrol
       scale: 1;
       border-color: var(--color-primary);
     }
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .snap-product__body { transition: none; }
@@ -4435,7 +4429,6 @@ Draw clean separators directly in grid and flex gaps using `column-rule` without
     padding-inline-start: 0;
     border-inline-start: 0;
   }
-}
 ```
 
 ### 151. Organic Avatar Cluster (`random()`)
@@ -4481,13 +4474,11 @@ Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, ba
     rotate: random(-6deg, 6deg);
     translate: 0 random(-3px, 3px);
   }
-}
 @media (prefers-reduced-motion: reduce) {
   .avatar-cluster > li {
     rotate: 0deg;
     translate: 0;
   }
-}
 ```
 
 ---

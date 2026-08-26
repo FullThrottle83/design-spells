@@ -151,7 +151,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "Icons transition smoothly through brand color tones on hover and focus. Icons transition smoothly through brand color tones on hover and focus.",
       "html": "",
       "css": ".icon {\n  color: var(--color-text-muted);\n  min-block-size: 44px; min-inline-size: 44px;\n  display: inline-grid; place-items: center;\n  transition: color 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);\n}\n.icon:hover, .icon:focus-visible {\n  color: var(--color-accent);\n  transform: scale(1.12);\n}\n",
       "previewEnvironment": "shadow",
@@ -253,7 +253,7 @@
       "jsNeed": "markup",
       "jsLabel": "Markup",
       "note": "",
-      "description": "",
+      "description": "Smooth rotation indicator for details disclosure triangles on open state.",
       "html": "",
       "css": "summary {\n  list-style: none;\n  min-block-size: 44px;\n  display: flex; align-items: center; gap: .5rem;\n  cursor: pointer;\n}\nsummary::-webkit-details-marker { display: none; }\nsummary .chevron {\n  transition: transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\ndetails[open] summary .chevron { transform: rotate(180deg); }\n",
       "previewEnvironment": "shadow",
@@ -287,7 +287,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "An outbound link indicator icon that nudges outward on hover. An outbound link indicator icon that nudges outward on hover.",
       "html": "",
       "css": "a[target=\"_blank\"] .external-icon {\n  display: inline-block;\n  opacity: .55;\n  transition: transform 180ms cubic-bezier(0.16,1,0.3,1), opacity 180ms cubic-bezier(0.16,1,0.3,1);\n}\na[target=\"_blank\"]:hover .external-icon,\na[target=\"_blank\"]:focus-visible .external-icon {\n  transform: translate(.3rem, -.3rem);\n  opacity: 1;\n}\n",
       "previewEnvironment": "shadow",
@@ -321,7 +321,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "Segmented pill selector with smooth active tab highlight and focus indicator. Segmented pill selector with smooth active tab highlight and focus indicator.",
       "html": "",
       "css": ".segmented {\n  display: inline-flex;\n  padding: .25rem;\n  border-radius: 999px;\n  background: var(--color-surface-offset);\n}\n.segmented button {\n  min-block-size: 44px; min-inline-size: 44px;\n  padding-inline: 1rem; border: 0; background: transparent; cursor: pointer;\n}\n.segmented button[aria-pressed=\"true\"] {\n  background: var(--color-bg);\n  box-shadow: 0 1px 3px oklch(0 0 0 / .08), inset 0 1px 0 oklch(1 0 0 / .3),\n    0 0 0 3px color-mix(in oklch, var(--color-primary), transparent 78%);\n}\n",
       "previewEnvironment": "shadow",
@@ -424,15 +424,15 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A touch-friendly, accessible before/after image comparison with no JavaScript. The scroller exports a named `scroll-timeline` via `timeline-scope` so `clip-path` can animate on a *sibling* surface (not on the scroller itself). Supports swipe gestures and arrow keys (`tabindex=\"0\"`). Use `role=\"region\"` — not `slider` — because `aria-valuenow` cannot be updated without JS.",
-      "html": "<div class=\"compare-container\">\n    <img src=\"/after.jpg\" alt=\"After\" class=\"compare-img compare-after\">\n  <div class=\"compare-before-wrap\">\n    <img src=\"/before.jpg\" alt=\"Before\" class=\"compare-img compare-before\">\n  </div>\n  \n  <div class=\"compare-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Compare before and after. Swipe or use the arrow keys.\">\n    <div class=\"scroller-spacer\"></div>\n  </div>\n</div>\n",
-      "css": ".compare-container {\n  position: relative;\n  overflow: hidden;\n  border-radius: var(--radius-md);\n  aspect-ratio: 16 / 9;\n  timeline-scope: --compare;\n}\n\n.compare-img {\n  position: absolute;\n  inset: 0;\n  width: 100%; height: 100%;\n  object-fit: cover;\n  pointer-events: none;\n}\n\n.compare-before-wrap {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  border-right: 2px solid white;\n  box-shadow: 4px 0 16px oklch(0 0 0 / 0.3);\n  pointer-events: none;\n}\n\n.compare-scroller {\n  position: absolute;\n  inset: 0;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  overscroll-behavior-x: contain;\n  scrollbar-width: none;\n  z-index: 10;\n  scroll-timeline: --compare inline;\n}\n.compare-scroller::-webkit-scrollbar { display: none; }\n\n.scroller-spacer {\n  width: 200%;\n  height: 100%;\n  pointer-events: none;\n}\n\n@supports (animation-timeline: scroll()) {\n  .compare-before-wrap {\n    animation: reveal-before linear both;\n    animation-timeline: --compare;\n  }\n\n  @keyframes reveal-before {\n    from { clip-path: inset(0 0% 0 0); }\n    to   { clip-path: inset(0 100% 0 0); }\n  }\n}\n",
+      "html": "<div class=\"compare-container\">\n    <img src=\"/after.jpg\" alt=\"After\" class=\"compare-img compare-after\">\n  <div class=\"compare-before-wrap\">\n    <img src=\"/before.jpg\" alt=\"Before\" class=\"compare-img compare-before\">\n  </div>\n  \n  <div class=\"compare-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Compare before and after. Swipe or use the arrow keys.\">\n    <div class=\"scroller-spacer\"></div>\n  </div>\n",
+      "css": ".compare-container {\n  position: relative;\n  overflow: hidden;\n  border-radius: var(--radius-md);\n  aspect-ratio: 16 / 9;\n  timeline-scope: --compare;\n}\n\n.compare-img {\n  position: absolute;\n  inset: 0;\n  width: 100%; height: 100%;\n  object-fit: cover;\n  pointer-events: none;\n}\n\n.compare-before-wrap {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  border-right: 2px solid white;\n  box-shadow: 4px 0 16px oklch(0 0 0 / 0.3);\n  pointer-events: none;\n}\n\n.compare-scroller {\n  position: absolute;\n  inset: 0;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  overscroll-behavior-x: contain;\n  scrollbar-width: none;\n  z-index: 10;\n  scroll-timeline: --compare inline;\n}\n.compare-scroller::-webkit-scrollbar { display: none; }\n\n.scroller-spacer {\n  width: 200%;\n  height: 100%;\n  pointer-events: none;\n}\n\n@supports (animation-timeline: scroll()) {\n  .compare-before-wrap {\n    animation: reveal-before linear both;\n    animation-timeline: --compare;\n  }\n\n  @keyframes reveal-before {\n    from { clip-path: inset(0 0% 0 0); }\n    to   { clip-path: inset(0 100% 0 0); }\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"compare-container\" style=\"width:100%;max-width:24rem\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='1' x2='0' y1='0' y2='1'%3E%3Cstop stop-color='%230f766e'/%3E%3Cstop offset='1' stop-color='%235eead4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"After\" class=\"compare-img compare-after\"><div class=\"compare-before-wrap\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Before\" class=\"compare-img compare-before\"></div><div class=\"compare-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Compare before and after. Swipe or use the arrow keys.\"><div class=\"scroller-spacer\"></div></div></div>",
-      "previewCss": ".compare-container {\n  position: relative;\n  overflow: hidden;\n  border-radius: var(--radius-md);\n  aspect-ratio: 16 / 9;\n  timeline-scope: --compare;\n}\n\n.compare-img {\n  position: absolute;\n  inset: 0;\n  width: 100%; height: 100%;\n  object-fit: cover;\n  pointer-events: none;\n}\n\n.compare-before-wrap {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  border-right: 2px solid white;\n  box-shadow: 4px 0 16px oklch(0 0 0 / 0.3);\n  pointer-events: none;\n}\n\n.compare-scroller {\n  position: absolute;\n  inset: 0;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  overscroll-behavior-x: contain;\n  scrollbar-width: none;\n  z-index: 10;\n  scroll-timeline: --compare inline;\n}\n.compare-scroller::-webkit-scrollbar { display: none; }\n\n.scroller-spacer {\n  width: 200%;\n  height: 100%;\n  pointer-events: none;\n}\n\n@supports (animation-timeline: scroll()) {\n  .compare-before-wrap {\n    animation: reveal-before linear both;\n    animation-timeline: --compare;\n  }\n\n  @keyframes reveal-before {\n    from { clip-path: inset(0 0% 0 0); }\n    to   { clip-path: inset(0 100% 0 0); }\n  }\n}\n",
+      "previewCss": ".compare-container {\n  position: relative;\n  overflow: hidden;\n  border-radius: var(--radius-md);\n  aspect-ratio: 16 / 9;\n  timeline-scope: --compare;\n}\n\n.compare-img {\n  position: absolute;\n  inset: 0;\n  width: 100%; height: 100%;\n  object-fit: cover;\n  pointer-events: none;\n}\n\n.compare-before-wrap {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  border-right: 2px solid white;\n  box-shadow: 4px 0 16px oklch(0 0 0 / 0.3);\n  pointer-events: none;\n}\n\n.compare-scroller {\n  position: absolute;\n  inset: 0;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  overscroll-behavior-x: contain;\n  scrollbar-width: none;\n  z-index: 10;\n  scroll-timeline: --compare inline;\n}\n.compare-scroller::-webkit-scrollbar { display: none; }\n\n.scroller-spacer {\n  width: 200%;\n  height: 100%;\n  pointer-events: none;\n}\n\n@supports (animation-timeline: scroll()) {\n  .compare-before-wrap {\n    animation: reveal-before linear both;\n    animation-timeline: --compare;\n  }\n\n  @keyframes reveal-before {\n    from { clip-path: inset(0 0% 0 0); }\n    to   { clip-path: inset(0 100% 0 0); }\n  }}",
       "featureKeys": [
         "scroll-timeline",
         "color-mix"
@@ -495,14 +495,14 @@
       "note": "",
       "description": "A floating action button (FAB) that expands child actions via native `<details>` and `@starting-style`. **Guardrails:** `pointer-events: none` on the wrapper stops invisible hit areas covering the screen. Every button meets WCAG minimum hit targets (44×44px).",
       "html": "<details class=\"speed-dial\">\n  <summary class=\"fab-main\" aria-label=\"Quick actions\">+</summary>\n\n  <div class=\"fab-actions\">\n    <button class=\"fab-child\" title=\"New post\" aria-label=\"New post\">📝</button>\n    <button class=\"fab-child\" title=\"Upload image\" aria-label=\"Upload image\">📷</button>\n    <button class=\"fab-child\" title=\"Share page\" aria-label=\"Share page\">🔗</button>\n  </div>\n</details>\n",
-      "css": ".speed-dial {\n  position: fixed;\n  right: 1.5rem; bottom: 1.5rem;\n  z-index: 100;\n  pointer-events: none;\n}\n\n.speed-dial summary::-webkit-details-marker { display: none; }\n\n.fab-main {\n  pointer-events: auto;\n  display: grid; place-items: center;\n  min-width: 3.25rem; min-height: 3.25rem;\n  border-radius: 999px;\n  background: var(--color-primary);\n  color: white;\n  font-size: 1.5rem;\n  cursor: pointer;\n  box-shadow: 0 8px 24px oklch(0 0 0 / 0.2);\n  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);\n  touch-action: manipulation;\n}\n\ndetails[open] .fab-main { transform: rotate(45deg); }\n\n.fab-actions {\n  position: absolute;\n  bottom: 4rem; right: 0.25rem;\n  display: none; flex-direction: column; gap: 0.75rem;\n  opacity: 0; transform: translateY(12px);\n  transition: opacity 240ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1), display 240ms allow-discrete;\n}\n\n.fab-child {\n  pointer-events: auto;\n  min-width: 2.75rem; min-height: 2.75rem;\n  border-radius: 999px;\n  border: none;\n  background: var(--color-bg);\n  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);\n  cursor: pointer;\n}\n\ndetails[open] .fab-actions {\n  display: flex;\n  opacity: 1;\n  transform: translateY(0);\n}\n\n@starting-style {\n  details[open] .fab-actions {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n}\n",
+      "css": ".speed-dial {\n  position: fixed;\n  right: 1.5rem; bottom: 1.5rem;\n  z-index: 100;\n  pointer-events: none;\n}\n\n.speed-dial summary::-webkit-details-marker { display: none; }\n\n.fab-main {\n  pointer-events: auto;\n  display: grid; place-items: center;\n  min-width: 3.25rem; min-height: 3.25rem;\n  border-radius: 999px;\n  background: var(--color-primary);\n  color: white;\n  font-size: 1.5rem;\n  cursor: pointer;\n  box-shadow: 0 8px 24px oklch(0 0 0 / 0.2);\n  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);\n  touch-action: manipulation;\n}\n\ndetails[open] .fab-main { transform: rotate(45deg); }\n\n.fab-actions {\n  position: absolute;\n  bottom: 4rem; right: 0.25rem;\n  display: none; flex-direction: column; gap: 0.75rem;\n  opacity: 0; transform: translateY(12px);\n  transition: opacity 240ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1), display 240ms allow-discrete;\n}\n\n.fab-child {\n  pointer-events: auto;\n  min-width: 2.75rem; min-height: 2.75rem;\n  border-radius: 999px;\n  border: none;\n  background: var(--color-bg);\n  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);\n  cursor: pointer;\n}\n\ndetails[open] .fab-actions {\n  display: flex;\n  opacity: 1;\n  transform: translateY(0);\n}\n\n@starting-style {\n  details[open] .fab-actions {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n",
       "previewEnvironment": "document",
       "previewAction": {
         "kind": "toggle-disclosure",
         "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<details class=\"speed-dial\">\n  <summary class=\"fab-main\" aria-label=\"Quick actions\">+</summary>\n\n  <div class=\"fab-actions\">\n    <button class=\"fab-child\" title=\"New post\" aria-label=\"New post\">📝</button>\n    <button class=\"fab-child\" title=\"Upload image\" aria-label=\"Upload image\">📷</button>\n    <button class=\"fab-child\" title=\"Share page\" aria-label=\"Share page\">🔗</button>\n  </div>\n</details>",
-      "previewCss": ".speed-dial {\n  position: fixed;\n  right: 1.5rem; bottom: 1.5rem;\n  z-index: 100;\n  pointer-events: none;\n}\n\n.speed-dial summary::-webkit-details-marker { display: none; }\n\n.fab-main {\n  pointer-events: auto;\n  display: grid; place-items: center;\n  min-width: 3.25rem; min-height: 3.25rem;\n  border-radius: 999px;\n  background: var(--color-primary);\n  color: white;\n  font-size: 1.5rem;\n  cursor: pointer;\n  box-shadow: 0 8px 24px oklch(0 0 0 / 0.2);\n  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);\n  touch-action: manipulation;\n}\n\ndetails[open] .fab-main { transform: rotate(45deg); }\n\n.fab-actions {\n  position: absolute;\n  bottom: 4rem; right: 0.25rem;\n  display: none; flex-direction: column; gap: 0.75rem;\n  opacity: 0; transform: translateY(12px);\n  transition: opacity 240ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1), display 240ms allow-discrete;\n}\n\n.fab-child {\n  pointer-events: auto;\n  min-width: 2.75rem; min-height: 2.75rem;\n  border-radius: 999px;\n  border: none;\n  background: var(--color-bg);\n  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);\n  cursor: pointer;\n}\n\ndetails[open] .fab-actions {\n  display: flex;\n  opacity: 1;\n  transform: translateY(0);\n}\n\n@starting-style {\n  details[open] .fab-actions {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n}\n",
+      "previewCss": ".speed-dial {\n  position: fixed;\n  right: 1.5rem; bottom: 1.5rem;\n  z-index: 100;\n  pointer-events: none;\n}\n\n.speed-dial summary::-webkit-details-marker { display: none; }\n\n.fab-main {\n  pointer-events: auto;\n  display: grid; place-items: center;\n  min-width: 3.25rem; min-height: 3.25rem;\n  border-radius: 999px;\n  background: var(--color-primary);\n  color: white;\n  font-size: 1.5rem;\n  cursor: pointer;\n  box-shadow: 0 8px 24px oklch(0 0 0 / 0.2);\n  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);\n  touch-action: manipulation;\n}\n\ndetails[open] .fab-main { transform: rotate(45deg); }\n\n.fab-actions {\n  position: absolute;\n  bottom: 4rem; right: 0.25rem;\n  display: none; flex-direction: column; gap: 0.75rem;\n  opacity: 0; transform: translateY(12px);\n  transition: opacity 240ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1), display 240ms allow-discrete;\n}\n\n.fab-child {\n  pointer-events: auto;\n  min-width: 2.75rem; min-height: 2.75rem;\n  border-radius: 999px;\n  border: none;\n  background: var(--color-bg);\n  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);\n  cursor: pointer;\n}\n\ndetails[open] .fab-actions {\n  display: flex;\n  opacity: 1;\n  transform: translateY(0);\n}\n\n@starting-style {\n  details[open] .fab-actions {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n",
       "featureKeys": [
         "starting-style",
         "color-mix"
@@ -772,14 +772,14 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges.",
-      "html": "<div class=\"ctx\">\n  <button class=\"ctx-btn\" commandfor=\"ctx-menu\" command=\"toggle-popover\" aria-haspopup=\"menu\" aria-label=\"More actions\">⋯</button>\n  <div id=\"ctx-menu\" popover=\"auto\" class=\"ctx-menu\" role=\"menu\">\n    <button role=\"menuitem\">Edit</button>\n    <button role=\"menuitem\">Duplicate</button>\n    <hr>\n    <button role=\"menuitem\" class=\"danger\">Delete</button>\n  </div>\n</div>\n",
+      "html": "<div class=\"ctx\">\n  <button class=\"ctx-btn\" commandfor=\"ctx-menu\" command=\"toggle-popover\" aria-haspopup=\"menu\" aria-label=\"More actions\">⋯</button>\n  <div id=\"ctx-menu\" popover=\"auto\" class=\"ctx-menu\" role=\"menu\">\n    <button role=\"menuitem\">Edit</button>\n    <button role=\"menuitem\">Duplicate</button>\n    <hr>\n    <button role=\"menuitem\" class=\"danger\">Delete</button>\n  </div>\n",
       "css": ".ctx { position: relative; anchor-scope: --ctx; }\n.ctx-btn { anchor-name: --ctx; inline-size: 44px; block-size: 44px; border-radius: var(--radius-sm);\n  border: 1px solid var(--color-border); background: var(--color-bg); cursor: pointer; }\n.ctx-menu {\n  margin: 0; inset: auto;\n  position-anchor: --ctx; position-area: bottom end; margin-block-start: var(--space-2);\n  position-try-fallbacks: flip-inline, flip-block;\n  min-inline-size: 12rem; padding: var(--space-2);\n  background: var(--color-bg); border: 1px solid var(--color-border);\n  border-radius: var(--radius-md); box-shadow: 0 20px 50px oklch(0 0 0 / .16);\n  opacity: 0; transform: scale(.96); transform-origin: top right;\n  transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),\n              display 180ms allow-discrete, overlay 180ms allow-discrete;\n}\n.ctx-menu:popover-open { opacity: 1; transform: scale(1); }\n@starting-style { .ctx-menu:popover-open { opacity: 0; transform: scale(.96); } }\n.ctx-menu button { display: block; inline-size: 100%; min-block-size: 44px; text-align: start;\n  padding: 0 .85rem; border: 0; background: none; border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text); }\n.ctx-menu button:hover, .ctx-menu button:focus-visible { background: var(--color-surface-offset); }\n.ctx-menu .danger { color: var(--color-error); }\n.ctx-menu hr { border: 0; border-top: 1px solid var(--color-border); margin-block: var(--space-1); }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "activate-control",
         "hint": "Activate the control to preview"
       },
-      "previewHtml": "<div class=\"ctx\">\n  <button class=\"ctx-btn\" commandfor=\"ctx-menu\" command=\"toggle-popover\" aria-haspopup=\"menu\" aria-label=\"More actions\">⋯</button>\n  <div id=\"ctx-menu\" popover=\"auto\" class=\"ctx-menu\" role=\"menu\">\n    <button role=\"menuitem\">Edit</button>\n    <button role=\"menuitem\">Duplicate</button>\n    <hr>\n    <button role=\"menuitem\" class=\"danger\">Delete</button>\n  </div>\n</div>",
+      "previewHtml": "<div class=\"ctx\">\n  <button class=\"ctx-btn\" commandfor=\"ctx-menu\" command=\"toggle-popover\" aria-haspopup=\"menu\" aria-label=\"More actions\">⋯</button>\n  <div id=\"ctx-menu\" popover=\"auto\" class=\"ctx-menu\" role=\"menu\">\n    <button role=\"menuitem\">Edit</button>\n    <button role=\"menuitem\">Duplicate</button>\n    <hr>\n    <button role=\"menuitem\" class=\"danger\">Delete</button>\n  </div>",
       "previewCss": ".ctx { position: relative; anchor-scope: --ctx; }\n.ctx-btn { anchor-name: --ctx; inline-size: 44px; block-size: 44px; border-radius: var(--radius-sm);\n  border: 1px solid var(--color-border); background: var(--color-bg); cursor: pointer; }\n.ctx-menu {\n  margin: 0; inset: auto;\n  position-anchor: --ctx; position-area: bottom end; margin-block-start: var(--space-2);\n  position-try-fallbacks: flip-inline, flip-block;\n  min-inline-size: 12rem; padding: var(--space-2);\n  background: var(--color-bg); border: 1px solid var(--color-border);\n  border-radius: var(--radius-md); box-shadow: 0 20px 50px oklch(0 0 0 / .16);\n  opacity: 0; transform: scale(.96); transform-origin: top right;\n  transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),\n              display 180ms allow-discrete, overlay 180ms allow-discrete;\n}\n.ctx-menu:popover-open { opacity: 1; transform: scale(1); }\n@starting-style { .ctx-menu:popover-open { opacity: 0; transform: scale(.96); } }\n.ctx-menu button { display: block; inline-size: 100%; min-block-size: 44px; text-align: start;\n  padding: 0 .85rem; border: 0; background: none; border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text); }\n.ctx-menu button:hover, .ctx-menu button:focus-visible { background: var(--color-surface-offset); }\n.ctx-menu .danger { color: var(--color-error); }\n.ctx-menu hr { border: 0; border-top: 1px solid var(--color-border); margin-block: var(--space-1); }\n",
       "featureKeys": [
         "invoker-commands",
@@ -947,14 +947,14 @@
       "note": "",
       "description": "A large premium effect for multi-page sites. The browser handles MPA navigation natively.",
       "html": "",
-      "css": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n\n  ::view-transition-old(root) {\n    animation: fade-out 240ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n  ::view-transition-new(root) {\n    animation: slide-up-in 360ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n\n  @keyframes fade-out { to { opacity: 0; transform: scale(0.985); } }\n  @keyframes slide-up-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: translateY(0); }\n  }\n}\n",
+      "css": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n\n  ::view-transition-old(root) {\n    animation: fade-out 240ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n  ::view-transition-new(root) {\n    animation: slide-up-in 360ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n\n  @keyframes fade-out { to { opacity: 0; transform: scale(0.985); } }\n  @keyframes slide-up-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: translateY(0); }\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<p class=\"demo-note\">View Transitions run on real page navigations. This preview shows the CSS only.</p>",
-      "previewCss": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n\n  ::view-transition-old(root) {\n    animation: fade-out 240ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n  ::view-transition-new(root) {\n    animation: slide-up-in 360ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n\n  @keyframes fade-out { to { opacity: 0; transform: scale(0.985); } }\n  @keyframes slide-up-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: translateY(0); }\n  }\n}\n",
+      "previewCss": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n\n  ::view-transition-old(root) {\n    animation: fade-out 240ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n  ::view-transition-new(root) {\n    animation: slide-up-in 360ms cubic-bezier(0.16,1,0.3,1) both;\n  }\n\n  @keyframes fade-out { to { opacity: 0; transform: scale(0.985); } }\n  @keyframes slide-up-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: translateY(0); }\n  }}",
       "featureKeys": [
         "view-transitions-cross",
         "view-transitions-same"
@@ -982,14 +982,14 @@
       "note": "",
       "description": "A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.",
       "html": "",
-      "css": ".popover-menu {\n  display: none;\n  opacity: 0;\n  transform: translateY(-8px) scale(0.96);\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),\n              transform 240ms cubic-bezier(0.16,1,0.3,1),\n              display 240ms allow-discrete;\n}\n.popover-menu:popover-open,\n.popover-menu.is-open {\n  display: block;\n  opacity: 1;\n  transform: translateY(0) scale(1);\n}\n@starting-style {\n  .popover-menu:popover-open,\n  .popover-menu.is-open {\n    opacity: 0;\n    transform: translateY(-8px) scale(0.96);\n  }\n}\n",
+      "css": ".popover-menu {\n  display: none;\n  opacity: 0;\n  transform: translateY(-8px) scale(0.96);\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),\n              transform 240ms cubic-bezier(0.16,1,0.3,1),\n              display 240ms allow-discrete;\n}\n.popover-menu:popover-open,\n.popover-menu.is-open {\n  display: block;\n  opacity: 1;\n  transform: translateY(0) scale(1);\n}\n@starting-style {\n  .popover-menu:popover-open,\n  .popover-menu.is-open {\n    opacity: 0;\n    transform: translateY(-8px) scale(0.96);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<button popovertarget=\"ph-pop\" class=\"btn\">Open menu</button><div id=\"ph-pop\" popover class=\"popover-menu\">Phantom entry</div>",
-      "previewCss": ".popover-menu {\n  display: none;\n  opacity: 0;\n  transform: translateY(-8px) scale(0.96);\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),\n              transform 240ms cubic-bezier(0.16,1,0.3,1),\n              display 240ms allow-discrete;\n}\n.popover-menu:popover-open,\n.popover-menu.is-open {\n  display: block;\n  opacity: 1;\n  transform: translateY(0) scale(1);\n}\n@starting-style {\n  .popover-menu:popover-open,\n  .popover-menu.is-open {\n    opacity: 0;\n    transform: translateY(-8px) scale(0.96);\n  }\n}\n",
+      "previewCss": ".popover-menu {\n  display: none;\n  opacity: 0;\n  transform: translateY(-8px) scale(0.96);\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),\n              transform 240ms cubic-bezier(0.16,1,0.3,1),\n              display 240ms allow-discrete;\n}\n.popover-menu:popover-open,\n.popover-menu.is-open {\n  display: block;\n  opacity: 1;\n  transform: translateY(0) scale(1);\n}\n@starting-style {\n  .popover-menu:popover-open,\n  .popover-menu.is-open {\n    opacity: 0;\n    transform: translateY(-8px) scale(0.96);\n  }}",
       "featureKeys": [
         "starting-style"
       ],
@@ -1050,14 +1050,14 @@
       "note": "",
       "description": "A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` modals, with no JS.",
       "html": "",
-      "css": "dialog::backdrop,\n[popover]::backdrop {\n  background: oklch(0 0 0 / 0.4);\n  backdrop-filter: blur(8px);\n  opacity: 0;\n  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              display 280ms allow-discrete,\n              overlay 280ms allow-discrete;\n}\n\ndialog[open]::backdrop,\n[popover]:popover-open::backdrop {\n  opacity: 1;\n}\n\n@starting-style {\n  dialog[open]::backdrop,\n  [popover]:popover-open::backdrop {\n    opacity: 0;\n  }\n}\n",
+      "css": "dialog::backdrop,\n[popover]::backdrop {\n  background: oklch(0 0 0 / 0.4);\n  backdrop-filter: blur(8px);\n  opacity: 0;\n  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              display 280ms allow-discrete,\n              overlay 280ms allow-discrete;\n}\n\ndialog[open]::backdrop,\n[popover]:popover-open::backdrop {\n  opacity: 1;\n}\n\n@starting-style {\n  dialog[open]::backdrop,\n  [popover]:popover-open::backdrop {\n    opacity: 0;\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "toggle-disclosure",
         "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<p class=\"demo-note\">Backdrop fade applies to native dialogs and popovers.</p><button popovertarget=\"bd-pop\">Open</button><div id=\"bd-pop\" popover>Hello</div>",
-      "previewCss": "dialog::backdrop,\n[popover]::backdrop {\n  background: oklch(0 0 0 / 0.4);\n  backdrop-filter: blur(8px);\n  opacity: 0;\n  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              display 280ms allow-discrete,\n              overlay 280ms allow-discrete;\n}\n\ndialog[open]::backdrop,\n[popover]:popover-open::backdrop {\n  opacity: 1;\n}\n\n@starting-style {\n  dialog[open]::backdrop,\n  [popover]:popover-open::backdrop {\n    opacity: 0;\n  }\n}\n",
+      "previewCss": "dialog::backdrop,\n[popover]::backdrop {\n  background: oklch(0 0 0 / 0.4);\n  backdrop-filter: blur(8px);\n  opacity: 0;\n  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              display 280ms allow-discrete,\n              overlay 280ms allow-discrete;\n}\n\ndialog[open]::backdrop,\n[popover]:popover-open::backdrop {\n  opacity: 1;\n}\n\n@starting-style {\n  dialog[open]::backdrop,\n  [popover]:popover-open::backdrop {\n    opacity: 0;\n  }}",
       "featureKeys": [
         "starting-style",
         "color-mix"
@@ -1084,14 +1084,14 @@
       "jsLabel": "0 JS",
       "note": "",
       "description": "A smooth infinite logo marquee with edge fades via `mask-image`. **Note:** Requires duplicated HTML markup (two identical `.marquee-track` elements) to loop without a gap. Pauses automatically on `:hover` and `:focus-within` for accessibility.",
-      "html": "<div class=\"marquee\">\n  <div class=\"marquee-track\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n  <!-- Duplicated track for a seamless loop -->\n  <div class=\"marquee-track\" aria-hidden=\"true\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n</div>\n",
+      "html": "<div class=\"marquee\">\n  <div class=\"marquee-track\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n  <!-- Duplicated track for a seamless loop -->\n  <div class=\"marquee-track\" aria-hidden=\"true\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n",
       "css": ".marquee {\n  display: flex;\n  overflow: hidden;\n  user-select: none;\n  gap: 2rem;\n  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);\n  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);\n}\n\n.marquee-track {\n  display: flex;\n  flex-shrink: 0;\n  gap: 2rem;\n  align-items: center;\n  min-width: 100%;\n  animation: marquee-scroll 25s linear infinite;\n}\n\n.marquee:hover .marquee-track,\n.marquee:focus-within .marquee-track {\n  animation-play-state: paused;\n}\n\n@keyframes marquee-scroll {\n  from { transform: translateX(0%); }\n  to   { transform: translateX(-100%); }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
-      "previewHtml": "<div class=\"marquee\">\n  <div class=\"marquee-track\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n  <!-- Duplicated track for a seamless loop -->\n  <div class=\"marquee-track\" aria-hidden=\"true\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n</div>",
+      "previewHtml": "<div class=\"marquee\">\n  <div class=\"marquee-track\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n  <!-- Duplicated track for a seamless loop -->\n  <div class=\"marquee-track\" aria-hidden=\"true\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>",
       "previewCss": ".marquee {\n  display: flex;\n  overflow: hidden;\n  user-select: none;\n  gap: 2rem;\n  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);\n  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);\n}\n\n.marquee-track {\n  display: flex;\n  flex-shrink: 0;\n  gap: 2rem;\n  align-items: center;\n  min-width: 100%;\n  animation: marquee-scroll 25s linear infinite;\n}\n\n.marquee:hover .marquee-track,\n.marquee:focus-within .marquee-track {\n  animation-play-state: paused;\n}\n\n@keyframes marquee-scroll {\n  from { transform: translateX(0%); }\n  to   { transform: translateX(-100%); }\n}\n",
       "featureKeys": [
         "baseline"
@@ -1119,14 +1119,14 @@
       "note": "",
       "description": "List and card items fade in sequence as the user scrolls, synced to viewport position.",
       "html": "",
-      "css": "@supports (animation-timeline: view()) {\n  .stagger-list > * {\n    animation: list-entry linear both;\n    animation-timeline: view();\n    animation-range: entry 5% entry 30%;\n  }\n\n  @keyframes list-entry {\n    from {\n      opacity: 0;\n      transform: translateY(24px) scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: translateY(0) scale(1);\n    }\n  }\n}\n",
+      "css": "@supports (animation-timeline: view()) {\n  .stagger-list > * {\n    animation: list-entry linear both;\n    animation-timeline: view();\n    animation-range: entry 5% entry 30%;\n  }\n\n  @keyframes list-entry {\n    from {\n      opacity: 0;\n      transform: translateY(24px) scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: translateY(0) scale(1);\n    }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<ul class=\"stagger-list\"><li>One</li><li>Two</li><li>Three</li></ul>",
-      "previewCss": "@supports (animation-timeline: view()) {\n  .stagger-list > * {\n    animation: list-entry linear both;\n    animation-timeline: view();\n    animation-range: entry 5% entry 30%;\n  }\n\n  @keyframes list-entry {\n    from {\n      opacity: 0;\n      transform: translateY(24px) scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: translateY(0) scale(1);\n    }\n  }\n}\n",
+      "previewCss": "@supports (animation-timeline: view()) {\n  .stagger-list > * {\n    animation: list-entry linear both;\n    animation-timeline: view();\n    animation-range: entry 5% entry 30%;\n  }\n\n  @keyframes list-entry {\n    from {\n      opacity: 0;\n      transform: translateY(24px) scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: translateY(0) scale(1);\n    }\n}}",
       "featureKeys": [
         "view-timeline"
       ],
@@ -1153,14 +1153,14 @@
       "note": "",
       "description": "Click an image to enlarge it to a fullscreen view with a native `popover` — no heavy lightbox library.",
       "html": "<button commandfor=\"img-modal-1\" command=\"toggle-popover\" class=\"img-trigger\">\n  <img src=\"/photo-thumb.jpg\" alt=\"Enlarge image\">\n</button>\n\n<div id=\"img-modal-1\" popover class=\"lightbox-popover\">\n  <img src=\"/photo-full.jpg\" alt=\"Enlarged image\">\n</div>\n",
-      "css": ".img-trigger {\n  display: block; padding: 0; border: 0; background: none; cursor: pointer;\n  min-block-size: 44px; min-inline-size: 44px;\n}\n.img-trigger img { display: block; inline-size: 100%; }\n.lightbox-popover {\n  margin: auto;\n  padding: 0;\n  border: none;\n  background: transparent;\n  max-width: 90vw;\n  max-height: 90vh;\n  opacity: 0;\n  transform: scale(0.92);\n  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), display 250ms allow-discrete;\n}\n\n.lightbox-popover:popover-open {\n  opacity: 1;\n  transform: scale(1);\n}\n\n@starting-style {\n  .lightbox-popover:popover-open {\n    opacity: 0;\n    transform: scale(0.92);\n  }\n}\n",
+      "css": ".img-trigger {\n  display: block; padding: 0; border: 0; background: none; cursor: pointer;\n  min-block-size: 44px; min-inline-size: 44px;\n}\n.img-trigger img { display: block; inline-size: 100%; }\n.lightbox-popover {\n  margin: auto;\n  padding: 0;\n  border: none;\n  background: transparent;\n  max-width: 90vw;\n  max-height: 90vh;\n  opacity: 0;\n  transform: scale(0.92);\n  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), display 250ms allow-discrete;\n}\n\n.lightbox-popover:popover-open {\n  opacity: 1;\n  transform: scale(1);\n}\n\n@starting-style {\n  .lightbox-popover:popover-open {\n    opacity: 0;\n    transform: scale(0.92);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "activate-control",
         "hint": "Activate the control to preview"
       },
       "previewHtml": "<button commandfor=\"img-modal-1\" command=\"toggle-popover\" class=\"img-trigger\">\n  <img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='1' x2='0' y1='0' y2='1'%3E%3Cstop stop-color='%230f766e'/%3E%3Cstop offset='1' stop-color='%235eead4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Enlarge image\">\n</button>\n\n<div id=\"img-modal-1\" popover class=\"lightbox-popover\">\n  <img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Enlarged image\">\n</div>",
-      "previewCss": ".img-trigger {\n  display: block; padding: 0; border: 0; background: none; cursor: pointer;\n  min-block-size: 44px; min-inline-size: 44px;\n}\n.img-trigger img { display: block; inline-size: 100%; }\n.lightbox-popover {\n  margin: auto;\n  padding: 0;\n  border: none;\n  background: transparent;\n  max-width: 90vw;\n  max-height: 90vh;\n  opacity: 0;\n  transform: scale(0.92);\n  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), display 250ms allow-discrete;\n}\n\n.lightbox-popover:popover-open {\n  opacity: 1;\n  transform: scale(1);\n}\n\n@starting-style {\n  .lightbox-popover:popover-open {\n    opacity: 0;\n    transform: scale(0.92);\n  }\n}\n",
+      "previewCss": ".img-trigger {\n  display: block; padding: 0; border: 0; background: none; cursor: pointer;\n  min-block-size: 44px; min-inline-size: 44px;\n}\n.img-trigger img { display: block; inline-size: 100%; }\n.lightbox-popover {\n  margin: auto;\n  padding: 0;\n  border: none;\n  background: transparent;\n  max-width: 90vw;\n  max-height: 90vh;\n  opacity: 0;\n  transform: scale(0.92);\n  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), display 250ms allow-discrete;\n}\n\n.lightbox-popover:popover-open {\n  opacity: 1;\n  transform: scale(1);\n}\n\n@starting-style {\n  .lightbox-popover:popover-open {\n    opacity: 0;\n    transform: scale(0.92);\n  }}",
       "featureKeys": [
         "invoker-commands",
         "starting-style"
@@ -1188,14 +1188,14 @@
       "note": "",
       "description": "Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in the viewport, with no scroll listener.",
       "html": "<figure class=\"kb\"><img src=\"/hero-1.jpg\" alt=\"Coastal landscape\"></figure>\n",
-      "css": ".kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n}\n",
+      "css": ".kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<figure class=\"kb\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Coastal landscape\"></figure>",
-      "previewCss": ".kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n}\n",
+      "previewCss": ".kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }}",
       "featureKeys": [
         "view-timeline"
       ],
@@ -1292,14 +1292,14 @@
       "note": "",
       "description": "The header becomes frosted glass only after the user has scrolled a little.",
       "html": "",
-      "css": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  background: transparent;\n  border-bottom: 1px solid transparent;\n}\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: frost-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 80px;\n  }\n  @keyframes frost-header {\n    to {\n      background: oklch(from var(--color-bg) l c h / 0.82);\n      backdrop-filter: blur(12px) saturate(160%);\n      -webkit-backdrop-filter: blur(12px) saturate(160%);\n      border-bottom-color: var(--color-border);\n      box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);\n    }\n  }\n}\n",
+      "css": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  background: transparent;\n  border-bottom: 1px solid transparent;\n}\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: frost-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 80px;\n  }\n  @keyframes frost-header {\n    to {\n      background: oklch(from var(--color-bg) l c h / 0.82);\n      backdrop-filter: blur(12px) saturate(160%);\n      -webkit-backdrop-filter: blur(12px) saturate(160%);\n      border-bottom-color: var(--color-border);\n      box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);\n    }\n}\n",
       "previewEnvironment": "document",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<header class=\"site-header\">Frosted after scroll</header><p class=\"demo-note\">Bound to the real page scroll — scroll the whole catalogue, not this box.</p>",
-      "previewCss": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  background: transparent;\n  border-bottom: 1px solid transparent;\n}\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: frost-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 80px;\n  }\n  @keyframes frost-header {\n    to {\n      background: oklch(from var(--color-bg) l c h / 0.82);\n      backdrop-filter: blur(12px) saturate(160%);\n      -webkit-backdrop-filter: blur(12px) saturate(160%);\n      border-bottom-color: var(--color-border);\n      box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);\n    }\n  }\n}\n",
+      "previewCss": ".site-header {\n  position: sticky; top: 0; z-index: 100;\n  background: transparent;\n  border-bottom: 1px solid transparent;\n}\n@supports (animation-timeline: scroll()) {\n  .site-header {\n    animation: frost-header linear both;\n    animation-timeline: scroll(root block);\n    animation-range: 0px 80px;\n  }\n  @keyframes frost-header {\n    to {\n      background: oklch(from var(--color-bg) l c h / 0.82);\n      backdrop-filter: blur(12px) saturate(160%);\n      -webkit-backdrop-filter: blur(12px) saturate(160%);\n      border-bottom-color: var(--color-border);\n      box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);\n    }\n}\n",
       "featureKeys": [
         "scroll-timeline",
         "color-mix"
@@ -1430,14 +1430,14 @@
       "note": "",
       "description": "A sticky element gains extra shadow and border only once it is actually stuck. Much more premium than a permanent shadow.",
       "html": "",
-      "css": ".toc {\n  position: sticky;\n  top: 1rem;\n  container-type: scroll-state;\n}\n\n.toc__inner {\n  border: 1px solid transparent;\n  transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;\n}\n\n@container scroll-state(stuck: top) {\n  .toc__inner {\n    background: oklch(from var(--color-bg) l c h / .86);\n    border-color: var(--color-border);\n    box-shadow: 0 12px 32px oklch(0 0 0 / .10);\n  }\n}\n",
+      "css": ".toc {\n  position: sticky;\n  top: 1rem;\n  container-type: scroll-state;\n}\n\n.toc__inner {\n  border: 1px solid transparent;\n  transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;\n}\n\n@container scroll-state(stuck: top) {\n  .toc__inner {\n    background: oklch(from var(--color-bg) l c h / .86);\n    border-color: var(--color-border);\n    box-shadow: 0 12px 32px oklch(0 0 0 / .10);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<nav class=\"toc\"><div class=\"toc__inner\">On this page</div></nav>",
-      "previewCss": ".toc {\n  position: sticky;\n  top: 1rem;\n  container-type: scroll-state;\n}\n\n.toc__inner {\n  border: 1px solid transparent;\n  transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;\n}\n\n@container scroll-state(stuck: top) {\n  .toc__inner {\n    background: oklch(from var(--color-bg) l c h / .86);\n    border-color: var(--color-border);\n    box-shadow: 0 12px 32px oklch(0 0 0 / .10);\n  }\n}\n",
+      "previewCss": ".toc {\n  position: sticky;\n  top: 1rem;\n  container-type: scroll-state;\n}\n\n.toc__inner {\n  border: 1px solid transparent;\n  transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;\n}\n\n@container scroll-state(stuck: top) {\n  .toc__inner {\n    background: oklch(from var(--color-bg) l c h / .86);\n    border-color: var(--color-border);\n    box-shadow: 0 12px 32px oklch(0 0 0 / .10);\n  }}",
       "featureKeys": [
         "scroll-state",
         "container",
@@ -1466,14 +1466,14 @@
       "note": "",
       "description": "The active slide in a scroll-snap container gets full sharpness while siblings fade down.",
       "html": "",
-      "css": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
+      "css": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"carousel\" style=\"max-width:20rem\"><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">01</article></div><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">02</article></div><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">03</article></div></div>",
-      "previewCss": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
+      "previewCss": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }}",
       "featureKeys": [
         "scroll-state",
         "container"
@@ -1536,14 +1536,14 @@
       "note": "",
       "description": "A floating button that wakes only after the user has moved the page. **Requires the Root scroll-state preset.**",
       "html": "",
-      "css": ".backtotop {\n  position: fixed;\n  right: 1rem;\n  bottom: 1rem;\n  inline-size: 44px; block-size: 44px;\n  min-inline-size: 44px; min-block-size: 44px;\n  display: grid; place-items: center;\n  opacity: 0;\n  transform: translateY(10px) scale(.96);\n  pointer-events: none;\n  transition: opacity 200ms ease, transform 240ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(scrolled: block) {\n  .backtotop {\n    opacity: 1;\n    transform: none;\n    pointer-events: auto;\n  }\n}\n",
+      "css": ".backtotop {\n  position: fixed;\n  right: 1rem;\n  bottom: 1rem;\n  inline-size: 44px; block-size: 44px;\n  min-inline-size: 44px; min-block-size: 44px;\n  display: grid; place-items: center;\n  opacity: 0;\n  transform: translateY(10px) scale(.96);\n  pointer-events: none;\n  transition: opacity 200ms ease, transform 240ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(scrolled: block) {\n  .backtotop {\n    opacity: 1;\n    transform: none;\n    pointer-events: auto;\n  }\n",
       "previewEnvironment": "document",
       "previewAction": {
         "kind": "resize",
         "hint": "Drag the corner to resize"
       },
       "previewHtml": "<a class=\"backtotop\" href=\"#\">↑</a><p class=\"demo-note\">Wakes after the page has been scrolled.</p>",
-      "previewCss": ".backtotop {\n  position: fixed;\n  right: 1rem;\n  bottom: 1rem;\n  inline-size: 44px; block-size: 44px;\n  min-inline-size: 44px; min-block-size: 44px;\n  display: grid; place-items: center;\n  opacity: 0;\n  transform: translateY(10px) scale(.96);\n  pointer-events: none;\n  transition: opacity 200ms ease, transform 240ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(scrolled: block) {\n  .backtotop {\n    opacity: 1;\n    transform: none;\n    pointer-events: auto;\n  }\n}\n",
+      "previewCss": ".backtotop {\n  position: fixed;\n  right: 1rem;\n  bottom: 1rem;\n  inline-size: 44px; block-size: 44px;\n  min-inline-size: 44px; min-block-size: 44px;\n  display: grid; place-items: center;\n  opacity: 0;\n  transform: translateY(10px) scale(.96);\n  pointer-events: none;\n  transition: opacity 200ms ease, transform 240ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(scrolled: block) {\n  .backtotop {\n    opacity: 1;\n    transform: none;\n    pointer-events: auto;\n  }\n",
       "featureKeys": [
         "scroll-state",
         "container"
@@ -1571,14 +1571,14 @@
       "note": "",
       "description": "Cards stack like a deck as the user scrolls. Scale and dimming stay synced to the exit-crossing.",
       "html": "",
-      "css": ".card-stack { display: flex; flex-direction: column; gap: var(--space-4); }\n\n.card-stack .card {\n  position: sticky;\n  top: max(2rem, var(--header-height, 0px));\n  transform-origin: top center;\n}\n\n@supports (animation-timeline: view()) {\n  .card-stack .card {\n    animation: stack-shrink linear both;\n    animation-timeline: view(block);\n    animation-range: exit-crossing 0% exit-crossing 100%;\n  }\n  @keyframes stack-shrink {\n    to {\n      transform: scale(0.92) translateY(-0.5rem);\n      filter: brightness(0.6);\n    }\n  }\n}\n",
+      "css": ".card-stack { display: flex; flex-direction: column; gap: var(--space-4); }\n\n.card-stack .card {\n  position: sticky;\n  top: max(2rem, var(--header-height, 0px));\n  transform-origin: top center;\n}\n\n@supports (animation-timeline: view()) {\n  .card-stack .card {\n    animation: stack-shrink linear both;\n    animation-timeline: view(block);\n    animation-range: exit-crossing 0% exit-crossing 100%;\n  }\n  @keyframes stack-shrink {\n    to {\n      transform: scale(0.92) translateY(-0.5rem);\n      filter: brightness(0.6);\n    }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"card-stack\"><article class=\"card\">Card A</article><article class=\"card\">Card B</article><article class=\"card\">Card C</article></div>",
-      "previewCss": ".card-stack { display: flex; flex-direction: column; gap: var(--space-4); }\n\n.card-stack .card {\n  position: sticky;\n  top: max(2rem, var(--header-height, 0px));\n  transform-origin: top center;\n}\n\n@supports (animation-timeline: view()) {\n  .card-stack .card {\n    animation: stack-shrink linear both;\n    animation-timeline: view(block);\n    animation-range: exit-crossing 0% exit-crossing 100%;\n  }\n  @keyframes stack-shrink {\n    to {\n      transform: scale(0.92) translateY(-0.5rem);\n      filter: brightness(0.6);\n    }\n  }\n}\n",
+      "previewCss": ".card-stack { display: flex; flex-direction: column; gap: var(--space-4); }\n\n.card-stack .card {\n  position: sticky;\n  top: max(2rem, var(--header-height, 0px));\n  transform-origin: top center;\n}\n\n@supports (animation-timeline: view()) {\n  .card-stack .card {\n    animation: stack-shrink linear both;\n    animation-timeline: view(block);\n    animation-range: exit-crossing 0% exit-crossing 100%;\n  }\n  @keyframes stack-shrink {\n    to {\n      transform: scale(0.92) translateY(-0.5rem);\n      filter: brightness(0.6);\n    }\n}}",
       "featureKeys": [
         "view-timeline"
       ],
@@ -1605,14 +1605,14 @@
       "note": "",
       "description": "Tables with `position: sticky` show edge shadows and dividers *only* when the content has actually been scrolled horizontally.",
       "html": "",
-      "css": ".table-wrapper {\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.table-wrapper th:first-child,\n.table-wrapper td:first-child {\n  position: sticky;\n  left: 0;\n  background: var(--color-bg);\n  transition: box-shadow 200ms ease;\n}\n\n@container scroll-state(scrolled: inline) {\n  .table-wrapper th:first-child,\n  .table-wrapper td:first-child {\n    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);\n  }\n}\n",
+      "css": ".table-wrapper {\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.table-wrapper th:first-child,\n.table-wrapper td:first-child {\n  position: sticky;\n  left: 0;\n  background: var(--color-bg);\n  transition: box-shadow 200ms ease;\n}\n\n@container scroll-state(scrolled: inline) {\n  .table-wrapper th:first-child,\n  .table-wrapper td:first-child {\n    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"table-wrapper\" style=\"max-width:20rem\"><table style=\"min-width:44rem\"><tr><th>Name</th><th>Plan</th><th>Seats</th><th>Region</th><th>Owner</th><th>Renewal date</th><th>Status</th></tr><tr><td>Acme Corporation</td><td>Pro</td><td>24</td><td>EU-West</td><td>Jonas Andersson</td><td>2026-11-04</td><td>Active</td></tr></table><p class=\"demo-note\">Scroll the table sideways.</p></div>",
-      "previewCss": ".table-wrapper {\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.table-wrapper th:first-child,\n.table-wrapper td:first-child {\n  position: sticky;\n  left: 0;\n  background: var(--color-bg);\n  transition: box-shadow 200ms ease;\n}\n\n@container scroll-state(scrolled: inline) {\n  .table-wrapper th:first-child,\n  .table-wrapper td:first-child {\n    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);\n  }\n}\n",
+      "previewCss": ".table-wrapper {\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.table-wrapper th:first-child,\n.table-wrapper td:first-child {\n  position: sticky;\n  left: 0;\n  background: var(--color-bg);\n  transition: box-shadow 200ms ease;\n}\n\n@container scroll-state(scrolled: inline) {\n  .table-wrapper th:first-child,\n  .table-wrapper td:first-child {\n    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);\n  }}",
       "featureKeys": [
         "scroll-state",
         "container",
@@ -1639,7 +1639,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "Touch-friendly horizontal scroll carousel with native CSS scroll snapping.",
       "html": "",
       "css": ".gallery {\n  display: flex;\n  overflow-x: auto;\n  gap: var(--space-4);\n  scroll-snap-type: x mandatory;\n  overscroll-behavior-x: contain;\n}\n.gallery > * {\n  flex: 0 0 clamp(280px, 70vw, 480px);\n  scroll-snap-align: start;\n}\n",
       "previewEnvironment": "shadow",
@@ -1777,14 +1777,14 @@
       "note": "",
       "description": "A card that adapts its layout to its container, not the viewport.",
       "html": "",
-      "css": ".card-container {\n  container-type: inline-size;\n  container-name: card;\n}\n\n.adaptive-card {\n  display: grid;\n  gap: var(--space-3);\n}\n\n@container card (min-inline-size: 420px) {\n  .adaptive-card {\n    grid-template-columns: 1fr 1.6fr;\n    align-items: start;\n  }\n  .adaptive-card .card-media {\n    aspect-ratio: 1;\n    border-radius: var(--radius-md) 0 0 var(--radius-md);\n  }\n}\n",
+      "css": ".card-container {\n  container-type: inline-size;\n  container-name: card;\n}\n\n.adaptive-card {\n  display: grid;\n  gap: var(--space-3);\n}\n\n@container card (min-inline-size: 420px) {\n  .adaptive-card {\n    grid-template-columns: 1fr 1.6fr;\n    align-items: start;\n  }\n  .adaptive-card .card-media {\n    aspect-ratio: 1;\n    border-radius: var(--radius-md) 0 0 var(--radius-md);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "resize",
         "hint": "Drag the corner to resize"
       },
       "previewHtml": "<div class=\"card-container\" style=\"resize:horizontal;overflow:auto;width:220px;min-width:180px;max-width:100%;padding:.5rem;border:1px dashed var(--color-border)\"><article class=\"adaptive-card\"><img class=\"card-media\" src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\"><div><h3>Adaptive</h3><p>Layout follows the container.</p></div></article></div>",
-      "previewCss": ".card-container {\n  container-type: inline-size;\n  container-name: card;\n}\n\n.adaptive-card {\n  display: grid;\n  gap: var(--space-3);\n}\n\n@container card (min-inline-size: 420px) {\n  .adaptive-card {\n    grid-template-columns: 1fr 1.6fr;\n    align-items: start;\n  }\n  .adaptive-card .card-media {\n    aspect-ratio: 1;\n    border-radius: var(--radius-md) 0 0 var(--radius-md);\n  }\n}\n",
+      "previewCss": ".card-container {\n  container-type: inline-size;\n  container-name: card;\n}\n\n.adaptive-card {\n  display: grid;\n  gap: var(--space-3);\n}\n\n@container card (min-inline-size: 420px) {\n  .adaptive-card {\n    grid-template-columns: 1fr 1.6fr;\n    align-items: start;\n  }\n  .adaptive-card .card-media {\n    aspect-ratio: 1;\n    border-radius: var(--radius-md) 0 0 var(--radius-md);\n  }}",
       "featureKeys": [
         "container"
       ],
@@ -1983,14 +1983,14 @@
       "note": "",
       "description": "A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.",
       "html": "",
-      "css": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n  }\n}\n",
+      "css": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "toggle-disclosure",
         "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<p class=\"demo-note\">Opens as a sheet on small screens, a dialog on large ones.</p><button commandfor=\"sheet-demo\" command=\"show-modal\" class=\"btn\">Open sheet</button><dialog id=\"sheet-demo\" class=\"responsive-sheet\" closedby=\"any\"><p>Sheet content</p><form method=\"dialog\"><button class=\"btn\">Close</button></form></dialog>",
-      "previewCss": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n  }\n}\n",
+      "previewCss": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }}}}",
       "featureKeys": [
         "starting-style"
       ],
@@ -2017,14 +2017,14 @@
       "note": "→ 34 is more modern",
       "description": "Keep this for simple hover text on elements where `overflow: hidden` is not a problem.",
       "html": "",
-      "css": "[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  left: 50%; bottom: calc(100% + 8px);\n  transform: translateX(-50%) translateY(4px) scale(.96);\n  opacity: 0;\n  white-space: nowrap;\n  padding: 6px 10px;\n  border-radius: var(--radius-sm);\n  background: var(--color-text);\n  color: var(--color-bg);\n  pointer-events: none;\n  transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);\n}\n@media (hover: hover) {\n  [data-tooltip]:hover::after {\n    opacity: 1;\n    transform: translateX(-50%) translateY(0) scale(1);\n  }\n}\n[data-tooltip]:focus-visible::after {\n  opacity: 1;\n  transform: translateX(-50%) translateY(0) scale(1);\n}\n",
+      "css": "[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  left: 50%; bottom: calc(100% + 8px);\n  transform: translateX(-50%) translateY(4px) scale(.96);\n  opacity: 0;\n  white-space: nowrap;\n  padding: 6px 10px;\n  border-radius: var(--radius-sm);\n  background: var(--color-text);\n  color: var(--color-bg);\n  pointer-events: none;\n  transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);\n}\n@media (hover: hover) {\n  [data-tooltip]:hover::after {\n    opacity: 1;\n    transform: translateX(-50%) translateY(0) scale(1);\n  }\n[data-tooltip]:focus-visible::after {\n  opacity: 1;\n  transform: translateX(-50%) translateY(0) scale(1);\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
       "previewHtml": "<button data-tooltip=\"Copied to clipboard\">Hover me</button>",
-      "previewCss": "[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  left: 50%; bottom: calc(100% + 8px);\n  transform: translateX(-50%) translateY(4px) scale(.96);\n  opacity: 0;\n  white-space: nowrap;\n  padding: 6px 10px;\n  border-radius: var(--radius-sm);\n  background: var(--color-text);\n  color: var(--color-bg);\n  pointer-events: none;\n  transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);\n}\n@media (hover: hover) {\n  [data-tooltip]:hover::after {\n    opacity: 1;\n    transform: translateX(-50%) translateY(0) scale(1);\n  }\n}\n[data-tooltip]:focus-visible::after {\n  opacity: 1;\n  transform: translateX(-50%) translateY(0) scale(1);\n}\n",
+      "previewCss": "[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  left: 50%; bottom: calc(100% + 8px);\n  transform: translateX(-50%) translateY(4px) scale(.96);\n  opacity: 0;\n  white-space: nowrap;\n  padding: 6px 10px;\n  border-radius: var(--radius-sm);\n  background: var(--color-text);\n  color: var(--color-bg);\n  pointer-events: none;\n  transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);\n}\n@media (hover: hover) {\n  [data-tooltip]:hover::after {\n    opacity: 1;\n    transform: translateX(-50%) translateY(0) scale(1);\n  }\n[data-tooltip]:focus-visible::after {\n  opacity: 1;\n  transform: translateX(-50%) translateY(0) scale(1);\n}}",
       "featureKeys": [
         "baseline"
       ],
@@ -2187,7 +2187,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "Custom text highlight styling using `::selection` to match brand identity. Custom text highlight styling using `::selection` to match brand identity.",
       "html": "",
       "css": "::selection {\n  background: oklch(from var(--color-primary) l c h / 0.25);\n  color: var(--color-text);\n}\n",
       "previewEnvironment": "shadow",
@@ -2221,7 +2221,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "Prevents orphaned single words at heading line ends using text-wrap balance and pretty. Prevents orphaned single words at heading line ends using text-wrap balance and pretty.",
       "html": "",
       "css": "h1, h2, h3, h4, .text-balance { text-wrap: balance; }\np, li, .text-pretty { text-wrap: pretty; }\n",
       "previewEnvironment": "shadow",
@@ -2323,7 +2323,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "An animated halo glow on input focus that communicates active focus with soft elevation.",
       "html": "",
       "css": "input, textarea, select { min-block-size: 44px; }\ninput:focus-visible, textarea:focus-visible, select:focus-visible {\n  outline: none;\n  box-shadow:\n    0 0 0 2px var(--color-bg),\n    0 0 0 4px var(--color-primary),\n    0 0 12px oklch(from var(--color-primary) l c h / 0.22);\n}\n",
       "previewEnvironment": "shadow",
@@ -2495,14 +2495,14 @@
       "note": "",
       "description": "A native `<select>` becomes fully styleable, including the open menu. Retires headless libraries for standard dropdowns.",
       "html": "",
-      "css": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    background: var(--color-surface);\n    border: 1px solid var(--color-border);\n    border-radius: var(--radius-md);\n    padding: var(--space-2) var(--space-4);\n  }\n\n  select.premium-dropdown::picker(select) {\n    background: oklch(from var(--color-bg) l c h / 0.92);\n    backdrop-filter: blur(12px);\n    border-radius: var(--radius-md);\n    box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);\n    padding: var(--space-2);\n  }\n\n  select.premium-dropdown option:hover {\n    background: var(--color-surface-offset);\n    border-radius: var(--radius-sm);\n  }\n}\n",
+      "css": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    background: var(--color-surface);\n    border: 1px solid var(--color-border);\n    border-radius: var(--radius-md);\n    padding: var(--space-2) var(--space-4);\n  }\n\n  select.premium-dropdown::picker(select) {\n    background: oklch(from var(--color-bg) l c h / 0.92);\n    backdrop-filter: blur(12px);\n    border-radius: var(--radius-md);\n    box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);\n    padding: var(--space-2);\n  }\n\n  select.premium-dropdown option:hover {\n    background: var(--color-surface-offset);\n    border-radius: var(--radius-sm);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "hover",
         "hint": "Hover to preview"
       },
       "previewHtml": "<select class=\"premium-dropdown\"><option>Overview</option><option>Reports</option><option>Settings</option></select>",
-      "previewCss": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    background: var(--color-surface);\n    border: 1px solid var(--color-border);\n    border-radius: var(--radius-md);\n    padding: var(--space-2) var(--space-4);\n  }\n\n  select.premium-dropdown::picker(select) {\n    background: oklch(from var(--color-bg) l c h / 0.92);\n    backdrop-filter: blur(12px);\n    border-radius: var(--radius-md);\n    box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);\n    padding: var(--space-2);\n  }\n\n  select.premium-dropdown option:hover {\n    background: var(--color-surface-offset);\n    border-radius: var(--radius-sm);\n  }\n}\n",
+      "previewCss": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    background: var(--color-surface);\n    border: 1px solid var(--color-border);\n    border-radius: var(--radius-md);\n    padding: var(--space-2) var(--space-4);\n  }\n\n  select.premium-dropdown::picker(select) {\n    background: oklch(from var(--color-bg) l c h / 0.92);\n    backdrop-filter: blur(12px);\n    border-radius: var(--radius-md);\n    box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);\n    padding: var(--space-2);\n  }\n\n  select.premium-dropdown option:hover {\n    background: var(--color-surface-offset);\n    border-radius: var(--radius-sm);\n  }}",
       "featureKeys": [
         "base-select",
         "color-mix"
@@ -2733,7 +2733,7 @@
       "jsNeed": "none",
       "jsLabel": "0 JS",
       "note": "",
-      "description": "",
+      "description": "Native CSS color scheme switching without JavaScript or duplicate CSS rules. Native CSS color scheme switching without JavaScript or duplicate CSS rules.",
       "html": "",
       "css": ":root { color-scheme: light dark; }\n\n.premium-card {\n  background: light-dark(var(--color-surface), var(--color-surface-dark));\n  color: light-dark(var(--color-text), var(--color-text-inverse));\n  border: 1px solid light-dark(transparent, oklch(1 0 0 / 0.1));\n}\n",
       "previewEnvironment": "document",
@@ -3390,14 +3390,14 @@
       "note": "",
       "description": "Pinterest packing in CSS. `display: grid-lanes` fills the shortest column in DOM order (correct reading order, unlike `column-count`). Fallback is a regular grid.",
       "html": "<ul class=\"lanes\">\n  <li><article class=\"card\">Card 1</article></li>\n  <li><article class=\"card\">Card 2 with more text</article></li>\n  <li><article class=\"card\">Card 3</article></li>\n</ul>\n",
-      "css": ".lanes {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  gap: var(--space-4);\n  align-items: start;\n  list-style: none; padding: 0; margin: 0;\n}\n@supports (display: grid-lanes) {\n  .lanes {\n    display: grid-lanes;\n    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  }\n}\n",
+      "css": ".lanes {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  gap: var(--space-4);\n  align-items: start;\n  list-style: none; padding: 0; margin: 0;\n}\n@supports (display: grid-lanes) {\n  .lanes {\n    display: grid-lanes;\n    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<ul class=\"lanes\" style=\"max-width:26rem\"><li><article class=\"card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Card 1</article></li><li><article class=\"card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Card 2 with more text</article></li><li><article class=\"card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Card 3</article></li><li><article class=\"card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Card 4</article></li></ul><p class=\"demo-note\">display: grid-lanes has no browser support yet — this shows the auto-fill grid fallback.</p>",
-      "previewCss": ".lanes {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  gap: var(--space-4);\n  align-items: start;\n  list-style: none; padding: 0; margin: 0;\n}\n@supports (display: grid-lanes) {\n  .lanes {\n    display: grid-lanes;\n    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  }\n}\n",
+      "previewCss": ".lanes {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  gap: var(--space-4);\n  align-items: start;\n  list-style: none; padding: 0; margin: 0;\n}\n@supports (display: grid-lanes) {\n  .lanes {\n    display: grid-lanes;\n    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  }}",
       "featureKeys": [
         "grid-lanes"
       ],
@@ -3424,14 +3424,14 @@
       "note": "",
       "description": "A staggered reveal with no `--i` custom properties. `sibling-index()` (1-based) and `sibling-count()` are CSS Values 5 tree-counting functions.",
       "html": "<ul class=\"stagger\">\n  <li>Analytics</li><li>Automation</li><li>API</li><li>Support</li>\n</ul>\n",
-      "css": "@supports (animation-delay: calc(sibling-index() * 1ms)) {\n  .stagger > * {\n    animation: stagger-in 420ms cubic-bezier(.16,1,.3,1) both;\n    animation-delay: calc((sibling-index() - 1) * 70ms);\n  }\n  @keyframes stagger-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: none; }\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .stagger > * { animation: none; }\n}\n",
+      "css": "@supports (animation-delay: calc(sibling-index() * 1ms)) {\n  .stagger > * {\n    animation: stagger-in 420ms cubic-bezier(.16,1,.3,1) both;\n    animation-delay: calc((sibling-index() - 1) * 70ms);\n  }\n  @keyframes stagger-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: none; }\n  }\n@media (prefers-reduced-motion: reduce) {\n  .stagger > * { animation: none; }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<ul class=\"stagger\">\n  <li>Analytics</li><li>Automation</li><li>API</li><li>Support</li>\n</ul>",
-      "previewCss": "@supports (animation-delay: calc(sibling-index() * 1ms)) {\n  .stagger > * {\n    animation: stagger-in 420ms cubic-bezier(.16,1,.3,1) both;\n    animation-delay: calc((sibling-index() - 1) * 70ms);\n  }\n  @keyframes stagger-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: none; }\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .stagger > * { animation: none; }\n}\n",
+      "previewCss": "@supports (animation-delay: calc(sibling-index() * 1ms)) {\n  .stagger > * {\n    animation: stagger-in 420ms cubic-bezier(.16,1,.3,1) both;\n    animation-delay: calc((sibling-index() - 1) * 70ms);\n  }\n  @keyframes stagger-in {\n    from { opacity: 0; transform: translateY(12px); }\n    to   { opacity: 1; transform: none; }\n  }\n@media (prefers-reduced-motion: reduce) {\n  .stagger > * { animation: none; }\n}}",
       "featureKeys": [
         "sibling-index"
       ],
@@ -3561,14 +3561,14 @@
       "note": "",
       "description": "Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. Feature-detect with `attr(x type(*))`.",
       "html": "<div class=\"attr-meter\" data-value=\"72\" aria-label=\"Profile complete to 72 percent\">\n  <span class=\"attr-meter-fill\"></span>\n</div>\n",
-      "css": ".attr-meter {\n  block-size: .6rem; border-radius: 999px;\n  background: var(--color-surface-offset); overflow: hidden;\n}\n.attr-meter-fill {\n  display: block; block-size: 100%;\n  background: var(--color-primary); border-radius: inherit;\n  inline-size: 0%;\n}\n@supports (x: attr(x type(*))) {\n  .attr-meter-fill {\n    inline-size: calc(attr(data-value type(<number>), 0) * 1%);\n  }\n}\n",
+      "css": ".attr-meter {\n  block-size: .6rem; border-radius: 999px;\n  background: var(--color-surface-offset); overflow: hidden;\n}\n.attr-meter-fill {\n  display: block; block-size: 100%;\n  background: var(--color-primary); border-radius: inherit;\n  inline-size: 0%;\n}\n@supports (x: attr(x type(*))) {\n  .attr-meter-fill {\n    inline-size: calc(attr(data-value type(<number>), 0) * 1%);\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<div class=\"attr-meter\" data-value=\"72\" style=\"inline-size:min(18rem, 100%)\" aria-label=\"Profile complete to 72 percent\"><span class=\"attr-meter-fill\"></span></div>",
-      "previewCss": ".attr-meter {\n  block-size: .6rem; border-radius: 999px;\n  background: var(--color-surface-offset); overflow: hidden;\n}\n.attr-meter-fill {\n  display: block; block-size: 100%;\n  background: var(--color-primary); border-radius: inherit;\n  inline-size: 0%;\n}\n@supports (x: attr(x type(*))) {\n  .attr-meter-fill {\n    inline-size: calc(attr(data-value type(<number>), 0) * 1%);\n  }\n}\n",
+      "previewCss": ".attr-meter {\n  block-size: .6rem; border-radius: 999px;\n  background: var(--color-surface-offset); overflow: hidden;\n}\n.attr-meter-fill {\n  display: block; block-size: 100%;\n  background: var(--color-primary); border-radius: inherit;\n  inline-size: 0%;\n}\n@supports (x: attr(x type(*))) {\n  .attr-meter-fill {\n    inline-size: calc(attr(data-value type(<number>), 0) * 1%);\n  }}",
       "featureKeys": [
         "typed-attr"
       ],
@@ -3702,14 +3702,14 @@
       "note": "",
       "description": "A shared-element transition between a list card and a detail page. `view-transition-name` is read from `id` as a `<custom-ident>`; `view-transition-class` groups the animation.",
       "html": "<article class=\"vt-card\" id=\"case-acme\">…</article>\n",
-      "css": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n}\n@supports (x: attr(x type(*))) {\n  .vt-card {\n    view-transition-name: attr(id type(<custom-ident>), none);\n    view-transition-class: card;\n  }\n}\n::view-transition-group(*.card) {\n  animation-duration: 320ms;\n  animation-timing-function: cubic-bezier(.16,1,.3,1);\n}\n@media (prefers-reduced-motion: reduce) {\n  ::view-transition-group(*),\n  ::view-transition-old(*),\n  ::view-transition-new(*) { animation: none !important; }\n}\n",
+      "css": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n}\n@supports (x: attr(x type(*))) {\n  .vt-card {\n    view-transition-name: attr(id type(<custom-ident>), none);\n    view-transition-class: card;\n  }\n::view-transition-group(*.card) {\n  animation-duration: 320ms;\n  animation-timing-function: cubic-bezier(.16,1,.3,1);\n}\n@media (prefers-reduced-motion: reduce) {\n  ::view-transition-group(*),\n  ::view-transition-old(*),\n  ::view-transition-new(*) { animation: none !important; }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<article class=\"vt-card\" id=\"case-acme\">…</article>",
-      "previewCss": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n}\n@supports (x: attr(x type(*))) {\n  .vt-card {\n    view-transition-name: attr(id type(<custom-ident>), none);\n    view-transition-class: card;\n  }\n}\n::view-transition-group(*.card) {\n  animation-duration: 320ms;\n  animation-timing-function: cubic-bezier(.16,1,.3,1);\n}\n@media (prefers-reduced-motion: reduce) {\n  ::view-transition-group(*),\n  ::view-transition-old(*),\n  ::view-transition-new(*) { animation: none !important; }\n}\n",
+      "previewCss": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n}\n@supports (x: attr(x type(*))) {\n  .vt-card {\n    view-transition-name: attr(id type(<custom-ident>), none);\n    view-transition-class: card;\n  }\n::view-transition-group(*.card) {\n  animation-duration: 320ms;\n  animation-timing-function: cubic-bezier(.16,1,.3,1);\n}\n@media (prefers-reduced-motion: reduce) {\n  ::view-transition-group(*),\n  ::view-transition-old(*),\n  ::view-transition-new(*) { animation: none !important; }\n}}",
       "featureKeys": [
         "typed-attr",
         "view-transitions-cross",
@@ -3738,14 +3738,14 @@
       "note": "→ modernizes 95",
       "description": "The same sparkline as Spell 95, but the value lives in `data-v` — no inline `style=\"--v:…\"`.",
       "html": "<figure class=\"attr-spark\" role=\"img\" aria-label=\"Sales: 34, 58, 41, 72, 66, 90 percent\">\n  <span data-v=\"34\"></span><span data-v=\"58\"></span><span data-v=\"41\"></span>\n  <span data-v=\"72\"></span><span data-v=\"66\"></span><span data-v=\"90\"></span>\n</figure>\n",
-      "css": ".attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }\n.attr-spark span {\n  flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;\n  background: color-mix(in oklch, var(--color-primary), transparent 25%);\n}\n@supports (x: attr(x type(*))) {\n  .attr-spark span {\n    block-size: calc(attr(data-v type(<number>), 0) * 1%);\n  }\n}\n.attr-spark span:last-child { background: var(--color-primary); }\n",
+      "css": ".attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }\n.attr-spark span {\n  flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;\n  background: color-mix(in oklch, var(--color-primary), transparent 25%);\n}\n@supports (x: attr(x type(*))) {\n  .attr-spark span {\n    block-size: calc(attr(data-v type(<number>), 0) * 1%);\n  }\n.attr-spark span:last-child { background: var(--color-primary); }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<figure class=\"attr-spark\" role=\"img\" aria-label=\"Sales: 34, 58, 41, 72, 66, 90 percent\">\n  <span data-v=\"34\"></span><span data-v=\"58\"></span><span data-v=\"41\"></span>\n  <span data-v=\"72\"></span><span data-v=\"66\"></span><span data-v=\"90\"></span>\n</figure>",
-      "previewCss": ".attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }\n.attr-spark span {\n  flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;\n  background: color-mix(in oklch, var(--color-primary), transparent 25%);\n}\n@supports (x: attr(x type(*))) {\n  .attr-spark span {\n    block-size: calc(attr(data-v type(<number>), 0) * 1%);\n  }\n}\n.attr-spark span:last-child { background: var(--color-primary); }\n",
+      "previewCss": ".attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }\n.attr-spark span {\n  flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;\n  background: color-mix(in oklch, var(--color-primary), transparent 25%);\n}\n@supports (x: attr(x type(*))) {\n  .attr-spark span {\n    block-size: calc(attr(data-v type(<number>), 0) * 1%);\n  }\n.attr-spark span:last-child { background: var(--color-primary); }}",
       "featureKeys": [
         "typed-attr",
         "color-mix"
@@ -3979,14 +3979,14 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.",
-      "html": "<div class=\"split\">\n  <a class=\"split-main\" href=\"/quote\">Request quote</a>\n  <button class=\"split-more\" commandfor=\"split-menu\" command=\"toggle-popover\" aria-label=\"More actions\">▾</button>\n  <div id=\"split-menu\" popover=\"auto\" class=\"split-menu\">\n    <a href=\"/quote?plan=pro\">Pro quote</a>\n    <a href=\"/contact\">Talk to sales</a>\n  </div>\n</div>\n",
+      "html": "<div class=\"split\">\n  <a class=\"split-main\" href=\"/quote\">Request quote</a>\n  <button class=\"split-more\" commandfor=\"split-menu\" command=\"toggle-popover\" aria-label=\"More actions\">▾</button>\n  <div id=\"split-menu\" popover=\"auto\" class=\"split-menu\">\n    <a href=\"/quote?plan=pro\">Pro quote</a>\n    <a href=\"/contact\">Talk to sales</a>\n  </div>\n",
       "css": ".split { display: inline-flex; position: relative; anchor-scope: --split; }\n.split-main, .split-more {\n  min-block-size: 44px; display: inline-grid; place-items: center;\n  background: var(--color-primary); color: white; border: 0;\n  text-decoration: none; cursor: pointer;\n}\n.split-main { padding-inline: var(--space-4); border-radius: var(--radius-md) 0 0 var(--radius-md); }\n.split-more {\n  anchor-name: --split;\n  min-inline-size: 44px;\n  border-inline-start: 1px solid oklch(1 0 0 / .25);\n  border-radius: 0 var(--radius-md) var(--radius-md) 0;\n}\n.split-menu {\n  margin: 0; inset: auto;\n  position-anchor: --split; position-area: bottom end;\n  margin-block-start: .35rem;\n  position-try-fallbacks: flip-inline, flip-block;\n  position-visibility: anchors-visible;\n  min-inline-size: 12rem; padding: var(--space-2);\n  background: var(--color-bg); border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  box-shadow: 0 16px 40px oklch(0 0 0 / .14);\n}\n.split-menu a {\n  display: grid; align-items: center; min-block-size: 44px;\n  padding-inline: .75rem; border-radius: var(--radius-sm);\n  color: var(--color-text); text-decoration: none;\n}\n.split-menu a:hover, .split-menu a:focus-visible { background: var(--color-surface-offset); }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "activate-control",
         "hint": "Activate the control to preview"
       },
-      "previewHtml": "<div class=\"split\">\n  <a class=\"split-main\" href=\"/quote\">Request quote</a>\n  <button class=\"split-more\" commandfor=\"split-menu\" command=\"toggle-popover\" aria-label=\"More actions\">▾</button>\n  <div id=\"split-menu\" popover=\"auto\" class=\"split-menu\">\n    <a href=\"/quote?plan=pro\">Pro quote</a>\n    <a href=\"/contact\">Talk to sales</a>\n  </div>\n</div>",
+      "previewHtml": "<div class=\"split\">\n  <a class=\"split-main\" href=\"/quote\">Request quote</a>\n  <button class=\"split-more\" commandfor=\"split-menu\" command=\"toggle-popover\" aria-label=\"More actions\">▾</button>\n  <div id=\"split-menu\" popover=\"auto\" class=\"split-menu\">\n    <a href=\"/quote?plan=pro\">Pro quote</a>\n    <a href=\"/contact\">Talk to sales</a>\n  </div>",
       "previewCss": ".split { display: inline-flex; position: relative; anchor-scope: --split; }\n.split-main, .split-more {\n  min-block-size: 44px; display: inline-grid; place-items: center;\n  background: var(--color-primary); color: white; border: 0;\n  text-decoration: none; cursor: pointer;\n}\n.split-main { padding-inline: var(--space-4); border-radius: var(--radius-md) 0 0 var(--radius-md); }\n.split-more {\n  anchor-name: --split;\n  min-inline-size: 44px;\n  border-inline-start: 1px solid oklch(1 0 0 / .25);\n  border-radius: 0 var(--radius-md) var(--radius-md) 0;\n}\n.split-menu {\n  margin: 0; inset: auto;\n  position-anchor: --split; position-area: bottom end;\n  margin-block-start: .35rem;\n  position-try-fallbacks: flip-inline, flip-block;\n  position-visibility: anchors-visible;\n  min-inline-size: 12rem; padding: var(--space-2);\n  background: var(--color-bg); border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  box-shadow: 0 16px 40px oklch(0 0 0 / .14);\n}\n.split-menu a {\n  display: grid; align-items: center; min-block-size: 44px;\n  padding-inline: .75rem; border-radius: var(--radius-sm);\n  color: var(--color-text); text-decoration: none;\n}\n.split-menu a:hover, .split-menu a:focus-visible { background: var(--color-surface-offset); }\n",
       "featureKeys": [
         "invoker-commands",
@@ -4018,14 +4018,14 @@
       "note": "",
       "description": "Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on the selected option (`::checkmark`). Requires `appearance: base-select` (Spell 54).",
       "html": "",
-      "css": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    min-block-size: 44px;\n  }\n  select.premium-dropdown::picker-icon {\n    content: \"▾\";\n    color: var(--color-text-muted);\n    transition: transform 180ms cubic-bezier(.16,1,.3,1);\n  }\n  select.premium-dropdown:open::picker-icon { transform: rotate(180deg); }\n  select.premium-dropdown option {\n    min-block-size: 44px;\n    display: flex; align-items: center; gap: .5rem;\n    padding-inline: .75rem;\n  }\n  select.premium-dropdown option::checkmark {\n    content: \"✓\";\n    color: var(--color-primary);\n    font-weight: 700;\n  }\n}\n",
+      "css": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    min-block-size: 44px;\n  }\n  select.premium-dropdown::picker-icon {\n    content: \"▾\";\n    color: var(--color-text-muted);\n    transition: transform 180ms cubic-bezier(.16,1,.3,1);\n  }\n  select.premium-dropdown:open::picker-icon { transform: rotate(180deg); }\n  select.premium-dropdown option {\n    min-block-size: 44px;\n    display: flex; align-items: center; gap: .5rem;\n    padding-inline: .75rem;\n  }\n  select.premium-dropdown option::checkmark {\n    content: \"✓\";\n    color: var(--color-primary);\n    font-weight: 700;\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "toggle-disclosure",
         "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<select class=\"premium-dropdown\"><option>One</option><option selected>Two</option><option>Three</option></select>",
-      "previewCss": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    min-block-size: 44px;\n  }\n  select.premium-dropdown::picker-icon {\n    content: \"▾\";\n    color: var(--color-text-muted);\n    transition: transform 180ms cubic-bezier(.16,1,.3,1);\n  }\n  select.premium-dropdown:open::picker-icon { transform: rotate(180deg); }\n  select.premium-dropdown option {\n    min-block-size: 44px;\n    display: flex; align-items: center; gap: .5rem;\n    padding-inline: .75rem;\n  }\n  select.premium-dropdown option::checkmark {\n    content: \"✓\";\n    color: var(--color-primary);\n    font-weight: 700;\n  }\n}\n",
+      "previewCss": "@supports (appearance: base-select) {\n  select.premium-dropdown {\n    appearance: base-select;\n    min-block-size: 44px;\n  }\n  select.premium-dropdown::picker-icon {\n    content: \"▾\";\n    color: var(--color-text-muted);\n    transition: transform 180ms cubic-bezier(.16,1,.3,1);\n  }\n  select.premium-dropdown:open::picker-icon { transform: rotate(180deg); }\n  select.premium-dropdown option {\n    min-block-size: 44px;\n    display: flex; align-items: center; gap: .5rem;\n    padding-inline: .75rem;\n  }\n  select.premium-dropdown option::checkmark {\n    content: \"✓\";\n    color: var(--color-primary);\n    font-weight: 700;\n  }}",
       "featureKeys": [
         "open-pseudo",
         "select-pseudos",
@@ -4087,14 +4087,14 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A card gallery that filters visible items from checked boxes, with no JavaScript.",
-      "html": "<div class=\"filter-matrix-wrap\">\n  <div class=\"filter-controls\">\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-tech\" checked><span>Tech</span></label>\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-design\"><span>Design</span></label>\n  </div>\n\n  <div class=\"card-matrix\">\n    <article class=\"matrix-card\" data-cat=\"tech\">Tech project</article>\n    <article class=\"matrix-card\" data-cat=\"design\">Design project</article>\n  </div>\n</div>\n",
+      "html": "<div class=\"filter-matrix-wrap\">\n  <div class=\"filter-controls\">\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-tech\" checked><span>Tech</span></label>\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-design\"><span>Design</span></label>\n  </div>\n\n  <div class=\"card-matrix\">\n    <article class=\"matrix-card\" data-cat=\"tech\">Tech project</article>\n    <article class=\"matrix-card\" data-cat=\"design\">Design project</article>\n  </div>\n",
       "css": ".filter-controls { display: flex; gap: var(--space-2); margin-block-end: var(--space-4); }\n.filter-chip { display: inline-grid; place-items: center; min-block-size: 44px; padding-inline: 1rem; cursor: pointer; border-radius: 999px; border: 1px solid var(--color-border); }\n.filter-chip input { position: absolute; opacity: 0; pointer-events: none; }\n.filter-chip:has(input:checked) { background: var(--color-primary); color: white; border-color: var(--color-primary); }\n.filter-chip:has(input:focus-visible) { outline: 2px solid var(--color-primary); outline-offset: 2px; }\n\n.card-matrix:has(#f-tech:not(:checked)) .matrix-card[data-cat=\"tech\"],\n.card-matrix:has(#f-design:not(:checked)) .matrix-card[data-cat=\"design\"] {\n  display: none;\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "toggle-control",
         "hint": "Toggle the control to preview"
       },
-      "previewHtml": "<div class=\"filter-matrix-wrap\">\n  <div class=\"filter-controls\">\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-tech\" checked><span>Tech</span></label>\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-design\"><span>Design</span></label>\n  </div>\n\n  <div class=\"card-matrix\">\n    <article class=\"matrix-card\" data-cat=\"tech\">Tech project</article>\n    <article class=\"matrix-card\" data-cat=\"design\">Design project</article>\n  </div>\n</div>",
+      "previewHtml": "<div class=\"filter-matrix-wrap\">\n  <div class=\"filter-controls\">\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-tech\" checked><span>Tech</span></label>\n    <label class=\"filter-chip\"><input type=\"checkbox\" id=\"f-design\"><span>Design</span></label>\n  </div>\n\n  <div class=\"card-matrix\">\n    <article class=\"matrix-card\" data-cat=\"tech\">Tech project</article>\n    <article class=\"matrix-card\" data-cat=\"design\">Design project</article>\n  </div>",
       "previewCss": ".filter-controls { display: flex; gap: var(--space-2); margin-block-end: var(--space-4); }\n.filter-chip { display: inline-grid; place-items: center; min-block-size: 44px; padding-inline: 1rem; cursor: pointer; border-radius: 999px; border: 1px solid var(--color-border); }\n.filter-chip input { position: absolute; opacity: 0; pointer-events: none; }\n.filter-chip:has(input:checked) { background: var(--color-primary); color: white; border-color: var(--color-primary); }\n.filter-chip:has(input:focus-visible) { outline: 2px solid var(--color-primary); outline-offset: 2px; }\n\n.card-matrix:has(#f-tech:not(:checked)) .matrix-card[data-cat=\"tech\"],\n.card-matrix:has(#f-design:not(:checked)) .matrix-card[data-cat=\"design\"] {\n  display: none;\n}\n",
       "featureKeys": [
         "has"
@@ -4326,14 +4326,14 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "Multi-level cascade menus whose light-dismiss is handled automatically by the browser.",
-      "html": "<button commandfor=\"m-main\" command=\"toggle-popover\" class=\"btn\">Export ▾</button>\n\n<div id=\"m-main\" popover=\"auto\" class=\"menu-l1\">\n  <button commandfor=\"m-sub\" command=\"show-popover\" id=\"b-sub\" class=\"sub-trig\">As file ▸</button>\n  <div id=\"m-sub\" popover=\"auto\" class=\"menu-l2\">\n    <button>PDF</button>\n    <button>CSV</button>\n  </div>\n</div>\n",
+      "html": "<button commandfor=\"m-main\" command=\"toggle-popover\" class=\"btn\">Export ▾</button>\n\n<div id=\"m-main\" popover=\"auto\" class=\"menu-l1\">\n  <button commandfor=\"m-sub\" command=\"show-popover\" id=\"b-sub\" class=\"sub-trig\">As file ▸</button>\n  <div id=\"m-sub\" popover=\"auto\" class=\"menu-l2\">\n    <button>PDF</button>\n    <button>CSV</button>\n  </div>\n",
       "css": ".menu-l1, .menu-l2 {\n  margin: 0; padding: var(--space-2); background: var(--color-bg);\n  border: 1px solid var(--color-border); border-radius: var(--radius-md);\n  box-shadow: 0 12px 32px oklch(0 0 0 / .14);\n}\n.sub-trig { anchor-name: --sub-btn; inline-size: 100%; text-align: start; min-block-size: 44px; }\n.menu-l2 {\n  inset: auto; position-anchor: --sub-btn; position-area: right span-bottom;\n  position-try-options: flip-inline, flip-block; margin-inline-start: var(--space-1);\n}\n.menu-l1 button, .menu-l2 button { min-block-size: 44px; inline-size: 100%; border: 0; background: none; cursor: pointer; }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "activate-control",
         "hint": "Activate the control to preview"
       },
-      "previewHtml": "<button commandfor=\"m-main\" command=\"toggle-popover\" class=\"btn\">Export ▾</button>\n\n<div id=\"m-main\" popover=\"auto\" class=\"menu-l1\">\n  <button commandfor=\"m-sub\" command=\"show-popover\" id=\"b-sub\" class=\"sub-trig\">As file ▸</button>\n  <div id=\"m-sub\" popover=\"auto\" class=\"menu-l2\">\n    <button>PDF</button>\n    <button>CSV</button>\n  </div>\n</div>",
+      "previewHtml": "<button commandfor=\"m-main\" command=\"toggle-popover\" class=\"btn\">Export ▾</button>\n\n<div id=\"m-main\" popover=\"auto\" class=\"menu-l1\">\n  <button commandfor=\"m-sub\" command=\"show-popover\" id=\"b-sub\" class=\"sub-trig\">As file ▸</button>\n  <div id=\"m-sub\" popover=\"auto\" class=\"menu-l2\">\n    <button>PDF</button>\n    <button>CSV</button>\n  </div>",
       "previewCss": ".menu-l1, .menu-l2 {\n  margin: 0; padding: var(--space-2); background: var(--color-bg);\n  border: 1px solid var(--color-border); border-radius: var(--radius-md);\n  box-shadow: 0 12px 32px oklch(0 0 0 / .14);\n}\n.sub-trig { anchor-name: --sub-btn; inline-size: 100%; text-align: start; min-block-size: 44px; }\n.menu-l2 {\n  inset: auto; position-anchor: --sub-btn; position-area: right span-bottom;\n  position-try-options: flip-inline, flip-block; margin-inline-start: var(--space-1);\n}\n.menu-l1 button, .menu-l2 button { min-block-size: 44px; inline-size: 100%; border: 0; background: none; cursor: pointer; }\n",
       "featureKeys": [
         "invoker-commands",
@@ -4536,14 +4536,14 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "Visually switches prices between monthly and yearly billing with no JS.",
-      "html": "<div class=\"price-toggle-wrap\">\n  <fieldset class=\"billing-switch\">\n    <legend class=\"sr-only\">Billing type</legend>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-m\" checked> Monthly</label>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-y\"> Yearly (−20%)</label>\n  </fieldset>\n\n  <div class=\"price-card\">\n    <p class=\"price-val price-monthly\">$19 / mo</p>\n    <p class=\"price-val price-yearly\">$15 / mo</p>\n  </div>\n</div>\n",
+      "html": "<div class=\"price-toggle-wrap\">\n  <fieldset class=\"billing-switch\">\n    <legend class=\"sr-only\">Billing type</legend>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-m\" checked> Monthly</label>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-y\"> Yearly (−20%)</label>\n  </fieldset>\n\n  <div class=\"price-card\">\n    <p class=\"price-val price-monthly\">$19 / mo</p>\n    <p class=\"price-val price-yearly\">$15 / mo</p>\n  </div>\n",
       "css": ".billing-switch { display: inline-flex; gap: .25rem; border: 0; padding: .25rem; background: var(--color-surface-offset); border-radius: 999px; }\n.billing-switch label { min-block-size: 44px; display: inline-flex; align-items: center; padding-inline: 1rem; border-radius: 999px; cursor: pointer; }\n.price-toggle-wrap:has(#b-m:checked) label:has(#b-m),\n.price-toggle-wrap:has(#b-y:checked) label:has(#b-y) { background: var(--color-bg); font-weight: 600; box-shadow: 0 1px 3px oklch(0 0 0 / .1); }\n\n.price-yearly { display: none; }\n.price-toggle-wrap:has(#b-y:checked) .price-monthly { display: none; }\n.price-toggle-wrap:has(#b-y:checked) .price-yearly { display: block; }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "toggle-control",
         "hint": "Toggle the control to preview"
       },
-      "previewHtml": "<div class=\"price-toggle-wrap\">\n  <fieldset class=\"billing-switch\">\n    <legend class=\"sr-only\">Billing type</legend>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-m\" checked> Monthly</label>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-y\"> Yearly (−20%)</label>\n  </fieldset>\n\n  <div class=\"price-card\">\n    <p class=\"price-val price-monthly\">$19 / mo</p>\n    <p class=\"price-val price-yearly\">$15 / mo</p>\n  </div>\n</div>",
+      "previewHtml": "<div class=\"price-toggle-wrap\">\n  <fieldset class=\"billing-switch\">\n    <legend class=\"sr-only\">Billing type</legend>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-m\" checked> Monthly</label>\n    <label><input type=\"radio\" name=\"billing\" id=\"b-y\"> Yearly (−20%)</label>\n  </fieldset>\n\n  <div class=\"price-card\">\n    <p class=\"price-val price-monthly\">$19 / mo</p>\n    <p class=\"price-val price-yearly\">$15 / mo</p>\n  </div>",
       "previewCss": ".billing-switch { display: inline-flex; gap: .25rem; border: 0; padding: .25rem; background: var(--color-surface-offset); border-radius: 999px; }\n.billing-switch label { min-block-size: 44px; display: inline-flex; align-items: center; padding-inline: 1rem; border-radius: 999px; cursor: pointer; }\n.price-toggle-wrap:has(#b-m:checked) label:has(#b-m),\n.price-toggle-wrap:has(#b-y:checked) label:has(#b-y) { background: var(--color-bg); font-weight: 600; box-shadow: 0 1px 3px oklch(0 0 0 / .1); }\n\n.price-yearly { display: none; }\n.price-toggle-wrap:has(#b-y:checked) .price-monthly { display: none; }\n.price-toggle-wrap:has(#b-y:checked) .price-yearly { display: block; }\n",
       "featureKeys": [
         "color-mix",
@@ -4742,14 +4742,14 @@
       "note": "",
       "description": "A tactile image reveal with `clip-path` that wipes the image in, synced to scroll.",
       "html": "<figure class=\"img-wipe\"><img src=\"/photo.jpg\" alt=\"Description\"></figure>\n",
-      "css": ".img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n}\n",
+      "css": ".img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<figure class=\"img-wipe\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Description\"></figure>",
-      "previewCss": ".img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n}\n",
+      "previewCss": ".img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }}",
       "featureKeys": [
         "view-timeline"
       ],
@@ -5052,14 +5052,14 @@
       "note": "",
       "description": "Style component guidance with `@scope` while explicitly preventing accent styles from leaking into nested demo regions.",
       "html": "<article class=\"docs-card\">\n  <h2><span class=\"accent\">Scoped</span> component guidance</h2>\n  <p>The outer accent belongs to the card.</p>\n  <section class=\"example\" aria-label=\"Unstyled embedded example\">\n    <p><span class=\"accent\">Embedded content</span> keeps its own theme.</p>\n  </section>\n</article>\n",
-      "css": ".docs-card {\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.docs-card > h2 .accent,\n.docs-card > p .accent {\n  color: var(--color-accent);\n  font-weight: 750;\n}\n.docs-card .example {\n  margin-block-start: 1rem;\n  padding: .75rem;\n  border-inline-start: 3px solid var(--color-border);\n}\n@scope (.docs-card) to (.example) {\n  .accent {\n    color: var(--color-accent);\n    font-weight: 750;\n  }\n}\n",
+      "css": ".docs-card {\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.docs-card > h2 .accent,\n.docs-card > p .accent {\n  color: var(--color-accent);\n  font-weight: 750;\n}\n.docs-card .example {\n  margin-block-start: 1rem;\n  padding: .75rem;\n  border-inline-start: 3px solid var(--color-border);\n}\n@scope (.docs-card) to (.example) {\n  .accent {\n    color: var(--color-accent);\n    font-weight: 750;\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<article class=\"docs-card\" style=\"inline-size:min(24rem, 100%)\"><h2><span class=\"accent\">Scoped</span> component guidance</h2><p>The outer accent belongs to the card.</p><section class=\"example\"><p><span class=\"accent\">Embedded content</span> keeps its own theme.</p></section></article>",
-      "previewCss": ".docs-card {\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.docs-card > h2 .accent,\n.docs-card > p .accent {\n  color: var(--color-accent);\n  font-weight: 750;\n}\n.docs-card .example {\n  margin-block-start: 1rem;\n  padding: .75rem;\n  border-inline-start: 3px solid var(--color-border);\n}\n@scope (.docs-card) to (.example) {\n  .accent {\n    color: var(--color-accent);\n    font-weight: 750;\n  }\n}\n",
+      "previewCss": ".docs-card {\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.docs-card > h2 .accent,\n.docs-card > p .accent {\n  color: var(--color-accent);\n  font-weight: 750;\n}\n.docs-card .example {\n  margin-block-start: 1rem;\n  padding: .75rem;\n  border-inline-start: 3px solid var(--color-border);\n}\n@scope (.docs-card) to (.example) {\n  .accent {\n    color: var(--color-accent);\n    font-weight: 750;\n  }}",
       "featureKeys": [
         "css-scope"
       ],
@@ -5086,14 +5086,14 @@
       "note": "",
       "description": "Highlight the active card aligned to a scroll-snap point using `@container scroll-state(snapped: inline)` without JavaScript observers.",
       "html": "<div class=\"snap-products\" aria-label=\"Featured products\">\n  <article class=\"snap-product\">\n    <div class=\"snap-product__body\"><strong>Starter</strong><span>$12</span></div>\n  </article>\n  <article class=\"snap-product\">\n    <div class=\"snap-product__body\"><strong>Studio</strong><span>$28</span></div>\n  </article>\n  <article class=\"snap-product\">\n    <div class=\"snap-product__body\"><strong>Agency</strong><span>$64</span></div>\n  </article>\n</div>\n",
-      "css": ".snap-products {\n  display: grid;\n  grid-auto-flow: column;\n  grid-auto-columns: min(80%, 16rem);\n  gap: .75rem;\n  overflow-x: auto;\n  padding: .5rem;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-inline: contain;\n}\n.snap-product {\n  container-type: scroll-state;\n  scroll-snap-align: center;\n}\n.snap-product__body {\n  min-block-size: 8rem;\n  padding: 1rem;\n  display: grid;\n  align-content: space-between;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n@supports (container-type: scroll-state) {\n  .snap-product__body {\n    opacity: .62;\n    scale: .96;\n    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;\n  }\n  @container scroll-state(snapped: inline) {\n    .snap-product__body {\n      opacity: 1;\n      scale: 1;\n      border-color: var(--color-primary);\n    }\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .snap-product__body { transition: none; }\n}\n",
+      "css": ".snap-products {\n  display: grid;\n  grid-auto-flow: column;\n  grid-auto-columns: min(80%, 16rem);\n  gap: .75rem;\n  overflow-x: auto;\n  padding: .5rem;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-inline: contain;\n}\n.snap-product {\n  container-type: scroll-state;\n  scroll-snap-align: center;\n}\n.snap-product__body {\n  min-block-size: 8rem;\n  padding: 1rem;\n  display: grid;\n  align-content: space-between;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n@supports (container-type: scroll-state) {\n  .snap-product__body {\n    opacity: .62;\n    scale: .96;\n    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;\n  }\n  @container scroll-state(snapped: inline) {\n    .snap-product__body {\n      opacity: 1;\n      scale: 1;\n      border-color: var(--color-primary);\n    }\n}\n@media (prefers-reduced-motion: reduce) {\n  .snap-product__body { transition: none; }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"snap-products\" style=\"max-width:22rem\"><article class=\"snap-product\"><div class=\"snap-product__body\"><strong>Starter</strong><span>$12</span></div></article><article class=\"snap-product\"><div class=\"snap-product__body\"><strong>Studio</strong><span>$28</span></div></article><article class=\"snap-product\"><div class=\"snap-product__body\"><strong>Agency</strong><span>$64</span></div></article></div>",
-      "previewCss": ".snap-products {\n  display: grid;\n  grid-auto-flow: column;\n  grid-auto-columns: min(80%, 16rem);\n  gap: .75rem;\n  overflow-x: auto;\n  padding: .5rem;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-inline: contain;\n}\n.snap-product {\n  container-type: scroll-state;\n  scroll-snap-align: center;\n}\n.snap-product__body {\n  min-block-size: 8rem;\n  padding: 1rem;\n  display: grid;\n  align-content: space-between;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n@supports (container-type: scroll-state) {\n  .snap-product__body {\n    opacity: .62;\n    scale: .96;\n    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;\n  }\n  @container scroll-state(snapped: inline) {\n    .snap-product__body {\n      opacity: 1;\n      scale: 1;\n      border-color: var(--color-primary);\n    }\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .snap-product__body { transition: none; }\n}\n",
+      "previewCss": ".snap-products {\n  display: grid;\n  grid-auto-flow: column;\n  grid-auto-columns: min(80%, 16rem);\n  gap: .75rem;\n  overflow-x: auto;\n  padding: .5rem;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-inline: contain;\n}\n.snap-product {\n  container-type: scroll-state;\n  scroll-snap-align: center;\n}\n.snap-product__body {\n  min-block-size: 8rem;\n  padding: 1rem;\n  display: grid;\n  align-content: space-between;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n@supports (container-type: scroll-state) {\n  .snap-product__body {\n    opacity: .62;\n    scale: .96;\n    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;\n  }\n  @container scroll-state(snapped: inline) {\n    .snap-product__body {\n      opacity: 1;\n      scale: 1;\n      border-color: var(--color-primary);\n    }\n}\n@media (prefers-reduced-motion: reduce) {\n  .snap-product__body { transition: none; }\n}}",
       "featureKeys": [
         "scroll-state",
         "container"
@@ -5121,14 +5121,14 @@
       "note": "",
       "description": "Draw clean separators directly in grid and flex gaps using `column-rule` without first/last-child border overrides.",
       "html": "<dl class=\"metric-strip\">\n  <div><dt>Revenue</dt><dd>$84k</dd></div>\n  <div><dt>Retention</dt><dd>94%</dd></div>\n  <div><dt>Latency</dt><dd>82ms</dd></div>\n</dl>\n",
-      "css": ".metric-strip {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 1rem;\n  margin: 0;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.metric-strip > div {\n  min-inline-size: 0;\n  padding-inline-start: 1rem;\n  border-inline-start: 1px solid var(--color-border);\n}\n.metric-strip > div:first-child {\n  padding-inline-start: 0;\n  border-inline-start: 0;\n}\n.metric-strip dt {\n  color: var(--color-text-muted);\n  font-size: .75rem;\n}\n.metric-strip dd {\n  margin: .2rem 0 0;\n  font-size: clamp(1.1rem, 4cqi, 1.6rem);\n  font-weight: 750;\n}\n@supports (row-rule: 1px solid transparent) {\n  .metric-strip {\n    column-rule: 1px solid var(--color-border);\n  }\n  .metric-strip > div,\n  .metric-strip > div:first-child {\n    padding-inline-start: 0;\n    border-inline-start: 0;\n  }\n}\n",
+      "css": ".metric-strip {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 1rem;\n  margin: 0;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.metric-strip > div {\n  min-inline-size: 0;\n  padding-inline-start: 1rem;\n  border-inline-start: 1px solid var(--color-border);\n}\n.metric-strip > div:first-child {\n  padding-inline-start: 0;\n  border-inline-start: 0;\n}\n.metric-strip dt {\n  color: var(--color-text-muted);\n  font-size: .75rem;\n}\n.metric-strip dd {\n  margin: .2rem 0 0;\n  font-size: clamp(1.1rem, 4cqi, 1.6rem);\n  font-weight: 750;\n}\n@supports (row-rule: 1px solid transparent) {\n  .metric-strip {\n    column-rule: 1px solid var(--color-border);\n  }\n  .metric-strip > div,\n  .metric-strip > div:first-child {\n    padding-inline-start: 0;\n    border-inline-start: 0;\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<dl class=\"metric-strip\" style=\"inline-size:min(24rem, 100%)\"><div><dt>Revenue</dt><dd>$84k</dd></div><div><dt>Retention</dt><dd>94%</dd></div><div><dt>Latency</dt><dd>82ms</dd></div></dl>",
-      "previewCss": ".metric-strip {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 1rem;\n  margin: 0;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.metric-strip > div {\n  min-inline-size: 0;\n  padding-inline-start: 1rem;\n  border-inline-start: 1px solid var(--color-border);\n}\n.metric-strip > div:first-child {\n  padding-inline-start: 0;\n  border-inline-start: 0;\n}\n.metric-strip dt {\n  color: var(--color-text-muted);\n  font-size: .75rem;\n}\n.metric-strip dd {\n  margin: .2rem 0 0;\n  font-size: clamp(1.1rem, 4cqi, 1.6rem);\n  font-weight: 750;\n}\n@supports (row-rule: 1px solid transparent) {\n  .metric-strip {\n    column-rule: 1px solid var(--color-border);\n  }\n  .metric-strip > div,\n  .metric-strip > div:first-child {\n    padding-inline-start: 0;\n    border-inline-start: 0;\n  }\n}\n",
+      "previewCss": ".metric-strip {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 1rem;\n  margin: 0;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  background: var(--color-surface);\n}\n.metric-strip > div {\n  min-inline-size: 0;\n  padding-inline-start: 1rem;\n  border-inline-start: 1px solid var(--color-border);\n}\n.metric-strip > div:first-child {\n  padding-inline-start: 0;\n  border-inline-start: 0;\n}\n.metric-strip dt {\n  color: var(--color-text-muted);\n  font-size: .75rem;\n}\n.metric-strip dd {\n  margin: .2rem 0 0;\n  font-size: clamp(1.1rem, 4cqi, 1.6rem);\n  font-weight: 750;\n}\n@supports (row-rule: 1px solid transparent) {\n  .metric-strip {\n    column-rule: 1px solid var(--color-border);\n  }\n  .metric-strip > div,\n  .metric-strip > div:first-child {\n    padding-inline-start: 0;\n    border-inline-start: 0;\n  }}",
       "featureKeys": [
         "gap-decorations"
       ],
@@ -5155,14 +5155,14 @@
       "note": "",
       "description": "Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.",
       "html": "<ul class=\"avatar-cluster\" aria-label=\"Project contributors\">\n  <li aria-label=\"Ari\">A</li>\n  <li aria-label=\"Bea\">B</li>\n  <li aria-label=\"Chen\">C</li>\n  <li aria-label=\"Dara\">D</li>\n  <li aria-label=\"Eli\">E</li>\n</ul>\n",
-      "css": ".avatar-cluster {\n  display: flex;\n  align-items: center;\n  gap: .4rem;\n  padding: 1rem;\n  margin: 0;\n  list-style: none;\n}\n.avatar-cluster > li {\n  inline-size: 2.75rem;\n  block-size: 2.75rem;\n  display: grid;\n  place-items: center;\n  border: 2px solid var(--color-bg);\n  border-radius: 50%;\n  background: var(--color-primary);\n  color: var(--color-text-inverse);\n  font-weight: 750;\n}\n.avatar-cluster > li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }\n.avatar-cluster > li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }\n.avatar-cluster > li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }\n@supports (rotate: random(-1deg, 1deg)) {\n  .avatar-cluster > li {\n    rotate: random(-6deg, 6deg);\n    translate: 0 random(-3px, 3px);\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .avatar-cluster > li {\n    rotate: 0deg;\n    translate: 0;\n  }\n}\n",
+      "css": ".avatar-cluster {\n  display: flex;\n  align-items: center;\n  gap: .4rem;\n  padding: 1rem;\n  margin: 0;\n  list-style: none;\n}\n.avatar-cluster > li {\n  inline-size: 2.75rem;\n  block-size: 2.75rem;\n  display: grid;\n  place-items: center;\n  border: 2px solid var(--color-bg);\n  border-radius: 50%;\n  background: var(--color-primary);\n  color: var(--color-text-inverse);\n  font-weight: 750;\n}\n.avatar-cluster > li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }\n.avatar-cluster > li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }\n.avatar-cluster > li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }\n@supports (rotate: random(-1deg, 1deg)) {\n  .avatar-cluster > li {\n    rotate: random(-6deg, 6deg);\n    translate: 0 random(-3px, 3px);\n  }\n@media (prefers-reduced-motion: reduce) {\n  .avatar-cluster > li {\n    rotate: 0deg;\n    translate: 0;\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
       "previewHtml": "<ul class=\"avatar-cluster\" style=\"max-width:20rem\"><li aria-label=\"Ari\">A</li><li aria-label=\"Bea\">B</li><li aria-label=\"Chen\">C</li><li aria-label=\"Dara\">D</li><li aria-label=\"Eli\">E</li></ul>",
-      "previewCss": ".avatar-cluster {\n  display: flex;\n  align-items: center;\n  gap: .4rem;\n  padding: 1rem;\n  margin: 0;\n  list-style: none;\n}\n.avatar-cluster > li {\n  inline-size: 2.75rem;\n  block-size: 2.75rem;\n  display: grid;\n  place-items: center;\n  border: 2px solid var(--color-bg);\n  border-radius: 50%;\n  background: var(--color-primary);\n  color: var(--color-text-inverse);\n  font-weight: 750;\n}\n.avatar-cluster > li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }\n.avatar-cluster > li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }\n.avatar-cluster > li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }\n@supports (rotate: random(-1deg, 1deg)) {\n  .avatar-cluster > li {\n    rotate: random(-6deg, 6deg);\n    translate: 0 random(-3px, 3px);\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .avatar-cluster > li {\n    rotate: 0deg;\n    translate: 0;\n  }\n}\n",
+      "previewCss": ".avatar-cluster {\n  display: flex;\n  align-items: center;\n  gap: .4rem;\n  padding: 1rem;\n  margin: 0;\n  list-style: none;\n}\n.avatar-cluster > li {\n  inline-size: 2.75rem;\n  block-size: 2.75rem;\n  display: grid;\n  place-items: center;\n  border: 2px solid var(--color-bg);\n  border-radius: 50%;\n  background: var(--color-primary);\n  color: var(--color-text-inverse);\n  font-weight: 750;\n}\n.avatar-cluster > li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }\n.avatar-cluster > li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }\n.avatar-cluster > li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }\n@supports (rotate: random(-1deg, 1deg)) {\n  .avatar-cluster > li {\n    rotate: random(-6deg, 6deg);\n    translate: 0 random(-3px, 3px);\n  }\n@media (prefers-reduced-motion: reduce) {\n  .avatar-cluster > li {\n    rotate: 0deg;\n    translate: 0;\n }}}",
       "featureKeys": [
         "css-random"
       ],

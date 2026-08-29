@@ -873,22 +873,24 @@ PREVIEW_TOKENS = """
   :host {
     display: block;
     color-scheme: light dark;
-    --color-primary: #18181b;
-    --color-bg: #fbfaf8;
-    --color-text: #18181b;
-    --color-text-muted: #75716a;
-    --color-text-inverse: #fbfaf8;
-    --color-border: #e3ddd0;
-    --color-surface: #ffffff;
-    --color-surface-offset: #f2efe8;
-    --color-surface-dynamic: #e3ddd0;
-    --color-surface-dark: #18181b;
-    --color-error: #b3261e;
-    --color-success: #2f7d4f;
-    --color-accent: #cf4520;
-    --radius-sm: 6px;
-    --radius-md: 8px;
-    --radius-lg: 8px;
+    /* Same paper/ink/accent the catalogue chrome uses, so a preview never
+       reads as a different product from the page it sits in. */
+    --color-primary: oklch(0.18 0.01 260);
+    --color-bg: oklch(0.985 0.002 90);
+    --color-text: oklch(0.18 0.01 260);
+    --color-text-muted: oklch(0.545 0.012 260);
+    --color-text-inverse: oklch(0.99 0.002 90);
+    --color-border: oklch(0.92 0.005 90);
+    --color-surface: oklch(0.995 0.001 90);
+    --color-surface-offset: oklch(0.963 0.004 90);
+    --color-surface-dynamic: oklch(0.92 0.005 90);
+    --color-surface-dark: oklch(0.18 0.01 260);
+    --color-error: oklch(0.52 0.17 27);
+    --color-success: oklch(0.5 0.12 155);
+    --color-accent: oklch(0.62 0.22 38);
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 4px;
     --space-1: .25rem;
     --space-2: .5rem;
     --space-3: .75rem;
@@ -902,17 +904,17 @@ PREVIEW_TOKENS = """
   }
   @media (prefers-color-scheme: dark) {
     :host {
-      --color-primary: #f4f4f5;
-      --color-bg: #18181b;
-      --color-text: #f4f4f5;
-      --color-text-muted: #a1a1aa;
-      --color-text-inverse: #18181b;
-      --color-border: #27272a;
-      --color-surface: #27272a;
-      --color-surface-offset: #202023;
-      --color-surface-dynamic: #3f3f46;
-      --color-surface-dark: #09090b;
-      --color-accent: #f97316;
+      --color-primary: oklch(0.96 0.002 90);
+      --color-bg: oklch(0.14 0.005 260);
+      --color-text: oklch(0.96 0.002 90);
+      --color-text-muted: oklch(0.62 0.008 90);
+      --color-text-inverse: oklch(0.14 0.005 260);
+      --color-border: oklch(0.24 0.008 260);
+      --color-surface: oklch(0.18 0.006 260);
+      --color-surface-offset: oklch(0.16 0.005 260);
+      --color-surface-dynamic: oklch(0.3 0.01 260);
+      --color-surface-dark: oklch(0.1 0.004 260);
+      --color-accent: oklch(0.68 0.19 38);
     }
   }
   .stage {
@@ -921,12 +923,14 @@ PREVIEW_TOKENS = """
     overflow: hidden;
     width: 100%;
     min-height: 180px;
+    margin-inline: auto;
     padding: 16px;
     display: grid;
     place-items: center;
     background-color: var(--color-bg);
     color: var(--color-text);
     contain: layout;
+    transition: max-width 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .stage > * { max-width: 100%; }
   .stage:has(details) { align-items: start; }
@@ -969,7 +973,7 @@ PREVIEW_TOKENS = """
     block-size: 16px;
   }
   :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
-  :where(table) { border-collapse: collapse; inline-size: 100%; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; font-variant-numeric: tabular-nums; }
   :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
   :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
   .sr-only {
@@ -995,22 +999,22 @@ DOCUMENT_TOKENS = """
   *, *::before, *::after { box-sizing: border-box; }
   :root {
     color-scheme: light dark;
-    --color-primary: light-dark(#18181b, #f4f4f5);
-    --color-bg: light-dark(#fbfaf8, #18181b);
-    --color-text: light-dark(#18181b, #f4f4f5);
-    --color-text-muted: light-dark(#75716a, #a1a1aa);
-    --color-text-inverse: light-dark(#fbfaf8, #18181b);
-    --color-border: light-dark(#e3ddd0, #27272a);
-    --color-surface: light-dark(#ffffff, #27272a);
-    --color-surface-offset: light-dark(#f2efe8, #202023);
-    --color-surface-dynamic: light-dark(#e3ddd0, #3f3f46);
-    --color-surface-dark: light-dark(#18181b, #09090b);
-    --color-error: #b3261e;
-    --color-success: #2f7d4f;
-    --color-accent: light-dark(#cf4520, #f97316);
-    --radius-sm: 6px;
-    --radius-md: 8px;
-    --radius-lg: 8px;
+    --color-primary: light-dark(oklch(0.18 0.01 260), oklch(0.96 0.002 90));
+    --color-bg: light-dark(oklch(0.985 0.002 90), oklch(0.14 0.005 260));
+    --color-text: light-dark(oklch(0.18 0.01 260), oklch(0.96 0.002 90));
+    --color-text-muted: light-dark(oklch(0.545 0.012 260), oklch(0.62 0.008 90));
+    --color-text-inverse: light-dark(oklch(0.99 0.002 90), oklch(0.14 0.005 260));
+    --color-border: light-dark(oklch(0.92 0.005 90), oklch(0.24 0.008 260));
+    --color-surface: light-dark(oklch(0.995 0.001 90), oklch(0.18 0.006 260));
+    --color-surface-offset: light-dark(oklch(0.963 0.004 90), oklch(0.16 0.005 260));
+    --color-surface-dynamic: light-dark(oklch(0.92 0.005 90), oklch(0.3 0.01 260));
+    --color-surface-dark: light-dark(oklch(0.18 0.01 260), oklch(0.1 0.004 260));
+    --color-error: oklch(0.52 0.17 27);
+    --color-success: oklch(0.5 0.12 155);
+    --color-accent: light-dark(oklch(0.62 0.22 38), oklch(0.68 0.19 38));
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 4px;
     --space-1: .25rem;
     --space-2: .5rem;
     --space-3: .75rem;
@@ -1068,7 +1072,7 @@ DOCUMENT_TOKENS = """
     block-size: 16px;
   }
   :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
-  :where(table) { border-collapse: collapse; inline-size: 100%; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; font-variant-numeric: tabular-nums; }
   :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
   :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
   .sr-only {
@@ -1111,6 +1115,16 @@ def inline_md_to_html(text: str) -> str:
     post = html.escape(src[last:], quote=False)
     out.append(apply_bold(post))
     return "".join(out)
+
+
+def spell_label(number: str) -> str:
+    """Editorial spell number for the catalogue: #001 … #150.
+
+    The bonus recipe has no number, so it gets a single mark instead of a
+    fake one. Tabular, fixed-width, and always three digits so a column of
+    them lines up on the baseline grid.
+    """
+    return f"#{number.zfill(3)}" if number.isdigit() else "#B"
 
 
 def one_line(text: str) -> str:
@@ -1295,7 +1309,11 @@ def render_preview_box(spell: dict) -> str:
     action = spell.get("previewAction", {})
     hint = action.get("hint", "")
     hint_tag = f'<span class="ds-hint" aria-hidden="true">{html.escape(hint)}</span>' if hint else ""
-    
+    doc_hint = (
+        f'<span class="ds-hint ds-hint--document" aria-hidden="true">{html.escape(hint)}</span>'
+        if hint else ""
+    )
+
     if env == "document":
         doc_src = f"""<!doctype html>
 <html lang="en">
@@ -1312,7 +1330,7 @@ def render_preview_box(spell: dict) -> str:
 </body>
 </html>"""
         esc_doc = html.escape(doc_src, quote=True)
-        return f"""<iframe class="ds-document" sandbox="allow-same-origin" srcdoc="{esc_doc}" aria-label="Live preview: {html.escape(spell['title'])}" style="width:100%;min-height:280px;border:0;display:block;background:var(--color-bg, #fbfaf8);"></iframe>{hint_tag}"""
+        return f"""<iframe class="ds-document" sandbox="allow-same-origin" srcdoc="{esc_doc}" aria-label="Live preview: {html.escape(spell['title'])}" style="width:100%;min-height:280px;border:0;display:block;background:var(--paper);"></iframe>{doc_hint}"""
     else:
         return f"""<template shadowrootmode="open">
   <style>
@@ -1323,14 +1341,15 @@ def render_preview_box(spell: dict) -> str:
       right: 8px;
       bottom: 8px;
       z-index: 2;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: var(--color-surface-dark);
-      color: var(--color-text-inverse);
-      font: 600 10px/1 var(--ds-sans, ui-sans-serif, system-ui, sans-serif);
-      letter-spacing: .02em;
+      padding: 3px 6px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      font: 500 10px/1.2 var(--ds-mono, ui-monospace, "SF Mono", Menlo, monospace);
+      letter-spacing: .04em;
+      text-transform: uppercase;
       pointer-events: none;
-      opacity: .8;
     }}
     .ds-runway {{
       overflow-y: auto;
@@ -1367,7 +1386,6 @@ def astro_for(spell: dict) -> str:
 
 
 def render_drawer(spell: dict) -> str:
-    status_cls = "ok" if spell["status"] == "baseline" else "warn" if spell["status"] == "newer" else "muted"
     browser_items = "".join(
         f'<li><span class="bname"><span class="brow" data-level="{html.escape(spell.get("browsers", {}).get(b["key"], "no"))}">{ICONS.get(b["key"], "")}</span>{html.escape(b["label"])}</span><span class="blevel" data-level="{html.escape(spell.get("browsers", {}).get(b["key"], "no"))}">{html.escape(LEVEL_LABEL.get(spell.get("browsers", {}).get(b["key"], "no"), ""))}</span></li>'
         for b in BROWSER_META
@@ -1377,24 +1395,28 @@ def render_drawer(spell: dict) -> str:
     astro_src = astro_for(spell)
     preview_box = render_preview_box(spell)
     feature_keys_json = html.escape(json.dumps(spell.get("featureKeys", [])), quote=True)
-    
+    num = spell_label(spell["number"])
+
     return f"""
   <div class="drawer" id="drawer-{spell['id']}" popover="auto" role="dialog" aria-modal="true" aria-labelledby="drawer-title-{spell['id']}">
     <header class="drawer__head">
       <div class="drawer__head-main">
         <p class="drawer__eyebrow">
-          <span>{spell['id']}</span>
-          <span aria-hidden="true">·</span>
+          <span class="drawer__num">{num}</span>
+          <span class="drawer__ref">{spell['id']}</span>
+          <span aria-hidden="true">/</span>
           <span>{spell['jsLabel']}</span>
         </p>
         <h2 class="drawer__title" id="drawer-title-{spell['id']}">{html.escape(spell['title'])}</h2>
         <p class="drawer__meta">
           <span class="drawer__cat">{html.escape(spell['category'])}</span>
           <span aria-hidden="true">/</span>
-          <span class="label label--{status_cls}"><span class="label__dot" aria-hidden="true"></span>{html.escape(spell['statusLabel'])}</span>
+          <span class="status-flag" data-status="{html.escape(spell['status'], quote=True)}"><span class="dot" aria-hidden="true"></span>{html.escape(spell['statusLabel'])}</span>
         </p>
       </div>
-      <button class="drawer__close" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide" aria-label="Close panel">×</button>
+      <button class="drawer__close" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide" aria-label="Close panel">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1 11 11M11 1 1 11" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
+      </button>
     </header>
 
     <div class="drawer__scroll">
@@ -1404,7 +1426,7 @@ def render_drawer(spell: dict) -> str:
         <h3 class="sect__label" id="browsers-label-{spell['id']}">Browser support <span>{html.escape(spell['feature'])}</span></h3>
         <ul class="browser-list">{browser_items}</ul>
         <div class="feature-check" data-features="{feature_keys_json}">
-          <span class="feature-check__text">Checking compatibility with your current browser...</span>
+          <span class="feature-check__text">Checking compatibility with your current browser…</span>
         </div>
         <p class="support-note">{html.escape(spell['supportNote'])}</p>
       </section>
@@ -1412,11 +1434,11 @@ def render_drawer(spell: dict) -> str:
       <section class="sect" aria-labelledby="preview-label-{spell['id']}">
         <div class="sect__head-row">
           <h3 class="sect__label" id="preview-label-{spell['id']}">Live preview <span>isolated sandbox</span></h3>
-          <div class="stage-controls">
+          <div class="stage-controls" role="group" aria-label="Preview stage width">
             <button type="button" class="btn-stage is-active" data-stage-width="100%">100%</button>
-            <button type="button" class="btn-stage" data-stage-width="768px">768px</button>
-            <button type="button" class="btn-stage" data-stage-width="375px">375px</button>
-            <button type="button" class="btn-stage btn-stage--theme" data-stage-theme-toggle title="Toggle light/dark preview stage">☀️/🌙</button>
+            <button type="button" class="btn-stage" data-stage-width="768px">768</button>
+            <button type="button" class="btn-stage" data-stage-width="375px">375</button>
+            <button type="button" class="btn-stage btn-stage--theme" data-stage-theme-toggle aria-label="Toggle preview stage theme" title="Toggle light / dark stage">◐</button>
           </div>
         </div>
         <div class="preview-host preview-host--lg" id="preview-host-{spell['id']}">
@@ -1427,6 +1449,10 @@ def render_drawer(spell: dict) -> str:
       <section class="sect" aria-labelledby="source-label-{spell['id']}">
         <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind v4 / Astro / HTML</span></h3>
         <div class="code drawer__code code__tabs">
+          <div class="code__bar">
+            <span class="code__file">{spell['id']}</span>
+            <button class="code__copy" type="button" data-copy-row>Copy</button>
+          </div>
           <details name="tabs-{spell['id']}" class="code__tab-group" open>
             <summary class="code__tab">Modern CSS</summary>
             <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_css(spell['css'])}</code></pre></div>
@@ -1448,7 +1474,7 @@ def render_drawer(spell: dict) -> str:
     </div>
 
     <footer class="drawer__foot">
-      <button class="btn btn--stack" type="button" data-stack-add="{spell['id']}">+ Add to Stack</button>
+      <button class="btn" type="button" data-stack-add="{spell['id']}">+ Add to Stack</button>
       <p class="drawer__hint">Zero JS · copy and paste freely</p>
       <button class="btn btn--primary" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide">Close</button>
     </footer>
@@ -1458,13 +1484,21 @@ def render_drawer(spell: dict) -> str:
 def render_quick_preview(spell: dict) -> str:
     browsers = browsers_row(spell)
     preview_box = render_preview_box(spell)
+    num = spell_label(spell["number"])
     return f"""
-        <div class="preview-panel__card" data-preview="{spell['id']}">
-          <div class="preview-panel__head">
-            <p class="preview-panel__eyebrow">{spell['id']}</p>
+        <article class="preview-panel__card" data-preview="{spell['id']}">
+          <header class="preview-panel__head">
+            <p class="preview-panel__eyebrow">
+              <span class="preview-panel__num">{num}</span>
+              <span class="preview-panel__ref">{spell['id']}</span>
+            </p>
             <h2 class="preview-panel__title">{html.escape(spell['title'])}</h2>
-            <p class="preview-panel__cat">{html.escape(spell['category'])}</p>
-          </div>
+            <p class="preview-panel__cat">
+              {html.escape(spell['category'])}
+              <span aria-hidden="true">/</span>
+              <span class="preview-panel__status" data-status="{html.escape(spell['status'], quote=True)}">{html.escape(spell['statusLabel'])}</span>
+            </p>
+          </header>
           <div class="preview-host preview-host--panel">
             {preview_box}
           </div>
@@ -1472,32 +1506,37 @@ def render_quick_preview(spell: dict) -> str:
             {browsers}
           </div>
           <div class="preview-panel__actions">
-            <button class="preview-panel__copy" type="button" data-copy-row data-spell-id="{spell['id']}">Copy CSS</button>
-            <button class="preview-panel__stack" type="button" data-stack-add="{spell['id']}">+ Stack</button>
+            <button class="btn btn--accent preview-panel__copy" type="button" data-copy-row data-spell-id="{spell['id']}">Copy CSS</button>
+            <button class="btn preview-panel__stack" type="button" data-stack-add="{spell['id']}">+ Stack</button>
           </div>
           <button class="preview-panel__details" type="button" popovertarget="drawer-{spell['id']}">Open full details</button>
-        </div>"""
+        </article>"""
 
 
 def render_row(spell: dict) -> str:
     desc = one_line(spell.get("description", ""))
     desc_p = f'<p class="row__desc">{html.escape(desc)}</p>' if desc else ""
     browsers = browsers_row(spell)
+    num = spell_label(spell["number"])
     tags = html.escape(f"{spell['category']} {spell['status']} {spell.get('feature', '')} {' '.join(spell.get('featureKeys', []))} {spell['title']} {spell['id']} {spell.get('css', '')}".lower(), quote=True)
     return f"""
   <li class="row" data-id="{spell['id']}" data-cat="{html.escape(spell['category'], quote=True)}" data-status="{html.escape(spell['status'], quote=True)}" data-tags="{tags}">
     <input type="radio" name="preview-select" id="select-{spell['id']}" value="{spell['id']}" class="sr-only">
     <label for="select-{spell['id']}" class="row__select-overlay" aria-hidden="true"></label>
+    <button class="row__num" type="button" popovertarget="drawer-{spell['id']}" aria-label="Open details for {num}" title="{spell['id']}">{num}</button>
     <div class="row__main">
       <h2 class="row__title">
         <button class="row__hit" type="button" popovertarget="drawer-{spell['id']}" aria-haspopup="dialog">{html.escape(spell['title'])}</button>
       </h2>
       {desc_p}
     </div>
+    <div class="row__meta">
+      <span class="row__cat">{html.escape(spell['category'])}</span>
+      <span class="row__status" data-status="{html.escape(spell['status'], quote=True)}"><span class="dot" aria-hidden="true"></span>{html.escape(spell['statusLabel'])}</span>
+    </div>
+    <div class="row__browsers" aria-label="Browser support">{browsers}</div>
     <div class="row__aside">
-      <button class="btn-row-stack" type="button" data-stack-add="{spell['id']}" title="Add to stack">+</button>
-      <button class="row__id" type="button" popovertarget="drawer-{spell['id']}" aria-label="Open {spell['id']} details">{spell['id']}</button>
-      <div class="row__browsers" aria-label="Browser support">{browsers}</div>
+      <button class="btn-row-stack" type="button" data-stack-add="{spell['id']}" aria-label="Add {num} to stack" title="Add to stack">+</button>
       <button class="row__copy" type="button" data-copy-row data-spell-id="{spell['id']}" aria-label="Copy CSS for {html.escape(spell['title'], quote=True)}">Copy</button>
     </div>
   </li>"""
@@ -1522,12 +1561,18 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
         cat_radios.append(f'<label class="nav-item"><input type="radio" name="cat" value="{html.escape(c, quote=True)}" class="sr-only"><span>{html.escape(c)}</span><span class="nav-item__count" aria-hidden="true">{cnt}</span></label>')
     cat_nav = "\n            ".join(cat_radios)
     
+    by_status = {}
+    for s in spells:
+        by_status[s["status"]] = by_status.get(s["status"], 0) + 1
+
     status_radios = [
-        '<label class="nav-item"><input type="radio" name="status" value="all" checked class="sr-only"><span>Any status</span></label>',
-        '<label class="nav-item"><input type="radio" name="status" value="baseline" class="sr-only"><span>Baseline</span></label>',
-        '<label class="nav-item"><input type="radio" name="status" value="newer" class="sr-only"><span>Newer</span></label>',
-        '<label class="nav-item"><input type="radio" name="status" value="progressive" class="sr-only"><span>Progressive</span></label>',
+        f'<label class="nav-item"><input type="radio" name="status" value="all" checked class="sr-only"><span>All</span><span class="nav-item__count" aria-hidden="true">{total}</span></label>',
     ]
+    for value, label in (("baseline", "Baseline"), ("newer", "Newer"), ("progressive", "Progressive")):
+        status_radios.append(
+            f'<label class="nav-item"><input type="radio" name="status" value="{value}" class="sr-only">'
+            f'<span>{label}</span><span class="nav-item__count" aria-hidden="true">{by_status.get(value, 0)}</span></label>'
+        )
     status_nav = "\n            ".join(status_radios)
     
     browser_legend_items = "".join(
@@ -1571,7 +1616,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Design Spells — zero-JS CSS techniques">
   <meta name="twitter:description" content="{total} zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='1' y='13' font-size='13'%3E%E2%9C%B6%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='3' width='10' height='10' fill='%23d84315'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
   <script src="./search.js" defer></script>
 </head>
@@ -1584,20 +1629,31 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
   <header class="site-head">
     <div class="site-head__row">
       <p class="brand">
-        Design Spells<span class="brand__star" aria-hidden="true">*</span>
-        <span class="brand__tag">Zero-JS CSS techniques</span>
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">Design Spells</span>
+        <span class="brand__tag">Zero-JS CSS</span>
       </p>
+
+      <form class="search" id="search-form" role="search" action="#main">
+        <label class="sr-only" for="search">Search spells by name, category, feature, CSS property, or status</label>
+        <svg class="search__icon" viewBox="0 0 14 14" aria-hidden="true">
+          <circle cx="6" cy="6" r="4.25" fill="none" stroke="currentColor" stroke-width="1.25"></circle>
+          <path d="M9.4 9.4 13 13" fill="none" stroke="currentColor" stroke-width="1.25"></path>
+        </svg>
+        <input class="search__input" id="search" name="q" type="search"
+               placeholder="Search by name, category, feature, property, or status"
+               aria-label="Search spells"
+               autocomplete="off" autocapitalize="off" spellcheck="false">
+        <kbd class="search__kbd" aria-hidden="true">/</kbd>
+      </form>
+
       <div class="head-meta">
-        <div class="theme-switch">
-          <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle theme (Light / Dark / Auto)" title="Toggle Theme (Auto / Light / Dark)">
-            <span class="theme-btn__icon">💻</span>
-            <span class="theme-btn__label">Auto</span>
-          </button>
-        </div>
-        <p class="counter" id="counter" aria-live="polite">Showing {total} of {total} spells</p>
-        <a class="sponsor" href="https://github.com/sponsors/FullThrottle83" target="_blank" rel="noopener">
-          Sponsor on GitHub <span aria-hidden="true">↗</span>
-        </a>
+        <p class="status" id="counter" aria-live="polite">Showing {total} of {total} spells</p>
+        <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle theme (Light / Dark / Auto)" title="Theme: Auto / Light / Dark">
+          <span class="theme-btn__icon" aria-hidden="true"></span>
+          <span class="theme-btn__label">Auto</span>
+        </button>
+        <a class="sponsor" href="https://github.com/sponsors/FullThrottle83" target="_blank" rel="noopener">Sponsor<span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </header>
@@ -1605,55 +1661,55 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
   <main class="shell" id="main">
 
     <section class="intro">
-      <h1>A catalogue of CSS that does the work itself.</h1>
-      <p>
-        {total} interaction, layout, and polish techniques. No client JavaScript.
-        Click a spell to preview it, then copy the source.
+      <p class="intro__eyebrow">Catalogue · browser support verified {SUPPORT_AS_OF}</p>
+      <h1 class="intro__title">A catalogue of CSS that does the work itself.</h1>
+      <p class="intro__lede">
+        {total} interaction, layout, and polish techniques — no client JavaScript ships with any
+        of them. Select a row to pin its preview, open a spell for the source, or copy the CSS
+        straight out of the list.
       </p>
-      <div class="preset-stacks" aria-label="Ready-made stacks">
-        <span class="preset-stacks__label">Presets:</span>
-        <button type="button" class="preset-btn" data-preset="baseline">⚡ Astro Baseline</button>
-        <button type="button" class="preset-btn" data-preset="marketing">🚀 Marketing</button>
-        <button type="button" class="preset-btn" data-preset="forms">📝 Forms</button>
-        <button type="button" class="preset-btn" data-preset="data">📊 Data & Charts</button>
-        <button type="button" class="preset-btn" data-preset="micro">✨ Micro-Interactions</button>
-      </div>
-      <form class="search" id="search-form" role="search" action="#main">
-        <div class="search__field">
-          <input class="search__input" id="search" name="q" type="search"
-                 placeholder="Search by name, category, feature, CSS property, or status…"
-                 aria-label="Search spells"
-                 autocomplete="off" autocapitalize="off" spellcheck="false">
-          <kbd class="search__kbd" aria-hidden="true">/</kbd>
+
+      <dl class="intro__specs">
+        <div class="spec"><dt>Spells</dt><dd>{total}</dd></div>
+        <div class="spec"><dt>Categories</dt><dd>{len(order)}</dd></div>
+        <div class="spec"><dt>Client JS</dt><dd>0 KB</dd></div>
+        <div class="spec"><dt>Presets</dt><dd>5</dd></div>
+        <div class="spec spec--key">
+          <dt>Browser key</dt>
+          <dd>
+            <ul class="key" id="browser-legend">{browser_legend_items}</ul>
+            <p class="key__note">Full colour supported · faded partial · grey not shipped</p>
+          </dd>
         </div>
-      </form>
+      </dl>
+
+      <div class="preset-stacks" role="group" aria-label="Ready-made stacks">
+        <span class="preset-stacks__label">Presets</span>
+        <button type="button" class="preset-btn" data-preset="baseline">Astro baseline</button>
+        <button type="button" class="preset-btn" data-preset="marketing">Marketing</button>
+        <button type="button" class="preset-btn" data-preset="forms">Forms</button>
+        <button type="button" class="preset-btn" data-preset="data">Data &amp; charts</button>
+        <button type="button" class="preset-btn" data-preset="micro">Micro-interactions</button>
+      </div>
     </section>
 
-    <div class="browse">
-
-      <nav class="browse__nav" aria-label="Browse spells">
-        <div class="nav-group" role="group" aria-label="Categories">
-          <h2 class="nav-group__label">Category</h2>
-          <div class="nav-list" id="cat-list">
+    <div class="filters" id="filters">
+      <div class="filters__group" role="group" aria-label="Filter by category">
+        <h2 class="filters__label">Category</h2>
+        <div class="nav-list nav-list--cats" id="cat-list">
             {cat_nav}
-          </div>
         </div>
+      </div>
 
-        <div class="nav-group" role="group" aria-label="Support status">
-          <h2 class="nav-group__label">Status</h2>
-          <div class="nav-list" id="status-list">
+      <div class="filters__group filters__group--end" role="group" aria-label="Filter by support status">
+        <h2 class="filters__label">Status</h2>
+        <div class="nav-list" id="status-list">
             {status_nav}
-          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="nav-group">
-          <h2 class="nav-group__label">Browsers</h2>
-          <ul class="nav-legend" id="browser-legend">
-            {browser_legend_items}
-          </ul>
-          <p class="nav-legend__key">Green supported · amber partial · red missing</p>
-        </div>
-      </nav>
+    <div class="browse">
 
       <div class="browse__list" id="catalogue">
 {catalogue_content}
@@ -1667,14 +1723,14 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
 
     <footer class="shell-note">
       <span>Raw CSS only — no JavaScript ships with any spell</span>
+      <span>Keys: <kbd>/</kbd> search · <kbd>j</kbd>/<kbd>k</kbd> move · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</span>
       <span>Open source · contributions via pull request</span>
     </footer>
   </main>
 
   <aside class="stack-bar" id="stack-bar" hidden aria-label="Spell stack builder">
     <button type="button" class="stack-bar__toggle" id="stack-toggle" popovertarget="stack-drawer">
-      <span class="stack-bar__icon">📦</span>
-      <span class="stack-bar__text">My Stack</span>
+      <span class="stack-bar__text">Stack</span>
       <span class="stack-bar__count" id="stack-count">0</span>
     </button>
   </aside>
@@ -1682,26 +1738,34 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
   <div class="drawer drawer--stack" id="stack-drawer" popover="auto" role="dialog" aria-modal="true" aria-labelledby="stack-title">
     <header class="drawer__head">
       <div class="drawer__head-main">
-        <p class="drawer__eyebrow">Stack Builder</p>
+        <p class="drawer__eyebrow">
+          <span class="drawer__num">Stack</span>
+          <span aria-hidden="true">/</span>
+          <span>Bundle builder</span>
+        </p>
         <h2 class="drawer__title" id="stack-title">Selected Design Spells</h2>
       </div>
-      <button class="drawer__close" type="button" popovertarget="stack-drawer" popovertargetaction="hide" aria-label="Close stack panel">×</button>
+      <button class="drawer__close" type="button" popovertarget="stack-drawer" popovertargetaction="hide" aria-label="Close stack panel">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1 11 11M11 1 1 11" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
+      </button>
     </header>
     <div class="drawer__scroll">
-      <p class="drawer__desc">Combine spells into a single consolidated CSS bundle with a unified <code>:root</code> token block.</p>
-      <div class="stack-items" id="stack-items">
-        <p class="stack-empty">Your stack is currently empty. Click <strong>+ Add to Stack</strong> on any spell or preset above to build your bundle.</p>
-      </div>
-      <div class="stack-actions">
-        <button type="button" class="btn btn--primary" id="stack-copy-css">Copy Combined CSS</button>
-        <button type="button" class="btn btn--secondary" id="stack-download-css">Download stack.css</button>
-        <button type="button" class="btn btn--secondary" id="stack-share-url">Share Stack Link</button>
-        <button type="button" class="btn btn--danger" id="stack-clear">Clear Stack</button>
-      </div>
+      <section class="sect">
+        <p class="drawer__desc drawer__desc--flush">Combine spells into a single consolidated CSS bundle with a unified <code>:root</code> token block.</p>
+        <div class="stack-items" id="stack-items">
+          <p class="stack-empty">Your stack is empty. Choose <strong>+ Add to Stack</strong> on any spell, or load a preset above.</p>
+        </div>
+        <div class="stack-actions">
+          <button type="button" class="btn btn--primary" id="stack-copy-css">Copy combined CSS</button>
+          <button type="button" class="btn" id="stack-download-css">Download stack.css</button>
+          <button type="button" class="btn" id="stack-share-url">Share stack link</button>
+          <button type="button" class="btn btn--danger" id="stack-clear">Clear stack</button>
+        </div>
+      </section>
     </div>
   </div>
 
-  <!-- Pre-rendered modal drawers for all 150 spells with Declarative Shadow DOM and native code tabs -->
+  <!-- {total} pre-rendered drawers: Declarative Shadow DOM previews, native code tabs, no hydration step -->
   <div class="drawers-layer" id="drawers-layer">
 {drawers_html}
   </div>

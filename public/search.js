@@ -42,19 +42,18 @@
     applyTheme(saved);
   }
 
+  // The icon is drawn in CSS from [data-theme], so only the label is text.
   function applyTheme(mode) {
+    const label = themeToggle?.querySelector(".theme-btn__label");
     if (mode === "dark") {
       document.documentElement.dataset.theme = "dark";
-      if (themeToggle) themeToggle.querySelector(".theme-btn__icon").textContent = "🌙";
-      if (themeToggle) themeToggle.querySelector(".theme-btn__label").textContent = "Dark";
+      if (label) label.textContent = "Dark";
     } else if (mode === "light") {
       document.documentElement.dataset.theme = "light";
-      if (themeToggle) themeToggle.querySelector(".theme-btn__icon").textContent = "☀️";
-      if (themeToggle) themeToggle.querySelector(".theme-btn__label").textContent = "Light";
+      if (label) label.textContent = "Light";
     } else {
       delete document.documentElement.dataset.theme;
-      if (themeToggle) themeToggle.querySelector(".theme-btn__icon").textContent = "💻";
-      if (themeToggle) themeToggle.querySelector(".theme-btn__label").textContent = "Auto";
+      if (label) label.textContent = "Auto";
     }
   }
 
@@ -256,11 +255,11 @@
     }
 
     if (supportedCount === featureKeys.length) {
-      return { status: "yes", text: "✓ Fully supported in your current browser" };
+      return { status: "yes", text: "Every feature this spell needs runs in your browser" };
     } else if (supportedCount > 0) {
-      return { status: "partial", text: "⚠️ Partial support in your current browser" };
+      return { status: "partial", text: `${supportedCount} of ${featureKeys.length} features run in your browser` };
     } else {
-      return { status: "no", text: "❌ Modern feature — requires fallback or browser update" };
+      return { status: "no", text: "None of these features run in your browser yet — ship a fallback" };
     }
   }
 
@@ -311,7 +310,11 @@
       const width = stageWidthBtn.dataset.stageWidth;
       const host = stageWidthBtn.closest(".sect")?.querySelector(".preview-host");
       if (host) {
-        const stage = host.querySelector(".stage") || host.querySelector("iframe");
+        // 129 of the 150 stages live in a shadow root, which the light DOM
+        // cannot query — reach in or the width buttons do nothing.
+        const stage = host.shadowRoot?.querySelector(".stage")
+          || host.querySelector(".stage")
+          || host.querySelector("iframe");
         if (stage) stage.style.maxWidth = width;
       }
       stageWidthBtn.parentElement.querySelectorAll("[data-stage-width]").forEach((b) => b.classList.remove("is-active"));
@@ -327,13 +330,8 @@
         const currentTheme = host.dataset.stageTheme || "light";
         const nextTheme = currentTheme === "light" ? "dark" : "light";
         host.dataset.stageTheme = nextTheme;
-        if (nextTheme === "dark") {
-          host.style.background = "oklch(0.18 0.01 285.9)";
-          host.style.color = "#fff";
-        } else {
-          host.style.background = "var(--color-bg, #fbfaf8)";
-          host.style.color = "inherit";
-        }
+        // styles.css keys the sandbox tokens off [data-stage-theme],
+        // so setting the attribute is all the toggle has to do.
       }
       return;
     }
@@ -379,20 +377,25 @@
     // Update row & drawer buttons
     document.querySelectorAll("[data-stack-add]").forEach((btn) => {
       const sid = btn.dataset.stackAdd;
+      const isRow = btn.classList.contains("btn-row-stack");
       if (stackSet.has(sid)) {
         btn.classList.add("is-stacked");
-        btn.textContent = btn.classList.contains("btn-row-stack") ? "✓" : "✓ In Stack";
+        btn.textContent = isRow ? "✓" : "✓ In Stack";
       } else {
         btn.classList.remove("is-stacked");
-        btn.textContent = btn.classList.contains("btn-row-stack") ? "+" : "+ Add to Stack";
+        btn.textContent = isRow ? "+" : "+ Add to Stack";
       }
+      btn.setAttribute(
+        "aria-label",
+        `${stackSet.has(sid) ? "Remove" : "Add"} ${sid} ${stackSet.has(sid) ? "from" : "to"} stack`,
+      );
     });
 
     // Render stack drawer items
     if (!stackItemsEl) return;
 
     if (count === 0) {
-      stackItemsEl.innerHTML = `<p class="stack-empty">Your stack is currently empty. Click <strong>+ Add to Stack</strong> on any spell or preset above to build your bundle.</p>`;
+      stackItemsEl.innerHTML = `<p class="stack-empty">Your stack is empty. Choose <strong>+ Add to Stack</strong> on any spell, or load a preset above.</p>`;
       return;
     }
 

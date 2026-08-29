@@ -1,878 +1,1341 @@
 /* ============================================================
-   Design Spells — catalogue
-   Swiss-style editorial system: sharp geometry, one accent-free
-   palette, one obvious action per row. No gradients, no glow,
-   no decorative badges — typography and grid do the work.
+   Design Spells — catalogue stylesheet
+   Scandinavian functionalist system: warm paper, carbon ink,
+   one signal accent, hairline rules, a strict 4px grid.
+   No gradients, no glass, no glow, no decorative shapes —
+   typography, spacing and alignment carry the design.
    ============================================================ */
+
+/* ------------------------------------------------------------
+   1. Tokens
+   ------------------------------------------------------------ */
 
 :root {
   color-scheme: light;
 
-  /* Palette — warm paper canvas, near-black ink, one spot accent.
-     Swiss poster, not developer-tool dark mode. Colors are oklch() so any
-     transition between them stays perceptually uniform (the same model the
-     catalogue itself recommends). */
-  --bg:          oklch(0.968 0.009 84.6);
-  --surface:     oklch(1 0 0);
-  --canvas:      oklch(0.938 0.017 88);
-  --line:        oklch(0.895 0.02 87.5);
-  --line-strong: oklch(0.803 0.031 87.6);
+  /* Canvas & surfaces — warm chalk, never pure white */
+  --paper:          oklch(0.985 0.002 90);
+  --surface:        oklch(0.995 0.001 90);
+  --surface-hover:  oklch(0.972 0.003 90);
+  --surface-sunken: oklch(0.962 0.004 90);
 
-  --ink:         oklch(0.21 0.006 285.9);
-  --ink-1:       oklch(0.424 0.013 89.8);
-  --ink-2:       oklch(0.38 0.022 93.8);
+  /* Rules — stone hairlines */
+  --line:           oklch(0.92 0.005 90);
+  --line-strong:    oklch(0.855 0.008 90);
 
-  /* Status — used only where it carries real meaning (browser support) */
-  --ok:          oklch(0.529 0.106 154.4);
-  --warn:        oklch(0.57 0.12 70.7);
-  --no:          oklch(0.522 0.157 29.6);
+  /* Ink — deep carbon on the cool side of neutral */
+  --ink:            oklch(0.18 0.01 260);
+  --ink-2:          oklch(0.4 0.012 260);
+  --ink-3:          oklch(0.545 0.012 260);
+  --ink-inverse:    oklch(0.99 0.002 90);
 
-  /* One confident spot color — the primary action, active state, brand mark */
-  --accent:      oklch(0.581 0.181 35.3);
-  --accent-ink:  oklch(0.979 0.011 45.7);
-  --accent-hover:oklch(0.499 0.155 37.8);
+  /* One accent: international orange. Active states, focus rings,
+     the live indicator and nothing else. */
+  --accent:         oklch(0.62 0.22 38);
+  --accent-press:   oklch(0.545 0.21 38);
+  --accent-ink:     oklch(0.99 0.002 90);
+  --accent-wash:    oklch(0.62 0.22 38 / 0.09);
 
-  /* Type — system stacks only. No webfonts: keeps the page at
-     true zero external requests, matching the zero-JS premise. */
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  /* Support semantics — only ever used for browser-support data */
+  --ok:             oklch(0.5 0.11 155);
+  --warn:           oklch(0.58 0.12 75);
+  --no:             oklch(0.52 0.16 27);
+  --ok-wash:        oklch(0.5 0.11 155 / 0.12);
+  --warn-wash:      oklch(0.58 0.12 75 / 0.14);
+  --no-wash:        oklch(0.52 0.16 27 / 0.12);
 
-  /* Shape — sharp, drafting-table geometry. No soft "app" corners. */
-  --r: 2px;
+  /* Code well — follows the theme, no black rectangle in a paper UI */
+  --code-bg:        var(--surface-sunken);
+  --code-line:      var(--line);
+  --code-ink:       var(--ink-2);
+  --tok-tag:        oklch(0.46 0.12 300);
+  --tok-attr:       oklch(0.45 0.1 250);
+  --tok-str:        oklch(0.44 0.1 150);
+  --tok-kw:         oklch(0.46 0.13 330);
+  --tok-prop:       oklch(0.43 0.09 230);
+  --tok-num:        oklch(0.47 0.1 60);
+  --tok-com:        oklch(0.6 0.008 260);
+  --tok-punct:      oklch(0.52 0.008 260);
 
-  --shell: 1360px;
-  --pad-x: clamp(16px, 3.5vw, 40px);
-  --ease: cubic-bezier(.2, .7, .3, 1);
-  --header-h: 57px;
+  /* Scrim & elevation — a hairline first, shadow only where it earns it */
+  --scrim:          oklch(0.18 0.01 260 / 0.44);
+  --shadow-2:       0 1px 2px oklch(0.18 0.01 260 / 0.06),
+                    0 12px 28px -18px oklch(0.18 0.01 260 / 0.28);
+  --shadow-drawer:  -20px 0 48px -28px oklch(0.18 0.01 260 / 0.3);
+
+  /* Type — system stacks only, so the page stays at zero external
+     requests and honours the zero-JS premise. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Inter",
+               "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono",
+               "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --t-100: 10px;
+  --t-110: 11px;
+  --t-120: 12px;
+  --t-130: 13px;
+  --t-140: 14px;
+  --t-160: 16px;
+  --t-200: 20px;
+  --t-240: 24px;
+  --t-320: 32px;
+
+  --lh-tight: 1.18;
+  --lh-snug:  1.35;
+  --lh-body:  1.55;
+
+  --track-micro: 0.09em;
+  --track-tight: -0.022em;
+
+  /* Shape — drafting-table geometry, no pill soup */
+  --r-1: 2px;
+  --r-2: 4px;
+
+  /* Space — strict 4px grid */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+
+  /* Layout */
+  --shell: 1440px;
+  --pad-x: clamp(16px, 4vw, 48px);
+  --header-h: 56px;
+  --filters-h: 46px;
+  --rail-w: 300px;
+  --drawer-w: min(720px, 100vw);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-1: 90ms;
+  --dur-2: 160ms;
+  --dur-3: 240ms;
+
+  /* Previews read these off the host element (shadow roots inherit
+     custom properties), so every sandbox uses the catalogue's stacks. */
+  --ds-sans: var(--font-sans);
+  --ds-mono: var(--font-mono);
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper:          oklch(0.14 0.005 260);
+    --surface:        oklch(0.18 0.006 260);
+    --surface-hover:  oklch(0.21 0.007 260);
+    --surface-sunken: oklch(0.115 0.004 260);
+
+    --line:           oklch(0.24 0.008 260);
+    --line-strong:    oklch(0.33 0.01 260);
+
+    --ink:            oklch(0.96 0.002 90);
+    --ink-2:          oklch(0.78 0.006 90);
+    --ink-3:          oklch(0.62 0.008 90);
+    --ink-inverse:    oklch(0.14 0.005 260);
+
+    --accent:         oklch(0.68 0.19 38);
+    --accent-press:   oklch(0.74 0.18 38);
+    --accent-ink:     oklch(0.14 0.005 260);
+    --accent-wash:    oklch(0.68 0.19 38 / 0.14);
+
+    --ok:             oklch(0.72 0.13 155);
+    --warn:           oklch(0.76 0.13 75);
+    --no:             oklch(0.68 0.17 27);
+    --ok-wash:        oklch(0.72 0.13 155 / 0.14);
+    --warn-wash:      oklch(0.76 0.13 75 / 0.14);
+    --no-wash:        oklch(0.68 0.17 27 / 0.14);
+
+    --code-bg:        oklch(0.115 0.004 260);
+    --code-line:      oklch(0.24 0.008 260);
+    --code-ink:       oklch(0.82 0.006 90);
+    --tok-tag:        oklch(0.76 0.1 300);
+    --tok-attr:       oklch(0.76 0.08 250);
+    --tok-str:        oklch(0.78 0.09 150);
+    --tok-kw:         oklch(0.76 0.11 330);
+    --tok-prop:       oklch(0.76 0.08 230);
+    --tok-num:        oklch(0.79 0.1 60);
+    --tok-com:        oklch(0.55 0.008 260);
+    --tok-punct:      oklch(0.62 0.008 260);
+
+    --scrim:          oklch(0.08 0.004 260 / 0.6);
+    --shadow-2:       0 1px 2px oklch(0 0 0 / 0.35),
+                      0 12px 28px -18px oklch(0 0 0 / 0.6);
+    --shadow-drawer:  -20px 0 48px -28px oklch(0 0 0 / 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper:          oklch(0.14 0.005 260);
+  --surface:        oklch(0.18 0.006 260);
+  --surface-hover:  oklch(0.21 0.007 260);
+  --surface-sunken: oklch(0.115 0.004 260);
+
+  --line:           oklch(0.24 0.008 260);
+  --line-strong:    oklch(0.33 0.01 260);
+
+  --ink:            oklch(0.96 0.002 90);
+  --ink-2:          oklch(0.78 0.006 90);
+  --ink-3:          oklch(0.62 0.008 90);
+  --ink-inverse:    oklch(0.14 0.005 260);
+
+  --accent:         oklch(0.68 0.19 38);
+  --accent-press:   oklch(0.74 0.18 38);
+  --accent-ink:     oklch(0.14 0.005 260);
+  --accent-wash:    oklch(0.68 0.19 38 / 0.14);
+
+  --ok:             oklch(0.72 0.13 155);
+  --warn:           oklch(0.76 0.13 75);
+  --no:             oklch(0.68 0.17 27);
+  --ok-wash:        oklch(0.72 0.13 155 / 0.14);
+  --warn-wash:      oklch(0.76 0.13 75 / 0.14);
+  --no-wash:        oklch(0.68 0.17 27 / 0.14);
+
+  --code-bg:        oklch(0.115 0.004 260);
+  --code-line:      oklch(0.24 0.008 260);
+  --code-ink:       oklch(0.82 0.006 90);
+  --tok-tag:        oklch(0.76 0.1 300);
+  --tok-attr:       oklch(0.76 0.08 250);
+  --tok-str:        oklch(0.78 0.09 150);
+  --tok-kw:         oklch(0.76 0.11 330);
+  --tok-prop:       oklch(0.76 0.08 230);
+  --tok-num:        oklch(0.79 0.1 60);
+  --tok-com:        oklch(0.55 0.008 260);
+  --tok-punct:      oklch(0.62 0.008 260);
+
+  --scrim:          oklch(0.08 0.004 260 / 0.6);
+  --shadow-2:       0 1px 2px oklch(0 0 0 / 0.35),
+                    0 12px 28px -18px oklch(0 0 0 / 0.6);
+  --shadow-drawer:  -20px 0 48px -28px oklch(0 0 0 / 0.7);
+}
+
+/* ------------------------------------------------------------
+   2. Reset & base
+   ------------------------------------------------------------ */
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   scrollbar-width: thin;
   scrollbar-color: var(--line-strong) transparent;
-  text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--ink-1);
-  font: 14px/1.55 var(--sans);
+  background: var(--paper);
+  color: var(--ink-2);
+  font: var(--t-130)/var(--lh-body) var(--font-sans);
+  font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-body.is-locked { overflow: hidden; }
+h1, h2, h3, h4, p, dl, dd, figure { margin: 0; }
+ul[class], ol[class] { margin: 0; padding: 0; list-style: none; }
 
-h1, h2, h3, p { margin: 0; }
-a { color: inherit; }
-button { font: inherit; color: inherit; }
+a { color: inherit; text-underline-offset: 2px; }
 
-::selection { background: var(--ink); color: var(--bg); }
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+::selection { background: var(--ink); color: var(--paper); }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
+  border-radius: var(--r-1);
 }
 
 [hidden] { display: none !important; }
 
-/* Accessibility visually-hidden utility */
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
+  inline-size: 1px;
+  block-size: 1px;
   margin: -1px;
+  padding: 0;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
 
 .skip-link {
   position: absolute;
-  top: -48px;
-  left: 8px;
+  inset-block-start: -48px;
+  inset-inline-start: var(--s-2);
   z-index: 100;
-  padding: 8px 12px;
+  padding: var(--s-2) var(--s-3);
   background: var(--ink);
-  color: var(--bg);
-  font: 600 12px/1 var(--sans);
+  color: var(--paper);
+  font: 600 var(--t-110)/1 var(--font-mono);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
   text-decoration: none;
-  transition: top .15s ease;
+  transition: inset-block-start var(--dur-2) var(--ease);
 }
-.skip-link:focus { top: 8px; }
+.skip-link:focus-visible { inset-block-start: var(--s-2); }
 
-/* A plain tracked label — the only "chip" idiom kept in the system,
-   used for genuinely categorical facts (status, browser level). */
-.label {
+/* Status dot + word. Colour lives on the dot; the word stays quiet. */
+.dot {
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  flex: none;
+}
+[data-status="baseline"] > .dot    { background: var(--ok); }
+[data-status="newer"] > .dot       { background: var(--warn); }
+[data-status="progressive"] > .dot { background: var(--no); }
+
+.status-flag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font: 600 10.5px/1 var(--sans);
-  letter-spacing: .08em;
+  gap: var(--s-2);
+  font: 600 var(--t-100)/1 var(--font-sans);
+  letter-spacing: var(--track-micro);
   text-transform: uppercase;
   color: var(--ink-2);
 }
-.label__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  flex: none;
-}
-.label--ok    { color: var(--ok); }
-.label--warn  { color: var(--warn); }
-.label--muted { color: var(--ink-2); }
 
-/* Browser glyphs — small hand-drawn marks, true to each brand's color
-   language. Support level reads through opacity/desaturation rather
-   than recoloring the glyph, so "supported" keeps its real color. */
+/* Browser glyphs — the real brand marks, dimmed by support level so
+   "supported" keeps its true colour instead of being recoloured. */
 .brow {
-  width: 18px;
-  height: 18px;
   display: inline-grid;
   place-items: center;
+  inline-size: 18px;
+  block-size: 18px;
   flex: none;
-  transition: opacity .12s ease, filter .12s ease;
+  transition: opacity var(--dur-1) linear, filter var(--dur-1) linear;
 }
-.brow svg { width: 16px; height: 16px; display: block; }
+.brow svg { display: block; inline-size: 15px; block-size: 15px; }
 .brow[data-level="yes"]     { opacity: 1; filter: none; }
-.brow[data-level="partial"] { opacity: .8; filter: grayscale(.4); }
-.brow[data-level="no"]      { opacity: .3; filter: grayscale(1); }
+.brow[data-level="partial"] { opacity: 0.72; filter: grayscale(0.35); }
+.brow[data-level="no"]      { opacity: 0.28; filter: grayscale(1); }
 
-/* ---------------- site header ---------------- */
+/* ------------------------------------------------------------
+   3. Header
+   ------------------------------------------------------------ */
 
 .site-head {
   position: sticky;
-  top: 0;
-  z-index: 20;
-  background: oklch(0.968 0.009 84.6 / .92);
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid var(--line);
+  inset-block-start: 0;
+  z-index: 30;
+  background: var(--paper);
+  border-block-end: 1px solid var(--line);
 }
 
 .site-head__row {
-  max-width: var(--shell);
-  margin-inline: auto;
-  padding: 16px var(--pad-x);
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px 20px;
-  flex-wrap: wrap;
+  gap: var(--s-4) var(--s-6);
+  max-inline-size: var(--shell);
+  min-block-size: var(--header-h);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
 }
 
 .brand {
-  font: 700 14px/1 var(--sans);
-  letter-spacing: -.01em;
-  color: var(--ink);
   display: flex;
-  align-items: baseline;
-  gap: 12px;
+  align-items: center;
+  gap: var(--s-3);
+  white-space: nowrap;
 }
-.brand__star { color: var(--accent); font-weight: 400; }
+.brand__mark {
+  inline-size: 9px;
+  block-size: 9px;
+  background: var(--accent);
+  flex: none;
+}
+.brand__name {
+  font: 600 var(--t-130)/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
 .brand__tag {
-  font: 500 11px/1 var(--sans);
-  letter-spacing: .02em;
-  color: var(--ink-2);
+  padding-inline-start: var(--s-3);
+  border-inline-start: 1px solid var(--line);
+  font: 500 var(--t-110)/1 var(--font-sans);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
 }
 
 .head-meta {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: var(--s-3);
 }
 
-.counter {
-  font: 500 11px/1 var(--mono);
-  letter-spacing: .02em;
-  color: var(--ink-2);
+/* Live result count — the dot is a ::before so the aria-live text can
+   be replaced wholesale by search.js without dropping the indicator. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 5px var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-110)/1 var(--font-mono);
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+  white-space: nowrap;
 }
+.status::before {
+  content: "";
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-block-size: 28px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear;
+}
+.theme-btn:hover { border-color: var(--line-strong); color: var(--ink); }
+
+/* The glyph is drawn, not an emoji: a ring for auto, a disc for dark,
+   a hollow ring for light. */
+.theme-btn__icon {
+  inline-size: 11px;
+  block-size: 11px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  flex: none;
+}
+:root:not([data-theme]) .theme-btn__icon {
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+:root[data-theme="dark"] .theme-btn__icon { background: currentColor; }
 
 .sponsor {
-  font: 600 11px/1 var(--sans);
-  letter-spacing: .01em;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  font: 500 var(--t-110)/1 var(--font-sans);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
   text-decoration: none;
-  padding: 7px 12px;
-  border: 1px solid var(--line);
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
+  white-space: nowrap;
+  transition: color var(--dur-1) linear;
 }
-.sponsor:hover {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
+.sponsor:hover { color: var(--ink); text-decoration: underline; }
 
-.shell {
-  max-width: var(--shell);
-  margin-inline: auto;
-  padding: 0 var(--pad-x) 72px;
-}
-
-.intro {
-  padding: 40px 0 28px;
-  border-bottom: 1px solid var(--line);
-}
-.intro h1 {
-  font: 700 clamp(24px, 3.2vw, 36px)/1.15 var(--sans);
-  letter-spacing: -.035em;
-  color: var(--ink);
-  max-width: 46ch;
-  text-wrap: balance;
-}
-.intro p {
-  margin-top: 12px;
-  color: var(--ink-1);
-  font-size: 14.5px;
-  line-height: 1.6;
-  max-width: 56ch;
-  text-wrap: pretty;
-}
-
-/* ---------------- search ---------------- */
-
+/* Search — sits in the header, hairline box, mono text, key hint */
 .search {
-  margin-top: 20px;
-  max-width: 480px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  max-inline-size: 520px;
+  justify-self: start;
 }
-.search__field { position: relative; }
+.search__icon {
+  position: absolute;
+  inset-inline-start: var(--s-3);
+  inline-size: 14px;
+  block-size: 14px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
 .search__input {
-  width: 100%;
-  padding: 11px 40px 11px 14px;
+  inline-size: 100%;
+  min-block-size: 32px;
+  padding: 0 var(--s-10) 0 var(--s-8);
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-2);
   background: var(--surface);
   color: var(--ink);
-  font: 13px/1.4 var(--mono);
+  font: 400 var(--t-120)/1 var(--font-mono);
   appearance: none;
-  transition: border-color .12s ease;
+  transition: border-color var(--dur-1) linear, background-color var(--dur-1) linear;
 }
-.search__input::-webkit-search-cancel-button,
-.search__input::-webkit-search-decoration { -webkit-appearance: none; }
-.search__input::placeholder { color: var(--ink-2); }
+.search__input:hover { border-color: var(--line-strong); }
 .search__input:focus-visible {
   outline: none;
-  border-color: var(--ink-1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-wash);
 }
+.search__input::placeholder { color: var(--ink-3); }
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
 .search__kbd {
   position: absolute;
-  right: 10px;
-  top: 50%;
-  translate: 0 -50%;
-  padding: 2px 7px;
+  inset-inline-end: var(--s-2);
+  padding: 2px 6px;
   border: 1px solid var(--line);
-  border-radius: var(--r);
-  font: 10px/1.4 var(--mono);
-  color: var(--ink-2);
+  border-radius: var(--r-1);
+  background: var(--surface-sunken);
+  font: 500 var(--t-100)/1.4 var(--font-mono);
+  color: var(--ink-3);
   pointer-events: none;
 }
 
-/* ---------------- browse layout ---------------- */
+/* ------------------------------------------------------------
+   4. Masthead
+   ------------------------------------------------------------ */
 
-.browse {
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: 24px;
-  padding-top: 28px;
-  align-items: start;
+.shell {
+  max-inline-size: var(--shell);
+  margin-inline: auto;
+  padding: 0 var(--pad-x) var(--s-16);
 }
 
-@media (min-width: 960px) {
-  .browse { grid-template-columns: 200px minmax(0, 1fr) 320px; }
+.intro {
+  padding-block: var(--s-10) var(--s-8);
+  border-block-end: 1px solid var(--line);
 }
-
-.browse__nav {
-  position: sticky;
-  top: calc(var(--header-h) + 20px);
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-  max-height: calc(100vh - var(--header-h) - 40px);
-  overflow-y: auto;
-  padding-bottom: 8px;
-}
-
-.nav-group__label {
-  font: 700 10.5px/1 var(--sans);
-  letter-spacing: .1em;
+.intro__eyebrow {
+  font: 500 var(--t-110)/1 var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.intro__title {
+  margin-block-start: var(--s-4);
+  max-inline-size: 22ch;
+  font: 600 clamp(28px, 4vw, var(--t-320))/var(--lh-tight) var(--font-sans);
+  letter-spacing: var(--track-tight);
+  color: var(--ink);
+  text-wrap: balance;
+}
+.intro__lede {
+  margin-block-start: var(--s-4);
+  max-inline-size: 62ch;
+  font-size: var(--t-140);
+  line-height: var(--lh-body);
   color: var(--ink-2);
-  margin-bottom: 10px;
+  text-wrap: pretty;
 }
 
-.nav-list {
+.intro__specs {
   display: flex;
-  flex-direction: column;
-  gap: 1px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--s-6) var(--s-8);
+  margin-block-start: var(--s-8);
+  padding-block-start: var(--s-6);
+  border-block-start: 1px solid var(--line);
+}
+.spec { min-inline-size: 96px; }
+.spec dt {
+  font: 600 var(--t-100)/1 var(--font-sans);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.spec dd {
+  margin-block-start: var(--s-2);
+  font: 500 var(--t-240)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.spec--key { min-inline-size: 260px; }
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+  margin-block-start: var(--s-2);
+}
+.key li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font: 500 var(--t-110)/1 var(--font-sans);
+  color: var(--ink-2);
+}
+.key__note {
+  margin-block-start: var(--s-2);
+  font: 400 var(--t-110)/1.4 var(--font-sans);
+  color: var(--ink-3);
 }
 
-.nav-item {
-  appearance: none;
-  background: none;
-  border: 0;
-  border-left: 2px solid transparent;
-  padding: 6px 8px;
-  cursor: pointer;
+/* Presets — a labelled row of hairline buttons, no iconography */
+.preset-stacks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin-block-start: var(--s-8);
+}
+.preset-stacks__label {
+  margin-inline-end: var(--s-2);
+  font: 600 var(--t-100)/1 var(--font-sans);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.preset-btn {
+  min-block-size: 28px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-120)/1 var(--font-sans);
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
+}
+.preset-btn:hover {
+  border-color: var(--ink);
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+.preset-btn:active { background: var(--ink); color: var(--paper); }
+
+/* ------------------------------------------------------------
+   5. Filter strip
+   ------------------------------------------------------------ */
+
+.filters {
+  position: sticky;
+  inset-block-start: var(--header-h);
+  z-index: 25;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  text-align: left;
-  font: 500 12.5px/1.3 var(--sans);
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
+  gap: var(--s-4) var(--s-8);
+  box-sizing: border-box;
+  min-block-size: var(--filters-h);
+  padding-block: var(--s-2);
+  background: var(--paper);
+  border-block-end: 1px solid var(--line);
 }
-.nav-item:hover { background: var(--surface); color: var(--ink); }
-.nav-item.is-on,
-.nav-item:has(input:checked) {
+.filters__group {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-inline-size: 0;
+}
+.filters__group--end { flex: none; }
+.filters__label {
+  font: 600 var(--t-100)/1 var(--font-sans);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.nav-list { display: flex; align-items: center; gap: var(--s-1); }
+.nav-list--cats {
+  /* A scrollable flex item needs an explicit zero minimum, or the 16
+     category chips push the status group out of the viewport. */
+  min-inline-size: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  padding-block: 2px;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-block-size: 28px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
   background: var(--surface);
-  border-left-color: var(--accent);
+  font: 500 var(--t-120)/1 var(--font-sans);
+  color: var(--ink-2);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
+}
+.nav-item:hover { border-color: var(--line-strong); color: var(--ink); }
+.nav-item__count {
+  font: 500 var(--t-100)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.nav-item:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-wash);
   color: var(--ink);
   font-weight: 600;
 }
-.nav-item__count {
-  font: 500 10.5px/1 var(--mono);
-  color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
+.nav-item:has(input:checked) .nav-item__count { color: var(--accent); }
+.nav-item:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-/* Zero-JS CSS :has() Category and Status Filtering */
-.browse:has(input[name="cat"][value="Interaction"]:checked) .cat-block:not([data-cat="Interaction"]),
-.browse:has(input[name="cat"][value="Navigation"]:checked) .cat-block:not([data-cat="Navigation"]),
-.browse:has(input[name="cat"][value="Cards"]:checked) .cat-block:not([data-cat="Cards"]),
-.browse:has(input[name="cat"][value="Layout"]:checked) .cat-block:not([data-cat="Layout"]),
-.browse:has(input[name="cat"][value="Scroll"]:checked) .cat-block:not([data-cat="Scroll"]),
-.browse:has(input[name="cat"][value="Reveal & motion"]:checked) .cat-block:not([data-cat="Reveal & motion"]),
-.browse:has(input[name="cat"][value="Forms"]:checked) .cat-block:not([data-cat="Forms"]),
-.browse:has(input[name="cat"][value="Overlays"]:checked) .cat-block:not([data-cat="Overlays"]),
-.browse:has(input[name="cat"][value="Typography"]:checked) .cat-block:not([data-cat="Typography"]),
-.browse:has(input[name="cat"][value="Media"]:checked) .cat-block:not([data-cat="Media"]),
-.browse:has(input[name="cat"][value="Visual"]:checked) .cat-block:not([data-cat="Visual"]),
-.browse:has(input[name="cat"][value="State"]:checked) .cat-block:not([data-cat="State"]),
-.browse:has(input[name="cat"][value="Data"]:checked) .cat-block:not([data-cat="Data"]),
-.browse:has(input[name="cat"][value="Anchor"]:checked) .cat-block:not([data-cat="Anchor"]),
-.browse:has(input[name="cat"][value="Performance"]:checked) .cat-block:not([data-cat="Performance"]) {
+/* ------------------------------------------------------------
+   6. Zero-JS filtering
+   The catalogue filters with :has() alone — the radios drive the
+   layout whether or not search.js has run.
+   ------------------------------------------------------------ */
+
+.shell:has(input[name="cat"][value="Interaction"]:checked) .cat-block:not([data-cat="Interaction"]),
+.shell:has(input[name="cat"][value="Navigation"]:checked) .cat-block:not([data-cat="Navigation"]),
+.shell:has(input[name="cat"][value="Cards"]:checked) .cat-block:not([data-cat="Cards"]),
+.shell:has(input[name="cat"][value="Layout"]:checked) .cat-block:not([data-cat="Layout"]),
+.shell:has(input[name="cat"][value="Scroll"]:checked) .cat-block:not([data-cat="Scroll"]),
+.shell:has(input[name="cat"][value="Reveal & motion"]:checked) .cat-block:not([data-cat="Reveal & motion"]),
+.shell:has(input[name="cat"][value="Forms"]:checked) .cat-block:not([data-cat="Forms"]),
+.shell:has(input[name="cat"][value="Overlays"]:checked) .cat-block:not([data-cat="Overlays"]),
+.shell:has(input[name="cat"][value="Typography"]:checked) .cat-block:not([data-cat="Typography"]),
+.shell:has(input[name="cat"][value="Media"]:checked) .cat-block:not([data-cat="Media"]),
+.shell:has(input[name="cat"][value="Visual"]:checked) .cat-block:not([data-cat="Visual"]),
+.shell:has(input[name="cat"][value="State"]:checked) .cat-block:not([data-cat="State"]),
+.shell:has(input[name="cat"][value="Data"]:checked) .cat-block:not([data-cat="Data"]),
+.shell:has(input[name="cat"][value="Anchor"]:checked) .cat-block:not([data-cat="Anchor"]),
+.shell:has(input[name="cat"][value="Performance"]:checked) .cat-block:not([data-cat="Performance"]) {
   display: none;
 }
 
-.browse:has(input[name="status"][value="baseline"]:checked) .row:not([data-status="baseline"]),
-.browse:has(input[name="status"][value="newer"]:checked) .row:not([data-status="newer"]),
-.browse:has(input[name="status"][value="progressive"]:checked) .row:not([data-status="progressive"]) {
+.shell:has(input[name="status"][value="baseline"]:checked) .row:not([data-status="baseline"]),
+.shell:has(input[name="status"][value="newer"]:checked) .row:not([data-status="newer"]),
+.shell:has(input[name="status"][value="progressive"]:checked) .row:not([data-status="progressive"]) {
   display: none;
 }
 
-.browse:has(input[name="status"][value="baseline"]:checked) .cat-block:not(:has(.row[data-status="baseline"])),
-.browse:has(input[name="status"][value="newer"]:checked) .cat-block:not(:has(.row[data-status="newer"])),
-.browse:has(input[name="status"][value="progressive"]:checked) .cat-block:not(:has(.row[data-status="progressive"])) {
+.shell:has(input[name="status"][value="baseline"]:checked) .cat-block:not(:has(.row[data-status="baseline"])),
+.shell:has(input[name="status"][value="newer"]:checked) .cat-block:not(:has(.row[data-status="newer"])),
+.shell:has(input[name="status"][value="progressive"]:checked) .cat-block:not(:has(.row[data-status="progressive"])) {
   display: none;
 }
 
-.nav-legend {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+/* ------------------------------------------------------------
+   7. Catalogue list
+   ------------------------------------------------------------ */
+
+.browse {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+  align-items: start;
+  padding-block-start: var(--s-6);
 }
-.nav-legend li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font: 500 12px/1 var(--sans);
-  color: var(--ink-1);
-}
-.nav-legend__key {
-  margin-top: 10px;
-  font: 500 10.5px/1.6 var(--sans);
-  color: var(--ink-2);
+@media (min-width: 960px) {
+  .browse {
+    grid-template-columns: minmax(0, 1fr) var(--rail-w);
+    gap: var(--s-8);
+  }
 }
 
-/* ---------------- row list ---------------- */
+.browse__list { min-inline-size: 0; }
 
-.browse__list { min-width: 0; }
-
-.cat-block { margin-top: 36px; }
-.cat-block:first-child { margin-top: 0; }
+.cat-block { margin-block-start: var(--s-10); }
+.cat-block:first-child { margin-block-start: 0; }
 
 .cat-block__head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 4px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
+  gap: var(--s-3);
+  padding-block-end: var(--s-2);
+  border-block-end: 1px solid var(--ink);
 }
 .cat-block__title {
-  font: 700 15px/1 var(--sans);
-  letter-spacing: -.01em;
+  font: 600 var(--t-110)/1 var(--font-sans);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
   color: var(--ink);
 }
+.cat-block__head-right { display: flex; align-items: baseline; gap: var(--s-3); flex: none; }
 .cat-block__count {
-  font: 600 10.5px/1 var(--mono);
-  letter-spacing: .04em;
-  color: var(--ink-2);
-}
-.cat-block__head-right {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex: none;
-}
-.cat-block__copy-all {
-  appearance: none;
-  background: none;
-  border: 1px solid var(--line);
-  padding: 4px 10px;
-  cursor: pointer;
-  font: 700 10px/1 var(--sans);
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
-}
-.cat-block__copy-all:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.cat-block__copy-all.is-done { background: var(--ok); color: var(--bg); border-color: var(--ok); }
-
-.row-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  font: 500 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
 }
 
-.row-list__empty {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  padding: 56px 16px;
-  text-align: center;
-  font: 600 12px/1.7 var(--sans);
-  color: var(--ink-2);
-  margin: 20px 0 0;
-}
+.row-list { border-block-end: 1px solid var(--line); }
+/* The category head already draws the rule above the first row. */
+.row-list > .row:first-child { border-block-start: 0; }
 
 .row {
   position: relative;
-  display: flex;
+  display: grid;
+  /* Cells are placed explicitly: a column hidden at this width must not
+     slide the cells after it into the wrong track. */
+  grid-template-columns: 48px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 16px;
-  padding: 13px 8px;
-  border-bottom: 1px solid var(--line);
-  cursor: pointer;
-  transition: background-color .12s ease, border-color .12s ease;
+  gap: var(--s-2) var(--s-4);
+  padding: var(--s-3) var(--s-2);
+  border-block-start: 1px solid var(--line);
+  transition: background-color var(--dur-1) linear;
 }
-.row:hover, .row:focus-within { background: var(--surface); }
+.row:hover,
+.row:focus-within { background: var(--surface-hover); }
+
+/* Selected row: a 2px accent bar painted inset, so nothing reflows. */
 .row:has(input[name="preview-select"]:checked) {
   background: var(--surface);
-  border-left: 2px solid var(--accent);
-  padding-left: 6px;
+  box-shadow: inset 2px 0 0 var(--accent);
 }
+
 .row__select-overlay {
   position: absolute;
   inset: 0;
-  cursor: pointer;
   z-index: 0;
+  cursor: pointer;
 }
-.row__main { min-width: 0; flex: 1; position: relative; z-index: 1; }
+.row__num,
+.row__main,
+.row__meta,
+.row__browsers,
 .row__aside { position: relative; z-index: 1; }
+
+.row__num {
+  grid-area: 1 / 1;
+  justify-self: start;
+  font: 500 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  transition: color var(--dur-1) linear;
+}
+.row__num:hover { color: var(--accent); }
+
+..row__main {
+  grid-area: 1 / 2;
+  min-inline-size: 0;
+}
 .row__title {
-  font: 600 14px/1.3 var(--sans);
-  letter-spacing: -.005em;
+  font: 600 var(--t-140)/var(--lh-snug) var(--font-sans);
+  letter-spacing: -0.008em;
   color: var(--ink);
 }
-.row__hit {
-  all: unset;
-  cursor: pointer;
-}
+.row__hit { display: inline; text-align: left; }
 .row__hit:hover { text-decoration: underline; text-underline-offset: 3px; }
-.row__hit:focus-visible { outline: none; text-decoration: underline; }
+.row__hit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--r-1); }
 .row__desc {
-  margin-top: 3px;
-  font: 400 12.5px/1.4 var(--sans);
-  color: var(--ink-2);
+  margin-block-start: 2px;
   overflow: hidden;
+  font: 400 var(--t-120)/var(--lh-snug) var(--font-sans);
+  color: var(--ink-3);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.row__aside {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex: none;
-}
-.row__id {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font: 500 11px/1 var(--mono);
-  color: var(--ink-2);
-  display: none;
-}
-.row__id:hover { color: var(--ink); text-decoration: underline; }
-.row__browsers { display: flex; gap: 2px; }
-.row__copy {
-  appearance: none;
-  background: none;
-  border: 1px solid var(--line);
-  padding: 6px 12px;
-  cursor: pointer;
-  font: 700 10.5px/1 var(--sans);
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
-}
-.row__copy:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.row__copy.is-done { background: var(--ok); color: var(--bg); border-color: var(--ok); }
-
-@media (min-width: 640px) {
-  .row__id { display: inline; }
-}
-
-/* mini syntax highlight tokens — desaturated, text stays the star */
-.tok-tag    { color: oklch(0.769 0.107 293.5); }
-.tok-attr   { color: oklch(0.795 0.085 245.8); }
-.tok-str    { color: oklch(0.798 0.094 151.6); }
-.tok-punct  { color: var(--ink-2); }
-.tok-kw     { color: oklch(0.792 0.12 324.7); }
-.tok-prop   { color: oklch(0.787 0.085 230.6); }
-.tok-num    { color: oklch(0.82 0.114 87.9); }
-.tok-com    { color: var(--ink-2); font-style: italic; }
-.tok-fn     { color: oklch(0.721 0.107 27.2); }
-
-.shell-note {
-  margin-top: 40px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  gap: 6px 16px;
-  flex-wrap: wrap;
-  font: 500 11px/1.6 var(--sans);
-  letter-spacing: .01em;
-  color: var(--ink-2);
-}
-
-/* Zero-JS Sticky Quick-Preview Panel Selection */
-.preview-panel__card {
+.row__meta {
+  grid-area: 1 / 3;
   display: none;
   flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-1);
 }
-.browse:not(:has(input[name="preview-select"]:checked)) .preview-panel__card:first-child,
-.browse:has(input[name="preview-select"][value="ds-1"]:checked) .preview-panel__card[data-preview="ds-1"],
-.browse:has(input[name="preview-select"][value="ds-2"]:checked) .preview-panel__card[data-preview="ds-2"],
-.browse:has(input[name="preview-select"][value="ds-3"]:checked) .preview-panel__card[data-preview="ds-3"],
-.browse:has(input[name="preview-select"][value="ds-5"]:checked) .preview-panel__card[data-preview="ds-5"],
-.browse:has(input[name="preview-select"][value="ds-7"]:checked) .preview-panel__card[data-preview="ds-7"],
-.browse:has(input[name="preview-select"][value="ds-19"]:checked) .preview-panel__card[data-preview="ds-19"],
-.browse:has(input[name="preview-select"][value="ds-20"]:checked) .preview-panel__card[data-preview="ds-20"],
-.browse:has(input[name="preview-select"][value="ds-22"]:checked) .preview-panel__card[data-preview="ds-22"],
-.browse:has(input[name="preview-select"][value="ds-24"]:checked) .preview-panel__card[data-preview="ds-24"],
-.browse:has(input[name="preview-select"][value="ds-26"]:checked) .preview-panel__card[data-preview="ds-26"],
-.browse:has(input[name="preview-select"][value="ds-38"]:checked) .preview-panel__card[data-preview="ds-38"],
-.browse:has(input[name="preview-select"][value="ds-39"]:checked) .preview-panel__card[data-preview="ds-39"],
-.browse:has(input[name="preview-select"][value="ds-67"]:checked) .preview-panel__card[data-preview="ds-67"],
-.browse:has(input[name="preview-select"][value="ds-71"]:checked) .preview-panel__card[data-preview="ds-71"],
-.browse:has(input[name="preview-select"][value="ds-73"]:checked) .preview-panel__card[data-preview="ds-73"],
-.browse:has(input[name="preview-select"][value="ds-79"]:checked) .preview-panel__card[data-preview="ds-79"],
-.browse:has(input[name="preview-select"][value="ds-80"]:checked) .preview-panel__card[data-preview="ds-80"],
-.browse:has(input[name="preview-select"][value="ds-81"]:checked) .preview-panel__card[data-preview="ds-81"],
-.browse:has(input[name="preview-select"][value="ds-82"]:checked) .preview-panel__card[data-preview="ds-82"],
-.browse:has(input[name="preview-select"][value="ds-83"]:checked) .preview-panel__card[data-preview="ds-83"],
-.browse:has(input[name="preview-select"][value="ds-84"]:checked) .preview-panel__card[data-preview="ds-84"],
-.browse:has(input[name="preview-select"][value="ds-88"]:checked) .preview-panel__card[data-preview="ds-88"],
-.browse:has(input[name="preview-select"][value="ds-89"]:checked) .preview-panel__card[data-preview="ds-89"],
-.browse:has(input[name="preview-select"][value="ds-90"]:checked) .preview-panel__card[data-preview="ds-90"],
-.browse:has(input[name="preview-select"][value="ds-8"]:checked) .preview-panel__card[data-preview="ds-8"],
-.browse:has(input[name="preview-select"][value="ds-9"]:checked) .preview-panel__card[data-preview="ds-9"],
-.browse:has(input[name="preview-select"][value="ds-11"]:checked) .preview-panel__card[data-preview="ds-11"],
-.browse:has(input[name="preview-select"][value="ds-14"]:checked) .preview-panel__card[data-preview="ds-14"],
-.browse:has(input[name="preview-select"][value="ds-31"]:checked) .preview-panel__card[data-preview="ds-31"],
-.browse:has(input[name="preview-select"][value="ds-65"]:checked) .preview-panel__card[data-preview="ds-65"],
-.browse:has(input[name="preview-select"][value="ds-66"]:checked) .preview-panel__card[data-preview="ds-66"],
-.browse:has(input[name="preview-select"][value="ds-68"]:checked) .preview-panel__card[data-preview="ds-68"],
-.browse:has(input[name="preview-select"][value="ds-72"]:checked) .preview-panel__card[data-preview="ds-72"],
-.browse:has(input[name="preview-select"][value="ds-75"]:checked) .preview-panel__card[data-preview="ds-75"],
-.browse:has(input[name="preview-select"][value="ds-91"]:checked) .preview-panel__card[data-preview="ds-91"],
-.browse:has(input[name="preview-select"][value="ds-92"]:checked) .preview-panel__card[data-preview="ds-92"],
-.browse:has(input[name="preview-select"][value="ds-93"]:checked) .preview-panel__card[data-preview="ds-93"],
-.browse:has(input[name="preview-select"][value="ds-17"]:checked) .preview-panel__card[data-preview="ds-17"],
-.browse:has(input[name="preview-select"][value="ds-30"]:checked) .preview-panel__card[data-preview="ds-30"],
-.browse:has(input[name="preview-select"][value="ds-36"]:checked) .preview-panel__card[data-preview="ds-36"],
-.browse:has(input[name="preview-select"][value="ds-43"]:checked) .preview-panel__card[data-preview="ds-43"],
-.browse:has(input[name="preview-select"][value="ds-44"]:checked) .preview-panel__card[data-preview="ds-44"],
-.browse:has(input[name="preview-select"][value="ds-45"]:checked) .preview-panel__card[data-preview="ds-45"],
-.browse:has(input[name="preview-select"][value="ds-46"]:checked) .preview-panel__card[data-preview="ds-46"],
-.browse:has(input[name="preview-select"][value="ds-47"]:checked) .preview-panel__card[data-preview="ds-47"],
-.browse:has(input[name="preview-select"][value="ds-55"]:checked) .preview-panel__card[data-preview="ds-55"],
-.browse:has(input[name="preview-select"][value="ds-69"]:checked) .preview-panel__card[data-preview="ds-69"],
-.browse:has(input[name="preview-select"][value="ds-12"]:checked) .preview-panel__card[data-preview="ds-12"],
-.browse:has(input[name="preview-select"][value="ds-15"]:checked) .preview-panel__card[data-preview="ds-15"],
-.browse:has(input[name="preview-select"][value="ds-27"]:checked) .preview-panel__card[data-preview="ds-27"],
-.browse:has(input[name="preview-select"][value="ds-33"]:checked) .preview-panel__card[data-preview="ds-33"],
-.browse:has(input[name="preview-select"][value="ds-37"]:checked) .preview-panel__card[data-preview="ds-37"],
-.browse:has(input[name="preview-select"][value="ds-40"]:checked) .preview-panel__card[data-preview="ds-40"],
-.browse:has(input[name="preview-select"][value="ds-56"]:checked) .preview-panel__card[data-preview="ds-56"],
-.browse:has(input[name="preview-select"][value="ds-61"]:checked) .preview-panel__card[data-preview="ds-61"],
-.browse:has(input[name="preview-select"][value="ds-62"]:checked) .preview-panel__card[data-preview="ds-62"],
-.browse:has(input[name="preview-select"][value="ds-70"]:checked) .preview-panel__card[data-preview="ds-70"],
-.browse:has(input[name="preview-select"][value="ds-77"]:checked) .preview-panel__card[data-preview="ds-77"],
-.browse:has(input[name="preview-select"][value="ds-18"]:checked) .preview-panel__card[data-preview="ds-18"],
-.browse:has(input[name="preview-select"][value="ds-34"]:checked) .preview-panel__card[data-preview="ds-34"],
-.browse:has(input[name="preview-select"][value="ds-48"]:checked) .preview-panel__card[data-preview="ds-48"],
-.browse:has(input[name="preview-select"][value="ds-49"]:checked) .preview-panel__card[data-preview="ds-49"],
-.browse:has(input[name="preview-select"][value="ds-50"]:checked) .preview-panel__card[data-preview="ds-50"],
-.browse:has(input[name="preview-select"][value="ds-10"]:checked) .preview-panel__card[data-preview="ds-10"],
-.browse:has(input[name="preview-select"][value="ds-bonus"]:checked) .preview-panel__card[data-preview="ds-bonus"],
-.browse:has(input[name="preview-select"][value="ds-53"]:checked) .preview-panel__card[data-preview="ds-53"],
-.browse:has(input[name="preview-select"][value="ds-63"]:checked) .preview-panel__card[data-preview="ds-63"],
-.browse:has(input[name="preview-select"][value="ds-6"]:checked) .preview-panel__card[data-preview="ds-6"],
-.browse:has(input[name="preview-select"][value="ds-16"]:checked) .preview-panel__card[data-preview="ds-16"],
-.browse:has(input[name="preview-select"][value="ds-23"]:checked) .preview-panel__card[data-preview="ds-23"],
-.browse:has(input[name="preview-select"][value="ds-28"]:checked) .preview-panel__card[data-preview="ds-28"],
-.browse:has(input[name="preview-select"][value="ds-32"]:checked) .preview-panel__card[data-preview="ds-32"],
-.browse:has(input[name="preview-select"][value="ds-54"]:checked) .preview-panel__card[data-preview="ds-54"],
-.browse:has(input[name="preview-select"][value="ds-57"]:checked) .preview-panel__card[data-preview="ds-57"],
-.browse:has(input[name="preview-select"][value="ds-76"]:checked) .preview-panel__card[data-preview="ds-76"],
-.browse:has(input[name="preview-select"][value="ds-85"]:checked) .preview-panel__card[data-preview="ds-85"],
-.browse:has(input[name="preview-select"][value="ds-86"]:checked) .preview-panel__card[data-preview="ds-86"],
-.browse:has(input[name="preview-select"][value="ds-87"]:checked) .preview-panel__card[data-preview="ds-87"],
-.browse:has(input[name="preview-select"][value="ds-25"]:checked) .preview-panel__card[data-preview="ds-25"],
-.browse:has(input[name="preview-select"][value="ds-35"]:checked) .preview-panel__card[data-preview="ds-35"],
-.browse:has(input[name="preview-select"][value="ds-51"]:checked) .preview-panel__card[data-preview="ds-51"],
-.browse:has(input[name="preview-select"][value="ds-52"]:checked) .preview-panel__card[data-preview="ds-52"],
-.browse:has(input[name="preview-select"][value="ds-58"]:checked) .preview-panel__card[data-preview="ds-58"],
-.browse:has(input[name="preview-select"][value="ds-64"]:checked) .preview-panel__card[data-preview="ds-64"],
-.browse:has(input[name="preview-select"][value="ds-74"]:checked) .preview-panel__card[data-preview="ds-74"],
-.browse:has(input[name="preview-select"][value="ds-78"]:checked) .preview-panel__card[data-preview="ds-78"],
-.browse:has(input[name="preview-select"][value="ds-13"]:checked) .preview-panel__card[data-preview="ds-13"],
-.browse:has(input[name="preview-select"][value="ds-21"]:checked) .preview-panel__card[data-preview="ds-21"],
-.browse:has(input[name="preview-select"][value="ds-29"]:checked) .preview-panel__card[data-preview="ds-29"],
-.browse:has(input[name="preview-select"][value="ds-59"]:checked) .preview-panel__card[data-preview="ds-59"],
-.browse:has(input[name="preview-select"][value="ds-60"]:checked) .preview-panel__card[data-preview="ds-60"],
-.browse:has(input[name="preview-select"][value="ds-41"]:checked) .preview-panel__card[data-preview="ds-41"],
-.browse:has(input[name="preview-select"][value="ds-94"]:checked) .preview-panel__card[data-preview="ds-94"],
-.browse:has(input[name="preview-select"][value="ds-95"]:checked) .preview-panel__card[data-preview="ds-95"],
-.browse:has(input[name="preview-select"][value="ds-96"]:checked) .preview-panel__card[data-preview="ds-96"],
-.browse:has(input[name="preview-select"][value="ds-97"]:checked) .preview-panel__card[data-preview="ds-97"],
-.browse:has(input[name="preview-select"][value="ds-98"]:checked) .preview-panel__card[data-preview="ds-98"],
-.browse:has(input[name="preview-select"][value="ds-99"]:checked) .preview-panel__card[data-preview="ds-99"],
-.browse:has(input[name="preview-select"][value="ds-100"]:checked) .preview-panel__card[data-preview="ds-100"],
-.browse:has(input[name="preview-select"][value="ds-101"]:checked) .preview-panel__card[data-preview="ds-101"],
-.browse:has(input[name="preview-select"][value="ds-102"]:checked) .preview-panel__card[data-preview="ds-102"],
-.browse:has(input[name="preview-select"][value="ds-103"]:checked) .preview-panel__card[data-preview="ds-103"],
-.browse:has(input[name="preview-select"][value="ds-104"]:checked) .preview-panel__card[data-preview="ds-104"],
-.browse:has(input[name="preview-select"][value="ds-105"]:checked) .preview-panel__card[data-preview="ds-105"],
-.browse:has(input[name="preview-select"][value="ds-106"]:checked) .preview-panel__card[data-preview="ds-106"],
-.browse:has(input[name="preview-select"][value="ds-107"]:checked) .preview-panel__card[data-preview="ds-107"],
-.browse:has(input[name="preview-select"][value="ds-108"]:checked) .preview-panel__card[data-preview="ds-108"],
-.browse:has(input[name="preview-select"][value="ds-109"]:checked) .preview-panel__card[data-preview="ds-109"],
-.browse:has(input[name="preview-select"][value="ds-110"]:checked) .preview-panel__card[data-preview="ds-110"],
-.browse:has(input[name="preview-select"][value="ds-111"]:checked) .preview-panel__card[data-preview="ds-111"],
-.browse:has(input[name="preview-select"][value="ds-112"]:checked) .preview-panel__card[data-preview="ds-112"],
-.browse:has(input[name="preview-select"][value="ds-113"]:checked) .preview-panel__card[data-preview="ds-113"],
-.browse:has(input[name="preview-select"][value="ds-114"]:checked) .preview-panel__card[data-preview="ds-114"],
-.browse:has(input[name="preview-select"][value="ds-115"]:checked) .preview-panel__card[data-preview="ds-115"],
-.browse:has(input[name="preview-select"][value="ds-116"]:checked) .preview-panel__card[data-preview="ds-116"],
-.browse:has(input[name="preview-select"][value="ds-117"]:checked) .preview-panel__card[data-preview="ds-117"],
-.browse:has(input[name="preview-select"][value="ds-118"]:checked) .preview-panel__card[data-preview="ds-118"],
-.browse:has(input[name="preview-select"][value="ds-119"]:checked) .preview-panel__card[data-preview="ds-119"],
-.browse:has(input[name="preview-select"][value="ds-120"]:checked) .preview-panel__card[data-preview="ds-120"],
-.browse:has(input[name="preview-select"][value="ds-121"]:checked) .preview-panel__card[data-preview="ds-121"],
-.browse:has(input[name="preview-select"][value="ds-122"]:checked) .preview-panel__card[data-preview="ds-122"],
-.browse:has(input[name="preview-select"][value="ds-123"]:checked) .preview-panel__card[data-preview="ds-123"],
-.browse:has(input[name="preview-select"][value="ds-124"]:checked) .preview-panel__card[data-preview="ds-124"],
-.browse:has(input[name="preview-select"][value="ds-125"]:checked) .preview-panel__card[data-preview="ds-125"],
-.browse:has(input[name="preview-select"][value="ds-126"]:checked) .preview-panel__card[data-preview="ds-126"],
-.browse:has(input[name="preview-select"][value="ds-127"]:checked) .preview-panel__card[data-preview="ds-127"],
-.browse:has(input[name="preview-select"][value="ds-128"]:checked) .preview-panel__card[data-preview="ds-128"],
-.browse:has(input[name="preview-select"][value="ds-129"]:checked) .preview-panel__card[data-preview="ds-129"],
-.browse:has(input[name="preview-select"][value="ds-130"]:checked) .preview-panel__card[data-preview="ds-130"],
-.browse:has(input[name="preview-select"][value="ds-131"]:checked) .preview-panel__card[data-preview="ds-131"],
-.browse:has(input[name="preview-select"][value="ds-132"]:checked) .preview-panel__card[data-preview="ds-132"],
-.browse:has(input[name="preview-select"][value="ds-133"]:checked) .preview-panel__card[data-preview="ds-133"],
-.browse:has(input[name="preview-select"][value="ds-134"]:checked) .preview-panel__card[data-preview="ds-134"],
-.browse:has(input[name="preview-select"][value="ds-135"]:checked) .preview-panel__card[data-preview="ds-135"],
-.browse:has(input[name="preview-select"][value="ds-136"]:checked) .preview-panel__card[data-preview="ds-136"],
-.browse:has(input[name="preview-select"][value="ds-137"]:checked) .preview-panel__card[data-preview="ds-137"],
-.browse:has(input[name="preview-select"][value="ds-138"]:checked) .preview-panel__card[data-preview="ds-138"],
-.browse:has(input[name="preview-select"][value="ds-139"]:checked) .preview-panel__card[data-preview="ds-139"],
-.browse:has(input[name="preview-select"][value="ds-140"]:checked) .preview-panel__card[data-preview="ds-140"],
-.browse:has(input[name="preview-select"][value="ds-141"]:checked) .preview-panel__card[data-preview="ds-141"],
-.browse:has(input[name="preview-select"][value="ds-142"]:checked) .preview-panel__card[data-preview="ds-142"],
-.browse:has(input[name="preview-select"][value="ds-143"]:checked) .preview-panel__card[data-preview="ds-143"],
-.browse:has(input[name="preview-select"][value="ds-144"]:checked) .preview-panel__card[data-preview="ds-144"],
-.browse:has(input[name="preview-select"][value="ds-145"]:checked) .preview-panel__card[data-preview="ds-145"],
-.browse:has(input[name="preview-select"][value="ds-146"]:checked) .preview-panel__card[data-preview="ds-146"],
-.browse:has(input[name="preview-select"][value="ds-147"]:checked) .preview-panel__card[data-preview="ds-147"],
-.browse:has(input[name="preview-select"][value="ds-148"]:checked) .preview-panel__card[data-preview="ds-148"],
-.browse:has(input[name="preview-select"][value="ds-149"]:checked) .preview-panel__card[data-preview="ds-149"],
-.browse:has(input[name="preview-select"][value="ds-150"]:checked) .preview-panel__card[data-preview="ds-150"],
-.browse:has(input[name="preview-select"][value="ds-151"]:checked) .preview-panel__card[data-preview="ds-151"] {
-  display: flex;
+.row__cat {
+  font: 500 var(--t-110)/1 var(--font-sans);
+  color: var(--ink-2);
+}
+.row__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font: 500 var(--t-100)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 
-/* ---------------- sticky quick-preview panel ---------------- */
+.row__browsers { grid-area: 1 / 3; display: none; gap: 2px; }
+
+.row__aside {
+  grid-area: 1 / -2 / -1 / -1;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: var(--s-2);
+}
+
+.btn-row-stack {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 26px;
+  block-size: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-130)/1 var(--font-mono);
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
+}
+.btn-row-stack:hover { border-color: var(--ink); color: var(--ink); }
+.btn-row-stack.is-stacked {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.row__copy {
+  min-block-size: 26px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
+}
+.row__copy:hover { border-color: var(--ink); color: var(--ink); }
+.row__copy.is-done {
+  border-color: var(--ok);
+  background: var(--ok);
+  color: var(--ink-inverse);
+}
+
+@media (min-width: 720px) {
+  .row { grid-template-columns: 48px minmax(0, 1fr) auto auto; }
+  .row__browsers { display: flex; justify-self: end; }
+}
+@media (min-width: 1080px) {
+  .row { grid-template-columns: 48px minmax(0, 1fr) 112px 84px 118px; }
+  .row__meta { display: flex; }
+  .row__browsers { grid-area: 1 / 4; }
+  .row__aside { grid-area: 1 / 5; }
+}
+
+.shell-note {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-6);
+  margin-block-start: var(--s-12);
+  padding-block-start: var(--s-4);
+  border-block-start: 1px solid var(--line);
+  font: 500 var(--t-110)/1.6 var(--font-sans);
+  color: var(--ink-3);
+}
+.shell-note kbd {
+  padding: 1px 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  background: var(--surface);
+  font-size: var(--t-100);
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------
+   8. Syntax tokens
+   ------------------------------------------------------------ */
+
+.tok-tag   { color: var(--tok-tag); }
+.tok-attr  { color: var(--tok-attr); }
+.tok-str   { color: var(--tok-str); }
+.tok-kw    { color: var(--tok-kw); }
+.tok-prop  { color: var(--tok-prop); }
+.tok-num   { color: var(--tok-num); }
+.tok-com   { color: var(--tok-com); font-style: italic; }
+.tok-punct { color: var(--tok-punct); }
+
+/* ------------------------------------------------------------
+   9. Preview rail
+   ------------------------------------------------------------ */
 
 .browse__preview {
   display: none;
   position: sticky;
-  top: calc(var(--header-h) + 20px);
+  inset-block-start: calc(var(--header-h) + var(--filters-h) + var(--s-4));
+  max-block-size: calc(100vh - var(--header-h) - var(--filters-h) - var(--s-8));
+  overflow-y: auto;
   border: 1px solid var(--line);
   background: var(--surface);
-  max-height: calc(100vh - var(--header-h) - 40px);
-  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
 }
 @media (min-width: 960px) {
   .browse__preview { display: block; }
 }
 
-.preview-panel__empty {
-  padding: 40px 20px;
-  text-align: center;
-  font: 500 12.5px/1.6 var(--sans);
-  color: var(--ink-2);
-}
+.preview-panel__card { display: none; flex-direction: column; }
 
-.preview-panel__head { padding: 16px 16px 0; }
-.preview-panel__eyebrow {
-  font: 600 10.5px/1 var(--mono);
-  letter-spacing: .04em;
-  color: var(--ink-2);
+.preview-panel__head {
+  padding: var(--s-4) var(--s-4) var(--s-3);
+  border-block-end: 1px solid var(--line);
 }
+.preview-panel__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.preview-panel__num { color: var(--accent); }
+.preview-panel__ref { color: var(--ink-3); }
 .preview-panel__title {
-  margin-top: 6px;
-  font: 700 17px/1.25 var(--sans);
-  letter-spacing: -.015em;
+  margin-block-start: var(--s-2);
+  font: 600 var(--t-160)/var(--lh-snug) var(--font-sans);
+  letter-spacing: var(--track-tight);
   color: var(--ink);
+  text-wrap: balance;
 }
 .preview-panel__cat {
-  margin-top: 4px;
-  font: 500 11.5px/1 var(--sans);
-  color: var(--ink-1);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-block-start: var(--s-2);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
+.preview-panel__cat span[aria-hidden="true"] { color: var(--line-strong); }
+.preview-panel__status[data-status="baseline"]    { color: var(--ok); }
+.preview-panel__status[data-status="newer"]       { color: var(--warn); }
+.preview-panel__status[data-status="progressive"] { color: var(--no); }
 
 .preview-host {
   position: relative;
-  background: var(--canvas);
+  background: var(--surface-sunken);
 }
 .preview-host .ds-document {
-  width: 100%;
-  border: 0;
   display: block;
+  inline-size: 100%;
+  border: 0;
 }
 .ds-hint--document {
   position: absolute;
-  right: 8px;
-  bottom: 8px;
+  inset-block-end: var(--s-2);
+  inset-inline-end: var(--s-2);
   z-index: 2;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
-  font: 600 10px/1 var(--sans);
-  letter-spacing: .02em;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  background: var(--surface);
+  font: 500 var(--t-100)/1.2 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
   pointer-events: none;
-  opacity: .85;
 }
 .preview-host--panel {
-  margin: 14px 16px 0;
-  border: 1px solid var(--line);
-  min-height: 220px;
+  min-block-size: 220px;
   overflow: hidden;
+  border-block-end: 1px solid var(--line);
 }
-.preview-host--lg { min-height: 280px; border: 1px solid var(--line); }
+.preview-host--lg {
+  min-block-size: 280px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+}
+
+/* Stage width presets animate. Only the document-iframe stage is reachable
+   from here — a shadow stage is styled inside its own sandbox tokens. */
+.preview-host .ds-document {
+  margin-inline: auto;
+  transition: max-inline-size var(--dur-3) var(--ease);
+}
+
+/* Stage theme toggle — custom properties set on the host win over the
+   shadow root's own :host block, so the sandbox follows along. */
+.preview-host[data-stage-theme="dark"] {
+  --color-bg: oklch(0.14 0.005 260);
+  --color-text: oklch(0.96 0.002 90);
+  --color-primary: oklch(0.96 0.002 90);
+  --color-text-muted: oklch(0.62 0.008 90);
+  --color-text-inverse: oklch(0.14 0.005 260);
+  --color-border: oklch(0.24 0.008 260);
+  --color-surface: oklch(0.18 0.006 260);
+  --color-surface-offset: oklch(0.16 0.005 260);
+  --color-surface-dynamic: oklch(0.3 0.01 260);
+  --color-surface-dark: oklch(0.1 0.004 260);
+  --color-accent: oklch(0.68 0.19 38);
+}
 
 .preview-panel__browsers {
   display: flex;
-  gap: 6px;
-  padding: 12px 16px 0;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  border-block-end: 1px solid var(--line);
 }
 
-.preview-panel__copy {
-  appearance: none;
-  width: calc(100% - 32px);
-  margin: 14px 16px 0;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 12px 14px;
-  cursor: pointer;
-  font: 700 12px/1 var(--sans);
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  transition: background-color .12s ease;
+.preview-panel__actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
 }
-.preview-panel__copy:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
-.preview-panel__copy.is-done { background: var(--ok); border-color: var(--ok); }
-
 .preview-panel__details {
-  appearance: none;
-  width: calc(100% - 32px);
-  margin: 8px 16px 16px;
-  background: none;
-  border: 1px solid var(--line);
-  padding: 10px 14px;
-  cursor: pointer;
-  font: 600 11.5px/1 var(--sans);
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
+  padding: var(--s-3) var(--s-4);
+  border-block-start: 1px solid var(--line);
+  font: 500 var(--t-120)/1 var(--font-sans);
+  color: var(--ink-2);
+  text-align: left;
+  transition: background-color var(--dur-1) linear, color var(--dur-1) linear;
 }
-.preview-panel__details:hover { color: var(--ink); border-color: var(--line-strong); }
+.preview-panel__details:hover { background: var(--surface-hover); color: var(--ink); }
 
-/* ---------------- backdrop / drawer ---------------- */
+/* ------------------------------------------------------------
+   10. Zero-JS preview selection
+   One selector per spell, generated from the catalogue: the checked
+   radio in a row reveals the matching card in the rail. CSS cannot
+   compare one element's attribute to another's, so the mapping is
+   spelled out — regenerate this block when spells are added or removed.
+   ------------------------------------------------------------ */
 
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background: oklch(0 0 0 / .64);
-  opacity: 0;
-  transition: opacity .18s ease;
-}
-.backdrop.is-shown { opacity: 1; }
-
-.drawer:not([popover]) {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 41;
-  width: min(680px, 100%);
+.shell:not(:has(input[name="preview-select"]:checked)) .preview-panel__card:first-child,
+.shell:has(input[name="preview-select"][value="ds-1"]:checked) .preview-panel__card[data-preview="ds-1"],
+.shell:has(input[name="preview-select"][value="ds-2"]:checked) .preview-panel__card[data-preview="ds-2"],
+.shell:has(input[name="preview-select"][value="ds-3"]:checked) .preview-panel__card[data-preview="ds-3"],
+.shell:has(input[name="preview-select"][value="ds-5"]:checked) .preview-panel__card[data-preview="ds-5"],
+.shell:has(input[name="preview-select"][value="ds-7"]:checked) .preview-panel__card[data-preview="ds-7"],
+.shell:has(input[name="preview-select"][value="ds-19"]:checked) .preview-panel__card[data-preview="ds-19"],
+.shell:has(input[name="preview-select"][value="ds-20"]:checked) .preview-panel__card[data-preview="ds-20"],
+.shell:has(input[name="preview-select"][value="ds-22"]:checked) .preview-panel__card[data-preview="ds-22"],
+.shell:has(input[name="preview-select"][value="ds-24"]:checked) .preview-panel__card[data-preview="ds-24"],
+.shell:has(input[name="preview-select"][value="ds-26"]:checked) .preview-panel__card[data-preview="ds-26"],
+.shell:has(input[name="preview-select"][value="ds-38"]:checked) .preview-panel__card[data-preview="ds-38"],
+.shell:has(input[name="preview-select"][value="ds-39"]:checked) .preview-panel__card[data-preview="ds-39"],
+.shell:has(input[name="preview-select"][value="ds-67"]:checked) .preview-panel__card[data-preview="ds-67"],
+.shell:has(input[name="preview-select"][value="ds-71"]:checked) .preview-panel__card[data-preview="ds-71"],
+.shell:has(input[name="preview-select"][value="ds-73"]:checked) .preview-panel__card[data-preview="ds-73"],
+.shell:has(input[name="preview-select"][value="ds-79"]:checked) .preview-panel__card[data-preview="ds-79"],
+.shell:has(input[name="preview-select"][value="ds-80"]:checked) .preview-panel__card[data-preview="ds-80"],
+.shell:has(input[name="preview-select"][value="ds-81"]:checked) .preview-panel__card[data-preview="ds-81"],
+.shell:has(input[name="preview-select"][value="ds-82"]:checked) .preview-panel__card[data-preview="ds-82"],
+.shell:has(input[name="preview-select"][value="ds-83"]:checked) .preview-panel__card[data-preview="ds-83"],
+.shell:has(input[name="preview-select"][value="ds-84"]:checked) .preview-panel__card[data-preview="ds-84"],
+.shell:has(input[name="preview-select"][value="ds-88"]:checked) .preview-panel__card[data-preview="ds-88"],
+.shell:has(input[name="preview-select"][value="ds-89"]:checked) .preview-panel__card[data-preview="ds-89"],
+.shell:has(input[name="preview-select"][value="ds-90"]:checked) .preview-panel__card[data-preview="ds-90"],
+.shell:has(input[name="preview-select"][value="ds-8"]:checked) .preview-panel__card[data-preview="ds-8"],
+.shell:has(input[name="preview-select"][value="ds-9"]:checked) .preview-panel__card[data-preview="ds-9"],
+.shell:has(input[name="preview-select"][value="ds-11"]:checked) .preview-panel__card[data-preview="ds-11"],
+.shell:has(input[name="preview-select"][value="ds-14"]:checked) .preview-panel__card[data-preview="ds-14"],
+.shell:has(input[name="preview-select"][value="ds-31"]:checked) .preview-panel__card[data-preview="ds-31"],
+.shell:has(input[name="preview-select"][value="ds-65"]:checked) .preview-panel__card[data-preview="ds-65"],
+.shell:has(input[name="preview-select"][value="ds-66"]:checked) .preview-panel__card[data-preview="ds-66"],
+.shell:has(input[name="preview-select"][value="ds-68"]:checked) .preview-panel__card[data-preview="ds-68"],
+.shell:has(input[name="preview-select"][value="ds-72"]:checked) .preview-panel__card[data-preview="ds-72"],
+.shell:has(input[name="preview-select"][value="ds-75"]:checked) .preview-panel__card[data-preview="ds-75"],
+.shell:has(input[name="preview-select"][value="ds-91"]:checked) .preview-panel__card[data-preview="ds-91"],
+.shell:has(input[name="preview-select"][value="ds-92"]:checked) .preview-panel__card[data-preview="ds-92"],
+.shell:has(input[name="preview-select"][value="ds-93"]:checked) .preview-panel__card[data-preview="ds-93"],
+.shell:has(input[name="preview-select"][value="ds-17"]:checked) .preview-panel__card[data-preview="ds-17"],
+.shell:has(input[name="preview-select"][value="ds-30"]:checked) .preview-panel__card[data-preview="ds-30"],
+.shell:has(input[name="preview-select"][value="ds-36"]:checked) .preview-panel__card[data-preview="ds-36"],
+.shell:has(input[name="preview-select"][value="ds-43"]:checked) .preview-panel__card[data-preview="ds-43"],
+.shell:has(input[name="preview-select"][value="ds-44"]:checked) .preview-panel__card[data-preview="ds-44"],
+.shell:has(input[name="preview-select"][value="ds-45"]:checked) .preview-panel__card[data-preview="ds-45"],
+.shell:has(input[name="preview-select"][value="ds-46"]:checked) .preview-panel__card[data-preview="ds-46"],
+.shell:has(input[name="preview-select"][value="ds-47"]:checked) .preview-panel__card[data-preview="ds-47"],
+.shell:has(input[name="preview-select"][value="ds-55"]:checked) .preview-panel__card[data-preview="ds-55"],
+.shell:has(input[name="preview-select"][value="ds-69"]:checked) .preview-panel__card[data-preview="ds-69"],
+.shell:has(input[name="preview-select"][value="ds-12"]:checked) .preview-panel__card[data-preview="ds-12"],
+.shell:has(input[name="preview-select"][value="ds-15"]:checked) .preview-panel__card[data-preview="ds-15"],
+.shell:has(input[name="preview-select"][value="ds-27"]:checked) .preview-panel__card[data-preview="ds-27"],
+.shell:has(input[name="preview-select"][value="ds-33"]:checked) .preview-panel__card[data-preview="ds-33"],
+.shell:has(input[name="preview-select"][value="ds-37"]:checked) .preview-panel__card[data-preview="ds-37"],
+.shell:has(input[name="preview-select"][value="ds-40"]:checked) .preview-panel__card[data-preview="ds-40"],
+.shell:has(input[name="preview-select"][value="ds-56"]:checked) .preview-panel__card[data-preview="ds-56"],
+.shell:has(input[name="preview-select"][value="ds-61"]:checked) .preview-panel__card[data-preview="ds-61"],
+.shell:has(input[name="preview-select"][value="ds-62"]:checked) .preview-panel__card[data-preview="ds-62"],
+.shell:has(input[name="preview-select"][value="ds-70"]:checked) .preview-panel__card[data-preview="ds-70"],
+.shell:has(input[name="preview-select"][value="ds-77"]:checked) .preview-panel__card[data-preview="ds-77"],
+.shell:has(input[name="preview-select"][value="ds-18"]:checked) .preview-panel__card[data-preview="ds-18"],
+.shell:has(input[name="preview-select"][value="ds-34"]:checked) .preview-panel__card[data-preview="ds-34"],
+.shell:has(input[name="preview-select"][value="ds-48"]:checked) .preview-panel__card[data-preview="ds-48"],
+.shell:has(input[name="preview-select"][value="ds-49"]:checked) .preview-panel__card[data-preview="ds-49"],
+.shell:has(input[name="preview-select"][value="ds-50"]:checked) .preview-panel__card[data-preview="ds-50"],
+.shell:has(input[name="preview-select"][value="ds-10"]:checked) .preview-panel__card[data-preview="ds-10"],
+.shell:has(input[name="preview-select"][value="ds-bonus"]:checked) .preview-panel__card[data-preview="ds-bonus"],
+.shell:has(input[name="preview-select"][value="ds-53"]:checked) .preview-panel__card[data-preview="ds-53"],
+.shell:has(input[name="preview-select"][value="ds-63"]:checked) .preview-panel__card[data-preview="ds-63"],
+.shell:has(input[name="preview-select"][value="ds-6"]:checked) .preview-panel__card[data-preview="ds-6"],
+.shell:has(input[name="preview-select"][value="ds-16"]:checked) .preview-panel__card[data-preview="ds-16"],
+.shell:has(input[name="preview-select"][value="ds-23"]:checked) .preview-panel__card[data-preview="ds-23"],
+.shell:has(input[name="preview-select"][value="ds-28"]:checked) .preview-panel__card[data-preview="ds-28"],
+.shell:has(input[name="preview-select"][value="ds-32"]:checked) .preview-panel__card[data-preview="ds-32"],
+.shell:has(input[name="preview-select"][value="ds-54"]:checked) .preview-panel__card[data-preview="ds-54"],
+.shell:has(input[name="preview-select"][value="ds-57"]:checked) .preview-panel__card[data-preview="ds-57"],
+.shell:has(input[name="preview-select"][value="ds-76"]:checked) .preview-panel__card[data-preview="ds-76"],
+.shell:has(input[name="preview-select"][value="ds-85"]:checked) .preview-panel__card[data-preview="ds-85"],
+.shell:has(input[name="preview-select"][value="ds-86"]:checked) .preview-panel__card[data-preview="ds-86"],
+.shell:has(input[name="preview-select"][value="ds-87"]:checked) .preview-panel__card[data-preview="ds-87"],
+.shell:has(input[name="preview-select"][value="ds-25"]:checked) .preview-panel__card[data-preview="ds-25"],
+.shell:has(input[name="preview-select"][value="ds-35"]:checked) .preview-panel__card[data-preview="ds-35"],
+.shell:has(input[name="preview-select"][value="ds-51"]:checked) .preview-panel__card[data-preview="ds-51"],
+.shell:has(input[name="preview-select"][value="ds-52"]:checked) .preview-panel__card[data-preview="ds-52"],
+.shell:has(input[name="preview-select"][value="ds-58"]:checked) .preview-panel__card[data-preview="ds-58"],
+.shell:has(input[name="preview-select"][value="ds-64"]:checked) .preview-panel__card[data-preview="ds-64"],
+.shell:has(input[name="preview-select"][value="ds-74"]:checked) .preview-panel__card[data-preview="ds-74"],
+.shell:has(input[name="preview-select"][value="ds-78"]:checked) .preview-panel__card[data-preview="ds-78"],
+.shell:has(input[name="preview-select"][value="ds-13"]:checked) .preview-panel__card[data-preview="ds-13"],
+.shell:has(input[name="preview-select"][value="ds-21"]:checked) .preview-panel__card[data-preview="ds-21"],
+.shell:has(input[name="preview-select"][value="ds-29"]:checked) .preview-panel__card[data-preview="ds-29"],
+.shell:has(input[name="preview-select"][value="ds-59"]:checked) .preview-panel__card[data-preview="ds-59"],
+.shell:has(input[name="preview-select"][value="ds-60"]:checked) .preview-panel__card[data-preview="ds-60"],
+.shell:has(input[name="preview-select"][value="ds-41"]:checked) .preview-panel__card[data-preview="ds-41"],
+.shell:has(input[name="preview-select"][value="ds-94"]:checked) .preview-panel__card[data-preview="ds-94"],
+.shell:has(input[name="preview-select"][value="ds-95"]:checked) .preview-panel__card[data-preview="ds-95"],
+.shell:has(input[name="preview-select"][value="ds-96"]:checked) .preview-panel__card[data-preview="ds-96"],
+.shell:has(input[name="preview-select"][value="ds-97"]:checked) .preview-panel__card[data-preview="ds-97"],
+.shell:has(input[name="preview-select"][value="ds-98"]:checked) .preview-panel__card[data-preview="ds-98"],
+.shell:has(input[name="preview-select"][value="ds-99"]:checked) .preview-panel__card[data-preview="ds-99"],
+.shell:has(input[name="preview-select"][value="ds-100"]:checked) .preview-panel__card[data-preview="ds-100"],
+.shell:has(input[name="preview-select"][value="ds-101"]:checked) .preview-panel__card[data-preview="ds-101"],
+.shell:has(input[name="preview-select"][value="ds-102"]:checked) .preview-panel__card[data-preview="ds-102"],
+.shell:has(input[name="preview-select"][value="ds-103"]:checked) .preview-panel__card[data-preview="ds-103"],
+.shell:has(input[name="preview-select"][value="ds-104"]:checked) .preview-panel__card[data-preview="ds-104"],
+.shell:has(input[name="preview-select"][value="ds-105"]:checked) .preview-panel__card[data-preview="ds-105"],
+.shell:has(input[name="preview-select"][value="ds-106"]:checked) .preview-panel__card[data-preview="ds-106"],
+.shell:has(input[name="preview-select"][value="ds-107"]:checked) .preview-panel__card[data-preview="ds-107"],
+.shell:has(input[name="preview-select"][value="ds-108"]:checked) .preview-panel__card[data-preview="ds-108"],
+.shell:has(input[name="preview-select"][value="ds-109"]:checked) .preview-panel__card[data-preview="ds-109"],
+.shell:has(input[name="preview-select"][value="ds-110"]:checked) .preview-panel__card[data-preview="ds-110"],
+.shell:has(input[name="preview-select"][value="ds-111"]:checked) .preview-panel__card[data-preview="ds-111"],
+.shell:has(input[name="preview-select"][value="ds-112"]:checked) .preview-panel__card[data-preview="ds-112"],
+.shell:has(input[name="preview-select"][value="ds-113"]:checked) .preview-panel__card[data-preview="ds-113"],
+.shell:has(input[name="preview-select"][value="ds-114"]:checked) .preview-panel__card[data-preview="ds-114"],
+.shell:has(input[name="preview-select"][value="ds-115"]:checked) .preview-panel__card[data-preview="ds-115"],
+.shell:has(input[name="preview-select"][value="ds-116"]:checked) .preview-panel__card[data-preview="ds-116"],
+.shell:has(input[name="preview-select"][value="ds-117"]:checked) .preview-panel__card[data-preview="ds-117"],
+.shell:has(input[name="preview-select"][value="ds-118"]:checked) .preview-panel__card[data-preview="ds-118"],
+.shell:has(input[name="preview-select"][value="ds-119"]:checked) .preview-panel__card[data-preview="ds-119"],
+.shell:has(input[name="preview-select"][value="ds-120"]:checked) .preview-panel__card[data-preview="ds-120"],
+.shell:has(input[name="preview-select"][value="ds-121"]:checked) .preview-panel__card[data-preview="ds-121"],
+.shell:has(input[name="preview-select"][value="ds-122"]:checked) .preview-panel__card[data-preview="ds-122"],
+.shell:has(input[name="preview-select"][value="ds-123"]:checked) .preview-panel__card[data-preview="ds-123"],
+.shell:has(input[name="preview-select"][value="ds-124"]:checked) .preview-panel__card[data-preview="ds-124"],
+.shell:has(input[name="preview-select"][value="ds-125"]:checked) .preview-panel__card[data-preview="ds-125"],
+.shell:has(input[name="preview-select"][value="ds-126"]:checked) .preview-panel__card[data-preview="ds-126"],
+.shell:has(input[name="preview-select"][value="ds-127"]:checked) .preview-panel__card[data-preview="ds-127"],
+.shell:has(input[name="preview-select"][value="ds-128"]:checked) .preview-panel__card[data-preview="ds-128"],
+.shell:has(input[name="preview-select"][value="ds-129"]:checked) .preview-panel__card[data-preview="ds-129"],
+.shell:has(input[name="preview-select"][value="ds-130"]:checked) .preview-panel__card[data-preview="ds-130"],
+.shell:has(input[name="preview-select"][value="ds-131"]:checked) .preview-panel__card[data-preview="ds-131"],
+.shell:has(input[name="preview-select"][value="ds-132"]:checked) .preview-panel__card[data-preview="ds-132"],
+.shell:has(input[name="preview-select"][value="ds-133"]:checked) .preview-panel__card[data-preview="ds-133"],
+.shell:has(input[name="preview-select"][value="ds-134"]:checked) .preview-panel__card[data-preview="ds-134"],
+.shell:has(input[name="preview-select"][value="ds-135"]:checked) .preview-panel__card[data-preview="ds-135"],
+.shell:has(input[name="preview-select"][value="ds-136"]:checked) .preview-panel__card[data-preview="ds-136"],
+.shell:has(input[name="preview-select"][value="ds-137"]:checked) .preview-panel__card[data-preview="ds-137"],
+.shell:has(input[name="preview-select"][value="ds-138"]:checked) .preview-panel__card[data-preview="ds-138"],
+.shell:has(input[name="preview-select"][value="ds-139"]:checked) .preview-panel__card[data-preview="ds-139"],
+.shell:has(input[name="preview-select"][value="ds-140"]:checked) .preview-panel__card[data-preview="ds-140"],
+.shell:has(input[name="preview-select"][value="ds-141"]:checked) .preview-panel__card[data-preview="ds-141"],
+.shell:has(input[name="preview-select"][value="ds-142"]:checked) .preview-panel__card[data-preview="ds-142"],
+.shell:has(input[name="preview-select"][value="ds-143"]:checked) .preview-panel__card[data-preview="ds-143"],
+.shell:has(input[name="preview-select"][value="ds-144"]:checked) .preview-panel__card[data-preview="ds-144"],
+.shell:has(input[name="preview-select"][value="ds-145"]:checked) .preview-panel__card[data-preview="ds-145"],
+.shell:has(input[name="preview-select"][value="ds-146"]:checked) .preview-panel__card[data-preview="ds-146"],
+.shell:has(input[name="preview-select"][value="ds-147"]:checked) .preview-panel__card[data-preview="ds-147"],
+.shell:has(input[name="preview-select"][value="ds-148"]:checked) .preview-panel__card[data-preview="ds-148"],
+.shell:has(input[name="preview-select"][value="ds-149"]:checked) .preview-panel__card[data-preview="ds-149"],
+.shell:has(input[name="preview-select"][value="ds-150"]:checked) .preview-panel__card[data-preview="ds-150"],
+.shell:has(input[name="preview-select"][value="ds-151"]:checked) .preview-panel__card[data-preview="ds-151"] {
   display: flex;
-  flex-direction: column;
-  background: var(--bg);
-  border-left: 1px solid var(--line);
-  transform: translateX(100%);
-  transition: transform .26s var(--ease);
 }
-.drawer:not([popover]).is-open { transform: translateX(0); }
 
+/* Below the rail breakpoint there is nowhere to pin a preview, so the
+   row overlay stops swallowing clicks meant for the buttons. */
+@media (max-width: 959px) {
+  .row__select-overlay { pointer-events: none; }
+}
+/* ------------------------------------------------------------
+   11. Buttons
+   ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-block-size: 32px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-120)/1 var(--font-sans);
+  color: var(--ink-2);
+  white-space: nowrap;
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
+}
+.btn:hover { border-color: var(--line-strong); color: var(--ink); }
+.btn--primary {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+.btn--primary:hover { border-color: var(--ink); color: var(--ink-inverse); opacity: 0.88; }
+.btn--accent {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn--accent:hover { border-color: var(--accent-press); background: var(--accent-press); color: var(--accent-ink); }
+.btn--danger { border-color: var(--no); color: var(--no); }
+.btn--danger:hover { border-color: var(--no); background: var(--no-wash); color: var(--no); }
+.btn.is-done { border-color: var(--ok); background: var(--ok); color: var(--ink-inverse); }
+
+/* ------------------------------------------------------------
+   12. Drawer
+   ------------------------------------------------------------ */
+
+/* `display` must stay out of this rule: an author-level `display` beats the
+   UA's `[popover]:not(:popover-open) { display: none }`, which would leave
+   all 150 drawers laid out and focusable behind the page. It is set on
+   :popover-open instead, and `allow-discrete` below keeps the slide-out
+   animating before the element is finally removed. */
 .drawer[popover] {
   position: fixed;
   inset: 0 0 0 auto;
-  z-index: 41;
-  width: min(680px, 100vw);
-  height: 100vh;
-  max-height: 100vh;
+  z-index: 60;
+  inline-size: var(--drawer-w);
+  block-size: 100vh;
+  max-block-size: 100vh;
   margin: 0;
   padding: 0;
   border: 0;
-  border-left: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--ink-1);
-  box-shadow: -16px 0 48px oklch(0.21 0.006 285.9 / .16);
+  border-inline-start: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-drawer);
   transform: translateX(100%);
-  transition: transform 0.28s var(--ease), overlay 0.28s allow-discrete, display 0.28s allow-discrete;
+  transition: transform var(--dur-3) var(--ease),
+              overlay var(--dur-3) allow-discrete,
+              display var(--dur-3) allow-discrete;
 }
 .drawer[popover]:popover-open {
   display: flex;
@@ -880,636 +1343,483 @@ button { font: inherit; color: inherit; }
   transform: translateX(0);
 }
 @starting-style {
-  .drawer[popover]:popover-open {
-    transform: translateX(100%);
-  }
+  .drawer[popover]:popover-open { transform: translateX(100%); }
 }
 .drawer[popover]::backdrop {
-  background: oklch(0.21 0.006 285.9 / 0);
-  backdrop-filter: blur(0);
-  transition: background-color 0.24s ease, backdrop-filter 0.24s ease, overlay 0.24s allow-discrete, display 0.24s allow-discrete;
+  background: oklch(0 0 0 / 0);
+  transition: background-color var(--dur-3) linear,
+              overlay var(--dur-3) allow-discrete,
+              display var(--dur-3) allow-discrete;
 }
-.drawer[popover]:popover-open::backdrop {
-  background: oklch(0.21 0.006 285.9 / .45);
-  backdrop-filter: blur(2px);
-}
+.drawer[popover]:popover-open::backdrop { background: var(--scrim); }
 @starting-style {
-  .drawer[popover]:popover-open::backdrop {
-    background: oklch(0.21 0.006 285.9 / 0);
-    backdrop-filter: blur(0);
-  }
-}
-
-/* View Transition morph: when the drawer opens/closes, the clicked row and the
-   drawer share the `spell-card` name so the browser animates the row's box into
-   the drawer (and back) natively. Tune only timing; position/size/cross-fade
-   are interpolated by the browser. */
-::view-transition-group(spell-card) {
-  animation-duration: .3s;
-  animation-timing-function: var(--ease);
+  .drawer[popover]:popover-open::backdrop { background: oklch(0 0 0 / 0); }
 }
 
 .drawer__head {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
-  padding: 18px;
-  border-bottom: 1px solid var(--line);
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-5);
+  border-block-end: 1px solid var(--line);
+  background: var(--paper);
 }
 .drawer__eyebrow {
   display: flex;
-  gap: 8px;
   align-items: center;
-  font: 600 10.5px/1 var(--mono);
-  letter-spacing: .04em;
-  color: var(--ink-2);
-  margin-bottom: 10px;
+  gap: var(--s-2);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
+.drawer__num { color: var(--accent); }
+.drawer__ref { color: var(--ink-3); }
+.drawer__eyebrow span[aria-hidden="true"] { color: var(--line-strong); }
 .drawer__title {
-  font: 700 20px/1.25 var(--sans);
-  letter-spacing: -.02em;
+  margin-block-start: var(--s-2);
+  font: 600 var(--t-200)/var(--lh-tight) var(--font-sans);
+  letter-spacing: var(--track-tight);
   color: var(--ink);
+  text-wrap: balance;
 }
 .drawer__meta {
-  margin-top: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font: 600 11px/1 var(--sans);
-  color: var(--ink-1);
+  gap: var(--s-2);
+  margin-block-start: var(--s-3);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
+.drawer__meta span[aria-hidden="true"] { color: var(--line-strong); }
 .drawer__close {
-  all: unset;
-  box-sizing: border-box;
-  width: 30px;
-  height: 30px;
   display: grid;
   place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  flex: none;
   border: 1px solid var(--line);
-  cursor: pointer;
-  font: 16px/1 var(--mono);
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease;
+  border-radius: var(--r-2);
+  background: var(--surface);
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
 }
-.drawer__close:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.drawer__close:hover { border-color: var(--ink); background: var(--ink); color: var(--ink-inverse); }
+.drawer__close svg { inline-size: 12px; block-size: 12px; }
 
-.drawer__scroll { flex: 1; min-height: 0; overflow-y: auto; }
+.drawer__scroll {
+  flex: 1;
+  min-block-size: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
 
 .drawer__desc {
-  padding: 18px 18px 0;
-  color: var(--ink-1);
-  font-size: 14px;
-  line-height: 1.6;
+  padding: var(--s-5) var(--s-5) 0;
+  font-size: var(--t-140);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
   text-wrap: pretty;
 }
+.drawer__desc--flush { padding: 0; }
 .drawer__desc code {
-  font: 0.92em/1 var(--mono);
   padding: 1px 4px;
   border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--canvas);
+  border-radius: var(--r-1);
+  background: var(--surface-sunken);
+  font: 400 0.9em/1.4 var(--font-mono);
   color: var(--ink);
   overflow-wrap: anywhere;
 }
-.drawer__desc strong { color: var(--ink); font-weight: 700; }
+.drawer__desc strong { color: var(--ink); font-weight: 600; }
 
 .sect {
-  padding: 18px;
-  border-bottom: 1px solid var(--line);
+  padding: var(--s-5);
+  border-block-end: 1px solid var(--line);
 }
+.sect:last-child { border-block-end: 0; }
+.sect__head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-block-end: var(--s-3);
+}
+.sect__head-row .sect__label { margin-block-end: 0; }
 .sect__label {
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 12px;
-  font: 700 10.5px/1.6 var(--sans);
+  gap: var(--s-2) var(--s-3);
+  margin-block-end: var(--s-3);
+  font: 600 var(--t-100)/1.6 var(--font-sans);
+  letter-spacing: var(--track-micro);
   text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--ink-2);
+  color: var(--ink);
 }
-.sect__label span { color: var(--ink-2); font-weight: 500; text-transform: none; letter-spacing: 0; }
+.sect__label span {
+  font: 400 var(--t-110)/1.5 var(--font-mono);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-3);
+}
 
+/* Browser support — a hairline table, not a row of cards */
 .browser-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
 }
 .browser-list li {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  padding: 10px 8px;
   display: grid;
-  gap: 5px;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-2);
+  background: var(--surface);
   text-align: center;
 }
 .browser-list .bname {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  font: 600 10.5px/1 var(--sans);
-  letter-spacing: .02em;
+  gap: var(--s-2);
+  font: 500 var(--t-110)/1 var(--font-sans);
   color: var(--ink-2);
 }
 .browser-list .blevel {
-  font: 700 11px/1 var(--sans);
+  font: 500 var(--t-100)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
-.browser-list .blevel[data-level="yes"] { color: var(--ok); }
+.browser-list .blevel[data-level="yes"]     { color: var(--ok); }
 .browser-list .blevel[data-level="partial"] { color: var(--warn); }
-.browser-list .blevel[data-level="no"] { color: var(--no); }
+.browser-list .blevel[data-level="no"]      { color: var(--no); }
 
 .support-note {
-  margin-top: 10px;
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: var(--ink-1);
+  margin-block-start: var(--s-3);
+  font-size: var(--t-120);
+  line-height: var(--lh-body);
+  color: var(--ink-3);
 }
 
-/* ---------------- shared code block (drawer) ---------------- */
-
-/* The source viewer stays a dark island regardless of site theme — a
-   code editor reads better dark, and it keeps the syntax-highlight
-   palette below legible without a second color system. */
-.code {
-  border: 1px solid var(--line-strong);
-  background: oklch(0.21 0.006 285.9);
-  overflow: hidden;
-}
-.code__bar {
+/* Live CSS.supports() verdict for the reader's own browser */
+.feature-check {
   display: flex;
-  align-items: stretch;
-  border-bottom: 1px solid oklch(0.295 0.009 285.8);
+  align-items: center;
+  gap: var(--s-3);
+  margin-block-start: var(--s-3);
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font: 500 var(--t-120)/1.4 var(--font-sans);
+  color: var(--ink-2);
 }
-.code__tabs {
-  display: grid;
-  grid-template-columns: repeat(3, auto) 1fr;
-  background: oklch(0.21 0.006 285.9);
+.feature-check__badge {
+  flex: none;
+  padding: 3px var(--s-2);
+  border-radius: var(--r-1);
+  font: 600 var(--t-100)/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
-.code__tab-group {
-  display: contents;
+.feature-check__badge.is-supported   { background: var(--ok-wash); color: var(--ok); }
+.feature-check__badge.is-partial     { background: var(--warn-wash); color: var(--warn); }
+.feature-check__badge.is-unsupported { background: var(--no-wash); color: var(--no); }
+
+/* Stage controls */
+.stage-controls { display: inline-flex; align-items: center; gap: 1px; }
+.btn-stage {
+  min-block-size: 26px;
+  padding: 0 var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  background: var(--surface);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
 }
-.code__tab-group summary.code__tab {
+.btn-stage + .btn-stage { margin-inline-start: var(--s-1); }
+.btn-stage:hover { border-color: var(--line-strong); color: var(--ink); }
+.btn-stage.is-active {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+  color: var(--ink);
+}
+.btn-stage--theme { margin-inline-start: var(--s-2); inline-size: 30px; }
+
+/* ------------------------------------------------------------
+   13. Code viewer
+   ------------------------------------------------------------ */
+
+.code {
+  overflow: hidden;
+  border: 1px solid var(--code-line);
+  border-radius: var(--r-2);
+  background: var(--code-bg);
+}
+.code__tabs { display: grid; grid-template-columns: repeat(4, auto) 1fr; }
+.code__bar {
+  grid-column: 1 / -1;
   grid-row: 1;
   display: flex;
   align-items: center;
-  appearance: none;
-  background: none;
-  border: 0;
-  border-right: 1px solid oklch(0.295 0.009 285.8);
-  border-bottom: 1px solid oklch(0.295 0.009 285.8);
-  padding: 8px 12px;
-  cursor: pointer;
-  font: 600 10.5px/1 var(--sans);
-  letter-spacing: .03em;
-  color: oklch(0.623 0.023 91.7);
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-3);
+  border-block-end: 1px solid var(--code-line);
+}
+.code__file {
+  font: 500 var(--t-110)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.code__copy {
+  min-block-size: 24px;
+  padding: 0 var(--s-2);
+  border: 1px solid var(--code-line);
+  border-radius: var(--r-1);
+  background: var(--surface);
+  font: 500 var(--t-100)/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear,
+              background-color var(--dur-1) linear;
+}
+.code__copy:hover { border-color: var(--ink); color: var(--ink); }
+.code__copy.is-done { border-color: var(--ok); background: var(--ok); color: var(--ink-inverse); }
+
+.code__tab-group { display: contents; }
+.code__tab-group summary.code__tab {
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  padding: var(--s-2) var(--s-3);
+  border-block-end: 1px solid var(--code-line);
+  font: 500 var(--t-110)/1 var(--font-sans);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
   list-style: none;
+  cursor: pointer;
   user-select: none;
-  transition: background-color .12s ease, color .12s ease;
+  transition: color var(--dur-1) linear, background-color var(--dur-1) linear;
 }
 .code__tab-group summary.code__tab::-webkit-details-marker { display: none; }
-.code__tab-group summary.code__tab:hover { color: oklch(0.867 0.018 89.4); }
+.code__tab-group summary.code__tab:hover { color: var(--ink); background: var(--surface-hover); }
 .code__tab-group[open] > summary.code__tab {
-  background: oklch(0.295 0.009 285.8);
-  color: oklch(0.967 0.005 95.1);
-  border-bottom-color: transparent;
+  border-block-end-color: transparent;
+  background: var(--surface);
+  box-shadow: inset 0 2px 0 var(--accent);
+  color: var(--ink);
+  font-weight: 600;
 }
-.code__tab-group .code__view-wrap {
+.code__view-wrap {
   grid-column: 1 / -1;
-  grid-row: 2;
+  grid-row: 3;
+  position: relative;
 }
-
-.code__tab {
-  appearance: none;
-  background: none;
-  border: 0;
-  border-right: 1px solid oklch(0.295 0.009 285.8);
-  padding: 7px 11px;
-  cursor: pointer;
-  font: 600 10.5px/1 var(--sans);
-  letter-spacing: .03em;
-  color: oklch(0.623 0.023 91.7);
-  transition: background-color .12s ease, color .12s ease;
-}
-.code__tab:hover { color: oklch(0.867 0.018 89.4); }
-.code__tab[aria-selected="true"] {
-  background: oklch(0.295 0.009 285.8);
-  color: oklch(0.967 0.005 95.1);
-}
-.code__spacer { flex: 1; }
-
-.code__copy {
-  appearance: none;
-  background: oklch(0.967 0.005 95.1);
-  border: 0;
-  padding: 0 16px;
-  margin: 5px 5px 5px auto;
-  cursor: pointer;
-  font: 700 10.5px/1 var(--sans);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: oklch(0.21 0.006 285.9);
-  transition: background-color .12s ease;
-}
-.code__copy:hover { background: oklch(1 0 0); }
-.code__copy.is-done { background: var(--ok); color: oklch(1 0 0); }
-
-.code__view-wrap { position: relative; }
 .code__view {
   margin: 0;
-  max-height: 420px;
+  max-block-size: 420px;
   overflow: auto;
-  padding: 14px 16px;
-  font: 12px/1.7 var(--mono);
-  color: oklch(0.867 0.018 89.4);
+  padding: var(--s-4);
+  background: var(--code-bg);
+  color: var(--code-ink);
+  font: 400 var(--t-120)/1.7 var(--font-mono);
   white-space: pre;
   tab-size: 2;
   scrollbar-width: thin;
-  background: oklch(0.21 0.006 285.9);
+  scrollbar-color: var(--line-strong) transparent;
 }
-.code__view:focus-visible { outline: none; }
+.code__view:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--accent); }
 
 .drawer__foot {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px;
-  padding: 14px 18px;
-  border-top: 1px solid var(--line);
-  background: var(--bg);
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-5);
+  border-block-start: 1px solid var(--line);
+  background: var(--surface);
 }
 .drawer__hint {
-  margin-right: auto;
-  font: 500 11px/1.5 var(--sans);
-  color: var(--ink-2);
+  margin-inline-end: auto;
+  font: 500 var(--t-110)/1.5 var(--font-sans);
+  color: var(--ink-3);
 }
 
-.btn {
-  appearance: none;
-  background: none;
-  border: 1px solid var(--line);
-  padding: 9px 15px;
-  cursor: pointer;
-  font: 600 11.5px/1 var(--sans);
-  letter-spacing: .01em;
-  color: var(--ink-1);
-  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
-}
-.btn:hover { color: var(--ink); border-color: var(--line-strong); }
-.btn--primary {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
-.btn--primary:hover { background: oklch(0.295 0.007 286); color: var(--bg); }
-.btn--primary.is-done { background: var(--ok); border-color: var(--ok); }
-
-/* ---------------- responsive ---------------- */
-
-@media (max-width: 759px) {
-  .browse { grid-template-columns: 1fr; gap: 20px; }
-  .browse__nav {
-    position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-height: none;
-    overflow: visible;
-    gap: 16px;
-  }
-  .nav-group { flex: 1 1 auto; min-width: 220px; }
-  .nav-list { flex-direction: row; flex-wrap: wrap; gap: 6px; }
-  .nav-item {
-    border-left: 0;
-    border: 1px solid var(--line);
-    padding: 6px 10px;
-  }
-  .nav-item.is-on,
-  .nav-item:has(input:checked) { border-color: var(--ink); }
-  .row { flex-wrap: wrap; }
-  .row__aside { margin-left: auto; }
-}
-
-@media (max-width: 640px) {
-  .browser-list { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 959px) {
-  .row__select-overlay {
-    pointer-events: none;
-  }
-}
-
-/* ---------------- Dark Mode Variables ---------------- */
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg:          oklch(0.16 0.008 285.9);
-    --surface:     oklch(0.20 0.008 285.9);
-    --canvas:      oklch(0.24 0.008 285.9);
-    --line:        oklch(0.28 0.012 285.9);
-    --line-strong: oklch(0.38 0.015 285.9);
-
-    --ink:         oklch(0.96 0.005 84.6);
-    --ink-1:       oklch(0.82 0.010 84.6);
-    --ink-2:       oklch(0.68 0.012 84.6);
-
-    --accent:      oklch(0.68 0.18 35.3);
-    --accent-hover:oklch(0.74 0.18 35.3);
-  }
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg:          oklch(0.16 0.008 285.9);
-  --surface:     oklch(0.20 0.008 285.9);
-  --canvas:      oklch(0.24 0.008 285.9);
-  --line:        oklch(0.28 0.012 285.9);
-  --line-strong: oklch(0.38 0.015 285.9);
-
-  --ink:         oklch(0.96 0.005 84.6);
-  --ink-1:       oklch(0.82 0.010 84.6);
-  --ink-2:       oklch(0.68 0.012 84.6);
-
-  --accent:      oklch(0.68 0.18 35.3);
-  --accent-hover:oklch(0.74 0.18 35.3);
-}
-
-/* ---------------- Theme Switcher ---------------- */
-
-.theme-switch {
-  display: inline-flex;
-  align-items: center;
-}
-
-.theme-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r);
-  font: 600 11.5px/1 var(--sans);
-  color: var(--ink);
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.theme-btn:hover {
-  background: var(--canvas);
-  border-color: var(--ink);
-}
-
-/* ---------------- Preset Stacks ---------------- */
-
-.preset-stacks {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0 16px 0;
-}
-
-.preset-stacks__label {
-  font: 700 11.5px/1 var(--sans);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--ink-2);
-}
-
-.preset-btn {
-  padding: 5px 11px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  font: 500 12px/1 var(--sans);
-  color: var(--ink-1);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.preset-btn:hover {
-  border-color: var(--accent);
-  color: var(--ink);
-  background: var(--canvas);
-}
-
-/* ---------------- Row Stack Button & Actions ---------------- */
-
-.btn-row-stack {
-  padding: 2px 8px;
-  background: var(--canvas);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r);
-  font: 700 12px/1 var(--mono);
-  color: var(--ink);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-row-stack:hover,
-.btn-row-stack.is-stacked {
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-color: var(--accent);
-}
-
-/* ---------------- Stage Controls & Live Preview Tools ---------------- */
-
-.sect__head-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.stage-controls {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.btn-stage {
-  padding: 4px 8px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  font: 600 11px/1 var(--mono);
-  color: var(--ink-1);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-stage:hover,
-.btn-stage.is-active {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
-
-.preview-host .stage {
-  transition: max-width 0.25s var(--ease);
-  margin: 0 auto;
-}
-
-/* ---------------- Live CSS.supports() Feature Check ---------------- */
-
-.feature-check {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: var(--canvas);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  font: 500 12px/1.4 var(--sans);
-  color: var(--ink-1);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.feature-check__badge {
-  padding: 2px 6px;
-  border-radius: var(--r);
-  font: 700 10.5px/1 var(--mono);
-}
-
-.feature-check__badge.is-supported {
-  background: oklch(0.92 0.05 154.4);
-  color: oklch(0.3 0.12 154.4);
-}
-
-.feature-check__badge.is-partial {
-  background: oklch(0.94 0.06 70.7);
-  color: oklch(0.35 0.12 70.7);
-}
-
-.feature-check__badge.is-unsupported {
-  background: oklch(0.92 0.07 29.6);
-  color: oklch(0.35 0.15 29.6);
-}
-
-/* ---------------- Floating Stack Bar & Drawer ---------------- */
+/* ------------------------------------------------------------
+   14. Stack builder
+   ------------------------------------------------------------ */
 
 .stack-bar {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 90;
+  inset-block-end: var(--s-5);
+  inset-inline-end: var(--s-5);
+  z-index: 50;
 }
-
 .stack-bar__toggle {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  background: var(--ink);
-  color: var(--bg);
-  border: 1px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-  font: 600 13px/1 var(--sans);
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease;
+  gap: var(--s-3);
+  min-block-size: 40px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+  font: 500 var(--t-120)/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: border-color var(--dur-1) linear;
 }
-
-.stack-bar__toggle:hover {
-  transform: translateY(-2px);
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
+.stack-bar__toggle:hover { border-color: var(--ink); }
 .stack-bar__count {
   display: inline-grid;
-  place-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
+  place-items: center;
+  min-inline-size: 20px;
+  block-size: 20px;
+  padding-inline: var(--s-1);
+  border-radius: var(--r-1);
   background: var(--accent);
   color: var(--accent-ink);
-  border-radius: 999px;
-  font: 700 11px/1 var(--mono);
+  font: 600 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
-.drawer--stack {
-  max-width: 600px;
-}
+.drawer--stack { --drawer-w: min(600px, 100vw); }
 
 .stack-items {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin: 16px 0;
-  max-height: 280px;
+  gap: 1px;
+  max-block-size: 320px;
+  margin-block: var(--s-4);
   overflow-y: auto;
+  border: 1px solid var(--line);
+  background: var(--line);
+  scrollbar-width: thin;
 }
-
 .stack-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
-  background: var(--canvas);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  font: 500 12.5px/1.4 var(--sans);
-}
-
-.stack-item__id {
-  font: 700 11px/1 var(--mono);
-  color: var(--accent);
-  margin-right: 8px;
-}
-
-.stack-item__remove {
-  padding: 2px 6px;
-  background: transparent;
-  border: none;
-  font: 700 14px/1 var(--sans);
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--surface);
+  font: 500 var(--t-120)/1.4 var(--font-sans);
   color: var(--ink-2);
-  cursor: pointer;
 }
-
-.stack-item__remove:hover {
-  color: var(--no);
+.stack-item__id {
+  margin-inline-end: var(--s-2);
+  font: 500 var(--t-110)/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
 }
+.stack-item__remove {
+  inline-size: 24px;
+  block-size: 24px;
+  flex: none;
+  border: 1px solid transparent;
+  border-radius: var(--r-1);
+  font: 500 var(--t-120)/1 var(--font-mono);
+  color: var(--ink-3);
+  transition: border-color var(--dur-1) linear, color var(--dur-1) linear;
+}
+.stack-item__remove:hover { border-color: var(--no); color: var(--no); }
 
 .stack-empty {
-  font: 13px/1.5 var(--sans);
-  color: var(--ink-2);
-  padding: 16px;
-  text-align: center;
-  border: 1px dashed var(--line);
-  border-radius: var(--r);
+  padding: var(--s-5);
+  background: var(--surface);
+  font: 400 var(--t-120)/1.6 var(--font-sans);
+  color: var(--ink-3);
 }
+.stack-empty strong { color: var(--ink-2); font-weight: 600; }
+.stack-items:has(.stack-empty) { border-style: dashed; background: transparent; }
 
 .stack-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 16px;
+  gap: var(--s-2);
+  margin-block-start: var(--s-4);
 }
 
-.btn--danger {
-  background: var(--surface);
-  border: 1px solid var(--no);
-  color: var(--no);
+/* ------------------------------------------------------------
+   15. Responsive
+   ------------------------------------------------------------ */
+
+@media (max-width: 959px) {
+  .site-head__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-block: var(--s-3);
+    row-gap: var(--s-3);
+  }
+  .brand { grid-column: 1; }
+  .head-meta { grid-column: 2; justify-self: end; }
+  .search { grid-column: 1 / -1; max-inline-size: none; }
 }
 
-.btn--danger:hover {
-  background: var(--no);
-  color: #fff;
+@media (max-width: 760px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-2);
+    min-block-size: 0;
+  }
+  .filters__group { flex-wrap: wrap; }
+  .nav-list { flex-wrap: wrap; }
+  .intro__specs { gap: var(--s-4) var(--s-6); }
+  .spec dd { font-size: var(--t-200); }
+  .drawer__foot { flex-wrap: wrap; }
+  .drawer__hint { inline-size: 100%; margin-inline-end: 0; }
 }
+
+@media (max-width: 640px) {
+  .browser-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brand__tag { display: none; }
+  .status { display: none; }
+}
+
+/* ------------------------------------------------------------
+   16. Print — the list is the document; chrome stays out of it
+   ------------------------------------------------------------ */
+
+@media print {
+  .site-head,
+  .filters,
+  .browse__preview,
+  .stack-bar,
+  .drawers-layer,
+  .preset-stacks,
+  .skip-link { display: none !important; }
+  body { background: #fff; color: #000; }
+  .row { break-inside: avoid; }
+  .row__copy, .btn-row-stack { display: none; }
+}
+
+/* ------------------------------------------------------------
+   17. Reduced motion
+   ------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
 }

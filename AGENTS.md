@@ -5,9 +5,8 @@ This repository is a canonical reference bank of ~150 zero-client-JS design spel
 ## Sources of truth
 
 When working in this repository, rely on these files as the authoritative sources:
-- **Data:** `public/spells.json` is the machine-readable source of truth for all spells.
+- **Data:** `README.md` is the canonical source for all spell content. `scripts/build.py` parses it and generates `public/spells.json`.
 - **Contracts:** `public/spells.schema.json` defines the strict JSON Schema, and `schema/spells.d.ts` provides the TypeScript types.
-- **Documentation:** `README.md` details project structure and principles.
 - **MCP Server:** `mcp/server.mjs` is the entry point exposing the catalogue via the Model Context Protocol.
 
 ## The hard Zero-JS rule
@@ -17,8 +16,8 @@ This is a Zero-JS repository. Only spells marked **"0 JS"** or **"Markup"** belo
 ## Adding or editing a spell
 
 - **Stable numbering:** Always preserve and use stable spell numbers.
-- **Consistency:** When updating spells, keep `public/spells.json`, `public/spells.schema.json`, and `schema/spells.d.ts` in sync.
-- **Alignment:** Ensure that updates keep the human-readable catalogue and the MCP server consistent.
+- **Consistency:** Edit `README.md` for spell content. You only need to synchronize `public/spells.schema.json` and `schema/spells.d.ts` when the actual data contract changes, not for ordinary spell edits.
+- **Validation:** Run `npm run build` after making changes. When your change warrants the full test suite, run `npm test`.
 
 ## Working style
 

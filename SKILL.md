@@ -394,6 +394,8 @@ a[target="_blank"]:focus-visible .external-icon {
 ### 26. Pill Segmented Control Glow
 *Interaction · Baseline · 0 JS*
 
+Usage note: These are static example buttons, not a complete segmented-control widget. Their pressed state does not change without additional state handling.
+
 Segmented pill selector with smooth active tab highlight and focus indicator.
 
 ```css
@@ -1049,6 +1051,8 @@ A CSS-driven loading surface.
 ### 14. Native Page Transitions (`@view-transition`)
 *Reveal · Newer · 0 JS*
 
+Usage note: The transition is decorative. Follow ordinary links when cross-document View Transitions are unsupported or reduced motion is requested.
+
 A large premium effect for multi-page sites. The browser handles MPA navigation natively.
 
 ```css
@@ -1498,6 +1502,8 @@ A sticky element gains extra shadow and border only once it is actually stuck. M
 ### 45. Snapped Spotlight
 *Scroll-state · Progressive · 0 JS*
 
+Usage note: Scroll snapping is not a complete carousel widget. Active-slide announcement, keyboard navigation and autoplay controls require separate verification.
+
 The active slide in a scroll-snap container gets full sharpness while siblings fade down.
 
 ```css
@@ -1805,6 +1811,8 @@ The scroller’s own edges become literally transparent. Works regardless of the
 ### 61. Native Accordion Tabs (`::details-content`)
 *Layout · Newer · Markup*
 
+Usage note: The exclusive details group provides native disclosure behavior; it is not an ARIA tabs widget with arrow-key tab navigation.
+
 Real tabs via `<details name="ui-tabs">`. No radio-button hack.
 
 ```html
@@ -2029,6 +2037,8 @@ dialog.responsive-sheet[open] {
 ### 18. Micro-Tooltips (`attr(data-tooltip)`)
 *Anchor (legacy) · Baseline · 0 JS · → 34 is more modern*
 
+Usage note: This hover-text effect is not a complete accessible tooltip. Provide keyboard access, a dismissible description and a non-hover alternative.
+
 Keep this for simple hover text on elements where `overflow: hidden` is not a problem.
 
 ```css
@@ -2061,6 +2071,8 @@ Keep this for simple hover text on elements where `overflow: hidden` is not a pr
 
 ### 34. Anchor-Positioned Tooltips
 *Anchor · Newer · 0 JS*
+
+Usage note: Anchor positioning solves placement only; this sample does not establish full tooltip keyboard, Escape or assistive-technology behavior.
 
 Tooltips pinned via `anchor-name` / `position-anchor`. No overflow problems.
 
@@ -2973,6 +2985,8 @@ An off-canvas menu as a native `<dialog>` — opened and closed with Invoker Com
 
 ### 98. Interest-Hint Tooltip (`interestfor` + `popover="hint"`)
 *Navigation · Progressive · Markup · → modernizes 18 / 34*
+
+Usage note: Interest-based hint behavior and touch/keyboard support vary by browser. Verify the trigger and fallback on target devices.
 
 A hover, focus, and long-press tooltip with no `mouseenter`. `popover="hint"` does not close open `auto` menus. The browser sets implicit `aria-describedby` — do not add `role="tooltip"` yourself.
 
@@ -3938,6 +3952,8 @@ A min/max range picker with two overlapping native sliders whose thumbs stay int
 ### 131. Auto-Dismiss Transient Toast (`popover="manual"`)
 *Overlays · Newer · Markup*
 
+Usage note: The CSS-only transient visual message does not announce newly created status updates to a screen reader. Do not treat it as a complete notification system.
+
 A self-dismissing transient toast driven by CSS keyframes, with no script.
 
 ```html
@@ -3966,6 +3982,8 @@ A self-dismissing transient toast driven by CSS keyframes, with no script.
 
 ### 132. Exclusive Accordion Group (`<details name="...">`)
 *Layout · Baseline · Markup*
+
+Usage note: Native details name groups are exclusive disclosures, not ARIA tabs. Test focus and keyboard operation in target browsers.
 
 An exclusive accordion where the browser automatically closes sibling panels when a new one opens.
 
@@ -4292,6 +4310,8 @@ Counts a numeric value from 0 to a target with pure CSS.
 ### 146. Guardrail Focus-Lock Modal (`overscroll-behavior: contain`)
 *Overlays · Baseline · Markup*
 
+Usage note: CSS overscroll containment does not trap focus or make background content inert by itself. Use native modal dialog behavior and test dismissal/focus.
+
 A modal dialog that prevents scroll chaining (the background moving while the modal scrolls).
 
 ```html
@@ -4312,6 +4332,8 @@ A modal dialog that prevents scroll chaining (the background moving while the mo
 
 ### 147. Fluid Rhythm Function (`@function`)
 *Layout · Progressive · 0 JS*
+
+Usage note: The native @function rule is progressive; retain and test the earlier clamp() fallback.
 
 Centralize fluid spacing calculations with typed custom CSS functions. Unsupported engines fall back cleanly to the baseline `clamp()`.
 
@@ -4505,6 +4527,8 @@ Draw clean separators directly in grid and flex gaps using `column-rule` without
 
 ### 151. Organic Avatar Cluster (`random()`)
 *Visual · Progressive · 0 JS*
+
+Usage note: CSS random() is progressive; preserve deterministic nth-child fallbacks and check reduced-motion behavior.
 
 Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.
 

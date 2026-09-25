@@ -6,6 +6,7 @@ import baseConfig from "./playwright.config.mjs";
 export default defineConfig({
   ...baseConfig,
   testMatch: "**/cross-browser.spec.mjs",
+  testIgnore: [],
   projects: [
     { name: "firefox", use: { ...devices["Desktop Firefox"], viewport: { width: 1280, height: 900 } } },
     { name: "webkit", use: { ...devices["Desktop Safari"], viewport: { width: 1280, height: 900 } } },

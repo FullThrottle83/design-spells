@@ -1501,6 +1501,11 @@ def render_drawer(spell: dict) -> str:
     )
     desc_html = inline_md_to_html(spell.get("description", "")) or "A zero-JS CSS technique."
     tailwind_src = tailwind_for(spell)
+    bundle_link = f'/bundle/{spell["id"]}.txt'
+    bundle_control = (
+        f'<button type="button" class="btn" data-copy-bundle="{spell["id"]}">Copy integration bundle</button>'
+        if spell["id"] not in {"ds-14", "ds-143"} else ""
+    )
     astro_src = astro_for(spell)
     preview_box = render_preview_box(spell)
     feature_keys_json = html.escape(json.dumps(spell.get("featureKeys", [])), quote=True)
@@ -1585,7 +1590,10 @@ def render_drawer(spell: dict) -> str:
 
     <footer class="drawer__foot">
       <button class="btn" type="button" data-stack-add="{spell['id']}">+ Add to Stack</button>
-      <p class="drawer__hint">Zero JS · copy and paste freely</p>
+      <p class="drawer__hint">Zero JS per spell · raw source omits project tokens</p>
+      {bundle_control}
+      <a class="btn" href="{bundle_link}">View integration source</a>
+      <span class="sr-only" role="status" data-bundle-status></span>
       <a class="btn drawer__permalink" href="/spells/{spell['id']}/">Full page ↗</a>
       <button class="btn btn--primary" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide">Close</button>
     </footer>

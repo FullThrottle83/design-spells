@@ -147,6 +147,8 @@ class McpServerTest(unittest.TestCase):
         self.assertNotIn('\n@import "tailwindcss";', data["tailwind"])
         self.assertEqual(data["runnableHtmlUrl"], "https://design-spells.hultsan20.workers.dev/download/ds-147.html")
         self.assertIsNone(data["companionHtmlUrl"])
+        self.assertEqual(data["integrationBundleUrl"], "https://design-spells.hultsan20.workers.dev/bundle/ds-147.txt")
+        self.assertEqual(data["integrationBundleFormat"], "html-document-with-selected-tokens")
         self.assertEqual(data["previewEnvironment"], "shadow")
         self.assertEqual(data["verification"]["behavior"], "not-individually-verified")
         self.assertEqual(data["verification"]["accessibility"], "not-audited")

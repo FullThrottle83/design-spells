@@ -246,6 +246,8 @@ function callTool(name, rawArgs = {}) {
         tailwind: tailwindFor(spell),
         tailwindFormat: "global-stylesheet-css",
         runnableHtmlUrl: `${SITE_URL}/download/${spell.id}.html`,
+        integrationBundleUrl: `${SITE_URL}/bundle/${spell.id}.txt`,
+        integrationBundleFormat: "html-document-with-selected-tokens",
         companionHtmlUrl: spell.id === "ds-14" ? `${SITE_URL}/download/ds-14-next.html` : null,
         previewEnvironment: spell.previewEnvironment,
         previewAction: spell.previewAction,

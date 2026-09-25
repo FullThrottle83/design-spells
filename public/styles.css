@@ -273,7 +273,7 @@ kbd {
 /* Reveal optional controls only after enhancement initializes successfully.
    This also covers blocked/failed script loads, unlike a noscript-only fix. */
 html:not([data-enhanced]) :is(.search, #counter, .theme-btn, .preset-stacks,
-  .row__aside, [data-stack-add], .code__copy, .stage-controls, .feature-check,
+  .row__aside, [data-stack-add], [data-copy-bundle], .code__copy, .stage-controls, .feature-check,
   .enhanced-keys, #stack-bar, #stack-drawer),
 html[data-enhanced] .fallback-help {
   display: none !important;

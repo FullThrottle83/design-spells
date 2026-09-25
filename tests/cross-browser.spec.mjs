@@ -45,6 +45,15 @@ test("downloaded HTML carries its own base tokens and visible demo without scrip
   expect(await stage.evaluate((el) => el.getBoundingClientRect().width)).toBeGreaterThan(0);
 });
 
+test("integration source is served as selectable text without script dependencies", async ({ request }) => {
+  const response = await request.get("/bundle/ds-120.txt");
+  expect(response.status()).toBe(200);
+  const source = await response.text();
+  expect(source).toContain("Design Spells ds-120: integration source");
+  expect(source).toContain("Authored markup from README.md");
+  expect(source).not.toContain("<script");
+});
+
 test("native cross-document navigation works with scripts disabled", async ({ page }) => {
   await page.goto("/play/ds-14/");
   await page.getByRole("link", { name: /Navigate to page B/ }).click();

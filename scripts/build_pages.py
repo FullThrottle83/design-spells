@@ -14,6 +14,7 @@ from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
 from build import DOCUMENT_TOKENS, rewrite_preview_assets
+from build_bundle import render_bundle
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
@@ -202,6 +203,7 @@ def build_pages(catalogue: dict) -> None:
         write_page(PUBLIC / "spells" / sid / "index.html", render_doc(spell))
         write_page(PUBLIC / "play" / sid / "index.html", render_play(spell))
         write_page(PUBLIC / "download" / f"{sid}.html", render_download(spell))
+        write_page(PUBLIC / "bundle" / f"{sid}.txt", render_bundle(spell, DOCUMENT_TOKENS))
         if sid == "ds-14":
             write_page(PUBLIC / "play" / sid / "next" / "index.html", render_play(spell, next_page=True))
             write_page(PUBLIC / "download" / "ds-14-next.html", render_download(spell, next_page=True))

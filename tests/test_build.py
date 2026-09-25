@@ -153,6 +153,8 @@ class BuildOutputTest(unittest.TestCase):
             sandbox = Path(tmp)
             shutil.copy2(ROOT / "README.md", sandbox / "README.md")
             shutil.copytree(ROOT / "scripts", sandbox / "scripts")
+            if (ROOT / "data").exists():
+                shutil.copytree(ROOT / "data", sandbox / "data")
             (sandbox / "public").mkdir()
 
             result = subprocess.run(

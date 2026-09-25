@@ -49,6 +49,7 @@ def render_doc(spell: dict) -> str:
     )
     instruction = spell.get("previewAction", {}).get("hint", "")
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
+    download_note = '<p class="note">This cross-document transition also needs <a href="/download/ds-14-next.html" download="ds-14-next.html">page B (HTML) ↓</a>; save both files together.</p>' if sid == "ds-14" else ""
     evidence = spell["verification"]
     evidence_note = (
         f"Support: {esc(evidence['support'])}; "
@@ -84,13 +85,14 @@ def render_doc(spell: dict) -> str:
     <p class="lede">{description}</p>
     <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
     <section aria-labelledby="demo-title">
-      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a></div>
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a><a class="action" href="/download/{sid}.html" download="{sid}.html">Download runnable HTML ↓</a></div>
       {instruction_html}
+      {download_note}
       <iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
       <h3>HTML</h3>
       {fixture_note}
       <pre tabindex="0"><code>{example_html}</code></pre>
@@ -161,6 +163,21 @@ def render_play(spell: dict, next_page: bool = False) -> str:
 </html>"""
 
 
+def render_download(spell: dict, next_page: bool = False) -> str:
+    """The actual runnable demo, plus its required base tokens, in one HTML file.
+
+    Unlike the raw CSS tab, this includes the demo fixture and the same document
+    scaffolding the hosted demo uses. Remote media may still require a network.
+    """
+    page = render_play(spell, next_page=next_page)
+    page = page.replace('  <meta name="robots" content="noindex,follow">', "")
+    if spell["id"] == "ds-14":
+        # Two real files are necessary for a cross-document transition offline.
+        href = 'href="ds-14.html"' if next_page else 'href="ds-14-next.html"'
+        page = page.replace('href="../"' if next_page else 'href="next/"', href)
+    return page
+
+
 def build_pages(catalogue: dict) -> None:
     sitemap = [f"{SITE_URL}/"]
     for spell in catalogue["spells"]:
@@ -169,8 +186,10 @@ def build_pages(catalogue: dict) -> None:
             raise ValueError(f"Unsafe spell ID for a file path: {sid!r}")
         write_page(PUBLIC / "spells" / sid / "index.html", render_doc(spell))
         write_page(PUBLIC / "play" / sid / "index.html", render_play(spell))
+        write_page(PUBLIC / "download" / f"{sid}.html", render_download(spell))
         if sid == "ds-14":
             write_page(PUBLIC / "play" / sid / "next" / "index.html", render_play(spell, next_page=True))
+            write_page(PUBLIC / "download" / "ds-14-next.html", render_download(spell, next_page=True))
         sitemap.append(f"{SITE_URL}/spells/{sid}/")
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

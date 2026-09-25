@@ -22,8 +22,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - run: git diff --exit-code -- public/index.html public/classic/index.html public/spells.json public/spells public/play public/sitemap.xml
-      - run: test -z "$(git status --porcelain -- public/spells public/play public/sitemap.xml)"
+      - run: git diff --exit-code -- public/index.html public/classic/index.html public/spells.json public/spells public/play public/download public/sitemap.xml
+      - run: test -z "$(git status --porcelain -- public/spells public/play public/download public/sitemap.xml)"
       - run: node --check public/search.js
       - run: npm test
       - run: git diff --check

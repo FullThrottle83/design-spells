@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+
+  <title>Demo: Named View-Transition Cards (`view-transition-class` + typed `attr()`) — Design Spells</title>
+  <style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    color-scheme: light dark;
+    --color-primary: light-dark(oklch(0.18 0.01 260), oklch(0.96 0.002 90));
+    --color-bg: light-dark(oklch(0.985 0.002 90), oklch(0.14 0.005 260));
+    --color-text: light-dark(oklch(0.18 0.01 260), oklch(0.96 0.002 90));
+    --color-text-muted: light-dark(oklch(0.545 0.012 260), oklch(0.62 0.008 90));
+    --color-text-inverse: light-dark(oklch(0.99 0.002 90), oklch(0.14 0.005 260));
+    --color-border: light-dark(oklch(0.92 0.005 90), oklch(0.24 0.008 260));
+    --color-surface: light-dark(oklch(0.995 0.001 90), oklch(0.18 0.006 260));
+    --color-surface-offset: light-dark(oklch(0.963 0.004 90), oklch(0.16 0.005 260));
+    --color-surface-dynamic: light-dark(oklch(0.92 0.005 90), oklch(0.3 0.01 260));
+    --color-surface-dark: light-dark(oklch(0.18 0.01 260), oklch(0.1 0.004 260));
+    --color-error: oklch(0.52 0.17 27);
+    --color-success: oklch(0.5 0.12 155);
+    --color-accent: light-dark(oklch(0.62 0.22 38), oklch(0.68 0.19 38));
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 4px;
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --header-height: 3rem;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  }
+  body {
+    padding: 16px;
+    display: grid;
+    place-items: center;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  button, .btn, a.btn { min-block-size: 36px; font: inherit; color: inherit; }
+  :where(button), .btn, .btn-primary {
+    padding: 0 .9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: transparent;
+  }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"])),
+  :where(select),
+  :where(textarea) {
+    font: inherit;
+    color: inherit;
+    padding: .45rem .65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  :where(select) { padding-inline-end: 1.6rem; }
+  :where(textarea) { resize: vertical; min-block-size: 5rem; }
+  :where(input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  :where(input[type="checkbox"], input[type="radio"]) {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+  :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; font-variant-numeric: tabular-nums; }
+  :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+  :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .demo-note {
+    margin: 0;
+    max-inline-size: 36ch;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 12px;
+  }
+
+
+    *,*::before,*::after {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {display:block; min-height:100dvh; padding:0}
+    .stage {position:relative;display:grid;place-items:center;min-height:280px;padding:2rem;width:100%;isolation:isolate}
+    .stage > * {max-width:100%}
+    .stage:has(details) {align-items:start}
+    .demo-hint {padding:.7rem 1rem;color:var(--color-text-muted);font-size:.875rem}
+    .scroll-content {min-height:110vh;display:grid;place-items:center;align-content:center;padding:2rem}
+    .page-transition {padding:clamp(2rem,7vw,6rem);max-width:60rem;margin:auto}
+    .page-transition a {display:inline-block;margin-top:2rem}
+    .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
+    @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
+    
+@supports (view-transition-name: none) {
+  @view-transition { navigation: auto; }
+}
+@supports (x: attr(x type(*))) {
+  .vt-card {
+    view-transition-name: attr(id type(<custom-ident>), none);
+    view-transition-class: card;
+  }
+}
+::view-transition-group(*.card) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(.16,1,.3,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+</style>
+</head>
+<body>
+  <div class="stage"><article class="vt-card" id="case-acme">…</article></div>
+  
+</body>
+</html>

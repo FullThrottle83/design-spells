@@ -601,7 +601,7 @@ def parse_spells(md: str) -> list[dict]:
             else:
                 note = p
 
-        usage_match = re.search(r"^Usage note:\\s*(.+)$", chunk, re.M)
+        usage_match = re.search(r"^Usage note:\s*(.+)$", chunk, re.M)
         usage_note = usage_match.group(1).strip() if usage_match else ""
 
         desc_parts = []

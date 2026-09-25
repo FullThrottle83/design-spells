@@ -12,7 +12,11 @@ for (const enabled of [false, true]) {
       await expect(page.locator(".catalogue-tools")).toBeVisible({ visible: enabled });
       await page.locator(".row[data-id='ds-1'] .row__link").click();
       await expect(page).toHaveURL(/\/spells\/ds-1\/$/);
-      await expect(page.locator("iframe")).toHaveAttribute("sandbox", "allow-same-origin");
+      const demos = page.locator(".demo-compare iframe");
+      await expect(demos).toHaveCount(2);
+      for (const demo of await demos.all()) {
+        await expect(demo).toHaveAttribute("sandbox", "allow-same-origin");
+      }
     });
 
     test("has no page-level horizontal overflow on small screens", async ({ page }) => {

@@ -3,3 +3,5 @@ test-results/
 playwright-report/
 __pycache__/
 .claude/
+# Large, reproducible output: built from README.md during CI and deploy.
+public/classic/index.html

@@ -7,7 +7,7 @@ for (const mode of ['disabled', 'blocked', 'enabled']) {
 
     test.beforeEach(async ({ page }) => {
       if (mode === 'blocked') await page.route('**/search.js', route => route.abort());
-      await page.goto('/');
+      await page.goto('/classic/');
     });
 
     test('filters, source disclosures and keyboard dismissal remain usable', async ({ page }) => {
@@ -53,7 +53,7 @@ for (const mode of ['disabled', 'blocked', 'enabled']) {
 }
 
 test('native popover toggle updates deep links and compatibility text', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/classic/');
   await page.getByRole('button', { name: 'Shimmer on primary buttons', exact: true }).click();
   await expect(page).toHaveURL(/#ds-1$/);
   await expect(page.locator('#drawer-ds-1 .feature-check')).not.toContainText('Checking');
@@ -62,7 +62,7 @@ test('native popover toggle updates deep links and compatibility text', async ({
 });
 
 test('document previews retain a safe sandbox and descriptive titles', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/classic/');
   const frames = page.locator('iframe.ds-document');
   expect(await frames.count()).toBeGreaterThan(0);
   for (const frame of await frames.all()) {

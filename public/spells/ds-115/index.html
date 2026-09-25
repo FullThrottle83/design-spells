@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>File Dropzone State (`::file-selector-button`) — Design Spells</title>
+  <meta name="description" content="A 0-JS dropzone around a native file input. The whole zone is the hit target; the button is 44px.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-115/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="File Dropzone State (`::file-selector-button`) — Design Spells">
+  <meta property="og:description" content="A 0-JS dropzone around a native file input. The whole zone is the hit target; the button is 44px.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-115/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-115</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-115 / Forms / Markup</p>
+    <h1>File Dropzone State (`::file-selector-button`)</h1>
+    <p class="lede">A 0-JS dropzone around a native file input. The whole zone is the hit target; the button is 44px.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-115/">Open standalone demo ↗</a></div>
+      <p class='note'>Press Tab to preview</p>
+      <iframe title="Isolated demonstration: File Dropzone State (`::file-selector-button`)" src="/play/ds-115/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;label class=&quot;dropzone&quot;&gt;
+  &lt;input type=&quot;file&quot; name=&quot;brief&quot; accept=&quot;.pdf,.docx&quot;&gt;
+  &lt;span&gt;Drop a brief or choose a file&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.dropzone {
+  display: grid; place-items: center; gap: var(--space-3);
+  min-block-size: 10rem;
+  padding: var(--space-6);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.dropzone:focus-within,
+.dropzone:has(:focus-visible) {
+  border-color: var(--color-primary);
+  background: oklch(from var(--color-primary) l c h / .06);
+}
+.dropzone input[type=&quot;file&quot;] { inline-size: 100%; }
+.dropzone input[type=&quot;file&quot;]::file-selector-button {
+  min-block-size: 44px; min-inline-size: 44px;
+  margin-inline-end: var(--space-3);
+  padding-inline: var(--space-4);
+  border: 0; border-radius: var(--radius-md);
+  background: var(--color-primary); color: white; cursor: pointer;
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

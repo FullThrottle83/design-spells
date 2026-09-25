@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Micro-Tooltips (`attr(data-tooltip)`) — Design Spells</title>
+  <meta name="description" content="Keep this for simple hover text on elements where `overflow: hidden` is not a problem.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-18/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Micro-Tooltips (`attr(data-tooltip)`) — Design Spells">
+  <meta property="og:description" content="Keep this for simple hover text on elements where `overflow: hidden` is not a problem.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-18/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-18</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-18 / Anchor / 0 JS</p>
+    <h1>Micro-Tooltips (`attr(data-tooltip)`)</h1>
+    <p class="lede">Keep this for simple hover text on elements where `overflow: hidden` is not a problem.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-18/">Open standalone demo ↗</a></div>
+      <p class='note'>Hover or focus to preview</p>
+      <iframe title="Isolated demonstration: Micro-Tooltips (`attr(data-tooltip)`)" src="/play/ds-18/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;button data-tooltip=&quot;Copied to clipboard&quot;&gt;Hover me&lt;/button&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>[data-tooltip] { position: relative; }
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px) scale(.96);
+  opacity: 0;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-bg);
+  pointer-events: none;
+  transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
+}
+@media (hover: hover) {
+  [data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

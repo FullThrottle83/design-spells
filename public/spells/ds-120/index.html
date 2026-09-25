@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Faceted Category Filter Matrix (`:has()`) — Design Spells</title>
+  <meta name="description" content="A card gallery that filters visible items from checked boxes, with no JavaScript.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-120/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Faceted Category Filter Matrix (`:has()`) — Design Spells">
+  <meta property="og:description" content="A card gallery that filters visible items from checked boxes, with no JavaScript.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-120/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-120</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-120 / State / Markup</p>
+    <h1>Faceted Category Filter Matrix (`:has()`)</h1>
+    <p class="lede">A card gallery that filters visible items from checked boxes, with no JavaScript.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-120/">Open standalone demo ↗</a></div>
+      <p class='note'>Toggle the control to preview</p>
+      <iframe title="Isolated demonstration: Faceted Category Filter Matrix (`:has()`)" src="/play/ds-120/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;filter-matrix-wrap&quot;&gt;
+  &lt;div class=&quot;filter-controls&quot;&gt;
+    &lt;label class=&quot;filter-chip&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;f-tech&quot; checked&gt;&lt;span&gt;Tech&lt;/span&gt;&lt;/label&gt;
+    &lt;label class=&quot;filter-chip&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;f-design&quot;&gt;&lt;span&gt;Design&lt;/span&gt;&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;card-matrix&quot;&gt;
+    &lt;article class=&quot;matrix-card&quot; data-cat=&quot;tech&quot;&gt;Tech project&lt;/article&gt;
+    &lt;article class=&quot;matrix-card&quot; data-cat=&quot;design&quot;&gt;Design project&lt;/article&gt;
+  &lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.filter-controls { display: flex; gap: var(--space-2); margin-block-end: var(--space-4); }
+.filter-chip { display: inline-grid; place-items: center; min-block-size: 44px; padding-inline: 1rem; cursor: pointer; border-radius: 999px; border: 1px solid var(--color-border); }
+.filter-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.filter-chip:has(input:checked) { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+.filter-chip:has(input:focus-visible) { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+.card-matrix:has(#f-tech:not(:checked)) .matrix-card[data-cat=&quot;tech&quot;],
+.card-matrix:has(#f-design:not(:checked)) .matrix-card[data-cat=&quot;design&quot;] {
+  display: none;
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Phantom Entry (`@starting-style`) — Design Spells</title>
+  <meta name="description" content="A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-31/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Phantom Entry (`@starting-style`) — Design Spells">
+  <meta property="og:description" content="A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-31/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-31</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-31 / Reveal &amp; motion / Markup</p>
+    <h1>Phantom Entry (`@starting-style`)</h1>
+    <p class="lede">A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-31/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Phantom Entry (`@starting-style`)" src="/play/ds-31/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;button type=&quot;button&quot; popovertarget=&quot;ph-pop&quot;&gt;Open menu&lt;/button&gt;
+&lt;div id=&quot;ph-pop&quot; popover=&quot;auto&quot; class=&quot;popover-menu&quot;&gt;
+  &lt;a href=&quot;/docs&quot;&gt;Documentation&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.popover-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.96);
+  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),
+              transform 240ms cubic-bezier(0.16,1,0.3,1),
+              display 240ms allow-discrete;
+}
+.popover-menu:popover-open,
+.popover-menu.is-open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+@starting-style {
+  .popover-menu:popover-open,
+  .popover-menu.is-open {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

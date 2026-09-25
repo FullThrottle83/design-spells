@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Invoker Command Drawer (`commandfor` + `closedby`) — Design Spells</title>
+  <meta name="description" content="An off-canvas menu as a native `&lt;dialog&gt;` — opened and closed with Invoker Commands, light-dismissed via `closedby=&quot;any&quot;`. No `showModal()`, no click-outside listener.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-97/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Invoker Command Drawer (`commandfor` + `closedby`) — Design Spells">
+  <meta property="og:description" content="An off-canvas menu as a native `&lt;dialog&gt;` — opened and closed with Invoker Commands, light-dismissed via `closedby=&quot;any&quot;`. No `showModal()`, no click-outside listener.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-97/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-97</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-97 / Navigation / Markup</p>
+    <h1>Invoker Command Drawer (`commandfor` + `closedby`)</h1>
+    <p class="lede">An off-canvas menu as a native `&lt;dialog&gt;` — opened and closed with Invoker Commands, light-dismissed via `closedby=&quot;any&quot;`. No `showModal()`, no click-outside listener.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-97/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Invoker Command Drawer (`commandfor` + `closedby`)" src="/play/ds-97/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;button class=&quot;nav-open&quot; commandfor=&quot;site-drawer&quot; command=&quot;show-modal&quot; aria-label=&quot;Open menu&quot;&gt;
+  Menu
+&lt;/button&gt;
+
+&lt;dialog id=&quot;site-drawer&quot; class=&quot;nav-drawer&quot; closedby=&quot;any&quot;&gt;
+  &lt;form method=&quot;dialog&quot;&gt;
+    &lt;button class=&quot;nav-close&quot; commandfor=&quot;site-drawer&quot; command=&quot;close&quot; aria-label=&quot;Close menu&quot;&gt;✕&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;nav aria-label=&quot;Mobile navigation&quot;&gt;
+    &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+    &lt;a href=&quot;/services&quot;&gt;Services&lt;/a&gt;
+    &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/dialog&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.nav-open, .nav-close, .nav-drawer a {
+  min-block-size: 44px; min-inline-size: 44px;
+  display: inline-grid; place-items: center; align-content: center;
+}
+.nav-drawer {
+  margin: 0; inset: 0 auto 0 0;
+  inline-size: min(22rem, 92vw); block-size: 100dvh;
+  border: 0; padding: var(--space-6);
+  background: var(--color-bg);
+  transform: translateX(-100%);
+  transition: transform 280ms cubic-bezier(.16,1,.3,1),
+              display 280ms allow-discrete, overlay 280ms allow-discrete;
+}
+.nav-drawer[open], .nav-drawer:open { transform: translateX(0); }
+@starting-style { .nav-drawer[open], .nav-drawer:open { transform: translateX(-100%); } }
+.nav-drawer::backdrop {
+  background: oklch(0 0 0 / .4);
+  opacity: 0;
+  transition: opacity 280ms ease, display 280ms allow-discrete, overlay 280ms allow-discrete;
+}
+.nav-drawer[open]::backdrop, .nav-drawer:open::backdrop { opacity: 1; }
+@starting-style { .nav-drawer[open]::backdrop, .nav-drawer:open::backdrop { opacity: 0; } }
+.nav-drawer nav { display: grid; gap: .25rem; margin-block-start: var(--space-6); }
+.nav-drawer a {
+  justify-content: start; padding-inline: var(--space-3);
+  border-radius: var(--radius-sm); color: var(--color-text); text-decoration: none;
+}
+.nav-drawer a:hover, .nav-drawer a:focus-visible { background: var(--color-surface-offset); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. :open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

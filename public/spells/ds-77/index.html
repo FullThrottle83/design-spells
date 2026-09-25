@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Responsive Sheet Modal — Design Spells</title>
+  <meta name="description" content="A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-77/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Responsive Sheet Modal — Design Spells">
+  <meta property="og:description" content="A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-77/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-77</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-77 / Layout / Markup</p>
+    <h1>Responsive Sheet Modal</h1>
+    <p class="lede">A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-77/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Responsive Sheet Modal" src="/play/ds-77/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;button type=&quot;button&quot; commandfor=&quot;sheet-demo&quot; command=&quot;show-modal&quot;&gt;Open sheet&lt;/button&gt;
+&lt;dialog id=&quot;sheet-demo&quot; class=&quot;responsive-sheet&quot; closedby=&quot;any&quot;&gt;
+  &lt;h2&gt;Sheet content&lt;/h2&gt;
+  &lt;p&gt;This stays a native modal dialog.&lt;/p&gt;
+  &lt;form method=&quot;dialog&quot;&gt;&lt;button type=&quot;submit&quot;&gt;Close&lt;/button&gt;&lt;/form&gt;
+&lt;/dialog&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>dialog.responsive-sheet {
+  margin: auto auto 0 auto; /* Bottom-aligned on mobile */
+  width: 100%;
+  max-width: 100%;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border: none;
+  transform: translateY(100%);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;
+}
+
+dialog.responsive-sheet[open] {
+  transform: translateY(0);
+}
+
+@starting-style {
+  dialog.responsive-sheet[open] {
+    transform: translateY(100%);
+  }
+}
+
+/* Centered modal on desktop */
+@media (min-width: 640px) {
+  dialog.responsive-sheet {
+    margin: auto;
+    max-width: 32rem;
+    border-radius: var(--radius-lg);
+    transform: scale(0.95);
+  }
+
+  @starting-style {
+    dialog.responsive-sheet[open] {
+      transform: scale(0.95);
+    }
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Sun-Fan FAB (radial) — Design Spells</title>
+  <meta name="description" content="A floating action button that fans child actions into an arc via native CSS `cos()` / `sin()`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-90/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sun-Fan FAB (radial) — Design Spells">
+  <meta property="og:description" content="A floating action button that fans child actions into an arc via native CSS `cos()` / `sin()`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-90/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-90</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-90 / Overlays / Markup</p>
+    <h1>Sun-Fan FAB (radial)</h1>
+    <p class="lede">A floating action button that fans child actions into an arc via native CSS `cos()` / `sin()`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-90/">Open standalone demo ↗</a></div>
+      <p class='note'>Open the disclosure to preview</p>
+      <iframe title="Isolated demonstration: Sun-Fan FAB (radial)" src="/play/ds-90/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;details class=&quot;fan&quot;&gt;
+  &lt;summary class=&quot;fan-main&quot; aria-label=&quot;Quick actions&quot;&gt;＋&lt;/summary&gt;
+  &lt;div class=&quot;fan-items&quot;&gt;
+    &lt;button class=&quot;fan-item&quot; style=&quot;--i:0&quot; aria-label=&quot;New post&quot;&gt;📝&lt;/button&gt;
+    &lt;button class=&quot;fan-item&quot; style=&quot;--i:1&quot; aria-label=&quot;Upload&quot;&gt;📷&lt;/button&gt;
+    &lt;button class=&quot;fan-item&quot; style=&quot;--i:2&quot; aria-label=&quot;Share&quot;&gt;🔗&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.fan { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 100; pointer-events: none; }
+.fan summary::-webkit-details-marker { display: none; }
+.fan-main {
+  pointer-events: auto; display: grid; place-items: center;
+  inline-size: 3.25rem; block-size: 3.25rem; border-radius: 999px; cursor: pointer;
+  background: var(--color-primary); color: white; font-size: 1.4rem;
+  box-shadow: 0 8px 24px oklch(0 0 0 / .2);
+  transition: transform 240ms cubic-bezier(.16,1,.3,1);
+}
+details[open] .fan-main { transform: rotate(45deg); }
+.fan-items { position: absolute; bottom: 0; right: 0; }
+.fan-item {
+  pointer-events: auto; position: absolute; bottom: .35rem; right: .35rem;
+  inline-size: 2.75rem; block-size: 2.75rem; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--color-bg); box-shadow: 0 4px 12px oklch(0 0 0 / .18);
+  --angle: calc(var(--i) * 45deg + 180deg);
+  opacity: 0; transform: translate(0, 0) scale(.6);
+  transition: transform 280ms cubic-bezier(.34,1.56,.64,1), opacity 200ms ease,
+              display 280ms allow-discrete;
+  transition-delay: calc(var(--i) * 40ms);
+}
+details[open] .fan-item {
+  opacity: 1;
+  transform: translate(calc(cos(var(--angle)) * -5.5rem), calc(sin(var(--angle)) * 5.5rem)) scale(1);
+}
+@starting-style { details[open] .fan-item { opacity: 0; transform: translate(0,0) scale(.6); } }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

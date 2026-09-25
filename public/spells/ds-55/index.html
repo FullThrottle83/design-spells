@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Sticky Card Deck — Design Spells</title>
+  <meta name="description" content="Cards stack like a deck as the user scrolls. Scale and dimming stay synced to the exit-crossing.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-55/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sticky Card Deck — Design Spells">
+  <meta property="og:description" content="Cards stack like a deck as the user scrolls. Scale and dimming stay synced to the exit-crossing.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-55/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-55</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-55 / Scroll / 0 JS</p>
+    <h1>Sticky Card Deck</h1>
+    <p class="lede">Cards stack like a deck as the user scrolls. Scale and dimming stay synced to the exit-crossing.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-55/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Sticky Card Deck" src="/play/ds-55/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;card-stack&quot;&gt;&lt;article class=&quot;card&quot;&gt;Card A&lt;/article&gt;&lt;article class=&quot;card&quot;&gt;Card B&lt;/article&gt;&lt;article class=&quot;card&quot;&gt;Card C&lt;/article&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.card-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.card-stack .card {
+  position: sticky;
+  top: max(2rem, var(--header-height, 0px));
+  transform-origin: top center;
+}
+
+@supports (animation-timeline: view()) {
+  .card-stack .card {
+    animation: stack-shrink linear both;
+    animation-timeline: view(block);
+    animation-range: exit-crossing 0% exit-crossing 100%;
+  }
+  @keyframes stack-shrink {
+    to {
+      transform: scale(0.92) translateY(-0.5rem);
+      filter: brightness(0.6);
+    }
+}
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>`if()` Inline Theme Tokens — Design Spells</title>
+  <meta name="description" content="Conditional values in the property value itself — media, style query, and supports — with no extra classes. `if()` applies to the element itself (unlike `@container style()`, which queries a parent).">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-104/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="`if()` Inline Theme Tokens — Design Spells">
+  <meta property="og:description" content="Conditional values in the property value itself — media, style query, and supports — with no extra classes. `if()` applies to the element itself (unlike `@container style()`, which queries a parent).">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-104/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-104</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-104 / Forms / 0 JS</p>
+    <h1>`if()` Inline Theme Tokens</h1>
+    <p class="lede">Conditional values in the property value itself — media, style query, and supports — with no extra classes. `if()` applies to the element itself (unlike `@container style()`, which queries a parent).</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-104/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: `if()` Inline Theme Tokens" src="/play/ds-104/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;article class=&quot;saas-card&quot;&gt;if() tokens follow the scheme.&lt;/article&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.saas-card {
+  padding: if(media(width &lt; 40rem): var(--space-4); else: var(--space-6););
+  background: if(
+    style(--scheme: dark): var(--color-surface-dark);
+    else: var(--color-surface);
+  );
+  color: if(
+    style(--scheme: dark): var(--color-text-inverse);
+    else: var(--color-text);
+  );
+  border-radius: var(--radius-md);
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chromium-only conditional values. Other browsers ignore the declaration.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

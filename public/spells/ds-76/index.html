@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Modern Wrapper Floating Label (`:has()`) — Design Spells</title>
+  <meta name="description" content="A modernization of [Spell 16 (Floating Labels)](#16-floating-labels). Removes the requirement that `&lt;label&gt;` sit immediately after `&lt;input&gt;` in the DOM via the sibling combinator (`+`). Works with wrapping label containers.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-76/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modern Wrapper Floating Label (`:has()`) — Design Spells">
+  <meta property="og:description" content="A modernization of [Spell 16 (Floating Labels)](#16-floating-labels). Removes the requirement that `&lt;label&gt;` sit immediately after `&lt;input&gt;` in the DOM via the sibling combinator (`+`). Works with wrapping label containers.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-76/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-76</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-76 / Forms / Markup</p>
+    <h1>Modern Wrapper Floating Label (`:has()`)</h1>
+    <p class="lede">A modernization of [Spell 16 (Floating Labels)](#16-floating-labels). Removes the requirement that `&lt;label&gt;` sit immediately after `&lt;input&gt;` in the DOM via the sibling combinator (`+`). Works with wrapping label containers.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-76/">Open standalone demo ↗</a></div>
+      <p class='note'>Focus to preview</p>
+      <iframe title="Isolated demonstration: Modern Wrapper Floating Label (`:has()`)" src="/play/ds-76/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;floating-field&quot;&gt;
+  &lt;input id=&quot;email&quot; type=&quot;email&quot; placeholder=&quot; &quot; required&gt;
+  &lt;label for=&quot;email&quot;&gt;Email address&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.floating-field {
+  position: relative;
+}
+
+.floating-field input {
+  width: 100%;
+  padding: 1.4rem 1rem 0.55rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.floating-field label {
+  position: absolute;
+  left: 1rem; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease;
+  color: var(--color-text-muted);
+}
+
+.floating-field:has(input:focus) label,
+.floating-field:has(input:not(:placeholder-shown)) label {
+  transform: translateY(-135%) scale(0.78);
+  color: var(--color-primary);
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

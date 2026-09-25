@@ -861,6 +861,16 @@ html[data-enhanced] .fallback-help {
 .row__hit { display: inline; text-align: left; }
 .row__hit:hover { text-decoration: underline; text-underline-offset: 3px; }
 .row__hit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--r-1); }
+.row__permalink {
+  display: inline-flex;
+  align-items: center;
+  margin-block-start: var(--s-1);
+  min-block-size: 24px;
+  font: 500 var(--t-110)/1.4 var(--font-sans);
+  color: var(--ink-2);
+  text-underline-offset: 3px;
+}
+.row__permalink:hover { color: var(--accent); }
 .row__desc {
   margin-block-start: 2px;
   overflow: hidden;
@@ -1668,6 +1678,7 @@ html[data-enhanced] .fallback-help {
 
 .drawer__foot {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: var(--s-2);

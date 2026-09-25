@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Scroll-Driven Image Wipe (`clip-path: inset()`) — Design Spells</title>
+  <meta name="description" content="A tactile image reveal with `clip-path` that wipes the image in, synced to scroll.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-139/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Scroll-Driven Image Wipe (`clip-path: inset()`) — Design Spells">
+  <meta property="og:description" content="A tactile image reveal with `clip-path` that wipes the image in, synced to scroll.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-139/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-139</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-139 / Reveal &amp; motion / 0 JS</p>
+    <h1>Scroll-Driven Image Wipe (`clip-path: inset()`)</h1>
+    <p class="lede">A tactile image reveal with `clip-path` that wipes the image in, synced to scroll.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-139/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Scroll-Driven Image Wipe (`clip-path: inset()`)" src="/play/ds-139/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;figure class=&quot;img-wipe&quot;&gt;&lt;img src=&quot;/photo.jpg&quot; alt=&quot;Description&quot;&gt;&lt;/figure&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }
+.img-wipe img { display: block; inline-size: 100%; block-size: auto; }
+@supports (animation-timeline: view()) {
+  .img-wipe img {
+    animation: wipe-anim linear both; animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+  @keyframes wipe-anim {
+    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }
+    to { clip-path: inset(0 0 0 0); transform: scale(1); }
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

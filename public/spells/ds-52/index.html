@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Organic Section Divider (`shape()`) — Design Spells</title>
+  <meta name="description" content="Responsive dividers between sections that feel editorial.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-52/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Organic Section Divider (`shape()`) — Design Spells">
+  <meta property="og:description" content="Responsive dividers between sections that feel editorial.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-52/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-52</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-52 / Visual / 0 JS</p>
+    <h1>Organic Section Divider (`shape()`)</h1>
+    <p class="lede">Responsive dividers between sections that feel editorial.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-52/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Organic Section Divider (`shape()`)" src="/play/ds-52/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;section-divider&quot; style=&quot;inline-size:min(22rem, 100%)&quot;&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.section-divider {
+  block-size: 5rem;
+  background: var(--color-surface);
+  clip-path: shape(
+    from 0% 45%,
+    line to 18% 58%,
+    line to 42% 32%,
+    line to 68% 62%,
+    line to 100% 40%,
+    line to 100% 100%,
+    line to 0% 100%,
+    close
+  );
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>partial</span></li></ul>
+      <p class="note">shape() is newest in Chromium. Other browsers ignore the clip.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

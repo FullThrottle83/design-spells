@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Billing Period Pricing Toggle (`:has()`) — Design Spells</title>
+  <meta name="description" content="Visually switches prices between monthly and yearly billing with no JS.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-133/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Billing Period Pricing Toggle (`:has()`) — Design Spells">
+  <meta property="og:description" content="Visually switches prices between monthly and yearly billing with no JS.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-133/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-133</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-133 / State / Markup</p>
+    <h1>Billing Period Pricing Toggle (`:has()`)</h1>
+    <p class="lede">Visually switches prices between monthly and yearly billing with no JS.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-133/">Open standalone demo ↗</a></div>
+      <p class='note'>Toggle the control to preview</p>
+      <iframe title="Isolated demonstration: Billing Period Pricing Toggle (`:has()`)" src="/play/ds-133/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;price-toggle-wrap&quot;&gt;
+  &lt;fieldset class=&quot;billing-switch&quot;&gt;
+    &lt;legend class=&quot;sr-only&quot;&gt;Billing type&lt;/legend&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;billing&quot; id=&quot;b-m&quot; checked&gt; Monthly&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;billing&quot; id=&quot;b-y&quot;&gt; Yearly (−20%)&lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;div class=&quot;price-card&quot;&gt;
+    &lt;p class=&quot;price-val price-monthly&quot;&gt;$19 / mo&lt;/p&gt;
+    &lt;p class=&quot;price-val price-yearly&quot;&gt;$15 / mo&lt;/p&gt;
+  &lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.billing-switch { display: inline-flex; gap: .25rem; border: 0; padding: .25rem; background: var(--color-surface-offset); border-radius: 999px; }
+.billing-switch label { min-block-size: 44px; display: inline-flex; align-items: center; padding-inline: 1rem; border-radius: 999px; cursor: pointer; }
+.price-toggle-wrap:has(#b-m:checked) label:has(#b-m),
+.price-toggle-wrap:has(#b-y:checked) label:has(#b-y) { background: var(--color-bg); font-weight: 600; box-shadow: 0 1px 3px oklch(0 0 0 / .1); }
+
+.price-yearly { display: none; }
+.price-toggle-wrap:has(#b-y:checked) .price-monthly { display: none; }
+.price-toggle-wrap:has(#b-y:checked) .price-yearly { display: block; }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

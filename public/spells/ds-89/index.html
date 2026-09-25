@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Anchor-Pinned Context Menu — Design Spells</title>
+  <meta name="description" content="A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-89/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Anchor-Pinned Context Menu — Design Spells">
+  <meta property="og:description" content="A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-89/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-89</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-89 / Overlays / Markup</p>
+    <h1>Anchor-Pinned Context Menu</h1>
+    <p class="lede">A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-89/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Anchor-Pinned Context Menu" src="/play/ds-89/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;ctx&quot;&gt;
+  &lt;button class=&quot;ctx-btn&quot; commandfor=&quot;ctx-menu&quot; command=&quot;toggle-popover&quot; aria-haspopup=&quot;menu&quot; aria-label=&quot;More actions&quot;&gt;⋯&lt;/button&gt;
+  &lt;div id=&quot;ctx-menu&quot; popover=&quot;auto&quot; class=&quot;ctx-menu&quot; role=&quot;menu&quot;&gt;
+    &lt;button role=&quot;menuitem&quot;&gt;Edit&lt;/button&gt;
+    &lt;button role=&quot;menuitem&quot;&gt;Duplicate&lt;/button&gt;
+    &lt;hr&gt;
+    &lt;button role=&quot;menuitem&quot; class=&quot;danger&quot;&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.ctx { position: relative; anchor-scope: --ctx; }
+.ctx-btn { anchor-name: --ctx; inline-size: 44px; block-size: 44px; border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border); background: var(--color-bg); cursor: pointer; }
+.ctx-menu {
+  margin: 0; inset: auto;
+  position-anchor: --ctx; position-area: bottom end; margin-block-start: var(--space-2);
+  position-try-fallbacks: flip-inline, flip-block;
+  min-inline-size: 12rem; padding: var(--space-2);
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); box-shadow: 0 20px 50px oklch(0 0 0 / .16);
+  opacity: 0; transform: scale(.96); transform-origin: top right;
+  transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),
+              display 180ms allow-discrete, overlay 180ms allow-discrete;
+}
+.ctx-menu:popover-open { opacity: 1; transform: scale(1); }
+@starting-style { .ctx-menu:popover-open { opacity: 0; transform: scale(.96); } }
+.ctx-menu button { display: block; inline-size: 100%; min-block-size: 44px; text-align: start;
+  padding: 0 .85rem; border: 0; background: none; border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text); }
+.ctx-menu button:hover, .ctx-menu button:focus-visible { background: var(--color-surface-offset); }
+.ctx-menu .danger { color: var(--color-error); }
+.ctx-menu hr { border: 0; border-top: 1px solid var(--color-border); margin-block: var(--space-1); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

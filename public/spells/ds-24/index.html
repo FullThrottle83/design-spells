@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>External Link Nudge — Design Spells</title>
+  <meta name="description" content="An outbound link indicator icon that nudges outward on hover.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-24/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="External Link Nudge — Design Spells">
+  <meta property="og:description" content="An outbound link indicator icon that nudges outward on hover.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-24/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-24</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-24 / Interaction / 0 JS</p>
+    <h1>External Link Nudge</h1>
+    <p class="lede">An outbound link indicator icon that nudges outward on hover.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-24/">Open standalone demo ↗</a></div>
+      <p class='note'>Hover or focus to preview</p>
+      <iframe title="Isolated demonstration: External Link Nudge" src="/play/ds-24/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;a href=&quot;https://example.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Docs &lt;span class=&quot;external-icon&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>a[target=&quot;_blank&quot;] .external-icon {
+  display: inline-block;
+  opacity: .55;
+  transition: transform 180ms cubic-bezier(0.16,1,0.3,1), opacity 180ms cubic-bezier(0.16,1,0.3,1);
+}
+a[target=&quot;_blank&quot;]:hover .external-icon,
+a[target=&quot;_blank&quot;]:focus-visible .external-icon {
+  transform: translate(.3rem, -.3rem);
+  opacity: 1;
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

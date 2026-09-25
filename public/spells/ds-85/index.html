@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>0-JS Multi-Step Wizard — Design Spells</title>
+  <meta name="description" content="A complete multi-step wizard that switches steps, shows progress, and offers Back/Next — no script, driven by radio state and `:has()`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-85/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="0-JS Multi-Step Wizard — Design Spells">
+  <meta property="og:description" content="A complete multi-step wizard that switches steps, shows progress, and offers Back/Next — no script, driven by radio state and `:has()`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-85/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-85</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-85 / Forms / Markup</p>
+    <h1>0-JS Multi-Step Wizard</h1>
+    <p class="lede">A complete multi-step wizard that switches steps, shows progress, and offers Back/Next — no script, driven by radio state and `:has()`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-85/">Open standalone demo ↗</a></div>
+      <p class='note'>Toggle the control to preview</p>
+      <iframe title="Isolated demonstration: 0-JS Multi-Step Wizard" src="/play/ds-85/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;form class=&quot;wizard&quot;&gt;
+  &lt;input class=&quot;sr-only&quot; type=&quot;radio&quot; name=&quot;wstep&quot; id=&quot;w-1&quot; checked&gt;
+  &lt;input class=&quot;sr-only&quot; type=&quot;radio&quot; name=&quot;wstep&quot; id=&quot;w-2&quot;&gt;
+  &lt;input class=&quot;sr-only&quot; type=&quot;radio&quot; name=&quot;wstep&quot; id=&quot;w-3&quot;&gt;
+
+  &lt;ol class=&quot;wz-steps&quot; aria-label=&quot;Wizard steps&quot;&gt;
+    &lt;li&gt;&lt;label for=&quot;w-1&quot;&gt;1 · Account&lt;/label&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;label for=&quot;w-2&quot;&gt;2 · Address&lt;/label&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;label for=&quot;w-3&quot;&gt;3 · Payment&lt;/label&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;div class=&quot;wz-progress&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+
+  &lt;section class=&quot;wz-panel wz-1&quot;&gt;
+    &lt;h2&gt;Account&lt;/h2&gt;
+    &lt;div class=&quot;wz-nav&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;label class=&quot;btn&quot; for=&quot;w-2&quot;&gt;Next →&lt;/label&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class=&quot;wz-panel wz-2&quot;&gt;
+    &lt;h2&gt;Address&lt;/h2&gt;
+    &lt;div class=&quot;wz-nav&quot;&gt;&lt;label class=&quot;btn ghost&quot; for=&quot;w-1&quot;&gt;← Back&lt;/label&gt;&lt;label class=&quot;btn&quot; for=&quot;w-3&quot;&gt;Next →&lt;/label&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class=&quot;wz-panel wz-3&quot;&gt;
+    &lt;h2&gt;Payment&lt;/h2&gt;
+    &lt;div class=&quot;wz-nav&quot;&gt;&lt;label class=&quot;btn ghost&quot; for=&quot;w-2&quot;&gt;← Back&lt;/label&gt;&lt;button class=&quot;btn&quot; type=&quot;submit&quot;&gt;Finish&lt;/button&gt;&lt;/div&gt;
+  &lt;/section&gt;
+&lt;/form&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.wizard .wz-panel { display: none; scroll-margin-block-start: max(6rem, var(--header-height, 0px)); }
+.wizard:has(#w-1:checked) .wz-1,
+.wizard:has(#w-2:checked) .wz-2,
+.wizard:has(#w-3:checked) .wz-3 { display: block; animation: wz-in 300ms cubic-bezier(.16,1,.3,1); }
+@keyframes wz-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.wz-steps { display: flex; gap: var(--space-2); list-style: none; padding: 0; }
+.wz-steps label { display: inline-grid; place-items: center; min-block-size: 44px; padding-inline: .75rem;
+  border-radius: 999px; cursor: pointer; color: var(--color-text-muted); }
+.wizard:has(#w-1:checked) label[for=&quot;w-1&quot;],
+.wizard:has(#w-2:checked) label[for=&quot;w-2&quot;],
+.wizard:has(#w-3:checked) label[for=&quot;w-3&quot;] { background: var(--color-primary); color: white; }
+
+.wz-progress { block-size: 4px; background: var(--color-surface-offset); border-radius: 999px; margin-block: var(--space-4); overflow: hidden; }
+.wz-progress span { display: block; block-size: 100%; background: var(--color-primary); inline-size: 33%;
+  transition: inline-size 300ms cubic-bezier(.16,1,.3,1); }
+.wizard:has(#w-2:checked) .wz-progress span { inline-size: 66%; }
+.wizard:has(#w-3:checked) .wz-progress span { inline-size: 100%; }
+
+.wz-nav { display: flex; justify-content: space-between; gap: var(--space-3); margin-block-start: var(--space-6); }
+.btn { display: inline-grid; place-items: center; min-block-size: 44px; padding-inline: var(--space-4);
+  border-radius: var(--radius-md); background: var(--color-primary); color: white; cursor: pointer; border: 0; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

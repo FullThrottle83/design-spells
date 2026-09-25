@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Guardrail Focus-Lock Modal (`overscroll-behavior: contain`) — Design Spells</title>
+  <meta name="description" content="A modal dialog that prevents scroll chaining (the background moving while the modal scrolls).">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-146/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Guardrail Focus-Lock Modal (`overscroll-behavior: contain`) — Design Spells">
+  <meta property="og:description" content="A modal dialog that prevents scroll chaining (the background moving while the modal scrolls).">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-146/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-146</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-146 / Overlays / Markup</p>
+    <h1>Guardrail Focus-Lock Modal (`overscroll-behavior: contain`)</h1>
+    <p class="lede">A modal dialog that prevents scroll chaining (the background moving while the modal scrolls).</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-146/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Guardrail Focus-Lock Modal (`overscroll-behavior: contain`)" src="/play/ds-146/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;dialog id=&quot;guard-modal&quot; class=&quot;guard-modal&quot; closedby=&quot;any&quot;&gt;
+  &lt;h2&gt;Modal content&lt;/h2&gt;
+  &lt;div class=&quot;guard-body&quot;&gt;Long scrollable content…&lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.guard-modal {
+  max-block-size: 80vh; max-inline-size: min(90vw, 36rem); margin: auto;
+  padding: var(--space-6); border: 0; border-radius: var(--radius-lg);
+  overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;
+}
+.guard-modal::backdrop { overscroll-behavior: none; background: oklch(0 0 0 / .4); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

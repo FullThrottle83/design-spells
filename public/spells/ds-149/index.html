@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Snapped Product State (`scroll-state()`) — Design Spells</title>
+  <meta name="description" content="Highlight the active card aligned to a scroll-snap point using `@container scroll-state(snapped: inline)` without JavaScript observers.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-149/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Snapped Product State (`scroll-state()`) — Design Spells">
+  <meta property="og:description" content="Highlight the active card aligned to a scroll-snap point using `@container scroll-state(snapped: inline)` without JavaScript observers.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-149/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-149</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-149 / Scroll / 0 JS</p>
+    <h1>Snapped Product State (`scroll-state()`)</h1>
+    <p class="lede">Highlight the active card aligned to a scroll-snap point using `@container scroll-state(snapped: inline)` without JavaScript observers.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-149/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Snapped Product State (`scroll-state()`)" src="/play/ds-149/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;snap-products&quot; aria-label=&quot;Featured products&quot;&gt;
+  &lt;article class=&quot;snap-product&quot;&gt;
+    &lt;div class=&quot;snap-product__body&quot;&gt;&lt;strong&gt;Starter&lt;/strong&gt;&lt;span&gt;$12&lt;/span&gt;&lt;/div&gt;
+  &lt;/article&gt;
+  &lt;article class=&quot;snap-product&quot;&gt;
+    &lt;div class=&quot;snap-product__body&quot;&gt;&lt;strong&gt;Studio&lt;/strong&gt;&lt;span&gt;$28&lt;/span&gt;&lt;/div&gt;
+  &lt;/article&gt;
+  &lt;article class=&quot;snap-product&quot;&gt;
+    &lt;div class=&quot;snap-product__body&quot;&gt;&lt;strong&gt;Agency&lt;/strong&gt;&lt;span&gt;$64&lt;/span&gt;&lt;/div&gt;
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.snap-products {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(80%, 16rem);
+  gap: .75rem;
+  overflow-x: auto;
+  padding: .5rem;
+  scroll-snap-type: inline mandatory;
+  overscroll-behavior-inline: contain;
+}
+.snap-product {
+  container-type: scroll-state;
+  scroll-snap-align: center;
+}
+.snap-product__body {
+  min-block-size: 8rem;
+  padding: 1rem;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+@supports (container-type: scroll-state) {
+  .snap-product__body {
+    opacity: .62;
+    scale: .96;
+    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;
+  }
+  @container scroll-state(snapped: inline) {
+    .snap-product__body {
+      opacity: 1;
+      scale: 1;
+      border-color: var(--color-primary);
+    }
+}
+}
+@media (prefers-reduced-motion: reduce) {
+  .snap-product__body { transition: none; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

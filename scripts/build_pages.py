@@ -161,6 +161,21 @@ def render_play(spell: dict, next_page: bool = False) -> str:
 </html>"""
 
 
+def render_download(spell: dict, next_page: bool = False) -> str:
+    """The actual runnable demo, plus its required base tokens, in one HTML file.
+
+    Unlike the raw CSS tab, this includes the demo fixture and the same document
+    scaffolding the hosted demo uses. Remote media may still require a network.
+    """
+    page = render_play(spell, next_page=next_page)
+    page = page.replace('  <meta name="robots" content="noindex,follow">\\n', "")
+    if spell["id"] == "ds-14":
+        # Two real files are necessary for a cross-document transition offline.
+        href = 'href="ds-14.html"' if next_page else 'href="ds-14-next.html"'
+        page = page.replace('href="../"' if next_page else 'href="next/"', href)
+    return page
+
+
 def build_pages(catalogue: dict) -> None:
     sitemap = [f"{SITE_URL}/"]
     for spell in catalogue["spells"]:
@@ -169,8 +184,10 @@ def build_pages(catalogue: dict) -> None:
             raise ValueError(f"Unsafe spell ID for a file path: {sid!r}")
         write_page(PUBLIC / "spells" / sid / "index.html", render_doc(spell))
         write_page(PUBLIC / "play" / sid / "index.html", render_play(spell))
+        write_page(PUBLIC / "download" / f"{sid}.html", render_download(spell))
         if sid == "ds-14":
             write_page(PUBLIC / "play" / sid / "next" / "index.html", render_play(spell, next_page=True))
+            write_page(PUBLIC / "download" / "ds-14-next.html", render_download(spell, next_page=True))
         sitemap.append(f"{SITE_URL}/spells/{sid}/")
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

@@ -35,7 +35,7 @@ def render(catalogue: dict) -> str:
             title = esc(spell["title"])
             status = esc(spell["status"])
             description = esc(one_line(spell.get("description", "")))
-            search = esc(" ".join(str(spell.get(key, "")) for key in ("id", "title", "category", "feature", "description", "status")).lower())
+            search = esc(" ".join(str(spell.get(key, "")) for key in ("id", "title", "category", "feature", "status")).lower())
             rows.append(f"""<li class="row" data-id="{sid}" data-status="{status}" data-search="{search}">
   <span class="row__index">{esc(spell["number"]).zfill(3)}</span>
   <div class="row__body">

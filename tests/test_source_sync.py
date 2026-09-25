@@ -22,6 +22,13 @@ class SourceSyncTest(unittest.TestCase):
             "Update SKILL.md when README.md changes.",
         )
 
+    def test_native_markup_spells_have_complete_html(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        for spell in parse_spells(readme):
+            if spell["jsNeed"] == "markup":
+                with self.subTest(spell=spell["id"]):
+                    self.assertTrue(spell["html"].strip(), "Native markup is required.")
+
     def test_every_spell_has_balanced_stylesheet_braces(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         spells = parse_spells(readme)

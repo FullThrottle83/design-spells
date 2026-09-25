@@ -1687,13 +1687,6 @@ details[open] .accordion-inner { opacity: 1; transition-delay: 80ms; }
 
 Keep this only if the background is solid and static. Otherwise use Spell 56.
 
-```html
-<details>
-  <summary>What is included?</summary>
-  <div class="accordion-panel">A panel that expands to its intrinsic height.</div>
-</details>
-```
-
 ```css
 .scroller-wrap { position: relative; }
 .scroller-wrap::before,
@@ -1716,6 +1709,13 @@ Keep this only if the background is solid and static. Otherwise use Spell 56.
 *Layout · Baseline · Markup*
 
 A modernization of Spell 15. Animates `block-size: 0` → `auto` directly.
+
+```html
+<details>
+  <summary>What is included?</summary>
+  <div class="accordion-panel">A panel that expands to its intrinsic height.</div>
+</details>
+```
 
 ```css
 :root {
@@ -1787,19 +1787,6 @@ Cards in a grid share the exact same row tracks despite different amounts of con
 
 The scroller’s own edges become literally transparent. Works regardless of the background color or pattern behind it.
 
-```html
-<div class="tabs-container">
-  <details name="ui-tabs" open>
-    <summary>Overview</summary>
-    <p>First disclosure panel.</p>
-  </details>
-  <details name="ui-tabs">
-    <summary>Details</summary>
-    <p>Second disclosure panel.</p>
-  </details>
-</div>
-```
-
 ```css
 .scroll-gallery {
   overflow-x: auto;
@@ -1819,6 +1806,19 @@ The scroller’s own edges become literally transparent. Works regardless of the
 *Layout · Newer · Markup*
 
 Real tabs via `<details name="ui-tabs">`. No radio-button hack.
+
+```html
+<div class="tabs-container">
+  <details name="ui-tabs" open>
+    <summary>Overview</summary>
+    <p>First disclosure panel.</p>
+  </details>
+  <details name="ui-tabs">
+    <summary>Details</summary>
+    <p>Second disclosure panel.</p>
+  </details>
+</div>
+```
 
 ```css
 details[name="ui-tabs"] summary::-webkit-details-marker { display: none; }
@@ -1920,15 +1920,6 @@ A tree view for documentation or sidebars built from nested `<details>` elements
 </nav>
 ```
 
-```html
-<button type="button" commandfor="sheet-demo" command="show-modal">Open sheet</button>
-<dialog id="sheet-demo" class="responsive-sheet" closedby="any">
-  <h2>Sheet content</h2>
-  <p>This stays a native modal dialog.</p>
-  <form method="dialog"><button type="submit">Close</button></form>
-</dialog>
-```
-
 ```css
 .tree-nav details {
   padding-left: 0.75rem;
@@ -1984,6 +1975,15 @@ A tree view for documentation or sidebars built from nested `<details>` elements
 
 A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.
 
+```html
+<button type="button" commandfor="sheet-demo" command="show-modal">Open sheet</button>
+<dialog id="sheet-demo" class="responsive-sheet" closedby="any">
+  <h2>Sheet content</h2>
+  <p>This stays a native modal dialog.</p>
+  <form method="dialog"><button type="submit">Close</button></form>
+</dialog>
+```
+
 ```css
 dialog.responsive-sheet {
   margin: auto auto 0 auto; /* Bottom-aligned on mobile */
@@ -2003,7 +2003,6 @@ dialog.responsive-sheet[open] {
   dialog.responsive-sheet[open] {
     transform: translateY(100%);
   }
-
 }
 
 /* Centered modal on desktop */
@@ -2019,8 +2018,8 @@ dialog.responsive-sheet[open] {
     dialog.responsive-sheet[open] {
       transform: scale(0.95);
     }
-}
   }
+}
 ```
 
 ---

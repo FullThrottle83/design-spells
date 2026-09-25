@@ -57,6 +57,18 @@ test("integration source is served as selectable text without script dependencie
   expect(source).not.toContain("<script");
 });
 
+test("baseline/effect comparison works without JS in both engines", async ({ page, request }) => {
+  await page.goto("/spells/ds-2/");
+  const frames = page.locator(".demo-compare iframe");
+  await expect(frames).toHaveCount(2);
+  await expect(frames.first()).toHaveAttribute("src", "/play/ds-2/before/");
+  await expect(frames.last()).toHaveAttribute("src", "/play/ds-2/");
+  const before = await (await request.get("/play/ds-2/before/")).text();
+  const after = await (await request.get("/play/ds-2/")).text();
+  expect(before).not.toContain("transform: scale(0.94)");
+  expect(after).toContain("transform: scale(0.94)");
+});
+
 test("native cross-document navigation works with scripts disabled", async ({ page }) => {
   await page.goto("/play/ds-14/");
   await page.getByRole("link", { name: /Navigate to page B/ }).click();

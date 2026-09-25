@@ -49,6 +49,7 @@ def render_doc(spell: dict) -> str:
     )
     instruction = spell.get("previewAction", {}).get("hint", "")
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
+    download_note = '<p class="note">This cross-document transition also needs <a href="/download/ds-14-next.html" download="ds-14-next.html">page B (HTML) ↓</a>; save both files together.</p>' if sid == "ds-14" else ""
     evidence = spell["verification"]
     evidence_note = (
         f"Support: {esc(evidence['support'])}; "
@@ -84,13 +85,14 @@ def render_doc(spell: dict) -> str:
     <p class="lede">{description}</p>
     <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
     <section aria-labelledby="demo-title">
-      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a></div>
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a><a class="action" href="/download/{sid}.html" download="{sid}.html">Download runnable HTML ↓</a></div>
       {instruction_html}
+      {download_note}
       <iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
       <h3>HTML</h3>
       {fixture_note}
       <pre tabindex="0"><code>{example_html}</code></pre>

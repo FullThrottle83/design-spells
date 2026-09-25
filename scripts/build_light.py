@@ -46,7 +46,7 @@ def render(catalogue: dict) -> str:
   <a class="row__demo" href="/play/{sid}/" aria-label="Open demo: {title}">Demo ↗</a>
 </li>""")
         sections.append(f"""<section class="cat-section" id="cat-{slugify(cat)}" data-category="{esc(cat)}" aria-labelledby="heading-{slugify(cat)}">
-  <div class="cat-section__head"><h2 id="heading-{slugify(cat)}">{esc(cat)}</h2><span>{len(rows)} spells</span></div>
+  <div class="cat-section__head"><h2 id="heading-{slugify(cat)}">{esc(cat)}</h2><span>{len(rows)} spell{'s' if len(rows) != 1 else ''}</span></div>
   <ul class="spell-list">{"".join(rows)}</ul>
 </section>""")
     total = len(spells)

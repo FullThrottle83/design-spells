@@ -77,12 +77,14 @@ jobs:
         run: |
           set -euo pipefail
           origin="https://design-spells.hultsan20.workers.dev"
-          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/spells/ds-1/" -o "$RUNNER_TEMP/ds-doc.html"
+          # Workers assets can briefly return 404 immediately after a successful
+          # deploy. Retry HTTP failures, but still fail if content never appears.
+          curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/spells/ds-1/" -o "$RUNNER_TEMP/ds-doc.html"
           grep -Fq "Isolated demonstration" "$RUNNER_TEMP/ds-doc.html"
-          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/play/ds-14/next/" -o "$RUNNER_TEMP/ds-next.html"
+          curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/play/ds-14/next/" -o "$RUNNER_TEMP/ds-next.html"
           grep -Fq "Return to page A" "$RUNNER_TEMP/ds-next.html"
-          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/classic/" -o "$RUNNER_TEMP/ds-classic.html"
+          curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/classic/" -o "$RUNNER_TEMP/ds-classic.html"
           grep -Fq "classic" "$RUNNER_TEMP/ds-classic.html"
-          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/play/ds-120/" -o "$RUNNER_TEMP/ds-120.html"
+          curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/play/ds-120/" -o "$RUNNER_TEMP/ds-120.html"
           grep -Fq ".filter-matrix-wrap:has(#f-tech:not(:checked))" "$RUNNER_TEMP/ds-120.html"
           echo "Cloudflare assets are live at $origin"

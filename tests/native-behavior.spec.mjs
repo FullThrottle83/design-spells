@@ -142,7 +142,12 @@ test("ds-18 tooltip decoration follows hover and keyboard focus without scriptin
   await expect(trigger).toBeFocused();
   await expect.poll(opacity).toBe(1);
 
-  await page.keyboard.press("Tab");
+  // This isolated demo has one focusable control; Firefox can cycle Tab
+  // back to it. Explicitly blur it and move the pointer out before checking
+  // the resting state, without adding any JavaScript to the shipped page.
+  await page.mouse.move(0, 0);
+  await trigger.evaluate(el => el.blur());
+  await expect(trigger).not.toBeFocused();
   await expect.poll(opacity).toBe(0);
   await trigger.hover();
   await expect.poll(opacity).toBe(1);

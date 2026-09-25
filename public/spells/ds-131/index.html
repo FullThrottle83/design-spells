@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Auto-Dismiss Transient Toast (`popover=&quot;manual&quot;`) — Design Spells</title>
-  <meta name="description" content="A self-dismissing transient toast driven by CSS keyframes, with no script.">
+  <title>Dismissible Toast (`popover=&quot;manual&quot;`) — Design Spells</title>
+  <meta name="description" content="A native toast that opens and closes with declarative buttons. It does **not** time out automatically; a CSS fade alone cannot close a manual popover or remove it from the top layer. The close button stays available to keyboard users.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-131/">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Auto-Dismiss Transient Toast (`popover=&quot;manual&quot;`) — Design Spells">
-  <meta property="og:description" content="A self-dismissing transient toast driven by CSS keyframes, with no script.">
+  <meta property="og:title" content="Dismissible Toast (`popover=&quot;manual&quot;`) — Design Spells">
+  <meta property="og:description" content="A native toast that opens and closes with declarative buttons. It does **not** time out automatically; a CSS fade alone cannot close a manual popover or remove it from the top layer. The close button stays available to keyboard users.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-131/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -22,14 +22,14 @@
   </header>
   <main id="main" class="shell">
     <p class="eyebrow">ds-131 / Overlays / Markup</p>
-    <h1>Auto-Dismiss Transient Toast (`popover=&quot;manual&quot;`)</h1>
-    <p class="lede">A self-dismissing transient toast driven by CSS keyframes, with no script.</p>
+    <h1>Dismissible Toast (`popover=&quot;manual&quot;`)</h1>
+    <p class="lede">A native toast that opens and closes with declarative buttons. It does **not** time out automatically; a CSS fade alone cannot close a manual popover or remove it from the top layer. The close button stays available to keyboard users.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-131/">Open standalone demo ↗</a><a class="action" href="/download/ds-131.html" download="ds-131.html">Download runnable HTML ↓</a></div>
       <p class='note'>Activate the control to preview</p>
       
-      <iframe title="Isolated demonstration: Auto-Dismiss Transient Toast (`popover=&quot;manual&quot;`)" src="/play/ds-131/" loading="lazy" sandbox="allow-same-origin"></iframe>
+      <iframe title="Isolated demonstration: Dismissible Toast (`popover=&quot;manual&quot;`)" src="/play/ds-131/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
@@ -41,24 +41,40 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       
-      <pre tabindex="0"><code>&lt;button commandfor=&quot;auto-toast-1&quot; command=&quot;show-popover&quot; class=&quot;btn&quot;&gt;Save changes&lt;/button&gt;
+      <pre tabindex="0"><code>&lt;button commandfor=&quot;auto-toast-1&quot; command=&quot;show-popover&quot; class=&quot;btn&quot;&gt;Show notification&lt;/button&gt;
 
 &lt;div id=&quot;auto-toast-1&quot; popover=&quot;manual&quot; class=&quot;auto-toast&quot;&gt;
-  ✅ Changes saved to the cloud
+  &lt;span role=&quot;status&quot;&gt;Changes saved.&lt;/span&gt;
+  &lt;button type=&quot;button&quot; class=&quot;auto-toast__close&quot;
+          commandfor=&quot;auto-toast-1&quot; command=&quot;hide-popover&quot;
+          aria-label=&quot;Dismiss notification&quot;&gt;×&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.auto-toast {
   margin: auto auto 2rem auto; border: 0; padding: .75rem 1.25rem;
   border-radius: 999px; background: var(--color-text); color: var(--color-bg);
   box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(.16,1,.3,1),
+              display 220ms allow-discrete, overlay 220ms allow-discrete;
 }
 .auto-toast:popover-open {
-  animation: toast-lifecycle 4s cubic-bezier(.16,1,.3,1) forwards;
+  display: flex; align-items: center; gap: .75rem;
+  opacity: 1; transform: none;
 }
-@keyframes toast-lifecycle {
-  0% { opacity: 0; transform: translateY(16px); }
-  10%, 90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-16px); display: none; overlay: none; }
+@starting-style {
+  .auto-toast:popover-open { opacity: 0; transform: translateY(12px); }
+}
+.auto-toast__close {
+  display: grid; place-items: center; min-inline-size: 44px; min-block-size: 44px;
+  border: 0; border-radius: 999px; background: transparent; color: inherit;
+  font: inherit; cursor: pointer;
+}
+.auto-toast__close:focus-visible {
+  outline: 2px solid currentColor; outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .auto-toast { transition: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">

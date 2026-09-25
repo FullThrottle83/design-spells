@@ -1531,6 +1531,7 @@ def render_row(spell: dict) -> str:
         <button class="row__hit" type="button" popovertarget="drawer-{spell['id']}" aria-haspopup="dialog">{html.escape(spell['title'])}</button>
       </h2>
       {desc_p}
+      <a class="row__permalink" href="/spells/{spell['id']}/">Full page ↗</a>
     </div>
     <div class="row__meta">
       <span class="row__cat">{html.escape(spell['category'])}</span>

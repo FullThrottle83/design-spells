@@ -28,7 +28,7 @@ class VerificationContractTest(unittest.TestCase):
                 self.assertIn("not-audited", doc)
 
     def test_schema_prevents_unsupported_verification_claims(self):
-        from tests.test_build import validate, SchemaError
+        from test_build import validate, SchemaError
         schema = json.loads((PUBLIC / "spells.schema.json").read_text(encoding="utf-8"))
         entry = schema["$defs"]["verification"]
         baseline = {

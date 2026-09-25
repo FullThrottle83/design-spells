@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+
+  <title>Demo: Sun-Fan FAB (radial) — Design Spells</title>
+  <style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    color-scheme: light dark;
+    --color-primary: light-dark(oklch(0.18 0.01 260), oklch(0.96 0.002 90));
+    --color-bg: light-dark(oklch(0.985 0.002 90), oklch(0.14 0.005 260));
+    --color-text: light-dark(oklch(0.18 0.01 260), oklch(0.96 0.002 90));
+    --color-text-muted: light-dark(oklch(0.545 0.012 260), oklch(0.62 0.008 90));
+    --color-text-inverse: light-dark(oklch(0.99 0.002 90), oklch(0.14 0.005 260));
+    --color-border: light-dark(oklch(0.92 0.005 90), oklch(0.24 0.008 260));
+    --color-surface: light-dark(oklch(0.995 0.001 90), oklch(0.18 0.006 260));
+    --color-surface-offset: light-dark(oklch(0.963 0.004 90), oklch(0.16 0.005 260));
+    --color-surface-dynamic: light-dark(oklch(0.92 0.005 90), oklch(0.3 0.01 260));
+    --color-surface-dark: light-dark(oklch(0.18 0.01 260), oklch(0.1 0.004 260));
+    --color-error: oklch(0.52 0.17 27);
+    --color-success: oklch(0.5 0.12 155);
+    --color-accent: light-dark(oklch(0.62 0.22 38), oklch(0.68 0.19 38));
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 4px;
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --header-height: 3rem;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font: 13px/1.5 var(--ds-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  }
+  body {
+    padding: 16px;
+    display: grid;
+    place-items: center;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  button, .btn, a.btn { min-block-size: 36px; font: inherit; color: inherit; }
+  :where(button), .btn, .btn-primary {
+    padding: 0 .9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: transparent;
+  }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"])),
+  :where(select),
+  :where(textarea) {
+    font: inherit;
+    color: inherit;
+    padding: .45rem .65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  :where(select) { padding-inline-end: 1.6rem; }
+  :where(textarea) { resize: vertical; min-block-size: 5rem; }
+  :where(input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  :where(input[type="checkbox"], input[type="radio"]) {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+  :where(a) { color: var(--color-accent); text-underline-offset: 2px; }
+  :where(table) { border-collapse: collapse; inline-size: 100%; font-variant-numeric: tabular-nums; }
+  :where(th, td) { padding: .4rem .6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+  :where(ul, ol) { padding-inline-start: 1.2rem; margin: 0; }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .demo-note {
+    margin: 0;
+    max-inline-size: 36ch;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 12px;
+  }
+
+
+    *,*::before,*::after {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {display:block; min-height:100dvh; padding:0}
+    .stage {position:relative;display:grid;place-items:center;min-height:280px;padding:2rem;width:100%;isolation:isolate}
+    .stage > * {max-width:100%}
+    .stage:has(details) {align-items:start}
+    .demo-hint {padding:.7rem 1rem;color:var(--color-text-muted);font-size:.875rem}
+    .scroll-content {min-height:110vh;display:grid;place-items:center;align-content:center;padding:2rem}
+    .page-transition {padding:clamp(2rem,7vw,6rem);max-width:60rem;margin:auto}
+    .page-transition a {display:inline-block;margin-top:2rem}
+    .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
+    @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
+    
+.fan { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 100; pointer-events: none; }
+.fan summary::-webkit-details-marker { display: none; }
+.fan-main {
+  pointer-events: auto; display: grid; place-items: center;
+  inline-size: 3.25rem; block-size: 3.25rem; border-radius: 999px; cursor: pointer;
+  background: var(--color-primary); color: white; font-size: 1.4rem;
+  box-shadow: 0 8px 24px oklch(0 0 0 / .2);
+  transition: transform 240ms cubic-bezier(.16,1,.3,1);
+}
+details[open] .fan-main { transform: rotate(45deg); }
+.fan-items { position: absolute; bottom: 0; right: 0; }
+.fan-item {
+  pointer-events: auto; position: absolute; bottom: .35rem; right: .35rem;
+  inline-size: 2.75rem; block-size: 2.75rem; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--color-bg); box-shadow: 0 4px 12px oklch(0 0 0 / .18);
+  --angle: calc(var(--i) * 45deg + 180deg);
+  opacity: 0; transform: translate(0, 0) scale(.6);
+  transition: transform 280ms cubic-bezier(.34,1.56,.64,1), opacity 200ms ease,
+              display 280ms allow-discrete;
+  transition-delay: calc(var(--i) * 40ms);
+}
+details[open] .fan-item {
+  opacity: 1;
+  transform: translate(calc(cos(var(--angle)) * -5.5rem), calc(sin(var(--angle)) * 5.5rem)) scale(1);
+}
+@starting-style { details[open] .fan-item { opacity: 0; transform: translate(0,0) scale(.6); } }
+</style>
+</head>
+<body>
+  <div class="stage"><details class="fan">
+  <summary class="fan-main" aria-label="Quick actions">＋</summary>
+  <div class="fan-items">
+    <button class="fan-item" style="--i:0" aria-label="New post">📝</button>
+    <button class="fan-item" style="--i:1" aria-label="Upload">📷</button>
+    <button class="fan-item" style="--i:2" aria-label="Share">🔗</button>
+  </div>
+</details></div>
+  <p class='demo-hint'>Open the disclosure to preview</p>
+</body>
+</html>

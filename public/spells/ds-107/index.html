@@ -26,13 +26,14 @@
     <p class="lede">Hide an anchor-positioned element when the trigger scrolls out of view (`anchors-visible`) or when the overlay itself overflows (`no-overflow`). Baseline 2026. Use `no-overflow` when the overlay itself must not leave the viewport. Fallback without support: the panel stays visible as usual.</p>
     <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
     <section aria-labelledby="demo-title">
-      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-107/">Open standalone demo ↗</a></div>
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-107/">Open standalone demo ↗</a><a class="action" href="/download/ds-107.html" download="ds-107.html">Download runnable HTML ↓</a></div>
+      
       
       <iframe title="Isolated demonstration: Position-Visibility Auto-Hide (`position-visibility`)" src="/play/ds-107/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
       <pre tabindex="0"><code>&lt;p class=&quot;demo-note&quot;&gt;The panel hides when its anchor leaves the viewport.&lt;/p&gt;&lt;button class=&quot;filter-trigger&quot; style=&quot;anchor-name:--filter-btn&quot;&gt;Filters&lt;/button&gt;&lt;div class=&quot;filter-panel&quot;&gt;Hidden when the trigger is gone.&lt;/div&gt;</code></pre>

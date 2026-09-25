@@ -26,13 +26,14 @@
     <p class="lede">A touch-friendly, accessible before/after image comparison with no JavaScript. The scroller exports a named `scroll-timeline` via `timeline-scope` so `clip-path` can animate on a *sibling* surface (not on the scroller itself). Supports swipe gestures and arrow keys (`tabindex=&quot;0&quot;`). Use `role=&quot;region&quot;` — not `slider` — because `aria-valuenow` cannot be updated without JS.</p>
     <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
     <section aria-labelledby="demo-title">
-      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-67/">Open standalone demo ↗</a></div>
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-67/">Open standalone demo ↗</a><a class="action" href="/download/ds-67.html" download="ds-67.html">Download runnable HTML ↓</a></div>
       <p class='note'>Scroll to preview</p>
+      
       <iframe title="Isolated demonstration: Scroll-Driven Before/After Comparison" src="/play/ds-67/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
       <h3>HTML</h3>
       
       <pre tabindex="0"><code>&lt;div class=&quot;compare-container&quot;&gt;

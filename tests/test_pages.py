@@ -1,5 +1,6 @@
 """Contracts for generated, independently navigable zero-script pages."""
 
+import html
 import json
 import unittest
 from pathlib import Path
@@ -22,7 +23,7 @@ class StaticPagesTest(unittest.TestCase):
                 self.assertIn('name="robots" content="noindex,follow"', play)
                 self.assertNotIn("<script", doc.lower())
                 self.assertNotIn("<script", play.lower())
-                self.assertIn(spell["title"].split(" (")[0].split(" \u0060")[0][:7], doc)
+                self.assertIn(f"<h1>{html.escape(spell['title'], quote=True)}</h1>", doc)
 
     def test_sitemap_only_indexes_docs_and_catalogue(self):
         xml = (PUBLIC / "sitemap.xml").read_text(encoding="utf-8")

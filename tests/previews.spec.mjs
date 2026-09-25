@@ -186,6 +186,14 @@ test.describe("spell previews", () => {
       }, spell.id);
 
       const classes = cssClasses(spell.previewCss);
+      // A mounted declarative shadow root may still be waiting for its first
+      // layout pass under CI load. Wait for a stable painted result, not just DOM.
+      await expect.poll(async () => {
+        const current = await page.evaluate(readPreview, { id: spell.id, classes });
+        return current.mounted && current.hasStage &&
+          current.stageWidth > 0 && current.stageHeight > 0 &&
+          current.paintedCount > 0 && current.collapsed.length === 0;
+      }, { timeout: 5000, message: `${spell.id}: preview did not reach a nonzero layout` }).toBe(true);
       const report = await page.evaluate(readPreview, { id: spell.id, classes });
 
       expect(report.mounted, `${spell.id}: preview never attached a shadow root`).toBe(true);

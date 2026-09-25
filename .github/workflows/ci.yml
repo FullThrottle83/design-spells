@@ -28,10 +28,25 @@ jobs:
       - run: npm test
       - run: git diff --check
 
+  cross-browser:
+    name: Firefox and WebKit smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps firefox webkit
+      - run: npm run build
+      - run: npx playwright test -c playwright.cross-browser.config.mjs
+
   deploy:
     name: Deploy static assets to Cloudflare
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: test
+    needs: [test, cross-browser]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: production

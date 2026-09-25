@@ -167,6 +167,8 @@ test.describe("spell previews", () => {
       await expect(row).toHaveCount(1);
 
       await row.locator(".row__hit").click();
+      // A heading remains in the DOM even when its popover is closed.
+      await expect(page.locator(`#drawer-${spell.id}:popover-open`)).toHaveCount(1);
       await expect(page.locator(`#drawer-title-${spell.id}`)).toHaveText(spell.title);
 
       await page.waitForFunction((id) => {
@@ -188,12 +190,23 @@ test.describe("spell previews", () => {
       const classes = cssClasses(spell.previewCss);
       // A mounted declarative shadow root may still be waiting for its first
       // layout pass under CI load. Wait for a stable painted result, not just DOM.
-      await expect.poll(async () => {
-        const current = await page.evaluate(readPreview, { id: spell.id, classes });
-        return current.mounted && current.hasStage &&
-          current.stageWidth > 0 && current.stageHeight > 0 &&
-          current.paintedCount > 0 && current.collapsed.length === 0;
-      }, { timeout: 12000, message: `${spell.id}: preview did not reach a nonzero layout` }).toBe(true);
+      try {
+        await expect.poll(async () => {
+          const current = await page.evaluate(readPreview, { id: spell.id, classes });
+          return current.mounted && current.hasStage &&
+            current.stageWidth > 0 && current.stageHeight > 0 &&
+            current.paintedCount > 0 && current.collapsed.length === 0;
+        }, { timeout: 12000, message: `${spell.id}: preview did not reach a nonzero layout` }).toBe(true);
+      } catch (error) {
+        const snapshot = await page.evaluate(readPreview, { id: spell.id, classes });
+        const state = await page.locator(`#drawer-${spell.id}`).evaluate((el) => ({
+          open: el.matches(':popover-open'),
+          display: getComputedStyle(el).display,
+          transform: getComputedStyle(el).transform,
+          reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
+        }));
+        throw new Error(`${spell.id}: preview diagnosis ${JSON.stringify({ snapshot, state })}`, { cause: error });
+      }
       const report = await page.evaluate(readPreview, { id: spell.id, classes });
 
       expect(report.mounted, `${spell.id}: preview never attached a shadow root`).toBe(true);
@@ -224,6 +237,11 @@ test.describe("spell previews", () => {
       }
 
       await page.keyboard.press("Escape");
+      // Wait for both native closure and the asynchronous toggle handler before
+      // opening the next drawer; do not let stale popover state leak across tests.
+      await expect(page.locator(`#drawer-${spell.id}:popover-open`)).toHaveCount(0);
+      await expect(page.locator(`#drawer-${spell.id}`)).toBeHidden();
+      await expect(page).not.toHaveURL(new RegExp(`#${spell.id}$`));
       expect(failures, `${spell.id}: errors while rendering the preview`).toEqual([]);
     });
   }

@@ -52,7 +52,10 @@ test.describe("drawer descriptions", () => {
   });
 
   test(`renders inline markdown as elements for all ${marked.length} spells that carry it`, async () => {
-    test.setTimeout(60000);
+    // This case opens and closes every marked spell, including document
+    // previews. Scale the budget with the catalogue instead of capping all
+    // 73 current interactions at one minute on slower CI machines.
+    test.setTimeout(marked.length * 2000);
     const problems = [];
 
     for (const spell of marked) {

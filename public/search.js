@@ -283,24 +283,17 @@
   // Listen for popover toggle events
   document.addEventListener("toggle", (e) => {
     if (e.target.classList.contains("drawer")) {
-      const mainShell = document.getElementById("main");
-      const siteHead = document.querySelector(".site-head");
-
       if (e.newState === "open") {
-        if (mainShell) mainShell.inert = true;
-        if (siteHead) siteHead.inert = true;
         updateDrawerFeatureChecks(e.target);
         location.hash = e.target.id.replace("drawer-", "");
       } else {
-        if (mainShell) mainShell.inert = false;
-        if (siteHead) siteHead.inert = false;
         if (location.hash && location.hash.startsWith("#ds-")) {
           history.replaceState(null, "", location.pathname + location.search);
         }
       }
       updateUrlState();
     }
-  });
+  }, true); // toggle does not bubble; capture native popover events.
 
   // ------------------------------------------------------------- 5. Stage Controls (Width & Theme)
   document.addEventListener("click", (e) => {
@@ -590,4 +583,5 @@
   loadStack();
   syncFromUrl();
   renderStack();
+  document.documentElement.setAttribute("data-enhanced", "");
 })();

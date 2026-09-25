@@ -11,6 +11,15 @@ npm run test:previews # live previews in Chromium
 The browser layer is two spec files: `previews.spec.mjs` (the preview sandbox)
 and `drawer.spec.mjs` (how the drawer renders description text).
 
+`accessibility.spec.mjs` additionally exercises native filtering, disclosure,
+keyboard opening/dismissal and focus restoration with JavaScript enabled,
+disabled, and the enhancement file blocked. It checks responsive page overflow
+at 320, 390, 768 and 1280px, named preview radios, popover event delivery and
+iframe titles/sandbox/loading attributes. Run it with
+`npx playwright test tests/accessibility.spec.mjs`. These regression tests do
+not establish WCAG conformance. Run suites sequentially, or give concurrent
+runs separate `DS_TEST_PORT` values so one runner cannot stop another's server.
+
 ## `test_build.py` — the generated data
 
 Pure Python, stdlib only, sub-second. `python3 -m unittest discover -s tests`

@@ -1330,7 +1330,7 @@ def render_preview_box(spell: dict) -> str:
 </body>
 </html>"""
         esc_doc = html.escape(doc_src, quote=True)
-        return f"""<iframe class="ds-document" sandbox="allow-same-origin" srcdoc="{esc_doc}" aria-label="Live preview: {html.escape(spell['title'])}" style="width:100%;min-height:280px;border:0;display:block;background:var(--paper);"></iframe>{doc_hint}"""
+        return f"""<iframe class="ds-document" loading="lazy" sandbox="allow-same-origin" srcdoc="{esc_doc}" title="Live preview: {html.escape(spell['title'], quote=True)}" style="width:100%;min-height:280px;border:0;display:block;background:var(--paper);"></iframe>{doc_hint}"""
     else:
         return f"""<template shadowrootmode="open">
   <style>
@@ -1398,7 +1398,7 @@ def render_drawer(spell: dict) -> str:
     num = spell_label(spell["number"])
 
     return f"""
-  <div class="drawer" id="drawer-{spell['id']}" popover="auto" role="dialog" aria-modal="true" aria-labelledby="drawer-title-{spell['id']}">
+  <div class="drawer" id="drawer-{spell['id']}" popover="auto" role="dialog" aria-labelledby="drawer-title-{spell['id']}">
     <header class="drawer__head">
       <div class="drawer__head-main">
         <p class="drawer__eyebrow">
@@ -1414,7 +1414,7 @@ def render_drawer(spell: dict) -> str:
           <span class="status-flag" data-status="{html.escape(spell['status'], quote=True)}"><span class="dot" aria-hidden="true"></span>{html.escape(spell['statusLabel'])}</span>
         </p>
       </div>
-      <button class="drawer__close" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide" aria-label="Close panel">
+      <button class="drawer__close" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide" aria-label="Close panel" autofocus>
         <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1 11 11M11 1 1 11" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
       </button>
     </header>
@@ -1448,6 +1448,7 @@ def render_drawer(spell: dict) -> str:
 
       <section class="sect" aria-labelledby="source-label-{spell['id']}">
         <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind v4 / Astro / HTML</span></h3>
+        <p class="source-help">Select code and use your browser’s Copy command.</p>
         <div class="code drawer__code code__tabs">
           <div class="code__bar">
             <span class="code__file">{spell['id']}</span>
@@ -1521,7 +1522,7 @@ def render_row(spell: dict) -> str:
     tags = html.escape(f"{spell['category']} {spell['status']} {spell.get('feature', '')} {' '.join(spell.get('featureKeys', []))} {spell['title']} {spell['id']} {spell.get('css', '')}".lower(), quote=True)
     return f"""
   <li class="row" data-id="{spell['id']}" data-cat="{html.escape(spell['category'], quote=True)}" data-status="{html.escape(spell['status'], quote=True)}" data-tags="{tags}">
-    <input type="radio" name="preview-select" id="select-{spell['id']}" value="{spell['id']}" class="sr-only">
+    <input type="radio" name="preview-select" id="select-{spell['id']}" value="{spell['id']}" class="sr-only" aria-label="Pin preview: {html.escape(spell['title'], quote=True)}">
     <label for="select-{spell['id']}" class="row__select-overlay" aria-hidden="true"></label>
     <button class="row__num" type="button" popovertarget="drawer-{spell['id']}" aria-label="Open details for {num}" title="{spell['id']}">{num}</button>
     <div class="row__main">
@@ -1672,7 +1673,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
       <dl class="intro__specs">
         <div class="spec"><dt>Spells</dt><dd>{total}</dd></div>
         <div class="spec"><dt>Categories</dt><dd>{len(order)}</dd></div>
-        <div class="spec"><dt>Client JS</dt><dd>0 KB</dd></div>
+        <div class="spec"><dt>JS per spell</dt><dd>0 KB</dd></div>
         <div class="spec"><dt>Presets</dt><dd>5</dd></div>
         <div class="spec spec--key">
           <dt>Browser key</dt>
@@ -1682,6 +1683,9 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
           </dd>
         </div>
       </dl>
+
+      <p class="catalogue-help">The catalogue uses optional JavaScript for search, copy buttons, and stacks. Each spell uses HTML and CSS only.</p>
+      <p class="fallback-help">Browse with the category and status filters, open a spell for its source, and use your browser’s Find and Copy commands.</p>
 
       <div class="preset-stacks" role="group" aria-label="Ready-made stacks">
         <span class="preset-stacks__label">Presets</span>
@@ -1723,7 +1727,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
 
     <footer class="shell-note">
       <span>Raw CSS only — no JavaScript ships with any spell</span>
-      <span>Keys: <kbd>/</kbd> search · <kbd>j</kbd>/<kbd>k</kbd> move · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</span>
+      <span class="enhanced-keys">Keys: <kbd>/</kbd> search · <kbd>j</kbd>/<kbd>k</kbd> move · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</span>
       <span>Open source · contributions via pull request</span>
     </footer>
   </main>
@@ -1735,7 +1739,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
     </button>
   </aside>
 
-  <div class="drawer drawer--stack" id="stack-drawer" popover="auto" role="dialog" aria-modal="true" aria-labelledby="stack-title">
+  <div class="drawer drawer--stack" id="stack-drawer" popover="auto" role="dialog" aria-labelledby="stack-title">
     <header class="drawer__head">
       <div class="drawer__head-main">
         <p class="drawer__eyebrow">
@@ -1745,7 +1749,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
         </p>
         <h2 class="drawer__title" id="stack-title">Selected Design Spells</h2>
       </div>
-      <button class="drawer__close" type="button" popovertarget="stack-drawer" popovertargetaction="hide" aria-label="Close stack panel">
+      <button class="drawer__close" type="button" popovertarget="stack-drawer" popovertargetaction="hide" aria-label="Close stack panel" autofocus>
         <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1 11 11M11 1 1 11" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
       </button>
     </header>

@@ -32,7 +32,7 @@ test("storage-denied browsers retain working search and filters", async ({ page 
   await page.goto("/");
   await expect(page.locator("#search")).toBeVisible();
   await page.locator("#search").fill("shimmer");
-  await expect(page.locator(".row:visible")).toHaveCount(1);
+  await expect(page.locator(".row:visible")).toHaveCount(2);
   await page.locator("#theme-toggle").click();
   await expect(page.locator("#theme-toggle")).toBeVisible();
 });

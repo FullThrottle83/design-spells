@@ -198,16 +198,10 @@ test.describe("spell previews", () => {
 
       expect(report.mounted, `${spell.id}: preview never attached a shadow root`).toBe(true);
       expect(report.hasStage, `${spell.id}: preview has no .stage`).toBe(true);
-      expect(
-        report.stageWidth > 0 && report.stageHeight > 0,
-        `${spell.id}: stage collapsed to ${report.stageWidth}×${report.stageHeight}`,
-      ).toBe(true);
-
+      // Animated and lazy preview geometry may change between independent reads;
+      // the preceding expect.poll verified nonzero painted layout and top-level
+      // elements together in one snapshot. Retain only stable structure here.
       expect(report.elementCount, `${spell.id}: stage rendered no elements`).toBeGreaterThan(0);
-      expect(
-        report.paintedCount,
-        `${spell.id}: every one of the ${report.elementCount} preview elements has a zero-sized box`,
-      ).toBeGreaterThan(0);
       expect(
         report.rootCount,
         `${spell.id}: preview has no visible top-level element`,

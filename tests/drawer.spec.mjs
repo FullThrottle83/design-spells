@@ -39,29 +39,6 @@ test.describe("drawer descriptions", () => {
     // so this is a path the app genuinely supports, not a test-only bypass, and
     // populateDrawer() — the thing under test — runs identically either way.
     page = await browser.newPage({ reducedMotion: "reduce" });
-    await page.addInitScript(() => {
-      window.__popoverEvents = [];
-      const record = (type, e) => {
-        if (!e.target?.matches?.('.drawer[popover]')) return;
-        window.__popoverEvents.push({
-          type, id: e.target.id, oldState: e.oldState, newState: e.newState,
-          open: e.target.matches(':popover-open'),
-          hash: location.hash, at: Math.round(performance.now()),
-        });
-        if (window.__popoverEvents.length > 120) window.__popoverEvents.shift();
-      };
-      document.addEventListener('beforetoggle', e => record('beforetoggle', e), true);
-      document.addEventListener('toggle', e => record('toggle', e), true);
-      document.addEventListener('click', e => {
-        const button = e.target.closest?.('button[popovertarget]');
-        if (!button) return;
-        window.__popoverEvents.push({
-          type: 'click', id: button.getAttribute('popovertarget'),
-          action: button.getAttribute('popovertargetaction'),
-          hash: location.hash, at: Math.round(performance.now()),
-        });
-      }, true);
-    });
     page.on("pageerror", (error) => failures.push(`pageerror: ${error.message}`));
     page.on("console", (msg) => {
       if (msg.type() === "error") failures.push(`console.error: ${msg.text()}`);
@@ -127,8 +104,7 @@ test.describe("drawer descriptions", () => {
           reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
           hash: location.hash,
         }));
-        const events = await page.evaluate(() => window.__popoverEvents?.slice(-20));
-        throw new Error(`${spell.id}: drawer close diagnosis ${JSON.stringify({state, events})}`, { cause: error });
+        throw new Error(`${spell.id}: drawer close diagnosis ${JSON.stringify(state)}`, { cause: error });
       }
     }
 

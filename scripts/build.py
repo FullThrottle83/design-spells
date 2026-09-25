@@ -50,6 +50,7 @@ CATEGORY_UI = {
 }
 
 SUPPORT_AS_OF = "2026-08-24"
+SUPPORT_METHOD = "Maintainer-curated feature snapshot, not an individual browser behavior or accessibility audit."
 
 FEATURE_BROWSERS = {
     "baseline": {
@@ -600,6 +601,9 @@ def parse_spells(md: str) -> list[dict]:
             else:
                 note = p
 
+        usage_match = re.search(r"^Usage note:\\s*(.+)$", chunk, re.M)
+        usage_note = usage_match.group(1).strip() if usage_match else ""
+
         desc_parts = []
         consumed = chunk
         if meta_m:
@@ -614,7 +618,7 @@ def parse_spells(md: str) -> list[dict]:
                 # End of this spell's section — stop before absorbing the
                 # next heading (or the divider right before it) into the text.
                 break
-            if line.startswith("Markup:"):
+            if line.startswith("Markup:") or line.startswith("Usage note:"):
                 continue
             desc_parts.append(line)
         description = " ".join(desc_parts).strip()
@@ -646,6 +650,7 @@ def parse_spells(md: str) -> list[dict]:
             "jsNeed": "none" if js_need == "0 JS" else "markup",
             "jsLabel": js_need,
             "note": note,
+            "usageNote": usage_note,
             "description": description,
             "html": html,
             "css": css,
@@ -1664,7 +1669,7 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
   <main class="shell" id="main">
 
     <section class="intro">
-      <p class="intro__eyebrow">Catalogue · browser support verified {SUPPORT_AS_OF}</p>
+      <p class="intro__eyebrow">Catalogue · support snapshot {SUPPORT_AS_OF}</p>
       <h1 class="intro__title">A catalogue of CSS that does the work itself.</h1>
       <p class="intro__lede">
         {total} interaction, layout, and polish techniques — no client JavaScript ships with any
@@ -1826,6 +1831,7 @@ def main() -> None:
 
     catalogue = {
         "supportAsOf": SUPPORT_AS_OF,
+        "supportMethod": SUPPORT_METHOD,
         "total": len(payload),
         "spells": payload,
     }

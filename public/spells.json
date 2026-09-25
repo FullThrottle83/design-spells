@@ -254,7 +254,7 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "Smooth rotation indicator for details disclosure triangles on open state.",
-      "html": "",
+      "html": "<details>\n  <summary>Details <span class=\"chevron\" aria-hidden=\"true\">▾</span></summary>\n  <p>Native disclosure, without JavaScript.</p>\n</details>\n",
       "css": "summary {\n  list-style: none;\n  min-block-size: 44px;\n  display: flex; align-items: center; gap: .5rem;\n  cursor: pointer;\n}\nsummary::-webkit-details-marker { display: none; }\nsummary .chevron {\n  transition: transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\ndetails[open] summary .chevron { transform: rotate(180deg); }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
@@ -981,12 +981,12 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.",
-      "html": "",
+      "html": "<button type=\"button\" popovertarget=\"ph-pop\">Open menu</button>\n<div id=\"ph-pop\" popover=\"auto\" class=\"popover-menu\">\n  <a href=\"/docs\">Documentation</a>\n</div>\n",
       "css": ".popover-menu {\n  display: none;\n  opacity: 0;\n  transform: translateY(-8px) scale(0.96);\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),\n              transform 240ms cubic-bezier(0.16,1,0.3,1),\n              display 240ms allow-discrete;\n}\n.popover-menu:popover-open,\n.popover-menu.is-open {\n  display: block;\n  opacity: 1;\n  transform: translateY(0) scale(1);\n}\n@starting-style {\n  .popover-menu:popover-open,\n  .popover-menu.is-open {\n    opacity: 0;\n    transform: translateY(-8px) scale(0.96);\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "none",
-        "hint": ""
+        "kind": "activate-control",
+        "hint": "Activate the control to preview"
       },
       "previewHtml": "<button popovertarget=\"ph-pop\" class=\"btn\">Open menu</button><div id=\"ph-pop\" popover class=\"popover-menu\">Phantom entry</div>",
       "previewCss": ".popover-menu {\n  display: none;\n  opacity: 0;\n  transform: translateY(-8px) scale(0.96);\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1),\n              transform 240ms cubic-bezier(0.16,1,0.3,1),\n              display 240ms allow-discrete;\n}\n.popover-menu:popover-open,\n.popover-menu.is-open {\n  display: block;\n  opacity: 1;\n  transform: translateY(0) scale(1);\n}\n@starting-style {\n  .popover-menu:popover-open,\n  .popover-menu.is-open {\n    opacity: 0;\n    transform: translateY(-8px) scale(0.96);\n  }\n}\n",
@@ -1049,12 +1049,12 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` modals, with no JS.",
-      "html": "",
+      "html": "<button type=\"button\" popovertarget=\"bd-pop\">Open</button>\n<div id=\"bd-pop\" popover=\"auto\">Popover with native backdrop styling.</div>\n",
       "css": "dialog::backdrop,\n[popover]::backdrop {\n  background: oklch(0 0 0 / 0.4);\n  backdrop-filter: blur(8px);\n  opacity: 0;\n  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              display 280ms allow-discrete,\n              overlay 280ms allow-discrete;\n}\n\ndialog[open]::backdrop,\n[popover]:popover-open::backdrop {\n  opacity: 1;\n}\n\n@starting-style {\n  dialog[open]::backdrop,\n  [popover]:popover-open::backdrop {\n    opacity: 0;\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "toggle-disclosure",
-        "hint": "Open the disclosure to preview"
+        "kind": "activate-control",
+        "hint": "Activate the control to preview"
       },
       "previewHtml": "<p class=\"demo-note\">Backdrop fade applies to native dialogs and popovers.</p><button popovertarget=\"bd-pop\">Open</button><div id=\"bd-pop\" popover>Hello</div>",
       "previewCss": "dialog::backdrop,\n[popover]::backdrop {\n  background: oklch(0 0 0 / 0.4);\n  backdrop-filter: blur(8px);\n  opacity: 0;\n  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),\n              display 280ms allow-discrete,\n              overlay 280ms allow-discrete;\n}\n\ndialog[open]::backdrop,\n[popover]:popover-open::backdrop {\n  opacity: 1;\n}\n\n@starting-style {\n  dialog[open]::backdrop,\n  [popover]:popover-open::backdrop {\n    opacity: 0;\n  }\n}\n",
@@ -1674,7 +1674,7 @@
       "jsLabel": "Markup",
       "note": "→ 33 is more modern",
       "description": "Keep this for broader browser compatibility or older projects.",
-      "html": "",
+      "html": "<details>\n  <summary>Open panel</summary>\n  <div class=\"accordion-panel\">\n    <div class=\"accordion-inner\">The panel content is available without scripting.</div>\n  </div>\n</details>\n",
       "css": "details .accordion-panel {\n  display: grid;\n  grid-template-rows: 0fr;\n  transition: grid-template-rows 320ms cubic-bezier(0.16,1,0.3,1);\n}\ndetails .accordion-inner { overflow: hidden; opacity: 0; transition: opacity 200ms ease; }\ndetails[open] .accordion-panel { grid-template-rows: 1fr; }\ndetails[open] .accordion-inner { opacity: 1; transition-delay: 80ms; }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
@@ -1708,12 +1708,12 @@
       "jsLabel": "0 JS",
       "note": "→ 56 is more modern",
       "description": "Keep this only if the background is solid and static. Otherwise use Spell 56.",
-      "html": "",
+      "html": "<details>\n  <summary>What is included?</summary>\n  <div class=\"accordion-panel\">A panel that expands to its intrinsic height.</div>\n</details>\n",
       "css": ".scroller-wrap { position: relative; }\n.scroller-wrap::before,\n.scroller-wrap::after {\n  content: \"\";\n  position: absolute; top: 0; bottom: 0; width: 2rem;\n  pointer-events: none; z-index: 1;\n}\n.scroller-wrap::before {\n  left: 0;\n  background: linear-gradient(to right, var(--color-bg), transparent);\n}\n.scroller-wrap::after {\n  right: 0;\n  background: linear-gradient(to left, var(--color-bg), transparent);\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "none",
-        "hint": ""
+        "kind": "toggle-disclosure",
+        "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<div class=\"scroller-wrap\"><div style=\"display:flex;gap:1rem;overflow:auto\"><span>Alpha</span><span>Bravo</span><span>Charlie</span><span>Delta</span></div></div>",
       "previewCss": ".scroller-wrap { position: relative; }\n.scroller-wrap::before,\n.scroller-wrap::after {\n  content: \"\";\n  position: absolute; top: 0; bottom: 0; width: 2rem;\n  pointer-events: none; z-index: 1;\n}\n.scroller-wrap::before {\n  left: 0;\n  background: linear-gradient(to right, var(--color-bg), transparent);\n}\n.scroller-wrap::after {\n  right: 0;\n  background: linear-gradient(to left, var(--color-bg), transparent);\n}\n",
@@ -1844,12 +1844,12 @@
       "jsLabel": "0 JS",
       "note": "replaces 27 in most cases",
       "description": "The scroller’s own edges become literally transparent. Works regardless of the background color or pattern behind it.",
-      "html": "",
+      "html": "<div class=\"tabs-container\">\n  <details name=\"ui-tabs\" open>\n    <summary>Overview</summary>\n    <p>First disclosure panel.</p>\n  </details>\n  <details name=\"ui-tabs\">\n    <summary>Details</summary>\n    <p>Second disclosure panel.</p>\n  </details>\n</div>\n",
       "css": ".scroll-gallery {\n  overflow-x: auto;\n  overscroll-behavior-x: contain;\n  mask-image: linear-gradient(\n    to right,\n    transparent 0%,\n    black 5%,\n    black 95%,\n    transparent 100%\n  );\n  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "none",
-        "hint": ""
+        "kind": "toggle-disclosure",
+        "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<div class=\"scroll-gallery\" style=\"display:flex;gap:1rem\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" width=\"180\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='1' x2='0' y1='0' y2='1'%3E%3Cstop stop-color='%230f766e'/%3E%3Cstop offset='1' stop-color='%235eead4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" width=\"180\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" width=\"180\"></div>",
       "previewCss": ".scroll-gallery {\n  overflow-x: auto;\n  overscroll-behavior-x: contain;\n  mask-image: linear-gradient(\n    to right,\n    transparent 0%,\n    black 5%,\n    black 95%,\n    transparent 100%\n  );\n  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);\n}\n",
@@ -1983,14 +1983,14 @@
       "note": "",
       "description": "A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.",
       "html": "",
-      "css": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n  }\n}\n",
+      "css": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n  }\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "toggle-disclosure",
         "hint": "Open the disclosure to preview"
       },
       "previewHtml": "<p class=\"demo-note\">Opens as a sheet on small screens, a dialog on large ones.</p><button commandfor=\"sheet-demo\" command=\"show-modal\" class=\"btn\">Open sheet</button><dialog id=\"sheet-demo\" class=\"responsive-sheet\" closedby=\"any\"><p>Sheet content</p><form method=\"dialog\"><button class=\"btn\">Close</button></form></dialog>",
-      "previewCss": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n  }\n}\n",
+      "previewCss": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n  }\n",
       "featureKeys": [
         "starting-style"
       ],

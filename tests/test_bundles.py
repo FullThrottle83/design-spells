@@ -2,6 +2,7 @@
 
 import json
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 
 from scripts.build import DOCUMENT_TOKENS
@@ -9,6 +10,19 @@ from scripts.build_bundle import render_bundle, resolve_tokens
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOGUE = json.loads((ROOT / "public" / "spells.json").read_text(encoding="utf-8"))
+
+
+class DocumentStructure(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.start_tags = []
+        self.doctypes = []
+
+    def handle_starttag(self, tag, attrs):
+        self.start_tags.append(tag)
+
+    def handle_decl(self, decl):
+        self.doctypes.append(decl)
 
 
 class IntegrationBundleTest(unittest.TestCase):
@@ -59,6 +73,24 @@ class IntegrationBundleTest(unittest.TestCase):
                     self.assertIn("Project variables not defined", source)
                     for name in missing:
                         self.assertIn(name, source)
+
+    def test_all_bundles_are_clean_single_documents_without_catalogue_chrome(self):
+        for spell in CATALOGUE["spells"]:
+            sid = spell["id"]
+            with self.subTest(spell=sid):
+                source = (ROOT / "public" / "bundle" / f"{sid}.txt").read_text(encoding="utf-8")
+                parsed = DocumentStructure()
+                parsed.feed(source)
+                self.assertEqual(parsed.doctypes, ["doctype html"])
+                for tag in ("html", "head", "body", "style"):
+                    self.assertEqual(parsed.start_tags.count(tag), 1, f"{sid}: expected one {tag}")
+                self.assertNotIn("script", parsed.start_tags)
+                self.assertNotIn("iframe", parsed.start_tags)
+                self.assertNotIn("link", parsed.start_tags)
+                self.assertNotIn('href="/spell-pages.css"', source)
+                self.assertNotIn('class="site-head"', source)
+                self.assertNotIn("*,*::before,*::after {box-sizing:border-box}", source)
+                self.assertNotIn("html {scroll-behavior:smooth}", source)
 
     def test_root_scroll_state_is_opt_in_and_document_effect_is_labelled(self):
         first = (ROOT / "public" / "bundle" / "ds-1.txt").read_text(encoding="utf-8")

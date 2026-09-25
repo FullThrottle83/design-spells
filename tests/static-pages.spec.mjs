@@ -10,7 +10,8 @@ test.describe("static spell pages without scripting", () => {
     await expect(demo).toHaveAttribute("sandbox", "allow-same-origin");
     await expect(page.getByRole("link", { name: /Open standalone demo/ })).toHaveAttribute("href", "/play/ds-1/");
     await expect(page.locator("pre code")).toHaveCount(2);
-    await expect(page.locator("script")).toHaveCount(0);
+    await expect(page.locator('script[src="/spell-copy.js"]')).toHaveCount(1);
+    await expect(page.locator("script:not([src])")).toHaveCount(0);
   });
 
   test("catalogue provides direct links to independent pages without scripting", async ({ page }) => {

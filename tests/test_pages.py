@@ -19,6 +19,13 @@ class StaticPagesTest(unittest.TestCase):
                 play = (PUBLIC / "play" / sid / "index.html").read_text(encoding="utf-8")
                 self.assertIn(f"/play/{sid}/", doc)
                 self.assertIn(f'/download/{sid}.html', doc)
+                self.assertIn(f'href="/bundle/{sid}.txt"', doc)
+                self.assertIn('data-bundle-source', doc)
+                self.assertIn('src="/spell-copy.js" defer', doc)
+                if sid in {"ds-14", "ds-143"}:
+                    self.assertNotIn('data-copy-bundle', doc)
+                else:
+                    self.assertIn(f'data-copy-bundle="{sid}" hidden', doc)
                 exported = (PUBLIC / "download" / f"{sid}.html").read_text(encoding="utf-8")
                 self.assertIn("<!doctype html>", exported.lower())
                 self.assertIn("<style>", exported)
@@ -30,7 +37,7 @@ class StaticPagesTest(unittest.TestCase):
                 self.assertIn(f"/spells/{sid}/", doc)
                 self.assertIn('sandbox="allow-same-origin"', doc)
                 self.assertIn('name="robots" content="noindex,follow"', play)
-                self.assertNotIn("<script", doc.lower())
+                self.assertEqual(doc.count("<script"), 1)
                 self.assertNotIn("<script", play.lower())
                 self.assertIn(f"<h1>{html.escape(spell['title'], quote=True)}</h1>", doc)
 

@@ -21,6 +21,21 @@
   const rows = Array.from(document.querySelectorAll(".row"));
   const catBlocks = Array.from(document.querySelectorAll(".cat-block"));
   const totalSpells = rows.length;
+  const validSpellIds = new Set(rows.map((row) => row.dataset.id));
+
+  function validIds(ids) {
+    return Array.isArray(ids)
+      ? ids.filter((id) => typeof id === "string" && validSpellIds.has(id))
+      : [];
+  }
+
+  function readStorage(key) {
+    try { return window.localStorage.getItem(key); } catch { return null; }
+  }
+
+  function writeStorage(key, value) {
+    try { window.localStorage.setItem(key, value); } catch { /* Storage is optional. */ }
+  }
 
   // Stacks presets
   const STACK_PRESETS = {
@@ -38,7 +53,7 @@
 
   // ------------------------------------------------------------- 1. Theme
   function initTheme() {
-    const saved = localStorage.getItem("ds-theme") || "auto";
+    const saved = readStorage("ds-theme") || "auto";
     applyTheme(saved);
   }
 
@@ -59,9 +74,9 @@
 
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-      const current = localStorage.getItem("ds-theme") || "auto";
+      const current = readStorage("ds-theme") || "auto";
       const next = current === "auto" ? "dark" : current === "dark" ? "light" : "auto";
-      localStorage.setItem("ds-theme", next);
+      writeStorage("ds-theme", next);
       applyTheme(next);
     });
   }
@@ -148,35 +163,33 @@
     history.replaceState(null, "", newUrl);
   }
 
-  function syncFromUrl() {
+  function syncFromUrl({ preserveStoredStack = false } = {}) {
     const params = new URLSearchParams(location.search);
-    const q = params.get("q");
-    const cat = params.get("category");
-    const status = params.get("status");
+    searchInput.value = params.get("q") || "";
+
+    const cat = params.get("category") || "all";
+    const status = params.get("status") || "all";
+    const catRadio = [...catRadios].find((radio) => radio.value === cat)
+      || [...catRadios].find((radio) => radio.value === "all");
+    const statusRadio = [...statusRadios].find((radio) => radio.value === status)
+      || [...statusRadios].find((radio) => radio.value === "all");
+    if (catRadio) catRadio.checked = true;
+    if (statusRadio) statusRadio.checked = true;
+
     const stack = params.get("stack");
-
-    if (q) searchInput.value = q;
-
-    if (cat) {
-      const radio = document.querySelector(`input[name="cat"][value="${CSS.escape(cat)}"]`);
-      if (radio) radio.checked = true;
-    }
-    if (status) {
-      const radio = document.querySelector(`input[name="status"][value="${CSS.escape(status)}"]`);
-      if (radio) radio.checked = true;
+    if (stack !== null) {
+      stackSet = new Set(validIds(stack.split(",").map((id) => id.trim())));
+      writeStorage("ds-stack", JSON.stringify([...stackSet]));
+    } else if (!preserveStoredStack) {
+      stackSet.clear();
+      writeStorage("ds-stack", "[]");
     }
 
-    if (stack) {
-      stackSet = new Set(stack.split(",").map((s) => s.trim()).filter(Boolean));
-      saveStack();
-      renderStack();
-    }
-
+    renderStack();
     filter();
 
-    // Check hash for direct spell modal deep-linking
-    const hash = location.hash.replace("#", "");
-    if (hash && hash.startsWith("ds-")) {
+    const hash = location.hash.slice(1);
+    if (validSpellIds.has(hash)) {
       const drawer = document.getElementById(`drawer-${hash}`);
       if (drawer && typeof drawer.showPopover === "function") {
         setTimeout(() => drawer.showPopover(), 100);
@@ -186,7 +199,7 @@
     }
   }
 
-  window.addEventListener("popstate", syncFromUrl);
+  window.addEventListener("popstate", () => syncFromUrl());
 
   // ------------------------------------------------------------- 4. Live Browser Feature Check (CSS.supports)
   const FEATURE_SUPPORTS = {
@@ -349,16 +362,13 @@
 
   // ------------------------------------------------------------- 6. Stack Builder Engine
   function loadStack() {
-    const saved = localStorage.getItem("ds-stack");
-    if (saved) {
-      try {
-        stackSet = new Set(JSON.parse(saved));
-      } catch (e) {}
-    }
+    const saved = readStorage("ds-stack");
+    if (!saved) return;
+    try { stackSet = new Set(validIds(JSON.parse(saved))); } catch { stackSet.clear(); }
   }
 
   function saveStack() {
-    localStorage.setItem("ds-stack", JSON.stringify(Array.from(stackSet)));
+    writeStorage("ds-stack", JSON.stringify([...stackSet]));
     updateUrlState();
   }
 
@@ -392,22 +402,29 @@
       return;
     }
 
-    let itemsHtml = "";
-    stackSet.forEach((sid) => {
-      const row = document.querySelector(`.row[data-id="${sid}"]`);
-      const title = row ? row.querySelector(".row__hit")?.textContent || sid : sid;
-      itemsHtml += `
-        <div class="stack-item" data-id="${sid}">
-          <span><strong class="stack-item__id">${sid}</strong> ${escapeHtml(title)}</span>
-          <button type="button" class="stack-item__remove" data-stack-remove="${sid}" aria-label="Remove ${sid}">✕</button>
-        </div>
-      `;
-    });
-    stackItemsEl.innerHTML = itemsHtml;
-  }
-
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const items = document.createDocumentFragment();
+    for (const sid of stackSet) {
+      const row = rows.find((candidate) => candidate.dataset.id === sid);
+      if (!row) continue;
+      const title = row.querySelector(".row__hit")?.textContent || sid;
+      const item = document.createElement("div");
+      item.className = "stack-item";
+      item.dataset.id = sid;
+      const description = document.createElement("span");
+      const id = document.createElement("strong");
+      id.className = "stack-item__id";
+      id.textContent = sid;
+      description.append(id, document.createTextNode(" " + title));
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "stack-item__remove";
+      remove.dataset.stackRemove = sid;
+      remove.setAttribute("aria-label", `Remove ${sid}`);
+      remove.textContent = "×";
+      item.append(description, remove);
+      items.append(item);
+    }
+    stackItemsEl.replaceChildren(items);
   }
 
   document.addEventListener("click", (e) => {
@@ -581,7 +598,6 @@
   // ------------------------------------------------------------- Init
   initTheme();
   loadStack();
-  syncFromUrl();
-  renderStack();
+  syncFromUrl({ preserveStoredStack: true });
   document.documentElement.setAttribute("data-enhanced", "");
 })();

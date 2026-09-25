@@ -534,9 +534,6 @@ class EmittedHtmlTest(unittest.TestCase):
         self.assertIn("<style>\n.btn-primary { color: red; }\n</style>", res)
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
 
 class LeanCatalogueTest(unittest.TestCase):
     """The light entrypoint links to isolated content; it does not embed the library."""
@@ -557,3 +554,6 @@ class LeanCatalogueTest(unittest.TestCase):
         self.assertNotIn(b'@starting-style', output)
         self.assertNotIn(b'<pre class="code__view"', output)
         self.assertIn(b'/catalogue.js', output)
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

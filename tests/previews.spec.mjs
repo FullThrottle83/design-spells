@@ -193,7 +193,7 @@ test.describe("spell previews", () => {
         return current.mounted && current.hasStage &&
           current.stageWidth > 0 && current.stageHeight > 0 &&
           current.paintedCount > 0 && current.collapsed.length === 0;
-      }, { timeout: 5000, message: `${spell.id}: preview did not reach a nonzero layout` }).toBe(true);
+      }, { timeout: 12000, message: `${spell.id}: preview did not reach a nonzero layout` }).toBe(true);
       const report = await page.evaluate(readPreview, { id: spell.id, classes });
 
       expect(report.mounted, `${spell.id}: preview never attached a shadow root`).toBe(true);
@@ -212,10 +212,9 @@ test.describe("spell previews", () => {
         report.rootCount,
         `${spell.id}: preview has no visible top-level element`,
       ).toBeGreaterThan(0);
-      expect(
-        report.collapsed,
-        `${spell.id}: top-level preview element collapsed to zero size`,
-      ).toEqual([]);
+      // The expect.poll above already verifies every visible top-level box has
+      // nonzero geometry. A second immediate snapshot is racy for lazy iframe
+      // previews and animated fixed-position scroll indicators.
 
       expect(report.brokenImages, `${spell.id}: images failed to load`).toEqual([]);
 

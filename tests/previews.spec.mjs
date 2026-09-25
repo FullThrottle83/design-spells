@@ -236,6 +236,9 @@ test.describe("spell previews", () => {
         ).toBeGreaterThan(0);
       }
 
+      // Document previews may own keyboard focus. Return it to the parent
+      // popover so Escape tests the drawer rather than the iframe context.
+      await page.locator(`#drawer-${spell.id} .drawer__close`).focus();
       await page.keyboard.press("Escape");
       // Wait for both native closure and the asynchronous toggle handler before
       // opening the next drawer; do not let stale popover state leak across tests.

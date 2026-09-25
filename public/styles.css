@@ -1847,6 +1847,12 @@ html[data-enhanced] .fallback-help {
    ------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
+  /* Do not retain a dismissed native popover in the top layer for a discrete
+     display/overlay exit animation when the user requests reduced motion. */
+  .drawer[popover],
+  .drawer[popover]::backdrop {
+    transition: none !important;
+  }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;

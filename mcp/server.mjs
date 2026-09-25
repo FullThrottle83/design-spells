@@ -35,6 +35,7 @@ const catalogue = JSON.parse(readFileSync(DATA_PATH, "utf-8"));
 const SPELLS = catalogue.spells ?? [];
 const TOTAL = catalogue.total ?? SPELLS.length;
 const SUPPORT_AS_OF = catalogue.supportAsOf ?? "2026-08-24";
+const SUPPORT_METHOD = catalogue.supportMethod ?? "Curated snapshot; not verified browser behavior.";
 
 function categories() {
   const counts = new Map();
@@ -162,6 +163,7 @@ function summary(spell) {
     feature: spell.feature,
     browsers: spell.browsers,
     supportNote: spell.supportNote,
+    usageNote: spell.usageNote ?? "",
     previewEnvironment: spell.previewEnvironment,
     previewAction: spell.previewAction,
     description: spell.description,
@@ -219,6 +221,7 @@ function callTool(name, rawArgs = {}) {
     case "list_categories":
       return {
         supportAsOf: SUPPORT_AS_OF,
+        supportMethod: SUPPORT_METHOD,
         total: TOTAL,
         categories: categories(),
         statuses: STATUSES,
@@ -230,6 +233,7 @@ function callTool(name, rawArgs = {}) {
       const results = SPELLS.filter((s) => matches(s, args)).slice(0, limit);
       return {
         supportAsOf: SUPPORT_AS_OF,
+        supportMethod: SUPPORT_METHOD,
         count: results.length,
         spells: results.map(summary),
       };

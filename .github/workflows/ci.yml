@@ -23,6 +23,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: test -s public/classic/index.html
+      - run: test -s public/bundle/ds-1.txt
       - run: git diff --exit-code -- public/index.html public/spells.json public/spells public/play public/download public/sitemap.xml
       - run: test -z "$(git status --porcelain -- public/spells public/play public/download public/sitemap.xml)"
       - run: node --check public/search.js
@@ -63,6 +64,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: test -s public/classic/index.html
+      - run: test -s public/bundle/ds-1.txt
       - name: Check Cloudflare deployment credentials
         shell: bash
         run: |
@@ -87,4 +89,6 @@ jobs:
           grep -Fq "classic" "$RUNNER_TEMP/ds-classic.html"
           curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/play/ds-120/" -o "$RUNNER_TEMP/ds-120.html"
           grep -Fq ".filter-matrix-wrap:has(#f-tech:not(:checked))" "$RUNNER_TEMP/ds-120.html"
+          curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/bundle/ds-1.txt" -o "$RUNNER_TEMP/ds-bundle.txt"
+          grep -Fq "Design Spells ds-1: integration source" "$RUNNER_TEMP/ds-bundle.txt"
           echo "Cloudflare assets are live at $origin"

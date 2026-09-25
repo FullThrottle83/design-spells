@@ -5,3 +5,5 @@ __pycache__/
 .claude/
 # Large, reproducible output: built from README.md during CI and deploy.
 public/classic/index.html
+# Deterministic per-spell integration sources; built for deploy, not tracked.
+public/bundle/

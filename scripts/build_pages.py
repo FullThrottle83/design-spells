@@ -49,6 +49,12 @@ def render_doc(spell: dict) -> str:
     )
     instruction = spell.get("previewAction", {}).get("hint", "")
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
+    evidence = spell["verification"]
+    evidence_note = (
+        f"Support: {esc(evidence['support'])}; "
+        f"behavior: {esc(evidence['behavior'])}; "
+        f"accessibility: {esc(evidence['accessibility'])}."
+    )
     canonical = f"{SITE_URL}/spells/{sid}/"
     return f"""<!doctype html>
 <html lang="en">
@@ -93,7 +99,8 @@ def render_doc(spell: dict) -> str:
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>
-      <p class="note">Project category: {esc(spell["statusLabel"])}. This registry is a dated reference, not a live proof of behavior.</p>
+      <p class="note">Project category: {esc(spell["statusLabel"])}. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">{evidence_note}</p>
       <ul class="browser-list">{support}</ul>
       <p class="note">{esc(spell["supportNote"])}</p>
     </section>

@@ -54,6 +54,14 @@ export interface BrowserSupport {
   safari: BrowserLevel;
 }
 
+/** Verification is deliberately independent of browser-support estimates. */
+export interface Verification {
+  support: "registry-estimate" | "source-checked";
+  behavior: "not-individually-verified" | "browser-tested";
+  accessibility: "not-audited" | "reviewed";
+  sources: string[];
+}
+
 export interface Spell {
   /** Stable identifier, e.g. "ds-43". */
   id: string;
@@ -91,10 +99,12 @@ export interface Spell {
   browsers: BrowserSupport;
   /** Detailed browser-support note, including versions where relevant. */
   supportNote: string;
+  /** No support claim is a substitute for per-engine interaction/a11y testing. */
+  verification: Verification;
 }
 
 export interface Catalogue {
-  /** UTC date on which the browser-support registry was verified. */
+  /** Date of a manually maintained support snapshot, not a proof of individual browser testing. */
   supportAsOf: string;
   total: number;
   spells: Spell[];

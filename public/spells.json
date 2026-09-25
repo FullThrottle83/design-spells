@@ -35,7 +35,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-2",
@@ -69,7 +75,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-3",
@@ -103,7 +115,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-5",
@@ -137,7 +155,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-7",
@@ -171,7 +195,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-19",
@@ -205,7 +235,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-20",
@@ -239,7 +275,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-22",
@@ -273,7 +315,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-24",
@@ -307,7 +355,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-26",
@@ -341,7 +395,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-38",
@@ -375,7 +435,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-39",
@@ -409,7 +475,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-67",
@@ -444,7 +516,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-71",
@@ -479,7 +557,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-73",
@@ -514,7 +598,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-79",
@@ -551,7 +641,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-80",
@@ -586,7 +682,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 139+. Falls back to regular border-radius. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 139+. Falls back to regular border-radius. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-81",
@@ -621,7 +723,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-82",
@@ -655,7 +763,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-83",
@@ -689,7 +803,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-84",
@@ -723,7 +843,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-88",
@@ -757,7 +883,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-89",
@@ -794,7 +926,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-90",
@@ -829,7 +967,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-8",
@@ -863,7 +1007,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-9",
@@ -897,7 +1047,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-11",
@@ -931,7 +1087,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-14",
@@ -966,7 +1128,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Cross-document navigation transitions remain unavailable in Firefox. Same-document View Transitions are available in current engines."
+      "supportNote": "Cross-document navigation transitions remain unavailable in Firefox. Same-document View Transitions are available in current engines.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-31",
@@ -1000,7 +1168,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
+      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-65",
@@ -1034,7 +1208,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-66",
@@ -1069,7 +1249,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-68",
@@ -1103,7 +1289,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-72",
@@ -1137,7 +1329,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-75",
@@ -1172,7 +1370,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-91",
@@ -1206,7 +1410,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-92",
@@ -1240,7 +1450,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-93",
@@ -1276,7 +1492,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-17",
@@ -1311,7 +1533,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-30",
@@ -1345,7 +1573,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-36",
@@ -1379,7 +1613,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-43",
@@ -1414,7 +1654,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-44",
@@ -1450,7 +1696,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-45",
@@ -1485,7 +1737,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-46",
@@ -1520,7 +1778,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-47",
@@ -1555,7 +1819,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-55",
@@ -1589,7 +1859,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-69",
@@ -1625,7 +1901,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-12",
@@ -1659,7 +1941,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-15",
@@ -1693,7 +1981,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-27",
@@ -1727,7 +2021,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-33",
@@ -1761,7 +2061,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 129+. Firefox and Safari still snap instead of interpolating."
+      "supportNote": "Chrome/Edge 129+. Firefox and Safari still snap instead of interpolating.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-37",
@@ -1795,7 +2101,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Size container queries are Baseline since 2023."
+      "supportNote": "Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-40",
@@ -1829,7 +2141,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "subgrid is Baseline in current browsers."
+      "supportNote": "subgrid is Baseline in current browsers.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-56",
@@ -1863,7 +2181,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-61",
@@ -1898,7 +2222,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 131+, Firefox 143+, Safari 18.4+. content-visibility: auto is widely available."
+      "supportNote": "Chrome/Edge 131+, Firefox 143+, Safari 18.4+. content-visibility: auto is widely available.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-62",
@@ -1933,7 +2263,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only carousel controls. Wrap them in @supports. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chromium-only carousel controls. Wrap them in @supports. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-70",
@@ -1967,7 +2303,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-77",
@@ -2003,7 +2345,13 @@
         "firefox": "yes",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-18",
@@ -2037,7 +2385,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-34",
@@ -2071,7 +2425,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+."
+      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-48",
@@ -2106,7 +2466,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. :has() has been Baseline since late 2023."
+      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-49",
@@ -2141,7 +2507,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-50",
@@ -2175,7 +2547,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+."
+      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-10",
@@ -2209,7 +2587,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-bonus",
@@ -2243,7 +2627,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-53",
@@ -2277,7 +2667,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 133+, Safari 18.2+. Firefox 154 support is preview; stable Firefox 153 does not support it."
+      "supportNote": "Chrome/Edge 133+, Safari 18.2+. Firefox 154 support is preview; stable Firefox 153 does not support it.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-63",
@@ -2311,7 +2707,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-6",
@@ -2345,7 +2747,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-16",
@@ -2379,7 +2787,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-23",
@@ -2413,7 +2827,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-28",
@@ -2447,7 +2867,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-32",
@@ -2481,7 +2907,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 123+, Firefox 152+, Safari 26.2+."
+      "supportNote": "Chrome/Edge 123+, Firefox 152+, Safari 26.2+.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-54",
@@ -2516,7 +2948,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 135+ in stable browsers. Firefox has no stable support; Safari 27 support is preview. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+ in stable browsers. Firefox has no stable support; Safari 27 support is preview. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-57",
@@ -2550,7 +2988,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-76",
@@ -2584,7 +3028,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-85",
@@ -2618,7 +3068,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-86",
@@ -2652,7 +3108,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-87",
@@ -2687,7 +3149,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-25",
@@ -2721,7 +3189,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-35",
@@ -2756,7 +3230,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "light-dark() is Baseline 2024. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "light-dark() is Baseline 2024. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-51",
@@ -2790,7 +3270,13 @@
         "firefox": "no",
         "safari": "partial"
       },
-      "supportNote": "shape() is newest in Chromium. Other browsers ignore the clip."
+      "supportNote": "shape() is newest in Chromium. Other browsers ignore the clip.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-52",
@@ -2824,7 +3310,13 @@
         "firefox": "no",
         "safari": "partial"
       },
-      "supportNote": "shape() is newest in Chromium. Other browsers ignore the clip."
+      "supportNote": "shape() is newest in Chromium. Other browsers ignore the clip.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-58",
@@ -2858,7 +3350,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "@property is Baseline and needed for typed interpolation."
+      "supportNote": "@property is Baseline and needed for typed interpolation.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-64",
@@ -2892,7 +3390,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Motion path is widely available in current browsers."
+      "supportNote": "Motion path is widely available in current browsers.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-74",
@@ -2926,7 +3430,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-78",
@@ -2960,7 +3470,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-13",
@@ -2994,7 +3510,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-21",
@@ -3028,7 +3550,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-29",
@@ -3062,7 +3590,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-59",
@@ -3096,7 +3630,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-60",
@@ -3130,7 +3670,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-41",
@@ -3164,7 +3710,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "content-visibility: auto is widely available."
+      "supportNote": "content-visibility: auto is widely available.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-94",
@@ -3199,7 +3751,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-95",
@@ -3233,7 +3791,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-96",
@@ -3267,7 +3831,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-97",
@@ -3305,7 +3875,13 @@
         "firefox": "yes",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. :open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. :open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-98",
@@ -3342,7 +3918,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only as of 2026. Pair with a CSS hover fallback. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
+      "supportNote": "Chromium-only as of 2026. Pair with a CSS hover fallback. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-99",
@@ -3376,7 +3958,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+ only in stable browsers. Firefox and Safari do not support scroll-initial-target."
+      "supportNote": "Chrome/Edge 133+ only in stable browsers. Firefox and Safari do not support scroll-initial-target.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-100",
@@ -3410,7 +3998,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Safari 26.4+ only in stable browsers. Fallback is a regular grid."
+      "supportNote": "Safari 26.4+ only in stable browsers. Fallback is a regular grid.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-101",
@@ -3444,7 +4038,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge and Safari 26.2+; Firefox has not shipped it."
+      "supportNote": "Chrome/Edge and Safari 26.2+; Firefox has not shipped it.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-102",
@@ -3479,7 +4079,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. color-mix() and oklch() are Baseline 2023."
+      "supportNote": ":open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-103",
@@ -3513,7 +4119,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 147+, Firefox 146+, Safari 26+."
+      "supportNote": "Chrome/Edge 147+, Firefox 146+, Safari 26+.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-104",
@@ -3547,7 +4159,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only conditional values. Other browsers ignore the declaration."
+      "supportNote": "Chromium-only conditional values. Other browsers ignore the declaration.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-105",
@@ -3581,7 +4199,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only. Feature-detect with attr(x type(*))."
+      "supportNote": "Chromium-only. Feature-detect with attr(x type(*)).",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-106",
@@ -3619,7 +4243,13 @@
         "firefox": "yes",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. :open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. :open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-107",
@@ -3654,7 +4284,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support."
+      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-108",
@@ -3688,7 +4324,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 102+, Firefox 148+, Safari 26.2+."
+      "supportNote": "Chrome/Edge 102+, Firefox 148+, Safari 26.2+.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-109",
@@ -3724,7 +4366,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only. Feature-detect with attr(x type(*)). Cross-document navigation transitions remain unavailable in Firefox. Same-document View Transitions are available in current engines."
+      "supportNote": "Chromium-only. Feature-detect with attr(x type(*)). Cross-document navigation transitions remain unavailable in Firefox. Same-document View Transitions are available in current engines.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-110",
@@ -3759,7 +4407,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only. Feature-detect with attr(x type(*)). color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chromium-only. Feature-detect with attr(x type(*)). color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-111",
@@ -3793,7 +4447,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-112",
@@ -3828,7 +4488,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Chrome 133+, Safari 18.2+. Styles shared text fragments. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome 133+, Safari 18.2+. Styles shared text fragments. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-113",
@@ -3862,7 +4528,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chromium-only. Tab order stays in DOM order elsewhere."
+      "supportNote": "Chromium-only. Tab order stays in DOM order elsewhere.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-114",
@@ -3897,7 +4569,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Standard scrollbar-color / scrollbar-width are Baseline 2024+. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Standard scrollbar-color / scrollbar-width are Baseline 2024+. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-115",
@@ -3932,7 +4610,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-116",
@@ -3966,7 +4650,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-117",
@@ -4004,7 +4694,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-118",
@@ -4040,7 +4736,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": ":open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. The pseudo-elements are Chrome/Edge 133+ and require customizable-select/base-select (Chrome/Edge 135+). Firefox has no stable support; Safari 27 is preview. Chrome/Edge 135+ in stable browsers. Firefox has no stable support; Safari 27 support is preview."
+      "supportNote": ":open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. The pseudo-elements are Chrome/Edge 133+ and require customizable-select/base-select (Chrome/Edge 135+). Firefox has no stable support; Safari 27 is preview. Chrome/Edge 135+ in stable browsers. Firefox has no stable support; Safari 27 support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-119",
@@ -4074,7 +4776,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-120",
@@ -4108,7 +4816,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-121",
@@ -4143,7 +4857,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. :has() has been Baseline since late 2023."
+      "supportNote": "Chrome/Edge 125+, Safari 26+, Firefox 147+. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-122",
@@ -4177,7 +4897,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-123",
@@ -4211,7 +4937,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-124",
@@ -4245,7 +4977,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-125",
@@ -4279,7 +5017,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-126",
@@ -4313,7 +5057,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-127",
@@ -4350,7 +5100,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-128",
@@ -4384,7 +5140,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-129",
@@ -4419,7 +5181,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-130",
@@ -4453,7 +5221,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-131",
@@ -4489,7 +5263,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-132",
@@ -4523,7 +5303,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-133",
@@ -4558,7 +5344,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-134",
@@ -4592,7 +5384,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-135",
@@ -4626,7 +5424,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-136",
@@ -4660,7 +5464,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-137",
@@ -4694,7 +5504,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-138",
@@ -4728,7 +5544,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Safari has full initial-letter. Chromium support is limited; a float fallback is included."
+      "supportNote": "Safari has full initial-letter. Chromium support is limited; a float fallback is included.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-139",
@@ -4762,7 +5584,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-140",
@@ -4796,7 +5624,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "color-mix() and oklch() are Baseline 2023."
+      "supportNote": "color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-141",
@@ -4830,7 +5664,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-142",
@@ -4866,7 +5706,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-143",
@@ -4900,7 +5746,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari."
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-144",
@@ -4934,7 +5786,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": ":has() has been Baseline since late 2023."
+      "supportNote": ":has() has been Baseline since late 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-145",
@@ -4969,7 +5827,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. @property is Baseline and needed for typed interpolation."
+      "supportNote": "view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. @property is Baseline and needed for typed interpolation.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-146",
@@ -5004,7 +5868,13 @@
         "firefox": "yes",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. color-mix() and oklch() are Baseline 2023."
+      "supportNote": "Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. color-mix() and oklch() are Baseline 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-147",
@@ -5038,7 +5908,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 139+; Firefox and Safari unsupported."
+      "supportNote": "Chrome/Edge 139+; Firefox and Safari unsupported.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-148",
@@ -5072,7 +5948,13 @@
         "firefox": "yes",
         "safari": "yes"
       },
-      "supportNote": "Baseline: Chrome/Edge 118+, Safari 17.4+, Firefox 146+."
+      "supportNote": "Baseline: Chrome/Edge 118+, Safari 17.4+, Firefox 146+.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-149",
@@ -5107,7 +5989,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023."
+      "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-150",
@@ -5141,7 +6029,13 @@
         "firefox": "no",
         "safari": "no"
       },
-      "supportNote": "Chrome/Edge 149+; Firefox and Safari unsupported."
+      "supportNote": "Chrome/Edge 149+; Firefox and Safari unsupported.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     },
     {
       "id": "ds-151",
@@ -5175,7 +6069,13 @@
         "firefox": "no",
         "safari": "yes"
       },
-      "supportNote": "Safari 26.2+; Chromium and Firefox unsupported."
+      "supportNote": "Safari 26.2+; Chromium and Firefox unsupported.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
     }
   ]
 }

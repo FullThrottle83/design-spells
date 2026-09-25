@@ -7,7 +7,9 @@ const PORT = Number(process.env.DS_TEST_PORT ?? 8788);
 export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.spec.mjs",
-  fullyParallel: true,
+  // Previews share a browser page in beforeAll; avoid concurrent full-catalogue DOM loads.
+  fullyParallel: false,
+  workers: process.env.CI ? 2 : undefined,
   forbidOnly: !!process.env.CI,
   retries: 0,
   reporter: [["list"]],

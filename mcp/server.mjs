@@ -26,6 +26,7 @@ const DATA_PATH = join(__dirname, "..", "public", "spells.json");
 
 const NAME = "design-spells";
 const VERSION = "1.0.0";
+const SITE_URL = "https://design-spells.hultsan20.workers.dev";
 
 const SUPPORTED_PROTOCOL_VERSIONS = ["2024-11-05", "2025-03-26", "2025-06-18"];
 
@@ -74,14 +75,11 @@ function matches(spell, { query = "", category, status, jsNeed } = {}) {
 function tailwindFor(spell) {
   const css = String(spell.css || "").trim();
   if (!css) return "";
-  const indented = css.split("\n").map((l) => (l ? "  " + l : l)).join("\n");
   return [
-    "/* Tailwind v4 — drop into a global stylesheet processed by Tailwind. */",
-    '@import "tailwindcss";',
-    "",
-    "@layer components {",
-    indented,
-    "}",
+    '/* CSS for a Tailwind v4 global stylesheet. Place after @import "tailwindcss";',
+    "   not utility classes. Supply project tokens and required HTML separately.",
+    "   For a runnable demo, download the standalone HTML document. */",
+    css,
     "",
   ].join("\n");
 }
@@ -246,6 +244,9 @@ function callTool(name, rawArgs = {}) {
         html: spell.html,
         css: spell.css,
         tailwind: tailwindFor(spell),
+        tailwindFormat: "global-stylesheet-css",
+        runnableHtmlUrl: `${SITE_URL}/download/${spell.id}.html`,
+        companionHtmlUrl: spell.id === "ds-14" ? `${SITE_URL}/download/ds-14-next.html` : null,
         previewEnvironment: spell.previewEnvironment,
         previewAction: spell.previewAction,
         previewHtml: spell.previewHtml,

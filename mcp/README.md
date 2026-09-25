@@ -12,7 +12,7 @@ three tools:
 |------|---------|
 | `list_categories` | Categories with counts, plus valid `status` / `jsNeed` values |
 | `search_spells` | Filter by query / category / status / jsNeed, returns summaries |
-| `get_spell` | Full source for one spell: description, HTML, modern CSS, Tailwind v4, browser support |
+| `get_spell` | Full source plus verification, global CSS for Tailwind v4 projects, and a runnable HTML download URL |
 
 ## Run it
 
@@ -35,5 +35,11 @@ node mcp/server.mjs        # stdio server — reads/writes JSON-RPC on stdin/std
 ```
 
 Then ask, for example: *"Give my login button some magic from Design Spells"*.
-The agent calls `search_spells`, picks a spell by id, then `get_spell` to inject
-its CSS, HTML, and Tailwind into your project.
+The agent calls `search_spells`, picks a spell by id, then `get_spell` to inspect
+its CSS, authored HTML, support evidence and export links. The `tailwind` field
+is **global CSS for a Tailwind v4 stylesheet**, not generated utility classes
+or a self-contained build; `tailwindFormat` identifies this explicitly. Place
+it after your project's Tailwind import and provide required design tokens and
+markup. `runnableHtmlUrl` points to the self-contained demo document (remote
+images may still require a network connection). Spell ds-14 also returns
+`companionHtmlUrl` for its second navigation document.

@@ -523,6 +523,40 @@
     return cssBlocks.join("\n");
   }
 
+  // Integration source is generated at build time and served as plain text.
+  // Keep the native source link available when clipboard access is unavailable.
+  document.addEventListener("click", async (e) => {
+    const button = e.target.closest("button[data-copy-bundle]");
+    if (!button) return;
+    const sid = button.dataset.copyBundle;
+    const status = button.closest(".drawer")?.querySelector("[data-bundle-status]");
+    if (!validSpellIds.has(sid)) {
+      if (status) status.textContent = "Unknown spell; nothing was copied.";
+      return;
+    }
+    if (!navigator.clipboard?.writeText) {
+      if (status) status.textContent = "Clipboard unavailable. Open the integration source link instead.";
+      return;
+    }
+    button.disabled = true;
+    try {
+      const response = await fetch("/bundle/" + encodeURIComponent(sid) + ".txt", { credentials: "same-origin" });
+      if (!response.ok) throw new Error("Bundle request failed");
+      const source = await response.text();
+      if (!source.startsWith("<!doctype html>\n<!-- Design Spells " + sid + ": integration source")) {
+        throw new Error("Unexpected bundle response");
+      }
+      await navigator.clipboard.writeText(source);
+      if (status) status.textContent = "Integration source copied for " + sid + ".";
+      button.textContent = "Copied bundle";
+    } catch {
+      if (status) status.textContent = "Copy failed. Use the integration source link instead.";
+      button.textContent = "Copy integration bundle";
+    } finally {
+      button.disabled = false;
+    }
+  });
+
   // ------------------------------------------------------------- 7. Progressive Copy
   document.addEventListener("click", async (e) => {
     const copyBtn = e.target.closest("[data-copy-row], .code__copy");

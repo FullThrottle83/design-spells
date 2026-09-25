@@ -43,3 +43,12 @@ it after your project's Tailwind import and provide required design tokens and
 markup. `runnableHtmlUrl` points to the self-contained demo document (remote
 images may still require a network connection). Spell ds-14 also returns
 `companionHtmlUrl` for its second navigation document.
+
+`integrationBundleUrl` points to a generated plain-text HTML integration source:
+authored markup (or an explicitly labelled demo fixture), the original spell CSS,
+and only the shared variables that the CSS/markup references, resolved recursively.
+Unknown project variables are called out rather than silently declared supported.
+This source is **not** a pixel-identical demo or a complete production component;
+document-level effects and external media require separate integration. The
+existing `runnableHtmlUrl` retains the fully styled demo and remains the
+better choice for verifying behavior.

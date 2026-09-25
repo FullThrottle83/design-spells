@@ -10,7 +10,7 @@ for (const enabled of [false, true]) {
       await expect(page.locator(".row[data-id='ds-1'] .row__link")).toHaveAttribute("href", "/spells/ds-1/");
       await expect(page.locator(".row[data-id='ds-1'] .row__demo")).toHaveAttribute("href", "/play/ds-1/");
       await expect(page.locator(".catalogue-tools")).toBeVisible({ visible: enabled });
-      await page.getByRole("link", { name: /Shimmer on primary buttons/ }).last().click();
+      await page.locator(".row[data-id='ds-1'] .row__link").click();
       await expect(page).toHaveURL(/\/spells\/ds-1\/$/);
       await expect(page.locator("iframe")).toHaveAttribute("sandbox", "allow-same-origin");
     });
@@ -22,8 +22,13 @@ for (const enabled of [false, true]) {
         const size = await page.evaluate(() => ({
           client: document.documentElement.clientWidth,
           scroll: document.documentElement.scrollWidth,
+          offenders: [...document.querySelectorAll("body *")].map(el => ({
+            node: el.tagName.toLowerCase() + "." + el.className,
+            right: Math.round(el.getBoundingClientRect().right),
+            width: Math.round(el.getBoundingClientRect().width),
+          })).filter(el => el.right > document.documentElement.clientWidth + 1).slice(0,12),
         }));
-        expect(size.scroll, `overflow at ${width}px`).toBeLessThanOrEqual(size.client);
+        expect(size.scroll, `overflow at ${width}px: ${JSON.stringify(size.offenders)}`).toBeLessThanOrEqual(size.client);
       }
     });
   });

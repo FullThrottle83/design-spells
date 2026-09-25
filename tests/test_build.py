@@ -551,7 +551,8 @@ class LeanCatalogueTest(unittest.TestCase):
         output = LIGHT_INDEX_HTML.read_bytes()
         self.assertLess(len(output), 110_000, "The homepage must remain under 110 KB raw HTML")
         self.assertLess(len(output), len(INDEX_HTML.read_bytes()) // 10)
-        self.assertNotIn(b'@starting-style', output)
+        self.assertNotIn(b'<style', output)
+        self.assertNotIn(b'srcdoc=', output)
         self.assertNotIn(b'<pre class="code__view"', output)
         self.assertIn(b'/catalogue.js', output)
 

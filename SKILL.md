@@ -12,7 +12,7 @@ A single **canonical** reference bank of design spells for modern Astro projects
 
 The document therefore contains only spells marked **`0 JS`** or **`Markup`**. In the original file's terminology, `Markup` still means the spell is JS-free, but it needs a precise HTML pattern — for example `<details>`, checkbox state, `popover`, a `dialog`-compatible structure, or another native state machine.
 
-In total there are **145 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–146** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal).
+In total there are **150 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–151** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal, Fluid Rhythm Function, Donut-Scoped Callout, Snapped Product State, Semantic Metrics Dividers, Organic Avatar Cluster).
 
 ---
 
@@ -88,6 +88,7 @@ This is the foundation every spell builds on. Load it before anything else.
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
 
 html {
   /* Prevents layout shift when a dialog/popover opens and locks the scrollbar */
@@ -121,7 +122,7 @@ html {
   overscroll-behavior: contain;
 }
 
-/* WCAG 2.2 AA / mobile: minimum hit target for buttons, links, summary, labels. */
+/* Project touch-target preference (44px); not a WCAG 2.2 AA requirement. */
 button, [type="button"], [type="submit"], [type="reset"],
 summary, .btn, a.btn {
   min-block-size: 44px;
@@ -208,14 +209,14 @@ A subtle light gleam sweeps across the button on hover.
 ### 2. Soft Push
 *Interaction · Baseline · 0 JS*
 
-A microscopic scale-down on `:active` for tactile feedback.
+A confident scale-down on `:active` for tactile feedback.
 
 ```css
 .btn, .card-interactive {
   min-block-size: 44px;
   transition: transform 100ms cubic-bezier(0.16,1,0.3,1);
 }
-.btn:active, .card-interactive:active { transform: scale(0.98); }
+.btn:active, .card-interactive:active { transform: scale(0.94); }
 ```
 
 ### 3. Lift & Zoom on cards
@@ -226,14 +227,23 @@ The card lifts and the image zooms in slowly.
 ```css
 .destination-card {
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px oklch(0.2 0.01 80 / 0.08);
   transition: transform 350ms cubic-bezier(0.16,1,0.3,1), box-shadow 350ms cubic-bezier(0.16,1,0.3,1);
 }
+.destination-card img {
+  display: block; aspect-ratio: 16 / 10; object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.16,1,0.3,1);
+}
+.destination-card :is(h3, p) { margin: 0; padding-inline: 1rem; }
+.destination-card h3 { padding-block-start: .85rem; }
+.destination-card p { padding-block-end: 1rem; color: var(--color-text-muted); }
 .destination-card:hover,
 .destination-card:focus-within {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px oklch(0.2 0.01 80 / 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px oklch(0.2 0.01 80 / 0.18);
 }
-.destination-card img { transition: transform 600ms cubic-bezier(0.16,1,0.3,1); }
 .destination-card:hover img,
 .destination-card:focus-within img { transform: scale(1.05); }
 @media (hover: none) {
@@ -274,9 +284,12 @@ Icons transition smoothly through brand color tones on hover and focus.
   color: var(--color-text-muted);
   min-block-size: 44px; min-inline-size: 44px;
   display: inline-grid; place-items: center;
-  transition: color 180ms cubic-bezier(0.16,1,0.3,1);
+  transition: color 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
 }
-.icon:hover, .icon:focus-visible { color: var(--color-primary); }
+.icon:hover, .icon:focus-visible {
+  color: var(--color-accent);
+  transform: scale(1.12);
+}
 ```
 
 ### 19. Focus-Within Halo
@@ -360,11 +373,13 @@ An outbound link indicator icon that nudges outward on hover.
 
 ```css
 a[target="_blank"] .external-icon {
+  display: inline-block;
+  opacity: .55;
   transition: transform 180ms cubic-bezier(0.16,1,0.3,1), opacity 180ms cubic-bezier(0.16,1,0.3,1);
 }
 a[target="_blank"]:hover .external-icon,
 a[target="_blank"]:focus-visible .external-icon {
-  transform: translate(.12rem, -.12rem);
+  transform: translate(.3rem, -.3rem);
   opacity: 1;
 }
 ```
@@ -387,7 +402,8 @@ Segmented pill selector with smooth active tab highlight and focus indicator.
 }
 .segmented button[aria-pressed="true"] {
   background: var(--color-bg);
-  box-shadow: 0 1px 3px oklch(0 0 0 / .08), inset 0 1px 0 oklch(1 0 0 / .3);
+  box-shadow: 0 1px 3px oklch(0 0 0 / .08), inset 0 1px 0 oklch(1 0 0 / .3),
+    0 0 0 3px color-mix(in oklch, var(--color-primary), transparent 78%);
 }
 ```
 
@@ -735,6 +751,7 @@ Breadcrumbs that show a discreet “+N” hint and edge masking only when the ro
 ```css
 .crumbs-wrap {
   position: relative; overflow-x: auto; container-type: scroll-state;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   mask-image: linear-gradient(to right, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, black 92%, transparent);
@@ -2459,10 +2476,11 @@ A media card gets a darker overlay on hover so the heading stays readable.
   content: "";
   position: absolute; inset: 0;
   background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));
+  opacity: .5;
   transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);
 }
 .media-card:hover::after,
-.media-card:focus-within::after { opacity: .86; }
+.media-card:focus-within::after { opacity: 1; }
 ```
 
 ### 35. Inline Theme Switch (`light-dark()`)
@@ -4207,6 +4225,246 @@ A modal dialog that prevents scroll chaining (the background moving while the mo
   overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;
 }
 .guard-modal::backdrop { overscroll-behavior: none; background: oklch(0 0 0 / .4); }
+```
+
+### 147. Fluid Rhythm Function (`@function`)
+*Layout · Progressive · 0 JS*
+
+Centralize fluid spacing calculations with typed custom CSS functions. Unsupported engines fall back cleanly to the baseline `clamp()`.
+
+```html
+<article class="fluid-rhythm-card">
+  <p class="eyebrow">Quarterly report</p>
+  <h2>Spacing that scales</h2>
+  <p>Responsive rhythm with typed @function.</p>
+</article>
+```
+
+```css
+.fluid-rhythm-card {
+  inline-size: min(32rem, 100%);
+  padding: clamp(1rem, 4cqi, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+@function --fluid-space(
+  --minimum <length>,
+  --preferred <length>,
+  --maximum <length>
+) returns <length> {
+  result: clamp(var(--minimum), var(--preferred), var(--maximum));
+}
+.fluid-rhythm-card {
+  padding: --fluid-space(1rem, 4cqi, 2rem);
+}
+.fluid-rhythm-card .eyebrow {
+  color: var(--color-text-muted);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+```
+
+### 148. Donut-Scoped Documentation Callout (`@scope`)
+*Layout · Baseline · 0 JS*
+
+Style component guidance with `@scope` while explicitly preventing accent styles from leaking into nested demo regions.
+
+```html
+<article class="docs-card">
+  <h2><span class="accent">Scoped</span> component guidance</h2>
+  <p>The outer accent belongs to the card.</p>
+  <section class="example" aria-label="Unstyled embedded example">
+    <p><span class="accent">Embedded content</span> keeps its own theme.</p>
+  </section>
+</article>
+```
+
+```css
+.docs-card {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.docs-card > h2 .accent,
+.docs-card > p .accent {
+  color: var(--color-accent);
+  font-weight: 750;
+}
+.docs-card .example {
+  margin-block-start: 1rem;
+  padding: .75rem;
+  border-inline-start: 3px solid var(--color-border);
+}
+@scope (.docs-card) to (.example) {
+  .accent {
+    color: var(--color-accent);
+    font-weight: 750;
+  }
+```
+
+### 149. Snapped Product State (`scroll-state()`)
+*Scroll · Progressive · 0 JS*
+
+Highlight the active card aligned to a scroll-snap point using `@container scroll-state(snapped: inline)` without JavaScript observers.
+
+```html
+<div class="snap-products" aria-label="Featured products">
+  <article class="snap-product">
+    <div class="snap-product__body"><strong>Starter</strong><span>$12</span></div>
+  </article>
+  <article class="snap-product">
+    <div class="snap-product__body"><strong>Studio</strong><span>$28</span></div>
+  </article>
+  <article class="snap-product">
+    <div class="snap-product__body"><strong>Agency</strong><span>$64</span></div>
+  </article>
+</div>
+```
+
+```css
+.snap-products {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(80%, 16rem);
+  gap: .75rem;
+  overflow-x: auto;
+  padding: .5rem;
+  scroll-snap-type: inline mandatory;
+  overscroll-behavior-inline: contain;
+}
+.snap-product {
+  container-type: scroll-state;
+  scroll-snap-align: center;
+}
+.snap-product__body {
+  min-block-size: 8rem;
+  padding: 1rem;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+@supports (container-type: scroll-state) {
+  .snap-product__body {
+    opacity: .62;
+    scale: .96;
+    transition: opacity .2s ease, scale .2s ease, border-color .2s ease;
+  }
+  @container scroll-state(snapped: inline) {
+    .snap-product__body {
+      opacity: 1;
+      scale: 1;
+      border-color: var(--color-primary);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snap-product__body { transition: none; }
+}
+```
+
+### 150. Semantic Metrics Dividers (`column-rule`)
+*Data · Progressive · 0 JS*
+
+Draw clean separators directly in grid and flex gaps using `column-rule` without first/last-child border overrides.
+
+```html
+<dl class="metric-strip">
+  <div><dt>Revenue</dt><dd>$84k</dd></div>
+  <div><dt>Retention</dt><dd>94%</dd></div>
+  <div><dt>Latency</dt><dd>82ms</dd></div>
+</dl>
+```
+
+```css
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.metric-strip > div {
+  min-inline-size: 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 1px solid var(--color-border);
+}
+.metric-strip > div:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+.metric-strip dt {
+  color: var(--color-text-muted);
+  font-size: .75rem;
+}
+.metric-strip dd {
+  margin: .2rem 0 0;
+  font-size: clamp(1.1rem, 4cqi, 1.6rem);
+  font-weight: 750;
+}
+@supports (row-rule: 1px solid transparent) {
+  .metric-strip {
+    column-rule: 1px solid var(--color-border);
+  }
+  .metric-strip > div,
+  .metric-strip > div:first-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+```
+
+### 151. Organic Avatar Cluster (`random()`)
+*Visual · Progressive · 0 JS*
+
+Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.
+
+```html
+<ul class="avatar-cluster" aria-label="Project contributors">
+  <li aria-label="Ari">A</li>
+  <li aria-label="Bea">B</li>
+  <li aria-label="Chen">C</li>
+  <li aria-label="Dara">D</li>
+  <li aria-label="Eli">E</li>
+</ul>
+```
+
+```css
+.avatar-cluster {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: 1rem;
+  margin: 0;
+  list-style: none;
+}
+.avatar-cluster > li {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--color-bg);
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 750;
+}
+.avatar-cluster > li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }
+.avatar-cluster > li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }
+.avatar-cluster > li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }
+@supports (rotate: random(-1deg, 1deg)) {
+  .avatar-cluster > li {
+    rotate: random(-6deg, 6deg);
+    translate: 0 random(-3px, 3px);
+  }
+@media (prefers-reduced-motion: reduce) {
+  .avatar-cluster > li {
+    rotate: 0deg;
+    translate: 0;
+  }
 ```
 
 ---

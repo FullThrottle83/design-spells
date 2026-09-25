@@ -124,3 +124,24 @@ test("ds-90 quick actions are exposed by native disclosure and keyboard", async 
   await expect(disclosure).not.toHaveAttribute("open", "");
   await expect(action).toBeHidden();
 });
+
+test("ds-18 tooltip decoration follows hover and keyboard focus without scripting", async ({ page }) => {
+  await page.goto("/play/ds-18/");
+  const trigger = page.getByRole("button", { name: "Hover me" });
+  const opacity = () => trigger.evaluate(el => Number(getComputedStyle(el, "::after").opacity));
+  const content = await trigger.evaluate(el => getComputedStyle(el, "::after").content);
+  await expect(page.locator("script")).toHaveCount(0);
+  expect(content).toContain("Copied to clipboard");
+  await expect.poll(opacity).toBe(0);
+
+  await page.keyboard.press("Tab");
+  await expect(trigger).toBeFocused();
+  await expect.poll(opacity).toBe(1);
+
+  await page.keyboard.press("Tab");
+  await expect.poll(opacity).toBe(0);
+  await trigger.hover();
+  await expect.poll(opacity).toBe(1);
+  await page.mouse.move(0, 0);
+  await expect.poll(opacity).toBe(0);
+});

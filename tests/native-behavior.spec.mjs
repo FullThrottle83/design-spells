@@ -79,3 +79,48 @@ test("ds-128 uses native form validity for the visual meter", async ({ page }) =
   expect(await input.evaluate(el => el.checkValidity())).toBe(true);
   await expect.poll(widthRatio).toBeGreaterThan(0.95);
 });
+
+test("ds-1 keyboard focus activates its decorative shimmer without scripting", async ({ page }) => {
+  await page.goto("/play/ds-1/");
+  const button = page.getByRole("button", { name: "Get started" });
+  const shimmerTransform = () => button.evaluate(
+    (el) => getComputedStyle(el, "::before").transform,
+  );
+  await expect(page.locator("script")).toHaveCount(0);
+  const initial = await shimmerTransform();
+  await page.keyboard.press("Tab");
+  await expect(button).toBeFocused();
+  await expect.poll(shimmerTransform).not.toBe(initial);
+  await expect(button).toHaveCSS("min-block-size", "44px");
+});
+
+test("ds-2 press effect returns to rest on release", async ({ page }) => {
+  await page.goto("/play/ds-2/");
+  const button = page.getByRole("button", { name: "Press me" });
+  await expect(page.locator("script")).toHaveCount(0);
+  const transform = () => button.evaluate((el) => getComputedStyle(el).transform);
+  const initial = await transform();
+  const box = await button.boundingBox();
+  expect(box).not.toBeNull();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await expect.poll(transform).not.toBe(initial);
+  await page.mouse.up();
+  await expect.poll(transform).toBe(initial);
+});
+
+test("ds-90 quick actions are exposed by native disclosure and keyboard", async ({ page }) => {
+  await page.goto("/play/ds-90/");
+  const disclosure = page.locator("details.fan");
+  const summary = disclosure.locator("summary");
+  const action = disclosure.getByRole("button", { name: "New post" });
+  await expect(page.locator("script")).toHaveCount(0);
+  await expect(disclosure).not.toHaveAttribute("open", "");
+  await summary.focus();
+  await page.keyboard.press("Enter");
+  await expect(disclosure).toHaveAttribute("open", "");
+  await expect(action).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(disclosure).not.toHaveAttribute("open", "");
+  await expect(action).toBeHidden();
+});

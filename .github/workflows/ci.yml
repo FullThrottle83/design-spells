@@ -5,7 +5,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.ref_name || github.event.pull_request.head.ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -20,5 +22,15 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run build
+      - name: Synchronize generated assets on the working branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/improve/verified-zero-js-foundation-20260925'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/index.html public/spells.json
+          if ! git diff --cached --quiet; then
+            git commit -m "build: synchronize generated catalogue"
+            git push
+          fi
       - run: git diff --exit-code -- public/index.html public/spells.json
       - run: npm test

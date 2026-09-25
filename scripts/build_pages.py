@@ -168,7 +168,7 @@ def render_download(spell: dict, next_page: bool = False) -> str:
     scaffolding the hosted demo uses. Remote media may still require a network.
     """
     page = render_play(spell, next_page=next_page)
-    page = page.replace('  <meta name="robots" content="noindex,follow">\\n', "")
+    page = page.replace('  <meta name="robots" content="noindex,follow">', "")
     if spell["id"] == "ds-14":
         # Two real files are necessary for a cross-document transition offline.
         href = 'href="ds-14.html"' if next_page else 'href="ds-14-next.html"'

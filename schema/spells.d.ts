@@ -71,6 +71,8 @@ export interface Spell {
   jsNeed: JsNeed;
   jsLabel: JsLabel;
   note: string;
+  /** A specific caveat authored in README.md; blank does not imply accessibility approval. */
+  usageNote: string;
   description: string;
   /** Required markup (may be empty for CSS-only spells). */
   html: string;
@@ -94,8 +96,10 @@ export interface Spell {
 }
 
 export interface Catalogue {
-  /** UTC date on which the browser-support registry was verified. */
+  /** UTC date of the manually curated support snapshot. */
   supportAsOf: string;
+  /** Scope and limitations of the curated support registry. */
+  supportMethod: string;
   total: number;
   spells: Spell[];
 }

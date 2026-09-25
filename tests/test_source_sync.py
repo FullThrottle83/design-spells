@@ -1,0 +1,51 @@
+"""Guard invariants for the canonical reference and its distributable skill."""
+
+import re
+import unittest
+from pathlib import Path
+
+from scripts.build import parse_spells
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def brace_balance(css: str) -> int:
+    css = re.sub(r"/\*[\s\S]*?\*/", "", css)
+    return css.count("{") - css.count("}")
+
+
+class SourceSyncTest(unittest.TestCase):
+    def test_skill_is_exact_copy_of_canonical_readme(self):
+        self.assertEqual(
+            (ROOT / "README.md").read_bytes(),
+            (ROOT / "SKILL.md").read_bytes(),
+            "Update SKILL.md when README.md changes.",
+        )
+
+    def test_native_markup_spells_have_complete_html(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        for spell in parse_spells(readme):
+            if spell["jsNeed"] == "markup":
+                with self.subTest(spell=spell["id"]):
+                    self.assertTrue(spell["html"].strip(), "Native markup is required.")
+
+    def test_every_spell_has_balanced_stylesheet_braces(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        spells = parse_spells(readme)
+        self.assertEqual(len(spells), 150)
+        for spell in spells:
+            with self.subTest(spell=spell["id"]):
+                self.assertEqual(
+                    brace_balance(spell["css"]), 0,
+                    f'{spell["id"]}: unmatched CSS braces',
+                )
+
+    def test_base_safeguards_have_balanced_css(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        section = readme.split("## Base safeguards", 1)[1].split("## Root scroll-state preset", 1)[0]
+        css = section.split("```css", 1)[1].split("```", 1)[0]
+        self.assertEqual(brace_balance(css), 0)
+
+
+if __name__ == "__main__":
+    unittest.main()

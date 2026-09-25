@@ -496,7 +496,7 @@ PREVIEW_HTML: dict[str, str] = {
         '<input type="range" min="0" max="100" value="20" aria-label="Lowest price">'
         '<input type="range" min="0" max="100" value="80" aria-label="Highest price">'
         '<div class="slider-track" aria-hidden="true"></div></div>',
-    "135": '<header class="plx-hero" style="inline-size:100%">'
+    "135": '<header class="plx-hero" style="inline-size:22rem;max-inline-size:100%">'
         '<div class="plx-layer plx-bg" aria-hidden="true"></div>'
         '<div class="plx-layer plx-fg"><h1>The future of UI</h1></div></header>',
     "146": '<button commandfor="guard-modal" command="show-modal" class="btn">Open modal</button>'

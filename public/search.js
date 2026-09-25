@@ -21,6 +21,21 @@
   const rows = Array.from(document.querySelectorAll(".row"));
   const catBlocks = Array.from(document.querySelectorAll(".cat-block"));
   const totalSpells = rows.length;
+  const validSpellIds = new Set(rows.map((row) => row.dataset.id));
+
+  function validIds(ids) {
+    return Array.isArray(ids)
+      ? ids.filter((id) => typeof id === "string" && validSpellIds.has(id))
+      : [];
+  }
+
+  function readStorage(key) {
+    try { return window.localStorage.getItem(key); } catch { return null; }
+  }
+
+  function writeStorage(key, value) {
+    try { window.localStorage.setItem(key, value); } catch { /* Storage is optional. */ }
+  }
 
   // Stacks presets
   const STACK_PRESETS = {
@@ -33,12 +48,11 @@
 
   // State
   let stackSet = new Set();
-  let highlightedIndex = -1;
   let debounceTimer = null;
 
   // ------------------------------------------------------------- 1. Theme
   function initTheme() {
-    const saved = localStorage.getItem("ds-theme") || "auto";
+    const saved = readStorage("ds-theme") || "auto";
     applyTheme(saved);
   }
 
@@ -59,9 +73,9 @@
 
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-      const current = localStorage.getItem("ds-theme") || "auto";
+      const current = readStorage("ds-theme") || "auto";
       const next = current === "auto" ? "dark" : current === "dark" ? "light" : "auto";
-      localStorage.setItem("ds-theme", next);
+      writeStorage("ds-theme", next);
       applyTheme(next);
     });
   }
@@ -148,35 +162,33 @@
     history.replaceState(null, "", newUrl);
   }
 
-  function syncFromUrl() {
+  function syncFromUrl({ preserveStoredStack = false } = {}) {
     const params = new URLSearchParams(location.search);
-    const q = params.get("q");
-    const cat = params.get("category");
-    const status = params.get("status");
+    searchInput.value = params.get("q") || "";
+
+    const cat = params.get("category") || "all";
+    const status = params.get("status") || "all";
+    const catRadio = [...catRadios].find((radio) => radio.value === cat)
+      || [...catRadios].find((radio) => radio.value === "all");
+    const statusRadio = [...statusRadios].find((radio) => radio.value === status)
+      || [...statusRadios].find((radio) => radio.value === "all");
+    if (catRadio) catRadio.checked = true;
+    if (statusRadio) statusRadio.checked = true;
+
     const stack = params.get("stack");
-
-    if (q) searchInput.value = q;
-
-    if (cat) {
-      const radio = document.querySelector(`input[name="cat"][value="${CSS.escape(cat)}"]`);
-      if (radio) radio.checked = true;
-    }
-    if (status) {
-      const radio = document.querySelector(`input[name="status"][value="${CSS.escape(status)}"]`);
-      if (radio) radio.checked = true;
+    if (stack !== null) {
+      stackSet = new Set(validIds(stack.split(",").map((id) => id.trim())));
+      writeStorage("ds-stack", JSON.stringify([...stackSet]));
+    } else if (!preserveStoredStack) {
+      stackSet.clear();
+      writeStorage("ds-stack", "[]");
     }
 
-    if (stack) {
-      stackSet = new Set(stack.split(",").map((s) => s.trim()).filter(Boolean));
-      saveStack();
-      renderStack();
-    }
-
+    renderStack();
     filter();
 
-    // Check hash for direct spell modal deep-linking
-    const hash = location.hash.replace("#", "");
-    if (hash && hash.startsWith("ds-")) {
+    const hash = location.hash.slice(1);
+    if (validSpellIds.has(hash)) {
       const drawer = document.getElementById(`drawer-${hash}`);
       if (drawer && typeof drawer.showPopover === "function") {
         setTimeout(() => drawer.showPopover(), 100);
@@ -186,15 +198,15 @@
     }
   }
 
-  window.addEventListener("popstate", syncFromUrl);
+  window.addEventListener("popstate", () => syncFromUrl());
 
   // ------------------------------------------------------------- 4. Live Browser Feature Check (CSS.supports)
   const FEATURE_SUPPORTS = {
-    "custom-functions": () => window.CSS && CSS.supports && CSS.supports("@function --f() {}"),
-    "css-scope": () => window.CSS && CSS.supports && CSS.supports("@scope"),
+    "custom-functions": () => null, // An at-rule is not a CSS.supports() declaration.
+    "css-scope": () => null, // At-rule behavior needs a separate test.
     "gap-decorations": () => window.CSS && CSS.supports && CSS.supports("column-rule: 1px solid red"),
-    "css-random": () => window.CSS && CSS.supports && CSS.supports("width: random(1px, 10px)"),
-    "interest-invokers": () => typeof HTMLButtonElement !== "undefined" && "interestfor" in HTMLButtonElement.prototype,
+    "css-random": () => window.CSS && CSS.supports && CSS.supports("rotate: random(-1deg, 1deg)"),
+    "interest-invokers": () => null, // Property presence does not establish behavior.
     "invoker-commands": () => typeof HTMLButtonElement !== "undefined" && "commandfor" in HTMLButtonElement.prototype,
     "grid-lanes": () => window.CSS && CSS.supports && CSS.supports("display: grid-lanes"),
     "sibling-index": () => window.CSS && CSS.supports && CSS.supports("top: sibling-index()"),
@@ -204,7 +216,7 @@
     "closedby": () => (typeof HTMLDialogElement !== "undefined" && "closedBy" in HTMLDialogElement.prototype) || "closedby" in HTMLElement.prototype,
     "scroll-initial-target": () => window.CSS && CSS.supports && CSS.supports("scroll-initial-target: nearest"),
     "open-pseudo": () => window.CSS && CSS.supports && CSS.supports("selector(:open)"),
-    "until-found": () => "onbeforematch" in window,
+    "until-found": () => null, // Event presence is not a behavioral test.
     "scroll-markers": () => window.CSS && CSS.supports && CSS.supports("selector(::scroll-marker)"),
     "select-pseudos": () => window.CSS && CSS.supports && CSS.supports("selector(::checkmark)"),
     "base-select": () => window.CSS && CSS.supports && CSS.supports("appearance: base-select"),
@@ -212,7 +224,7 @@
     "scroll-state": () => window.CSS && CSS.supports && CSS.supports("container-type: scroll-state"),
     "view-timeline": () => window.CSS && CSS.supports && CSS.supports("animation-timeline: view()"),
     "scroll-timeline": () => window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()"),
-    "view-transitions-cross": () => window.CSS && CSS.supports && CSS.supports("@view-transition { navigation: auto; }"),
+    "view-transitions-cross": () => null, // Navigation behavior needs an integration test.
     "view-transitions-same": () => window.CSS && CSS.supports && CSS.supports("view-transition-name: test"),
     "anchor": () => window.CSS && CSS.supports && CSS.supports("anchor-name: --a"),
     "interpolate-size": () => window.CSS && CSS.supports && CSS.supports("interpolate-size: allow-keywords"),
@@ -225,42 +237,46 @@
     "position-visibility": () => window.CSS && CSS.supports && CSS.supports("position-visibility: anchors-visible"),
     "shape": () => window.CSS && CSS.supports && CSS.supports("clip-path: shape()"),
     "offset-path": () => window.CSS && CSS.supports && CSS.supports("offset-path: path('M0 0')"),
-    "property": () => window.CSS && CSS.supports && CSS.supports("@property --p { syntax: '<number>'; inherits: false; initial-value: 0; }"),
+    "property": () => null, // An at-rule is not a CSS.supports() declaration.
     "subgrid": () => window.CSS && CSS.supports && CSS.supports("grid-template-columns: subgrid"),
     "container": () => window.CSS && CSS.supports && CSS.supports("container-type: inline-size"),
     "content-visibility": () => window.CSS && CSS.supports && CSS.supports("content-visibility: auto"),
     "scrollbar-color": () => window.CSS && CSS.supports && CSS.supports("scrollbar-color: auto"),
     "light-dark": () => window.CSS && CSS.supports && CSS.supports("color: light-dark(#fff, #000)"),
-    "starting-style": () => window.CSS && CSS.supports && CSS.supports("@starting-style {}"),
+    "starting-style": () => null, // An at-rule is not a CSS.supports() declaration.
     "color-mix": () => window.CSS && CSS.supports && CSS.supports("color: color-mix(in srgb, red 50%, blue)"),
     "has": () => window.CSS && CSS.supports && CSS.supports("selector(:has(*))")
   };
 
   function checkFeatureSupport(featureKeys) {
-    if (!featureKeys || !featureKeys.length) return { status: "yes", text: "100% supported in your browser" };
+    if (!Array.isArray(featureKeys) || featureKeys.length === 0) {
+      return { status: "partial", text: "No runtime checks available; see dated compatibility notes." };
+    }
 
-    let supportedCount = 0;
+    let passed = 0;
+    let failed = 0;
+    let unchecked = 0;
     for (const key of featureKeys) {
-      const fn = FEATURE_SUPPORTS[key];
-      if (!fn) {
-        supportedCount++;
-        continue;
+      const probe = FEATURE_SUPPORTS[key];
+      if (typeof probe !== "function") {
+        unchecked++;
+        continue; // Unknown keys are never treated as supported.
       }
       try {
-        const res = typeof fn === "function" ? fn() : Boolean(fn);
-        if (res) supportedCount++;
-      } catch (e) {
-        // Feature check failed
+        const result = probe();
+        if (result === true) passed++;
+        else if (result === false) failed++;
+        else unchecked++;
+      } catch {
+        unchecked++;
       }
     }
 
-    if (supportedCount === featureKeys.length) {
-      return { status: "yes", text: "Every feature this spell needs runs in your browser" };
-    } else if (supportedCount > 0) {
-      return { status: "partial", text: `${supportedCount} of ${featureKeys.length} features run in your browser` };
-    } else {
-      return { status: "no", text: "None of these features run in your browser yet — ship a fallback" };
-    }
+    const counts = `${passed} syntax/API checks passed, ${failed} failed, ${unchecked} not checked.`;
+    return {
+      status: failed ? "no" : unchecked ? "partial" : "yes",
+      text: `${counts} This does not verify interactive behavior or fallback quality.`,
+    };
   }
 
   function updateDrawerFeatureChecks(drawerEl) {
@@ -271,7 +287,7 @@
       const res = checkFeatureSupport(keys);
       checkEl.innerHTML = `
         <span class="feature-check__badge is-${res.status === 'yes' ? 'supported' : res.status === 'partial' ? 'partial' : 'unsupported'}">
-          ${res.status === 'yes' ? 'Supported' : res.status === 'partial' ? 'Partial' : 'No native support'}
+          ${res.status === 'yes' ? 'Syntax detected' : res.status === 'partial' ? 'Not fully checked' : 'Check failed'}
         </span>
         <span class="feature-check__text">${res.text}</span>
       `;
@@ -349,16 +365,13 @@
 
   // ------------------------------------------------------------- 6. Stack Builder Engine
   function loadStack() {
-    const saved = localStorage.getItem("ds-stack");
-    if (saved) {
-      try {
-        stackSet = new Set(JSON.parse(saved));
-      } catch (e) {}
-    }
+    const saved = readStorage("ds-stack");
+    if (!saved) return;
+    try { stackSet = new Set(validIds(JSON.parse(saved))); } catch { stackSet.clear(); }
   }
 
   function saveStack() {
-    localStorage.setItem("ds-stack", JSON.stringify(Array.from(stackSet)));
+    writeStorage("ds-stack", JSON.stringify([...stackSet]));
     updateUrlState();
   }
 
@@ -392,22 +405,29 @@
       return;
     }
 
-    let itemsHtml = "";
-    stackSet.forEach((sid) => {
-      const row = document.querySelector(`.row[data-id="${sid}"]`);
-      const title = row ? row.querySelector(".row__hit")?.textContent || sid : sid;
-      itemsHtml += `
-        <div class="stack-item" data-id="${sid}">
-          <span><strong class="stack-item__id">${sid}</strong> ${escapeHtml(title)}</span>
-          <button type="button" class="stack-item__remove" data-stack-remove="${sid}" aria-label="Remove ${sid}">✕</button>
-        </div>
-      `;
-    });
-    stackItemsEl.innerHTML = itemsHtml;
-  }
-
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const items = document.createDocumentFragment();
+    for (const sid of stackSet) {
+      const row = rows.find((candidate) => candidate.dataset.id === sid);
+      if (!row) continue;
+      const title = row.querySelector(".row__hit")?.textContent || sid;
+      const item = document.createElement("div");
+      item.className = "stack-item";
+      item.dataset.id = sid;
+      const description = document.createElement("span");
+      const id = document.createElement("strong");
+      id.className = "stack-item__id";
+      id.textContent = sid;
+      description.append(id, document.createTextNode(" " + title));
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "stack-item__remove";
+      remove.dataset.stackRemove = sid;
+      remove.setAttribute("aria-label", `Remove ${sid}`);
+      remove.textContent = "×";
+      item.append(description, remove);
+      items.append(item);
+    }
+    stackItemsEl.replaceChildren(items);
   }
 
   document.addEventListener("click", (e) => {
@@ -488,7 +508,7 @@
     cssBlocks.push(`/* ============================================================`);
     cssBlocks.push(`   Design Spells — Combined Bundle (${stackSet.size} spells)`);
     cssBlocks.push(`   Generated: ${new Date().toISOString().slice(0, 10)}`);
-    cssBlocks.push(`   Zero Client JS · Astro 7 & Modern CSS Ready`);
+    cssBlocks.push(`   CSS snippets only; include required tokens and markup separately.`);
     cssBlocks.push(`   ============================================================ */\n`);
 
     stackSet.forEach((sid) => {
@@ -535,53 +555,40 @@
     }
   });
 
-  // ------------------------------------------------------------- 8. Keyboard Navigation
+  // ------------------------------------------------------------- 8. Component-scoped keyboard navigation
   document.addEventListener("keydown", (e) => {
-    // '/' or 'Cmd+K' search focus
-    if (
-      (e.key === "/" || (e.key === "k" && (e.metaKey || e.ctrlKey))) &&
-      document.activeElement !== searchInput &&
-      !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName)
-    ) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"
+      && !e.altKey && !e.isComposing) {
       e.preventDefault();
       searchInput.focus();
       return;
     }
-
-    // Row navigation with 'j' and 'k' when search is not focused
-    if (
-      !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName) &&
-      !document.querySelector(".drawer[popover]:not([hidden]):popover-open")
-    ) {
-      const visibleRows = rows.filter((r) => !r.hidden);
-      if (!visibleRows.length) return;
-
-      if (e.key === "j") {
-        e.preventDefault();
-        highlightedIndex = Math.min(highlightedIndex + 1, visibleRows.length - 1);
-        focusRow(visibleRows[highlightedIndex]);
-      } else if (e.key === "k") {
-        e.preventDefault();
-        highlightedIndex = Math.max(highlightedIndex - 1, 0);
-        focusRow(visibleRows[highlightedIndex]);
-      } else if (e.key === "Enter" && highlightedIndex >= 0 && visibleRows[highlightedIndex]) {
-        const btn = visibleRows[highlightedIndex].querySelector(".row__hit");
-        if (btn) btn.click();
-      }
+    if (e.altKey || e.metaKey || e.ctrlKey || e.isComposing || !["j", "k"].includes(e.key)) return;
+    const active = document.activeElement;
+    if (!active?.matches(".row__hit, .row__num")) return;
+    const visibleRows = rows.filter((row) => !row.hidden);
+    const current = visibleRows.findIndex((row) => row.contains(active));
+    if (current < 0) return;
+    const next = Math.max(0, Math.min(current + (e.key === "j" ? 1 : -1), visibleRows.length - 1));
+    const target = visibleRows[next].querySelector(".row__hit");
+    if (target) {
+      e.preventDefault();
+      target.focus();
+      target.scrollIntoView({ block: "nearest", behavior: "auto" });
     }
   });
-
-  function focusRow(rowEl) {
-    if (!rowEl) return;
-    const hitBtn = rowEl.querySelector(".row__hit");
-    if (hitBtn) hitBtn.focus();
-    rowEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }
 
   // ------------------------------------------------------------- Init
   initTheme();
   loadStack();
-  syncFromUrl();
-  renderStack();
+  syncFromUrl({ preserveStoredStack: true });
+  const shortcut = document.querySelector(".search__kbd");
+  if (shortcut) shortcut.textContent = "Ctrl/⌘ K";
+  const keyHelp = document.querySelector(".enhanced-keys");
+  if (keyHelp) keyHelp.textContent = "Keys: Ctrl/⌘ K search · j/k while a catalogue row is focused · Esc close";
+  const stackHelp = document.querySelector(".drawer__desc--flush");
+  if (stackHelp) stackHelp.textContent = "Selected CSS snippets are concatenated verbatim. Required tokens, HTML and global-selector conflicts are not resolved.";
+  if (stackCopyBtn) stackCopyBtn.textContent = "Copy CSS snippets";
+  if (stackDownloadBtn) stackDownloadBtn.textContent = "Download CSS snippets";
   document.documentElement.setAttribute("data-enhanced", "");
 })();

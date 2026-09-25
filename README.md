@@ -88,6 +88,7 @@ This is the foundation every spell builds on. Load it before anything else.
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
 
 html {
   /* Prevents layout shift when a dialog/popover opens and locks the scrollbar */
@@ -121,7 +122,7 @@ html {
   overscroll-behavior: contain;
 }
 
-/* WCAG 2.2 AA / mobile: minimum hit target for buttons, links, summary, labels. */
+/* Project touch-target preference (44px); not a WCAG 2.2 AA requirement. */
 button, [type="button"], [type="submit"], [type="reset"],
 summary, .btn, a.btn {
   min-block-size: 44px;
@@ -351,6 +352,13 @@ input[type="checkbox"]:checked::before { transform: scale(1); }
 
 Smooth rotation indicator for details disclosure triangles on open state.
 
+```html
+<details>
+  <summary>Details <span class="chevron" aria-hidden="true">▾</span></summary>
+  <p>Native disclosure, without JavaScript.</p>
+</details>
+```
+
 ```css
 summary {
   list-style: none;
@@ -506,6 +514,7 @@ A touch-friendly, accessible before/after image comparison with no JavaScript. T
     from { clip-path: inset(0 0% 0 0); }
     to   { clip-path: inset(0 100% 0 0); }
   }
+}
 ```
 
 ### 71. Sliding Segment Indicator
@@ -639,6 +648,7 @@ details[open] .fab-actions {
     opacity: 0;
     transform: translateY(12px);
   }
+}
 ```
 
 ### 79. Anchor-Positioned Mega Menu (`[popover]`)
@@ -1057,12 +1067,20 @@ A large premium effect for multi-page sites. The browser handles MPA navigation 
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+}
 ```
 
 ### 31. Phantom Entry (`@starting-style`)
 *Reveal · Baseline · Markup*
 
 A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.
+
+```html
+<button type="button" popovertarget="ph-pop">Open menu</button>
+<div id="ph-pop" popover="auto" class="popover-menu">
+  <a href="/docs">Documentation</a>
+</div>
+```
 
 ```css
 .popover-menu {
@@ -1085,6 +1103,7 @@ A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[pop
     opacity: 0;
     transform: translateY(-8px) scale(0.96);
   }
+}
 ```
 
 ### 65. Scroll-Driven Header Compression
@@ -1127,6 +1146,11 @@ Shrinks the sticky header and scales the logo down as the user scrolls, without 
 
 A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` modals, with no JS.
 
+```html
+<button type="button" popovertarget="bd-pop">Open</button>
+<div id="bd-pop" popover="auto">Popover with native backdrop styling.</div>
+```
+
 ```css
 dialog::backdrop,
 [popover]::backdrop {
@@ -1149,6 +1173,7 @@ dialog[open]::backdrop,
   [popover]:popover-open::backdrop {
     opacity: 0;
   }
+}
 ```
 
 ### 68. Infinite Logo Marquee
@@ -1222,6 +1247,7 @@ List and card items fade in sequence as the user scrolls, synced to viewport pos
       transform: translateY(0) scale(1);
     }
 }
+}
 ```
 
 ### 75. Native Modal Image Zoom (`popovertarget`)
@@ -1267,6 +1293,7 @@ Click an image to enlarge it to a fullscreen view with a native `popover` — no
     opacity: 0;
     transform: scale(0.92);
   }
+}
 ```
 
 ### 91. Ken Burns Scroll Gallery
@@ -1292,6 +1319,7 @@ Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in th
     50%  { transform: scale(1)    translateY(0); }
     100% { transform: scale(1.12) translateY(-2%); }
   }
+}
 ```
 
 ### 92. Image-Clipped Gradient Headline
@@ -1378,6 +1406,7 @@ The header becomes frosted glass only after the user has scrolled a little.
       box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);
     }
 }
+}
 ```
 
 ### 30. Sticky CTA Elevation
@@ -1463,6 +1492,7 @@ A sticky element gains extra shadow and border only once it is actually stuck. M
     border-color: var(--color-border);
     box-shadow: 0 12px 32px oklch(0 0 0 / .10);
   }
+}
 ```
 
 ### 45. Snapped Spotlight
@@ -1495,6 +1525,7 @@ The active slide in a scroll-snap container gets full sharpness while siblings f
     opacity: 1;
     transform: scale(1);
   }
+}
 ```
 
 ### 46. Real Overflow Hint
@@ -1544,6 +1575,7 @@ A floating button that wakes only after the user has moved the page. **Requires 
     transform: none;
     pointer-events: auto;
   }
+}
 ```
 
 ### 55. Sticky Card Deck
@@ -1572,6 +1604,7 @@ Cards stack like a deck as the user scrolls. Scale and dimming stay synced to th
       filter: brightness(0.6);
     }
 }
+}
 ```
 
 ### 69. Scroll-Aware Table Boundaries (`container-type: scroll-state`)
@@ -1598,6 +1631,7 @@ Tables with `position: sticky` show edge shadows and dividers *only* when the co
   .table-wrapper td:first-child {
     box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
   }
+}
 ```
 
 ---
@@ -1627,6 +1661,15 @@ Touch-friendly horizontal scroll carousel with native CSS scroll snapping.
 *Layout · Baseline · Markup · → 33 is more modern*
 
 Keep this for broader browser compatibility or older projects.
+
+```html
+<details>
+  <summary>Open panel</summary>
+  <div class="accordion-panel">
+    <div class="accordion-inner">The panel content is available without scripting.</div>
+  </div>
+</details>
+```
 
 ```css
 details .accordion-panel {
@@ -1666,6 +1709,13 @@ Keep this only if the background is solid and static. Otherwise use Spell 56.
 *Layout · Baseline · Markup*
 
 A modernization of Spell 15. Animates `block-size: 0` → `auto` directly.
+
+```html
+<details>
+  <summary>What is included?</summary>
+  <div class="accordion-panel">A panel that expands to its intrinsic height.</div>
+</details>
+```
 
 ```css
 :root {
@@ -1710,6 +1760,7 @@ A card that adapts its layout to its container, not the viewport.
     aspect-ratio: 1;
     border-radius: var(--radius-md) 0 0 var(--radius-md);
   }
+}
 ```
 
 ### 40. Subgrid Alignment
@@ -1755,6 +1806,19 @@ The scroller’s own edges become literally transparent. Works regardless of the
 *Layout · Newer · Markup*
 
 Real tabs via `<details name="ui-tabs">`. No radio-button hack.
+
+```html
+<div class="tabs-container">
+  <details name="ui-tabs" open>
+    <summary>Overview</summary>
+    <p>First disclosure panel.</p>
+  </details>
+  <details name="ui-tabs">
+    <summary>Details</summary>
+    <p>Second disclosure panel.</p>
+  </details>
+</div>
+```
 
 ```css
 details[name="ui-tabs"] summary::-webkit-details-marker { display: none; }
@@ -1911,6 +1975,15 @@ A tree view for documentation or sidebars built from nested `<details>` elements
 
 A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.
 
+```html
+<button type="button" commandfor="sheet-demo" command="show-modal">Open sheet</button>
+<dialog id="sheet-demo" class="responsive-sheet" closedby="any">
+  <h2>Sheet content</h2>
+  <p>This stays a native modal dialog.</p>
+  <form method="dialog"><button type="submit">Close</button></form>
+</dialog>
+```
+
 ```css
 dialog.responsive-sheet {
   margin: auto auto 0 auto; /* Bottom-aligned on mobile */
@@ -1930,6 +2003,7 @@ dialog.responsive-sheet[open] {
   dialog.responsive-sheet[open] {
     transform: translateY(100%);
   }
+}
 
 /* Centered modal on desktop */
 @media (min-width: 640px) {
@@ -1944,6 +2018,7 @@ dialog.responsive-sheet[open] {
     dialog.responsive-sheet[open] {
       transform: scale(0.95);
     }
+  }
 }
 ```
 
@@ -1977,6 +2052,7 @@ Keep this for simple hover text on elements where `overflow: hidden` is not a pr
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
   }
+}
 [data-tooltip]:focus-visible::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0) scale(1);
@@ -2282,6 +2358,7 @@ A native `<select>` becomes fully styleable, including the open menu. Retires he
     background: var(--color-surface-offset);
     border-radius: var(--radius-sm);
   }
+}
 ```
 
 ### 57. Form Gatekeeper
@@ -2996,6 +3073,7 @@ Pinterest packing in CSS. `display: grid-lanes` fills the shortest column in DOM
     display: grid-lanes;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   }
+}
 ```
 
 ### 101. Sibling-Index Stagger (`sibling-index()`)
@@ -3019,6 +3097,7 @@ A staggered reveal with no `--i` custom properties. `sibling-index()` (1-based) 
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: none; }
   }
+}
 @media (prefers-reduced-motion: reduce) {
   .stagger > * { animation: none; }
 }
@@ -3130,6 +3209,7 @@ Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. 
   .attr-meter-fill {
     inline-size: calc(attr(data-value type(<number>), 0) * 1%);
   }
+}
 ```
 
 ---
@@ -3237,6 +3317,7 @@ A shared-element transition between a list card and a detail page. `view-transit
     view-transition-name: attr(id type(<custom-ident>), none);
     view-transition-class: card;
   }
+}
 ::view-transition-group(*.card) {
   animation-duration: 320ms;
   animation-timing-function: cubic-bezier(.16,1,.3,1);
@@ -3274,6 +3355,7 @@ The same sparkline as Spell 95, but the value lives in `data-v` — no inline `s
   .attr-spark span {
     block-size: calc(attr(data-v type(<number>), 0) * 1%);
   }
+}
 .attr-spark span:last-child { background: var(--color-primary); }
 ```
 
@@ -3520,6 +3602,7 @@ Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on
     color: var(--color-primary);
     font-weight: 700;
   }
+}
 ```
 
 
@@ -4074,6 +4157,7 @@ A tactile image reveal with `clip-path` that wipes the image in, synced to scrol
     from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }
     to { clip-path: inset(0 0 0 0); transform: scale(1); }
   }
+}
 ```
 
 ### 140. Sticky Footer Reveal Layout
@@ -4301,6 +4385,7 @@ Style component guidance with `@scope` while explicitly preventing accent styles
     color: var(--color-accent);
     font-weight: 750;
   }
+}
 ```
 
 ### 149. Snapped Product State (`scroll-state()`)
@@ -4359,6 +4444,7 @@ Highlight the active card aligned to a scroll-snap point using `@container scrol
       border-color: var(--color-primary);
     }
 }
+}
 @media (prefers-reduced-motion: reduce) {
   .snap-product__body { transition: none; }
 }
@@ -4414,6 +4500,7 @@ Draw clean separators directly in grid and flex gaps using `column-rule` without
     padding-inline-start: 0;
     border-inline-start: 0;
   }
+}
 ```
 
 ### 151. Organic Avatar Cluster (`random()`)
@@ -4459,11 +4546,13 @@ Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, ba
     rotate: random(-6deg, 6deg);
     translate: 0 random(-3px, 3px);
   }
+}
 @media (prefers-reduced-motion: reduce) {
   .avatar-cluster > li {
     rotate: 0deg;
     translate: 0;
   }
+}
 ```
 
 ---

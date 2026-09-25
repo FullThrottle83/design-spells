@@ -273,6 +273,75 @@
             "type": "string"
           },
           "description": "Per-spell URLs supporting a manual verification; empty for unreviewed registry estimates."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/verificationEvidence"
+          },
+          "description": "Dated scoped provenance; required for promoted claims."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Reviewed functional dependencies, if known."
+        },
+        "fallback": {
+          "type": "string",
+          "description": "Reviewed fallback requirements, if known."
+        },
+        "accessibilityNotes": {
+          "type": "string",
+          "description": "Scope and limitations of any accessibility review; no automatic WCAG claim."
+        }
+      }
+    },
+    "verificationEvidence": {
+      "type": "object",
+      "required": [
+        "kind",
+        "url",
+        "checkedAt",
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "support",
+            "behavior",
+            "accessibility"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "description": "HTTPS evidence URL, enforced at build time."
+        },
+        "checkedAt": {
+          "type": "string",
+          "description": "Date YYYY-MM-DD, enforced at build time."
+        },
+        "note": {
+          "type": "string",
+          "description": "Specific observation or source scope."
+        },
+        "browser": {
+          "type": "string",
+          "enum": [
+            "chromium",
+            "firefox",
+            "webkit",
+            "chrome",
+            "edge",
+            "safari"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "Actual browser version for tested behavior."
         }
       }
     }

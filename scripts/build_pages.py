@@ -56,6 +56,21 @@ def render_doc(spell: dict) -> str:
         f"behavior: {esc(evidence['behavior'])}; "
         f"accessibility: {esc(evidence['accessibility'])}."
     )
+    evidence_details = ""
+    if evidence.get("evidence"):
+        observations = "".join(
+            f'<li>{esc(item["kind"])} ({esc(item["checkedAt"])}'
+            f'{", " + esc(item["browser"]) + " " + esc(item["version"]) if "browser" in item else ""}): '
+            f'{esc(item["note"])} — <a href="{esc(item["url"])}">Source</a></li>'
+            for item in evidence["evidence"]
+        )
+        evidence_details += f'<h3>Verification evidence</h3><ul>{observations}</ul>'
+    if evidence.get("dependencies"):
+        evidence_details += '<p class="note">Dependencies: ' + esc(", ".join(evidence["dependencies"])) + '</p>'
+    if evidence.get("fallback"):
+        evidence_details += '<p class="note">Fallback: ' + esc(evidence["fallback"]) + '</p>'
+    if evidence.get("accessibilityNotes"):
+        evidence_details += '<p class="note">Accessibility review: ' + esc(evidence["accessibilityNotes"]) + '</p>'
     canonical = f"{SITE_URL}/spells/{sid}/"
     return f"""<!doctype html>
 <html lang="en">
@@ -102,7 +117,7 @@ def render_doc(spell: dict) -> str:
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>
       <p class="note">Project category: {esc(spell["statusLabel"])}. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
-      <p class="note">{evidence_note}</p>
+      <p class="note">{evidence_note}</p>{evidence_details}
       <ul class="browser-list">{support}</ul>
       <p class="note">{esc(spell["supportNote"])}</p>
     </section>

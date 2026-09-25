@@ -7,6 +7,8 @@ const PORT = Number(process.env.DS_TEST_PORT ?? 8788);
 export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.spec.mjs",
+  // Cross-engine smoke runs in its dedicated Firefox/WebKit CI job.
+  testIgnore: "**/cross-browser.spec.mjs",
   // Previews share a browser page in beforeAll; avoid concurrent full-catalogue DOM loads.
   fullyParallel: false,
   workers: process.env.CI ? 2 : undefined,

@@ -27,6 +27,12 @@ h3 { font-size: 1rem; margin: 1.6rem 0 .6rem; }
 .note { max-width: 80ch; margin: .6rem 0 1rem; color: var(--muted); font-size: .875rem; }
 section { border-top: 1px solid var(--rule); margin-top: 2.5rem; padding-top: 1.5rem; }
 .section-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.demo-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.demo-compare__item { min-width: 0; }
+.demo-compare__item h3 { margin: 1rem 0 0; }
+.demo-compare__item iframe { min-height: 280px; }
+.demo-compare__guide { max-width: 90ch; }
+@media (max-width: 44rem) { .demo-compare { grid-template-columns: minmax(0, 1fr); } }
 .action { display: inline-flex; min-height: 44px; align-items: center; padding: .5rem .8rem; border: 1px solid var(--rule); background: var(--surface); text-decoration: none; font-weight: 650; font-size: .875rem; }
 .action:hover { border-color: var(--accent); }
 button.action { color: inherit; font: inherit; font-size: .875rem; cursor: pointer; }

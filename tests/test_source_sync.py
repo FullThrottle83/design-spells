@@ -4,6 +4,8 @@ import re
 import unittest
 from pathlib import Path
 
+from scripts.build import parse_spells
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -19,6 +21,17 @@ class SourceSyncTest(unittest.TestCase):
             (ROOT / "SKILL.md").read_bytes(),
             "Update SKILL.md when README.md changes.",
         )
+
+    def test_every_spell_has_balanced_stylesheet_braces(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        spells = parse_spells(readme)
+        self.assertEqual(len(spells), 150)
+        for spell in spells:
+            with self.subTest(spell=spell["id"]):
+                self.assertEqual(
+                    brace_balance(spell["css"]), 0,
+                    f'{spell["id"]}: unmatched CSS braces',
+                )
 
     def test_base_safeguards_have_balanced_css(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

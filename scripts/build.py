@@ -1477,6 +1477,7 @@ def render_drawer(spell: dict) -> str:
     <footer class="drawer__foot">
       <button class="btn" type="button" data-stack-add="{spell['id']}">+ Add to Stack</button>
       <p class="drawer__hint">Zero JS · copy and paste freely</p>
+      <a class="btn drawer__permalink" href="/spells/{spell['id']}/">Full page ↗</a>
       <button class="btn btn--primary" type="button" popovertarget="drawer-{spell['id']}" popovertargetaction="hide">Close</button>
     </footer>
   </div>"""
@@ -1841,6 +1842,8 @@ def main() -> None:
 
     # Static HTML emission for the Zero-JS catalogue
     render_index_html(catalogue, ROOT / "public" / "index.html")
+    from build_pages import build_pages
+    build_pages(catalogue)
 
 
 if __name__ == "__main__":

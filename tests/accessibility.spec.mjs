@@ -77,3 +77,21 @@ test('document previews retain a safe sandbox and descriptive titles', async ({ 
     await expect(frame).toHaveAttribute('sandbox', 'allow-same-origin');
   }
 });
+
+test('native close buttons dismiss classic popovers by pointer, including a tooltip preview', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const [id, title] of [
+    ['ds-1', 'Shimmer on primary buttons'],
+    ['ds-18', 'Micro-Tooltips'],
+  ]) {
+    await page.goto('/classic/');
+    const trigger = page.getByRole('button', { name: title, exact: true });
+    await trigger.click();
+    const panel = page.locator(`#drawer-${id}`);
+    await expect(panel).toBeVisible();
+    await expect(panel).toHaveJSProperty('id', `drawer-${id}`);
+    await panel.getByRole('button', { name: 'Close panel', exact: true }).click();
+    await expect(panel).toBeHidden();
+    await expect(page).not.toHaveURL(new RegExp(`#${id}$`));
+  }
+});

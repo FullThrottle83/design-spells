@@ -1,16 +1,17 @@
-name: Verify catalogue
+name: Generate static spell pages
 
 on:
   push:
-  pull_request:
+    branches:
+      - improve/static-spell-pages-20260925
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  test:
+  generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -18,9 +19,13 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - run: git diff --exit-code -- public/index.html public/spells.json
-      - run: node --check public/search.js
-      - run: npm test
-      - run: git diff --check
+      - name: Commit generated pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/index.html public/spells.json public/spells public/play public/sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "build: publish static spell detail and demo pages"
+            git push
+          fi

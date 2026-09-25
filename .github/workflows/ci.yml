@@ -22,7 +22,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - run: git diff --exit-code -- public/index.html public/classic/index.html public/spells.json public/spells public/play public/download public/sitemap.xml
+      - run: test -s public/classic/index.html
+      - run: git diff --exit-code -- public/index.html public/spells.json public/spells public/play public/download public/sitemap.xml
       - run: test -z "$(git status --porcelain -- public/spells public/play public/download public/sitemap.xml)"
       - run: node --check public/search.js
       - run: npm test
@@ -60,6 +61,8 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - run: npm run build
+      - run: test -s public/classic/index.html
       - name: Check Cloudflare deployment credentials
         shell: bash
         run: |
@@ -74,6 +77,12 @@ jobs:
         run: |
           set -euo pipefail
           origin="https://design-spells.hultsan20.workers.dev"
-          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/spells/ds-1/" | grep -Fq "Isolated demonstration"
-          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/play/ds-14/next/" | grep -Fq "Return to page A"
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/spells/ds-1/" -o "$RUNNER_TEMP/ds-doc.html"
+          grep -Fq "Isolated demonstration" "$RUNNER_TEMP/ds-doc.html"
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/play/ds-14/next/" -o "$RUNNER_TEMP/ds-next.html"
+          grep -Fq "Return to page A" "$RUNNER_TEMP/ds-next.html"
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/classic/" -o "$RUNNER_TEMP/ds-classic.html"
+          grep -Fq "classic" "$RUNNER_TEMP/ds-classic.html"
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/play/ds-120/" -o "$RUNNER_TEMP/ds-120.html"
+          grep -Fq ".filter-matrix-wrap:has(#f-tech:not(:checked))" "$RUNNER_TEMP/ds-120.html"
           echo "Cloudflare assets are live at $origin"

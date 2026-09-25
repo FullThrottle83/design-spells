@@ -2426,7 +2426,7 @@ A modernization of [Spell 16 (Floating Labels)](#16-floating-labels). Removes th
 ### 85. 0-JS Multi-Step Wizard
 *Forms · Baseline · Markup*
 
-A complete multi-step wizard that switches steps, shows progress, and offers Back/Next — no script, driven by radio state and `:has()`.
+A visual three-step wizard shell driven by radio state and `:has()`. It shows progress and Back/Next navigation, but does not validate answers, block skipped steps, manage focus, or handle form submission.
 
 ```html
 <form class="wizard">
@@ -3935,16 +3935,19 @@ A min/max range picker with two overlapping native sliders whose thumbs stay int
 .slider-track { position: absolute; inline-size: 100%; block-size: 6px; background: var(--color-surface-offset); border-radius: 999px; z-index: 1; }
 ```
 
-### 131. Auto-Dismiss Transient Toast (`popover="manual"`)
+### 131. Dismissible Toast (`popover="manual"`)
 *Overlays · Newer · Markup*
 
-A self-dismissing transient toast driven by CSS keyframes, with no script.
+A native toast that opens and closes with declarative buttons. It does **not** time out automatically; a CSS fade alone cannot close a manual popover or remove it from the top layer. The close button stays available to keyboard users.
 
 ```html
-<button commandfor="auto-toast-1" command="show-popover" class="btn">Save changes</button>
+<button commandfor="auto-toast-1" command="show-popover" class="btn">Show notification</button>
 
 <div id="auto-toast-1" popover="manual" class="auto-toast">
-  ✅ Changes saved to the cloud
+  <span role="status">Changes saved.</span>
+  <button type="button" class="auto-toast__close"
+          commandfor="auto-toast-1" command="hide-popover"
+          aria-label="Dismiss notification">×</button>
 </div>
 ```
 
@@ -3953,14 +3956,27 @@ A self-dismissing transient toast driven by CSS keyframes, with no script.
   margin: auto auto 2rem auto; border: 0; padding: .75rem 1.25rem;
   border-radius: 999px; background: var(--color-text); color: var(--color-bg);
   box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(.16,1,.3,1),
+              display 220ms allow-discrete, overlay 220ms allow-discrete;
 }
 .auto-toast:popover-open {
-  animation: toast-lifecycle 4s cubic-bezier(.16,1,.3,1) forwards;
+  display: flex; align-items: center; gap: .75rem;
+  opacity: 1; transform: none;
 }
-@keyframes toast-lifecycle {
-  0% { opacity: 0; transform: translateY(16px); }
-  10%, 90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-16px); display: none; overlay: none; }
+@starting-style {
+  .auto-toast:popover-open { opacity: 0; transform: translateY(12px); }
+}
+.auto-toast__close {
+  display: grid; place-items: center; min-inline-size: 44px; min-block-size: 44px;
+  border: 0; border-radius: 999px; background: transparent; color: inherit;
+  font: inherit; cursor: pointer;
+}
+.auto-toast__close:focus-visible {
+  outline: 2px solid currentColor; outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .auto-toast { transition: none; }
 }
 ```
 

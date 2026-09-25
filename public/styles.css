@@ -270,6 +270,22 @@ kbd {
 
 [hidden] { display: none !important; }
 
+/* Reveal optional controls only after enhancement initializes successfully.
+   This also covers blocked/failed script loads, unlike a noscript-only fix. */
+html:not([data-enhanced]) :is(.search, #counter, .theme-btn, .preset-stacks,
+  .row__aside, [data-stack-add], .code__copy, .stage-controls, .feature-check,
+  .enhanced-keys, #stack-bar, #stack-drawer),
+html[data-enhanced] .fallback-help {
+  display: none !important;
+}
+.catalogue-help, .fallback-help, .source-help {
+  margin-block: 1rem;
+  color: var(--ink-2);
+  font-size: .875rem;
+  line-height: 1.6;
+}
+.code__view code { user-select: all; }
+
 .sr-only {
   position: absolute;
   inline-size: 1px;
@@ -670,6 +686,8 @@ kbd {
 }
 
 .nav-item {
+  /* Keep clipped radio inputs inside the horizontally scrolling label. */
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
@@ -1271,6 +1289,8 @@ kbd {
    row overlay stops swallowing clicks meant for the buttons. */
 @media (max-width: 959px) {
   .row__select-overlay { pointer-events: none; }
+  /* The preview rail is absent here; omit its radios from keyboard navigation. */
+  input[name="preview-select"] { display: none; }
 }
 /* ------------------------------------------------------------
    11. Buttons

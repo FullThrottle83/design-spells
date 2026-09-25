@@ -1815,6 +1815,14 @@ def main() -> None:
             "feature": feature_label(feature_keys),
             "browsers": browsers_support,
             "supportNote": feature_note(feature_keys),
+            # A support lookup is not a browser run or an accessibility audit.
+            # Promote these claims only with a documented, per-spell review.
+            "verification": {
+                "support": "registry-estimate",
+                "behavior": "not-individually-verified",
+                "accessibility": "not-audited",
+                "sources": [],
+            },
         }
         payload.append(item)
     print(f"status labels corrected from support data: {corrected}")

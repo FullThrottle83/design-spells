@@ -82,7 +82,7 @@ test('native close buttons dismiss classic popovers by pointer, including a tool
   await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const [id, title] of [
     ['ds-1', 'Shimmer on primary buttons'],
-    ['ds-18', 'Micro-Tooltips'],
+    ['ds-18', 'Micro-Tooltips (`attr(data-tooltip)`)'],
   ]) {
     await page.goto('/classic/');
     const trigger = page.getByRole('button', { name: title, exact: true });

@@ -1,17 +1,16 @@
-name: Synchronize generated catalogue
+name: Verify catalogue
 
 on:
   push:
-    branches:
-      - improve/verified-zero-js-foundation-20260925
+  pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  regenerate:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -19,13 +18,9 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - name: Commit generated catalogue
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/index.html public/spells.json
-          if ! git diff --cached --quiet; then
-            git commit -m "build: synchronize canonical HTML examples"
-            git push
-          fi
+      - run: git diff --exit-code -- public/index.html public/spells.json
+      - run: node --check public/search.js
+      - run: npm test
+      - run: git diff --check

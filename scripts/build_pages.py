@@ -49,6 +49,8 @@ def render_doc(spell: dict) -> str:
     )
     instruction = spell.get("previewAction", {}).get("hint", "")
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
+    usage_note = spell.get("usageNote", "")
+    usage_html = f'<p class="note"><strong>Usage boundary:</strong> {esc(usage_note)}</p>' if usage_note else ""
     canonical = f"{SITE_URL}/spells/{sid}/"
     return f"""<!doctype html>
 <html lang="en">
@@ -76,7 +78,8 @@ def render_doc(spell: dict) -> str:
     <p class="eyebrow">{esc(sid)} / {esc(spell["category"])} / {esc(spell["jsLabel"])}</p>
     <h1>{title}</h1>
     <p class="lede">{description}</p>
-    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements. Browser support is a dated, curated feature snapshot, not an individual behavior or accessibility audit.</p>
+    {usage_html}
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a></div>
       {instruction_html}

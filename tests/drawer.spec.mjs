@@ -93,7 +93,11 @@ test.describe("drawer descriptions", () => {
         note(`bold runs ${JSON.stringify(seen.bolds)} != ${JSON.stringify(wantBolds)}`);
       }
 
-      await page.locator(`#drawer-${spell.id} .drawer__close`).click();
+      // The test verifies copy/markup across 73 panels. Activate the native
+      // close button via keyboard, which also exercises the zero-JS pathway
+      // without a pointer hit-test against animated preview content.
+      await page.locator(`#drawer-${spell.id} .drawer__close`).focus();
+      await page.keyboard.press("Enter");
       try {
         await expect(page.locator(`#drawer-${spell.id}`)).toBeHidden();
       } catch (error) {

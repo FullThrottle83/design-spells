@@ -27,3 +27,38 @@ jobs:
       - run: node --check public/search.js
       - run: npm test
       - run: git diff --check
+
+  deploy:
+    name: Deploy static assets to Cloudflare
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Check Cloudflare deployment credentials
+        shell: bash
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo "::error::Configure CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as GitHub Actions secrets or the account ID as a repository variable."
+            exit 1
+          fi
+      - name: Deploy prebuilt, verified assets
+        run: npx --yes wrangler@4 deploy --config wrangler.json
+      - name: Smoke-test published pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          origin="https://design-spells.hultsan20.workers.dev"
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/spells/ds-1/" | grep -Fq "Isolated demonstration"
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 3 "$origin/play/ds-14/next/" | grep -Fq "Return to page A"
+          echo "Cloudflare assets are live at $origin"

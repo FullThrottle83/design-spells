@@ -6,7 +6,9 @@ from __future__ import annotations
 import html
 import json
 import re
+from datetime import date
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -50,6 +52,115 @@ CATEGORY_UI = {
 }
 
 SUPPORT_AS_OF = "2026-08-24"
+
+VERIFICATION_SOURCE = ROOT / "data" / "verification.json"
+VERIFICATION_KINDS = {"support", "behavior", "accessibility"}
+VERIFICATION_BROWSERS = {"chromium", "firefox", "webkit", "chrome", "edge", "safari"}
+
+
+def load_verification_overrides(path: Path = VERIFICATION_SOURCE) -> dict:
+    """Read optional evidence without turning registry estimates into test results."""
+    if not path.exists():
+        return {}
+    records = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(records, dict):
+        raise ValueError("data/verification.json must be a spell-id object")
+    return records
+
+
+def verification_for_spell(spell_id: str, records: dict) -> dict:
+    """Require dated, scoped evidence before promoting an individual claim."""
+    result = {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": [],
+    }
+    override = records.get(spell_id)
+    if override is None:
+        return result
+    if not isinstance(override, dict):
+        raise ValueError(f"{spell_id}: verification entry must be an object")
+    permitted = {"support", "behavior", "accessibility", "evidence",
+                 "dependencies", "fallback", "accessibilityNotes"}
+    if set(override) - permitted:
+        raise ValueError(f"{spell_id}: unknown verification fields: {sorted(set(override) - permitted)}")
+    states = {
+        "support": {"registry-estimate", "source-checked"},
+        "behavior": {"not-individually-verified", "browser-tested"},
+        "accessibility": {"not-audited", "reviewed"},
+    }
+    for key, allowed in states.items():
+        if key in override:
+            if override[key] not in allowed:
+                raise ValueError(f"{spell_id}: invalid {key} status")
+            result[key] = override[key]
+    evidence = override.get("evidence", [])
+    if not isinstance(evidence, list):
+        raise ValueError(f"{spell_id}: evidence must be a list")
+    for item in evidence:
+        if not isinstance(item, dict):
+            raise ValueError(f"{spell_id}: evidence item must be an object")
+        required = {"kind", "url", "checkedAt", "note"}
+        optional = {"browser", "version"}
+        if not required <= set(item) or set(item) - required - optional:
+            raise ValueError(f"{spell_id}: evidence has missing or unknown fields")
+        if item["kind"] not in VERIFICATION_KINDS:
+            raise ValueError(f"{spell_id}: unknown evidence kind")
+        if not isinstance(item["url"], str):
+            raise ValueError(f"{spell_id}: evidence URL must be HTTPS")
+        uri = urlsplit(item["url"])
+        if uri.scheme != "https" or not uri.hostname or uri.username or uri.password:
+            raise ValueError(f"{spell_id}: evidence URL must be HTTPS without credentials")
+        stamp = item["checkedAt"]
+        if not isinstance(stamp, str) or len(stamp) != 10:
+            raise ValueError(f"{spell_id}: evidence needs an ISO date")
+        try:
+            checked = date.fromisoformat(stamp)
+        except ValueError as exc:
+            raise ValueError(f"{spell_id}: invalid evidence date") from exc
+        if checked.isoformat() != stamp or checked > date.today():
+            raise ValueError(f"{spell_id}: invalid or future evidence date")
+        if not isinstance(item["note"], str) or not item["note"].strip():
+            raise ValueError(f"{spell_id}: evidence requires an observation")
+        has_browser = "browser" in item
+        has_version = "version" in item
+        if has_browser != has_version or (item["kind"] == "behavior" and not has_browser):
+            raise ValueError(f"{spell_id}: behavior evidence requires browser and version")
+        if has_browser:
+            if item["browser"] not in VERIFICATION_BROWSERS:
+                raise ValueError(f"{spell_id}: unknown browser")
+            if not isinstance(item["version"], str) or not item["version"].strip():
+                raise ValueError(f"{spell_id}: browser version is required")
+    promotions = {
+        "support": ("source-checked", "support"),
+        "behavior": ("browser-tested", "behavior"),
+        "accessibility": ("reviewed", "accessibility"),
+    }
+    kinds = {item["kind"] for item in evidence}
+    for field, (promoted, kind) in promotions.items():
+        if result[field] == promoted and kind not in kinds:
+            raise ValueError(f"{spell_id}: {promoted} needs {kind} evidence")
+    if evidence:
+        result["evidence"] = evidence
+        result["sources"] = list(dict.fromkeys(item["url"] for item in evidence))
+    if "dependencies" in override:
+        deps = override["dependencies"]
+        if not isinstance(deps, list) or not all(isinstance(x, str) and x.strip() for x in deps):
+            raise ValueError(f"{spell_id}: dependencies must be nonempty strings")
+        result["dependencies"] = deps
+    if "fallback" in override:
+        if not isinstance(override["fallback"], str) or not override["fallback"].strip():
+            raise ValueError(f"{spell_id}: fallback must be descriptive")
+        result["fallback"] = override["fallback"]
+    if "accessibilityNotes" in override:
+        if not isinstance(override["accessibilityNotes"], str) or not override["accessibilityNotes"].strip():
+            raise ValueError(f"{spell_id}: accessibilityNotes must be descriptive")
+        result["accessibilityNotes"] = override["accessibilityNotes"]
+    if result["accessibility"] == "reviewed" and "accessibilityNotes" not in result:
+        raise ValueError(f"{spell_id}: a reviewed accessibility claim needs notes")
+    return result
+
 
 FEATURE_BROWSERS = {
     "baseline": {
@@ -1786,6 +1897,10 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
 def main() -> None:
     spells = parse_spells(SRC)
     print("parsed spells:", len(spells))
+    verification_overrides = load_verification_overrides()
+    unknown_ids = set(verification_overrides) - {spell["id"] for spell in spells}
+    if unknown_ids:
+        raise ValueError(f"Verification references unknown spell IDs: {sorted(unknown_ids)}")
 
     payload = []
     corrected = 0
@@ -1817,12 +1932,7 @@ def main() -> None:
             "supportNote": feature_note(feature_keys),
             # A support lookup is not a browser run or an accessibility audit.
             # Promote these claims only with a documented, per-spell review.
-            "verification": {
-                "support": "registry-estimate",
-                "behavior": "not-individually-verified",
-                "accessibility": "not-audited",
-                "sources": [],
-            },
+            "verification": verification_for_spell(spell["id"], verification_overrides),
         }
         payload.append(item)
     print(f"status labels corrected from support data: {corrected}")

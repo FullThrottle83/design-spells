@@ -24,7 +24,7 @@
     <p class="eyebrow">ds-96 / Data / 0 JS</p>
     <h1>Themed `&lt;progress&gt;` &amp; `&lt;meter&gt;`</h1>
     <p class="lede">Native `&lt;progress&gt;`/`&lt;meter&gt;` with brand colors — keeps built-in semantics, min/max logic, and screen-reader support for storage, quotas, and goals.</p>
-    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-96/">Open standalone demo ↗</a><a class="action" href="/download/ds-96.html" download="ds-96.html">Download runnable HTML ↓</a></div>
       
@@ -33,7 +33,12 @@
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-96.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-96" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       
       <pre tabindex="0"><code>&lt;label class=&quot;prog-field&quot;&gt;
@@ -59,5 +64,6 @@ progress::-moz-progress-bar { background: var(--color-primary); border-radius: 9
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>
+  <script src="/spell-copy.js" defer></script>
 </body>
 </html>

@@ -24,7 +24,7 @@
     <p class="eyebrow">ds-39 / Interaction / 0 JS</p>
     <h1>Accent Color Forms</h1>
     <p class="lede">A one-liner that tints every native form control (radio, checkbox, range, progress).</p>
-    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-39/">Open standalone demo ↗</a><a class="action" href="/download/ds-39.html" download="ds-39.html">Download runnable HTML ↓</a></div>
       
@@ -33,7 +33,12 @@
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-39.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-39" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
       <pre tabindex="0"><code>&lt;label style=&quot;display:grid;gap:.4rem&quot;&gt;Accent&lt;input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100&quot; value=&quot;60&quot;&gt;&lt;/label&gt;</code></pre>
@@ -51,5 +56,6 @@
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>
+  <script src="/spell-copy.js" defer></script>
 </body>
 </html>

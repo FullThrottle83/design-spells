@@ -129,9 +129,13 @@ test("ds-18 tooltip decoration follows hover and keyboard focus without scriptin
   await page.goto("/play/ds-18/");
   const trigger = page.getByRole("button", { name: "Hover me" });
   const opacity = () => trigger.evaluate(el => Number(getComputedStyle(el, "::after").opacity));
+  // Firefox exposes the authored attr() expression in computed content while
+  // WebKit/Chromium can expose its resolved string. Validate the source data
+  // and pseudo-element wiring independently of CSSOM serialization.
   const content = await trigger.evaluate(el => getComputedStyle(el, "::after").content);
   await expect(page.locator("script")).toHaveCount(0);
-  expect(content).toContain("Copied to clipboard");
+  await expect(trigger).toHaveAttribute("data-tooltip", "Copied to clipboard");
+  expect(content === "attr(data-tooltip)" || content.includes("Copied to clipboard")).toBe(true);
   await expect.poll(opacity).toBe(0);
 
   await page.keyboard.press("Tab");

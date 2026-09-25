@@ -15,7 +15,7 @@ test.describe("static spell pages without scripting", () => {
 
   test("catalogue provides direct links to independent pages without scripting", async ({ page }) => {
     await page.goto("/");
-    const link = page.locator('.row[data-id="ds-1"] .row__permalink');
+    const link = page.locator('.row[data-id="ds-1"] .row__link');
     await expect(link).toHaveAttribute("href", "/spells/ds-1/");
     await link.click();
     await expect(page).toHaveURL(/\/spells\/ds-1\/$/);

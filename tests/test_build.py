@@ -37,7 +37,8 @@ from scripts.build import (
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 SPELLS_JSON = PUBLIC / "spells.json"
-INDEX_HTML = PUBLIC / "index.html"
+INDEX_HTML = PUBLIC / "classic" / "index.html"
+LIGHT_INDEX_HTML = PUBLIC / "index.html"
 SCHEMA_PATH = PUBLIC / "spells.schema.json"
 
 
@@ -163,7 +164,7 @@ class BuildOutputTest(unittest.TestCase):
                 f"scripts/build.py failed:\n{result.stdout}\n{result.stderr}",
             )
 
-            for name in ("spells.json", "index.html"):
+            for name in ("spells.json", "index.html", "classic/index.html"):
                 with self.subTest(artefact=name):
                     rebuilt = (sandbox / "public" / name).read_bytes()
                     committed = (PUBLIC / name).read_bytes()
@@ -532,6 +533,28 @@ class EmittedHtmlTest(unittest.TestCase):
         self.assertIn("<button class=\"btn-primary\">Click</button>", res)
         self.assertIn("<style>\n.btn-primary { color: red; }\n</style>", res)
 
+
+
+class LeanCatalogueTest(unittest.TestCase):
+    """The light entrypoint links to isolated content; it does not embed the library."""
+
+    def test_homepage_contains_all_canonical_links(self):
+        output = LIGHT_INDEX_HTML.read_text(encoding="utf-8")
+        for spell in load_catalogue()["spells"]:
+            with self.subTest(spell=spell["id"]):
+                self.assertIn(f'href="/spells/{spell["id"]}/"', output)
+        self.assertNotIn('shadowrootmode="open"', output)
+        self.assertNotIn('id="drawers-layer"', output)
+        self.assertIn('href="/classic/"', output)
+
+    def test_homepage_is_small_and_source_free(self):
+        output = LIGHT_INDEX_HTML.read_bytes()
+        self.assertLess(len(output), 110_000, "The homepage must remain under 110 KB raw HTML")
+        self.assertLess(len(output), len(INDEX_HTML.read_bytes()) // 10)
+        self.assertNotIn(b'<style', output)
+        self.assertNotIn(b'srcdoc=', output)
+        self.assertNotIn(b'<pre class="code__view"', output)
+        self.assertIn(b'/catalogue.js', output)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

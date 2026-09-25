@@ -43,7 +43,7 @@ test.describe("drawer descriptions", () => {
     page.on("console", (msg) => {
       if (msg.type() === "error") failures.push(`console.error: ${msg.text()}`);
     });
-    await page.goto("/");
+    await page.goto("/classic/");
     await expect(page.locator(".row").first()).toBeVisible();
   });
 

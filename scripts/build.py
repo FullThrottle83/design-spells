@@ -1620,8 +1620,8 @@ def render_index_html(catalogue: dict, out_path: Path) -> None:
   <meta name="twitter:title" content="Design Spells — zero-JS CSS techniques">
   <meta name="twitter:description" content="{total} zero-JavaScript design techniques. Browse by category, preview each spell, copy the source, and see which browsers support it.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='3' width='10' height='10' fill='%23d84315'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./search.js" defer></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/search.js" defer></script>
 </head>
 <body>
 
@@ -1841,10 +1841,15 @@ def main() -> None:
     (ROOT / "public" / "spells.json").write_text(json_text, encoding="utf-8")
     print("wrote public/spells.json", (ROOT / "public" / "spells.json").stat().st_size, "bytes")
 
-    # Static HTML emission for the Zero-JS catalogue
-    render_index_html(catalogue, ROOT / "public" / "index.html")
+    # Keep the original complete explorer for existing users and regression tests.
+    # It is intentionally not requested on the new, lightweight home page.
+    classic = ROOT / "public" / "classic"
+    classic.mkdir(parents=True, exist_ok=True)
+    render_index_html(catalogue, classic / "index.html")
     from build_pages import build_pages
     build_pages(catalogue)
+    from build_light import build_light
+    build_light(catalogue)
 
 
 if __name__ == "__main__":

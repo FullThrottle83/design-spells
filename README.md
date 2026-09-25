@@ -352,6 +352,13 @@ input[type="checkbox"]:checked::before { transform: scale(1); }
 
 Smooth rotation indicator for details disclosure triangles on open state.
 
+```html
+<details>
+  <summary>Details <span class="chevron" aria-hidden="true">▾</span></summary>
+  <p>Native disclosure, without JavaScript.</p>
+</details>
+```
+
 ```css
 summary {
   list-style: none;
@@ -1068,6 +1075,13 @@ A large premium effect for multi-page sites. The browser handles MPA navigation 
 
 A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[popover]`) and native modals.
 
+```html
+<button type="button" popovertarget="ph-pop">Open menu</button>
+<div id="ph-pop" popover="auto" class="popover-menu">
+  <a href="/docs">Documentation</a>
+</div>
+```
+
 ```css
 .popover-menu {
   display: none;
@@ -1131,6 +1145,11 @@ Shrinks the sticky header and scales the logo down as the user scrolls, without 
 *Reveal · Newer · Markup*
 
 A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` modals, with no JS.
+
+```html
+<button type="button" popovertarget="bd-pop">Open</button>
+<div id="bd-pop" popover="auto">Popover with native backdrop styling.</div>
+```
 
 ```css
 dialog::backdrop,
@@ -1643,6 +1662,15 @@ Touch-friendly horizontal scroll carousel with native CSS scroll snapping.
 
 Keep this for broader browser compatibility or older projects.
 
+```html
+<details>
+  <summary>Open panel</summary>
+  <div class="accordion-panel">
+    <div class="accordion-inner">The panel content is available without scripting.</div>
+  </div>
+</details>
+```
+
 ```css
 details .accordion-panel {
   display: grid;
@@ -1658,6 +1686,13 @@ details[open] .accordion-inner { opacity: 1; transition-delay: 80ms; }
 *Layout · Baseline · 0 JS · → 56 is more modern*
 
 Keep this only if the background is solid and static. Otherwise use Spell 56.
+
+```html
+<details>
+  <summary>What is included?</summary>
+  <div class="accordion-panel">A panel that expands to its intrinsic height.</div>
+</details>
+```
 
 ```css
 .scroller-wrap { position: relative; }
@@ -1751,6 +1786,19 @@ Cards in a grid share the exact same row tracks despite different amounts of con
 *Layout · Baseline · 0 JS · replaces 27 in most cases*
 
 The scroller’s own edges become literally transparent. Works regardless of the background color or pattern behind it.
+
+```html
+<div class="tabs-container">
+  <details name="ui-tabs" open>
+    <summary>Overview</summary>
+    <p>First disclosure panel.</p>
+  </details>
+  <details name="ui-tabs">
+    <summary>Details</summary>
+    <p>Second disclosure panel.</p>
+  </details>
+</div>
+```
 
 ```css
 .scroll-gallery {
@@ -1872,6 +1920,15 @@ A tree view for documentation or sidebars built from nested `<details>` elements
 </nav>
 ```
 
+```html
+<button type="button" commandfor="sheet-demo" command="show-modal">Open sheet</button>
+<dialog id="sheet-demo" class="responsive-sheet" closedby="any">
+  <h2>Sheet content</h2>
+  <p>This stays a native modal dialog.</p>
+  <form method="dialog"><button type="submit">Close</button></form>
+</dialog>
+```
+
 ```css
 .tree-nav details {
   padding-left: 0.75rem;
@@ -1947,6 +2004,8 @@ dialog.responsive-sheet[open] {
     transform: translateY(100%);
   }
 
+}
+
 /* Centered modal on desktop */
 @media (min-width: 640px) {
   dialog.responsive-sheet {
@@ -1962,7 +2021,6 @@ dialog.responsive-sheet[open] {
     }
 }
   }
-}
 ```
 
 ---

@@ -88,6 +88,7 @@ This is the foundation every spell builds on. Load it before anything else.
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
 
 html {
   /* Prevents layout shift when a dialog/popover opens and locks the scrollbar */
@@ -121,7 +122,7 @@ html {
   overscroll-behavior: contain;
 }
 
-/* WCAG 2.2 AA / mobile: minimum hit target for buttons, links, summary, labels. */
+/* Project touch-target preference (44px); not a WCAG 2.2 AA requirement. */
 button, [type="button"], [type="submit"], [type="reset"],
 summary, .btn, a.btn {
   min-block-size: 44px;

@@ -144,7 +144,7 @@ class McpServerTest(unittest.TestCase):
         self.assertIn("tailwind", data)
         self.assertEqual(data["tailwindFormat"], "global-stylesheet-css")
         self.assertIn("CSS for a Tailwind v4 global stylesheet", data["tailwind"])
-        self.assertNotIn('\\n@import "tailwindcss";', data["tailwind"])
+        self.assertNotIn('\n@import "tailwindcss";', data["tailwind"])
         self.assertEqual(data["runnableHtmlUrl"], "https://design-spells.hultsan20.workers.dev/download/ds-147.html")
         self.assertIsNone(data["companionHtmlUrl"])
         self.assertEqual(data["previewEnvironment"], "shadow")

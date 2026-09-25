@@ -526,7 +526,7 @@ class EmittedHtmlTest(unittest.TestCase):
         out = tailwind_for({"css": css})
         self.assertIn("CSS for a Tailwind v4 global stylesheet", out)
         self.assertIn(css, out)
-        self.assertNotIn('\\n@import "tailwindcss";', out)
+        self.assertNotIn('\n@import "tailwindcss";', out)
         self.assertNotIn("@layer components {", out)
         self.assertEqual(out.count("@view-transition"), 1)
 

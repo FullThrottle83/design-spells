@@ -57,7 +57,13 @@ test('native popover toggle updates deep links and compatibility text', async ({
   await page.getByRole('button', { name: 'Shimmer on primary buttons', exact: true }).click();
   await expect(page).toHaveURL(/#ds-1$/);
   await expect(page.locator('#drawer-ds-1 .feature-check')).not.toContainText('Checking');
+  const panel = page.locator('#drawer-ds-1');
+  // A lazy document preview may have moved keyboard focus into its iframe.
+  // Exercise Escape from a known control inside the parent popover rather than
+  // dispatching it into whichever browsing context currently owns focus.
+  await panel.getByRole('button', { name: 'Close panel', exact: true }).focus();
   await page.keyboard.press('Escape');
+  await expect(panel).toBeHidden();
   await expect(page).not.toHaveURL(/#ds-1$/);
 });
 

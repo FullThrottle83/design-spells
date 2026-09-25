@@ -48,7 +48,6 @@
 
   // State
   let stackSet = new Set();
-  let highlightedIndex = -1;
   let debounceTimer = null;
 
   // ------------------------------------------------------------- 1. Theme
@@ -509,7 +508,7 @@
     cssBlocks.push(`/* ============================================================`);
     cssBlocks.push(`   Design Spells — Combined Bundle (${stackSet.size} spells)`);
     cssBlocks.push(`   Generated: ${new Date().toISOString().slice(0, 10)}`);
-    cssBlocks.push(`   Zero Client JS · Astro 7 & Modern CSS Ready`);
+    cssBlocks.push(`   CSS snippets only; include required tokens and markup separately.`);
     cssBlocks.push(`   ============================================================ */\n`);
 
     stackSet.forEach((sid) => {
@@ -556,52 +555,40 @@
     }
   });
 
-  // ------------------------------------------------------------- 8. Keyboard Navigation
+  // ------------------------------------------------------------- 8. Component-scoped keyboard navigation
   document.addEventListener("keydown", (e) => {
-    // '/' or 'Cmd+K' search focus
-    if (
-      (e.key === "/" || (e.key === "k" && (e.metaKey || e.ctrlKey))) &&
-      document.activeElement !== searchInput &&
-      !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName)
-    ) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"
+      && !e.altKey && !e.isComposing) {
       e.preventDefault();
       searchInput.focus();
       return;
     }
-
-    // Row navigation with 'j' and 'k' when search is not focused
-    if (
-      !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName) &&
-      !document.querySelector(".drawer[popover]:not([hidden]):popover-open")
-    ) {
-      const visibleRows = rows.filter((r) => !r.hidden);
-      if (!visibleRows.length) return;
-
-      if (e.key === "j") {
-        e.preventDefault();
-        highlightedIndex = Math.min(highlightedIndex + 1, visibleRows.length - 1);
-        focusRow(visibleRows[highlightedIndex]);
-      } else if (e.key === "k") {
-        e.preventDefault();
-        highlightedIndex = Math.max(highlightedIndex - 1, 0);
-        focusRow(visibleRows[highlightedIndex]);
-      } else if (e.key === "Enter" && highlightedIndex >= 0 && visibleRows[highlightedIndex]) {
-        const btn = visibleRows[highlightedIndex].querySelector(".row__hit");
-        if (btn) btn.click();
-      }
+    if (e.altKey || e.metaKey || e.ctrlKey || e.isComposing || !["j", "k"].includes(e.key)) return;
+    const active = document.activeElement;
+    if (!active?.matches(".row__hit, .row__num")) return;
+    const visibleRows = rows.filter((row) => !row.hidden);
+    const current = visibleRows.findIndex((row) => row.contains(active));
+    if (current < 0) return;
+    const next = Math.max(0, Math.min(current + (e.key === "j" ? 1 : -1), visibleRows.length - 1));
+    const target = visibleRows[next].querySelector(".row__hit");
+    if (target) {
+      e.preventDefault();
+      target.focus();
+      target.scrollIntoView({ block: "nearest", behavior: "auto" });
     }
   });
-
-  function focusRow(rowEl) {
-    if (!rowEl) return;
-    const hitBtn = rowEl.querySelector(".row__hit");
-    if (hitBtn) hitBtn.focus();
-    rowEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }
 
   // ------------------------------------------------------------- Init
   initTheme();
   loadStack();
   syncFromUrl({ preserveStoredStack: true });
+  const shortcut = document.querySelector(".search__kbd");
+  if (shortcut) shortcut.textContent = "Ctrl/⌘ K";
+  const keyHelp = document.querySelector(".enhanced-keys");
+  if (keyHelp) keyHelp.textContent = "Keys: Ctrl/⌘ K search · j/k while a catalogue row is focused · Esc close";
+  const stackHelp = document.querySelector(".drawer__desc--flush");
+  if (stackHelp) stackHelp.textContent = "Selected CSS snippets are concatenated verbatim. Required tokens, HTML and global-selector conflicts are not resolved.";
+  if (stackCopyBtn) stackCopyBtn.textContent = "Copy CSS snippets";
+  if (stackDownloadBtn) stackDownloadBtn.textContent = "Download CSS snippets";
   document.documentElement.setAttribute("data-enhanced", "");
 })();

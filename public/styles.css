@@ -1853,6 +1853,11 @@ html[data-enhanced] .fallback-help {
   .drawer[popover]::backdrop {
     transition: none !important;
   }
+  /* A dismissed popover must stop participating in layout and focus immediately.
+     Explicitly override any retained discrete display animation in reduced motion. */
+  .drawer[popover]:not(:popover-open) {
+    display: none !important;
+  }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;

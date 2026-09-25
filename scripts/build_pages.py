@@ -14,13 +14,25 @@ from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
 from build import DOCUMENT_TOKENS, rewrite_preview_assets
-from build_bundle import render_bundle
+from build_bundle import ROOT_SCROLL_IDS, render_bundle
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 SITE_URL = "https://design-spells.hultsan20.workers.dev"
 VALID_ID = re.compile(r"ds-(?:[1-9]\d*|bonus)\Z")
 SCROLL_DEMOS = {"ds-17", "ds-36", "ds-43", "ds-47", "ds-65", "ds-126"}
+# A curated comparison, not a claim that all 150 CSS features have a
+# meaningful single-frame before/after state. Keep authored spell CSS intact.
+COMPARE_NOTES = {
+    "ds-1": "Hover or keyboard-focus both buttons. The right button gains a moving highlight.",
+    "ds-2": "Press and hold each button. Only the right button shrinks while pressed.",
+    "ds-5": "Hover Overview in both previews. The right underline grows across the link.",
+    "ds-6": "Use Tab to focus each input. The right input gets a layered focus glow.",
+    "ds-7": "Hover or keyboard-focus each star. The right star changes color and grows.",
+    "ds-18": "Hover or focus each button. The right one reveals a tooltip above it.",
+    "ds-24": "Hover or focus each Docs link. The right arrow moves up and right.",
+    "ds-38": "Hover, then press each button. The right button changes its background.",
+}
 BROWSERS = (("chrome", "Chrome"), ("edge", "Edge"), ("firefox", "Firefox"), ("safari", "Safari"))
 
 
@@ -51,6 +63,17 @@ def render_doc(spell: dict) -> str:
     instruction = spell.get("previewAction", {}).get("hint", "")
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
     download_note = '<p class="note">This cross-document transition also needs <a href="/download/ds-14-next.html" download="ds-14-next.html">page B (HTML) ↓</a>; save both files together.</p>' if sid == "ds-14" else ""
+    effect_iframe = f'<iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin"></iframe>'
+    if sid in COMPARE_NOTES:
+        demo_preview = (
+            '<div class="demo-compare">'
+            f'<div class="demo-compare__item"><h3>Base fixture</h3><iframe title="Baseline without spell CSS: {title}" src="/play/{sid}/before/" loading="lazy" sandbox="allow-same-origin"></iframe></div>'
+            f'<div class="demo-compare__item"><h3>With spell CSS</h3>{effect_iframe}</div>'
+            '</div>'
+            f'<p class="note demo-compare__guide">{esc(COMPARE_NOTES[sid])} Both use identical markup and shared demo styling; only the right includes this spell’s CSS.</p>'
+        )
+    else:
+        demo_preview = effect_iframe
     evidence = spell["verification"]
     evidence_note = (
         f"Support: {esc(evidence['support'])}; "
@@ -108,7 +131,7 @@ def render_doc(spell: dict) -> str:
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a><a class="action" href="/download/{sid}.html" download="{sid}.html">Download runnable HTML ↓</a></div>
       {instruction_html}
       {download_note}
-      <iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin"></iframe>
+      {demo_preview}
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
@@ -138,10 +161,14 @@ def render_doc(spell: dict) -> str:
 </html>"""
 
 
-def render_play(spell: dict, next_page: bool = False) -> str:
+def render_play(spell: dict, next_page: bool = False, baseline: bool = False) -> str:
     sid = spell["id"]
     title = esc(spell["title"])
-    css = rewrite_preview_assets(spell["css"])
+    css = "" if baseline else rewrite_preview_assets(spell["css"])
+    if sid in ROOT_SCROLL_IDS and not baseline:
+        # The hosted root-scroll demos need the same opt-in prerequisite
+        # as their integration bundles; it must not leak into other spells.
+        css = "html { container-type: scroll-state; overflow: auto; }\n" + css
     raw_html = spell["previewHtml"] or spell["html"] or "<p>CSS-only example.</p>"
     hint = spell.get("previewAction", {}).get("hint", "")
     hint_html = f"<p class='demo-hint'>{esc(hint)}</p>" if hint else ""
@@ -212,6 +239,8 @@ def build_pages(catalogue: dict) -> None:
             raise ValueError(f"Unsafe spell ID for a file path: {sid!r}")
         write_page(PUBLIC / "spells" / sid / "index.html", render_doc(spell))
         write_page(PUBLIC / "play" / sid / "index.html", render_play(spell))
+        if sid in COMPARE_NOTES:
+            write_page(PUBLIC / "play" / sid / "before" / "index.html", render_play(spell, baseline=True))
         write_page(PUBLIC / "download" / f"{sid}.html", render_download(spell))
         write_page(PUBLIC / "bundle" / f"{sid}.txt", render_bundle(spell, DOCUMENT_TOKENS))
         if sid == "ds-14":

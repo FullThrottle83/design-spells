@@ -18,6 +18,17 @@ class StaticPagesTest(unittest.TestCase):
                 doc = (PUBLIC / "spells" / sid / "index.html").read_text(encoding="utf-8")
                 play = (PUBLIC / "play" / sid / "index.html").read_text(encoding="utf-8")
                 self.assertIn(f"/play/{sid}/", doc)
+                if sid in {"ds-1", "ds-2", "ds-5", "ds-6", "ds-7", "ds-18", "ds-24", "ds-38"}:
+                    self.assertIn(f'/play/{sid}/before/', doc)
+                    self.assertIn(f'Baseline without spell CSS: {html.escape(spell["title"], quote=True)}', doc)
+                    baseline = (PUBLIC / "play" / sid / "before" / "index.html").read_text(encoding="utf-8")
+                    self.assertIn("<!doctype html>", baseline.lower())
+                    self.assertNotIn(spell["css"].strip(), baseline)
+                    self.assertIn(spell["previewHtml"], baseline)
+                    self.assertNotIn("<script", baseline.lower())
+                    self.assertIn(spell["previewHtml"], play)
+                else:
+                    self.assertNotIn('class="demo-compare"', doc)
                 self.assertIn(f'/download/{sid}.html', doc)
                 self.assertIn(f'href="/bundle/{sid}.txt"', doc)
                 self.assertIn('data-bundle-source', doc)
@@ -45,6 +56,20 @@ class StaticPagesTest(unittest.TestCase):
         xml = (PUBLIC / "sitemap.xml").read_text(encoding="utf-8")
         self.assertEqual(xml.count("<url>"), CATALOGUE["total"] + 1)
         self.assertNotIn("/play/", xml)
+
+    def test_root_scroll_state_demo_prerequisite_is_opt_in(self):
+        for sid in ("ds-43", "ds-47"):
+            with self.subTest(spell=sid):
+                for path in (PUBLIC / "play" / sid / "index.html",
+                             PUBLIC / "download" / f"{sid}.html"):
+                    self.assertIn(
+                        "html { container-type: scroll-state; overflow: auto; }",
+                        path.read_text(encoding="utf-8"),
+                    )
+        self.assertNotIn(
+            "html { container-type: scroll-state; overflow: auto; }",
+            (PUBLIC / "play" / "ds-1" / "index.html").read_text(encoding="utf-8"),
+        )
 
     def test_view_transition_uses_two_real_documents(self):
         first = (PUBLIC / "play" / "ds-14" / "index.html").read_text(encoding="utf-8")

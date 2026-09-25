@@ -14,6 +14,21 @@ test.describe("static spell pages without scripting", () => {
     await expect(page.locator("script:not([src])")).toHaveCount(0);
   });
 
+  test("subtle interaction has side-by-side native previews and clear instruction", async ({ page, request }) => {
+    await page.goto("/spells/ds-5/");
+    const compare = page.locator(".demo-compare");
+    await expect(compare.locator("iframe")).toHaveCount(2);
+    await expect(compare.getByRole("heading", { name: "Base fixture" })).toBeVisible();
+    await expect(compare.getByRole("heading", { name: "With spell CSS" })).toBeVisible();
+    await expect(page.locator(".demo-compare__guide")).toContainText("Hover Overview");
+    const before = await (await request.get("/play/ds-5/before/")).text();
+    const after = await (await request.get("/play/ds-5/")).text();
+    expect(before).not.toContain(".nav-link::after");
+    expect(after).toContain(".nav-link::after");
+    expect(before).not.toContain("<script");
+    expect(after).not.toContain("<script");
+  });
+
   test("catalogue provides direct links to independent pages without scripting", async ({ page }) => {
     await page.goto("/");
     const link = page.locator('.row[data-id="ds-1"] .row__link');

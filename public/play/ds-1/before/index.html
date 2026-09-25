@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <meta name="robots" content="noindex,follow">
-  <title>Demo: Scroll-Awake Back-to-Top — Design Spells</title>
+  <title>Demo: Shimmer on primary buttons — Design Spells</title>
   <style>
   *, *::before, *::after { box-sizing: border-box; }
   :root {
@@ -118,31 +118,10 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-html { container-type: scroll-state; overflow: auto; }
-.backtotop {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  inline-size: 44px; block-size: 44px;
-  min-inline-size: 44px; min-block-size: 44px;
-  display: grid; place-items: center;
-  opacity: 0;
-  transform: translateY(10px) scale(.96);
-  pointer-events: none;
-  transition: opacity 200ms ease, transform 240ms cubic-bezier(0.16,1,0.3,1);
-}
-
-@container scroll-state(scrolled: block) {
-  .backtotop {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-  }
-}
 </style>
 </head>
 <body>
-  <a class="backtotop" href="#">↑</a><p class="demo-note">Wakes after the page has been scrolled.</p><div class="scroll-content"><h2>Scroll through the document</h2><p>Root-document scroll effects cannot be meaningfully tested in a tiny isolated card.</p></div><div class="scroll-content"><p>End of the scrolling demonstration.</p></div>
-  <p class='demo-hint'>Drag the corner to resize</p>
+  <div class="stage"><button class="btn-primary">Get started</button></div>
+  <p class='demo-hint'>Hover or focus to preview</p>
 </body>
 </html>

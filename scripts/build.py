@@ -1381,17 +1381,15 @@ def highlight_html(src: str) -> str:
 
 
 def tailwind_for(spell: dict) -> str:
+    """Plain global CSS, not Tailwind utility classes or an independent build."""
     css = str(spell.get("css", "")).strip()
     if not css:
         return ""
-    indented = "\n".join(("  " + line) if line else line for line in css.split("\n"))
     return "\n".join([
-        "/* Tailwind v4 — drop into a global stylesheet processed by Tailwind. */",
-        '@import "tailwindcss";',
-        "",
-        "@layer components {",
-        indented,
-        "}",
+        '/* CSS for a Tailwind v4 global stylesheet. Place after @import "tailwindcss";',
+        "   not utility classes. Supply project tokens and required HTML separately.",
+        "   For a runnable demo, download the standalone HTML document. */",
+        css,
         "",
     ])
 
@@ -1558,7 +1556,7 @@ def render_drawer(spell: dict) -> str:
       </section>
 
       <section class="sect" aria-labelledby="source-label-{spell['id']}">
-        <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind v4 / Astro / HTML</span></h3>
+        <h3 class="sect__label" id="source-label-{spell['id']}">Source <span>Modern CSS / Tailwind global CSS / Astro / HTML</span></h3>
         <p class="source-help">Select code and use your browser’s Copy command.</p>
         <div class="code drawer__code code__tabs">
           <div class="code__bar">
@@ -1570,7 +1568,7 @@ def render_drawer(spell: dict) -> str:
             <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_css(spell['css'])}</code></pre></div>
           </details>
           <details name="tabs-{spell['id']}" class="code__tab-group">
-            <summary class="code__tab">Tailwind v4</summary>
+            <summary class="code__tab">CSS for Tailwind v4</summary>
             <div class="code__view-wrap"><pre class="code__view" tabindex="0"><code>{highlight_css(tailwind_src)}</code></pre></div>
           </details>
           <details name="tabs-{spell['id']}" class="code__tab-group">

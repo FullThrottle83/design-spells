@@ -28,6 +28,7 @@ from pathlib import Path
 from scripts.build import (
     CAT_ORDER,
     astro_for,
+    tailwind_for,
     highlight_css,
     highlight_html,
     inline_md_to_html,
@@ -513,12 +514,21 @@ class EmittedHtmlTest(unittest.TestCase):
     def test_emitted_index_html_contains_code_tabs(self):
         self.assertIn('name="tabs-ds-1"', self.html)
         self.assertIn('<summary class="code__tab">Modern CSS</summary>', self.html)
-        self.assertIn('<summary class="code__tab">Tailwind v4</summary>', self.html)
+        self.assertIn('<summary class="code__tab">CSS for Tailwind v4</summary>', self.html)
         self.assertIn('<summary class="code__tab">Astro Component</summary>', self.html)
         self.assertIn('<summary class="code__tab">HTML</summary>', self.html)
 
     def test_emitted_index_html_contains_data_features(self):
         self.assertIn('data-features="', self.html)
+
+    def test_tailwind_export_is_global_css_not_fake_utilities(self):
+        css = '@view-transition { navigation: auto; }\n:root { color: var(--color-primary); }'
+        out = tailwind_for({"css": css})
+        self.assertIn("CSS for a Tailwind v4 global stylesheet", out)
+        self.assertIn(css, out)
+        self.assertNotIn('\n@import "tailwindcss";', out)
+        self.assertNotIn("@layer components {", out)
+        self.assertEqual(out.count("@view-transition"), 1)
 
     def test_astro_for_generates_astro_sfc_format(self):
         sample = {

@@ -124,3 +124,33 @@ test("ds-90 quick actions are exposed by native disclosure and keyboard", async 
   await expect(disclosure).not.toHaveAttribute("open", "");
   await expect(action).toBeHidden();
 });
+
+test("ds-18 tooltip decoration follows hover and keyboard focus without scripting", async ({ page }) => {
+  await page.goto("/play/ds-18/");
+  const trigger = page.getByRole("button", { name: "Hover me" });
+  const opacity = () => trigger.evaluate(el => Number(getComputedStyle(el, "::after").opacity));
+  // Firefox exposes the authored attr() expression in computed content while
+  // WebKit/Chromium can expose its resolved string. Validate the source data
+  // and pseudo-element wiring independently of CSSOM serialization.
+  const content = await trigger.evaluate(el => getComputedStyle(el, "::after").content);
+  await expect(page.locator("script")).toHaveCount(0);
+  await expect(trigger).toHaveAttribute("data-tooltip", "Copied to clipboard");
+  expect(content === "attr(data-tooltip)" || content.includes("Copied to clipboard")).toBe(true);
+  await expect.poll(opacity).toBe(0);
+
+  await page.keyboard.press("Tab");
+  await expect(trigger).toBeFocused();
+  await expect.poll(opacity).toBe(1);
+
+  // This isolated demo has one focusable control; Firefox can cycle Tab
+  // back to it. Explicitly blur it and move the pointer out before checking
+  // the resting state, without adding any JavaScript to the shipped page.
+  await page.mouse.move(0, 0);
+  await trigger.evaluate(el => el.blur());
+  await expect(trigger).not.toBeFocused();
+  await expect.poll(opacity).toBe(0);
+  await trigger.hover();
+  await expect.poll(opacity).toBe(1);
+  await page.mouse.move(0, 0);
+  await expect.poll(opacity).toBe(0);
+});

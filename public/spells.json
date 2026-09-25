@@ -1708,12 +1708,12 @@
       "jsLabel": "0 JS",
       "note": "→ 56 is more modern",
       "description": "Keep this only if the background is solid and static. Otherwise use Spell 56.",
-      "html": "<details>\n  <summary>What is included?</summary>\n  <div class=\"accordion-panel\">A panel that expands to its intrinsic height.</div>\n</details>\n",
+      "html": "",
       "css": ".scroller-wrap { position: relative; }\n.scroller-wrap::before,\n.scroller-wrap::after {\n  content: \"\";\n  position: absolute; top: 0; bottom: 0; width: 2rem;\n  pointer-events: none; z-index: 1;\n}\n.scroller-wrap::before {\n  left: 0;\n  background: linear-gradient(to right, var(--color-bg), transparent);\n}\n.scroller-wrap::after {\n  right: 0;\n  background: linear-gradient(to left, var(--color-bg), transparent);\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "toggle-disclosure",
-        "hint": "Open the disclosure to preview"
+        "kind": "none",
+        "hint": ""
       },
       "previewHtml": "<div class=\"scroller-wrap\"><div style=\"display:flex;gap:1rem;overflow:auto\"><span>Alpha</span><span>Bravo</span><span>Charlie</span><span>Delta</span></div></div>",
       "previewCss": ".scroller-wrap { position: relative; }\n.scroller-wrap::before,\n.scroller-wrap::after {\n  content: \"\";\n  position: absolute; top: 0; bottom: 0; width: 2rem;\n  pointer-events: none; z-index: 1;\n}\n.scroller-wrap::before {\n  left: 0;\n  background: linear-gradient(to right, var(--color-bg), transparent);\n}\n.scroller-wrap::after {\n  right: 0;\n  background: linear-gradient(to left, var(--color-bg), transparent);\n}\n",
@@ -1742,7 +1742,7 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "A modernization of Spell 15. Animates `block-size: 0` → `auto` directly. Bonus: `<details name=\"faq\">` gives you an exclusive accordion automatically (siblings close when a new one opens).",
-      "html": "",
+      "html": "<details>\n  <summary>What is included?</summary>\n  <div class=\"accordion-panel\">A panel that expands to its intrinsic height.</div>\n</details>\n",
       "css": ":root {\n  interpolate-size: allow-keywords;\n}\n\n.accordion-panel {\n  block-size: 0;\n  overflow: hidden;\n  transition: block-size 300ms cubic-bezier(0.16,1,0.3,1);\n}\n\ndetails[open] .accordion-panel {\n  block-size: auto;\n}\n",
       "previewEnvironment": "document",
       "previewAction": {
@@ -1844,12 +1844,12 @@
       "jsLabel": "0 JS",
       "note": "replaces 27 in most cases",
       "description": "The scroller’s own edges become literally transparent. Works regardless of the background color or pattern behind it.",
-      "html": "<div class=\"tabs-container\">\n  <details name=\"ui-tabs\" open>\n    <summary>Overview</summary>\n    <p>First disclosure panel.</p>\n  </details>\n  <details name=\"ui-tabs\">\n    <summary>Details</summary>\n    <p>Second disclosure panel.</p>\n  </details>\n</div>\n",
+      "html": "",
       "css": ".scroll-gallery {\n  overflow-x: auto;\n  overscroll-behavior-x: contain;\n  mask-image: linear-gradient(\n    to right,\n    transparent 0%,\n    black 5%,\n    black 95%,\n    transparent 100%\n  );\n  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "toggle-disclosure",
-        "hint": "Open the disclosure to preview"
+        "kind": "none",
+        "hint": ""
       },
       "previewHtml": "<div class=\"scroll-gallery\" style=\"display:flex;gap:1rem\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" width=\"180\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='1' x2='0' y1='0' y2='1'%3E%3Cstop stop-color='%230f766e'/%3E%3Cstop offset='1' stop-color='%235eead4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" width=\"180\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" width=\"180\"></div>",
       "previewCss": ".scroll-gallery {\n  overflow-x: auto;\n  overscroll-behavior-x: contain;\n  mask-image: linear-gradient(\n    to right,\n    transparent 0%,\n    black 5%,\n    black 95%,\n    transparent 100%\n  );\n  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);\n}\n",
@@ -1878,7 +1878,7 @@
       "jsLabel": "Markup",
       "note": "",
       "description": "Real tabs via `<details name=\"ui-tabs\">`. No radio-button hack.",
-      "html": "",
+      "html": "<div class=\"tabs-container\">\n  <details name=\"ui-tabs\" open>\n    <summary>Overview</summary>\n    <p>First disclosure panel.</p>\n  </details>\n  <details name=\"ui-tabs\">\n    <summary>Details</summary>\n    <p>Second disclosure panel.</p>\n  </details>\n</div>\n",
       "css": "details[name=\"ui-tabs\"] summary::-webkit-details-marker { display: none; }\n\n.tabs-container {\n  display: flex; gap: var(--space-2); position: relative;\n  padding-block-end: 320px;\n}\n\ndetails[name=\"ui-tabs\"] summary {\n  min-block-size: 44px;\n  display: inline-grid; place-items: center;\n  padding: var(--space-2) var(--space-4);\n  cursor: pointer;\n  border-bottom: 2px solid transparent;\n}\ndetails[name=\"ui-tabs\"][open] summary { border-bottom-color: var(--color-primary); }\n\ndetails[name=\"ui-tabs\"]::details-content {\n  position: absolute;\n  top: 100%; left: 0; width: 100%;\n  padding-block-start: var(--space-4);\n  transition: opacity 300ms ease, content-visibility 300ms allow-discrete;\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
@@ -1976,32 +1976,34 @@
       "section": "Layout & composition",
       "category": "Layout",
       "rawCategory": "Layout",
-      "status": "baseline",
-      "statusLabel": "Baseline",
+      "status": "newer",
+      "statusLabel": "Newer",
       "jsNeed": "markup",
       "jsLabel": "Markup",
       "note": "",
       "description": "A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.",
-      "html": "",
-      "css": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n  }\n",
+      "html": "<button type=\"button\" commandfor=\"sheet-demo\" command=\"show-modal\">Open sheet</button>\n<dialog id=\"sheet-demo\" class=\"responsive-sheet\" closedby=\"any\">\n  <h2>Sheet content</h2>\n  <p>This stays a native modal dialog.</p>\n  <form method=\"dialog\"><button type=\"submit\">Close</button></form>\n</dialog>\n",
+      "css": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
-        "kind": "toggle-disclosure",
-        "hint": "Open the disclosure to preview"
+        "kind": "activate-control",
+        "hint": "Activate the control to preview"
       },
       "previewHtml": "<p class=\"demo-note\">Opens as a sheet on small screens, a dialog on large ones.</p><button commandfor=\"sheet-demo\" command=\"show-modal\" class=\"btn\">Open sheet</button><dialog id=\"sheet-demo\" class=\"responsive-sheet\" closedby=\"any\"><p>Sheet content</p><form method=\"dialog\"><button class=\"btn\">Close</button></form></dialog>",
-      "previewCss": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n}\n  }\n",
+      "previewCss": "dialog.responsive-sheet {\n  margin: auto auto 0 auto; /* Bottom-aligned on mobile */\n  width: 100%;\n  max-width: 100%;\n  border-radius: var(--radius-lg) var(--radius-lg) 0 0;\n  border: none;\n  transform: translateY(100%);\n  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;\n}\n\ndialog.responsive-sheet[open] {\n  transform: translateY(0);\n}\n\n@starting-style {\n  dialog.responsive-sheet[open] {\n    transform: translateY(100%);\n  }\n}\n\n/* Centered modal on desktop */\n@media (min-width: 640px) {\n  dialog.responsive-sheet {\n    margin: auto;\n    max-width: 32rem;\n    border-radius: var(--radius-lg);\n    transform: scale(0.95);\n  }\n\n  @starting-style {\n    dialog.responsive-sheet[open] {\n      transform: scale(0.95);\n    }\n  }\n}\n",
       "featureKeys": [
+        "invoker-commands",
+        "closedby",
         "starting-style"
       ],
-      "feature": "@starting-style / popover",
+      "feature": "Invoker Commands (commandfor) + dialog closedby + @starting-style / popover",
       "browsers": {
         "chrome": "yes",
         "edge": "yes",
         "firefox": "yes",
-        "safari": "yes"
+        "safari": "no"
       },
-      "supportNote": "@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
+      "supportNote": "Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features."
     },
     {
       "id": "ds-18",

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`) — Design Spells</title>
+  <meta name="description" content="Evaluates password strength dynamically via HTML regex and drives the meter with `:has()`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-128/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`) — Design Spells">
+  <meta property="og:description" content="Evaluates password strength dynamically via HTML regex and drives the meter with `:has()`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-128/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-128</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-128 / Forms / Markup</p>
+    <h1>0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`)</h1>
+    <p class="lede">Evaluates password strength dynamically via HTML regex and drives the meter with `:has()`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-128/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: 0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`)" src="/play/ds-128/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;pwd-wrap&quot;&gt;
+  &lt;input type=&quot;password&quot; class=&quot;pwd-input&quot; placeholder=&quot;At least 8 chars, a number &amp; a capital&quot; 
+         pattern=&quot;(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}&quot; required&gt;
+  &lt;div class=&quot;pwd-meter&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.pwd-wrap { display: grid; gap: var(--space-2); }
+.pwd-input { min-block-size: 44px; padding-inline: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.pwd-meter { block-size: 6px; background: var(--color-surface-offset); border-radius: 999px; overflow: hidden; }
+.pwd-meter span { display: block; block-size: 100%; inline-size: 0; transition: inline-size 300ms ease, background 300ms ease; }
+
+.pwd-wrap:has(input:not(:placeholder-shown):invalid) .pwd-meter span { inline-size: 33%; background: var(--color-error); }
+.pwd-wrap:has(input:valid) .pwd-meter span { inline-size: 100%; background: var(--color-success); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

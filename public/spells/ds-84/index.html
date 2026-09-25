@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Hover/Focus Reveal Card Actions — Design Spells</title>
+  <meta name="description" content="Secondary card actions stay hidden until the card is hovered or focused.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-84/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hover/Focus Reveal Card Actions — Design Spells">
+  <meta property="og:description" content="Secondary card actions stay hidden until the card is hovered or focused.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-84/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-84</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-84 / Cards / 0 JS</p>
+    <h1>Hover/Focus Reveal Card Actions</h1>
+    <p class="lede">Secondary card actions stay hidden until the card is hovered or focused.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-84/">Open standalone demo ↗</a></div>
+      <p class='note'>Hover or focus to preview</p>
+      <iframe title="Isolated demonstration: Hover/Focus Reveal Card Actions" src="/play/ds-84/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;article class=&quot;card-row&quot;&gt;
+  &lt;h3&gt;Q3 report&lt;/h3&gt;
+  &lt;div class=&quot;card-actions&quot;&gt;
+    &lt;button aria-label=&quot;Edit Q3 report&quot;&gt;✏️&lt;/button&gt;
+    &lt;button aria-label=&quot;Share Q3 report&quot;&gt;🔗&lt;/button&gt;
+    &lt;button aria-label=&quot;Archive Q3 report&quot;&gt;📦&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.card-row {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+}
+.card-actions { display: flex; gap: var(--space-1); opacity: 0; transition: opacity 180ms ease; }
+.card-row:hover .card-actions,
+.card-row:focus-within .card-actions { opacity: 1; }
+.card-actions button {
+  inline-size: 44px; block-size: 44px; border-radius: var(--radius-sm);
+  border: 0; background: transparent; cursor: pointer;
+}
+.card-actions button:hover { background: var(--color-surface-offset); }
+@media (hover: none) { .card-actions { opacity: 1; } }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

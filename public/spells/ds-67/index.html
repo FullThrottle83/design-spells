@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Scroll-Driven Before/After Comparison — Design Spells</title>
+  <meta name="description" content="A touch-friendly, accessible before/after image comparison with no JavaScript. The scroller exports a named `scroll-timeline` via `timeline-scope` so `clip-path` can animate on a *sibling* surface (not on the scroller itself). Supports swipe gestures and arrow keys (`tabindex=&quot;0&quot;`). Use `role=&quot;region&quot;` — not `slider` — because `aria-valuenow` cannot be updated without JS.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-67/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Scroll-Driven Before/After Comparison — Design Spells">
+  <meta property="og:description" content="A touch-friendly, accessible before/after image comparison with no JavaScript. The scroller exports a named `scroll-timeline` via `timeline-scope` so `clip-path` can animate on a *sibling* surface (not on the scroller itself). Supports swipe gestures and arrow keys (`tabindex=&quot;0&quot;`). Use `role=&quot;region&quot;` — not `slider` — because `aria-valuenow` cannot be updated without JS.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-67/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-67</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-67 / Interaction / Markup</p>
+    <h1>Scroll-Driven Before/After Comparison</h1>
+    <p class="lede">A touch-friendly, accessible before/after image comparison with no JavaScript. The scroller exports a named `scroll-timeline` via `timeline-scope` so `clip-path` can animate on a *sibling* surface (not on the scroller itself). Supports swipe gestures and arrow keys (`tabindex=&quot;0&quot;`). Use `role=&quot;region&quot;` — not `slider` — because `aria-valuenow` cannot be updated without JS.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-67/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Scroll-Driven Before/After Comparison" src="/play/ds-67/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;compare-container&quot;&gt;
+    &lt;img src=&quot;/after.jpg&quot; alt=&quot;After&quot; class=&quot;compare-img compare-after&quot;&gt;
+  &lt;div class=&quot;compare-before-wrap&quot;&gt;
+    &lt;img src=&quot;/before.jpg&quot; alt=&quot;Before&quot; class=&quot;compare-img compare-before&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;compare-scroller&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Compare before and after. Swipe or use the arrow keys.&quot;&gt;
+    &lt;div class=&quot;scroller-spacer&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.compare-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 16 / 9;
+  timeline-scope: --compare;
+}
+
+.compare-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.compare-before-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border-right: 2px solid white;
+  box-shadow: 4px 0 16px oklch(0 0 0 / 0.3);
+  pointer-events: none;
+}
+
+.compare-scroller {
+  position: absolute;
+  inset: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  z-index: 10;
+  scroll-timeline: --compare inline;
+}
+.compare-scroller::-webkit-scrollbar { display: none; }
+
+.scroller-spacer {
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .compare-before-wrap {
+    animation: reveal-before linear both;
+    animation-timeline: --compare;
+  }
+
+  @keyframes reveal-before {
+    from { clip-path: inset(0 0% 0 0); }
+    to   { clip-path: inset(0 100% 0 0); }
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

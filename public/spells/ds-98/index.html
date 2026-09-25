@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Interest-Hint Tooltip (`interestfor` + `popover=&quot;hint&quot;`) — Design Spells</title>
+  <meta name="description" content="A hover, focus, and long-press tooltip with no `mouseenter`. `popover=&quot;hint&quot;` does not close open `auto` menus. The browser sets implicit `aria-describedby` — do not add `role=&quot;tooltip&quot;` yourself.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-98/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Interest-Hint Tooltip (`interestfor` + `popover=&quot;hint&quot;`) — Design Spells">
+  <meta property="og:description" content="A hover, focus, and long-press tooltip with no `mouseenter`. `popover=&quot;hint&quot;` does not close open `auto` menus. The browser sets implicit `aria-describedby` — do not add `role=&quot;tooltip&quot;` yourself.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-98/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-98</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-98 / Navigation / Markup</p>
+    <h1>Interest-Hint Tooltip (`interestfor` + `popover=&quot;hint&quot;`)</h1>
+    <p class="lede">A hover, focus, and long-press tooltip with no `mouseenter`. `popover=&quot;hint&quot;` does not close open `auto` menus. The browser sets implicit `aria-describedby` — do not add `role=&quot;tooltip&quot;` yourself.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-98/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Interest-Hint Tooltip (`interestfor` + `popover=&quot;hint&quot;`)" src="/play/ds-98/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;button type=&quot;button&quot; class=&quot;icon-btn&quot; interestfor=&quot;tip-save&quot; aria-label=&quot;Save&quot;&gt;★&lt;/button&gt;
+&lt;div id=&quot;tip-save&quot; popover=&quot;hint&quot; class=&quot;hint-tip&quot;&gt;Save to your list&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.icon-btn {
+  anchor-name: --tip-save;
+  interest-delay: 400ms 180ms;
+  inline-size: 44px; block-size: 44px; min-inline-size: 44px; min-block-size: 44px;
+  border-radius: var(--radius-sm); border: 1px solid var(--color-border);
+  background: var(--color-bg); cursor: pointer;
+}
+.icon-btn:interest-source { border-color: var(--color-primary); }
+.hint-tip {
+  margin: 0; inset: auto;
+  position-anchor: --tip-save;
+  position-area: top;
+  margin-block-end: .4rem;
+  position-try-fallbacks: flip-block;
+  position-visibility: anchors-visible;
+  padding: .4rem .7rem; border-radius: var(--radius-sm);
+  background: var(--color-text); color: var(--color-bg); font-size: .85rem;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity 160ms ease, transform 160ms cubic-bezier(.16,1,.3,1),
+              display 160ms allow-discrete, overlay 160ms allow-discrete;
+}
+.hint-tip:popover-open { opacity: 1; transform: none; }
+@starting-style { .hint-tip:popover-open { opacity: 0; transform: translateY(4px); } }
+@media (hover: none) {
+  .icon-btn { interest-delay-start: 0ms; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chromium-only as of 2026. Pair with a CSS hover fallback. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

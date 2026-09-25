@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Spring-Loaded Checkbox — Design Spells</title>
+  <meta name="description" content="Animate only the properties that actually change. Never `transition: all`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-20/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Spring-Loaded Checkbox — Design Spells">
+  <meta property="og:description" content="Animate only the properties that actually change. Never `transition: all`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-20/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-20</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-20 / Interaction / 0 JS</p>
+    <h1>Spring-Loaded Checkbox</h1>
+    <p class="lede">Animate only the properties that actually change. Never `transition: all`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-20/">Open standalone demo ↗</a></div>
+      <p class='note'>Toggle the control to preview</p>
+      <iframe title="Isolated demonstration: Spring-Loaded Checkbox" src="/play/ds-20/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;label style=&quot;display:flex;align-items:center;gap:.6rem&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt; Remember me&lt;/label&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>input[type=&quot;checkbox&quot;] {
+  appearance: none;
+  inline-size: 44px;
+  block-size: 44px;
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  border: 1.5px solid var(--color-text-muted);
+  border-radius: 6px;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+input[type=&quot;checkbox&quot;]::before {
+  content: &quot;&quot;;
+  width: .7rem; height: .7rem;
+  transform: scale(0);
+  transition: transform 300ms cubic-bezier(0.34,1.56,0.64,1);
+  background: var(--color-bg);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type=&quot;checkbox&quot;]:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+input[type=&quot;checkbox&quot;]:checked::before { transform: scale(1); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

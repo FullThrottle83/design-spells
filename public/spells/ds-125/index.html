@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Inline SVG Line Chart (0-JS Draw &amp; Fill) — Design Spells</title>
+  <meta name="description" content="An SVG line chart with a scroll-driven draw animation via `stroke-dasharray`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-125/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Inline SVG Line Chart (0-JS Draw &amp; Fill) — Design Spells">
+  <meta property="og:description" content="An SVG line chart with a scroll-driven draw animation via `stroke-dasharray`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-125/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-125</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-125 / Data / Markup</p>
+    <h1>Inline SVG Line Chart (0-JS Draw &amp; Fill)</h1>
+    <p class="lede">An SVG line chart with a scroll-driven draw animation via `stroke-dasharray`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-125/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Inline SVG Line Chart (0-JS Draw &amp; Fill)" src="/play/ds-125/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;figure class=&quot;line-chart-wrap&quot; role=&quot;img&quot; aria-label=&quot;Sales trend Q1–Q4&quot;&gt;
+  &lt;svg viewBox=&quot;0 0 300 100&quot; class=&quot;line-chart-svg&quot;&gt;
+    &lt;path class=&quot;line-path&quot; d=&quot;M0,80 L75,50 L150,65 L225,20 L300,10&quot; /&gt;
+  &lt;/svg&gt;
+&lt;/figure&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.line-chart-wrap { inline-size: 100%; block-size: 8rem; margin: 0; }
+.line-chart-svg { inline-size: 100%; block-size: 100%; overflow: visible; }
+.line-path {
+  fill: none; stroke: var(--color-primary); stroke-width: 3;
+  stroke-dasharray: 1000; stroke-dashoffset: 1000;
+  stroke-linecap: round;
+}
+@supports (animation-timeline: view()) {
+  .line-path {
+    animation: draw-line linear both;
+    animation-timeline: view();
+    animation-range: entry 20% entry 80%;
+  }
+  @keyframes draw-line { to { stroke-dashoffset: 0; } }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

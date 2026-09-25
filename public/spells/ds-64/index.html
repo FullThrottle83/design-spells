@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Path Motion (`offset-path`) — Design Spells</title>
+  <meta name="description" content="Animate an element along a curved path for decorative floating pieces (background shapes, dotted trails, orbiting icons).">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-64/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Path Motion (`offset-path`) — Design Spells">
+  <meta property="og:description" content="Animate an element along a curved path for decorative floating pieces (background shapes, dotted trails, orbiting icons).">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-64/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-64</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-64 / Visual / 0 JS</p>
+    <h1>Path Motion (`offset-path`)</h1>
+    <p class="lede">Animate an element along a curved path for decorative floating pieces (background shapes, dotted trails, orbiting icons).</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-64/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Path Motion (`offset-path`)" src="/play/ds-64/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;floating-orb&quot;&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.floating-orb {
+  inline-size: 12rem;
+  block-size: 12rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--color-primary), transparent 70%);
+  filter: blur(40px);
+  opacity: .35;
+
+  offset-path: path(&quot;M 0 0 C 200 100, 400 -100, 600 0 S 1000 100, 1200 0&quot;);
+  offset-rotate: 0deg;
+  animation: drift 18s linear infinite alternate;
+}
+
+@keyframes drift {
+  to { offset-distance: 100%; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Motion path is widely available in current browsers.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Reading-Flow Grid (`reading-flow`) — Design Spells</title>
+  <meta name="description" content="When grid items are repacked with `dense` or explicit `order`, Tab and screen readers should follow the *visual* row order, not the DOM order. `flex-visual` / `flex-flow` for flex; `grid-columns` if column order is the semantically correct one.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-113/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reading-Flow Grid (`reading-flow`) — Design Spells">
+  <meta property="og:description" content="When grid items are repacked with `dense` or explicit `order`, Tab and screen readers should follow the *visual* row order, not the DOM order. `flex-visual` / `flex-flow` for flex; `grid-columns` if column order is the semantically correct one.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-113/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-113</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-113 / Layout / 0 JS</p>
+    <h1>Reading-Flow Grid (`reading-flow`)</h1>
+    <p class="lede">When grid items are repacked with `dense` or explicit `order`, Tab and screen readers should follow the *visual* row order, not the DOM order. `flex-visual` / `flex-flow` for flex; `grid-columns` if column order is the semantically correct one.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-113/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Reading-Flow Grid (`reading-flow`)" src="/play/ds-113/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;pack-grid&quot;&gt;&lt;article&gt;A&lt;/article&gt;&lt;article&gt;B&lt;/article&gt;&lt;article&gt;C&lt;/article&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-auto-flow: dense;
+  gap: var(--space-4);
+}
+@supports (reading-flow: grid-rows) {
+  .pack-grid { reading-flow: grid-rows; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chromium-only. Tab order stays in DOM order elsewhere.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

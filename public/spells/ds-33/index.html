@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>True Auto-Height (`interpolate-size`) — Design Spells</title>
+  <meta name="description" content="A modernization of Spell 15. Animates `block-size: 0` → `auto` directly. Bonus: `&lt;details name=&quot;faq&quot;&gt;` gives you an exclusive accordion automatically (siblings close when a new one opens).">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-33/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="True Auto-Height (`interpolate-size`) — Design Spells">
+  <meta property="og:description" content="A modernization of Spell 15. Animates `block-size: 0` → `auto` directly. Bonus: `&lt;details name=&quot;faq&quot;&gt;` gives you an exclusive accordion automatically (siblings close when a new one opens).">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-33/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-33</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-33 / Layout / Markup</p>
+    <h1>True Auto-Height (`interpolate-size`)</h1>
+    <p class="lede">A modernization of Spell 15. Animates `block-size: 0` → `auto` directly. Bonus: `&lt;details name=&quot;faq&quot;&gt;` gives you an exclusive accordion automatically (siblings close when a new one opens).</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-33/">Open standalone demo ↗</a></div>
+      <p class='note'>Open the disclosure to preview</p>
+      <iframe title="Isolated demonstration: True Auto-Height (`interpolate-size`)" src="/play/ds-33/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;details&gt;
+  &lt;summary&gt;What is included?&lt;/summary&gt;
+  &lt;div class=&quot;accordion-panel&quot;&gt;A panel that expands to its intrinsic height.&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>:root {
+  interpolate-size: allow-keywords;
+}
+
+.accordion-panel {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 300ms cubic-bezier(0.16,1,0.3,1);
+}
+
+details[open] .accordion-panel {
+  block-size: auto;
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 129+. Firefox and Safari still snap instead of interpolating.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Scroll-Driven Header Compression — Design Spells</title>
+  <meta name="description" content="Shrinks the sticky header and scales the logo down as the user scrolls, without layout shifts.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-65/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Scroll-Driven Header Compression — Design Spells">
+  <meta property="og:description" content="Shrinks the sticky header and scales the logo down as the user scrolls, without layout shifts.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-65/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-65</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-65 / Scroll / 0 JS</p>
+    <h1>Scroll-Driven Header Compression</h1>
+    <p class="lede">Shrinks the sticky header and scales the logo down as the user scrolls, without layout shifts.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-65/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Scroll-Driven Header Compression" src="/play/ds-65/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;header class=&quot;site-header&quot;&gt;&lt;strong class=&quot;header-logo&quot;&gt;Brand&lt;/strong&gt;&lt;/header&gt;&lt;p class=&quot;demo-note&quot;&gt;Bound to the real page scroll — scroll the whole catalogue, not this box.&lt;/p&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.site-header {
+  position: sticky; top: 0; z-index: 100;
+  padding-block: 1.25rem;
+  transition: padding 150ms ease;
+}
+
+.header-logo {
+  transform-origin: left center;
+  transition: transform 150ms ease;
+}
+
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: shrink-header linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0px 120px;
+  }
+  
+  .header-logo {
+    animation: scale-logo linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0px 120px;
+  }
+
+  @keyframes shrink-header { to { padding-block: 0.5rem; } }
+  @keyframes scale-logo { to { transform: scale(0.85); } }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Scroll-driven animations: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

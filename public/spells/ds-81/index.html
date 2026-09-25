@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Overflow-Aware Breadcrumbs — Design Spells</title>
+  <meta name="description" content="Breadcrumbs that show a discreet “+N” hint and edge masking only when the row is actually scrollable.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-81/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Overflow-Aware Breadcrumbs — Design Spells">
+  <meta property="og:description" content="Breadcrumbs that show a discreet “+N” hint and edge masking only when the row is actually scrollable.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-81/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-81</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-81 / Navigation / Markup</p>
+    <h1>Overflow-Aware Breadcrumbs</h1>
+    <p class="lede">Breadcrumbs that show a discreet “+N” hint and edge masking only when the row is actually scrollable.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-81/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Overflow-Aware Breadcrumbs" src="/play/ds-81/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;nav class=&quot;crumbs-wrap&quot; aria-label=&quot;Breadcrumb&quot;&gt;
+  &lt;ol class=&quot;crumbs&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/docs&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/docs/components&quot;&gt;Components&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-current=&quot;page&quot;&gt;Spells&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;span class=&quot;crumb-hint&quot; aria-hidden=&quot;true&quot;&gt;+2&lt;/span&gt;
+&lt;/nav&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.crumbs-wrap {
+  position: relative; overflow-x: auto; container-type: scroll-state;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, black 92%, transparent);
+}
+.crumbs-wrap::-webkit-scrollbar { display: none; }
+.crumbs { display: flex; gap: var(--space-2); white-space: nowrap; list-style: none; padding: 0; }
+.crumbs a, .crumbs [aria-current] {
+  min-block-size: 44px; display: inline-grid; place-items: center; padding-inline: .35rem;
+  color: var(--color-text-muted); text-decoration: none;
+}
+.crumbs a:hover { color: var(--color-text); }
+.crumb-hint {
+  position: absolute; right: 0; top: 50%; translate: 0 -50%;
+  padding: .2rem .5rem; border-radius: 999px; font-size: .75rem;
+  background: var(--color-primary); color: white;
+  opacity: 0; transition: opacity 180ms ease;
+}
+@container scroll-state(scrollable: inline) { .crumb-hint { opacity: 1; } }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

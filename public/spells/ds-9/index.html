@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Depth Parallax on hero — Design Spells</title>
+  <meta name="description" content="A light 3D settle on load.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-9/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Depth Parallax on hero — Design Spells">
+  <meta property="og:description" content="A light 3D settle on load.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-9/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-9</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-9 / Reveal &amp; motion / 0 JS</p>
+    <h1>Depth Parallax on hero</h1>
+    <p class="lede">A light 3D settle on load.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-9/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Depth Parallax on hero" src="/play/ds-9/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;hero-content&quot;&gt;&lt;p&gt;Depth settles on load.&lt;/p&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.hero-content { animation: hero-settle 0.8s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes hero-settle {
+  from { opacity: 0; transform: perspective(800px) rotateX(4deg) translateY(12px); }
+  to   { opacity: 1; transform: perspective(800px) rotateX(0) translateY(0); }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

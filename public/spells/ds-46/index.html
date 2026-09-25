@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Real Overflow Hint — Design Spells</title>
+  <meta name="description" content="Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-46/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Real Overflow Hint — Design Spells">
+  <meta property="og:description" content="Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-46/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-46</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-46 / Scroll / 0 JS</p>
+    <h1>Real Overflow Hint</h1>
+    <p class="lede">Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-46/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Real Overflow Hint" src="/play/ds-46/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;tabs-wrap&quot; style=&quot;max-width:20rem&quot;&gt;&lt;div style=&quot;display:flex;gap:1rem;white-space:nowrap;padding-inline-end:3rem;min-width:44rem&quot;&gt;&lt;span&gt;Overview&lt;/span&gt;&lt;span&gt;Getting started&lt;/span&gt;&lt;span&gt;Pricing&lt;/span&gt;&lt;span&gt;Documentation&lt;/span&gt;&lt;span&gt;Changelog&lt;/span&gt;&lt;span&gt;Support&lt;/span&gt;&lt;span&gt;Community&lt;/span&gt;&lt;span&gt;Careers&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;fade-hint&quot;&gt;→&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.tabs-wrap {
+  position: relative;
+  overflow-x: auto;
+  container-type: scroll-state;
+}
+
+.tabs-wrap .fade-hint {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+@container scroll-state(scrollable: inline) {
+  .fade-hint { opacity: 1; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

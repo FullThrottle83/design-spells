@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Typed `attr()` Sparkline — Design Spells</title>
+  <meta name="description" content="The same sparkline as Spell 95, but the value lives in `data-v` — no inline `style=&quot;--v:…&quot;`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-110/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Typed `attr()` Sparkline — Design Spells">
+  <meta property="og:description" content="The same sparkline as Spell 95, but the value lives in `data-v` — no inline `style=&quot;--v:…&quot;`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-110/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-110</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-110 / Data / Markup</p>
+    <h1>Typed `attr()` Sparkline</h1>
+    <p class="lede">The same sparkline as Spell 95, but the value lives in `data-v` — no inline `style=&quot;--v:…&quot;`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-110/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Typed `attr()` Sparkline" src="/play/ds-110/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;figure class=&quot;attr-spark&quot; role=&quot;img&quot; aria-label=&quot;Sales: 34, 58, 41, 72, 66, 90 percent&quot;&gt;
+  &lt;span data-v=&quot;34&quot;&gt;&lt;/span&gt;&lt;span data-v=&quot;58&quot;&gt;&lt;/span&gt;&lt;span data-v=&quot;41&quot;&gt;&lt;/span&gt;
+  &lt;span data-v=&quot;72&quot;&gt;&lt;/span&gt;&lt;span data-v=&quot;66&quot;&gt;&lt;/span&gt;&lt;span data-v=&quot;90&quot;&gt;&lt;/span&gt;
+&lt;/figure&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }
+.attr-spark span {
+  flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;
+  background: color-mix(in oklch, var(--color-primary), transparent 25%);
+}
+@supports (x: attr(x type(*))) {
+  .attr-spark span {
+    block-size: calc(attr(data-v type(&lt;number&gt;), 0) * 1%);
+  }
+}
+.attr-spark span:last-child { background: var(--color-primary); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chromium-only. Feature-detect with attr(x type(*)). color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

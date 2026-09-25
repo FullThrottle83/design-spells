@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Native Donut Chart (`conic-gradient` + `mask-image`) — Design Spells</title>
+  <meta name="description" content="Draws a donut chart via `conic-gradient` with the center cut out by `mask-image`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-119/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Native Donut Chart (`conic-gradient` + `mask-image`) — Design Spells">
+  <meta property="og:description" content="Draws a donut chart via `conic-gradient` with the center cut out by `mask-image`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-119/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-119</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-119 / Data / 0 JS</p>
+    <h1>Native Donut Chart (`conic-gradient` + `mask-image`)</h1>
+    <p class="lede">Draws a donut chart via `conic-gradient` with the center cut out by `mask-image`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-119/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Native Donut Chart (`conic-gradient` + `mask-image`)" src="/play/ds-119/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;donut-chart&quot; role=&quot;img&quot; aria-label=&quot;Split: 65% Core, 20% Admin, 15% R&amp;D&quot; style=&quot;--p1: 65; --p2: 20;&quot;&gt;
+  &lt;span class=&quot;donut-center&quot;&gt;100%&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.donut-chart {
+  inline-size: 12rem; block-size: 12rem;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color-primary) 0% calc(var(--p1, 0) * 1%),
+    var(--color-accent, oklch(.7 .2 50)) calc(var(--p1, 0) * 1%) calc((var(--p1, 0) + var(--p2, 0)) * 1%),
+    var(--color-surface-offset) calc((var(--p1, 0) + var(--p2, 0)) * 1%) 100%
+  );
+  mask-image: radial-gradient(circle, transparent 58%, black 60%);
+  -webkit-mask-image: radial-gradient(circle, transparent 58%, black 60%);
+  display: grid; place-items: center;
+}
+.donut-center { font-weight: 700; font-size: 1.5rem; color: var(--color-text); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Organic Avatar Cluster (`random()`) — Design Spells</title>
+  <meta name="description" content="Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-151/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Organic Avatar Cluster (`random()`) — Design Spells">
+  <meta property="og:description" content="Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-151/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-151</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-151 / Visual / 0 JS</p>
+    <h1>Organic Avatar Cluster (`random()`)</h1>
+    <p class="lede">Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, backed by deterministic `:nth-child()` fallbacks.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-151/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Organic Avatar Cluster (`random()`)" src="/play/ds-151/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;ul class=&quot;avatar-cluster&quot; aria-label=&quot;Project contributors&quot;&gt;
+  &lt;li aria-label=&quot;Ari&quot;&gt;A&lt;/li&gt;
+  &lt;li aria-label=&quot;Bea&quot;&gt;B&lt;/li&gt;
+  &lt;li aria-label=&quot;Chen&quot;&gt;C&lt;/li&gt;
+  &lt;li aria-label=&quot;Dara&quot;&gt;D&lt;/li&gt;
+  &lt;li aria-label=&quot;Eli&quot;&gt;E&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.avatar-cluster {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: 1rem;
+  margin: 0;
+  list-style: none;
+}
+.avatar-cluster &gt; li {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--color-bg);
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 750;
+}
+.avatar-cluster &gt; li:nth-child(3n + 1) { rotate: -4deg; translate: 0 -2px; }
+.avatar-cluster &gt; li:nth-child(3n + 2) { rotate:  3deg; translate: 0  2px; }
+.avatar-cluster &gt; li:nth-child(3n)     { rotate: -1deg; translate: 0  1px; }
+@supports (rotate: random(-1deg, 1deg)) {
+  .avatar-cluster &gt; li {
+    rotate: random(-6deg, 6deg);
+    translate: 0 random(-3px, 3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .avatar-cluster &gt; li {
+    rotate: 0deg;
+    translate: 0;
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>no</span></li><li><strong>Edge</strong><span>no</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Safari 26.2+; Chromium and Firefox unsupported.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

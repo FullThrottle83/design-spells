@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Elastic Textarea (`field-sizing`) — Design Spells</title>
+  <meta name="description" content="A textarea that grows with its content, with no JS listeners.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-32/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Elastic Textarea (`field-sizing`) — Design Spells">
+  <meta property="og:description" content="A textarea that grows with its content, with no JS listeners.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-32/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-32</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-32 / Forms / 0 JS</p>
+    <h1>Elastic Textarea (`field-sizing`)</h1>
+    <p class="lede">A textarea that grows with its content, with no JS listeners.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-32/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Elastic Textarea (`field-sizing`)" src="/play/ds-32/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;textarea class=&quot;auto-grow&quot; placeholder=&quot;Type to grow…&quot;&gt;&lt;/textarea&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>textarea.auto-grow {
+  field-sizing: content;
+  min-block-size: 3lh;
+  max-block-size: 12lh;
+  resize: none;
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Chrome/Edge 123+, Firefox 152+, Safari 26.2+.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

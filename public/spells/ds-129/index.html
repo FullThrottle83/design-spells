@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>0-JS Star Rating Input (`row-reverse` + `~`) — Design Spells</title>
+  <meta name="description" content="A classic star rating that fills left to right with hidden radios and flex `row-reverse`.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-129/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="0-JS Star Rating Input (`row-reverse` + `~`) — Design Spells">
+  <meta property="og:description" content="A classic star rating that fills left to right with hidden radios and flex `row-reverse`.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-129/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-129</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-129 / Forms / Markup</p>
+    <h1>0-JS Star Rating Input (`row-reverse` + `~`)</h1>
+    <p class="lede">A classic star rating that fills left to right with hidden radios and flex `row-reverse`.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-129/">Open standalone demo ↗</a></div>
+      <p class='note'>Toggle the control to preview</p>
+      <iframe title="Isolated demonstration: 0-JS Star Rating Input (`row-reverse` + `~`)" src="/play/ds-129/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;fieldset class=&quot;star-rating&quot;&gt;
+  &lt;legend class=&quot;sr-only&quot;&gt;Rate this&lt;/legend&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;st5&quot; name=&quot;rate&quot; value=&quot;5&quot; class=&quot;sr-only&quot;&gt;&lt;label for=&quot;st5&quot;&gt;★&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;st4&quot; name=&quot;rate&quot; value=&quot;4&quot; class=&quot;sr-only&quot;&gt;&lt;label for=&quot;st4&quot;&gt;★&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;st3&quot; name=&quot;rate&quot; value=&quot;3&quot; class=&quot;sr-only&quot;&gt;&lt;label for=&quot;st3&quot;&gt;★&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;st2&quot; name=&quot;rate&quot; value=&quot;2&quot; class=&quot;sr-only&quot;&gt;&lt;label for=&quot;st2&quot;&gt;★&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;st1&quot; name=&quot;rate&quot; value=&quot;1&quot; class=&quot;sr-only&quot;&gt;&lt;label for=&quot;st1&quot;&gt;★&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.star-rating { display: inline-flex; flex-direction: row-reverse; justify-content: flex-end; border: 0; padding: 0; }
+.star-rating label { cursor: pointer; font-size: 2rem; color: var(--color-surface-offset); min-block-size: 44px; min-inline-size: 44px; display: grid; place-items: center; transition: color 150ms ease; }
+.star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: oklch(0.8 0.15 80); }
+.star-rating:has(input:focus-visible) label:has(+ input:focus-visible) { outline: 2px solid var(--color-primary); outline-offset: 2px; }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">color-mix() and oklch() are Baseline 2023. :has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

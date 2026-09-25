@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Hero Parallax Lockup &amp; Depth (`view-timeline`) — Design Spells</title>
+  <meta name="description" content="Multi-layer parallax where background and foreground move at different speeds on scroll.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-135/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hero Parallax Lockup &amp; Depth (`view-timeline`) — Design Spells">
+  <meta property="og:description" content="Multi-layer parallax where background and foreground move at different speeds on scroll.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-135/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-135</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-135 / Scroll / 0 JS</p>
+    <h1>Hero Parallax Lockup &amp; Depth (`view-timeline`)</h1>
+    <p class="lede">Multi-layer parallax where background and foreground move at different speeds on scroll.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-135/">Open standalone demo ↗</a></div>
+      <p class='note'>Scroll to preview</p>
+      <iframe title="Isolated demonstration: Hero Parallax Lockup &amp; Depth (`view-timeline`)" src="/play/ds-135/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;header class=&quot;plx-hero&quot;&gt;
+  &lt;div class=&quot;plx-layer plx-bg&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;plx-layer plx-fg&quot;&gt;&lt;h1&gt;The future of UI&lt;/h1&gt;&lt;/div&gt;
+&lt;/header&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.plx-hero { position: relative; block-size: 70vh; overflow: hidden; display: grid; place-items: center; }
+.plx-layer { position: absolute; inset: -10%; }
+.plx-bg { background: url(&#x27;/hero-bg.jpg&#x27;) center/cover; }
+.plx-fg { display: grid; place-items: center; z-index: 2; color: white; }
+
+@supports (animation-timeline: view()) {
+  .plx-bg { animation: plx-bg-anim linear both; animation-timeline: view(); }
+  @keyframes plx-bg-anim { to { transform: translateY(15%); } }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">view() timelines: Chrome/Edge 115+, Safari 26+. Firefox stable does not support them; Nightly support is preview.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

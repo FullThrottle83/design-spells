@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Customizable Select Checkmark (`::checkmark` + `::picker-icon`) — Design Spells</title>
+  <meta name="description" content="Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on the selected option (`::checkmark`). Requires `appearance: base-select` (Spell 54).">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-118/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Customizable Select Checkmark (`::checkmark` + `::picker-icon`) — Design Spells">
+  <meta property="og:description" content="Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on the selected option (`::checkmark`). Requires `appearance: base-select` (Spell 54).">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-118/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-118</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-118 / Forms / 0 JS</p>
+    <h1>Customizable Select Checkmark (`::checkmark` + `::picker-icon`)</h1>
+    <p class="lede">Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on the selected option (`::checkmark`). Requires `appearance: base-select` (Spell 54).</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-118/">Open standalone demo ↗</a></div>
+      <p class='note'>Open the disclosure to preview</p>
+      <iframe title="Isolated demonstration: Customizable Select Checkmark (`::checkmark` + `::picker-icon`)" src="/play/ds-118/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;select class=&quot;premium-dropdown&quot;&gt;&lt;option&gt;One&lt;/option&gt;&lt;option selected&gt;Two&lt;/option&gt;&lt;option&gt;Three&lt;/option&gt;&lt;/select&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>@supports (appearance: base-select) {
+  select.premium-dropdown {
+    appearance: base-select;
+    min-block-size: 44px;
+  }
+  select.premium-dropdown::picker-icon {
+    content: &quot;▾&quot;;
+    color: var(--color-text-muted);
+    transition: transform 180ms cubic-bezier(.16,1,.3,1);
+  }
+  select.premium-dropdown:open::picker-icon { transform: rotate(180deg); }
+  select.premium-dropdown option {
+    min-block-size: 44px;
+    display: flex; align-items: center; gap: .5rem;
+    padding-inline: .75rem;
+  }
+  select.premium-dropdown option::checkmark {
+    content: &quot;✓&quot;;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">:open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. The pseudo-elements are Chrome/Edge 133+ and require customizable-select/base-select (Chrome/Edge 135+). Firefox has no stable support; Safari 27 is preview. Chrome/Edge 135+ in stable browsers. Firefox has no stable support; Safari 27 support is preview.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

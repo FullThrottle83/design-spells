@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Themed `&lt;progress&gt;` &amp; `&lt;meter&gt;` — Design Spells</title>
+  <meta name="description" content="Native `&lt;progress&gt;`/`&lt;meter&gt;` with brand colors — keeps built-in semantics, min/max logic, and screen-reader support for storage, quotas, and goals.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-96/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Themed `&lt;progress&gt;` &amp; `&lt;meter&gt;` — Design Spells">
+  <meta property="og:description" content="Native `&lt;progress&gt;`/`&lt;meter&gt;` with brand colors — keeps built-in semantics, min/max logic, and screen-reader support for storage, quotas, and goals.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-96/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-96</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-96 / Data / 0 JS</p>
+    <h1>Themed `&lt;progress&gt;` &amp; `&lt;meter&gt;`</h1>
+    <p class="lede">Native `&lt;progress&gt;`/`&lt;meter&gt;` with brand colors — keeps built-in semantics, min/max logic, and screen-reader support for storage, quotas, and goals.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-96/">Open standalone demo ↗</a></div>
+      
+      <iframe title="Isolated demonstration: Themed `&lt;progress&gt;` &amp; `&lt;meter&gt;`" src="/play/ds-96/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;label class=&quot;prog-field&quot;&gt;
+  &lt;span&gt;Storage &lt;output&gt;72%&lt;/output&gt;&lt;/span&gt;
+  &lt;progress max=&quot;100&quot; value=&quot;72&quot;&gt;72%&lt;/progress&gt;
+&lt;/label&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.prog-field { display: grid; gap: var(--space-2); }
+:root { accent-color: var(--color-primary); }
+progress { inline-size: 100%; block-size: .6rem; border: 0; border-radius: 999px;
+  background: var(--color-surface-offset); overflow: hidden; }
+progress::-webkit-progress-bar { background: var(--color-surface-offset); border-radius: 999px; }
+progress::-webkit-progress-value { background: var(--color-primary); border-radius: 999px;
+  transition: inline-size 400ms cubic-bezier(.16,1,.3,1); }
+progress::-moz-progress-bar { background: var(--color-primary); border-radius: 999px; }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

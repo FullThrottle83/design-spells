@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Expandable Speed Dial FAB — Design Spells</title>
+  <meta name="description" content="A floating action button (FAB) that expands child actions via native `&lt;details&gt;` and `@starting-style`. **Guardrails:** `pointer-events: none` on the wrapper stops invisible hit areas covering the screen. Every button meets WCAG minimum hit targets (44×44px).">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-73/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Expandable Speed Dial FAB — Design Spells">
+  <meta property="og:description" content="A floating action button (FAB) that expands child actions via native `&lt;details&gt;` and `@starting-style`. **Guardrails:** `pointer-events: none` on the wrapper stops invisible hit areas covering the screen. Every button meets WCAG minimum hit targets (44×44px).">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-73/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-73</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-73 / Interaction / Markup</p>
+    <h1>Expandable Speed Dial FAB</h1>
+    <p class="lede">A floating action button (FAB) that expands child actions via native `&lt;details&gt;` and `@starting-style`. **Guardrails:** `pointer-events: none` on the wrapper stops invisible hit areas covering the screen. Every button meets WCAG minimum hit targets (44×44px).</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-73/">Open standalone demo ↗</a></div>
+      <p class='note'>Open the disclosure to preview</p>
+      <iframe title="Isolated demonstration: Expandable Speed Dial FAB" src="/play/ds-73/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;details class=&quot;speed-dial&quot;&gt;
+  &lt;summary class=&quot;fab-main&quot; aria-label=&quot;Quick actions&quot;&gt;+&lt;/summary&gt;
+
+  &lt;div class=&quot;fab-actions&quot;&gt;
+    &lt;button class=&quot;fab-child&quot; title=&quot;New post&quot; aria-label=&quot;New post&quot;&gt;📝&lt;/button&gt;
+    &lt;button class=&quot;fab-child&quot; title=&quot;Upload image&quot; aria-label=&quot;Upload image&quot;&gt;📷&lt;/button&gt;
+    &lt;button class=&quot;fab-child&quot; title=&quot;Share page&quot; aria-label=&quot;Share page&quot;&gt;🔗&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.speed-dial {
+  position: fixed;
+  right: 1.5rem; bottom: 1.5rem;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.speed-dial summary::-webkit-details-marker { display: none; }
+
+.fab-main {
+  pointer-events: auto;
+  display: grid; place-items: center;
+  min-width: 3.25rem; min-height: 3.25rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px oklch(0 0 0 / 0.2);
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+}
+
+details[open] .fab-main { transform: rotate(45deg); }
+
+.fab-actions {
+  position: absolute;
+  bottom: 4rem; right: 0.25rem;
+  display: none; flex-direction: column; gap: 0.75rem;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 240ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1), display 240ms allow-discrete;
+}
+
+.fab-child {
+  pointer-events: auto;
+  min-width: 2.75rem; min-height: 2.75rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--color-bg);
+  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);
+  cursor: pointer;
+}
+
+details[open] .fab-actions {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@starting-style {
+  details[open] .fab-actions {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

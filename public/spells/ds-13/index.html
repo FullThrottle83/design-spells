@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Spotlight Focus — Design Spells</title>
+  <meta name="description" content="The hovered card in a grid sharpens while its siblings recede.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-13/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Spotlight Focus — Design Spells">
+  <meta property="og:description" content="The hovered card in a grid sharpens while its siblings recede.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-13/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-13</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-13 / State / 0 JS</p>
+    <h1>Spotlight Focus</h1>
+    <p class="lede">The hovered card in a grid sharpens while its siblings recede.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-13/">Open standalone demo ↗</a></div>
+      <p class='note'>Hover or focus to preview</p>
+      <iframe title="Isolated demonstration: Spotlight Focus" src="/play/ds-13/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
+      <pre tabindex="0"><code>&lt;div class=&quot;card-grid&quot;&gt;&lt;article class=&quot;destination-card&quot; style=&quot;padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)&quot;&gt;Alpha&lt;/article&gt;&lt;article class=&quot;destination-card&quot; style=&quot;padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)&quot;&gt;Bravo&lt;/article&gt;&lt;article class=&quot;destination-card&quot; style=&quot;padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)&quot;&gt;Charlie&lt;/article&gt;&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.card-grid { display: grid; gap: var(--space-4); }
+.card-grid:has(.destination-card:hover) .destination-card:not(:hover),
+.card-grid:has(.destination-card:focus-within) .destination-card:not(:focus-within) {
+  opacity: 0.65;
+  transform: scale(0.985);
+}
+.destination-card {
+  transition: opacity 300ms cubic-bezier(0.16,1,0.3,1), transform 300ms cubic-bezier(0.16,1,0.3,1);
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Split Action Button (`commandfor`) — Design Spells</title>
+  <meta name="description" content="A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-117/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Split Action Button (`commandfor`) — Design Spells">
+  <meta property="og:description" content="A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-117/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-117</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-117 / Overlays / Markup</p>
+    <h1>Split Action Button (`commandfor`)</h1>
+    <p class="lede">A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.</p>
+    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-117/">Open standalone demo ↗</a></div>
+      <p class='note'>Activate the control to preview</p>
+      <iframe title="Isolated demonstration: Split Action Button (`commandfor`)" src="/play/ds-117/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <p class="note">Select the source and use your browser's copy command. Shared design tokens are supplied by the demo environment, not included in these snippets.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;split&quot;&gt;
+  &lt;a class=&quot;split-main&quot; href=&quot;/quote&quot;&gt;Request quote&lt;/a&gt;
+  &lt;button class=&quot;split-more&quot; commandfor=&quot;split-menu&quot; command=&quot;toggle-popover&quot; aria-label=&quot;More actions&quot;&gt;▾&lt;/button&gt;
+  &lt;div id=&quot;split-menu&quot; popover=&quot;auto&quot; class=&quot;split-menu&quot;&gt;
+    &lt;a href=&quot;/quote?plan=pro&quot;&gt;Pro quote&lt;/a&gt;
+    &lt;a href=&quot;/contact&quot;&gt;Talk to sales&lt;/a&gt;
+  &lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.split { display: inline-flex; position: relative; anchor-scope: --split; }
+.split-main, .split-more {
+  min-block-size: 44px; display: inline-grid; place-items: center;
+  background: var(--color-primary); color: white; border: 0;
+  text-decoration: none; cursor: pointer;
+}
+.split-main { padding-inline: var(--space-4); border-radius: var(--radius-md) 0 0 var(--radius-md); }
+.split-more {
+  anchor-name: --split;
+  min-inline-size: 44px;
+  border-inline-start: 1px solid oklch(1 0 0 / .25);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.split-menu {
+  margin: 0; inset: auto;
+  position-anchor: --split; position-area: bottom end;
+  margin-block-start: .35rem;
+  position-try-fallbacks: flip-inline, flip-block;
+  position-visibility: anchors-visible;
+  min-inline-size: 12rem; padding: var(--space-2);
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px oklch(0 0 0 / .14);
+}
+.split-menu a {
+  display: grid; align-items: center; min-block-size: 44px;
+  padding-inline: .75rem; border-radius: var(--radius-sm);
+  color: var(--color-text); text-decoration: none;
+}
+.split-menu a:hover, .split-menu a:focus-visible { background: var(--color-surface-offset); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Newer. This registry is a dated reference, not a live proof of behavior.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+</body>
+</html>

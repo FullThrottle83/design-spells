@@ -296,20 +296,21 @@
     }
   }
 
-  // Listen for popover toggle events
-  document.addEventListener("toggle", (e) => {
-    if (e.target.classList.contains("drawer")) {
-      if (e.newState === "open") {
-        updateDrawerFeatureChecks(e.target);
-        location.hash = e.target.id.replace("drawer-", "");
-      } else {
-        if (location.hash && location.hash.startsWith("#ds-")) {
-          history.replaceState(null, "", location.pathname + location.search);
-        }
-      }
-      updateUrlState();
+  // Sync native popover state before the UA applies it. Unlike `toggle`,
+  // `beforetoggle` is not coalesced, so a fast open/close cannot leave a stale
+  // deep-link hash behind.
+  document.addEventListener("beforetoggle", (e) => {
+    if (!e.target.classList.contains("drawer")) return;
+
+    if (e.newState === "open") {
+      updateDrawerFeatureChecks(e.target);
+      location.hash = e.target.id.replace("drawer-", "");
+    } else if (location.hash && location.hash.startsWith("#ds-")) {
+      history.replaceState(null, "", location.pathname + location.search);
     }
-  }, true); // toggle does not bubble; capture native popover events.
+
+    updateUrlState();
+  }, true);
 
   // ------------------------------------------------------------- 5. Stage Controls (Width & Theme)
   document.addEventListener("click", (e) => {

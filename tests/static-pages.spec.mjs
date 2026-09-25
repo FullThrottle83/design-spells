@@ -13,10 +13,11 @@ test.describe("static spell pages without scripting", () => {
     await expect(page.locator("script")).toHaveCount(0);
   });
 
-  test("catalogue drawer deep-links to the independent page", async ({ page }) => {
+  test("catalogue provides direct links to independent pages without scripting", async ({ page }) => {
     await page.goto("/");
-    await page.locator('.row[data-id="ds-1"] .row__hit').click();
-    await page.getByRole("link", { name: /Full page/ }).click();
+    const link = page.locator('.row[data-id="ds-1"] .row__permalink');
+    await expect(link).toHaveAttribute("href", "/spells/ds-1/");
+    await link.click();
     await expect(page).toHaveURL(/\/spells\/ds-1\/$/);
     await expect(page.getByRole("heading", { name: "Shimmer on primary buttons" })).toBeVisible();
   });

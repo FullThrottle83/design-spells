@@ -11,7 +11,9 @@ export default defineConfig({
   testIgnore: "**/cross-browser.spec.mjs",
   // Previews share a browser page in beforeAll; avoid concurrent full-catalogue DOM loads.
   fullyParallel: false,
-  workers: process.env.CI ? 2 : undefined,
+  // The legacy /classic/ suite holds a 4.6 MB DOM and 150 preview documents.
+  // Avoid memory/animation contention between independent browser workers in CI.
+  workers: process.env.CI ? 1 : undefined,
   forbidOnly: !!process.env.CI,
   retries: 0,
   reporter: [["list"]],

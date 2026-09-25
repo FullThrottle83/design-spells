@@ -58,6 +58,7 @@ test('native popover toggle updates deep links and compatibility text', async ({
   await expect(page).toHaveURL(/#ds-1$/);
   await expect(page.locator('#drawer-ds-1 .feature-check')).not.toContainText('Checking');
   await page.keyboard.press('Escape');
+  await expect(page.locator('#drawer-ds-1')).toBeHidden();
   await expect(page).not.toHaveURL(/#ds-1$/);
 });
 

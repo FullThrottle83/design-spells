@@ -29,7 +29,10 @@ test("docs expose labelled isolated demos, readable source and keyboard navigati
   await expect(iframe).toHaveAttribute("sandbox", "allow-same-origin");
   await expect(iframe).toHaveAttribute("loading", "lazy");
   await expect(page.locator("pre code")).toHaveCount(2);
-  await expect(page.locator("script")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /View integration source/ })).toHaveAttribute("href", "/bundle/ds-1.txt");
+  await expect(page.locator("[data-copy-bundle]")).toBeHidden();
+  await expect(page.locator('script[src="/spell-copy.js"]')).toHaveCount(1);
+  await expect(page.locator("script:not([src])")).toHaveCount(0);
   await expect(page.locator("body")).toHaveCSS("overflow-x", "visible");
 });
 

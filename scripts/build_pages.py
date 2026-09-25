@@ -72,6 +72,10 @@ def render_doc(spell: dict) -> str:
         evidence_details += '<p class="note">Fallback: ' + esc(evidence["fallback"]) + '</p>'
     if evidence.get("accessibilityNotes"):
         evidence_details += '<p class="note">Accessibility review: ' + esc(evidence["accessibilityNotes"]) + '</p>'
+    bundle_copy = (
+        f'<button class="action bundle-copy" type="button" data-copy-bundle="{sid}" hidden>Copy integration bundle</button>'
+        if sid not in {"ds-14", "ds-143"} else ""
+    )
     canonical = f"{SITE_URL}/spells/{sid}/"
     return f"""<!doctype html>
 <html lang="en">
@@ -99,7 +103,7 @@ def render_doc(spell: dict) -> str:
     <p class="eyebrow">{esc(sid)} / {esc(spell["category"])} / {esc(spell["jsLabel"])}</p>
     <h1>{title}</h1>
     <p class="lede">{description}</p>
-    <p class="note">Zero JavaScript in this example. The catalogue has optional enhancements.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/{sid}/">Open standalone demo ↗</a><a class="action" href="/download/{sid}.html" download="{sid}.html">Download runnable HTML ↓</a></div>
       {instruction_html}
@@ -108,7 +112,12 @@ def render_doc(spell: dict) -> str:
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
-      <p class="note">Select the source and use your browser's copy command. Raw snippets omit the shared base tokens. Download runnable HTML above for the demo fixture, required base tokens, and CSS in a single document. External images, if any, still need network access.</p>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/{sid}.txt" data-bundle-source>View integration source ↗</a>
+        {bundle_copy}
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       {fixture_note}
       <pre tabindex="0"><code>{example_html}</code></pre>
@@ -124,6 +133,7 @@ def render_doc(spell: dict) -> str:
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>
+  <script src="/spell-copy.js" defer></script>
 </body>
 </html>"""
 

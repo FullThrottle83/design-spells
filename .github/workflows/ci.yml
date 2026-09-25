@@ -27,6 +27,7 @@ jobs:
       - run: git diff --exit-code -- public/index.html public/spells.json public/spells public/play public/download public/sitemap.xml
       - run: test -z "$(git status --porcelain -- public/spells public/play public/download public/sitemap.xml)"
       - run: node --check public/search.js
+      - run: node --check public/spell-copy.js
       - run: npm test
       - run: git diff --check
 
@@ -83,6 +84,7 @@ jobs:
           # deploy. Retry HTTP failures, but still fail if content never appears.
           curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/spells/ds-1/" -o "$RUNNER_TEMP/ds-doc.html"
           grep -Fq "Isolated demonstration" "$RUNNER_TEMP/ds-doc.html"
+          grep -Fq 'href="/bundle/ds-1.txt"' "$RUNNER_TEMP/ds-doc.html"
           curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/play/ds-14/next/" -o "$RUNNER_TEMP/ds-next.html"
           grep -Fq "Return to page A" "$RUNNER_TEMP/ds-next.html"
           curl --fail --silent --show-error --location --retry-all-errors --retry 8 --retry-delay 3 --retry-max-time 60 "$origin/classic/" -o "$RUNNER_TEMP/ds-classic.html"

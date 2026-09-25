@@ -29,6 +29,12 @@ section { border-top: 1px solid var(--rule); margin-top: 2.5rem; padding-top: 1.
 .section-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .action { display: inline-flex; min-height: 44px; align-items: center; padding: .5rem .8rem; border: 1px solid var(--rule); background: var(--surface); text-decoration: none; font-weight: 650; font-size: .875rem; }
 .action:hover { border-color: var(--accent); }
+button.action { color: inherit; font: inherit; font-size: .875rem; cursor: pointer; }
+button.action:disabled { cursor: progress; opacity: .75; }
+.bundle-copy[hidden] { display: none !important; }
+.bundle-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+.bundle-status { font-size: .875rem; color: var(--muted); }
+.bundle-status:empty { display: none; }
 iframe { display: block; width: 100%; min-height: 390px; border: 1px solid var(--rule); background: var(--surface); margin-top: 1rem; }
 pre { max-width: 100%; overflow-x: auto; padding: 1.25rem; margin: .6rem 0 1.6rem; border: 1px solid var(--rule); background: var(--surface); font: .85rem/1.6 ui-monospace,"SFMono-Regular",Consolas,monospace; tab-size: 2; }
 pre code { user-select: all; }

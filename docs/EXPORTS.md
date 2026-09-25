@@ -17,10 +17,15 @@ buttons/links. Document-wide effects (ds-14, ds-143) are labelled as such;
 the cross-document transition requires both downloadable demo files. Nothing
 in this export promotes browser-support or WCAG verification status.
 
-The classic catalogue has a native **View integration source** link that works
-without scripting. With optional catalogue JavaScript, the **Copy integration
-bundle** button fetches that exact text and reports success only after the
-clipboard write succeeds. Raw CSS and the existing stack-of-snippets path
+The classic catalogue and individual spell documentation pages expose a native
+**View integration source** link that works without scripting. Their optional
+**Copy integration bundle** buttons fetch exactly that plain-text document and
+report success only after the clipboard write succeeds. On individual docs,
+the copy enhancement is served separately by `/spell-copy.js`; the hosted
+demo, runnable download and exported integration source remain script-free.
+Document-level spells ds-14 and ds-143 retain their native source links
+without a copy button because their behavior cannot be represented by a
+single integration snippet. Raw CSS and the existing stack-of-snippets path
 remain raw, with their own labels; they are not represented as dependency-
 resolved exports. The MCP `get_spell` response includes the corresponding
 `integrationBundleUrl` and `integrationBundleFormat`.

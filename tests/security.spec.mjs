@@ -4,7 +4,7 @@ test("discard untrusted URL stack identifiers before rendering", async ({ page }
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   const injected = 'ds-1,"><img src=x onerror=alert(1)>,ds-999';
-  await page.goto("/?stack=" + encodeURIComponent(injected));
+  await page.goto("/classic/?stack=" + encodeURIComponent(injected));
   await expect(page.locator("#stack-count")).toHaveText("1");
   await expect(page.locator("#stack-items .stack-item")).toHaveCount(1);
   await expect(page.locator("#stack-items img")).toHaveCount(0);
@@ -13,7 +13,7 @@ test("discard untrusted URL stack identifiers before rendering", async ({ page }
 });
 
 test("discard untrusted persisted identifiers", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/classic/");
   await page.evaluate(() => localStorage.setItem("ds-stack", JSON.stringify([
     "ds-1", '"><svg onload=alert(1)>', "ds-999", 42
   ])));
@@ -29,7 +29,7 @@ test("storage-denied browsers retain working search and filters", async ({ page 
       throw new DOMException("Storage blocked", "SecurityError");
     }});
   });
-  await page.goto("/");
+  await page.goto("/classic/");
   await expect(page.locator("#search")).toBeVisible();
   await page.locator("#search").fill("shimmer");
   await expect(page.locator(".row:visible")).toHaveCount(2);
@@ -38,10 +38,10 @@ test("storage-denied browsers retain working search and filters", async ({ page 
 });
 
 test("history without filter params clears previous state", async ({ page }) => {
-  await page.goto("/?q=shimmer&category=Interaction&status=baseline");
+  await page.goto("/classic/?q=shimmer&category=Interaction&status=baseline");
   await expect(page.locator("#search")).toHaveValue("shimmer");
   await page.evaluate(() => {
-    history.pushState({}, "", "/");
+    history.pushState({}, "", "/classic/");
     dispatchEvent(new PopStateEvent("popstate"));
   });
   await expect(page.locator("#search")).toHaveValue("");
@@ -50,7 +50,7 @@ test("history without filter params clears previous state", async ({ page }) => 
 });
 
 test("unmodified global character shortcuts do not hijack focus", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/classic/");
   await page.locator("body").focus();
   await page.keyboard.press("j");
   await expect(page.locator(".row__hit").first()).not.toBeFocused();
@@ -59,7 +59,7 @@ test("unmodified global character shortcuts do not hijack focus", async ({ page 
 });
 
 test("compatibility probes never claim component behavior as verified", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/classic/");
   await page.locator('.row[data-id="ds-1"] .row__hit').click();
   const result = page.locator('#drawer-ds-1 .feature-check');
   await expect(result).toContainText("This does not verify interactive behavior");

@@ -507,6 +507,7 @@ A touch-friendly, accessible before/after image comparison with no JavaScript. T
     from { clip-path: inset(0 0% 0 0); }
     to   { clip-path: inset(0 100% 0 0); }
   }
+}
 ```
 
 ### 71. Sliding Segment Indicator
@@ -640,6 +641,7 @@ details[open] .fab-actions {
     opacity: 0;
     transform: translateY(12px);
   }
+}
 ```
 
 ### 79. Anchor-Positioned Mega Menu (`[popover]`)
@@ -1058,6 +1060,7 @@ A large premium effect for multi-page sites. The browser handles MPA navigation 
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+}
 ```
 
 ### 31. Phantom Entry (`@starting-style`)
@@ -1086,6 +1089,7 @@ A soft fade-in from `display: none` with no JS. Perfect for popover menus (`[pop
     opacity: 0;
     transform: translateY(-8px) scale(0.96);
   }
+}
 ```
 
 ### 65. Scroll-Driven Header Compression
@@ -1150,6 +1154,7 @@ dialog[open]::backdrop,
   [popover]:popover-open::backdrop {
     opacity: 0;
   }
+}
 ```
 
 ### 68. Infinite Logo Marquee
@@ -1223,6 +1228,7 @@ List and card items fade in sequence as the user scrolls, synced to viewport pos
       transform: translateY(0) scale(1);
     }
 }
+}
 ```
 
 ### 75. Native Modal Image Zoom (`popovertarget`)
@@ -1268,6 +1274,7 @@ Click an image to enlarge it to a fullscreen view with a native `popover` — no
     opacity: 0;
     transform: scale(0.92);
   }
+}
 ```
 
 ### 91. Ken Burns Scroll Gallery
@@ -1293,6 +1300,7 @@ Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in th
     50%  { transform: scale(1)    translateY(0); }
     100% { transform: scale(1.12) translateY(-2%); }
   }
+}
 ```
 
 ### 92. Image-Clipped Gradient Headline
@@ -1379,6 +1387,7 @@ The header becomes frosted glass only after the user has scrolled a little.
       box-shadow: 0 4px 20px oklch(0 0 0 / 0.05);
     }
 }
+}
 ```
 
 ### 30. Sticky CTA Elevation
@@ -1464,6 +1473,7 @@ A sticky element gains extra shadow and border only once it is actually stuck. M
     border-color: var(--color-border);
     box-shadow: 0 12px 32px oklch(0 0 0 / .10);
   }
+}
 ```
 
 ### 45. Snapped Spotlight
@@ -1496,6 +1506,7 @@ The active slide in a scroll-snap container gets full sharpness while siblings f
     opacity: 1;
     transform: scale(1);
   }
+}
 ```
 
 ### 46. Real Overflow Hint
@@ -1545,6 +1556,7 @@ A floating button that wakes only after the user has moved the page. **Requires 
     transform: none;
     pointer-events: auto;
   }
+}
 ```
 
 ### 55. Sticky Card Deck
@@ -1573,6 +1585,7 @@ Cards stack like a deck as the user scrolls. Scale and dimming stay synced to th
       filter: brightness(0.6);
     }
 }
+}
 ```
 
 ### 69. Scroll-Aware Table Boundaries (`container-type: scroll-state`)
@@ -1599,6 +1612,7 @@ Tables with `position: sticky` show edge shadows and dividers *only* when the co
   .table-wrapper td:first-child {
     box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
   }
+}
 ```
 
 ---
@@ -1711,6 +1725,7 @@ A card that adapts its layout to its container, not the viewport.
     aspect-ratio: 1;
     border-radius: var(--radius-md) 0 0 var(--radius-md);
   }
+}
 ```
 
 ### 40. Subgrid Alignment
@@ -1946,6 +1961,8 @@ dialog.responsive-sheet[open] {
       transform: scale(0.95);
     }
 }
+  }
+}
 ```
 
 ---
@@ -1978,6 +1995,7 @@ Keep this for simple hover text on elements where `overflow: hidden` is not a pr
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
   }
+}
 [data-tooltip]:focus-visible::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0) scale(1);
@@ -2283,6 +2301,7 @@ A native `<select>` becomes fully styleable, including the open menu. Retires he
     background: var(--color-surface-offset);
     border-radius: var(--radius-sm);
   }
+}
 ```
 
 ### 57. Form Gatekeeper
@@ -2997,6 +3016,7 @@ Pinterest packing in CSS. `display: grid-lanes` fills the shortest column in DOM
     display: grid-lanes;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   }
+}
 ```
 
 ### 101. Sibling-Index Stagger (`sibling-index()`)
@@ -3020,6 +3040,7 @@ A staggered reveal with no `--i` custom properties. `sibling-index()` (1-based) 
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: none; }
   }
+}
 @media (prefers-reduced-motion: reduce) {
   .stagger > * { animation: none; }
 }
@@ -3131,6 +3152,7 @@ Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. 
   .attr-meter-fill {
     inline-size: calc(attr(data-value type(<number>), 0) * 1%);
   }
+}
 ```
 
 ---
@@ -3238,6 +3260,7 @@ A shared-element transition between a list card and a detail page. `view-transit
     view-transition-name: attr(id type(<custom-ident>), none);
     view-transition-class: card;
   }
+}
 ::view-transition-group(*.card) {
   animation-duration: 320ms;
   animation-timing-function: cubic-bezier(.16,1,.3,1);
@@ -3275,6 +3298,7 @@ The same sparkline as Spell 95, but the value lives in `data-v` — no inline `s
   .attr-spark span {
     block-size: calc(attr(data-v type(<number>), 0) * 1%);
   }
+}
 .attr-spark span:last-child { background: var(--color-primary); }
 ```
 
@@ -3521,6 +3545,7 @@ Full native select chrome: a custom chevron (`::picker-icon`) and a checkmark on
     color: var(--color-primary);
     font-weight: 700;
   }
+}
 ```
 
 
@@ -4075,6 +4100,7 @@ A tactile image reveal with `clip-path` that wipes the image in, synced to scrol
     from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }
     to { clip-path: inset(0 0 0 0); transform: scale(1); }
   }
+}
 ```
 
 ### 140. Sticky Footer Reveal Layout
@@ -4302,6 +4328,7 @@ Style component guidance with `@scope` while explicitly preventing accent styles
     color: var(--color-accent);
     font-weight: 750;
   }
+}
 ```
 
 ### 149. Snapped Product State (`scroll-state()`)
@@ -4360,6 +4387,7 @@ Highlight the active card aligned to a scroll-snap point using `@container scrol
       border-color: var(--color-primary);
     }
 }
+}
 @media (prefers-reduced-motion: reduce) {
   .snap-product__body { transition: none; }
 }
@@ -4415,6 +4443,7 @@ Draw clean separators directly in grid and flex gaps using `column-rule` without
     padding-inline-start: 0;
     border-inline-start: 0;
   }
+}
 ```
 
 ### 151. Organic Avatar Cluster (`random()`)
@@ -4460,11 +4489,13 @@ Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, ba
     rotate: random(-6deg, 6deg);
     translate: 0 random(-3px, 3px);
   }
+}
 @media (prefers-reduced-motion: reduce) {
   .avatar-cluster > li {
     rotate: 0deg;
     translate: 0;
   }
+}
 ```
 
 ---

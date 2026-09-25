@@ -111,6 +111,7 @@ class McpServerTest(unittest.TestCase):
             self.assertIn("id", spell)
             self.assertIn("previewEnvironment", spell)
             self.assertIn("previewAction", spell)
+            self.assertEqual(spell["verification"]["support"], "registry-estimate")
 
     def test_tool_search_spells_validation_errors(self):
         self.init_server()
@@ -142,6 +143,8 @@ class McpServerTest(unittest.TestCase):
         self.assertIn("html", data)
         self.assertIn("tailwind", data)
         self.assertEqual(data["previewEnvironment"], "shadow")
+        self.assertEqual(data["verification"]["behavior"], "not-individually-verified")
+        self.assertEqual(data["verification"]["accessibility"], "not-audited")
 
     def test_tool_get_spell_missing_id(self):
         self.init_server()

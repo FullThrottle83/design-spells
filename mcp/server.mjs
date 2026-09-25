@@ -165,6 +165,7 @@ function summary(spell) {
     previewEnvironment: spell.previewEnvironment,
     previewAction: spell.previewAction,
     description: spell.description,
+    verification: spell.verification,
   };
 }
 

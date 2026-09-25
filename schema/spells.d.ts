@@ -54,12 +54,26 @@ export interface BrowserSupport {
   safari: BrowserLevel;
 }
 
+export interface VerificationEvidence {
+  kind: "support" | "behavior" | "accessibility";
+  url: string;
+  checkedAt: string;
+  note: string;
+  browser?: "chromium" | "firefox" | "webkit" | "chrome" | "edge" | "safari";
+  version?: string;
+}
+
 /** Verification is deliberately independent of browser-support estimates. */
 export interface Verification {
   support: "registry-estimate" | "source-checked";
   behavior: "not-individually-verified" | "browser-tested";
   accessibility: "not-audited" | "reviewed";
   sources: string[];
+  /** Populated only after dated, individually scoped review. */
+  evidence?: VerificationEvidence[];
+  dependencies?: string[];
+  fallback?: string;
+  accessibilityNotes?: string;
 }
 
 export interface Spell {

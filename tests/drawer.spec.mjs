@@ -94,7 +94,18 @@ test.describe("drawer descriptions", () => {
       }
 
       await page.locator(`#drawer-${spell.id} .drawer__close`).click();
-      await expect(page.locator(`#drawer-${spell.id}`)).toBeHidden();
+      try {
+        await expect(page.locator(`#drawer-${spell.id}`)).toBeHidden();
+      } catch (error) {
+        const state = await page.locator(`#drawer-${spell.id}`).evaluate((el) => ({
+          open: el.matches(':popover-open'),
+          display: getComputedStyle(el).display,
+          transform: getComputedStyle(el).transform,
+          reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
+          hash: location.hash,
+        }));
+        throw new Error(`${spell.id}: drawer close diagnosis ${JSON.stringify(state)}`, { cause: error });
+      }
     }
 
     expect(problems, "drawer descriptions rendered incorrectly").toEqual([]);

@@ -4649,7 +4649,7 @@ Expand a compact disclosure to its real max-content width plus breathing room. T
 ```
 
 ```css
-.intrinsic-demo { inline-size: min(28rem, 100%); }
+.intrinsic-demo { inline-size: 100%; max-inline-size: 28rem; }
 .intrinsic-pill {
   inline-size: 3rem;
   max-inline-size: 100%;

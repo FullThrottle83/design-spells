@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>View-Timeline KPI Fill — Design Spells</title>
-  <meta name="description" content="KPI bars fill as they enter the viewport via `animation-timeline: view()` — no IntersectionObserver.">
+  <meta name="description" content="KPI bars fill as their labelled metric enters the viewport, using a named view timeline — no IntersectionObserver. The final value is the default when timelines are unavailable or motion is reduced. Keep the numeric value in text, not only in bar geometry.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-111/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="View-Timeline KPI Fill — Design Spells">
-  <meta property="og:description" content="KPI bars fill as they enter the viewport via `animation-timeline: view()` — no IntersectionObserver.">
+  <meta property="og:description" content="KPI bars fill as their labelled metric enters the viewport, using a named view timeline — no IntersectionObserver. The final value is the default when timelines are unavailable or motion is reduced. Keep the numeric value in text, not only in bar geometry.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-111/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-111 / Data / 0 JS</p>
     <h1>View-Timeline KPI Fill</h1>
-    <p class="lede">KPI bars fill as they enter the viewport via `animation-timeline: view()` — no IntersectionObserver.</p>
+    <p class="lede">KPI bars fill as their labelled metric enters the viewport, using a named view timeline — no IntersectionObserver. The final value is the default when timelines are unavailable or motion is reduced. Keep the numeric value in text, not only in bar geometry.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-111/">Open standalone demo ↗</a><a class="action" href="/download/ds-111.html" download="ds-111.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Scroll to preview</p>
+      <p class='note'>Scroll down to the allocation report. Bars fill as each metric enters; scroll back up to replay. Unsupported browsers and reduced motion show the final values.</p>
       
       <iframe title="Isolated demonstration: View-Timeline KPI Fill" src="/play/ds-111/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -42,7 +42,7 @@
       <h3>HTML</h3>
       
       <pre tabindex="0"><code>&lt;div class=&quot;kpi&quot; style=&quot;--kpi: 72%&quot;&gt;
-  &lt;span&gt;Conversion&lt;/span&gt;
+  &lt;span&gt;Annual grants allocated &lt;strong&gt;72%&lt;/strong&gt;&lt;/span&gt;
   &lt;div class=&quot;kpi-track&quot; aria-hidden=&quot;true&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
       <h3>CSS</h3>
@@ -51,19 +51,23 @@
   background: var(--color-surface-offset); overflow: hidden;
 }
 .kpi-track i {
-  display: block; block-size: 100%; inline-size: 0;
+  display: block; block-size: 100%; inline-size: var(--kpi, 0%);
   background: var(--color-primary); border-radius: inherit;
 }
 @supports (animation-timeline: view()) {
+  .kpi { view-timeline: --kpi-entry block; }
   .kpi-track i {
     animation: kpi-fill linear both;
-    animation-timeline: view();
+    animation-timeline: --kpi-entry;
     animation-range: entry 10% entry 60%;
   }
-  @keyframes kpi-fill { to { inline-size: var(--kpi, 0%); } }
+  @keyframes kpi-fill {
+    from { inline-size: 0; }
+    to { inline-size: var(--kpi, 0%); }
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .kpi-track i { inline-size: var(--kpi, 0%); animation: none; }
+  .kpi-track i { animation: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">

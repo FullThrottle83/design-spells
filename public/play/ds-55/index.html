@@ -122,7 +122,7 @@
 
 .card-stack .card {
   position: sticky;
-  top: max(2rem, var(--header-height, 0px));
+  top: calc(max(2rem, var(--header-height, 0px)) + var(--stack-offset, 0px));
   transform-origin: top center;
 }
 
@@ -139,10 +139,40 @@
     }
 }
 }
+@media (prefers-reduced-motion: reduce) {
+  .card-stack .card { animation: none; transform: none; filter: none; }
+}
+
+/* Batch 02: demo-only composition, never overrides a spell's activated state. */
+html:has(.journey-demo) {scroll-behavior:auto}
+.journey-demo {width:100%;min-width:0;max-width:1020px;margin-inline:auto;padding:clamp(22px,5vw,64px);font:16px/1.65 ui-sans-serif,system-ui,sans-serif;--color-primary:light-dark(#245b50,#a2d9be);--color-bg:light-dark(#faf9f5,#151918);--color-border:light-dark(#dadbd1,#3a453e)}
+body:has(.journey-demo) {background:light-dark(#faf9f5,#151918)}
+.journey-demo * {min-width:0}
+.journey-head {max-width:720px;margin-bottom:24px}
+.journey-demo h1,.journey-demo h2 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
+.journey-demo h1 {font-size:clamp(40px,6vw,76px);margin:18px 0 24px}.journey-demo h2 {font-size:clamp(32px,4vw,54px);margin:18px 0 24px}
+.journey-demo p {margin:0 0 20px}.journey-demo a {color:inherit;text-underline-offset:5px}
+.journey-kicker {font:600 11px/1.6 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+.journey-lede {max-width:56ch}.journey-demo .journey-instruction {font-size:13px;border-inline-start:2px solid var(--color-primary);padding-inline-start:16px;max-width:65ch;margin:24px 0 32px}
+.journey-demo .journey-note {font-size:12px;max-width:65ch;margin:24px 0}
+.journey-demo :where(a,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:4px}
+.journey-demo :where(a) {min-height:44px;display:inline-flex;align-items:center}
+.journey-demo :where(section) {scroll-margin-top:24px}
+.journey-demo dl {font-size:14px}.journey-demo dl div {padding-block:14px;border-top:1px solid var(--color-border)}.journey-demo dt {font-size:11px;text-transform:uppercase;letter-spacing:.08em}.journey-demo dd {margin:6px 0 0}
+
+.journey-ds-55 {max-width:1060px}.journey-ds-55 .card-stack {gap:28dvh;padding-bottom:70dvh;margin-top:60px}
+.journey-ds-55 .card {min-height:68dvh;border:1px solid var(--color-border);padding:clamp(20px,4vw,44px);display:flex;flex-direction:column;background:var(--color-bg)}
+.route-label {display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font:11px/1.4 ui-monospace,monospace;text-transform:uppercase}
+.route-illustration {height:clamp(100px,20vh,200px);position:relative;overflow:hidden;margin-block:24px;background:#d6dcd2;isolation:isolate}
+.route-illustration span {position:absolute;bottom:-1px;width:65%;height:90%;background:#3c5d4d;clip-path:polygon(0 100%,50% 0,100% 100%)}.route-illustration span:nth-child(2) {left:35%;height:65%;background:#8e9e82}.route-illustration span:nth-child(3) {width:50px;height:50px;top:15px;left:72%;border-radius:50%;clip-path:none;background:#e5b46c;z-index:-1}
+.route-ridge .route-illustration {background:#e2d5c8}.route-ridge .route-illustration span {background:#976a53}.route-ridge .route-illustration span:nth-child(2) {background:#c2977a}
+.route-shore .route-illustration {background:#cadcde}.route-shore .route-illustration span:not(:nth-child(3)) {clip-path:ellipse(65% 50% at 50% 90%);background:#4f7977}.route-shore .route-illustration span:nth-child(2) {background:#89aaa2}
+.route-copy p {max-width:54ch}.route-copy strong {font:italic 18px Georgia,serif;color:var(--color-primary)}
+.route-end {min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding-block:70px}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="card-stack"><article class="card">Card A</article><article class="card">Card B</article><article class="card">Card C</article></div></div>
-  <p class='demo-hint'>Scroll to preview</p>
+  <main class="journey-demo journey-ds-55" id="demo-main"><div id="route-start"><header class="journey-head"><p class="journey-kicker">FIELD ATLAS / Route 03</p><h1>A day, in<br>three chapters.</h1><p class="journey-lede">A short walking route from the treeline to open water. Scroll to stack the stops, one over the next.</p></header><p class="journey-instruction">Scroll slowly through the three stops. Cards pin and overlap; supporting browsers shrink and dim the deck as it exits. Return to the start to replay.</p></div><div class="card-stack"><article class="card route-forest" style="--stack-offset:0px"><div class="route-label"><span>STOP 01 / 03</span><span>09:00 · 2.4 km</span></div><div class="route-illustration" aria-hidden="true"><span></span><span></span><span></span></div><div class="route-copy"><h2>The treeline</h2><p>A quiet start beneath the pines. Follow the path until the canopy gives way to the first open view.</p><strong>Switch off. Look up.</strong></div></article><article class="card route-ridge" style="--stack-offset:64px"><div class="route-label"><span>STOP 02 / 03</span><span>11:30 · 3.1 km</span></div><div class="route-illustration" aria-hidden="true"><span></span><span></span><span></span></div><div class="route-copy"><h2>The ridgeline</h2><p>The trail narrows, the horizon opens. Stop at the crest for lunch and a little space to think.</p><strong>Take the longer view.</strong></div></article><article class="card route-shore" style="--stack-offset:128px"><div class="route-label"><span>STOP 03 / 03</span><span>14:00 · 1.8 km</span></div><div class="route-illustration" aria-hidden="true"><span></span><span></span><span></span></div><div class="route-copy"><h2>The shoreline</h2><p>An easy descent to the water. Find a flat stone, loosen your boots and let the afternoon slow down.</p><strong>Leave time for nothing.</strong></div></article></div><footer class="route-end"><p class="journey-kicker">7.3 km / One unhurried day</p><h2>Good places<br>stay with you.</h2><a href="#route-start">Return to the first chapter ↑</a><p class="journey-note">Illustrative itinerary. Sticky stacking remains without view timelines; reduced motion removes shrinking and dimming.</p></footer></main>
+
 </body>
 </html>

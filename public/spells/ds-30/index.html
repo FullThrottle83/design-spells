@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Sticky CTA Elevation — Design Spells</title>
-  <meta name="description" content="A sticky bottom CTA gains more separation when it sits on top of content.">
+  <meta name="description" content="A bottom-sticky CTA stays reachable over a long content journey. Its translucent surface and border provide separation; this is not a scroll-triggered shadow. Supply enough content height and a real link destination.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-30/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Sticky CTA Elevation — Design Spells">
-  <meta property="og:description" content="A sticky bottom CTA gains more separation when it sits on top of content.">
+  <meta property="og:description" content="A bottom-sticky CTA stays reachable over a long content journey. Its translucent surface and border provide separation; this is not a scroll-triggered shadow. Supply enough content height and a real link destination.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-30/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-30 / Scroll / 0 JS</p>
     <h1>Sticky CTA Elevation</h1>
-    <p class="lede">A sticky bottom CTA gains more separation when it sits on top of content.</p>
+    <p class="lede">A bottom-sticky CTA stays reachable over a long content journey. Its translucent surface and border provide separation; this is not a scroll-triggered shadow. Supply enough content height and a real link destination.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-30/">Open standalone demo ↗</a><a class="action" href="/download/ds-30.html" download="ds-30.html">Download runnable HTML ↓</a></div>
-      
+      <p class='note'>Scroll through the workshop itinerary. The session bar stays at the bottom; Session details takes you to the visit information.</p>
       
       <iframe title="Isolated demonstration: Sticky CTA Elevation" src="/play/ds-30/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -41,10 +41,11 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;p style=&quot;min-height:4rem&quot;&gt;Content&lt;/p&gt;&lt;div class=&quot;sticky-cta&quot;&gt;Continue →&lt;/div&gt;</code></pre>
+      <pre tabindex="0"><code>&lt;article style=&quot;inline-size:min(100%,36rem)&quot;&gt;&lt;div style=&quot;min-block-size:150vh&quot;&gt;&lt;h2&gt;Paper &amp;amp; Practice&lt;/h2&gt;&lt;p&gt;Scroll through a workshop itinerary.&lt;/p&gt;&lt;/div&gt;&lt;aside class=&quot;sticky-cta&quot;&gt;&lt;a href=&quot;#visit-info&quot;&gt;Session details ↓&lt;/a&gt;&lt;/aside&gt;&lt;/article&gt;&lt;section id=&quot;visit-info&quot; tabindex=&quot;-1&quot;&gt;&lt;h2&gt;Visit information&lt;/h2&gt;&lt;p&gt;A three-hour paper-binding workshop. Illustrative itinerary, not a booking service.&lt;/p&gt;&lt;/section&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.sticky-cta {
   position: sticky; bottom: 0;
+  background: var(--color-bg); /* Opaque fallback without relative colors or blur. */
   background: oklch(from var(--color-bg) l c h / .88);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);

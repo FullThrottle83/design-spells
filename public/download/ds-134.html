@@ -119,14 +119,37 @@
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
 .swipe-list { list-style: none; padding: 0; margin: 0; }
-.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
-.swipe-item::-webkit-scrollbar { display: none; }
+.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
 .swipe-content { flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
-.swipe-action { flex: 0 0 80px; scroll-snap-align: end; background: var(--color-error); color: white; border: 0; cursor: pointer; font-weight: 600; }
+.swipe-action { flex: 0 0 96px; scroll-snap-align: end; display: grid; place-items: center;
+  min-block-size: 44px; background: var(--color-primary); color: var(--color-text-inverse); font-weight: 600; }
+.swipe-action:focus-visible { outline: 2px solid currentColor; outline-offset: -5px; }
+
+/* Batch 02: demo-only composition, never overrides a spell's activated state. */
+html:has(.journey-demo) {scroll-behavior:auto}
+.journey-demo {width:100%;min-width:0;max-width:1020px;margin-inline:auto;padding:clamp(22px,5vw,64px);font:16px/1.65 ui-sans-serif,system-ui,sans-serif;--color-primary:light-dark(#245b50,#a2d9be);--color-bg:light-dark(#faf9f5,#151918);--color-border:light-dark(#dadbd1,#3a453e)}
+body:has(.journey-demo) {background:light-dark(#faf9f5,#151918)}
+.journey-demo * {min-width:0}
+.journey-head {max-width:720px;margin-bottom:24px}
+.journey-demo h1,.journey-demo h2 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
+.journey-demo h1 {font-size:clamp(40px,6vw,76px);margin:18px 0 24px}.journey-demo h2 {font-size:clamp(32px,4vw,54px);margin:18px 0 24px}
+.journey-demo p {margin:0 0 20px}.journey-demo a {color:inherit;text-underline-offset:5px}
+.journey-kicker {font:600 11px/1.6 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+.journey-lede {max-width:56ch}.journey-demo .journey-instruction {font-size:13px;border-inline-start:2px solid var(--color-primary);padding-inline-start:16px;max-width:65ch;margin:24px 0 32px}
+.journey-demo .journey-note {font-size:12px;max-width:65ch;margin:24px 0}
+.journey-demo :where(a,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:4px}
+.journey-demo :where(a) {min-height:44px;display:inline-flex;align-items:center}
+.journey-demo :where(section) {scroll-margin-top:24px}
+.journey-demo dl {font-size:14px}.journey-demo dl div {padding-block:14px;border-top:1px solid var(--color-border)}.journey-demo dt {font-size:11px;text-transform:uppercase;letter-spacing:.08em}.journey-demo dd {margin:6px 0 0}
+
+.journey-ds-134 {max-width:800px}.journey-ds-134 .swipe-list {margin-top:40px;border-top:1px solid var(--color-border)}
+.journey-ds-134 .swipe-item {border-bottom:1px solid var(--color-border)}.journey-ds-134 .swipe-content {display:flex;align-items:center;gap:16px;padding:24px 12px}.swipe-content div {flex:1}.swipe-content strong {display:block;font-size:16px}.swipe-content small {display:block;font-size:11px;margin-top:4px}.file-icon {padding:10px 6px;font:10px ui-monospace,monospace;border:1px solid var(--color-border);border-radius:2px;background:var(--color-bg)}
+.journey-ds-134 .swipe-action {display:grid;color:var(--color-text-inverse);font-size:13px}
+.document-notes {padding-top:120px}.document-notes section {padding:30px 0;min-height:55dvh;border-top:1px solid var(--color-border)}.document-notes section:target {outline:2px solid var(--color-primary);outline-offset:12px}
 </style>
 </head>
 <body>
-  <div class="stage"><ul class="swipe-list" style="max-width:20rem"><li class="swipe-item"><div class="swipe-content">Document_v1.pdf</div><button class="swipe-action">Delete</button></li><li class="swipe-item"><div class="swipe-content">Invoice_Q3.pdf</div><button class="swipe-action">Delete</button></li></ul></div>
-  <p class='demo-hint'>Swipe to preview</p>
+  <main class="journey-demo journey-ds-134" id="demo-main"><div id="files-start"><header class="journey-head"><p class="journey-kicker">PROJECT LIBRARY / Your reference shelf</p><h1>A little more<br>within reach.</h1><p class="journey-lede">Document information, tucked beside each row rather than crowded into it.</p></header><p class="journey-instruction">Swipe a document to the left, or focus its row and use the right arrow. Tab also reveals Details. Follow the link to the real document information below.</p><ul class="swipe-list"><li class="swipe-item" tabindex="0" aria-label="Field guide, scroll for details"><div class="swipe-content"><span class="file-icon" aria-hidden="true">PDF</span><div><strong>Field guide</strong><small>PDF · 2.4 MB · Updated Sep 18</small></div><span aria-hidden="true">←</span></div><a class="swipe-action" href="#field-guide-details" aria-label="Details for Field guide">Details ↗</a></li><li class="swipe-item" tabindex="0" aria-label="Material notes, scroll for details"><div class="swipe-content"><span class="file-icon" aria-hidden="true">PDF</span><div><strong>Material notes</strong><small>PDF · 860 KB · Updated Sep 22</small></div><span aria-hidden="true">←</span></div><a class="swipe-action" href="#materials-details" aria-label="Details for Material notes">Details ↗</a></li></ul><p class="journey-note">The action navigates to information. CSS does not delete a file, download it or save application state.</p></div><div class="document-notes"><section id="field-guide-details" tabindex="-1"><p class="journey-kicker">Document information</p><h2>Field guide</h2><p>A concise guide to observation, sketching and collecting useful references on a walk.</p><p class="journey-note">Illustrative document record. No actual file operation is performed.</p><a href="#files-start">Return to documents ↑</a></section><section id="materials-details" tabindex="-1"><p class="journey-kicker">Document information</p><h2>Material notes</h2><p>An annotated list of papers, threads and cover stocks for the studio’s next workshop.</p><p class="journey-note">Illustrative document record. No actual file operation is performed.</p><a href="#files-start">Return to documents ↑</a></section></div></main>
+
 </body>
 </html>

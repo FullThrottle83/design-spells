@@ -650,10 +650,6 @@ PREVIEW_HTML: dict[str, str] = {
     "126": '<nav class="spy-nav"><a href="#s1" class="spy-l1">Intro</a> <a href="#s2" class="spy-l2">Features</a></nav>'
         '<main><section id="s1" style="min-height:180px;display:grid;place-items:center">Intro</section>'
         '<section id="s2" style="min-height:180px;display:grid;place-items:center">Features</section></main>',
-    "134": '<ul class="swipe-list" style="max-width:20rem">'
-        '<li class="swipe-item"><div class="swipe-content">Document_v1.pdf</div><button class="swipe-action">Delete</button></li>'
-        '<li class="swipe-item"><div class="swipe-content">Invoice_Q3.pdf</div><button class="swipe-action">Delete</button></li>'
-        '</ul>',
     "147": '<article class="fluid-rhythm-card" style="inline-size:min(22rem, 100%)">'
         '<p class="eyebrow">Quarterly report</p><h2>Spacing that scales</h2>'
         '<p>Responsive rhythm with typed @function.</p></article>',
@@ -674,10 +670,13 @@ PREVIEW_HTML: dict[str, str] = {
 # Editorial markup is shared with standalone demos and CSS-only bundles.
 if __package__:
     from .showcase_fixtures import HTML as SHOWCASE_HTML, INTEGRATION_CARD_HTML
+    from .showcase_scroll_fixtures import INTEGRATION_HTML as SCROLL_HTML
 else:
     from showcase_fixtures import HTML as SHOWCASE_HTML, INTEGRATION_CARD_HTML
+    from showcase_scroll_fixtures import INTEGRATION_HTML as SCROLL_HTML
 PREVIEW_HTML.update(SHOWCASE_HTML)
 PREVIEW_HTML["37"] = INTEGRATION_CARD_HTML
+PREVIEW_HTML.update(SCROLL_HTML)
 
 
 def parse_spells(md: str) -> list[dict]:

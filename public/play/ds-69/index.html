@@ -122,25 +122,53 @@
   overflow-x: auto;
   container-type: scroll-state;
 }
-
 .table-wrapper th:first-child,
 .table-wrapper td:first-child {
   position: sticky;
-  left: 0;
+  inset-inline-start: 0;
+  z-index: 1;
   background: var(--color-bg);
+  border-inline-end: 1px solid var(--color-border);
   transition: box-shadow 200ms ease;
 }
-
-@container scroll-state(scrolled: inline) {
+@container scroll-state(scrollable: inline-start) {
   .table-wrapper th:first-child,
   .table-wrapper td:first-child {
     box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .table-wrapper th:first-child,
+  .table-wrapper td:first-child { transition: none; }
+}
+
+/* Batch 02: demo-only composition, never overrides a spell's activated state. */
+html:has(.journey-demo) {scroll-behavior:auto}
+.journey-demo {width:100%;min-width:0;max-width:1020px;margin-inline:auto;padding:clamp(22px,5vw,64px);font:16px/1.65 ui-sans-serif,system-ui,sans-serif;--color-primary:light-dark(#245b50,#a2d9be);--color-bg:light-dark(#faf9f5,#151918);--color-border:light-dark(#dadbd1,#3a453e)}
+body:has(.journey-demo) {background:light-dark(#faf9f5,#151918)}
+.journey-demo * {min-width:0}
+.journey-head {max-width:720px;margin-bottom:24px}
+.journey-demo h1,.journey-demo h2 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
+.journey-demo h1 {font-size:clamp(40px,6vw,76px);margin:18px 0 24px}.journey-demo h2 {font-size:clamp(32px,4vw,54px);margin:18px 0 24px}
+.journey-demo p {margin:0 0 20px}.journey-demo a {color:inherit;text-underline-offset:5px}
+.journey-kicker {font:600 11px/1.6 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+.journey-lede {max-width:56ch}.journey-demo .journey-instruction {font-size:13px;border-inline-start:2px solid var(--color-primary);padding-inline-start:16px;max-width:65ch;margin:24px 0 32px}
+.journey-demo .journey-note {font-size:12px;max-width:65ch;margin:24px 0}
+.journey-demo :where(a,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:4px}
+.journey-demo :where(a) {min-height:44px;display:inline-flex;align-items:center}
+.journey-demo :where(section) {scroll-margin-top:24px}
+.journey-demo dl {font-size:14px}.journey-demo dl div {padding-block:14px;border-top:1px solid var(--color-border)}.journey-demo dt {font-size:11px;text-transform:uppercase;letter-spacing:.08em}.journey-demo dd {margin:6px 0 0}
+
+.journey-ds-69 {max-width:1140px}.ledger-summary {display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12px;padding-block:18px;border-top:1px solid var(--color-border)}.ledger-summary strong {font-size:20px;margin-right:6px}
+.journey-ds-69 .table-wrapper {width:100%;border:1px solid var(--color-border);scrollbar-width:thin}
+.journey-ds-69 table {min-width:1120px;width:100%;border-collapse:separate;border-spacing:0;font-size:14px;font-variant-numeric:tabular-nums}
+.journey-ds-69 caption {text-align:left;padding:14px 18px;font-size:12px}.journey-ds-69 th,.journey-ds-69 td {padding:20px 18px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--color-border)}
+.journey-ds-69 thead th {font:600 10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.09em}.journey-ds-69 th:first-child {width:190px}
+.journey-ds-69 tbody th {font-weight:600}.journey-ds-69 tbody tr:nth-child(even) {background:light-dark(#f0f1e9,#1b231f)}.table-foot {font:12px ui-monospace,monospace;padding-top:18px}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="table-wrapper" style="max-width:20rem"><table style="min-width:44rem"><tr><th>Name</th><th>Plan</th><th>Seats</th><th>Region</th><th>Owner</th><th>Renewal date</th><th>Status</th></tr><tr><td>Acme Corporation</td><td>Pro</td><td>24</td><td>EU-West</td><td>Jonas Andersson</td><td>2026-11-04</td><td>Active</td></tr></table><p class="demo-note">Scroll the table sideways.</p></div></div>
-  <p class='demo-hint'>Scroll to preview</p>
+  <main class="journey-demo journey-ds-69" id="demo-main"><header class="journey-head"><p class="journey-kicker">STUDIO OPERATIONS / September 2026</p><h1>Keep your bearings.</h1><p class="journey-lede">A project ledger with a first column that stays put while the rest of the data moves.</p></header><p class="journey-instruction">Scroll the table sideways, or focus it and use arrow keys. The first column stays pinned. Supporting browsers add a shadow while content is hidden to its left.</p><div class="ledger-summary"><span><strong>5</strong> active projects</span><span>All amounts in EUR · Sample data</span></div><div class="table-wrapper" tabindex="0" role="region" aria-label="Project ledger, scroll horizontally"><table><caption>Studio project ledger · autumn delivery schedule</caption><thead><tr><th scope="col">Project</th><th scope="col">Discipline</th><th scope="col">Lead</th><th scope="col">Delivery</th><th scope="col">Days</th><th scope="col">Budget</th><th scope="col">Status</th></tr></thead><tbody><tr><th scope="row">Field journal</th><td>Editorial</td><td>Mina Rao</td><td>Sep 30</td><td>12</td><td>€8,400</td><td>On track</td></tr><tr><th scope="row">Orchard identity</th><td>Brand</td><td>Theo Kim</td><td>Oct 07</td><td>18</td><td>€12,600</td><td>In review</td></tr><tr><th scope="row">Harbour site</th><td>Digital</td><td>Ari Soto</td><td>Oct 12</td><td>24</td><td>€19,200</td><td>On track</td></tr><tr><th scope="row">Archive annual</th><td>Print</td><td>Lea Berg</td><td>Oct 20</td><td>16</td><td>€11,200</td><td>Planning</td></tr><tr><th scope="row">Sunday objects</th><td>Packaging</td><td>Noor Ali</td><td>Nov 02</td><td>21</td><td>€14,700</td><td>In review</td></tr></tbody></table></div><p class="table-foot">← Scroll to compare delivery, budget and status →</p><p class="journey-note">Without scroll-state queries, the pinned column and its divider remain; only the conditional shadow is absent.</p></main>
+
 </body>
 </html>

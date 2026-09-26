@@ -1,0 +1,1210 @@
+{
+  "browser": "153.0.8010.0",
+  "base": "6414b5a",
+  "spells": {
+    "ds-30-1440": {
+      "initial": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "sticky-cta",
+            "text": "Continue →",
+            "tag": "DIV",
+            "x": 683.25,
+            "y": 201.125,
+            "w": 73.484375,
+            "h": 20.5,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "sticky-cta",
+            "text": "Continue →",
+            "tag": "DIV",
+            "x": 683.25,
+            "y": 201.125,
+            "w": 73.484375,
+            "h": 20.5,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      }
+    },
+    "ds-55-1440": {
+      "initial": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "card-stack",
+            "text": "Card ACard BCard C",
+            "tag": "DIV",
+            "x": 698.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 84.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "card",
+            "text": "Card A",
+            "tag": "ARTICLE",
+            "x": 698.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card B",
+            "tag": "ARTICLE",
+            "x": 698.1875,
+            "y": 130.25,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card C",
+            "tag": "ARTICLE",
+            "x": 698.1875,
+            "y": 162.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "card-stack",
+            "text": "Card ACard BCard C",
+            "tag": "DIV",
+            "x": 698.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 84.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "card",
+            "text": "Card A",
+            "tag": "ARTICLE",
+            "x": 698.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card B",
+            "tag": "ARTICLE",
+            "x": 698.1875,
+            "y": 130.25,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card C",
+            "tag": "ARTICLE",
+            "x": 698.1875,
+            "y": 162.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ]
+      }
+    },
+    "ds-69-1440": {
+      "initial": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "table-wrapper",
+            "text": "NamePlanSeatsRegionOwnerRenewal dateStatusAcme CorporationPro24EU-West",
+            "tag": "DIV",
+            "x": 590,
+            "y": 80.625,
+            "w": 260,
+            "h": 118.75,
+            "scrollWidth": 572,
+            "clientWidth": 260,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "Name",
+            "tag": "TH",
+            "x": 590,
+            "y": 80.625,
+            "w": 120.8125,
+            "h": 49.875,
+            "scrollWidth": 121,
+            "clientWidth": 121,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "table-wrapper",
+            "text": "NamePlanSeatsRegionOwnerRenewal dateStatusAcme CorporationPro24EU-West",
+            "tag": "DIV",
+            "x": 590,
+            "y": 80.625,
+            "w": 260,
+            "h": 118.75,
+            "scrollWidth": 572,
+            "clientWidth": 260,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "Name",
+            "tag": "TH",
+            "x": 590,
+            "y": 80.625,
+            "w": 120.8125,
+            "h": 49.875,
+            "scrollWidth": 121,
+            "clientWidth": 121,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ],
+        "returnShadow": "none"
+      }
+    },
+    "ds-93-1440": {
+      "initial": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "snap-carousel",
+            "text": "The Alps — winter 2026\n  \n  \n    \n    The coast — autumn 2025",
+            "tag": "DIV",
+            "x": 413.5,
+            "y": 26,
+            "w": 613,
+            "h": 325.640625,
+            "scrollWidth": 1055,
+            "clientWidth": 613,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGURE",
+            "x": 413.5,
+            "y": 26,
+            "w": 521.046875,
+            "h": 325.640625,
+            "scrollWidth": 521,
+            "clientWidth": 521,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGCAPTION",
+            "x": 423.25,
+            "y": 312.015625,
+            "w": 176.03125,
+            "h": 29.875,
+            "scrollWidth": 176,
+            "clientWidth": 176,
+            "opacity": "0.651208",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGURE",
+            "x": 947.546875,
+            "y": 26,
+            "w": 521.046875,
+            "h": 325.640625,
+            "scrollWidth": 521,
+            "clientWidth": 521,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGCAPTION",
+            "x": 957.296875,
+            "y": 320.015625,
+            "w": 192.96875,
+            "h": 29.875,
+            "scrollWidth": 193,
+            "clientWidth": 193,
+            "opacity": "0",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "snap-carousel",
+            "text": "The Alps — winter 2026\n  \n  \n    \n    The coast — autumn 2025",
+            "tag": "DIV",
+            "x": 413.5,
+            "y": 26,
+            "w": 613,
+            "h": 325.640625,
+            "scrollWidth": 1055,
+            "clientWidth": 613,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGURE",
+            "x": -28.5,
+            "y": 26,
+            "w": 521.046875,
+            "h": 325.640625,
+            "scrollWidth": 521,
+            "clientWidth": 521,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGCAPTION",
+            "x": -18.75,
+            "y": 320.015625,
+            "w": 176.03125,
+            "h": 29.875,
+            "scrollWidth": 176,
+            "clientWidth": 176,
+            "opacity": "0",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGURE",
+            "x": 505.546875,
+            "y": 26,
+            "w": 521.046875,
+            "h": 325.640625,
+            "scrollWidth": 521,
+            "clientWidth": 521,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGCAPTION",
+            "x": 515.296875,
+            "y": 312.015625,
+            "w": 192.96875,
+            "h": 29.875,
+            "scrollWidth": 193,
+            "clientWidth": 193,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      }
+    },
+    "ds-111-1440": {
+      "initial": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "kpi-track",
+            "text": "",
+            "tag": "DIV",
+            "x": 683.546875,
+            "y": 145.84375,
+            "w": 72.890625,
+            "h": 7.796875,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "",
+            "tag": "I",
+            "x": 683.546875,
+            "y": 145.84375,
+            "w": 52.46875,
+            "h": 7.796875,
+            "scrollWidth": 52,
+            "clientWidth": 52,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "kpi-track",
+            "text": "",
+            "tag": "DIV",
+            "x": 683.546875,
+            "y": 145.84375,
+            "w": 72.890625,
+            "h": 7.796875,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "",
+            "tag": "I",
+            "x": 683.546875,
+            "y": 145.84375,
+            "w": 52.46875,
+            "h": 7.796875,
+            "scrollWidth": 52,
+            "clientWidth": 52,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ],
+        "simulatedFallbackWidth": 0
+      }
+    },
+    "ds-134-1440": {
+      "initial": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "swipe-item",
+            "text": "Document_v1.pdfDelete",
+            "tag": "LI",
+            "x": 609.484375,
+            "y": 94.5,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 830.515625,
+            "y": 94.5,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-item",
+            "text": "Invoice_Q3.pdfDelete",
+            "tag": "LI",
+            "x": 609.484375,
+            "y": 140,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 830.515625,
+            "y": 140,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 900,
+        "viewport": 900,
+        "width": 1440,
+        "targets": [
+          {
+            "class": "swipe-item",
+            "text": "Document_v1.pdfDelete",
+            "tag": "LI",
+            "x": 609.484375,
+            "y": 94.5,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 750.515625,
+            "y": 94.5,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-item",
+            "text": "Invoice_Q3.pdfDelete",
+            "tag": "LI",
+            "x": 609.484375,
+            "y": 140,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 830.515625,
+            "y": 140,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      }
+    },
+    "ds-30-390": {
+      "initial": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "sticky-cta",
+            "text": "Continue →",
+            "tag": "DIV",
+            "x": 158.25,
+            "y": 201.125,
+            "w": 73.484375,
+            "h": 20.5,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "sticky-cta",
+            "text": "Continue →",
+            "tag": "DIV",
+            "x": 158.25,
+            "y": 201.125,
+            "w": 73.484375,
+            "h": 20.5,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      }
+    },
+    "ds-55-390": {
+      "initial": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "card-stack",
+            "text": "Card ACard BCard C",
+            "tag": "DIV",
+            "x": 173.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 84.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "card",
+            "text": "Card A",
+            "tag": "ARTICLE",
+            "x": 173.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card B",
+            "tag": "ARTICLE",
+            "x": 173.1875,
+            "y": 130.25,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card C",
+            "tag": "ARTICLE",
+            "x": 173.1875,
+            "y": 162.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "card-stack",
+            "text": "Card ACard BCard C",
+            "tag": "DIV",
+            "x": 173.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 84.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "card",
+            "text": "Card A",
+            "tag": "ARTICLE",
+            "x": 173.1875,
+            "y": 97.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card B",
+            "tag": "ARTICLE",
+            "x": 173.1875,
+            "y": 130.25,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          {
+            "class": "card",
+            "text": "Card C",
+            "tag": "ARTICLE",
+            "x": 173.1875,
+            "y": 162.75,
+            "w": 43.625,
+            "h": 19.5,
+            "scrollWidth": 44,
+            "clientWidth": 44,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ]
+      }
+    },
+    "ds-69-390": {
+      "initial": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "table-wrapper",
+            "text": "NamePlanSeatsRegionOwnerRenewal dateStatusAcme CorporationPro24EU-West",
+            "tag": "DIV",
+            "x": 65,
+            "y": 80.625,
+            "w": 260,
+            "h": 118.75,
+            "scrollWidth": 572,
+            "clientWidth": 260,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "Name",
+            "tag": "TH",
+            "x": 65,
+            "y": 80.625,
+            "w": 120.8125,
+            "h": 49.875,
+            "scrollWidth": 121,
+            "clientWidth": 121,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "table-wrapper",
+            "text": "NamePlanSeatsRegionOwnerRenewal dateStatusAcme CorporationPro24EU-West",
+            "tag": "DIV",
+            "x": 65,
+            "y": 80.625,
+            "w": 260,
+            "h": 118.75,
+            "scrollWidth": 572,
+            "clientWidth": 260,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "Name",
+            "tag": "TH",
+            "x": 65,
+            "y": 80.625,
+            "w": 120.8125,
+            "h": 49.875,
+            "scrollWidth": 121,
+            "clientWidth": 121,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ],
+        "returnShadow": "none"
+      }
+    },
+    "ds-93-390": {
+      "initial": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "snap-carousel",
+            "text": "The Alps — winter 2026\n  \n  \n    \n    The coast — autumn 2025",
+            "tag": "DIV",
+            "x": 26,
+            "y": 50.21875,
+            "w": 338,
+            "h": 179.546875,
+            "scrollWidth": 588,
+            "clientWidth": 338,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGURE",
+            "x": 26,
+            "y": 50.21875,
+            "w": 287.296875,
+            "h": 179.546875,
+            "scrollWidth": 287,
+            "clientWidth": 287,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGCAPTION",
+            "x": 35.75,
+            "y": 190.140625,
+            "w": 176.03125,
+            "h": 29.875,
+            "scrollWidth": 176,
+            "clientWidth": 176,
+            "opacity": "0.357623",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGURE",
+            "x": 326.296875,
+            "y": 50.21875,
+            "w": 287.296875,
+            "h": 179.546875,
+            "scrollWidth": 287,
+            "clientWidth": 287,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGCAPTION",
+            "x": 336.046875,
+            "y": 198.140625,
+            "w": 192.96875,
+            "h": 29.875,
+            "scrollWidth": 193,
+            "clientWidth": 193,
+            "opacity": "0",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "snap-carousel",
+            "text": "The Alps — winter 2026\n  \n  \n    \n    The coast — autumn 2025",
+            "tag": "DIV",
+            "x": 26,
+            "y": 50.21875,
+            "w": 338,
+            "h": 179.546875,
+            "scrollWidth": 588,
+            "clientWidth": 338,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGURE",
+            "x": -224,
+            "y": 50.21875,
+            "w": 287.296875,
+            "h": 179.546875,
+            "scrollWidth": 287,
+            "clientWidth": 287,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The Alps — winter 2026",
+            "tag": "FIGCAPTION",
+            "x": -214.25,
+            "y": 198.140625,
+            "w": 176.03125,
+            "h": 29.875,
+            "scrollWidth": 176,
+            "clientWidth": 176,
+            "opacity": "0",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "slide",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGURE",
+            "x": 76.296875,
+            "y": 50.21875,
+            "w": 287.296875,
+            "h": 179.546875,
+            "scrollWidth": 287,
+            "clientWidth": 287,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "caption",
+            "text": "The coast — autumn 2025",
+            "tag": "FIGCAPTION",
+            "x": 86.046875,
+            "y": 190.140625,
+            "w": 192.96875,
+            "h": 29.875,
+            "scrollWidth": 193,
+            "clientWidth": 193,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      }
+    },
+    "ds-111-390": {
+      "initial": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "kpi-track",
+            "text": "",
+            "tag": "DIV",
+            "x": 158.546875,
+            "y": 145.84375,
+            "w": 72.890625,
+            "h": 7.796875,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "",
+            "tag": "I",
+            "x": 158.546875,
+            "y": 145.84375,
+            "w": 52.46875,
+            "h": 7.796875,
+            "scrollWidth": 52,
+            "clientWidth": 52,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "kpi-track",
+            "text": "",
+            "tag": "DIV",
+            "x": 158.546875,
+            "y": 145.84375,
+            "w": 72.890625,
+            "h": 7.796875,
+            "scrollWidth": 73,
+            "clientWidth": 73,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "",
+            "text": "",
+            "tag": "I",
+            "x": 158.546875,
+            "y": 145.84375,
+            "w": 52.46875,
+            "h": 7.796875,
+            "scrollWidth": 52,
+            "clientWidth": 52,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ],
+        "simulatedFallbackWidth": 0
+      }
+    },
+    "ds-134-390": {
+      "initial": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "swipe-item",
+            "text": "Document_v1.pdfDelete",
+            "tag": "LI",
+            "x": 84.484375,
+            "y": 94.5,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 305.515625,
+            "y": 94.5,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-item",
+            "text": "Invoice_Q3.pdfDelete",
+            "tag": "LI",
+            "x": 84.484375,
+            "y": 140,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 305.515625,
+            "y": 140,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      },
+      "activated": {
+        "scrollHeight": 844,
+        "viewport": 844,
+        "width": 390,
+        "targets": [
+          {
+            "class": "swipe-item",
+            "text": "Document_v1.pdfDelete",
+            "tag": "LI",
+            "x": 84.484375,
+            "y": 94.5,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 225.515625,
+            "y": 94.5,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-item",
+            "text": "Invoice_Q3.pdfDelete",
+            "tag": "LI",
+            "x": 84.484375,
+            "y": 140,
+            "w": 221.03125,
+            "h": 45.5,
+            "scrollWidth": 301,
+            "clientWidth": 221,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          },
+          {
+            "class": "swipe-action",
+            "text": "Delete",
+            "tag": "BUTTON",
+            "x": 305.515625,
+            "y": 140,
+            "w": 80,
+            "h": 45.5,
+            "scrollWidth": 80,
+            "clientWidth": 80,
+            "opacity": "1",
+            "shadow": "none",
+            "transform": "none"
+          }
+        ]
+      }
+    }
+  }
+}

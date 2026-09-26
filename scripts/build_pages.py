@@ -16,6 +16,7 @@ from xml.sax.saxutils import escape as xml_escape
 from build import DOCUMENT_TOKENS, rewrite_preview_assets
 from build_bundle import ROOT_SCROLL_IDS, render_bundle
 from showcase_fixtures import HTML as SCENE_HTML, HINTS, CSS as SCENE_CSS, COMMON_CSS, scene_html
+import showcase_scroll_fixtures as SCROLL_SHOWCASE
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
@@ -62,7 +63,7 @@ def render_doc(spell: dict) -> str:
         f"<li><strong>{name}</strong><span>{esc(spell['browsers'][key])}</span></li>"
         for key, name in BROWSERS
     )
-    instruction = HINTS.get(sid, spell.get("previewAction", {}).get("hint", ""))
+    instruction = SCROLL_SHOWCASE.HINTS.get(sid, HINTS.get(sid, spell.get("previewAction", {}).get("hint", "")))
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
     if sid in SCROLL_ENTRY_DEMOS:
         instruction_html += '<p class="note">This entry animation needs a scroll runway. Scroll inside the iframe or open the full-page demo, then move down to the effect. The spell CSS has not been accelerated.</p>'
@@ -294,6 +295,10 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
         stage = f'<div class="stage">{scene_html(sid, raw_html)}</div>'
         css += COMMON_CSS + SCENE_CSS[sid]
         hint_html = ""  # The contextual instruction lives inside the scene.
+    if sid in SCROLL_SHOWCASE.HINTS:
+        stage = SCROLL_SHOWCASE.render(sid)
+        css += SCROLL_SHOWCASE.COMMON_CSS + SCROLL_SHOWCASE.CSS[sid]
+        hint_html = ""
     page_css = """
     *,*::before,*::after {box-sizing:border-box}
     html {scroll-behavior:smooth}
@@ -320,7 +325,7 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
 </head>
 <body>
   {stage}
-{"" if sid in HINTS else "  " + hint_html}
+{"" if sid in HINTS or sid in SCROLL_SHOWCASE.HINTS else "  " + hint_html}
 </body>
 </html>"""
 

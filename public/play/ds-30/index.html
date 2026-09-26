@@ -120,14 +120,46 @@
     
 .sticky-cta {
   position: sticky; bottom: 0;
+  background: var(--color-bg); /* Opaque fallback without relative colors or blur. */
   background: oklch(from var(--color-bg) l c h / .88);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);
 }
+
+/* Batch 02: demo-only composition, never overrides a spell's activated state. */
+html:has(.journey-demo) {scroll-behavior:auto}
+.journey-demo {width:100%;min-width:0;max-width:1020px;margin-inline:auto;padding:clamp(22px,5vw,64px);font:16px/1.65 ui-sans-serif,system-ui,sans-serif;--color-primary:light-dark(#245b50,#a2d9be);--color-bg:light-dark(#faf9f5,#151918);--color-border:light-dark(#dadbd1,#3a453e)}
+body:has(.journey-demo) {background:light-dark(#faf9f5,#151918)}
+.journey-demo * {min-width:0}
+.journey-head {max-width:720px;margin-bottom:24px}
+.journey-demo h1,.journey-demo h2 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
+.journey-demo h1 {font-size:clamp(40px,6vw,76px);margin:18px 0 24px}.journey-demo h2 {font-size:clamp(32px,4vw,54px);margin:18px 0 24px}
+.journey-demo p {margin:0 0 20px}.journey-demo a {color:inherit;text-underline-offset:5px}
+.journey-kicker {font:600 11px/1.6 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+.journey-lede {max-width:56ch}.journey-demo .journey-instruction {font-size:13px;border-inline-start:2px solid var(--color-primary);padding-inline-start:16px;max-width:65ch;margin:24px 0 32px}
+.journey-demo .journey-note {font-size:12px;max-width:65ch;margin:24px 0}
+.journey-demo :where(a,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:4px}
+.journey-demo :where(a) {min-height:44px;display:inline-flex;align-items:center}
+.journey-demo :where(section) {scroll-margin-top:24px}
+.journey-demo dl {font-size:14px}.journey-demo dl div {padding-block:14px;border-top:1px solid var(--color-border)}.journey-demo dt {font-size:11px;text-transform:uppercase;letter-spacing:.08em}.journey-demo dd {margin:6px 0 0}
+
+.workshop-cover {background:light-dark(#e4dacc,#302a23);min-height:clamp(320px,48vw,480px);position:relative;display:flex;justify-content:center;align-items:center;gap:24px;overflow:hidden}
+.book {display:flex;flex-direction:column;justify-content:space-between;width:clamp(110px,21vw,210px);height:clamp(180px,29vw,300px);padding:20px;font:clamp(18px,3vw,28px)/1.05 Georgia,serif;box-shadow:10px 15px 0 #0001;border-inline-start:6px double #ffffff70;transform:rotate(-7deg)}
+.book-one {background:#285a4d;color:#f3ebda}.book-two {background:#b65d3e;color:#ffeddb;transform:rotate(8deg)}.book span {font:9px/1.4 ui-monospace,monospace}.cover-caption {position:absolute;bottom:16px;font:11px ui-monospace,monospace}
+.workshop-story {max-width:640px;margin:auto}.workshop-story section {padding-block:clamp(64px,12vh,140px);min-height:70dvh;border-bottom:1px solid var(--color-border)}
+.workshop-pullquote {font:italic clamp(24px,3vw,36px)/1.3 Georgia,serif;padding-block:32px;color:var(--color-primary)}
+.journey-ds-30 .sticky-cta {z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 12px;margin-inline:-12px;font-size:14px}
+.sticky-cta strong,.sticky-cta span {display:block}.sticky-cta span {font-size:11px}.sticky-cta a {text-align:center;padding:8px 16px;background:var(--color-primary);color:var(--color-text-inverse);text-decoration:none;line-height:1.4}
+.session-details {padding-block:70px;min-height:90dvh;max-width:640px;margin:auto}
 </style>
 </head>
 <body>
-  <div class="stage"><p style="min-height:4rem">Content</p><div class="sticky-cta">Continue →</div></div>
-  
+  <main class="journey-demo journey-ds-30" id="demo-main"><div class="workshop-journey" id="workshop-start"><header class="journey-head"><p class="journey-kicker">PAPER / PRACTICE · Saturday sessions</p><h1>Make something<br>worth keeping.</h1><p class="journey-lede">A slow afternoon of paper, thread and simple tools. Learn to bind a notebook you will actually use.</p></header><p class="journey-instruction">Scroll through the workshop itinerary. The session bar stays at the bottom; Session details takes you to the visit information.</p><div class="workshop-cover" aria-hidden="true"><span class="book book-one">PAPER<br>NOTES<span>VOL. 01 / HAND BOUND</span></span><span class="book book-two">Field<br>notes.</span><span class="cover-caption">A simple object. Made by you.</span></div>
+        <div class="workshop-story"><section><p class="journey-kicker">01 / Find your materials</p><h2>Start with the feel of it.</h2><p>Compare soft cotton sheets and warm, textured covers. Choose your paper, fold a signature and learn why the grain matters.</p><dl><div><dt>Materials</dt><dd>Recycled paper &amp; linen thread</dd></div><div><dt>Experience</dt><dd>Curiosity is enough</dd></div></dl></section>
+        <section><p class="journey-kicker">02 / Learn the rhythm</p><h2>One stitch at a time.</h2><p>A guided demonstration, then time to find your own pace. We use a simple exposed stitch so you can see exactly how the book holds together.</p><p class="workshop-pullquote">“The best tools are the ones<br>you learn to trust.”</p></section>
+        <section><p class="journey-kicker">03 / Take it with you</p><h2>A notebook, not a souvenir.</h2><p>Trim the edges, add a title and take home a finished notebook, a printed binding guide and the confidence to make another.</p></section></div>
+        <aside class="sticky-cta" aria-label="Workshop information"><div><strong>Paper &amp; Practice</strong><span>Saturday · 14:00–17:00 · €48</span></div><a href="#session-details">Session details ↓</a></aside></div>
+        <section class="session-details" id="session-details" tabindex="-1"><p class="journey-kicker">Plan your visit</p><h2>A seat at the workbench.</h2><p>This is an illustrative workshop itinerary, not a booking service.</p><dl><div><dt>Duration</dt><dd>3 hours, including a tea break</dd></div><div><dt>Included</dt><dd>All materials and a take-home guide</dd></div><div><dt>Group size</dt><dd>Up to 8 participants</dd></div></dl><a href="#workshop-start">Back to the itinerary ↑</a></section></main>
+
 </body>
 </html>

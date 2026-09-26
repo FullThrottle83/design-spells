@@ -132,10 +132,22 @@
 @container scroll-state(scrollable: inline) {
   .fade-hint { opacity: 1; }
 }
+
+/* Demo-only conditions: the authored scroll-state rule above is unchanged. */
+.overflow-demo { inline-size: 100%; max-inline-size: 32rem; }
+.overflow-demo__toggle { display: inline-flex; align-items: center; gap: .6rem; min-block-size: 44px; margin-block-end: 1rem; cursor: pointer; }
+.overflow-demo .tabs-wrap { inline-size: 100%; }
+.overflow-demo:has(#overflow-fit:checked) .tabs-wrap > div:first-child {
+  min-width: 0 !important;
+  white-space: normal !important;
+  flex-wrap: wrap;
+  padding-inline-end: 0 !important;
+}
+.overflow-demo .fade-hint { position: sticky; inset-inline-end: 0; inline-size: 2rem; margin-inline-start: auto; text-align: center; }
 </style>
 </head>
 <body>
-  <div class="stage"><div class="tabs-wrap" style="max-width:20rem"><div style="display:flex;gap:1rem;white-space:nowrap;padding-inline-end:3rem;min-width:44rem"><span>Overview</span><span>Getting started</span><span>Pricing</span><span>Documentation</span><span>Changelog</span><span>Support</span><span>Community</span><span>Careers</span></div><div class="fade-hint">→</div></div></div>
+  <div class="stage"><div class="overflow-demo"><label class="overflow-demo__toggle"><input type="checkbox" id="overflow-fit"> Fit content without horizontal scrolling</label><div class="tabs-wrap" role="region" aria-label="Scrollable labels" tabindex="0" style="max-width:20rem"><div style="display:flex;gap:1rem;white-space:nowrap;padding-inline-end:3rem;min-width:44rem"><span>Overview</span><span>Getting started</span><span>Pricing</span><span>Documentation</span><span>Changelog</span><span>Support</span><span>Community</span><span>Careers</span></div><div class="fade-hint">→</div></div></div></div>
   <p class='demo-hint'>Scroll to preview</p>
 </body>
 </html>

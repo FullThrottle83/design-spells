@@ -1521,7 +1521,7 @@ The active slide in a scroll-snap container gets full sharpness while siblings f
 }
 
 @container scroll-state(snapped: inline) {
-  article {
+  .slide > article {
     opacity: 1;
     transform: scale(1);
   }
@@ -1546,7 +1546,7 @@ Show edge fades, arrows, or “swipe me” hints only when the content is actual
 }
 
 @container scroll-state(scrollable: inline) {
-  .fade-hint { opacity: 1; }
+  .tabs-wrap .fade-hint { opacity: 1; }
 }
 ```
 

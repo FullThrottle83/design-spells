@@ -51,6 +51,11 @@ const { arenaLaunchOptions } = await import(
   pathToFileURL(join(import.meta.dirname, "arena-launch-options.mjs"))
 );
 
+// Synthetic canary demonstrates that the browser does not inherit the agent's
+// entire environment. Never use an actual token as test data.
+const CANARY_NAME = "ARENA_BROWSER_ENV_CANARY";
+const originalCanary = process.env[CANARY_NAME];
+process.env[CANARY_NAME] = "synthetic-only-do-not-forward";
 const launchOptions = await arenaLaunchOptions(); // sandbox first, as configured
 let browser;
 let fellBackToUnsandboxed = false;
@@ -71,6 +76,8 @@ try {
     "Unsandboxed fallback permitted only for trusted local loopback fixtures.",
   );
 }
+if (originalCanary === undefined) delete process.env[CANARY_NAME];
+else process.env[CANARY_NAME] = originalCanary;
 
 // --- 1. effective command line ------------------------------------------------
 // playwright-core 1.63 does not expose browser.process(); find the main
@@ -95,21 +102,38 @@ if (procs.length !== 1) {
 const { pid, argv } = { pid: procs[0].pid, argv: procs[0].argv };
 const redacted = redactArgs(argv);
 const forbidden = FORBIDDEN_ARGS.filter((flag) => argv.includes(flag));
-record(
-  "no forbidden flags",
-  forbidden.length === 0,
-  forbidden.length
-    ? `HARD FAIL: effective args contain ${forbidden.join(", ")}`
-    : `absent: ${FORBIDDEN_ARGS.join(", ")}`,
-);
+if (forbidden.length) {
+  hardFail("no forbidden flags", `effective args contain ${forbidden.join(", ")}`);
+}
+record("no forbidden flags", true, `absent: ${FORBIDDEN_ARGS.join(", ")}`);
+const sandboxFlagsOk = !argv.includes("--no-sandbox") && !fellBackToUnsandboxed;
 record(
   "sandbox flag outcome",
-  true,
+  sandboxFlagsOk,
   `--no-sandbox present: ${argv.includes("--no-sandbox")}; unsandboxed fallback: ${fellBackToUnsandboxed}; requested chromiumSandbox: true`,
 );
-record("arena boundary flags present", true,
-  `host-resolver-rules "${HOST_RESOLVER_RULES}", proxy-server ${DEAD_PROXY}`);
+const boundaryFlagsOk =
+  argv.includes(`--host-resolver-rules=${HOST_RESOLVER_RULES}`) &&
+  argv.includes(`--proxy-server=${DEAD_PROXY}`);
+if (!boundaryFlagsOk) hardFail("arena boundary flags present", "required launch flags absent from effective argv");
+record("arena boundary flags present", true, "host resolver and dead proxy present in effective argv");
 console.log("EFFECTIVE_CMDLINE " + JSON.stringify(redacted));
+
+// Check the *actual spawned process*, not merely the configuration object.
+// Log names only; never read out or print environment values.
+const browserEnvNames = readFileSync(`/proc/${pid}/environ`, "utf8")
+  .split("\0").filter(Boolean).map((entry) => entry.split("=", 1)[0]);
+const declaredEnvNames = new Set(Object.keys(launchOptions.env ?? {}));
+const unexpectedEnvNames = browserEnvNames.filter((key) => !declaredEnvNames.has(key));
+const environmentIsolated =
+  unexpectedEnvNames.length === 0 &&
+  !browserEnvNames.includes(CANARY_NAME) &&
+  !browserEnvNames.some((key) => /(?:^|_)(?:TOKEN|SECRET|PASSWORD|CREDENTIAL|API_KEY|PRIVATE_KEY)(?:$|_)/i.test(key));
+if (!environmentIsolated) {
+  hardFail("browser environment isolation", `unexpected variable names: ${unexpectedEnvNames.join(", ") || "(none)"}; synthetic canary present: ${browserEnvNames.includes(CANARY_NAME)}`);
+}
+record("browser environment isolation", true,
+  `only ${browserEnvNames.length} explicit allowlisted variables; synthetic canary and credential variables absent`);
 
 const context = await browser.newContext({ serviceWorkers: "block" });
 const page = await context.newPage();
@@ -220,8 +244,8 @@ try {
   record("sandbox status (chrome://sandbox)", true, text.slice(0, 400));
   await sandboxPage.close();
 } catch (error) {
-  record("sandbox status (chrome://sandbox)", true,
-    `chrome://sandbox not available in this build: ${String(error.message).split("\n")[0].slice(0, 160)}`);
+  console.log("NOT_TESTED sandbox status (chrome://sandbox): " +
+    String(error.message).split("\n")[0].slice(0, 160));
 }
 
 await context.close();

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Intrinsic Disclosure Width (`calc-size()`) — Design Spells</title>
+  <meta name="description" content="Expand a compact disclosure to its real max-content width plus breathing room. The fixed-width fallback stays usable where `calc-size()` is unavailable.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-153/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Intrinsic Disclosure Width (`calc-size()`) — Design Spells">
+  <meta property="og:description" content="Expand a compact disclosure to its real max-content width plus breathing room. The fixed-width fallback stays usable where `calc-size()` is unavailable.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-153/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-153</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-153 / Layout / Markup</p>
+    <h1>Intrinsic Disclosure Width (`calc-size()`)</h1>
+    <p class="lede">Expand a compact disclosure to its real max-content width plus breathing room. The fixed-width fallback stays usable where `calc-size()` is unavailable.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-153/">Open standalone demo ↗</a><a class="action" href="/download/ds-153.html" download="ds-153.html">Download runnable HTML ↓</a></div>
+      <p class='note'>Toggle the control to preview</p>
+      
+      <iframe title="Isolated demonstration: Intrinsic Disclosure Width (`calc-size()`)" src="/play/ds-153/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-153.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-153" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;intrinsic-demo&quot;&gt;
+  &lt;input class=&quot;sr-only intrinsic-toggle&quot; type=&quot;checkbox&quot; id=&quot;intrinsic-more&quot;&gt;
+  &lt;label class=&quot;intrinsic-pill&quot; for=&quot;intrinsic-more&quot;&gt;
+    &lt;span class=&quot;intrinsic-pill__icon&quot; aria-hidden=&quot;true&quot;&gt;＋&lt;/span&gt;
+    &lt;span&gt;Show intrinsic details&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.intrinsic-demo { inline-size: min(28rem, 100%); }
+.intrinsic-pill {
+  inline-size: 3rem;
+  max-inline-size: 100%;
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding-inline: .75rem;
+  overflow: clip;
+  white-space: nowrap;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: inline-size 320ms cubic-bezier(.16,1,.3,1);
+}
+.intrinsic-pill__icon { flex: 0 0 1.4rem; text-align: center; }
+.intrinsic-toggle:checked + .intrinsic-pill {
+  inline-size: min(18rem, 100%);
+}
+@supports (inline-size: calc-size(max-content, size + 2rem)) {
+  .intrinsic-toggle:checked + .intrinsic-pill {
+    inline-size: calc-size(max-content, size + 2rem);
+  }
+}
+.intrinsic-toggle:focus-visible + .intrinsic-pill {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intrinsic-pill { transition: none; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Progressive. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
+      <p class="note">Chromium 129+; Firefox and Safari do not support calc-size().</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+  <script src="/spell-copy.js" defer></script>
+</body>
+</html>

@@ -1,7 +1,8 @@
 # Per-spell verification provenance
 
 `README.md` remains canonical for authored spell HTML/CSS. `data/verification.json`
-is an optional evidence overlay keyed by the stable `ds-N` ID; it starts empty.
+is a sparse evidence overlay keyed by the stable `ds-N` ID. Only individually
+observed and documented spells receive entries.
 Missing entries retain `registry-estimate`, `not-individually-verified`, and
 `not-audited`. Never infer WCAG conformance from automated tests.
 

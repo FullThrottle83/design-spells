@@ -49,12 +49,13 @@ A browser test does not replace manual keyboard, zoom or screen-reader review.
 ## Snapped and scrollable states (ds-45 / ds-46)
 
 Ds-45's hosted/downloaded carousel is a labelled, keyboard-focusable scroll
-region; its snap targets and authored spotlight styles are unchanged. Verify a
+region; its snap targets are unchanged, while the authored query selector now
+matches the base rule's specificity. Verify a
 *change of highlighted card*, not just that an overflow box has nonzero size.
 
 Ds-46 provides a native, demo-only Fit content checkbox that changes the
-content conditions from overflowing to wrapped. The authored scroll-state CSS
-still determines whether the hint becomes visible; the fixture must change
+content conditions from overflowing to wrapped. The authored query selector
+was corrected to win the cascade and determines whether the hint becomes visible; the fixture must change
 actual scrollWidth/clientWidth as well as its rendered opacity. This is a
 visual scrollability example, not a fully implemented tabs component. Unsupported
 browsers retain native scrolling and readable content. Manual keyboard, zoom,

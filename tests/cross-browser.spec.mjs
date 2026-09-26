@@ -82,8 +82,10 @@ test("new gap-fill spells keep baseline/fallback behavior across engines", async
   await pill.focus();
   await page.keyboard.press("Enter");
   await expect(disclosure).toHaveAttribute("open", "");
-  const after = await pill.evaluate(el => el.getBoundingClientRect().width);
-  expect(after).toBeGreaterThan(before + 10);
+  // Width is transitioned; WebKit can report the pre-transition frame immediately
+  // after the native <details> state changes. Check the settled rendered width.
+  await expect.poll(() => pill.evaluate(el => el.getBoundingClientRect().width))
+    .toBeGreaterThan(before + 10);
 
   await page.goto("/play/ds-152/");
   const cell = page.getByRole("button", { name: "42" });

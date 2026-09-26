@@ -3,7 +3,7 @@ const ids=[111,93,134,30,55,69];
 const style=(el,p)=>el.evaluate((e,p)=>getComputedStyle(e)[p],p);
 const rect=el=>el.evaluate(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};});
 const settle=page=>page.waitForTimeout(350);
-test.beforeAll(async({browser,browserName})=>console.log(`Pilot 02: ${browserName} ${browser.version()}`));
+test.beforeAll(async({browser,browserName})=>console.log(`${process.env.CI ? "::notice::" : ""}Pilot 02: ${browserName} ${browser.version()}`));
 async function scrollDocument(root,selector,y){
  await root.locator(selector).first().evaluate((e,y)=>window.scrollTo(0,e.getBoundingClientRect().top+scrollY-y),y);
 }

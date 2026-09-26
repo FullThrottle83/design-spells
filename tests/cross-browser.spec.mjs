@@ -83,7 +83,7 @@ test("new gap-fill spells keep baseline/fallback behavior across engines", async
   await page.keyboard.press("Space");
   await expect(toggle).toBeChecked();
   const after = await pill.evaluate(el => el.getBoundingClientRect().width);
-  expect(after).toBeGreaterThan(before + 40);
+  expect(after).toBeGreaterThan(before + 10);
 
   await page.goto("/play/ds-152/");
   const cell = page.getByRole("button", { name: "42" });

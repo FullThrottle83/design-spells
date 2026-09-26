@@ -72,7 +72,7 @@ for (const motion of ["reduce", "no-preference"]) {
     if (browserName === "chromium" || supported) {
       await expect.poll(() => opacity(0), { message: "first snapped card should become opaque" }).toBeGreaterThan(0.95);
       await expect.poll(() => opacity(1)).toBeLessThan(0.65);
-      expect(await transform(0)).toBe("matrix(1, 0, 0, 1, 0, 0)");
+      await expect.poll(() => transform(0), { message: "first card must reach its settled full scale" }).toBe("matrix(1, 0, 0, 1, 0, 0)");
     } else {
       await expect.poll(() => opacity(0)).toBeLessThan(0.65);
       await expect.poll(() => opacity(1)).toBeLessThan(0.65);
@@ -83,7 +83,7 @@ for (const motion of ["reduce", "no-preference"]) {
     if (browserName === "chromium" || supported) {
       await expect.poll(() => opacity(1), { message: "second snapped card should become opaque" }).toBeGreaterThan(0.95);
       await expect.poll(() => opacity(0), { message: "first card should lose spotlight" }).toBeLessThan(0.65);
-      expect(await transform(1)).toBe("matrix(1, 0, 0, 1, 0, 0)");
+      await expect.poll(() => transform(1), { message: "second card must reach its settled full scale" }).toBe("matrix(1, 0, 0, 1, 0, 0)");
     } else {
       await expect.poll(() => opacity(1)).toBeLessThan(0.65);
       await expect(cards.nth(1)).toBeVisible();

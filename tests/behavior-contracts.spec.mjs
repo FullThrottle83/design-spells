@@ -4,7 +4,9 @@ import { test, expect } from "@playwright/test";
 test.use({ javaScriptEnabled: false, reducedMotion: "reduce" });
 
 test("manual toast has explicit native close and stays in the top layer until dismissed", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/play/ds-131/");
+  expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   const toast = page.locator("#auto-toast-1");
   await expect(page.locator("#auto-toast-1:popover-open")).toHaveCount(0);
   await page.getByRole("button", { name: "Show notification" }).click();

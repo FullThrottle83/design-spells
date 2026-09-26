@@ -21,3 +21,14 @@ Verification: check that all comparison routes have the exact same fixture
 markup, the effect side has the unchanged authored spell CSS, the baseline
 does not, and no scripts execute. Playwright additionally checks pseudo-
 element and background state changes on representative interactive spells.
+
+## Stage-specific native walkthroughs
+
+The hosted and downloaded demos for ds-8, ds-72, ds-125 and ds-145 now place
+scroll-triggered targets after a full-height introduction, with a native jump
+link and a tail runway. This makes the view-timeline state reachable rather
+than showing an animation already completed on load. The source and integration
+bundle remain unchanged. ds-35 exposes native light/dark controls using a
+preview-only scheme override; ds-9 has a plain reload link to replay the
+one-shot entrance; ds-143 tells visitors to use browser print preview rather
+than faking print CSS in screen media. No preview helper requires script.

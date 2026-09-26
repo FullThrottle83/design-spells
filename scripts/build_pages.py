@@ -21,6 +21,7 @@ PUBLIC = ROOT / "public"
 SITE_URL = "https://design-spells.hultsan20.workers.dev"
 VALID_ID = re.compile(r"ds-(?:[1-9]\d*|bonus)\Z")
 SCROLL_DEMOS = {"ds-17", "ds-36", "ds-43", "ds-47", "ds-65", "ds-126"}
+SCROLL_ENTRY_DEMOS = {"ds-8", "ds-72", "ds-125", "ds-145"}
 # A curated comparison, not a claim that all 150 CSS features have a
 # meaningful single-frame before/after state. Keep authored spell CSS intact.
 COMPARE_NOTES = {
@@ -62,6 +63,14 @@ def render_doc(spell: dict) -> str:
     )
     instruction = spell.get("previewAction", {}).get("hint", "")
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
+    if sid in SCROLL_ENTRY_DEMOS:
+        instruction_html += '<p class="note">This entry animation needs a scroll runway. Scroll inside the iframe or open the full-page demo, then move down to the effect. The spell CSS has not been accelerated.</p>'
+    elif sid == "ds-35":
+        instruction_html += '<p class="note">Use the native Light / Dark controls inside the demo to compare both color schemes without changing the spell CSS.</p>'
+    elif sid == "ds-9":
+        instruction_html += '<p class="note">This animation happens on page load. Use Replay in the standalone demo to reload it without JavaScript.</p>'
+    elif sid == "ds-143":
+        instruction_html += '<p class="note">Print styles are visible only in print media. Open the standalone demo, then use your browser’s Print preview (Ctrl+P or Cmd+P).</p>'
     download_note = '<p class="note">This cross-document transition also needs <a href="/download/ds-14-next.html" download="ds-14-next.html">page B (HTML) ↓</a>; save both files together.</p>' if sid == "ds-14" else ""
     effect_iframe = f'<iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin"></iframe>'
     if sid in COMPARE_NOTES:
@@ -170,6 +179,12 @@ def render_play(spell: dict, next_page: bool = False, baseline: bool = False) ->
         # as their integration bundles; it must not leak into other spells.
         css = "html { container-type: scroll-state; overflow: auto; }\n" + css
     raw_html = spell["previewHtml"] or spell["html"] or "<p>CSS-only example.</p>"
+    if sid == "ds-35":
+        # Preview-only scheme controls: keep the source CSS and integration bundle unchanged.
+        css += """
+html:has(#scheme-light:checked) { color-scheme: light; }
+html:has(#scheme-dark:checked) { color-scheme: dark; }
+"""
     hint = spell.get("previewAction", {}).get("hint", "")
     hint_html = f"<p class='demo-hint'>{esc(hint)}</p>" if hint else ""
     extra = ""
@@ -184,7 +199,27 @@ def render_play(spell: dict, next_page: bool = False, baseline: bool = False) ->
         extra = ('<div class="scroll-content"><h2>Scroll through the document</h2>'
                  '<p>Root-document scroll effects cannot be meaningfully tested in a tiny isolated card.</p></div>'
                  '<div class="scroll-content"><p>End of the scrolling demonstration.</p></div>')
-    stage = raw_html + extra if sid in SCROLL_DEMOS else f'<div class="stage">{raw_html}</div>'
+    if sid in SCROLL_ENTRY_DEMOS:
+        stage = (
+            '<section class="scroll-entry__intro">'
+            '<h1>Scroll to see this effect</h1>'
+            '<p>The target starts below the fold so its view timeline has room to run.</p>'
+            '<a href="#entry-effect">Jump to the effect ↓</a>'
+            '</section>'
+            f'<div class="stage scroll-entry__stage" id="entry-effect">{raw_html}</div>'
+            '<div class="scroll-entry__tail">Continue scrolling to finish the animation.</div>'
+        )
+    else:
+        stage = raw_html + extra if sid in SCROLL_DEMOS else f'<div class="stage">{raw_html}</div>'
+    if sid == "ds-35":
+        stage = (
+            '<fieldset class="demo-theme"><legend>Preview color scheme</legend>'
+            '<label><input type="radio" id="scheme-light" name="demo-scheme" checked> Light</label>'
+            '<label><input type="radio" id="scheme-dark" name="demo-scheme"> Dark</label>'
+            '</fieldset>' + stage
+        )
+    elif sid == "ds-9":
+        stage += '<p class="demo-replay"><a href="/play/ds-9/">Replay entrance animation ↻</a></p>'
     page_css = """
     *,*::before,*::after {box-sizing:border-box}
     html {scroll-behavior:smooth}
@@ -197,6 +232,16 @@ def render_play(spell: dict, next_page: bool = False, baseline: bool = False) ->
     .page-transition {padding:clamp(2rem,7vw,6rem);max-width:60rem;margin:auto}
     .page-transition a {display:inline-block;margin-top:2rem}
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
+    .scroll-entry__intro {min-block-size:100dvh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:2rem;background:var(--color-bg)}
+    .scroll-entry__intro h1 {font-size:clamp(1.5rem,5vw,2.5rem);margin:0}
+    .scroll-entry__intro p {max-width:46ch;margin:0;color:var(--color-text-muted)}
+    .scroll-entry__intro a {display:inline-flex;min-block-size:44px;align-items:center}
+    .scroll-entry__tail {min-block-size:65dvh;display:grid;place-items:center;padding:2rem}
+    .demo-theme {display:flex;flex-wrap:wrap;gap:1rem;align-items:center;border:0;margin:1rem;padding:.75rem 1rem}
+    .demo-theme legend {font-weight:650}
+    .demo-theme label {display:inline-flex;gap:.4rem;min-block-size:44px;align-items:center;cursor:pointer}
+    .demo-replay {padding:1rem;text-align:center}
+    .demo-replay a {display:inline-flex;min-block-size:44px;align-items:center}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     """
     return f"""<!doctype html>

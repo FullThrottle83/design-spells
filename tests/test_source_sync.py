@@ -1,5 +1,6 @@
 """Guard invariants for the canonical reference and its distributable skill."""
 
+import json
 import re
 import unittest
 from pathlib import Path
@@ -32,7 +33,8 @@ class SourceSyncTest(unittest.TestCase):
     def test_every_spell_has_balanced_stylesheet_braces(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         spells = parse_spells(readme)
-        self.assertEqual(len(spells), 150)
+        catalogue = json.loads((ROOT / "public" / "spells.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(spells), catalogue["total"])
         for spell in spells:
             with self.subTest(spell=spell["id"]):
                 self.assertEqual(

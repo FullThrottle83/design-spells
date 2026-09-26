@@ -14,6 +14,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 SERVER_PATH = ROOT / "mcp" / "server.mjs"
+CATALOGUE_PATH = ROOT / "public" / "spells.json"
 
 
 class McpServerTest(unittest.TestCase):
@@ -95,7 +96,8 @@ class McpServerTest(unittest.TestCase):
         self.assertIn("categories", data)
         self.assertIn("total", data)
         self.assertIn("supportAsOf", data)
-        self.assertEqual(data["total"], 150)
+        expected_total = json.loads(CATALOGUE_PATH.read_text(encoding="utf-8"))["total"]
+        self.assertEqual(data["total"], expected_total)
 
     def test_tool_search_spells(self):
         self.init_server()

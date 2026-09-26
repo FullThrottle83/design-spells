@@ -1,10 +1,15 @@
+import fs from "node:fs";
 import { test, expect } from "@playwright/test";
+
+const EXPECTED_TOTAL = JSON.parse(
+  fs.readFileSync(new URL("../public/spells.json", import.meta.url), "utf8"),
+).total;
 
 test.use({ javaScriptEnabled: false, reducedMotion: "reduce" });
 
-test("light catalogue keeps all 150 links usable without JavaScript or horizontal overflow", async ({ page }) => {
+test("light catalogue keeps every spell link usable without JavaScript or horizontal overflow", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".row__link")).toHaveCount(150);
+  await expect(page.locator(".row__link")).toHaveCount(EXPECTED_TOTAL);
   await expect(page.getByRole("link", { name: "Shimmer on primary buttons", exact: true })).toHaveAttribute("href", "/spells/ds-1/");
   for (const width of [320, 390, 768, 1280]) {
     await page.setViewportSize({ width, height: 900 });
@@ -67,6 +72,25 @@ test("baseline/effect comparison works without JS in both engines", async ({ pag
   const after = await (await request.get("/play/ds-2/")).text();
   expect(before).not.toContain("transform: scale(0.94)");
   expect(after).toContain("transform: scale(0.94)");
+});
+
+test("new gap-fill spells keep baseline/fallback behavior across engines", async ({ page }) => {
+  await page.goto("/play/ds-153/");
+  const disclosure = page.locator(".intrinsic-demo");
+  const pill = page.locator(".intrinsic-pill");
+  const before = await pill.evaluate(el => el.getBoundingClientRect().width);
+  await pill.focus();
+  await page.keyboard.press("Enter");
+  await expect(disclosure).toHaveAttribute("open", "");
+  // Width is transitioned; WebKit can report the pre-transition frame immediately
+  // after the native <details> state changes. Check the settled rendered width.
+  await expect.poll(() => pill.evaluate(el => el.getBoundingClientRect().width))
+    .toBeGreaterThan(before + 10);
+
+  await page.goto("/play/ds-152/");
+  const cell = page.getByRole("button", { name: "42" });
+  await cell.focus();
+  await expect(cell).toBeFocused();
 });
 
 test("native cross-document navigation works with scripts disabled", async ({ page }) => {

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Keyboard-Friendly Table Crosshair (`:has()`) — Design Spells</title>
+  <meta name="description" content="Highlight the active table row and column together without JavaScript. Pointer hover and keyboard focus use the same relational selectors, so the crosshair remains useful beyond a mouse-only demo.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-152/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Keyboard-Friendly Table Crosshair (`:has()`) — Design Spells">
+  <meta property="og:description" content="Highlight the active table row and column together without JavaScript. Pointer hover and keyboard focus use the same relational selectors, so the crosshair remains useful beyond a mouse-only demo.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-152/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-152</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-152 / Data / Markup</p>
+    <h1>Keyboard-Friendly Table Crosshair (`:has()`)</h1>
+    <p class="lede">Highlight the active table row and column together without JavaScript. Pointer hover and keyboard focus use the same relational selectors, so the crosshair remains useful beyond a mouse-only demo.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-152/">Open standalone demo ↗</a><a class="action" href="/download/ds-152.html" download="ds-152.html">Download runnable HTML ↓</a></div>
+      <p class='note'>Hover or focus to preview</p>
+      
+      <iframe title="Isolated demonstration: Keyboard-Friendly Table Crosshair (`:has()`)" src="/play/ds-152/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-152.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-152" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;table class=&quot;crosshair-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Region&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Q1&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Q2&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Q3&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;North&lt;/th&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;42&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;56&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;61&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;South&lt;/th&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;38&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;49&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;67&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;West&lt;/th&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;51&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;63&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;cell-value&quot;&gt;72&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.crosshair-table {
+  inline-size: min(34rem, 100%);
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.crosshair-table th,
+.crosshair-table td {
+  padding: .7rem;
+  border: 1px solid var(--color-border);
+  text-align: center;
+  transition: background-color 140ms ease;
+}
+.crosshair-table th { font-weight: 700; }
+.cell-value {
+  inline-size: 100%;
+  min-block-size: 44px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.crosshair-table tbody tr:has(.cell-value:hover, .cell-value:focus-visible) &gt; * {
+  background: var(--color-surface-offset);
+}
+.crosshair-table:has(td:nth-child(2) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(2),
+.crosshair-table:has(td:nth-child(3) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(3),
+.crosshair-table:has(td:nth-child(4) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(4) {
+  background: var(--color-surface-dynamic);
+}
+.cell-value:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .crosshair-table th,
+  .crosshair-table td { transition: none; }
+}</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+  <script src="/spell-copy.js" defer></script>
+</body>
+</html>

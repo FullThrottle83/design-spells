@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Breakpointless Switcher Layout — Design Spells</title>
+  <meta name="description" content="Switch from a horizontal card row to a vertical stack based on the component&#x27;s available inline size, with flex math instead of viewport media queries.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-154/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Breakpointless Switcher Layout — Design Spells">
+  <meta property="og:description" content="Switch from a horizontal card row to a vertical stack based on the component&#x27;s available inline size, with flex math instead of viewport media queries.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-154/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-154</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-154 / Layout / 0 JS</p>
+    <h1>Breakpointless Switcher Layout</h1>
+    <p class="lede">Switch from a horizontal card row to a vertical stack based on the component&#x27;s available inline size, with flex math instead of viewport media queries.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-154/">Open standalone demo ↗</a><a class="action" href="/download/ds-154.html" download="ds-154.html">Download runnable HTML ↓</a></div>
+      
+      
+      <iframe title="Isolated demonstration: Breakpointless Switcher Layout" src="/play/ds-154/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-154.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-154" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;section class=&quot;switcher&quot; aria-label=&quot;Service options&quot;&gt;
+  &lt;article&gt;&lt;strong&gt;Audit&lt;/strong&gt;&lt;span&gt;Find the bottlenecks.&lt;/span&gt;&lt;/article&gt;
+  &lt;article&gt;&lt;strong&gt;Build&lt;/strong&gt;&lt;span&gt;Ship the lean version.&lt;/span&gt;&lt;/article&gt;
+  &lt;article&gt;&lt;strong&gt;Improve&lt;/strong&gt;&lt;span&gt;Measure and iterate.&lt;/span&gt;&lt;/article&gt;
+&lt;/section&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.switcher {
+  --switcher-threshold: 34rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  inline-size: 100%;
+}
+.switcher &gt; * {
+  flex-grow: 1;
+  flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
+  min-inline-size: min(100%, 10rem);
+  display: grid;
+  gap: .35rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.switcher strong { font-size: 1.05rem; }
+.switcher span { color: var(--color-text-muted); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+  <script src="/spell-copy.js" defer></script>
+</body>
+</html>

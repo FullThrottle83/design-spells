@@ -321,6 +321,19 @@ class SpellInvariantTest(unittest.TestCase):
                     f"{spell['id']} status disagrees with {spell['browsers']}",
                 )
 
+    def test_gap_fill_spells_have_honest_feature_and_support_contracts(self):
+        by_id = {s["id"]: s for s in self.spells}
+        self.assertEqual(by_id["ds-152"]["featureKeys"], ["has"])
+        self.assertEqual(by_id["ds-152"]["status"], "baseline")
+        self.assertEqual(by_id["ds-153"]["featureKeys"], ["calc-size"])
+        self.assertEqual(by_id["ds-153"]["status"], "progressive")
+        self.assertEqual(by_id["ds-154"]["featureKeys"], ["baseline"])
+        self.assertEqual(by_id["ds-154"]["status"], "baseline")
+        self.assertEqual(by_id["ds-155"]["featureKeys"], ["round-math", "property"])
+        self.assertEqual(by_id["ds-155"]["status"], "baseline")
+        for sid in ("ds-152", "ds-153", "ds-155"):
+            self.assertIn("prefers-reduced-motion", by_id[sid]["css"])
+
     def test_categories_are_known_to_the_app(self):
         known = set(CAT_ORDER)
         used = {s["category"] for s in self.spells}

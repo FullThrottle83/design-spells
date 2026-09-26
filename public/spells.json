@@ -1718,14 +1718,14 @@
       "note": "",
       "description": "The active slide in a scroll-snap container gets full sharpness while siblings fade down.",
       "html": "",
-      "css": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
+      "css": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  .slide > article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"carousel\" style=\"max-width:20rem\"><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">01</article></div><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">02</article></div><div class=\"slide\"><article style=\"min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center\">03</article></div></div>",
-      "previewCss": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
+      "previewCss": ".carousel {\n  display: flex;\n  gap: var(--space-4);\n  overflow-x: auto;\n  scroll-snap-type: inline mandatory;\n  overscroll-behavior-x: contain;\n}\n\n.slide {\n  scroll-snap-align: center;\n  container-type: scroll-state;\n}\n\n.slide > article {\n  opacity: .58;\n  transform: scale(.96);\n  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1);\n}\n\n@container scroll-state(snapped: inline) {\n  .slide > article {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n",
       "featureKeys": [
         "scroll-state",
         "container"
@@ -1759,14 +1759,14 @@
       "note": "",
       "description": "Show edge fades, arrows, or “swipe me” hints only when the content is actually scrollable.",
       "html": "",
-      "css": ".tabs-wrap {\n  position: relative;\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.tabs-wrap .fade-hint {\n  opacity: 0;\n  transition: opacity 180ms ease;\n}\n\n@container scroll-state(scrollable: inline) {\n  .fade-hint { opacity: 1; }\n}\n",
+      "css": ".tabs-wrap {\n  position: relative;\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.tabs-wrap .fade-hint {\n  opacity: 0;\n  transition: opacity 180ms ease;\n}\n\n@container scroll-state(scrollable: inline) {\n  .tabs-wrap .fade-hint { opacity: 1; }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<div class=\"tabs-wrap\" style=\"max-width:20rem\"><div style=\"display:flex;gap:1rem;white-space:nowrap;padding-inline-end:3rem;min-width:44rem\"><span>Overview</span><span>Getting started</span><span>Pricing</span><span>Documentation</span><span>Changelog</span><span>Support</span><span>Community</span><span>Careers</span></div><div class=\"fade-hint\">→</div></div>",
-      "previewCss": ".tabs-wrap {\n  position: relative;\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.tabs-wrap .fade-hint {\n  opacity: 0;\n  transition: opacity 180ms ease;\n}\n\n@container scroll-state(scrollable: inline) {\n  .fade-hint { opacity: 1; }\n}\n",
+      "previewCss": ".tabs-wrap {\n  position: relative;\n  overflow-x: auto;\n  container-type: scroll-state;\n}\n\n.tabs-wrap .fade-hint {\n  opacity: 0;\n  transition: opacity 180ms ease;\n}\n\n@container scroll-state(scrollable: inline) {\n  .tabs-wrap .fade-hint { opacity: 1; }\n}\n",
       "featureKeys": [
         "scroll-state",
         "container"

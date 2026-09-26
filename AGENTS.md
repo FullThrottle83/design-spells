@@ -24,3 +24,11 @@ This is a Zero-JS repository. Only spells marked **"0 JS"** or **"Markup"** belo
 - **Minimal edits:** Make the smallest change necessary to solve the given task. Do not refactor or reorganize unrelated content.
 - **Referencing:** Always refer to spells by their stable number.
 - **Selection priority:** When selecting spells, follow the priority order: **Baseline → Newer → Progressive**.
+
+
+## Safe execution and handoff
+- Check worktree status and preserve other work. Confirm scripts, dependencies and CI from the repo before editing; read the affected README, generator, contract and tests. Verify uncertain APIs against installed versions or version-matched docs. Never weaken checks or validation to get a pass.
+- Stop after two unsuccessful repair cycles for one failure; report errors and remaining work instead of a third blind edit.
+- Do not enable auto-merge, remove `hold`, delete a branch or deploy without Jonas's separate explicit approval. Propose changes in a draft PR with `hold`; do not merge.
+- Never place personnummer or customer data in spells, code, prompts, fixtures, logs or PR text; use synthetic data.
+- Start the Swedish report with one sentence stating klart, delvis or blockerat and the next action Jonas needs, if any. Mark claims VERIFIERAT or ANTAGET; list exact checks, results and anything unverified.

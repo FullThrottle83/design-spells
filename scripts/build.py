@@ -831,6 +831,7 @@ def preview_action(css: str, html: str) -> dict:
             "scroll",
             "Scroll to preview",
         ),
+        (r"@container\s+(?:[\w-]+\s+)?scroll-state\s*\(", "scroll", "Scroll to preview"),
         (r"@container\s+[\w-]*\s*\(", "resize", "Drag the corner to resize"),
         (r"scroll-snap-type\s*:", "swipe", "Swipe to preview"),
         (r":target(?!-)", "activate-link", "Activate the link to preview"),

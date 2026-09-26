@@ -71,6 +71,15 @@ class StaticPagesTest(unittest.TestCase):
             (PUBLIC / "play" / "ds-1" / "index.html").read_text(encoding="utf-8"),
         )
 
+    def test_directional_scroll_demos_request_scroll_not_resize(self):
+        for sid in ("ds-43", "ds-47"):
+            with self.subTest(spell=sid):
+                spell = next(s for s in CATALOGUE["spells"] if s["id"] == sid)
+                self.assertEqual(spell["previewAction"]["kind"], "scroll")
+                doc = (PUBLIC / "spells" / sid / "index.html").read_text(encoding="utf-8")
+                self.assertIn("Scroll to preview", doc)
+                self.assertNotIn("Drag the corner to resize", doc)
+
     def test_view_transition_uses_two_real_documents(self):
         first = (PUBLIC / "play" / "ds-14" / "index.html").read_text(encoding="utf-8")
         second = (PUBLIC / "play" / "ds-14" / "next" / "index.html").read_text(encoding="utf-8")

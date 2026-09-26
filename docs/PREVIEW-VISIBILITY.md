@@ -21,3 +21,6 @@ Verification: check that all comparison routes have the exact same fixture
 markup, the effect side has the unchanged authored spell CSS, the baseline
 does not, and no scripts execute. Playwright additionally checks pseudo-
 element and background state changes on representative interactive spells.
+
+Behavior claims, reduced-motion decisions and production boundaries are tracked
+in [BEHAVIOR-CONTRACTS.md](BEHAVIOR-CONTRACTS.md).

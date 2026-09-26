@@ -58,23 +58,13 @@ const originalCanary = process.env[CANARY_NAME];
 process.env[CANARY_NAME] = "synthetic-only-do-not-forward";
 const launchOptions = await arenaLaunchOptions(); // sandbox first, as configured
 let browser;
-let fellBackToUnsandboxed = false;
+const fellBackToUnsandboxed = false; // never downgrade the required sandbox
 try {
   browser = await chromium.launch(launchOptions);
   record("launch (chromiumSandbox: true)", true, `executablePath=${launchOptions.executablePath}`);
 } catch (sandboxError) {
-  record(
-    "launch (chromiumSandbox: true)",
-    false,
-    String(sandboxError.message).split("\n")[0]?.slice(0, 300),
-  );
-  fellBackToUnsandboxed = true;
-  browser = await chromium.launch({ ...launchOptions, chromiumSandbox: false });
-  record(
-    "launch (chromiumSandbox: false fallback)",
-    true,
-    "Unsandboxed fallback permitted only for trusted local loopback fixtures.",
-  );
+  hardFail("launch (chromiumSandbox: true)",
+    String(sandboxError.message).split("\n")[0]?.slice(0, 300));
 }
 if (originalCanary === undefined) delete process.env[CANARY_NAME];
 else process.env[CANARY_NAME] = originalCanary;

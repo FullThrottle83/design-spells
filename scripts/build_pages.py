@@ -184,7 +184,20 @@ def render_play(spell: dict, next_page: bool = False, baseline: bool = False) ->
         css += """
 html:has(#scheme-light:checked) { color-scheme: light; }
 html:has(#scheme-dark:checked) { color-scheme: dark; }
+.demo-theme {display:flex;flex-wrap:wrap;gap:1rem;align-items:center;border:0;margin:1rem;padding:.75rem 1rem}
+.demo-theme legend {font-weight:650}
+.demo-theme label {display:inline-flex;gap:.4rem;min-block-size:44px;align-items:center;cursor:pointer}
 """
+    elif sid in SCROLL_ENTRY_DEMOS:
+        css += """
+.scroll-entry__intro {min-block-size:100dvh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:2rem;background:var(--color-bg)}
+.scroll-entry__intro h1 {font-size:clamp(1.5rem,5vw,2.5rem);margin:0}
+.scroll-entry__intro p {max-width:46ch;margin:0;color:var(--color-text-muted)}
+.scroll-entry__intro a {display:inline-flex;min-block-size:44px;align-items:center}
+.scroll-entry__tail {min-block-size:65dvh;display:grid;place-items:center;padding:2rem}
+"""
+    elif sid == "ds-9":
+        css += ".demo-replay {padding:1rem;text-align:center}\n.demo-replay a {display:inline-flex;min-block-size:44px;align-items:center}\n"
     hint = spell.get("previewAction", {}).get("hint", "")
     hint_html = f"<p class='demo-hint'>{esc(hint)}</p>" if hint else ""
     extra = ""
@@ -232,16 +245,6 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
     .page-transition {padding:clamp(2rem,7vw,6rem);max-width:60rem;margin:auto}
     .page-transition a {display:inline-block;margin-top:2rem}
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
-    .scroll-entry__intro {min-block-size:100dvh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:2rem;background:var(--color-bg)}
-    .scroll-entry__intro h1 {font-size:clamp(1.5rem,5vw,2.5rem);margin:0}
-    .scroll-entry__intro p {max-width:46ch;margin:0;color:var(--color-text-muted)}
-    .scroll-entry__intro a {display:inline-flex;min-block-size:44px;align-items:center}
-    .scroll-entry__tail {min-block-size:65dvh;display:grid;place-items:center;padding:2rem}
-    .demo-theme {display:flex;flex-wrap:wrap;gap:1rem;align-items:center;border:0;margin:1rem;padding:.75rem 1rem}
-    .demo-theme legend {font-weight:650}
-    .demo-theme label {display:inline-flex;gap:.4rem;min-block-size:44px;align-items:center;cursor:pointer}
-    .demo-replay {padding:1rem;text-align:center}
-    .demo-replay a {display:inline-flex;min-block-size:44px;align-items:center}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     """
     return f"""<!doctype html>

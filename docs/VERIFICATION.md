@@ -21,3 +21,18 @@ Attach only evidence actually inspected. Do not infer broad support or WCAG
 conformance from syntax checks, geometry or one browser. Run `npm run build`,
 `npm test` and the Firefox/WebKit suite before merging; when evidence changes
 generated assets, commit them alongside the source.
+
+## First scoped observations — 26 September 2026
+
+Ds-44, ds-45 and ds-46 now have dated, browser-versioned evidence linked to
+the relevant successful GitHub Actions runs. Their `behavior: browser-tested`
+status covers only the named rendered state transitions in Chromium and their
+documented native fallbacks in Firefox/WebKit. It does **not** upgrade the
+curated support estimate, imply support for every scroll-state descriptor, or
+claim WCAG conformance. All other spells remain individually unverified.
+
+The browser tests ran with scripts disabled. Ds-45 and ds-46 were checked under
+both normal and reduced-motion preferences, but their authored transitions
+still run in the reduced setting and need a separate motion/accessibility
+decision. NVDA/VoiceOver, full keyboard workflows, zoom/reflow and visual
+contrast are not audited by these entries.

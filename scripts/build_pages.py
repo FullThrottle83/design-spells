@@ -56,7 +56,7 @@ def render_doc(spell: dict) -> str:
     example_html = esc(authored_html or spell["previewHtml"].strip())
     fixture_note = (
         "<p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>"
-        if not authored_html else ("<!-- Canonical authored markup. -->" if sid in {"ds-48", "ds-49", "ds-50", "ds-79", "ds-89", "ds-142"} else "")
+        if not authored_html else ("<!-- Canonical authored markup. -->" if sid in {"ds-48", "ds-49", "ds-50", "ds-79", "ds-89", "ds-142", "ds-66", "ds-75", "ds-77", "ds-106"} else "")
     )
     support = "".join(
         f"<li><strong>{name}</strong><span>{esc(spell['browsers'][key])}</span></li>"

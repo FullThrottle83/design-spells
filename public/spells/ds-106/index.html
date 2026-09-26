@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Light-Dismiss Confirm Dialog (`closedby=&quot;any&quot;`) — Design Spells</title>
-  <meta name="description" content="A confirm dialog that closes on Escape *and* backdrop click. Opened with `command=&quot;show-modal&quot;`. `closedby=&quot;closerequest&quot;` is Escape-only; `&quot;none&quot;` requires an explicit close button.">
+  <meta name="description" content="A confirm dialog that closes on Escape *and* backdrop click. Opened with `command=&quot;show-modal&quot;`. `closedby=&quot;closerequest&quot;` is Escape-only; `&quot;none&quot;` requires an explicit close button. The demonstration confirms nothing destructive: it teaches the three dismissal paths, and every button only closes the dialog. Reduced motion keeps the open final state without the scale transition.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-106/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Light-Dismiss Confirm Dialog (`closedby=&quot;any&quot;`) — Design Spells">
-  <meta property="og:description" content="A confirm dialog that closes on Escape *and* backdrop click. Opened with `command=&quot;show-modal&quot;`. `closedby=&quot;closerequest&quot;` is Escape-only; `&quot;none&quot;` requires an explicit close button.">
+  <meta property="og:description" content="A confirm dialog that closes on Escape *and* backdrop click. Opened with `command=&quot;show-modal&quot;`. `closedby=&quot;closerequest&quot;` is Escape-only; `&quot;none&quot;` requires an explicit close button. The demonstration confirms nothing destructive: it teaches the three dismissal paths, and every button only closes the dialog. Reduced motion keeps the open final state without the scale transition.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-106/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-106 / Overlays / Markup</p>
     <h1>Light-Dismiss Confirm Dialog (`closedby=&quot;any&quot;`)</h1>
-    <p class="lede">A confirm dialog that closes on Escape *and* backdrop click. Opened with `command=&quot;show-modal&quot;`. `closedby=&quot;closerequest&quot;` is Escape-only; `&quot;none&quot;` requires an explicit close button.</p>
+    <p class="lede">A confirm dialog that closes on Escape *and* backdrop click. Opened with `command=&quot;show-modal&quot;`. `closedby=&quot;closerequest&quot;` is Escape-only; `&quot;none&quot;` requires an explicit close button. The demonstration confirms nothing destructive: it teaches the three dismissal paths, and every button only closes the dialog. Reduced motion keeps the open final state without the scale transition.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-106/">Open standalone demo ↗</a><a class="action" href="/download/ds-106.html" download="ds-106.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Open the dialog and try all three closings: the Close dialog button, Escape and a backdrop click. Each one only closes the dialog — nothing is sent or saved.</p>
       
       <iframe title="Isolated demonstration: Light-Dismiss Confirm Dialog (`closedby=&quot;any&quot;`)" src="/play/ds-106/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -40,22 +40,30 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;button class=&quot;btn&quot; commandfor=&quot;confirm-delete&quot; command=&quot;show-modal&quot;&gt;Delete customer&lt;/button&gt;
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;button type=&quot;button&quot; commandfor=&quot;close-options&quot; command=&quot;show-modal&quot;&gt;How does this dialog close?&lt;/button&gt;
 
-&lt;dialog id=&quot;confirm-delete&quot; class=&quot;confirm&quot; closedby=&quot;any&quot;&gt;
-  &lt;h2&gt;Delete customer?&lt;/h2&gt;
-  &lt;p&gt;This cannot be undone.&lt;/p&gt;
-  &lt;div class=&quot;confirm-actions&quot;&gt;
-    &lt;button class=&quot;btn ghost&quot; commandfor=&quot;confirm-delete&quot; command=&quot;close&quot;&gt;Cancel&lt;/button&gt;
-    &lt;button class=&quot;btn danger&quot; commandfor=&quot;confirm-delete&quot; command=&quot;close&quot;&gt;Delete&lt;/button&gt;
-  &lt;/div&gt;
+&lt;dialog id=&quot;close-options&quot; class=&quot;confirm&quot; closedby=&quot;any&quot; aria-labelledby=&quot;close-options-title&quot;&gt;
+  &lt;h2 id=&quot;close-options-title&quot;&gt;Three ways to close&lt;/h2&gt;
+  &lt;p&gt;This native dialog dismisses three ways. Try each of them — nothing is sent or saved.&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Choose &lt;strong&gt;Close dialog&lt;/strong&gt; below.&lt;/li&gt;
+    &lt;li&gt;Press &lt;kbd&gt;Escape&lt;/kbd&gt;.&lt;/li&gt;
+    &lt;li&gt;Select the dimmed backdrop around this card.&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;p class=&quot;confirm-note&quot;&gt;Without &lt;code&gt;closedby&lt;/code&gt; support the backdrop click does nothing; the close controls and Escape still work.&lt;/p&gt;
+  &lt;form method=&quot;dialog&quot; class=&quot;confirm-actions&quot;&gt;
+    &lt;button type=&quot;submit&quot; value=&quot;stay&quot;&gt;Keep reading&lt;/button&gt;
+    &lt;button type=&quot;submit&quot; value=&quot;close&quot; autofocus&gt;Close dialog&lt;/button&gt;
+  &lt;/form&gt;
 &lt;/dialog&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.confirm {
   margin: auto; border: 0; padding: var(--space-6);
-  max-inline-size: 28rem; border-radius: var(--radius-lg);
-  background: var(--color-bg);
+  max-inline-size: min(28rem, calc(100vw - 2rem));
+  max-block-size: min(88dvh, 40rem); overflow: auto;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg); color: var(--color-text);
   box-shadow: 0 24px 60px oklch(0 0 0 / .22);
   opacity: 0; transform: scale(.96);
   transition: opacity 220ms cubic-bezier(.16,1,.3,1), transform 220ms cubic-bezier(.16,1,.3,1),
@@ -63,9 +71,27 @@
 }
 .confirm[open], .confirm:open { opacity: 1; transform: none; }
 @starting-style { .confirm[open], .confirm:open { opacity: 0; transform: scale(.96); } }
-.confirm-actions { display: flex; justify-content: end; gap: var(--space-3); margin-block-start: var(--space-5); }
-.confirm-actions .btn, .btn { min-block-size: 44px; }
-.btn.danger { background: var(--color-error); color: white; }</code></pre>
+.confirm::backdrop {
+  background: oklch(0 0 0 / .45);
+  opacity: 0;
+  transition: opacity 220ms ease, display 220ms allow-discrete, overlay 220ms allow-discrete;
+}
+.confirm[open]::backdrop, .confirm:open::backdrop { opacity: 1; }
+@starting-style { .confirm[open]::backdrop, .confirm:open::backdrop { opacity: 0; } }
+.confirm h2 { margin: 0 0 var(--space-2); }
+.confirm &gt; p { margin: 0 0 var(--space-3); }
+.confirm ol { margin: 0 0 var(--space-4); padding-inline-start: 1.25rem; display: grid; gap: .4rem; }
+.confirm kbd {
+  padding: .1rem .4rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); background: var(--color-surface-offset); font-size: .85em;
+}
+.confirm-note { color: var(--color-text-muted); font-size: .85rem; }
+.confirm-actions { display: flex; justify-content: end; gap: var(--space-3); margin-block-start: var(--space-5); flex-wrap: wrap; }
+.confirm-actions button { min-block-size: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  .confirm { transition: none; transform: none; }
+  .confirm::backdrop { transition: none; }
+}</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

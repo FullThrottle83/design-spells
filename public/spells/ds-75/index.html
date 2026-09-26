@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Native Modal Image Zoom (`popovertarget`) — Design Spells</title>
-  <meta name="description" content="Click an image to enlarge it to a fullscreen view with a native `popover` — no heavy lightbox library.">
+  <title>Native Image Zoom (`popovertarget`) — Design Spells</title>
+  <meta name="description" content="Select an image to enlarge it in a native `popover` — no lightbox library. The trigger and the enlarged view share one image; the enlargement keeps its intrinsic aspect ratio and stays inside the viewport, with a visible close control alongside native Escape and light-dismiss. An `auto` popover is not modal: the page behind stays interactive, so no focus trapping is claimed. Reduced motion keeps the enlarged final state without the scale transition.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-75/">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Native Modal Image Zoom (`popovertarget`) — Design Spells">
-  <meta property="og:description" content="Click an image to enlarge it to a fullscreen view with a native `popover` — no heavy lightbox library.">
+  <meta property="og:title" content="Native Image Zoom (`popovertarget`) — Design Spells">
+  <meta property="og:description" content="Select an image to enlarge it in a native `popover` — no lightbox library. The trigger and the enlarged view share one image; the enlargement keeps its intrinsic aspect ratio and stays inside the viewport, with a visible close control alongside native Escape and light-dismiss. An `auto` popover is not modal: the page behind stays interactive, so no focus trapping is claimed. Reduced motion keeps the enlarged final state without the scale transition.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-75/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -22,14 +22,14 @@
   </header>
   <main id="main" class="shell">
     <p class="eyebrow">ds-75 / Reveal &amp; motion / Markup</p>
-    <h1>Native Modal Image Zoom (`popovertarget`)</h1>
-    <p class="lede">Click an image to enlarge it to a fullscreen view with a native `popover` — no heavy lightbox library.</p>
+    <h1>Native Image Zoom (`popovertarget`)</h1>
+    <p class="lede">Select an image to enlarge it in a native `popover` — no lightbox library. The trigger and the enlarged view share one image; the enlargement keeps its intrinsic aspect ratio and stays inside the viewport, with a visible close control alongside native Escape and light-dismiss. An `auto` popover is not modal: the page behind stays interactive, so no focus trapping is claimed. Reduced motion keeps the enlarged final state without the scale transition.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-75/">Open standalone demo ↗</a><a class="action" href="/download/ds-75.html" download="ds-75.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Select the harbour image with pointer or keyboard to enlarge it. Escape, a backdrop click or Close returns to the article.</p>
       
-      <iframe title="Isolated demonstration: Native Modal Image Zoom (`popovertarget`)" src="/play/ds-75/" loading="lazy" sandbox="allow-same-origin"></iframe>
+      <iframe title="Isolated demonstration: Native Image Zoom (`popovertarget`)" src="/play/ds-75/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
@@ -40,30 +40,42 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;button commandfor=&quot;img-modal-1&quot; command=&quot;toggle-popover&quot; class=&quot;img-trigger&quot;&gt;
-  &lt;img src=&quot;/photo-thumb.jpg&quot; alt=&quot;Enlarge image&quot;&gt;
-&lt;/button&gt;
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;figure class=&quot;zoom-figure&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;img-trigger&quot; popovertarget=&quot;img-modal-1&quot; aria-label=&quot;Enlarge: harbour at dusk&quot;&gt;
+    &lt;img src=&quot;/photo-thumb.jpg&quot; alt=&quot;Harbour at dusk&quot; width=&quot;640&quot; height=&quot;800&quot;&gt;
+  &lt;/button&gt;
+  &lt;figcaption&gt;Harbour at dusk · Select the image to enlarge it.&lt;/figcaption&gt;
+&lt;/figure&gt;
 
-&lt;div id=&quot;img-modal-1&quot; popover class=&quot;lightbox-popover&quot;&gt;
-  &lt;img src=&quot;/photo-full.jpg&quot; alt=&quot;Enlarged image&quot;&gt;
+&lt;div id=&quot;img-modal-1&quot; class=&quot;lightbox-popover&quot; popover=&quot;auto&quot;&gt;
+  &lt;figure&gt;
+    &lt;img src=&quot;/photo-full.jpg&quot; alt=&quot;Harbour at dusk, enlarged view&quot; width=&quot;1200&quot; height=&quot;1500&quot;&gt;
+    &lt;figcaption&gt;Harbour at dusk · Press Escape or choose Close.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;button type=&quot;button&quot; class=&quot;lightbox-close&quot; popovertarget=&quot;img-modal-1&quot; popovertargetaction=&quot;hide&quot;&gt;Close&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.img-trigger {
+      <pre tabindex="0"><code>.zoom-figure { margin: 0; display: grid; gap: var(--space-2); justify-items: start; }
+.zoom-figure figcaption { color: var(--color-text-muted); font-size: .85rem; }
+.img-trigger {
   display: block; padding: 0; border: 0; background: none; cursor: pointer;
   min-block-size: 44px; min-inline-size: 44px;
 }
-.img-trigger img { display: block; inline-size: 100%; }
+.img-trigger img { display: block; inline-size: 100%; block-size: auto; }
+.img-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .lightbox-popover {
   margin: auto;
-  padding: 0;
+  padding: var(--space-4);
   border: none;
   background: transparent;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-inline-size: 94vw;
+  max-block-size: 92dvh;
+  overflow: auto;
   opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), display 250ms allow-discrete;
+  transform: scale(0.94);
+  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              display 250ms allow-discrete, overlay 250ms allow-discrete;
 }
 
 .lightbox-popover:popover-open {
@@ -74,8 +86,39 @@
 @starting-style {
   .lightbox-popover:popover-open {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.94);
   }
+}
+
+.lightbox-popover::backdrop {
+  background: oklch(0 0 0 / .62);
+  opacity: 0;
+  transition: opacity 250ms ease, display 250ms allow-discrete, overlay 250ms allow-discrete;
+}
+.lightbox-popover:popover-open::backdrop { opacity: 1; }
+@starting-style { .lightbox-popover:popover-open::backdrop { opacity: 0; } }
+
+.lightbox-popover figure { margin: 0; display: grid; gap: var(--space-2); justify-items: center; }
+.lightbox-popover img {
+  display: block; inline-size: auto; block-size: auto;
+  max-inline-size: min(88vw, 60rem); max-block-size: 76dvh;
+  border-radius: var(--radius-md);
+}
+.lightbox-popover figcaption {
+  color: oklch(1 0 0 / .92); font-size: .85rem;
+  background: oklch(0 0 0 / .55); padding: .3rem .9rem; border-radius: 999px;
+}
+.lightbox-close {
+  position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+  min-block-size: 44px; min-inline-size: 44px; cursor: pointer;
+  border: 1px solid oklch(1 0 0 / .35); border-radius: 999px;
+  background: oklch(0 0 0 / .55); color: white;
+}
+.lightbox-close:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-popover { transition: none; transform: none; }
+  .lightbox-popover::backdrop { transition: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">
@@ -83,7 +126,7 @@
       <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
       <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
-      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.</p>
+      <p class="note">@starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

@@ -118,20 +118,109 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.map-container { position: relative; inline-size: 100%; block-size: 24rem; background: var(--color-surface-offset); }
-.map-pin { position: absolute; anchor-name: --pin-1; min-block-size: 44px; min-inline-size: 44px; border: 0; background: none; font-size: 1.5rem; cursor: pointer; }
-.pin-pop {
-  margin: 0; inset: auto; position-anchor: --pin-1; position-area: top;
-  position-try-options: flip-block, flip-inline; padding: var(--space-2) var(--space-3);
-  background: var(--color-bg); border-radius: var(--radius-sm); border: 1px solid var(--color-border);
+.map-figure { margin: 0; }
+.map-container {
+  position: relative; inline-size: 100%; block-size: clamp(18rem, 46vw, 26rem);
+  background: var(--color-surface-offset);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
 }
+.map-stop {
+  position: absolute; inset-block-start: var(--pin-y); inset-inline-start: var(--pin-x);
+  margin: -22px 0 0 -22px;
+  anchor-name: var(--pin-anchor);
+}
+.map-pin {
+  display: grid; place-items: center;
+  inline-size: 44px; block-size: 44px;
+  border: 0; background: none; cursor: pointer;
+}
+.map-pin span {
+  display: grid; place-items: center; inline-size: 30px; block-size: 30px;
+  border-radius: 50% 50% 50% 0; rotate: -45deg;
+  background: var(--color-primary); color: var(--color-text-inverse);
+  box-shadow: 0 6px 14px oklch(0 0 0 / .28);
+  transition: scale 160ms cubic-bezier(.16,1,.3,1), background 160ms ease;
+}
+.map-pin i { rotate: 45deg; font-style: normal; font: 700 12px/1 ui-monospace, monospace; }
+.map-pin:hover span, .map-pin:focus-visible span { scale: 1.12; }
+.map-pin:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 50%; }
+.pin-pop {
+  padding: var(--space-3) var(--space-4);
+  gap: 2px; min-inline-size: 12rem; max-inline-size: min(86vw, 20rem);
+  background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px oklch(0 0 0 / .18);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),
+              display 180ms allow-discrete, overlay 180ms allow-discrete;
+}
+.pin-pop:popover-open { display: grid; opacity: 1; transform: translateY(0); }
+@starting-style { .pin-pop:popover-open { opacity: 0; transform: translateY(6px); } }
+.pin-pop strong { font-size: 1rem; }
+.pin-pop > span { color: var(--color-text-muted); font-size: .85rem; }
+.pin-link { display: inline-flex; align-items: center; min-block-size: 32px; font-size: .85rem; }
+.pin-close {
+  position: absolute; top: var(--space-1); right: var(--space-1);
+  inline-size: 32px; block-size: 32px;
+  border: 0; background: none; cursor: pointer;
+  color: var(--color-text-muted); font-size: 18px; line-height: 1; border-radius: var(--radius-sm);
+}
+.pin-close:hover, .pin-close:focus-visible { background: var(--color-surface-offset); color: var(--color-text); }
+.map-key ul {
+  list-style: none; margin: var(--space-3) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4);
+  font-size: .85rem; color: var(--color-text-muted);
+}
+.map-key li { display: flex; align-items: center; gap: .45rem; }
+.map-key span {
+  display: inline-grid; place-items: center; inline-size: 18px; block-size: 18px;
+  border-radius: 50%; background: var(--color-primary); color: var(--color-text-inverse);
+  font: 700 10px ui-monospace, monospace;
+}
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@supports (bottom: anchor(top)) {
+  .pin-pop {
+    inset: auto; margin: 0; margin-block-end: var(--space-2);
+    position-anchor: var(--pin-anchor);
+    bottom: anchor(var(--pin-anchor) top); left: anchor(var(--pin-anchor) center);
+    translate: -50% 0;
+    position-try-fallbacks: flip-block;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-pop { transition: none; transform: none; }
+  .map-pin span { transition: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.atlas-scene{width:100%;padding:clamp(22px,5vw,56px);background:light-dark(#e9ede4,#141a18);border-radius:28px;--color-primary:light-dark(#c75135,#eb9075);--color-text:light-dark(#1c2422,#eef4ee);--color-text-muted:light-dark(#5f6d65,#9db2a7);--color-border:light-dark(#ccd4c6,#2a3531);--color-bg:light-dark(#fffdf6,#18211e);--color-surface-offset:light-dark(#efece1,#222c28);--color-accent:light-dark(#1f4b43,#9ed5c4);--color-text-inverse:#fffdf6}
+.atlas-head{margin-bottom:22px}
+.atlas-head h1{max-width:16ch;margin-bottom:8px}
+.atlas-head p:last-child{max-width:52ch;color:var(--color-text-muted)}
+.atlas-scene .map-container{block-size:clamp(20rem,44vw,28rem);border-radius:20px;border-color:light-dark(#b9c4b2,#33413c)}
+.atlas-scene .map-art{position:absolute;inset:0;inline-size:100%;block-size:100%}
+.atlas-scene .map-key ul{gap:var(--space-2) var(--space-5);font-size:13px}
+.atlas-notes{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.atlas-notes section{padding:20px 22px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:16px;scroll-margin-block:20px}
+.atlas-notes .scene-kicker{color:light-dark(#c75135,#eb9075)}
+.atlas-notes h2{font:400 21px/1.2 Georgia,serif;margin:6px 0 8px}
+.atlas-notes p{font-size:13px;color:var(--color-text-muted);margin:0}
+@media(max-width:760px){.atlas-notes{grid-template-columns:1fr}.atlas-head h1{font-size:38px}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="map-container">
-  <button id="pin-1" commandfor="pop-pin-1" command="toggle-popover" class="map-pin" style="top: 30%; left: 40%;">📍</button>
-  <div id="pop-pin-1" popover="auto" class="pin-pop">London HQ</div>
-</div></div>
-  <p class='demo-hint'>Activate the control to preview</p>
+  <div class="stage"><div class="showcase"><main class="atlas-scene"><header class="atlas-head"><p class="scene-kicker">Fieldline atlas / Four studios</p><h1>Where the work happens.</h1><p>Four small studios, one shared practice. Activate a numbered pin for its details, or read the key below the map.</p></header><figure class="map-figure"><div class="map-container" role="group" aria-label="Illustrated studio map with four locations"><svg class="map-art" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="1000" height="560" fill="#cfdcd2"/><path d="M0 0h1000v560H0z" fill="none"/><path d="M-20 420q140-70 260-30t240 10 260-60 280-20v260H-20Z" fill="#b9cdbd"/><path d="M120 120q90-60 200-30t150 110q-40 90-160 100T120 240Z" fill="#e6e2cf"/><path d="M560 60q120-40 220 20t90 150q-60 80-180 70T540 190Z" fill="#efe9d6"/><path d="M170 150q70-40 150-16t110 86q-34 62-120 70T170 210Z" fill="none" stroke="#a8b79f" stroke-width="2"/><path d="M205 175q50-26 105-10t75 58q-26 42-84 48t-96-40Z" fill="none" stroke="#a8b79f" stroke-width="2"/><path d="M610 100q80-26 150 14t60 100q-42 52-120 46t-100-70Z" fill="none" stroke="#b3ac93" stroke-width="2"/><path d="M640 130q55-16 100 10t40 66q-30 34-82 30t-68-48Z" fill="none" stroke="#b3ac93" stroke-width="2"/><path d="M420 300q60 40 90 110t40 150" fill="none" stroke="#8fb0c4" stroke-width="7" stroke-linecap="round"/><path d="M700 330q-30 60-20 120t50 110" fill="none" stroke="#8fb0c4" stroke-width="5" stroke-linecap="round"/><g stroke="#7d9683" stroke-width="2" fill="none"><path d="M300 430l10-18 10 18Z"/><path d="M330 452l10-18 10 18Z"/><path d="M270 460l10-18 10 18Z"/><path d="M760 180l10-18 10 18Z"/><path d="M790 205l10-18 10 18Z"/><path d="M735 210l10-18 10 18Z"/></g><g stroke="#ffffff" stroke-opacity=".5" stroke-width="1"><path d="M0 140h1000M0 280h1000M0 420h1000M200 0v560M400 0v560M600 0v560M800 0v560"/></g><g stroke="#5f7268" stroke-width="2" fill="none"><circle cx="905" cy="80" r="30"/><path d="M905 42v76M867 80h76"/><path d="M905 58l10 22-10 22-10-22Z" fill="#5f7268"/></g></svg><div class="map-stop" style="--pin-anchor: --pin-1; --pin-x: 22%; --pin-y: 46%;"><button class="map-pin" commandfor="pop-pin-1" command="toggle-popover" aria-label="Location 1, Harbour Point, Lisbon"><span aria-hidden="true"><i>1</i></span></button><div id="pop-pin-1" popover="auto" class="pin-pop"><strong>Harbour Point</strong><span>Lisbon · 14 people · UTC+1</span><a class="pin-link" href="#note-1">Studio notes →</a><button class="pin-close" commandfor="pop-pin-1" command="hide-popover" aria-label="Close Harbour Point notes">×</button></div></div><div class="map-stop" style="--pin-anchor: --pin-2; --pin-x: 58%; --pin-y: 22%;"><button class="map-pin" commandfor="pop-pin-2" command="toggle-popover" aria-label="Location 2, Kiln Yard, Porto"><span aria-hidden="true"><i>2</i></span></button><div id="pop-pin-2" popover="auto" class="pin-pop"><strong>Kiln Yard</strong><span>Porto · 6 people · UTC+1</span><a class="pin-link" href="#note-2">Studio notes →</a><button class="pin-close" commandfor="pop-pin-2" command="hide-popover" aria-label="Close Kiln Yard notes">×</button></div></div><div class="map-stop" style="--pin-anchor: --pin-3; --pin-x: 76%; --pin-y: 66%;"><button class="map-pin" commandfor="pop-pin-3" command="toggle-popover" aria-label="Location 3, North Light, Tromsø"><span aria-hidden="true"><i>3</i></span></button><div id="pop-pin-3" popover="auto" class="pin-pop"><strong>North Light</strong><span>Tromsø · 3 people · UTC+2</span><a class="pin-link" href="#note-3">Studio notes →</a><button class="pin-close" commandfor="pop-pin-3" command="hide-popover" aria-label="Close North Light notes">×</button></div></div><div class="map-stop" style="--pin-anchor: --pin-4; --pin-x: 40%; --pin-y: 80%;"><button class="map-pin" commandfor="pop-pin-4" command="toggle-popover" aria-label="Location 4, Field Station, Azores"><span aria-hidden="true"><i>4</i></span></button><div id="pop-pin-4" popover="auto" class="pin-pop"><strong>Field Station</strong><span>Azores · 2 people · UTC+0</span><a class="pin-link" href="#note-4">Studio notes →</a><button class="pin-close" commandfor="pop-pin-4" command="hide-popover" aria-label="Close Field Station notes">×</button></div></div></div><figcaption class="map-key"><ul><li><span aria-hidden="true">1</span>Harbour Point — Lisbon</li><li><span aria-hidden="true">2</span>Kiln Yard — Porto</li><li><span aria-hidden="true">3</span>North Light — Tromsø</li><li><span aria-hidden="true">4</span>Field Station — Azores</li></ul></figcaption></figure><div class="atlas-notes"><section id="note-1" tabindex="-1"><p class="scene-kicker">01 / Lisbon</p><h2>Harbour Point</h2><p>A converted warehouse by the water. The studio keeps its press room and the shared material library here.</p></section><section id="note-2" tabindex="-1"><p class="scene-kicker">02 / Porto</p><h2>Kiln Yard</h2><p>Six makers share two kilns and one long table. Glaze tests line the stairwell.</p></section><section id="note-3" tabindex="-1"><p class="scene-kicker">03 / Tromsø</p><h2>North Light</h2><p>Winter daylight is short and blue; the studio plans its photography around it.</p></section><section id="note-4" tabindex="-1"><p class="scene-kicker">04 / Azores</p><h2>Field Station</h2><p>Two people, one field station. Soil samples and sketchbooks in equal measure.</p></section></div></main><p class="scene-instruction">Activate any numbered pin with pointer or keyboard. Its own popover opens above the pin and flips below when the pin sits near the top edge. The numbered key lists every location for keyboard and no-enhancement reading.</p></div></div>
+
 </body>
 </html>

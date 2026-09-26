@@ -148,3 +148,12 @@ except ImportError:
 HTML.update(P03_HTML)
 CSS.update(P03_CSS)
 HINTS.update(P03_HINTS)
+
+# Pilot 04: native overlay spells and their product scenes.
+try:
+    from .showcase_pilot04 import HTML as P04_HTML, CSS as P04_CSS, HINTS as P04_HINTS
+except ImportError:
+    from showcase_pilot04 import HTML as P04_HTML, CSS as P04_CSS, HINTS as P04_HINTS
+HTML.update(P04_HTML)
+CSS.update(P04_CSS)
+HINTS.update(P04_HINTS)

@@ -118,54 +118,102 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.site-nav { position: relative; anchor-scope: --mega-1; }
+.site-nav { display: flex; align-items: center; gap: var(--space-4); min-block-size: 64px; }
+.site-nav .brand { font-weight: 700; text-decoration: none; color: var(--color-text); }
+.site-nav .nav-link { min-block-size: 44px; display: inline-flex; align-items: center; color: var(--color-text-muted); text-decoration: none; }
 .mega-trigger {
   anchor-name: --mega-1;
   min-block-size: 44px;
   padding: 0 var(--space-4);
   background: none; border: 0; cursor: pointer;
   color: var(--color-text); font-weight: 500;
+  border-radius: var(--radius-sm);
 }
+.mega-trigger:hover { background: var(--color-surface-offset); }
+.mega-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .mega-panel {
-  margin: 0; inset: auto;
-  position-anchor: --mega-1;
-  position-area: bottom span-all;
-  margin-block-start: var(--space-2);
-  position-try-fallbacks: flip-block;
-  min-inline-size: 22rem;
-  padding: var(--space-4);
+  max-inline-size: min(92vw, 54rem);
+  padding: var(--space-5);
+  grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: 0 20px 50px oklch(0 0 0 / .14);
-  opacity: 0; transform: translateY(-6px);
-  transition: opacity 200ms cubic-bezier(.16,1,.3,1),
-              transform 200ms cubic-bezier(.16,1,.3,1),
-              display 200ms allow-discrete,
-              overlay 200ms allow-discrete;
+  box-shadow: 0 24px 60px oklch(0 0 0 / .16);
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity 200ms cubic-bezier(.16,1,.3,1), transform 200ms cubic-bezier(.16,1,.3,1),
+              display 200ms allow-discrete, overlay 200ms allow-discrete;
 }
-.mega-panel:popover-open { opacity: 1; transform: translateY(0); }
-@starting-style { .mega-panel:popover-open { opacity: 0; transform: translateY(-6px); } }
-.mega-panel a {
+.mega-panel:popover-open { display: grid; opacity: 1; transform: translateY(0); }
+@starting-style { .mega-panel:popover-open { opacity: 0; transform: translateY(-8px); } }
+.mega-col h2 {
+  font: 600 11px ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-text-muted); margin: 0 0 var(--space-2);
+}
+.mega-item {
   display: block; padding: .65rem .75rem; min-block-size: 44px;
   border-radius: var(--radius-sm); text-decoration: none; color: var(--color-text);
 }
-.mega-panel a:hover, .mega-panel a:focus-visible { background: var(--color-surface-offset); }
+.mega-item strong { display: block; }
+.mega-item span { color: var(--color-text-muted); font-size: .85rem; }
+.mega-item:hover, .mega-item:focus-visible { background: var(--color-surface-offset); }
+.mega-foot { grid-column: 1 / -1; margin: 0; border-top: 1px solid var(--color-border); padding-top: var(--space-3); }
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@media (min-width: 700px) {
+  @supports (top: anchor(top)) {
+    .mega-panel {
+      inset: auto; margin: 0; margin-block-start: var(--space-2);
+      top: anchor(--mega-1 bottom); left: anchor(--mega-1 left);
+      position-try-fallbacks: flip-inline, flip-block;
+    }
+  }
+}
+/* Narrow or short viewports get a contained bottom sheet instead of an
+   anchored panel, so the menu never clips essential content. */
+@media (max-width: 699px), (max-height: 560px) {
+  .mega-panel {
+    inset: auto 0 0 0; margin: 0; inline-size: 100%; max-inline-size: none;
+    grid-template-columns: 1fr; max-block-size: 84dvh; overflow: auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mega-panel { transition: none; transform: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.fieldline-scene{width:100%;background:light-dark(#f4f1e8,#141b18);border-radius:28px;overflow:clip;--color-primary:light-dark(#1f4b43,#9ed5c4);--color-text:light-dark(#1c2422,#eef4ee);--color-text-muted:light-dark(#5f6d65,#9db2a7);--color-border:light-dark(#d9d3c3,#2a3531);--color-bg:light-dark(#fffdf6,#18211e);--color-surface-offset:light-dark(#efeadd,#222c28);--color-accent:light-dark(#c75135,#eb9075)}
+.fl-head{padding:clamp(14px,2.4vw,26px) clamp(20px,4vw,54px);border-bottom:1px solid var(--color-border)}
+.fl-head .brand{font-family:Georgia,serif;font-size:21px;letter-spacing:-.02em}
+.fl-head .site-nav{gap:clamp(12px,2.6vw,28px)}
+.fl-hero{padding:clamp(44px,7vw,104px) clamp(20px,4vw,54px);background:linear-gradient(155deg,light-dark(#e5ebdc,#1b2b26),light-dark(#f4f1e8,#141b18) 70%);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(230px,.75fr);gap:clamp(24px,4vw,64px);align-items:center}.fl-digest{background:var(--color-bg);border:1px solid var(--color-border);border-radius:16px;padding:22px 24px;box-shadow:0 18px 44px #102b241f}.fl-digest ul{list-style:none;margin:14px 0 12px;padding:0;display:grid;gap:10px}.fl-digest li{display:flex;align-items:baseline;gap:12px;border-top:1px solid var(--color-border);padding-top:10px}.fl-digest strong{font:400 30px/1 Georgia,serif;min-width:2.2ch}.fl-digest span{color:var(--color-text-muted);font-size:13px}.fl-digest small{font-size:11px;color:var(--color-text-muted)}
+.fl-hero h1{max-width:15ch}
+.fl-hero p:last-child{max-width:52ch;color:var(--color-text-muted)}
+.fl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);border-block:1px solid var(--color-border)}
+.fl-grid section{background:var(--color-bg);padding:clamp(20px,2.6vw,32px);scroll-margin-block:20px}
+.fl-grid .scene-kicker{color:light-dark(#c75135,#eb9075)}
+.fl-grid h2{font:400 clamp(20px,2vw,25px)/1.15 Georgia,serif;margin:6px 0 8px}
+.fl-grid p:last-child{font-size:13px;color:var(--color-text-muted);margin:0}
+.fl-tail{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px);padding:clamp(26px,4vw,58px)}
+.fl-tail section{scroll-margin-block:20px}
+.fl-tail h2{font:400 22px/1.2 Georgia,serif;margin:6px 0 8px}
+.fl-tail p:last-child{font-size:13px;color:var(--color-text-muted);margin:0}
+@media(max-width:760px){.fl-grid,.fl-tail{grid-template-columns:1fr}.fl-hero{grid-template-columns:1fr}.fl-hero h1{font-size:40px}.fl-head .nav-link{display:none}}
 </style>
 </head>
 <body>
-  <div class="stage"><nav class="site-nav">
-  <button class="mega-trigger" commandfor="mega-1" command="toggle-popover">
-    Products <span aria-hidden="true">▾</span>
-  </button>
-  <div id="mega-1" popover="auto" class="mega-panel">
-    <ul>
-      <li><a href="/analytics">Analytics</a></li>
-      <li><a href="/automation">Automation</a></li>
-      <li><a href="/api">API & Integrations</a></li>
-    </ul>
-  </div>
-</nav></div>
-  <p class='demo-hint'>Activate the control to preview</p>
+  <div class="stage"><div class="showcase"><main class="fieldline-scene" id="top"><header class="fl-head"><nav class="site-nav" aria-label="Primary"><a class="brand" href="#top">Fieldline</a><button class="mega-trigger" commandfor="mega-1" command="toggle-popover">Products <span aria-hidden="true">▾</span></button><a class="nav-link" href="#pricing">Pricing</a><a class="nav-link" href="#field-notes">Field notes</a></nav><div id="mega-1" popover="auto" class="mega-panel"><div class="mega-col"><h2>Observe</h2><a class="mega-item" href="#observe"><strong>Signal dashboard</strong><span>Release metrics in one morning view.</span></a><a class="mega-item" href="#observe-alerts"><strong>Quiet alerts</strong><span>Only the thresholds you actually set.</span></a></div><div class="mega-col"><h2>Automate</h2><a class="mega-item" href="#automate"><strong>Flow builder</strong><span>Plain-language steps, no scripting.</span></a><a class="mega-item" href="#automate-schedule"><strong>Seasonal schedules</strong><span>Pause and resume whole workflows.</span></a></div><div class="mega-col"><h2>Connect</h2><a class="mega-item" href="#connect"><strong>Guided imports</strong><span>Bring existing records across.</span></a><a class="mega-item" href="#connect-api"><strong>Read-only API</strong><span>Token-scoped, documented endpoints.</span></a></div><p class="mega-foot"><a href="#changelog">Read the changelog →</a></p></div></header><section class="fl-hero"><p class="scene-kicker">Fieldline / Studio operations</p><h1>Know what the studio is doing this morning.</h1><p>Fieldline keeps release metrics, routines and client records in one calm place. Open <strong>Products</strong> above to tour the range — every destination lives on this page.</p><aside class="fl-digest"><p class="scene-kicker">This morning</p><ul><li><strong>3</strong><span>deploys shipped before nine</span></li><li><strong>0</strong><span>open errors across clients</span></li><li><strong>82%</strong><span>focus time kept this week</span></li></ul><small>Illustrative digest. Nothing pings, nothing is sent.</small></aside></section><div class="fl-grid"><section id="observe"><p class="scene-kicker">Observe / 01</p><h2>Signal dashboard</h2><p>One screen for yesterday’s releases: deploys, errors and the two numbers the studio actually watches.</p></section><section id="observe-alerts"><p class="scene-kicker">Observe / 02</p><h2>Quiet alerts</h2><p>Thresholds you set yourself, delivered once a day. Nothing pings at 2am unless you asked for it.</p></section><section id="automate"><p class="scene-kicker">Automate / 03</p><h2>Flow builder</h2><p>Describe a routine in plain language — weekly report, client digest — and Fieldline keeps it running.</p></section><section id="automate-schedule"><p class="scene-kicker">Automate / 04</p><h2>Seasonal schedules</h2><p>Pause a whole workflow over the quiet months and resume it with one keystroke in spring.</p></section><section id="connect"><p class="scene-kicker">Connect / 05</p><h2>Guided imports</h2><p>Bring spreadsheets and old exports across with a mapped, reviewable import. No data is moved in this demo.</p></section><section id="connect-api"><p class="scene-kicker">Connect / 06</p><h2>Read-only API</h2><p>Token-scoped endpoints for the metrics you already see, documented with copyable examples.</p></section></div><div class="fl-tail"><section id="pricing"><p class="scene-kicker">Pricing</p><h2>One seat, one price.</h2><p>€18 per month per maker. Every feature included; no tier theatre.</p></section><section id="field-notes"><p class="scene-kicker">Field notes</p><h2>Written by the people who build it.</h2><p>Short monthly notes on running a small studio without drowning in tooling.</p></section><section id="changelog"><p class="scene-kicker">Changelog</p><h2>September: quieter alerts.</h2><p>Alert digests, import previews and the read-only API all shipped this month.</p></section></div></main><p class="scene-instruction">Open Products with a click, or with Enter while the trigger has focus. Every destination in the panel is a section of this page. Nothing auto-closes on navigation — one click away or Escape clears the panel, which becomes a contained bottom sheet on narrow screens.</p></div></div>
+
 </body>
 </html>

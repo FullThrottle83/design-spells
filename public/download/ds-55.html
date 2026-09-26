@@ -139,10 +139,34 @@
     }
 }
 }
+@media (prefers-reduced-motion: reduce) {
+  .card-stack .card { animation: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.showcase) {scroll-behavior:auto}
+.showcase {width:min(100%,960px)}
+.showcase header>p:last-child {max-width:52ch;color:var(--color-text-muted)}
+.showcase .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.showcase :target {scroll-margin-block:24px}
+
+.expedition>header {padding-block:40px 80px}.expedition h1 {font-size:clamp(50px,6vw,80px)}.deck-cue {font:11px ui-monospace,monospace;letter-spacing:.1em;padding-bottom:28px}.expedition .card-stack {gap:20vh;padding-bottom:35vh}.expedition .card {display:grid;grid-template-columns:1fr 1fr;min-height:480px;background:#e4d7b9;color:#303f39;border:1px solid #303f3933;border-radius:12px;overflow:hidden;box-shadow:0 12px 30px #0002}.expedition .card:nth-child(2) {background:#cddad5;color:#25555a}.expedition .card:nth-child(3) {background:#e5c5b2;color:#613d4a}.deck-copy {padding:clamp(24px,4vw,48px);display:flex;flex-direction:column;align-items:start}.deck-copy h2 {font:clamp(30px,4vw,48px)/1.05 Georgia,serif}.deck-copy>span {font:10px ui-monospace,monospace;margin-top:auto}.expedition .card img {width:100%;height:100%;object-fit:cover;min-width:0}.deck-end {min-height:60vh;padding-top:60px}@media(max-width:600px) {.expedition .card {grid-template-columns:1fr;min-height:0}.expedition .card img {height:160px}.deck-copy {min-height:300px}.deck-copy h2 {margin-block:20px}}@media(max-height:550px) {.expedition .card {position:static}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="card-stack"><article class="card">Card A</article><article class="card">Card B</article><article class="card">Card C</article></div></div>
-  <p class='demo-hint'>Scroll to preview</p>
+  <div class="stage"><div class="showcase"><article class="expedition"><header><p class="scene-kicker">THE LONG WAY / Three field notes</p><h1>Go slowly.<br>Notice more.</h1><p>A small guide to travelling with attention. Scroll to stack the chapters; reverse your journey to uncover them.</p></header><p class="deck-cue">↓ THREE CHAPTERS, ONE CONTINUOUS JOURNEY</p><div class="card-stack"><article class="card"><div class="deck-copy"><p class="scene-kicker">CHAPTER 01 / Departure</p><h2>Take the quiet route.</h2><p>Leave the main road. Walk at a pace that lets you hear the landscape change.</p><span>FIELD GUIDE — 2026</span></div><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20560%22%3E%3Crect%20width%3D%22800%22%20height%3D%22560%22%20fill%3D%22%23e4d7b9%22/%3E%3Ccircle%20cx%3D%22580%22%20cy%3D%22145%22%20r%3D%2272%22%20fill%3D%22%23a54b32%22/%3E%3Cpath%20d%3D%22M0%20420%20210%20110%20445%20420%20620%20245%20800%20380V560H0Z%22%20fill%3D%22%23303f39%22/%3E%3Cpath%20d%3D%22m210%20110-66%20100%2066-25%2067%2025Z%22%20fill%3D%22%23faf1dc%22/%3E%3Cpath%20d%3D%22M0%20475Q200%20410%20400%20485T800%20475%22%20fill%3D%22none%22%20stroke%3D%22%23a54b32%22%20stroke-width%3D%2222%22/%3E%3Cpath%20d%3D%22M55%2040h95M55%2040v95M745%20520h-95M745%20520v-95%22%20fill%3D%22none%22%20stroke%3D%22%23303f39%22%20stroke-width%3D%222%22/%3E%3C/svg%3E" alt="Illustrated mountain landscape"></article><article class="card"><div class="deck-copy"><p class="scene-kicker">CHAPTER 02 / Attention</p><h2>Stay a little longer.</h2><p>The first view is only the beginning. Sit down, look again, and let the small details arrive.</p><span>FIELD GUIDE — 2026</span></div><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20560%22%3E%3Crect%20width%3D%22800%22%20height%3D%22560%22%20fill%3D%22%23cddad5%22/%3E%3Ccircle%20cx%3D%22580%22%20cy%3D%22145%22%20r%3D%2272%22%20fill%3D%22%23dcaa63%22/%3E%3Cpath%20d%3D%22M0%20420%20210%20110%20445%20420%20620%20245%20800%20380V560H0Z%22%20fill%3D%22%2325555a%22/%3E%3Cpath%20d%3D%22m210%20110-66%20100%2066-25%2067%2025Z%22%20fill%3D%22%23faf1dc%22/%3E%3Cpath%20d%3D%22M0%20475Q200%20410%20400%20485T800%20475%22%20fill%3D%22none%22%20stroke%3D%22%23dcaa63%22%20stroke-width%3D%2222%22/%3E%3Cpath%20d%3D%22M55%2040h95M55%2040v95M745%20520h-95M745%20520v-95%22%20fill%3D%22none%22%20stroke%3D%22%2325555a%22%20stroke-width%3D%222%22/%3E%3C/svg%3E" alt="Illustrated mountain landscape"></article><article class="card"><div class="deck-copy"><p class="scene-kicker">CHAPTER 03 / Return</p><h2>Bring less. Remember more.</h2><p>Keep a few notes, a sketch, a story. Leave the place as generous as you found it.</p><span>FIELD GUIDE — 2026</span></div><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20560%22%3E%3Crect%20width%3D%22800%22%20height%3D%22560%22%20fill%3D%22%23e5c5b2%22/%3E%3Ccircle%20cx%3D%22580%22%20cy%3D%22145%22%20r%3D%2272%22%20fill%3D%22%23bf6049%22/%3E%3Cpath%20d%3D%22M0%20420%20210%20110%20445%20420%20620%20245%20800%20380V560H0Z%22%20fill%3D%22%23613d4a%22/%3E%3Cpath%20d%3D%22m210%20110-66%20100%2066-25%2067%2025Z%22%20fill%3D%22%23faf1dc%22/%3E%3Cpath%20d%3D%22M0%20475Q200%20410%20400%20485T800%20475%22%20fill%3D%22none%22%20stroke%3D%22%23bf6049%22%20stroke-width%3D%2222%22/%3E%3Cpath%20d%3D%22M55%2040h95M55%2040v95M745%20520h-95M745%20520v-95%22%20fill%3D%22none%22%20stroke%3D%22%23613d4a%22%20stroke-width%3D%222%22/%3E%3C/svg%3E" alt="Illustrated mountain landscape"></article></div><footer class="deck-end"><h2>The journey stays with you.</h2><p>Scroll back to uncover the chapters.</p></footer></article><p class="scene-instruction">Scroll slowly: each chapter pins near the top as the next covers it. Scroll back to revisit. Scale and dimming are progressive enhancements.</p></div></div>
+
 </body>
 </html>

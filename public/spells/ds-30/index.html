@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Sticky CTA Elevation — Design Spells</title>
-  <meta name="description" content="A sticky bottom CTA gains more separation when it sits on top of content.">
+  <meta name="description" content="A native sticky bottom CTA uses a persistent elevated edge to stay distinct over a long page. This is not scroll-state detection. Keep its destination outside the sticky container and reserve space for focus targets.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-30/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Sticky CTA Elevation — Design Spells">
-  <meta property="og:description" content="A sticky bottom CTA gains more separation when it sits on top of content.">
+  <meta property="og:description" content="A native sticky bottom CTA uses a persistent elevated edge to stay distinct over a long page. This is not scroll-state detection. Keep its destination outside the sticky container and reserve space for focus targets.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-30/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-30 / Scroll / 0 JS</p>
     <h1>Sticky CTA Elevation</h1>
-    <p class="lede">A sticky bottom CTA gains more separation when it sits on top of content.</p>
+    <p class="lede">A native sticky bottom CTA uses a persistent elevated edge to stay distinct over a long page. This is not scroll-state detection. Keep its destination outside the sticky container and reserve space for focus targets.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-30/">Open standalone demo ↗</a><a class="action" href="/download/ds-30.html" download="ds-30.html">Download runnable HTML ↓</a></div>
-      
+      <p class='note'>Read the guide, then follow the sticky checklist link. On short viewports the CTA returns to normal document flow.</p>
       
       <iframe title="Isolated demonstration: Sticky CTA Elevation" src="/play/ds-30/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -41,13 +41,18 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;p style=&quot;min-height:4rem&quot;&gt;Content&lt;/p&gt;&lt;div class=&quot;sticky-cta&quot;&gt;Continue →&lt;/div&gt;</code></pre>
+      <pre tabindex="0"><code>&lt;article class=&quot;studio-guide&quot;&gt;&lt;header&gt;&lt;p class=&quot;scene-kicker&quot;&gt;THE STUDIO HANDBOOK / 7 minute read&lt;/p&gt;&lt;h1&gt;A better beginning.&lt;/h1&gt;&lt;p&gt;A practical guide to starting creative work with clarity, care and enough room to think.&lt;/p&gt;&lt;/header&gt;&lt;div class=&quot;guide-body&quot;&gt;&lt;section&gt;&lt;span class=&quot;chapter-number&quot;&gt;01&lt;/span&gt;&lt;h2&gt;Start with what matters.&lt;/h2&gt;&lt;p&gt;Choose one project you can finish, not five you can only start. Write down the change you want someone to feel when the work is done. That sentence will guide every decision that follows.&lt;/p&gt;&lt;aside&gt;FIELD NOTE / Define a useful outcome&lt;/aside&gt;&lt;p&gt;Try it today: leave yourself a short note about the next concrete step. Return to that note before opening your tools tomorrow.&lt;/p&gt;&lt;/section&gt;&lt;section&gt;&lt;span class=&quot;chapter-number&quot;&gt;02&lt;/span&gt;&lt;h2&gt;Make room for the work.&lt;/h2&gt;&lt;p&gt;Protect a quiet hour. Gather your references, close the extra tabs, and place the tools you need within reach. A thoughtful environment is not a luxury; it makes your next action easier.&lt;/p&gt;&lt;aside&gt;FIELD NOTE / Prepare your workspace&lt;/aside&gt;&lt;p&gt;Try it today: leave yourself a short note about the next concrete step. Return to that note before opening your tools tomorrow.&lt;/p&gt;&lt;/section&gt;&lt;section&gt;&lt;span class=&quot;chapter-number&quot;&gt;03&lt;/span&gt;&lt;h2&gt;Leave a clear handover.&lt;/h2&gt;&lt;p&gt;A finished file is only part of the work. Explain what changed, what remains open, and where the next person should begin. Kind documentation lets good work keep moving.&lt;/p&gt;&lt;aside&gt;FIELD NOTE / Share context, not just files&lt;/aside&gt;&lt;p&gt;Try it today: leave yourself a short note about the next concrete step. Return to that note before opening your tools tomorrow.&lt;/p&gt;&lt;/section&gt;&lt;/div&gt;&lt;nav class=&quot;sticky-cta&quot; aria-label=&quot;Reading next step&quot;&gt;&lt;span&gt;Ready when you are.&lt;small&gt;A three-point starting checklist&lt;/small&gt;&lt;/span&gt;&lt;a href=&quot;#checklist&quot;&gt;Open checklist ↗&lt;/a&gt;&lt;/nav&gt;&lt;/article&gt;&lt;section id=&quot;checklist&quot; class=&quot;guide-checklist&quot; tabindex=&quot;-1&quot;&gt;&lt;p class=&quot;scene-kicker&quot;&gt;YOUR NEXT STEP&lt;/p&gt;&lt;h2&gt;Make a little room.&lt;/h2&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Name the outcome&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Protect a quiet hour&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Write the handover note&lt;/label&gt;&lt;p&gt;Local checklist only. Nothing is saved or sent.&lt;/p&gt;&lt;/section&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.sticky-cta {
   position: sticky; bottom: 0;
   background: oklch(from var(--color-bg) l c h / .88);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 24px light-dark(oklch(0 0 0 / .12), oklch(1 0 0 / .1));
+}
+.sticky-cta a { display: inline-flex; min-block-size: 44px; align-items: center; }
+@media (max-height: 480px) {
+  .sticky-cta { position: static; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">
@@ -55,7 +60,7 @@
       <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
       <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
-      <p class="note">color-mix() and oklch() are Baseline 2023.</p>
+      <p class="note">light-dark() is Baseline 2024. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

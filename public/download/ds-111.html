@@ -118,32 +118,56 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
+.kpi { view-timeline-name: --kpi-entry; view-timeline-axis: block; }
 .kpi-track {
   block-size: .6rem; border-radius: 999px;
   background: var(--color-surface-offset); overflow: hidden;
 }
 .kpi-track i {
-  display: block; block-size: 100%; inline-size: 0;
+  display: block; block-size: 100%; inline-size: var(--kpi, 0%);
   background: var(--color-primary); border-radius: inherit;
 }
 @supports (animation-timeline: view()) {
   .kpi-track i {
     animation: kpi-fill linear both;
-    animation-timeline: view();
-    animation-range: entry 10% entry 60%;
+    animation-timeline: --kpi-entry;
+    animation-range: entry 0% cover 45%;
   }
-  @keyframes kpi-fill { to { inline-size: var(--kpi, 0%); } }
+  @keyframes kpi-fill { from { inline-size: 0; } to { inline-size: var(--kpi, 0%); } }
 }
 @media (prefers-reduced-motion: reduce) {
   .kpi-track i { inline-size: var(--kpi, 0%); animation: none; }
 }
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.showcase) {scroll-behavior:auto}
+.showcase {width:min(100%,960px)}
+.showcase header>p:last-child {max-width:52ch;color:var(--color-text-muted)}
+.showcase .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.showcase :target {scroll-margin-block:24px}
+
+.impact-report {--color-primary:light-dark(#176554,#85d9b9)}
+.report-intro {min-height:100dvh;padding-top:8vh;display:flex;flex-direction:column;align-items:start}
+.report-intro h1 {font-size:clamp(46px,6vw,84px)}
+.report-total {display:flex;align-items:center;gap:24px;border-top:1px solid var(--color-border);padding:28px 0;margin-top:24px;flex-wrap:wrap}.report-total strong {font-size:90px;letter-spacing:-.08em;line-height:1}.report-total span {font-size:14px}
+.report-intro .report-cue {margin-top:auto;padding-block:44px;font:11px ui-monospace,monospace;letter-spacing:.12em}
+.impact-report #metrics {max-width:740px;margin:auto}.impact-report .kpi {padding:42px 0 64px;border-top:1px solid var(--color-border);min-height:330px}.impact-report .kpi h2 {font-size:72px;letter-spacing:-.06em;margin:18px 0;line-height:1}.impact-report .kpi small {display:block;margin-top:16px}.report-tail {padding-block:100px;min-height:75vh}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="kpi" style="--kpi: 72%">
-  <span>Conversion</span>
-  <div class="kpi-track" aria-hidden="true"><i></i></div>
-</div></div>
-  <p class='demo-hint'>Scroll to preview</p>
+  <div class="stage"><div class="showcase"><article class="impact-report"><div class="report-intro"><header><p class="scene-kicker">NORTH / Impact report · Q3 2026</p><h1>Small steps.<br>Measurable change.</h1><p>A quarterly snapshot of the systems that help our studio do better work.</p></header><div class="report-total"><strong>216</strong><span>members completed onboarding<br>of 300 invited this quarter</span></div><a href="#metrics">Explore the quarter ↓</a><p class="report-cue">SCROLL TO REVEAL / 03 METRICS</p></div><section id="metrics" aria-label="Quarterly metrics"><div class="kpi" style="--kpi:72%"><p class="scene-kicker">01 / Activation</p><h2>72%</h2><p>A confident first week.</p><div class="kpi-track" aria-hidden="true"><i></i></div><small>216 of 300 members completed onboarding</small></div><div class="kpi" style="--kpi:94%"><p class="scene-kicker">02 / Retention</p><h2>94%</h2><p>Good habits that stick.</p><div class="kpi-track" aria-hidden="true"><i></i></div><small>188 of 200 members returned this month</small></div><div class="kpi" style="--kpi:86%"><p class="scene-kicker">03 / Delivery</p><h2>86%</h2><p>Promises, kept.</p><div class="kpi-track" aria-hidden="true"><i></i></div><small>43 of 50 milestones delivered on time</small></div></section><footer class="report-tail"><h2>Progress, not perfection.</h2><p>Illustrative studio data. Every percentage has a denominator.</p><a href="#metrics">Read the metrics again ↑</a></footer></article><p class="scene-instruction">Scroll down to watch each metric fill. Values are always readable; reduced motion and unsupported browsers show the final fill.</p></div></div>
+
 </body>
 </html>

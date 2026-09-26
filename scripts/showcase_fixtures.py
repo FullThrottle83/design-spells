@@ -130,3 +130,12 @@ def scene_html(sid: str, raw_html: str) -> str:
         rows = ''.join(f'<tr><th scope="row">{m}</th><td>{v}%</td></tr>' for m, v in zip(['Jan','Feb','Mar','Apr','May','Jun'], [34,58,41,72,66,90]))
         raw_html = '<article class="capacity-report"><p class="scene-kicker">Studio operations / Jan—Jun 2026</p><h1>Room for good work.</h1><div class="capacity-total"><strong>90%</strong><span>June capacity booked<br>+24 points from May</span></div><div class="capacity-plot"><div class="chart-scale"><span>Booked capacity</span><span>0—100%</span></div>' + raw_html + '<div class="chart-months" aria-hidden="true">' + ''.join(f'<span>{m}</span>' for m in ['Jan','Feb','Mar','Apr','May','Jun']) + '</div></div><details><summary>View exact monthly values</summary><table><caption>Studio capacity booked · 2026</caption><thead><tr><th scope="col">Month</th><th scope="col">Capacity</th></tr></thead><tbody>' + rows + '</tbody></table></details></article>'
     return f'<div class="showcase">{raw_html}<p class="scene-instruction">{HINTS[sid]}</p></div>'
+
+# Pilot 02 keeps its own scenery while sharing the same generation path.
+try:
+    from .showcase_pilot02 import HTML as P02_HTML, CSS as P02_CSS, HINTS as P02_HINTS
+except ImportError:
+    from showcase_pilot02 import HTML as P02_HTML, CSS as P02_CSS, HINTS as P02_HINTS
+HTML.update(P02_HTML)
+CSS.update(P02_CSS)
+HINTS.update(P02_HINTS)

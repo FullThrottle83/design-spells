@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Snapped Caption Reveal — Design Spells</title>
-  <meta name="description" content="Captions in a scroll-snap carousel fade in only once the slide is “snapped”.">
+  <meta name="description" content="Captions reveal when a slide snaps. Without scroll-state queries, all captions remain readable.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-93/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Snapped Caption Reveal — Design Spells">
-  <meta property="og:description" content="Captions in a scroll-snap carousel fade in only once the slide is “snapped”.">
+  <meta property="og:description" content="Captions reveal when a slide snaps. Without scroll-state queries, all captions remain readable.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-93/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-93 / Media / Markup</p>
     <h1>Snapped Caption Reveal</h1>
-    <p class="lede">Captions in a scroll-snap carousel fade in only once the slide is “snapped”.</p>
+    <p class="lede">Captions reveal when a slide snaps. Without scroll-state queries, all captions remain readable.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-93/">Open standalone demo ↗</a><a class="action" href="/download/ds-93.html" download="ds-93.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Scroll to preview</p>
+      <p class='note'>Scroll sideways or Tab into the gallery and use arrow keys. Snap a new print to reveal its caption. Unsupported browsers show every caption.</p>
       
       <iframe title="Isolated demonstration: Snapped Caption Reveal" src="/play/ds-93/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -41,7 +41,7 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       
-      <pre tabindex="0"><code>&lt;div class=&quot;snap-carousel&quot;&gt;
+      <pre tabindex="0"><code>&lt;div class=&quot;snap-carousel&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Landscape gallery&quot;&gt;
   &lt;figure class=&quot;slide&quot;&gt;
     &lt;img src=&quot;/a.jpg&quot; alt=&quot;&quot;&gt;
     &lt;figcaption class=&quot;caption&quot;&gt;The Alps — winter 2026&lt;/figcaption&gt;
@@ -60,10 +60,14 @@
 .caption {
   position: absolute; bottom: var(--space-3); left: var(--space-3);
   padding: .4rem .8rem; border-radius: 999px; background: oklch(0 0 0 / .6); color: white;
-  opacity: 0; translate: 0 8px; transition: opacity 220ms ease, transform 220ms cubic-bezier(.16,1,.3,1);
+  opacity: 1; translate: 0 0; transition: opacity 220ms ease, translate 220ms cubic-bezier(.16,1,.3,1);
 }
-@container scroll-state(snapped: inline) { .caption { opacity: 1; translate: 0 0; } }
-.slide:focus-within .caption { opacity: 1; translate: 0 0; }</code></pre>
+@supports (container-type: scroll-state) {
+  .caption { opacity: 0; translate: 0 8px; }
+  @container scroll-state(snapped: inline) { .caption { opacity: 1; translate: 0 0; } }
+}
+.slide:focus-within .caption { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: reduce) { .caption { transition: none; } }</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

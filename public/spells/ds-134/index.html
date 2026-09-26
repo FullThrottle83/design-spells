@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Mobile Swipe-to-Action List (`scroll-snap`) — Design Spells</title>
-  <meta name="description" content="A mobile-first swipe list where a delete button appears on a horizontal swipe.">
+  <meta name="description" content="Swipe to reveal a document link, or Tab directly to it. This reveals an action; it does not implement deletion.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-134/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Mobile Swipe-to-Action List (`scroll-snap`) — Design Spells">
-  <meta property="og:description" content="A mobile-first swipe list where a delete button appears on a horizontal swipe.">
+  <meta property="og:description" content="Swipe to reveal a document link, or Tab directly to it. This reveals an action; it does not implement deletion.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-134/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-134 / Interaction / Markup</p>
     <h1>Mobile Swipe-to-Action List (`scroll-snap`)</h1>
-    <p class="lede">A mobile-first swipe list where a delete button appears on a horizontal swipe.</p>
+    <p class="lede">Swipe to reveal a document link, or Tab directly to it. This reveals an action; it does not implement deletion.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-134/">Open standalone demo ↗</a><a class="action" href="/download/ds-134.html" download="ds-134.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Swipe to preview</p>
+      <p class='note'>Swipe a row left, scroll sideways, or Tab to its Open link. These links open local document summaries; nothing is deleted.</p>
       
       <iframe title="Isolated demonstration: Mobile Swipe-to-Action List (`scroll-snap`)" src="/play/ds-134/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -42,17 +42,17 @@
       <h3>HTML</h3>
       
       <pre tabindex="0"><code>&lt;ul class=&quot;swipe-list&quot;&gt;
-  &lt;li class=&quot;swipe-item&quot;&gt;
+  &lt;li class=&quot;swipe-item&quot; tabindex=&quot;0&quot; aria-label=&quot;Document actions; scroll right or Tab to open&quot;&gt;
     &lt;div class=&quot;swipe-content&quot;&gt;Document_v1.pdf&lt;/div&gt;
-    &lt;button class=&quot;swipe-action&quot;&gt;Delete&lt;/button&gt;
+    &lt;a class=&quot;swipe-action&quot; href=&quot;#document&quot;&gt;Open&lt;/a&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+&lt;/ul&gt;
+&lt;section id=&quot;document&quot; tabindex=&quot;-1&quot;&gt;&lt;h2&gt;Document_v1.pdf&lt;/h2&gt;&lt;p&gt;Document summary and review notes.&lt;/p&gt;&lt;/section&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.swipe-list { list-style: none; padding: 0; margin: 0; }
-.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
-.swipe-item::-webkit-scrollbar { display: none; }
-.swipe-content { flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
-.swipe-action { flex: 0 0 80px; scroll-snap-align: end; background: var(--color-error); color: white; border: 0; cursor: pointer; font-weight: 600; }</code></pre>
+.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.swipe-content { box-sizing: border-box; flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
+.swipe-action { position: relative; flex: 0 0 80px; scroll-snap-align: end; display: grid; place-items: center; background: #254f4b; color: white; border: 0; cursor: pointer; font-weight: 600; }</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

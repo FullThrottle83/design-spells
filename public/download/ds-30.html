@@ -123,11 +123,37 @@
   background: oklch(from var(--color-bg) l c h / .88);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 24px light-dark(oklch(0 0 0 / .12), oklch(1 0 0 / .1));
 }
+.sticky-cta a { display: inline-flex; min-block-size: 44px; align-items: center; }
+@media (max-height: 480px) {
+  .sticky-cta { position: static; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.showcase) {scroll-behavior:auto}
+.showcase {width:min(100%,960px)}
+.showcase header>p:last-child {max-width:52ch;color:var(--color-text-muted)}
+.showcase .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.showcase :target {scroll-margin-block:24px}
+
+.showcase:has(.studio-guide) {max-width:780px}.studio-guide>header {padding-block:30px 50px;border-bottom:1px solid var(--color-border)}.studio-guide h1 {font-size:clamp(48px,6vw,76px)}.guide-body {padding-bottom:120px}.guide-body section {padding:50px 0;max-width:60ch;min-height:62vh;scroll-margin-bottom:140px}.chapter-number {font:56px Georgia,serif;color:var(--color-text-muted)}.guide-body h2 {font:36px Georgia,serif}.guide-body p {font-size:18px;line-height:1.9}.guide-body aside {border-left:3px solid var(--color-primary);padding:20px;font:12px ui-monospace,monospace;margin:30px 0;background:var(--color-surface-offset)}.sticky-cta {padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.sticky-cta span {font-weight:600}.sticky-cta small {display:block;font-weight:400}.sticky-cta a {background:var(--color-primary);color:var(--color-bg);padding:8px 18px;border-radius:4px}.guide-checklist {padding-block:100px;min-height:75vh}.guide-checklist label {display:flex;gap:14px;align-items:center;min-height:56px;border-bottom:1px solid var(--color-border)}.guide-checklist p:last-child {margin-top:28px;font-size:13px}
 </style>
 </head>
 <body>
-  <div class="stage"><p style="min-height:4rem">Content</p><div class="sticky-cta">Continue →</div></div>
-  
+  <div class="stage"><div class="showcase"><article class="studio-guide"><header><p class="scene-kicker">THE STUDIO HANDBOOK / 7 minute read</p><h1>A better beginning.</h1><p>A practical guide to starting creative work with clarity, care and enough room to think.</p></header><div class="guide-body"><section><span class="chapter-number">01</span><h2>Start with what matters.</h2><p>Choose one project you can finish, not five you can only start. Write down the change you want someone to feel when the work is done. That sentence will guide every decision that follows.</p><aside>FIELD NOTE / Define a useful outcome</aside><p>Try it today: leave yourself a short note about the next concrete step. Return to that note before opening your tools tomorrow.</p></section><section><span class="chapter-number">02</span><h2>Make room for the work.</h2><p>Protect a quiet hour. Gather your references, close the extra tabs, and place the tools you need within reach. A thoughtful environment is not a luxury; it makes your next action easier.</p><aside>FIELD NOTE / Prepare your workspace</aside><p>Try it today: leave yourself a short note about the next concrete step. Return to that note before opening your tools tomorrow.</p></section><section><span class="chapter-number">03</span><h2>Leave a clear handover.</h2><p>A finished file is only part of the work. Explain what changed, what remains open, and where the next person should begin. Kind documentation lets good work keep moving.</p><aside>FIELD NOTE / Share context, not just files</aside><p>Try it today: leave yourself a short note about the next concrete step. Return to that note before opening your tools tomorrow.</p></section></div><nav class="sticky-cta" aria-label="Reading next step"><span>Ready when you are.<small>A three-point starting checklist</small></span><a href="#checklist">Open checklist ↗</a></nav></article><section id="checklist" class="guide-checklist" tabindex="-1"><p class="scene-kicker">YOUR NEXT STEP</p><h2>Make a little room.</h2><label><input type="checkbox"> Name the outcome</label><label><input type="checkbox"> Protect a quiet hour</label><label><input type="checkbox"> Write the handover note</label><p>Local checklist only. Nothing is saved or sent.</p></section><p class="scene-instruction">Read the guide, then follow the sticky checklist link. On short viewports the CTA returns to normal document flow.</p></div></div>
+
 </body>
 </html>

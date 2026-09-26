@@ -8,7 +8,7 @@ Tracking: [#40](https://github.com/FullThrottle83/design-spells/issues/40) · 20
 
 - **6 individually verified (scoped Chromium / Firefox / WebKit behavior):** ds-5, ds-12, ds-16, ds-21, ds-37, ds-95.
 - **3 fixed in prior work:** ds-44–46, PRs #37–39. Existing evidence is preserved; no repeat implementation or new visual claim here.
-- **6 needs work (source inspection only):** ds-30, ds-55, ds-69, ds-93, ds-111, ds-134. Prioritized next batch below.
+- **6 Pilot 02 implemented, local Chromium behavior verified; cross-engine CI pending:** ds-30, ds-55, ds-69, ds-93, ds-111, ds-134. See Pilot 02 evidence below.
 - **139 uninspected:** intended behavior/action/support below are imported source metadata, not browser findings. Unknowns explicitly remain unknown.
 
 Statuses are editorial, not changes to the production verification overlay or support badges. No WCAG claim, screen-reader audit, physical-device swipe test or historical-browser certification is made. Default metadata stays unpromoted.
@@ -75,6 +75,36 @@ Do not repeat Pilot 01 or PRs #37–39. On the latest main after this PR is merg
 6. **ds-69** — multirow table, reachable scroll region, pinned column and observed shadow boundary.
 
 After that: native overlay group ds-48/49/50/79/89/142; inspect invocation, focus return, clipping and unsupported anchor positioning before art direction. These are triage priorities, not confirmed browser failures.
+
+## Pilot 02 — implemented, local behavior verified; CI pending
+
+Scope: ds-111, ds-93, ds-134, ds-30, ds-55 and ds-69 only. Started at latest main `fd4a7fa` (merged #41). No ds-44–46 evidence was replaced.
+
+### Canonical fixes versus scene fixtures
+
+| Spell | README.md / identical SKILL.md | Demo-only environment (`scripts/showcase_pilot02.py`, imported through showcase_fixtures) |
+|---|---|---|
+| ds-111 | Filled default width and explicit zero keyframe; named timeline on the whole KPI gives a visible journey rather than a few pixels of track entry; exact numeric label; final reduced-motion state. | NORTH quarterly dashboard, three denominated metrics, full viewport introduction and tail runway. |
+| ds-93 | Captions visible by default, hidden only within the scroll-state enhancement; transition `translate`, not `transform`; motion opt-out; named focusable region. | Original self-contained landscape SVG artwork, editorial captions and horizontal gallery instructions. |
+| ds-134 | Replace nonfunctional Delete with a real local Open link and destination. Focusable row, border-box sizing, visible native scrollbar, positioned action contains off-screen accessible label. | PAPERTRAIL document list, three distinct summaries and return links; no deletion or payment claims. |
+| ds-30 | Persistent shadow makes elevation real; description explicitly does not claim scroll-state detection. Accessible-link sizing and static flow on short viewports. | Long studio handbook, native checkbox checklist destination outside the sticky container, focus runway and wrapping CTA. |
+| ds-55 | Explicit reduced-motion opt-out. Existing native sticky and exit-crossing technique retained. | Three differentiated illustrated expedition chapters, deliberate overlap and exit runway; normal flow in short viewports. |
+| ds-69 | Replace directional `scrolled: inline` with positional `scrollable: left` for this LTR table: the boundary stays shaded while away from the start, including when reversing. More legible shadow; motion opt-out. | Eight workspace rows, seven headed columns, caption, focusable named region, 1080px table and pinned row headings. |
+
+Canonical CSS, rather than scenic overrides, owns every effect. Integration bundles retain canonical HTML when supplied, labelled fixture markup for CSS-only spells and canonical CSS; runnable downloads include the scenery. Stable IDs, schemas, support overlays and MCP contracts are unchanged.
+
+### Actual observations and evidence
+
+[Evidence index / contact sheets](evidence/pilot-02/README.md). Before captures were taken in Chromium before source editing at 1440×900 and 390×844, initial and attempted activated. Five initial fixtures were tiny placeholders; ds-93's first caption was visible in Chromium over a generic gradient. Before captures are not evidence of unsupported behavior.
+
+Local Chromium **153.0.8010.0**, Playwright **1.62.1** (see package lock for pinned runner): the new suite has **83 scenarios**: 72 size × motion × surface × spell cases; six dark, touch-enabled mobile cases; four explicit enhancement-removal simulations; one short zoom-equivalent viewport case. All passed locally. Subsequent strengthening of deck assertions and native touch taps passed all 19 affected scenarios. Final full-suite results and CI links follow below when available.
+
+Tests measure KPI intermediate and final width ratios and reversibility; interior slide snap alignment and caption opacity changes; keyboard-triggered native row scroll and fragment navigation; sticky CTA geometry, destination visibility and checkbox state; native card pinning and actual scale/brightness change; table overflow, fixed first-column geometry and shadow before, away from, reversing toward and at the start. No test treats CSS.supports alone as success.
+
+The first local iteration exposed action-label overflow on mobile (fixed by positioning its containing action), plus harness assumptions about `2rem` being 32px and iframe coordinates being top-page coordinates (corrected to computed inset/document-relative geometry, without widening tolerances). The documentation's short iframe triggers the deliberate static-flow policy for CTA/deck; hosted/downloaded tall viewports assert real sticky positioning. Enhancement-removal tests are simulations, not old-browser certification.
+
+**Environment boundary:** Playwright browser CDN failed with ECONNRESET; apt hosts were also unreachable. An external `@sparticuz/chromium` runtime and its packaged libraries enabled real local Chromium rendering without adding project dependencies. Stock Firefox/WebKit run in CI, not locally. Screenshots are local Chromium evidence. Native programmatic scrolling and keyboard inputs are not physical swipe tests. Touch taps are emulated. The 360×450 short viewport is not a full browser zoom or text-only zoom audit; physical devices, assistive technology, contrast certification and 400% zoom remain unverified.
+
 
 ## Full inventory
 

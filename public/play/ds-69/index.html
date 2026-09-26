@@ -131,16 +131,40 @@
   transition: box-shadow 200ms ease;
 }
 
-@container scroll-state(scrolled: inline) {
+@container scroll-state(scrollable: left) {
   .table-wrapper th:first-child,
   .table-wrapper td:first-child {
-    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
+    box-shadow: 8px 0 12px -4px light-dark(oklch(0 0 0 / .3), oklch(1 0 0 / .25));
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .table-wrapper th:first-child, .table-wrapper td:first-child { transition: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.showcase) {scroll-behavior:auto}
+.showcase {width:min(100%,960px)}
+.showcase header>p:last-child {max-width:52ch;color:var(--color-text-muted)}
+.showcase .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.showcase :target {scroll-margin-block:24px}
+
+.accounts-report {padding-block:24px}.table-summary {display:flex;gap:32px;align-items:center;flex-wrap:wrap;padding-block:24px;margin-block:24px;border-block:1px solid var(--color-border)}.table-summary strong {font-size:32px;letter-spacing:-.03em}.table-summary small {display:block;font-size:11px;font-weight:400;letter-spacing:0;text-transform:uppercase}.table-summary>span {margin-left:auto;font-size:12px}.accounts-report table {border-collapse:separate;border-spacing:0;min-width:1080px;width:100%;font-size:14px}.accounts-report caption {text-align:left;padding:0 0 20px;font-size:12px}.accounts-report th,.accounts-report td {text-align:left;white-space:nowrap;padding:18px 22px;border-bottom:1px solid var(--color-border)}.accounts-report thead th {font:11px ui-monospace,monospace;text-transform:uppercase}.accounts-report th:first-child {min-width:190px;z-index:1}.table-foot {display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:11px ui-monospace,monospace;margin-top:20px!important}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="table-wrapper" style="max-width:20rem"><table style="min-width:44rem"><tr><th>Name</th><th>Plan</th><th>Seats</th><th>Region</th><th>Owner</th><th>Renewal date</th><th>Status</th></tr><tr><td>Acme Corporation</td><td>Pro</td><td>24</td><td>EU-West</td><td>Jonas Andersson</td><td>2026-11-04</td><td>Active</td></tr></table><p class="demo-note">Scroll the table sideways.</p></div></div>
-  <p class='demo-hint'>Scroll to preview</p>
+  <div class="stage"><div class="showcase"><article class="accounts-report"><header><p class="scene-kicker">ORBIT / Workspace operations</p><h1>Good company.</h1><p>Eight teams, one shared view. Compare the details without losing track of who you’re looking at.</p></header><div class="table-summary"><strong>8 <small>workspaces</small></strong><strong>166 <small>total seats</small></strong><span>Renewals / Nov—Dec 2026</span></div><div class="table-wrapper" tabindex="0" role="region" aria-label="Workspace renewals; scroll horizontally"><table><caption>Workspace renewals · illustrative data</caption><thead><tr><th scope="col">Workspace</th><th scope="col">Team</th><th scope="col">Seats</th><th scope="col">Region</th><th scope="col">Owner</th><th scope="col">Renewal</th><th scope="col">Status</th></tr></thead><tbody><tr><th scope="row">Alder Studio</th><td>Design</td><td>24</td><td>EU West</td><td>Mira Chen</td><td>04 Nov 2026</td><td>Active</td></tr><tr><th scope="row">North House</th><td>Editorial</td><td>12</td><td>US East</td><td>Sam Rivera</td><td>12 Nov 2026</td><td>Active</td></tr><tr><th scope="row">Common Ground</th><td>Research</td><td>36</td><td>EU North</td><td>Iris Wells</td><td>18 Nov 2026</td><td>Review</td></tr><tr><th scope="row">Fieldwork Co.</th><td>Strategy</td><td>18</td><td>AP South</td><td>Noah Park</td><td>22 Nov 2026</td><td>Active</td></tr><tr><th scope="row">Still Office</th><td>Design</td><td>8</td><td>EU West</td><td>Ada Reed</td><td>01 Dec 2026</td><td>Active</td></tr><tr><th scope="row">Open Form</th><td>Editorial</td><td>16</td><td>US West</td><td>Leo Bell</td><td>08 Dec 2026</td><td>Review</td></tr><tr><th scope="row">Morrow Lab</th><td>Research</td><td>42</td><td>EU North</td><td>Kai Moore</td><td>14 Dec 2026</td><td>Active</td></tr><tr><th scope="row">Good Measure</th><td>Strategy</td><td>10</td><td>AP East</td><td>Eva Lane</td><td>21 Dec 2026</td><td>Active</td></tr></tbody></table></div><p class="table-foot">PINNED: WORKSPACE <span>Scroll for renewal details →</span></p></article><p class="scene-instruction">Tab into the table, then use left/right arrows, or scroll sideways. The first column stays pinned. Supporting browsers add a shadow away from the start.</p></div></div>
+
 </body>
 </html>

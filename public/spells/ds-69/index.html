@@ -27,7 +27,7 @@
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-69/">Open standalone demo ↗</a><a class="action" href="/download/ds-69.html" download="ds-69.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Scroll to preview</p>
+      <p class='note'>Tab into the table, then use left/right arrows, or scroll sideways. The first column stays pinned. Supporting browsers add a shadow away from the start.</p>
       
       <iframe title="Isolated demonstration: Scroll-Aware Table Boundaries (`container-type: scroll-state`)" src="/play/ds-69/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -41,7 +41,7 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;div class=&quot;table-wrapper&quot; style=&quot;max-width:20rem&quot;&gt;&lt;table style=&quot;min-width:44rem&quot;&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Plan&lt;/th&gt;&lt;th&gt;Seats&lt;/th&gt;&lt;th&gt;Region&lt;/th&gt;&lt;th&gt;Owner&lt;/th&gt;&lt;th&gt;Renewal date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Acme Corporation&lt;/td&gt;&lt;td&gt;Pro&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;td&gt;EU-West&lt;/td&gt;&lt;td&gt;Jonas Andersson&lt;/td&gt;&lt;td&gt;2026-11-04&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p class=&quot;demo-note&quot;&gt;Scroll the table sideways.&lt;/p&gt;&lt;/div&gt;</code></pre>
+      <pre tabindex="0"><code>&lt;article class=&quot;accounts-report&quot;&gt;&lt;header&gt;&lt;p class=&quot;scene-kicker&quot;&gt;ORBIT / Workspace operations&lt;/p&gt;&lt;h1&gt;Good company.&lt;/h1&gt;&lt;p&gt;Eight teams, one shared view. Compare the details without losing track of who you’re looking at.&lt;/p&gt;&lt;/header&gt;&lt;div class=&quot;table-summary&quot;&gt;&lt;strong&gt;8 &lt;small&gt;workspaces&lt;/small&gt;&lt;/strong&gt;&lt;strong&gt;166 &lt;small&gt;total seats&lt;/small&gt;&lt;/strong&gt;&lt;span&gt;Renewals / Nov—Dec 2026&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;table-wrapper&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Workspace renewals; scroll horizontally&quot;&gt;&lt;table&gt;&lt;caption&gt;Workspace renewals · illustrative data&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Workspace&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Team&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Seats&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Region&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Owner&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Renewal&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Alder Studio&lt;/th&gt;&lt;td&gt;Design&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;td&gt;EU West&lt;/td&gt;&lt;td&gt;Mira Chen&lt;/td&gt;&lt;td&gt;04 Nov 2026&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;North House&lt;/th&gt;&lt;td&gt;Editorial&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;US East&lt;/td&gt;&lt;td&gt;Sam Rivera&lt;/td&gt;&lt;td&gt;12 Nov 2026&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Common Ground&lt;/th&gt;&lt;td&gt;Research&lt;/td&gt;&lt;td&gt;36&lt;/td&gt;&lt;td&gt;EU North&lt;/td&gt;&lt;td&gt;Iris Wells&lt;/td&gt;&lt;td&gt;18 Nov 2026&lt;/td&gt;&lt;td&gt;Review&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Fieldwork Co.&lt;/th&gt;&lt;td&gt;Strategy&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;AP South&lt;/td&gt;&lt;td&gt;Noah Park&lt;/td&gt;&lt;td&gt;22 Nov 2026&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Still Office&lt;/th&gt;&lt;td&gt;Design&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;EU West&lt;/td&gt;&lt;td&gt;Ada Reed&lt;/td&gt;&lt;td&gt;01 Dec 2026&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Open Form&lt;/th&gt;&lt;td&gt;Editorial&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;US West&lt;/td&gt;&lt;td&gt;Leo Bell&lt;/td&gt;&lt;td&gt;08 Dec 2026&lt;/td&gt;&lt;td&gt;Review&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Morrow Lab&lt;/th&gt;&lt;td&gt;Research&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;td&gt;EU North&lt;/td&gt;&lt;td&gt;Kai Moore&lt;/td&gt;&lt;td&gt;14 Dec 2026&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Good Measure&lt;/th&gt;&lt;td&gt;Strategy&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;AP East&lt;/td&gt;&lt;td&gt;Eva Lane&lt;/td&gt;&lt;td&gt;21 Dec 2026&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;p class=&quot;table-foot&quot;&gt;PINNED: WORKSPACE &lt;span&gt;Scroll for renewal details →&lt;/span&gt;&lt;/p&gt;&lt;/article&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.table-wrapper {
   overflow-x: auto;
@@ -56,11 +56,14 @@
   transition: box-shadow 200ms ease;
 }
 
-@container scroll-state(scrolled: inline) {
+@container scroll-state(scrollable: left) {
   .table-wrapper th:first-child,
   .table-wrapper td:first-child {
-    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
+    box-shadow: 8px 0 12px -4px light-dark(oklch(0 0 0 / .3), oklch(1 0 0 / .25));
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .table-wrapper th:first-child, .table-wrapper td:first-child { transition: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">
@@ -68,7 +71,7 @@
       <p class="note">Project category: Progressive. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
       <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>no</span></li></ul>
-      <p class="note">Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023.</p>
+      <p class="note">Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. light-dark() is Baseline 2024. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

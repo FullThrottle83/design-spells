@@ -119,14 +119,34 @@
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
 .swipe-list { list-style: none; padding: 0; margin: 0; }
-.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
-.swipe-item::-webkit-scrollbar { display: none; }
-.swipe-content { flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
-.swipe-action { flex: 0 0 80px; scroll-snap-align: end; background: var(--color-error); color: white; border: 0; cursor: pointer; font-weight: 600; }
+.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.swipe-content { box-sizing: border-box; flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
+.swipe-action { position: relative; flex: 0 0 80px; scroll-snap-align: end; display: grid; place-items: center; background: #254f4b; color: white; border: 0; cursor: pointer; font-weight: 600; }
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.showcase) {scroll-behavior:auto}
+.showcase {width:min(100%,960px)}
+.showcase header>p:last-child {max-width:52ch;color:var(--color-text-muted)}
+.showcase .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.showcase :target {scroll-margin-block:24px}
+
+.showcase:has(.document-inbox) {max-width:660px}.document-inbox {border:1px solid var(--color-border);background:var(--color-surface);padding:clamp(18px,4vw,40px)}.document-inbox h1 {font-size:clamp(34px,4vw,48px)}.inbox-label {font:11px ui-monospace,monospace;display:flex;justify-content:space-between;border-bottom:1px solid var(--color-border);padding-block:24px 12px}.swipe-content {display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--color-border)}.swipe-content>div {flex:1;min-width:0}.swipe-content strong {font-size:15px}.swipe-content small {display:block;color:var(--color-text-muted);margin-top:4px}.file-mark {font:18px Georgia,serif;color:var(--color-text-muted)}.inbox-note {font-size:12px;padding-top:18px}.document-summaries {margin-top:60px}.document-summaries section {padding-block:28px;border-top:1px solid var(--color-border)}.document-summaries section:target {outline:2px solid var(--color-primary);outline-offset:8px}
 </style>
 </head>
 <body>
-  <div class="stage"><ul class="swipe-list" style="max-width:20rem"><li class="swipe-item"><div class="swipe-content">Document_v1.pdf</div><button class="swipe-action">Delete</button></li><li class="swipe-item"><div class="swipe-content">Invoice_Q3.pdf</div><button class="swipe-action">Delete</button></li></ul></div>
-  <p class='demo-hint'>Swipe to preview</p>
+  <div class="stage"><div class="showcase"><div id="inbox-top"><article class="document-inbox"><header><p class="scene-kicker">PAPERTRAIL / Shared workspace</p><h1>Your reading room.</h1><p>Three documents ready for a closer look. Reveal a row’s Open link, or reach it directly with Tab.</p></header><p class="inbox-label">RECENT DOCUMENTS <span>03</span></p><ul class="swipe-list"><li class="swipe-item" tabindex="0" aria-label="Field notes; scroll right or Tab to open"><div class="swipe-content"><span class="file-mark">01</span><div><strong>Field notes</strong><small>PDF · 2 pages · 26 Sep 2026</small></div><span aria-hidden="true">←</span></div><a class="swipe-action" href="#doc-0">Open<span class="sr-only"> Field notes</span></a></li><li class="swipe-item" tabindex="0" aria-label="Studio agreement; scroll right or Tab to open"><div class="swipe-content"><span class="file-mark">02</span><div><strong>Studio agreement</strong><small>PDF · 3 pages · 26 Sep 2026</small></div><span aria-hidden="true">←</span></div><a class="swipe-action" href="#doc-1">Open<span class="sr-only"> Studio agreement</span></a></li><li class="swipe-item" tabindex="0" aria-label="September invoice; scroll right or Tab to open"><div class="swipe-content"><span class="file-mark">03</span><div><strong>September invoice</strong><small>PDF · 4 pages · 26 Sep 2026</small></div><span aria-hidden="true">←</span></div><a class="swipe-action" href="#doc-2">Open<span class="sr-only"> September invoice</span></a></li></ul><p class="inbox-note">← Swipe left to reveal · No destructive actions</p><div class="document-summaries"><section id="doc-0" tabindex="-1"><p class="scene-kicker">Document 01 / Summary</p><h2>Field notes</h2><p>Site observations from our September workshop. Review the material samples before the next studio meeting.</p><a href="#inbox-top">Back to documents ↑</a></section><section id="doc-1" tabindex="-1"><p class="scene-kicker">Document 02 / Summary</p><h2>Studio agreement</h2><p>A plain-language outline of scope, review rounds and delivery dates. For demonstration only; not a signed agreement.</p><a href="#inbox-top">Back to documents ↑</a></section><section id="doc-2" tabindex="-1"><p class="scene-kicker">Document 03 / Summary</p><h2>September invoice</h2><p>A sample record of the month’s studio services. No payment is requested or processed.</p><a href="#inbox-top">Back to documents ↑</a></section></div></article></div><p class="scene-instruction">Swipe a row left, scroll sideways, or Tab to its Open link. These links open local document summaries; nothing is deleted.</p></div></div>
+
 </body>
 </html>

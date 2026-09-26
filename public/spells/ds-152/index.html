@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Responsive Switcher (intrinsic flex layout) — Design Spells</title>
+  <meta name="description" content="A three-card service row that stacks itself when its own container becomes narrow. Resize the demo to see the layout change without a viewport media query or JavaScript. Cards keep their content and reading order.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-152/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Responsive Switcher (intrinsic flex layout) — Design Spells">
+  <meta property="og:description" content="A three-card service row that stacks itself when its own container becomes narrow. Resize the demo to see the layout change without a viewport media query or JavaScript. Cards keep their content and reading order.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-152/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-152</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-152 / Layout / Markup</p>
+    <h1>Responsive Switcher (intrinsic flex layout)</h1>
+    <p class="lede">A three-card service row that stacks itself when its own container becomes narrow. Resize the demo to see the layout change without a viewport media query or JavaScript. Cards keep their content and reading order.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-152/">Open standalone demo ↗</a><a class="action" href="/download/ds-152.html" download="ds-152.html">Download runnable HTML ↓</a></div>
+      
+      
+      <iframe title="Isolated demonstration: Responsive Switcher (intrinsic flex layout)" src="/play/ds-152/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-152.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-152" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;service-switcher&quot;&gt;
+  &lt;article class=&quot;switcher-card&quot;&gt;&lt;strong&gt;Starter&lt;/strong&gt;&lt;p&gt;One-page launch.&lt;/p&gt;&lt;/article&gt;
+  &lt;article class=&quot;switcher-card&quot;&gt;&lt;strong&gt;Growth&lt;/strong&gt;&lt;p&gt;Room for new services and content.&lt;/p&gt;&lt;/article&gt;
+  &lt;article class=&quot;switcher-card&quot;&gt;&lt;strong&gt;Studio&lt;/strong&gt;&lt;p&gt;A larger, structured website.&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.service-switcher {
+  --switch-at: 34rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  inline-size: 100%;
+}
+.service-switcher &gt; .switcher-card {
+  flex-grow: 1;
+  flex-basis: calc((var(--switch-at) - 100%) * 999);
+  min-inline-size: min(100%, 12rem);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.switcher-card strong { display: block; color: var(--color-primary); font-size: 1.1rem; }
+.switcher-card p { margin: .35rem 0 0; color: var(--color-text-muted); }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Works in current Chrome, Edge, Firefox, and Safari.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+  <script src="/spell-copy.js" defer></script>
+</body>
+</html>

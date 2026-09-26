@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Table Crosshair Highlight (:has()) — Design Spells</title>
+  <meta name="description" content="Highlights the row and column of a hovered or keyboard-focused table link, making dense data easier to scan. Cells remain real table cells; this is visual orientation, not a spreadsheet keyboard-navigation implementation.">
+  <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-153/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Table Crosshair Highlight (:has()) — Design Spells">
+  <meta property="og:description" content="Highlights the row and column of a hovered or keyboard-focused table link, making dense data easier to scan. Cells remain real table cells; this is visual orientation, not a spreadsheet keyboard-navigation implementation.">
+  <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-153/">
+  <link rel="stylesheet" href="/spell-pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-head">
+    <a class="brand" href="/">Design Spells</a>
+    <nav aria-label="Breadcrumb"><a href="/">Catalogue</a><span aria-hidden="true">/</span><span>ds-153</span></nav>
+    <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <p class="eyebrow">ds-153 / Data / Markup</p>
+    <h1>Table Crosshair Highlight (:has())</h1>
+    <p class="lede">Highlights the row and column of a hovered or keyboard-focused table link, making dense data easier to scan. Cells remain real table cells; this is visual orientation, not a spreadsheet keyboard-navigation implementation.</p>
+    <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
+    <section aria-labelledby="demo-title">
+      <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-153/">Open standalone demo ↗</a><a class="action" href="/download/ds-153.html" download="ds-153.html">Download runnable HTML ↓</a></div>
+      <p class='note'>Hover or focus to preview</p>
+      
+      <iframe title="Isolated demonstration: Table Crosshair Highlight (:has())" src="/play/ds-153/" loading="lazy" sandbox="allow-same-origin"></iframe>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">Complete source</h2>
+      <div class="bundle-actions">
+        <a class="action" href="/bundle/ds-153.txt" data-bundle-source>View integration source ↗</a>
+        <button class="action bundle-copy" type="button" data-copy-bundle="ds-153" hidden>Copy integration bundle</button>
+        <span class="bundle-status" role="status" aria-live="polite" data-bundle-status></span>
+      </div>
+      <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
+      <h3>HTML</h3>
+      
+      <pre tabindex="0"><code>&lt;div class=&quot;crosshair-scroller&quot; role=&quot;region&quot; aria-label=&quot;Quarterly revenue&quot; tabindex=&quot;0&quot;&gt;
+  &lt;table class=&quot;crosshair-table&quot;&gt;
+    &lt;caption&gt;Revenue by region, in thousands&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Region&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Q1&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Q2&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Q3&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;North&lt;/th&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;24&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;31&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;38&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;West&lt;/th&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;18&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;27&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;34&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;East&lt;/th&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;15&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;22&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#crosshair-note&quot;&gt;29&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+  &lt;p id=&quot;crosshair-note&quot;&gt;Illustrative values only.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <h3>CSS</h3>
+      <pre tabindex="0"><code>.crosshair-scroller { inline-size: 100%; max-inline-size: 100%; overflow-x: auto; }
+.crosshair-table { inline-size: 100%; border-collapse: collapse; }
+.crosshair-table caption { text-align: start; margin-block-end: .5rem; font-weight: 600; }
+.crosshair-table th,
+.crosshair-table td {
+  padding: .6rem .7rem;
+  border: 1px solid var(--color-border);
+  text-align: start;
+  min-inline-size: 4.5rem;
+}
+.crosshair-table thead th { background: var(--color-surface-offset); }
+.crosshair-table tbody tr:hover &gt; *,
+.crosshair-table tbody tr:focus-within &gt; * { background: var(--color-surface-offset); }
+.crosshair-table:has(tbody :nth-child(2):is(:hover, :focus-within)) tr &gt; :nth-child(2),
+.crosshair-table:has(tbody :nth-child(3):is(:hover, :focus-within)) tr &gt; :nth-child(3),
+.crosshair-table:has(tbody :nth-child(4):is(:hover, :focus-within)) tr &gt; :nth-child(4) {
+  background: var(--color-surface-offset);
+}
+.crosshair-table tbody td:is(:hover, :focus-within) {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.crosshair-table td a { display: grid; align-items: center; min-block-size: 44px; color: inherit; }
+.crosshair-table td a:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }</code></pre>
+    </section>
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">Browser-support guidance</h2>
+      <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">:has() has been Baseline since late 2023.</p>
+    </section>
+    <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
+  </main>
+  <script src="/spell-copy.js" defer></script>
+</body>
+</html>

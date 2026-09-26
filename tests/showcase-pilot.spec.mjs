@@ -30,6 +30,12 @@ async function exercise(root, page, id, width, motion) {
     await gallery.focus();
     await page.keyboard.press('ArrowRight');
     await expect.poll(async () => (await geometry()).left).toBeGreaterThan(5);
+    // Wait for Firefox's native keyboard scroll before a separate snap transaction.
+    await expect(async () => {
+      const left = (await geometry()).left;
+      await page.waitForTimeout(250);
+      expect((await geometry()).left).toBe(left);
+    }).toPass({timeout: 5000});
     // Prove snapping at an interior item, not just clamping at a scroll edge.
     await gallery.evaluate(e => {
       e.scrollLeft = e.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(e).gap) - 45;

@@ -4571,6 +4571,219 @@ Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, ba
 }
 ```
 
+
+## Gap-fill spells (2026)
+
+### 152. Keyboard-Friendly Table Crosshair (`:has()`)
+*Data · Baseline · Markup*
+
+Highlight the active table row and column together without JavaScript. Pointer hover and keyboard focus use the same relational selectors, so the crosshair remains useful beyond a mouse-only demo.
+
+```html
+<table class="crosshair-table">
+  <thead>
+    <tr><th scope="col">Region</th><th scope="col">Q1</th><th scope="col">Q2</th><th scope="col">Q3</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">North</th><td><button class="cell-value">42</button></td><td><button class="cell-value">56</button></td><td><button class="cell-value">61</button></td></tr>
+    <tr><th scope="row">South</th><td><button class="cell-value">38</button></td><td><button class="cell-value">49</button></td><td><button class="cell-value">67</button></td></tr>
+    <tr><th scope="row">West</th><td><button class="cell-value">51</button></td><td><button class="cell-value">63</button></td><td><button class="cell-value">72</button></td></tr>
+  </tbody>
+</table>
+```
+
+```css
+.crosshair-table {
+  inline-size: min(34rem, 100%);
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.crosshair-table th,
+.crosshair-table td {
+  padding: .7rem;
+  border: 1px solid var(--color-border);
+  text-align: center;
+  transition: background-color 140ms ease;
+}
+.crosshair-table th { font-weight: 700; }
+.cell-value {
+  inline-size: 100%;
+  min-block-size: 44px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.crosshair-table tbody tr:has(.cell-value:hover, .cell-value:focus-visible) > * {
+  background: var(--color-surface-offset);
+}
+.crosshair-table:has(td:nth-child(2) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(2),
+.crosshair-table:has(td:nth-child(3) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(3),
+.crosshair-table:has(td:nth-child(4) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(4) {
+  background: var(--color-surface-dynamic);
+}
+.cell-value:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .crosshair-table th,
+  .crosshair-table td { transition: none; }
+}
+```
+
+### 153. Intrinsic Disclosure Width (`calc-size()`)
+*Layout · Progressive · Markup*
+
+Expand a compact disclosure to its real max-content width plus breathing room. The fixed-width fallback stays usable where `calc-size()` is unavailable.
+
+```html
+<div class="intrinsic-demo">
+  <input class="sr-only intrinsic-toggle" type="checkbox" id="intrinsic-more">
+  <label class="intrinsic-pill" for="intrinsic-more">
+    <span class="intrinsic-pill__icon" aria-hidden="true">＋</span>
+    <span>Show intrinsic details</span>
+  </label>
+</div>
+```
+
+```css
+.intrinsic-demo { inline-size: min(28rem, 100%); }
+.intrinsic-pill {
+  inline-size: 3rem;
+  max-inline-size: 100%;
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding-inline: .75rem;
+  overflow: clip;
+  white-space: nowrap;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: inline-size 320ms cubic-bezier(.16,1,.3,1);
+}
+.intrinsic-pill__icon { flex: 0 0 1.4rem; text-align: center; }
+.intrinsic-toggle:checked + .intrinsic-pill {
+  inline-size: min(18rem, 100%);
+}
+@supports (inline-size: calc-size(max-content, size + 2rem)) {
+  .intrinsic-toggle:checked + .intrinsic-pill {
+    inline-size: calc-size(max-content, size + 2rem);
+  }
+}
+.intrinsic-toggle:focus-visible + .intrinsic-pill {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intrinsic-pill { transition: none; }
+}
+```
+
+### 154. Breakpointless Switcher Layout
+*Layout · Baseline · 0 JS*
+
+Switch from a horizontal card row to a vertical stack based on the component's available inline size, with flex math instead of viewport media queries.
+
+```html
+<section class="switcher" aria-label="Service options">
+  <article><strong>Audit</strong><span>Find the bottlenecks.</span></article>
+  <article><strong>Build</strong><span>Ship the lean version.</span></article>
+  <article><strong>Improve</strong><span>Measure and iterate.</span></article>
+</section>
+```
+
+```css
+.switcher {
+  --switcher-threshold: 34rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  inline-size: 100%;
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
+  min-inline-size: min(100%, 10rem);
+  display: grid;
+  gap: .35rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.switcher strong { font-size: 1.05rem; }
+.switcher span { color: var(--color-text-muted); }
+```
+
+### 155. Stepped CSS Math Gauge (`round()`)
+*Data · Baseline · 0 JS*
+
+Quantize a continuously animated percentage into visible ten-point steps with CSS `round()`. The fallback shows the raw target, while reduced-motion users get the final rounded state immediately.
+
+```html
+<figure class="step-gauge" style="--target:73%;--step:10%">
+  <figcaption><strong>Capacity</strong><span>73% target → 70% step</span></figcaption>
+  <div class="step-gauge__track" aria-hidden="true"><span class="step-gauge__fill"></span></div>
+</figure>
+```
+
+```css
+@property --raw-progress {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+.step-gauge {
+  inline-size: min(28rem, 100%);
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.step-gauge figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: .75rem;
+}
+.step-gauge figcaption span { color: var(--color-text-muted); }
+.step-gauge__track {
+  block-size: 1rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-surface-offset);
+}
+.step-gauge__fill {
+  display: block;
+  block-size: 100%;
+  inline-size: var(--target);
+  border-radius: inherit;
+  background: var(--color-primary);
+}
+@supports (inline-size: round(down, 73%, 10%)) {
+  .step-gauge__fill {
+    --raw-progress: 0%;
+    inline-size: round(down, var(--raw-progress), var(--step));
+    animation: step-gauge-fill 1800ms ease-out forwards;
+  }
+  @keyframes step-gauge-fill {
+    to { --raw-progress: var(--target); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step-gauge__fill {
+    animation: none;
+    --raw-progress: var(--target);
+  }
+}
+```
+
 ---
 
 # Ready-made stacks
@@ -4698,6 +4911,7 @@ Composed combinations for different project types. Every stack starts from Base 
 - 124
 - 125
 - 145
+- 155
 
 ### Table.astro
 - 69
@@ -4708,6 +4922,7 @@ Composed combinations for different project types. Every stack starts from Base 
 - 111
 - 114
 - 122
+- 152
 
 ### Tooltip.astro
 - 18
@@ -4811,6 +5026,8 @@ Composed combinations for different project types. Every stack starts from Base 
 - 111
 - 126
 - 135
+- 153
+- 154
 
 ### Shell.astro
 - 30

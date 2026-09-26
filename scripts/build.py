@@ -388,6 +388,16 @@ FEATURE_BROWSERS = {
         "chrome": "no", "edge": "no", "firefox": "no", "safari": "yes",
         "note": "Safari 26.2+; Chromium and Firefox unsupported.",
     },
+    "calc-size": {
+        "feature": "calc-size()",
+        "chrome": "yes", "edge": "yes", "firefox": "no", "safari": "no",
+        "note": "Chromium 129+; Firefox and Safari do not support calc-size().",
+    },
+    "round-math": {
+        "feature": "CSS round()",
+        "chrome": "yes", "edge": "yes", "firefox": "yes", "safari": "yes",
+        "note": "round() is Baseline 2024 across current major engines.",
+    },
 }
 
 
@@ -401,6 +411,8 @@ def detect_features(css: str, html: str, title: str, status: str) -> list[str]:
         (r"@scope\b", "css-scope"),
         (r"column-rule|row-rule", "gap-decorations"),
         (r"\brandom\(", "css-random"),
+        (r"\bcalc-size\(", "calc-size"),
+        (r"\bround\(", "round-math"),
         (r"interestfor|interest-delay|:interest-source", "interest-invokers"),
         (r"commandfor|command=", "invoker-commands"),
         (r"grid-lanes", "grid-lanes"),

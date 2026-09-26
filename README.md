@@ -658,59 +658,100 @@ details[open] .fab-actions {
 ### 79. Anchor-Positioned Mega Menu (`[popover]`)
 *Navigation · Newer · Markup*
 
-A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command="toggle-popover"`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree.
+A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command="toggle-popover"`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree. Anchor placement is an enhancement only: without it the panel remains a usable centred native overlay, and below 700px it becomes a contained bottom sheet. Menu destinations are local fragments that exist in the demo document.
 
 ```html
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="#top">Fieldline</a>
   <button class="mega-trigger" commandfor="mega-1" command="toggle-popover">
     Products <span aria-hidden="true">▾</span>
   </button>
-  <div id="mega-1" popover="auto" class="mega-panel">
-    <ul>
-      <li><a href="/analytics">Analytics</a></li>
-      <li><a href="/automation">Automation</a></li>
-      <li><a href="/api">API & Integrations</a></li>
-    </ul>
-  </div>
+  <a class="nav-link" href="#pricing">Pricing</a>
+  <a class="nav-link" href="#field-notes">Field notes</a>
 </nav>
+<div id="mega-1" popover="auto" class="mega-panel">
+  <div class="mega-col">
+    <h2>Observe</h2>
+    <a class="mega-item" href="#observe"><strong>Signal dashboard</strong><span>Release metrics in one morning view.</span></a>
+    <a class="mega-item" href="#observe-alerts"><strong>Quiet alerts</strong><span>Only the thresholds you actually set.</span></a>
+  </div>
+  <div class="mega-col">
+    <h2>Automate</h2>
+    <a class="mega-item" href="#automate"><strong>Flow builder</strong><span>Plain-language steps, no scripting.</span></a>
+    <a class="mega-item" href="#automate-schedule"><strong>Seasonal schedules</strong><span>Pause and resume whole workflows.</span></a>
+  </div>
+  <div class="mega-col">
+    <h2>Connect</h2>
+    <a class="mega-item" href="#connect"><strong>Guided imports</strong><span>Bring existing records across.</span></a>
+    <a class="mega-item" href="#connect-api"><strong>Read-only API</strong><span>Token-scoped, documented endpoints.</span></a>
+  </div>
+  <p class="mega-foot"><a href="#changelog">Read the changelog →</a></p>
+</div>
 ```
 
 ```css
-.site-nav { position: relative; anchor-scope: --mega-1; }
+.site-nav { display: flex; align-items: center; gap: var(--space-4); min-block-size: 64px; }
+.site-nav .brand { font-weight: 700; text-decoration: none; color: var(--color-text); }
+.site-nav .nav-link { min-block-size: 44px; display: inline-flex; align-items: center; color: var(--color-text-muted); text-decoration: none; }
 .mega-trigger {
   anchor-name: --mega-1;
   min-block-size: 44px;
   padding: 0 var(--space-4);
   background: none; border: 0; cursor: pointer;
   color: var(--color-text); font-weight: 500;
+  border-radius: var(--radius-sm);
 }
+.mega-trigger:hover { background: var(--color-surface-offset); }
+.mega-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .mega-panel {
-  margin: 0; inset: auto;
-  position-anchor: --mega-1;
-  position-area: bottom span-all;
-  margin-block-start: var(--space-2);
-  position-try-fallbacks: flip-block;
-  min-inline-size: 22rem;
-  padding: var(--space-4);
+  max-inline-size: min(92vw, 54rem);
+  padding: var(--space-5);
+  grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: 0 20px 50px oklch(0 0 0 / .14);
-  opacity: 0; transform: translateY(-6px);
-  transition: opacity 200ms cubic-bezier(.16,1,.3,1),
-              transform 200ms cubic-bezier(.16,1,.3,1),
-              display 200ms allow-discrete,
-              overlay 200ms allow-discrete;
+  box-shadow: 0 24px 60px oklch(0 0 0 / .16);
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity 200ms cubic-bezier(.16,1,.3,1), transform 200ms cubic-bezier(.16,1,.3,1),
+              display 200ms allow-discrete, overlay 200ms allow-discrete;
 }
-.mega-panel:popover-open { opacity: 1; transform: translateY(0); }
-@starting-style { .mega-panel:popover-open { opacity: 0; transform: translateY(-6px); } }
-.mega-panel a {
+.mega-panel:popover-open { display: grid; opacity: 1; transform: translateY(0); }
+@starting-style { .mega-panel:popover-open { opacity: 0; transform: translateY(-8px); } }
+.mega-col h2 {
+  font: 600 11px ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-text-muted); margin: 0 0 var(--space-2);
+}
+.mega-item {
   display: block; padding: .65rem .75rem; min-block-size: 44px;
   border-radius: var(--radius-sm); text-decoration: none; color: var(--color-text);
 }
-.mega-panel a:hover, .mega-panel a:focus-visible { background: var(--color-surface-offset); }
+.mega-item strong { display: block; }
+.mega-item span { color: var(--color-text-muted); font-size: .85rem; }
+.mega-item:hover, .mega-item:focus-visible { background: var(--color-surface-offset); }
+.mega-foot { grid-column: 1 / -1; margin: 0; border-top: 1px solid var(--color-border); padding-top: var(--space-3); }
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@media (min-width: 700px) {
+  @supports (top: anchor(top)) {
+    .mega-panel {
+      inset: auto; margin: 0; margin-block-start: var(--space-2);
+      top: anchor(--mega-1 bottom); left: anchor(--mega-1 left);
+      position-try-fallbacks: flip-inline, flip-block;
+    }
+  }
+}
+/* Narrow or short viewports get a contained bottom sheet instead of an
+   anchored panel, so the menu never clips essential content. */
+@media (max-width: 699px), (max-height: 560px) {
+  .mega-panel {
+    inset: auto 0 0 0; margin: 0; inline-size: 100%; max-inline-size: none;
+    grid-template-columns: 1fr; max-block-size: 84dvh; overflow: auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mega-panel { transition: none; transform: none; }
+}
 ```
-
 ### 80. Squircle Chips & Nav (`corner-shape`)
 *Navigation · Progressive · 0 JS*
 
@@ -914,43 +955,79 @@ Confirmation toasts that appear when a link sets `#toast-…` and close via a di
 ### 89. Anchor-Pinned Context Menu
 *Overlays · Newer · Markup*
 
-A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges.
+A click-driven action menu (⋯) pinned to its trigger with anchor positioning and automatic flip at the screen edges. The popover holds ordinary links and native controls with real local effects — a fragment destination and a checkbox the owning row reflects — instead of `role="menu"` semantics whose arrow-key, type-ahead and focus-wrap contract zero-JS cannot fulfil. Escape, light-dismiss and focus return stay native. A per-row `--ctx-anchor` custom property keeps every anchor name unique when a list repeats the pattern. Without anchor positioning the menu remains a usable centred native overlay; below 700px it becomes a contained bottom sheet.
 
 ```html
-<div class="ctx">
-  <button class="ctx-btn" commandfor="ctx-menu" command="toggle-popover" aria-haspopup="menu" aria-label="More actions">⋯</button>
-  <div id="ctx-menu" popover="auto" class="ctx-menu" role="menu">
-    <button role="menuitem">Edit</button>
-    <button role="menuitem">Duplicate</button>
-    <hr>
-    <button role="menuitem" class="danger">Delete</button>
+<article class="doc-row" style="--ctx-anchor: --ctx-q3;">
+  <div class="doc-copy">
+    <h2>Q3 renewal forecast <span class="star-flag" aria-hidden="true">★</span></h2>
+    <p>Updated 2 days ago · Owned by Priya</p>
   </div>
+  <button class="ctx-btn" commandfor="ctx-menu" command="toggle-popover" aria-label="Actions for Q3 renewal forecast">⋯</button>
+  <div id="ctx-menu" popover="auto" class="ctx-menu">
+    <a class="ctx-item" href="#record-q3">Open full record</a>
+    <label class="ctx-item ctx-check"><input type="checkbox"> Star for review</label>
+    <a class="ctx-item" href="#history-q3">View change history</a>
+  </div>
+</article>
 ```
 
 ```css
-.ctx { position: relative; anchor-scope: --ctx; }
-.ctx-btn { anchor-name: --ctx; inline-size: 44px; block-size: 44px; border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border); background: var(--color-bg); cursor: pointer; }
+.doc-row {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+.doc-row p { margin: 0; color: var(--color-text-muted); font-size: .85rem; }
+.star-flag { display: none; color: var(--color-primary); }
+.doc-row:has(.ctx-check input:checked) { border-color: var(--color-primary); }
+.doc-row:has(.ctx-check input:checked) .star-flag { display: inline; }
+.ctx-btn {
+  anchor-name: var(--ctx-anchor);
+  margin-inline-start: auto; flex: none;
+  inline-size: 44px; block-size: 44px; border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border); background: var(--color-bg); cursor: pointer;
+}
+.ctx-btn:hover { background: var(--color-surface-offset); }
+.ctx-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .ctx-menu {
-  margin: 0; inset: auto;
-  position-anchor: --ctx; position-area: bottom end; margin-block-start: var(--space-2);
-  position-try-fallbacks: flip-inline, flip-block;
-  min-inline-size: 12rem; padding: var(--space-2);
+  min-inline-size: 13rem; padding: var(--space-2);
   background: var(--color-bg); border: 1px solid var(--color-border);
   border-radius: var(--radius-md); box-shadow: 0 20px 50px oklch(0 0 0 / .16);
-  opacity: 0; transform: scale(.96); transform-origin: top right;
+  opacity: 0; transform: scale(.98); transform-origin: top right;
   transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),
               display 180ms allow-discrete, overlay 180ms allow-discrete;
 }
 .ctx-menu:popover-open { opacity: 1; transform: scale(1); }
-@starting-style { .ctx-menu:popover-open { opacity: 0; transform: scale(.96); } }
-.ctx-menu button { display: block; inline-size: 100%; min-block-size: 44px; text-align: start;
-  padding: 0 .85rem; border: 0; background: none; border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text); }
-.ctx-menu button:hover, .ctx-menu button:focus-visible { background: var(--color-surface-offset); }
-.ctx-menu .danger { color: var(--color-error); }
-.ctx-menu hr { border: 0; border-top: 1px solid var(--color-border); margin-block: var(--space-1); }
+@starting-style { .ctx-menu:popover-open { opacity: 0; transform: scale(.98); } }
+.ctx-item {
+  display: flex; align-items: center; gap: .5rem;
+  min-block-size: 44px; padding: 0 .85rem;
+  border-radius: var(--radius-sm); color: var(--color-text);
+  text-decoration: none; cursor: pointer;
+}
+.ctx-item:hover, .ctx-item:focus-visible, .ctx-item:focus-within { background: var(--color-surface-offset); }
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@media (min-width: 700px) {
+  @supports (top: anchor(top)) {
+    .ctx-menu {
+      inset: auto; margin: 0; margin-block-start: var(--space-1);
+      position-anchor: var(--ctx-anchor);
+      top: anchor(var(--ctx-anchor) bottom); right: anchor(var(--ctx-anchor) right);
+      position-try-fallbacks: flip-inline, flip-block;
+    }
+  }
+}
+/* Narrow or short viewports get a contained bottom sheet instead of an
+   anchored menu, so the menu never clips essential content. */
+@media (max-width: 699px), (max-height: 560px) {
+  .ctx-menu { inset: auto 0 0 0; margin: 0; inline-size: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ctx-menu { transition: none; transform: none; }
+}
 ```
-
 ### 90. Sun-Fan FAB (radial)
 *Overlays · Baseline · Markup*
 
@@ -4306,25 +4383,139 @@ A keyboard-first skip link that slides in at the top of the screen on focus.
 ### 142. Interactive Map Pin Popover (`anchor-name` + `position-anchor`)
 *Overlays · Newer · Markup*
 
-Map pins that open anchored popovers on click.
+Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key's `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.
 
 ```html
-<div class="map-container">
-  <button id="pin-1" commandfor="pop-pin-1" command="toggle-popover" class="map-pin" style="top: 30%; left: 40%;">📍</button>
-  <div id="pop-pin-1" popover="auto" class="pin-pop">London HQ</div>
-</div>
+<figure class="map-figure">
+  <div class="map-container" role="group" aria-label="Illustrated studio map with four locations">
+    <div class="map-stop" style="--pin-anchor: --pin-1; --pin-x: 22%; --pin-y: 46%;">
+      <button class="map-pin" commandfor="pop-pin-1" command="toggle-popover" aria-label="Location 1, Harbour Point, Lisbon"><span aria-hidden="true"><i>1</i></span></button>
+      <div id="pop-pin-1" popover="auto" class="pin-pop">
+        <strong>Harbour Point</strong>
+        <span>Lisbon · 14 people · UTC+1</span>
+        <a class="pin-link" href="#note-1">Studio notes →</a>
+        <button class="pin-close" commandfor="pop-pin-1" command="hide-popover" aria-label="Close Harbour Point notes">×</button>
+      </div>
+    </div>
+    <div class="map-stop" style="--pin-anchor: --pin-2; --pin-x: 58%; --pin-y: 24%;">
+      <button class="map-pin" commandfor="pop-pin-2" command="toggle-popover" aria-label="Location 2, Kiln Yard, Porto"><span aria-hidden="true"><i>2</i></span></button>
+      <div id="pop-pin-2" popover="auto" class="pin-pop">
+        <strong>Kiln Yard</strong>
+        <span>Porto · 6 people · UTC+1</span>
+        <a class="pin-link" href="#note-2">Studio notes →</a>
+        <button class="pin-close" commandfor="pop-pin-2" command="hide-popover" aria-label="Close Kiln Yard notes">×</button>
+      </div>
+    </div>
+    <div class="map-stop" style="--pin-anchor: --pin-3; --pin-x: 74%; --pin-y: 68%;">
+      <button class="map-pin" commandfor="pop-pin-3" command="toggle-popover" aria-label="Location 3, North Light, Tromsø"><span aria-hidden="true"><i>3</i></span></button>
+      <div id="pop-pin-3" popover="auto" class="pin-pop">
+        <strong>North Light</strong>
+        <span>Tromsø · 3 people · UTC+2</span>
+        <a class="pin-link" href="#note-3">Studio notes →</a>
+        <button class="pin-close" commandfor="pop-pin-3" command="hide-popover" aria-label="Close North Light notes">×</button>
+      </div>
+    </div>
+    <div class="map-stop" style="--pin-anchor: --pin-4; --pin-x: 38%; --pin-y: 78%;">
+      <button class="map-pin" commandfor="pop-pin-4" command="toggle-popover" aria-label="Location 4, Field Station, Azores"><span aria-hidden="true"><i>4</i></span></button>
+      <div id="pop-pin-4" popover="auto" class="pin-pop">
+        <strong>Field Station</strong>
+        <span>Azores · 2 people · UTC+0</span>
+        <a class="pin-link" href="#note-4">Studio notes →</a>
+        <button class="pin-close" commandfor="pop-pin-4" command="hide-popover" aria-label="Close Field Station notes">×</button>
+      </div>
+    </div>
+  </div>
+  <figcaption class="map-key">
+    <ul>
+      <li><a href="#note-1"><span aria-hidden="true">1</span>Harbour Point — Lisbon</a></li>
+      <li><a href="#note-2"><span aria-hidden="true">2</span>Kiln Yard — Porto</a></li>
+      <li><a href="#note-3"><span aria-hidden="true">3</span>North Light — Tromsø</a></li>
+      <li><a href="#note-4"><span aria-hidden="true">4</span>Field Station — Azores</a></li>
+    </ul>
+  </figcaption>
+</figure>
 ```
 
 ```css
-.map-container { position: relative; inline-size: 100%; block-size: 24rem; background: var(--color-surface-offset); }
-.map-pin { position: absolute; anchor-name: --pin-1; min-block-size: 44px; min-inline-size: 44px; border: 0; background: none; font-size: 1.5rem; cursor: pointer; }
+.map-figure { margin: 0; }
+.map-container {
+  position: relative; inline-size: 100%; block-size: clamp(18rem, 46vw, 26rem);
+  background: var(--color-surface-offset);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+}
+.map-stop {
+  position: absolute; inset-block-start: var(--pin-y); inset-inline-start: var(--pin-x);
+  margin: -22px 0 0 -22px;
+  anchor-name: var(--pin-anchor);
+}
+.map-pin {
+  display: grid; place-items: center;
+  inline-size: 44px; block-size: 44px;
+  border: 0; background: none; cursor: pointer;
+}
+.map-pin span {
+  display: grid; place-items: center; inline-size: 30px; block-size: 30px;
+  border-radius: 50% 50% 50% 0; rotate: -45deg;
+  background: var(--color-primary); color: var(--color-text-inverse);
+  box-shadow: 0 6px 14px oklch(0 0 0 / .28);
+  transition: scale 160ms cubic-bezier(.16,1,.3,1), background 160ms ease;
+}
+.map-pin i { rotate: 45deg; font-style: normal; font: 700 12px/1 ui-monospace, monospace; }
+.map-pin:hover span, .map-pin:focus-visible span { scale: 1.12; }
+.map-pin:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 50%; }
 .pin-pop {
-  margin: 0; inset: auto; position-anchor: --pin-1; position-area: top;
-  position-try-options: flip-block, flip-inline; padding: var(--space-2) var(--space-3);
-  background: var(--color-bg); border-radius: var(--radius-sm); border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  gap: 2px; min-inline-size: 12rem; max-inline-size: min(86vw, 20rem);
+  background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px oklch(0 0 0 / .18);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),
+              display 180ms allow-discrete, overlay 180ms allow-discrete;
+}
+.pin-pop:popover-open { display: grid; opacity: 1; transform: translateY(0); }
+@starting-style { .pin-pop:popover-open { opacity: 0; transform: translateY(6px); } }
+.pin-pop strong { font-size: 1rem; }
+.pin-pop > span { color: var(--color-text-muted); font-size: .85rem; }
+.pin-link { display: inline-flex; align-items: center; min-block-size: 32px; font-size: .85rem; }
+.pin-close {
+  position: absolute; top: var(--space-1); right: var(--space-1);
+  inline-size: 32px; block-size: 32px;
+  border: 0; background: none; cursor: pointer;
+  color: var(--color-text-muted); font-size: 18px; line-height: 1; border-radius: var(--radius-sm);
+}
+.pin-close:hover, .pin-close:focus-visible { background: var(--color-surface-offset); color: var(--color-text); }
+.map-key ul {
+  list-style: none; margin: var(--space-3) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4);
+  font-size: .85rem; color: var(--color-text-muted);
+}
+.map-key a {
+  display: flex; align-items: center; gap: .45rem;
+  min-block-size: 32px; color: inherit; text-decoration: none;
+  border-radius: 4px;
+}
+.map-key a:hover { text-decoration: underline; }
+.map-key a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.map-key span {
+  display: inline-grid; place-items: center; inline-size: 18px; block-size: 18px;
+  border-radius: 50%; background: var(--color-primary); color: var(--color-text-inverse);
+  font: 700 10px ui-monospace, monospace;
+}
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@supports (bottom: anchor(top)) {
+  .pin-pop {
+    inset: auto; margin: 0; margin-block-end: var(--space-2);
+    position-anchor: var(--pin-anchor);
+    bottom: anchor(var(--pin-anchor) top); left: anchor(var(--pin-anchor) center);
+    translate: -50% 0;
+    position-try-fallbacks: flip-block;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-pop { transition: none; transform: none; }
+  .map-pin span { transition: none; }
 }
 ```
-
 ### 143. Print-Friendly Article Stylesheet (`@media print`)
 *Layout · Baseline · 0 JS*
 

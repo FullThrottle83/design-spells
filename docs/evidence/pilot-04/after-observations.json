@@ -1,0 +1,1024 @@
+{
+  "capturedAt": "2026-09-26T16:53:57.018Z",
+  "browserVersion": "153.0.8010.0",
+  "base": "http://127.0.0.1:8790",
+  "prefix": "after",
+  "states": [
+    {
+      "id": "ds-79",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "mega-1",
+          "triggerRect": {
+            "x": 441.72,
+            "y": 92,
+            "width": 108.2,
+            "height": 44,
+            "right": 549.92,
+            "bottom": 136
+          },
+          "command": {
+            "commandfor": "mega-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 2,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 441.72,
+            "y": 142.5,
+            "width": 702,
+            "height": 310.84,
+            "right": 1143.72,
+            "bottom": 453.34
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Products ▾",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Signal dashboardRelease metrics in",
+            "a:Quiet alertsOnly the thresholds yo",
+            "a:Flow builderPlain-language steps, ",
+            "a:Seasonal schedulesPause and resume"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "panelLinks": [
+        "#observe",
+        "#observe-alerts",
+        "#automate",
+        "#automate-schedule",
+        "#connect",
+        "#connect-api",
+        "#changelog"
+      ],
+      "fragmentTargets": [
+        {
+          "href": "#observe",
+          "exists": true
+        },
+        {
+          "href": "#observe-alerts",
+          "exists": true
+        },
+        {
+          "href": "#automate",
+          "exists": true
+        },
+        {
+          "href": "#automate-schedule",
+          "exists": true
+        },
+        {
+          "href": "#connect",
+          "exists": true
+        },
+        {
+          "href": "#connect-api",
+          "exists": true
+        },
+        {
+          "href": "#changelog",
+          "exists": true
+        }
+      ],
+      "linkStatus": [],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 369,
+          "y": 294.58,
+          "width": 702,
+          "height": 310.84,
+          "right": 1071,
+          "bottom": 605.42
+        },
+        "position": "fixed",
+        "visibleText": "ObserveSignal dashboardRelease metrics in one morning view.Q",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-89",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 4,
+      "popoverCount": 4,
+      "overlays": [
+        {
+          "target": "ctx-menu",
+          "triggerRect": {
+            "x": 1066,
+            "y": 314.33,
+            "width": 44,
+            "height": 44,
+            "right": 1110,
+            "bottom": 358.33
+          },
+          "command": {
+            "commandfor": "ctx-menu",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 910.84,
+            "y": 361.58,
+            "width": 199.16,
+            "height": 147,
+            "right": 1110,
+            "bottom": 508.58
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for Q3 renewal forecast",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "button:Actions for Studio lease, annex"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "ctx-menu-2",
+          "triggerRect": {
+            "x": 1066,
+            "y": 411.5,
+            "width": 44,
+            "height": 44,
+            "right": 1110,
+            "bottom": 455.5
+          },
+          "command": {
+            "commandfor": "ctx-menu-2",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 2,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 910.84,
+            "y": 458.75,
+            "width": 199.16,
+            "height": 147,
+            "right": 1110,
+            "bottom": 605.75
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for Studio lease, annex",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "button:Actions for Winter residency brief"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "ctx-menu-3",
+          "triggerRect": {
+            "x": 1066,
+            "y": 508.67,
+            "width": 44,
+            "height": 44,
+            "right": 1110,
+            "bottom": 552.67
+          },
+          "command": {
+            "commandfor": "ctx-menu-3",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 3,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 910.84,
+            "y": 555.92,
+            "width": 199.16,
+            "height": 147,
+            "right": 1110,
+            "bottom": 702.92
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for Winter residency brief",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "a:Back to documents ↑"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "a",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "ctx-menu-4",
+          "triggerRect": {
+            "x": 1066,
+            "y": 1612.36,
+            "width": 44,
+            "height": 44,
+            "right": 1110,
+            "bottom": 1656.36
+          },
+          "command": {
+            "commandfor": "ctx-menu-4",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 12,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 910.84,
+            "y": 409.11,
+            "width": 199.16,
+            "height": 147,
+            "right": 1110,
+            "bottom": 556.11
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for archived spring catalo",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "BODY"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "BODY",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "menuActions": {
+        "clicks": [],
+        "domLengthDelta": 0,
+        "urlUnchanged": true
+      },
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 620.42,
+          "y": 376.5,
+          "width": 199.16,
+          "height": 147,
+          "right": 819.58,
+          "bottom": 523.5
+        },
+        "position": "fixed",
+        "visibleText": "Open full record Star for reviewView change history",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-142",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 4,
+      "popoverCount": 4,
+      "overlays": [
+        {
+          "target": "pop-pin-1",
+          "triggerRect": {
+            "x": 472.31,
+            "y": 520.05,
+            "width": 44,
+            "height": 44,
+            "right": 516.31,
+            "bottom": 564.05
+          },
+          "command": {
+            "commandfor": "pop-pin-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 405.3,
+            "y": 417.58,
+            "width": 178.03,
+            "height": 95.97,
+            "right": 583.33,
+            "bottom": 513.55
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 1, Harbour Point, Lisbon",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close Harbour Point notes",
+            "button:Location 2, Kiln Yard, Porto",
+            "button:Location 3, North Light, Tromsø"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "pop-pin-2",
+          "triggerRect": {
+            "x": 762.47,
+            "y": 433.16,
+            "width": 44,
+            "height": 44,
+            "right": 806.47,
+            "bottom": 477.16
+          },
+          "command": {
+            "commandfor": "pop-pin-2",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 2,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 702.52,
+            "y": 330.69,
+            "width": 163.91,
+            "height": 95.97,
+            "right": 866.42,
+            "bottom": 426.66
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 2, Kiln Yard, Porto",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close Kiln Yard notes",
+            "button:Location 3, North Light, Tromsø",
+            "button:Location 4, Field Station, Azores"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "pop-pin-3",
+          "triggerRect": {
+            "x": 907.55,
+            "y": 592.44,
+            "width": 44,
+            "height": 44,
+            "right": 951.55,
+            "bottom": 636.44
+          },
+          "command": {
+            "commandfor": "pop-pin-3",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 3,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 842.2,
+            "y": 489.97,
+            "width": 174.7,
+            "height": 95.97,
+            "right": 1016.9,
+            "bottom": 585.94
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 3, North Light, Tromsø",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close North Light notes",
+            "button:Location 4, Field Station, Azores",
+            "a:1Harbour Point — Lisbon"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "a",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "pop-pin-4",
+          "triggerRect": {
+            "x": 617.39,
+            "y": 643.13,
+            "width": 44,
+            "height": 44,
+            "right": 661.39,
+            "bottom": 687.13
+          },
+          "command": {
+            "commandfor": "pop-pin-4",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 4,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 553.29,
+            "y": 540.66,
+            "width": 172.2,
+            "height": 95.97,
+            "right": 725.49,
+            "bottom": 636.63
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 4, Field Station, Azores",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close Field Station notes",
+            "a:1Harbour Point — Lisbon",
+            "a:2Kiln Yard — Porto"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "a",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "pinCount": 16,
+      "popoverTexts": [
+        "Harbour PointLisbon · 14 people · UTC+1Studio notes →×",
+        "Kiln YardPorto · 6 people · UTC+1Studio notes →×",
+        "North LightTromsø · 3 people · UTC+2Studio notes →×",
+        "Field StationAzores · 2 people · UTC+0Studio notes →×"
+      ],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 630.98,
+          "y": 402.02,
+          "width": 178.03,
+          "height": 95.97,
+          "right": 809.02,
+          "bottom": 497.98
+        },
+        "position": "fixed",
+        "visibleText": "Harbour PointLisbon · 14 people · UTC+1Studio notes →×",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-79",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "mega-1",
+          "triggerRect": {
+            "x": 149.72,
+            "y": 42,
+            "width": 108.2,
+            "height": 44,
+            "right": 257.92,
+            "bottom": 86
+          },
+          "command": {
+            "commandfor": "mega-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 2,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 246.72,
+            "width": 390,
+            "height": 597.28,
+            "right": 390,
+            "bottom": 844
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Products ▾",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Signal dashboardRelease metrics in",
+            "a:Quiet alertsOnly the thresholds yo",
+            "a:Flow builderPlain-language steps, ",
+            "a:Seasonal schedulesPause and resume"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "panelLinks": [
+        "#observe",
+        "#observe-alerts",
+        "#automate",
+        "#automate-schedule",
+        "#connect",
+        "#connect-api",
+        "#changelog"
+      ],
+      "fragmentTargets": [
+        {
+          "href": "#observe",
+          "exists": true
+        },
+        {
+          "href": "#observe-alerts",
+          "exists": true
+        },
+        {
+          "href": "#automate",
+          "exists": true
+        },
+        {
+          "href": "#automate-schedule",
+          "exists": true
+        },
+        {
+          "href": "#connect",
+          "exists": true
+        },
+        {
+          "href": "#connect-api",
+          "exists": true
+        },
+        {
+          "href": "#changelog",
+          "exists": true
+        }
+      ],
+      "linkStatus": [],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 0,
+          "y": 246.72,
+          "width": 390,
+          "height": 597.28,
+          "right": 390,
+          "bottom": 844
+        },
+        "position": "fixed",
+        "visibleText": "ObserveSignal dashboardRelease metrics in one morning view.Q",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-89",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 4,
+      "popoverCount": 4,
+      "overlays": [
+        {
+          "target": "ctx-menu",
+          "triggerRect": {
+            "x": 292,
+            "y": 298.7,
+            "width": 44,
+            "height": 44,
+            "right": 336,
+            "bottom": 342.7
+          },
+          "command": {
+            "commandfor": "ctx-menu",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 697,
+            "width": 390,
+            "height": 147,
+            "right": 390,
+            "bottom": 844
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for Q3 renewal forecast",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "button:Actions for Studio lease, annex"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "ctx-menu-2",
+          "triggerRect": {
+            "x": 292,
+            "y": 395.88,
+            "width": 44,
+            "height": 44,
+            "right": 336,
+            "bottom": 439.88
+          },
+          "command": {
+            "commandfor": "ctx-menu-2",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 2,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 697,
+            "width": 390,
+            "height": 147,
+            "right": 390,
+            "bottom": 844
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for Studio lease, annex",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "button:Actions for Winter residency brief"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "ctx-menu-3",
+          "triggerRect": {
+            "x": 292,
+            "y": 493.05,
+            "width": 44,
+            "height": 44,
+            "right": 336,
+            "bottom": 537.05
+          },
+          "command": {
+            "commandfor": "ctx-menu-3",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 3,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 697,
+            "width": 390,
+            "height": 147,
+            "right": 390,
+            "bottom": 844
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for Winter residency brief",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "a:Back to documents ↑"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "a",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "ctx-menu-4",
+          "triggerRect": {
+            "x": 292,
+            "y": 2623.44,
+            "width": 44,
+            "height": 44,
+            "right": 336,
+            "bottom": 2667.44
+          },
+          "command": {
+            "commandfor": "ctx-menu-4",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 12,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 697,
+            "width": 390,
+            "height": 147,
+            "right": 390,
+            "bottom": 844
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Actions for archived spring catalo",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Open full record",
+            "input:INPUT",
+            "a:View change history",
+            "BODY"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "BODY",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "menuActions": {
+        "clicks": [],
+        "domLengthDelta": 0,
+        "urlUnchanged": true
+      },
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 0,
+          "y": 697,
+          "width": 390,
+          "height": 147,
+          "right": 390,
+          "bottom": 844
+        },
+        "position": "fixed",
+        "visibleText": "Open full record Star for reviewView change history",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-142",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 4,
+      "popoverCount": 4,
+      "overlays": [
+        {
+          "target": "pop-pin-1",
+          "triggerRect": {
+            "x": 86.75,
+            "y": 382.61,
+            "width": 44,
+            "height": 44,
+            "right": 130.75,
+            "bottom": 426.61
+          },
+          "command": {
+            "commandfor": "pop-pin-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 19.73,
+            "y": 280.14,
+            "width": 178.03,
+            "height": 95.97,
+            "right": 197.77,
+            "bottom": 376.11
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 1, Harbour Point, Lisbon",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close Harbour Point notes",
+            "button:Location 2, Kiln Yard, Porto",
+            "button:Location 3, North Light, Tromsø"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "pop-pin-2",
+          "triggerRect": {
+            "x": 197.63,
+            "y": 320.69,
+            "width": 44,
+            "height": 44,
+            "right": 241.63,
+            "bottom": 364.69
+          },
+          "command": {
+            "commandfor": "pop-pin-2",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 2,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 137.67,
+            "y": 218.22,
+            "width": 163.91,
+            "height": 95.97,
+            "right": 301.58,
+            "bottom": 314.19
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 2, Kiln Yard, Porto",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close Kiln Yard notes",
+            "button:Location 3, North Light, Tromsø",
+            "button:Location 4, Field Station, Azores"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "pop-pin-3",
+          "triggerRect": {
+            "x": 253.08,
+            "y": 434.2,
+            "width": 44,
+            "height": 44,
+            "right": 297.08,
+            "bottom": 478.2
+          },
+          "command": {
+            "commandfor": "pop-pin-3",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 3,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 197.08,
+            "y": 314.06,
+            "width": 156,
+            "height": 113.64,
+            "right": 353.08,
+            "bottom": 427.7
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 3, North Light, Tromsø",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close North Light notes",
+            "button:Location 4, Field Station, Azores",
+            "a:1Harbour Point — Lisbon"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "a",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        },
+        {
+          "target": "pop-pin-4",
+          "triggerRect": {
+            "x": 142.19,
+            "y": 470.33,
+            "width": 44,
+            "height": 44,
+            "right": 186.19,
+            "bottom": 514.33
+          },
+          "command": {
+            "commandfor": "pop-pin-4",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 4,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 78.09,
+            "y": 367.86,
+            "width": 172.2,
+            "height": 95.97,
+            "right": 250.29,
+            "bottom": 463.83
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Location 4, Field Station, Azores",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Studio notes →",
+            "button:Close Field Station notes",
+            "a:1Harbour Point — Lisbon",
+            "a:2Kiln Yard — Porto"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "a",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "pinCount": 16,
+      "popoverTexts": [
+        "Harbour PointLisbon · 14 people · UTC+1Studio notes →×",
+        "Kiln YardPorto · 6 people · UTC+1Studio notes →×",
+        "North LightTromsø · 3 people · UTC+2Studio notes →×",
+        "Field StationAzores · 2 people · UTC+0Studio notes →×"
+      ],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 105.98,
+          "y": 374.02,
+          "width": 178.03,
+          "height": 95.97,
+          "right": 284.02,
+          "bottom": 469.98
+        },
+        "position": "fixed",
+        "visibleText": "Harbour PointLisbon · 14 people · UTC+1Studio notes →×",
+        "contained": true
+      }
+    }
+  ]
+}

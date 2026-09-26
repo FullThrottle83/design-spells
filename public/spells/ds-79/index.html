@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Anchor-Positioned Mega Menu (`[popover]`) — Design Spells</title>
-  <meta name="description" content="A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command=&quot;toggle-popover&quot;`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree.">
+  <meta name="description" content="A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command=&quot;toggle-popover&quot;`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree. Anchor placement is an enhancement only: without it the panel remains a usable centred native overlay, and below 700px it becomes a contained bottom sheet. Menu destinations are local fragments that exist in the demo document.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-79/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Anchor-Positioned Mega Menu (`[popover]`) — Design Spells">
-  <meta property="og:description" content="A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command=&quot;toggle-popover&quot;`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree.">
+  <meta property="og:description" content="A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command=&quot;toggle-popover&quot;`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree. Anchor placement is an enhancement only: without it the panel remains a usable centred native overlay, and below 700px it becomes a contained bottom sheet. Menu destinations are local fragments that exist in the demo document.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-79/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-79 / Navigation / Markup</p>
     <h1>Anchor-Positioned Mega Menu (`[popover]`)</h1>
-    <p class="lede">A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command=&quot;toggle-popover&quot;`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree.</p>
+    <p class="lede">A mega menu that opens from a nav trigger via Invoker Commands (`commandfor` + `command=&quot;toggle-popover&quot;`) and native `[popover=auto]`, pinned with anchor positioning. Escape, light-dismiss, and focus handling come for free. Do not set a static `aria-expanded` — the native popover owns the accessibility tree. Anchor placement is an enhancement only: without it the panel remains a usable centred native overlay, and below 700px it becomes a contained bottom sheet. Menu destinations are local fragments that exist in the demo document.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-79/">Open standalone demo ↗</a><a class="action" href="/download/ds-79.html" download="ds-79.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Open Products with a click, or with Enter while the trigger has focus. Every destination in the panel is a section of this page. Nothing auto-closes on navigation — one click away or Escape clears the panel, which becomes a contained bottom sheet on narrow screens.</p>
       
       <iframe title="Isolated demonstration: Anchor-Positioned Mega Menu (`[popover]`)" src="/play/ds-79/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -40,53 +40,95 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;nav class=&quot;site-nav&quot;&gt;
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;nav class=&quot;site-nav&quot; aria-label=&quot;Primary&quot;&gt;
+  &lt;a class=&quot;brand&quot; href=&quot;#top&quot;&gt;Fieldline&lt;/a&gt;
   &lt;button class=&quot;mega-trigger&quot; commandfor=&quot;mega-1&quot; command=&quot;toggle-popover&quot;&gt;
     Products &lt;span aria-hidden=&quot;true&quot;&gt;▾&lt;/span&gt;
   &lt;/button&gt;
-  &lt;div id=&quot;mega-1&quot; popover=&quot;auto&quot; class=&quot;mega-panel&quot;&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;/analytics&quot;&gt;Analytics&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;/automation&quot;&gt;Automation&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;/api&quot;&gt;API &amp; Integrations&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;a class=&quot;nav-link&quot; href=&quot;#pricing&quot;&gt;Pricing&lt;/a&gt;
+  &lt;a class=&quot;nav-link&quot; href=&quot;#field-notes&quot;&gt;Field notes&lt;/a&gt;
+&lt;/nav&gt;
+&lt;div id=&quot;mega-1&quot; popover=&quot;auto&quot; class=&quot;mega-panel&quot;&gt;
+  &lt;div class=&quot;mega-col&quot;&gt;
+    &lt;h2&gt;Observe&lt;/h2&gt;
+    &lt;a class=&quot;mega-item&quot; href=&quot;#observe&quot;&gt;&lt;strong&gt;Signal dashboard&lt;/strong&gt;&lt;span&gt;Release metrics in one morning view.&lt;/span&gt;&lt;/a&gt;
+    &lt;a class=&quot;mega-item&quot; href=&quot;#observe-alerts&quot;&gt;&lt;strong&gt;Quiet alerts&lt;/strong&gt;&lt;span&gt;Only the thresholds you actually set.&lt;/span&gt;&lt;/a&gt;
   &lt;/div&gt;
-&lt;/nav&gt;</code></pre>
+  &lt;div class=&quot;mega-col&quot;&gt;
+    &lt;h2&gt;Automate&lt;/h2&gt;
+    &lt;a class=&quot;mega-item&quot; href=&quot;#automate&quot;&gt;&lt;strong&gt;Flow builder&lt;/strong&gt;&lt;span&gt;Plain-language steps, no scripting.&lt;/span&gt;&lt;/a&gt;
+    &lt;a class=&quot;mega-item&quot; href=&quot;#automate-schedule&quot;&gt;&lt;strong&gt;Seasonal schedules&lt;/strong&gt;&lt;span&gt;Pause and resume whole workflows.&lt;/span&gt;&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;mega-col&quot;&gt;
+    &lt;h2&gt;Connect&lt;/h2&gt;
+    &lt;a class=&quot;mega-item&quot; href=&quot;#connect&quot;&gt;&lt;strong&gt;Guided imports&lt;/strong&gt;&lt;span&gt;Bring existing records across.&lt;/span&gt;&lt;/a&gt;
+    &lt;a class=&quot;mega-item&quot; href=&quot;#connect-api&quot;&gt;&lt;strong&gt;Read-only API&lt;/strong&gt;&lt;span&gt;Token-scoped, documented endpoints.&lt;/span&gt;&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;mega-foot&quot;&gt;&lt;a href=&quot;#changelog&quot;&gt;Read the changelog →&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.site-nav { position: relative; anchor-scope: --mega-1; }
+      <pre tabindex="0"><code>.site-nav { display: flex; align-items: center; gap: var(--space-4); min-block-size: 64px; }
+.site-nav .brand { font-weight: 700; text-decoration: none; color: var(--color-text); }
+.site-nav .nav-link { min-block-size: 44px; display: inline-flex; align-items: center; color: var(--color-text-muted); text-decoration: none; }
 .mega-trigger {
   anchor-name: --mega-1;
   min-block-size: 44px;
   padding: 0 var(--space-4);
   background: none; border: 0; cursor: pointer;
   color: var(--color-text); font-weight: 500;
+  border-radius: var(--radius-sm);
 }
+.mega-trigger:hover { background: var(--color-surface-offset); }
+.mega-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .mega-panel {
-  margin: 0; inset: auto;
-  position-anchor: --mega-1;
-  position-area: bottom span-all;
-  margin-block-start: var(--space-2);
-  position-try-fallbacks: flip-block;
-  min-inline-size: 22rem;
-  padding: var(--space-4);
+  max-inline-size: min(92vw, 54rem);
+  padding: var(--space-5);
+  grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: 0 20px 50px oklch(0 0 0 / .14);
-  opacity: 0; transform: translateY(-6px);
-  transition: opacity 200ms cubic-bezier(.16,1,.3,1),
-              transform 200ms cubic-bezier(.16,1,.3,1),
-              display 200ms allow-discrete,
-              overlay 200ms allow-discrete;
+  box-shadow: 0 24px 60px oklch(0 0 0 / .16);
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity 200ms cubic-bezier(.16,1,.3,1), transform 200ms cubic-bezier(.16,1,.3,1),
+              display 200ms allow-discrete, overlay 200ms allow-discrete;
 }
-.mega-panel:popover-open { opacity: 1; transform: translateY(0); }
-@starting-style { .mega-panel:popover-open { opacity: 0; transform: translateY(-6px); } }
-.mega-panel a {
+.mega-panel:popover-open { display: grid; opacity: 1; transform: translateY(0); }
+@starting-style { .mega-panel:popover-open { opacity: 0; transform: translateY(-8px); } }
+.mega-col h2 {
+  font: 600 11px ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-text-muted); margin: 0 0 var(--space-2);
+}
+.mega-item {
   display: block; padding: .65rem .75rem; min-block-size: 44px;
   border-radius: var(--radius-sm); text-decoration: none; color: var(--color-text);
 }
-.mega-panel a:hover, .mega-panel a:focus-visible { background: var(--color-surface-offset); }</code></pre>
+.mega-item strong { display: block; }
+.mega-item span { color: var(--color-text-muted); font-size: .85rem; }
+.mega-item:hover, .mega-item:focus-visible { background: var(--color-surface-offset); }
+.mega-foot { grid-column: 1 / -1; margin: 0; border-top: 1px solid var(--color-border); padding-top: var(--space-3); }
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@media (min-width: 700px) {
+  @supports (top: anchor(top)) {
+    .mega-panel {
+      inset: auto; margin: 0; margin-block-start: var(--space-2);
+      top: anchor(--mega-1 bottom); left: anchor(--mega-1 left);
+      position-try-fallbacks: flip-inline, flip-block;
+    }
+  }
+}
+/* Narrow or short viewports get a contained bottom sheet instead of an
+   anchored panel, so the menu never clips essential content. */
+@media (max-width: 699px), (max-height: 560px) {
+  .mega-panel {
+    inset: auto 0 0 0; margin: 0; inline-size: 100%; max-inline-size: none;
+    grid-template-columns: 1fr; max-block-size: 84dvh; overflow: auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mega-panel { transition: none; transform: none; }
+}</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

@@ -1,0 +1,516 @@
+{
+  "capturedAt": "2026-09-26T13:06:08.922Z",
+  "browserVersion": "153.0.8010.0",
+  "base": "http://127.0.0.1:8790",
+  "prefix": "before",
+  "states": [
+    {
+      "id": "ds-79",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "mega-1",
+          "triggerRect": {
+            "x": 673.59,
+            "y": 118,
+            "width": 92.8,
+            "height": 44,
+            "right": 766.39,
+            "bottom": 162
+          },
+          "command": {
+            "commandfor": "mega-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 577,
+            "y": 168.5,
+            "width": 286,
+            "height": 160,
+            "right": 863,
+            "bottom": 328.5
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Products ▾",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Analytics",
+            "a:Automation",
+            "a:API & Integrations",
+            "BODY"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "BODY",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "panelLinks": [
+        "/analytics",
+        "/automation",
+        "/api"
+      ],
+      "linkStatus": [
+        {
+          "href": "/analytics",
+          "status": 404
+        },
+        {
+          "href": "/automation",
+          "status": 404
+        },
+        {
+          "href": "/api",
+          "status": 404
+        }
+      ],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 577,
+          "y": 168.5,
+          "width": 286,
+          "height": 160,
+          "right": 863,
+          "bottom": 328.5
+        },
+        "position": "fixed",
+        "visibleText": "Analytics Automation API & Integrations",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-89",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "ctx-menu",
+          "triggerRect": {
+            "x": 698,
+            "y": 57.5,
+            "width": 44,
+            "height": 44,
+            "right": 742,
+            "bottom": 101.5
+          },
+          "command": {
+            "commandfor": "ctx-menu",
+            "command": "toggle-popover",
+            "haspopup": "menu"
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 6.5,
+            "width": 156,
+            "height": 154.5,
+            "right": 156,
+            "bottom": 161
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:More actions",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "button:Edit",
+            "button:Duplicate",
+            "button:Delete",
+            "BODY"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "BODY",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "menuActions": {
+        "clicks": [
+          {
+            "label": "Edit",
+            "stillOpen": true,
+            "urlUnchanged": true
+          },
+          {
+            "label": "Duplicate",
+            "stillOpen": true,
+            "urlUnchanged": true
+          },
+          {
+            "label": "Delete",
+            "stillOpen": true,
+            "urlUnchanged": true
+          }
+        ],
+        "domLengthDelta": 0,
+        "urlUnchanged": true
+      },
+      "fallback": {
+        "opened": false,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "position": "fixed",
+        "visibleText": "Edit Duplicate Delete",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-142",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "pop-pin-1",
+          "triggerRect": {
+            "x": 581.19,
+            "y": 119.59,
+            "width": 44,
+            "height": 44,
+            "right": 625.19,
+            "bottom": 163.59
+          },
+          "command": {
+            "commandfor": "pop-pin-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 556.53,
+            "y": 85.09,
+            "width": 93.3,
+            "height": 34.5,
+            "right": 649.83,
+            "bottom": 119.59
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button#pin-1:📍",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "BODY",
+            "button#pin-1:📍",
+            "BODY",
+            "button#pin-1:📍"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button#pin-1",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "pinCount": 2,
+      "popoverTexts": [
+        "London HQ"
+      ],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 556.53,
+          "y": 85.09,
+          "width": 93.3,
+          "height": 34.5,
+          "right": 649.83,
+          "bottom": 119.59
+        },
+        "position": "fixed",
+        "visibleText": "London HQ",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-79",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "mega-1",
+          "triggerRect": {
+            "x": 148.59,
+            "y": 118,
+            "width": 92.8,
+            "height": 44,
+            "right": 241.39,
+            "bottom": 162
+          },
+          "command": {
+            "commandfor": "mega-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 52,
+            "y": 168.5,
+            "width": 286,
+            "height": 160,
+            "right": 338,
+            "bottom": 328.5
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:Products ▾",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "a:Analytics",
+            "a:Automation",
+            "a:API & Integrations",
+            "BODY"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "BODY",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "panelLinks": [
+        "/analytics",
+        "/automation",
+        "/api"
+      ],
+      "linkStatus": [
+        {
+          "href": "/analytics",
+          "status": 404
+        },
+        {
+          "href": "/automation",
+          "status": 404
+        },
+        {
+          "href": "/api",
+          "status": 404
+        }
+      ],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 52,
+          "y": 168.5,
+          "width": 286,
+          "height": 160,
+          "right": 338,
+          "bottom": 328.5
+        },
+        "position": "fixed",
+        "visibleText": "Analytics Automation API & Integrations",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-89",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "ctx-menu",
+          "triggerRect": {
+            "x": 173,
+            "y": 57.5,
+            "width": 44,
+            "height": 44,
+            "right": 217,
+            "bottom": 101.5
+          },
+          "command": {
+            "commandfor": "ctx-menu",
+            "command": "toggle-popover",
+            "haspopup": "menu"
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 0,
+            "y": 6.5,
+            "width": 156,
+            "height": 154.5,
+            "right": 156,
+            "bottom": 161
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button:More actions",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "button:Edit",
+            "button:Duplicate",
+            "button:Delete",
+            "BODY"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "BODY",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "menuActions": {
+        "clicks": [
+          {
+            "label": "Edit",
+            "stillOpen": true,
+            "urlUnchanged": true
+          },
+          {
+            "label": "Duplicate",
+            "stillOpen": true,
+            "urlUnchanged": true
+          },
+          {
+            "label": "Delete",
+            "stillOpen": true,
+            "urlUnchanged": true
+          }
+        ],
+        "domLengthDelta": 0,
+        "urlUnchanged": true
+      },
+      "fallback": {
+        "opened": false,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "position": "fixed",
+        "visibleText": "Edit Duplicate Delete",
+        "contained": true
+      }
+    },
+    {
+      "id": "ds-142",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsAnchor": true,
+        "supportsInvoker": true
+      },
+      "triggerCount": 1,
+      "popoverCount": 1,
+      "overlays": [
+        {
+          "target": "pop-pin-1",
+          "triggerRect": {
+            "x": 161.19,
+            "y": 119.59,
+            "width": 44,
+            "height": 44,
+            "right": 205.19,
+            "bottom": 163.59
+          },
+          "command": {
+            "commandfor": "pop-pin-1",
+            "command": "toggle-popover",
+            "haspopup": null
+          },
+          "keyboardTabsToTrigger": 1,
+          "triggerFocused": true,
+          "keyboardOpened": true,
+          "openRect": {
+            "x": 136.53,
+            "y": 85.09,
+            "width": 93.3,
+            "height": 34.5,
+            "right": 229.83,
+            "bottom": 119.59
+          },
+          "openContained": true,
+          "openPosition": "fixed",
+          "focusAfterOpen": "button#pin-1:📍",
+          "focusInsidePopover": false,
+          "focusChain": [
+            "BODY",
+            "button#pin-1:📍",
+            "BODY",
+            "button#pin-1:📍"
+          ],
+          "escapeClosed": true,
+          "focusAfterEscape": "button#pin-1",
+          "clickOpened": true,
+          "lightDismissClosed": true
+        }
+      ],
+      "pinCount": 2,
+      "popoverTexts": [
+        "London HQ"
+      ],
+      "fallback": {
+        "opened": true,
+        "rect": {
+          "x": 136.53,
+          "y": 85.09,
+          "width": 93.3,
+          "height": 34.5,
+          "right": 229.83,
+          "bottom": 119.59
+        },
+        "position": "fixed",
+        "visibleText": "London HQ",
+        "contained": true
+      }
+    }
+  ]
+}

@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Interactive Map Pin Popover (`anchor-name` + `position-anchor`) — Design Spells</title>
-  <meta name="description" content="Map pins that open anchored popovers on click.">
+  <meta name="description" content="Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key&#x27;s `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-142/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Interactive Map Pin Popover (`anchor-name` + `position-anchor`) — Design Spells">
-  <meta property="og:description" content="Map pins that open anchored popovers on click.">
+  <meta property="og:description" content="Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key&#x27;s `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-142/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-142 / Overlays / Markup</p>
     <h1>Interactive Map Pin Popover (`anchor-name` + `position-anchor`)</h1>
-    <p class="lede">Map pins that open anchored popovers on click.</p>
+    <p class="lede">Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key&#x27;s `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-142/">Open standalone demo ↗</a><a class="action" href="/download/ds-142.html" download="ds-142.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Activate any numbered pin with pointer or keyboard. Its own popover opens above the pin and flips below when the pin sits near the top edge. The numbered key links to every location’s note for keyboard and no-enhancement reading.</p>
       
       <iframe title="Isolated demonstration: Interactive Map Pin Popover (`anchor-name` + `position-anchor`)" src="/play/ds-142/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -40,18 +40,133 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;div class=&quot;map-container&quot;&gt;
-  &lt;button id=&quot;pin-1&quot; commandfor=&quot;pop-pin-1&quot; command=&quot;toggle-popover&quot; class=&quot;map-pin&quot; style=&quot;top: 30%; left: 40%;&quot;&gt;📍&lt;/button&gt;
-  &lt;div id=&quot;pop-pin-1&quot; popover=&quot;auto&quot; class=&quot;pin-pop&quot;&gt;London HQ&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;figure class=&quot;map-figure&quot;&gt;
+  &lt;div class=&quot;map-container&quot; role=&quot;group&quot; aria-label=&quot;Illustrated studio map with four locations&quot;&gt;
+    &lt;div class=&quot;map-stop&quot; style=&quot;--pin-anchor: --pin-1; --pin-x: 22%; --pin-y: 46%;&quot;&gt;
+      &lt;button class=&quot;map-pin&quot; commandfor=&quot;pop-pin-1&quot; command=&quot;toggle-popover&quot; aria-label=&quot;Location 1, Harbour Point, Lisbon&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;i&gt;1&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+      &lt;div id=&quot;pop-pin-1&quot; popover=&quot;auto&quot; class=&quot;pin-pop&quot;&gt;
+        &lt;strong&gt;Harbour Point&lt;/strong&gt;
+        &lt;span&gt;Lisbon · 14 people · UTC+1&lt;/span&gt;
+        &lt;a class=&quot;pin-link&quot; href=&quot;#note-1&quot;&gt;Studio notes →&lt;/a&gt;
+        &lt;button class=&quot;pin-close&quot; commandfor=&quot;pop-pin-1&quot; command=&quot;hide-popover&quot; aria-label=&quot;Close Harbour Point notes&quot;&gt;×&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;map-stop&quot; style=&quot;--pin-anchor: --pin-2; --pin-x: 58%; --pin-y: 24%;&quot;&gt;
+      &lt;button class=&quot;map-pin&quot; commandfor=&quot;pop-pin-2&quot; command=&quot;toggle-popover&quot; aria-label=&quot;Location 2, Kiln Yard, Porto&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;i&gt;2&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+      &lt;div id=&quot;pop-pin-2&quot; popover=&quot;auto&quot; class=&quot;pin-pop&quot;&gt;
+        &lt;strong&gt;Kiln Yard&lt;/strong&gt;
+        &lt;span&gt;Porto · 6 people · UTC+1&lt;/span&gt;
+        &lt;a class=&quot;pin-link&quot; href=&quot;#note-2&quot;&gt;Studio notes →&lt;/a&gt;
+        &lt;button class=&quot;pin-close&quot; commandfor=&quot;pop-pin-2&quot; command=&quot;hide-popover&quot; aria-label=&quot;Close Kiln Yard notes&quot;&gt;×&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;map-stop&quot; style=&quot;--pin-anchor: --pin-3; --pin-x: 74%; --pin-y: 68%;&quot;&gt;
+      &lt;button class=&quot;map-pin&quot; commandfor=&quot;pop-pin-3&quot; command=&quot;toggle-popover&quot; aria-label=&quot;Location 3, North Light, Tromsø&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;i&gt;3&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+      &lt;div id=&quot;pop-pin-3&quot; popover=&quot;auto&quot; class=&quot;pin-pop&quot;&gt;
+        &lt;strong&gt;North Light&lt;/strong&gt;
+        &lt;span&gt;Tromsø · 3 people · UTC+2&lt;/span&gt;
+        &lt;a class=&quot;pin-link&quot; href=&quot;#note-3&quot;&gt;Studio notes →&lt;/a&gt;
+        &lt;button class=&quot;pin-close&quot; commandfor=&quot;pop-pin-3&quot; command=&quot;hide-popover&quot; aria-label=&quot;Close North Light notes&quot;&gt;×&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;map-stop&quot; style=&quot;--pin-anchor: --pin-4; --pin-x: 38%; --pin-y: 78%;&quot;&gt;
+      &lt;button class=&quot;map-pin&quot; commandfor=&quot;pop-pin-4&quot; command=&quot;toggle-popover&quot; aria-label=&quot;Location 4, Field Station, Azores&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;i&gt;4&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+      &lt;div id=&quot;pop-pin-4&quot; popover=&quot;auto&quot; class=&quot;pin-pop&quot;&gt;
+        &lt;strong&gt;Field Station&lt;/strong&gt;
+        &lt;span&gt;Azores · 2 people · UTC+0&lt;/span&gt;
+        &lt;a class=&quot;pin-link&quot; href=&quot;#note-4&quot;&gt;Studio notes →&lt;/a&gt;
+        &lt;button class=&quot;pin-close&quot; commandfor=&quot;pop-pin-4&quot; command=&quot;hide-popover&quot; aria-label=&quot;Close Field Station notes&quot;&gt;×&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;figcaption class=&quot;map-key&quot;&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-1&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;1&lt;/span&gt;Harbour Point — Lisbon&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-2&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;2&lt;/span&gt;Kiln Yard — Porto&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-3&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;3&lt;/span&gt;North Light — Tromsø&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-4&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;4&lt;/span&gt;Field Station — Azores&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.map-container { position: relative; inline-size: 100%; block-size: 24rem; background: var(--color-surface-offset); }
-.map-pin { position: absolute; anchor-name: --pin-1; min-block-size: 44px; min-inline-size: 44px; border: 0; background: none; font-size: 1.5rem; cursor: pointer; }
+      <pre tabindex="0"><code>.map-figure { margin: 0; }
+.map-container {
+  position: relative; inline-size: 100%; block-size: clamp(18rem, 46vw, 26rem);
+  background: var(--color-surface-offset);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+}
+.map-stop {
+  position: absolute; inset-block-start: var(--pin-y); inset-inline-start: var(--pin-x);
+  margin: -22px 0 0 -22px;
+  anchor-name: var(--pin-anchor);
+}
+.map-pin {
+  display: grid; place-items: center;
+  inline-size: 44px; block-size: 44px;
+  border: 0; background: none; cursor: pointer;
+}
+.map-pin span {
+  display: grid; place-items: center; inline-size: 30px; block-size: 30px;
+  border-radius: 50% 50% 50% 0; rotate: -45deg;
+  background: var(--color-primary); color: var(--color-text-inverse);
+  box-shadow: 0 6px 14px oklch(0 0 0 / .28);
+  transition: scale 160ms cubic-bezier(.16,1,.3,1), background 160ms ease;
+}
+.map-pin i { rotate: 45deg; font-style: normal; font: 700 12px/1 ui-monospace, monospace; }
+.map-pin:hover span, .map-pin:focus-visible span { scale: 1.12; }
+.map-pin:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 50%; }
 .pin-pop {
-  margin: 0; inset: auto; position-anchor: --pin-1; position-area: top;
-  position-try-options: flip-block, flip-inline; padding: var(--space-2) var(--space-3);
-  background: var(--color-bg); border-radius: var(--radius-sm); border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  gap: 2px; min-inline-size: 12rem; max-inline-size: min(86vw, 20rem);
+  background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px oklch(0 0 0 / .18);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 180ms cubic-bezier(.16,1,.3,1), transform 180ms cubic-bezier(.16,1,.3,1),
+              display 180ms allow-discrete, overlay 180ms allow-discrete;
+}
+.pin-pop:popover-open { display: grid; opacity: 1; transform: translateY(0); }
+@starting-style { .pin-pop:popover-open { opacity: 0; transform: translateY(6px); } }
+.pin-pop strong { font-size: 1rem; }
+.pin-pop &gt; span { color: var(--color-text-muted); font-size: .85rem; }
+.pin-link { display: inline-flex; align-items: center; min-block-size: 32px; font-size: .85rem; }
+.pin-close {
+  position: absolute; top: var(--space-1); right: var(--space-1);
+  inline-size: 32px; block-size: 32px;
+  border: 0; background: none; cursor: pointer;
+  color: var(--color-text-muted); font-size: 18px; line-height: 1; border-radius: var(--radius-sm);
+}
+.pin-close:hover, .pin-close:focus-visible { background: var(--color-surface-offset); color: var(--color-text); }
+.map-key ul {
+  list-style: none; margin: var(--space-3) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4);
+  font-size: .85rem; color: var(--color-text-muted);
+}
+.map-key a {
+  display: flex; align-items: center; gap: .45rem;
+  min-block-size: 32px; color: inherit; text-decoration: none;
+  border-radius: 4px;
+}
+.map-key a:hover { text-decoration: underline; }
+.map-key a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.map-key span {
+  display: inline-grid; place-items: center; inline-size: 18px; block-size: 18px;
+  border-radius: 50%; background: var(--color-primary); color: var(--color-text-inverse);
+  font: 700 10px ui-monospace, monospace;
+}
+/* Anchor placement enhances the native overlay; unsupported engines keep it centred. */
+@supports (bottom: anchor(top)) {
+  .pin-pop {
+    inset: auto; margin: 0; margin-block-end: var(--space-2);
+    position-anchor: var(--pin-anchor);
+    bottom: anchor(var(--pin-anchor) top); left: anchor(var(--pin-anchor) center);
+    translate: -50% 0;
+    position-try-fallbacks: flip-block;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-pop { transition: none; transform: none; }
+  .map-pin span { transition: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">
@@ -59,7 +174,7 @@
       <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
       <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
-      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.</p>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

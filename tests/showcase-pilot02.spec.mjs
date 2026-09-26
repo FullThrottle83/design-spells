@@ -33,8 +33,11 @@ async function verify(root,page,id,motion,browserName){
   expect(await scroller.evaluate(e=>e.scrollWidth-e.clientWidth)).toBeGreaterThan(200);
   await scroller.focus();await page.keyboard.press('ArrowRight');
   await expect.poll(()=>scroller.evaluate(e=>e.scrollLeft)).toBeGreaterThan(5);
+  // Finish the native keyboard scroll before starting a separate snap transaction.
+  // Firefox can continue that key's smooth scroll after scrollLeft first becomes >5.
+  await expect(async()=>{const left=await scroller.evaluate(e=>e.scrollLeft);await page.waitForTimeout(250);expect(await scroller.evaluate(e=>e.scrollLeft)).toBe(left);}).toPass({timeout:5000});
   // Set an off-grid position: the UA, not the test, chooses the snapped position.
-  await scroller.evaluate(e=>{const s=e.children[1];e.scrollLeft=s.offsetLeft-e.offsetLeft-(e.clientWidth-s.clientWidth)/2-30;});
+  await scroller.evaluate(e=>{const s=e.children[1],r=s.getBoundingClientRect(),c=e.getBoundingClientRect();e.scrollTo({left:e.scrollLeft+r.x+r.width/2-c.x-c.width/2-30,behavior:'instant'});});
   await expect.poll(async()=>Math.abs((await rect(slides.nth(1))).x+(await rect(slides.nth(1))).width/2-(await rect(scroller)).x-(await rect(scroller)).width/2)).toBeLessThan(2);
   await expect.poll(()=>style(captions.nth(1),'opacity')).toBe('1');
   if(browserName==='chromium') await expect.poll(()=>style(captions.first(),'opacity')).toBe('0');

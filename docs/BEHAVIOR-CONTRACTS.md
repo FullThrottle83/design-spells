@@ -61,3 +61,14 @@ References:
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/popover
 - https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Container_scroll-state_queries
 - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion
+
+## Pilot 02 native-scroll boundaries
+
+- **ds-111:** the KPI, not its thin track, supplies the entry timeline. Text is the accessible value; the decorative track is aria-hidden. Unsupported timelines and reduced motion retain the authored final width.
+- **ds-93:** scroll-state enhancement alone hides unsnapped captions. Unsupported engines expose all captions; native horizontal scroll and the named keyboard region remain.
+- **ds-134:** swipe reveals a real Open link. No deletion, undo, persistence or network operation is implemented or implied. Tab can reach the action without first swiping.
+- **ds-30:** elevation is a persistent shadow, not an inferred stuck state. The demo destination is outside the sticky container. Short viewports use normal flow.
+- **ds-55:** scale/dimming belongs to exit-crossing, not the moment a card first pins. Reduced motion removes the timeline animation. Short demo viewports use normal flow to preserve reading space.
+- **ds-69:** the LTR demo uses `scrollable: left` to distinguish away-from-start from at-start, including reverse scrolling. This is not the most recent scroll direction. Adapt physical direction for RTL layouts before reuse.
+
+See the Pilot 02 audit ledger for measured scope, engine results and limitations; no library-wide accessibility or support promotion follows from this pilot.

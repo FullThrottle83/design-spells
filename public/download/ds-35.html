@@ -125,10 +125,16 @@
   color: light-dark(var(--color-text), var(--color-text-inverse));
   border: 1px solid light-dark(transparent, oklch(1 0 0 / 0.1));
 }
+
+html:has(#scheme-light:checked) { color-scheme: light; }
+html:has(#scheme-dark:checked) { color-scheme: dark; }
+.demo-theme {display:flex;flex-wrap:wrap;gap:1rem;align-items:center;border:0;margin:1rem;padding:.75rem 1rem}
+.demo-theme legend {font-weight:650}
+.demo-theme label {display:inline-flex;gap:.4rem;min-block-size:44px;align-items:center;cursor:pointer}
 </style>
 </head>
 <body>
-  <div class="stage"><article class="premium-card" style="padding:1rem">light-dark() follows the OS.</article></div>
+  <fieldset class="demo-theme"><legend>Preview color scheme</legend><label><input type="radio" id="scheme-light" name="demo-scheme" checked> Light</label><label><input type="radio" id="scheme-dark" name="demo-scheme"> Dark</label></fieldset><div class="stage"><article class="premium-card" style="padding:1rem">light-dark() follows the OS.</article></div>
   
 </body>
 </html>

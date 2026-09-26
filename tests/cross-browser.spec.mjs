@@ -69,6 +69,20 @@ test("baseline/effect comparison works without JS in both engines", async ({ pag
   expect(after).toContain("transform: scale(0.94)");
 });
 
+test("new gap-fill spells keep baseline/fallback behavior across engines", async ({ page }) => {
+  await page.goto("/play/ds-153/");
+  const pill = page.locator(".intrinsic-pill");
+  const before = await pill.evaluate(el => el.getBoundingClientRect().width);
+  await pill.click();
+  const after = await pill.evaluate(el => el.getBoundingClientRect().width);
+  expect(after).toBeGreaterThan(before + 80);
+
+  await page.goto("/play/ds-152/");
+  const cell = page.getByRole("button", { name: "42" });
+  await cell.focus();
+  await expect(cell).toBeFocused();
+});
+
 test("native cross-document navigation works with scripts disabled", async ({ page }) => {
   await page.goto("/play/ds-14/");
   await page.getByRole("link", { name: /Navigate to page B/ }).click();

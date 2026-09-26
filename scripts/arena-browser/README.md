@@ -34,9 +34,9 @@ on violation (exit 1):
   passes `@sparticuz/chromium.args` wholesale — only the two boundary flags
   below are added to Playwright's defaults.
 - **Sandbox.** Launches with `chromiumSandbox: true` (Playwright's default is
-  `false`, which adds `--no-sandbox`). Verified working on this platform; if it
-  ever fails, the script falls back to unsandboxed and says so — permitted only
-  for trusted local loopback fixtures.
+  `false`, which adds `--no-sandbox`). Verified working in the original Arena
+  session; if sandboxed launch fails, the verifier exits with failure rather
+  than downgrading to an unsandboxed browser.
 - **Loopback-only network boundary**, enforced inside the browser process for
   every context and page (including the raw `browser.newContext()` calls some
   specs make), via two flags set in `arena-launch-options.mjs`:
@@ -49,9 +49,16 @@ on violation (exit 1):
   - `use.serviceWorkers: "block"` (in `playwright.arena.config.mjs`) for
     runner-created contexts. The catalogue registers no service workers; this
     is defense in depth.
+- **Explicit subprocess environment:** Chromium receives only a short allowlist
+  of runtime variables plus a private scratch `HOME`. It does not inherit the
+  agent's token, credential, proxy or arbitrary environment variables.
+  `verify-chromium.mjs` places a synthetic canary in the parent environment
+  and inspects the actual child process's `/proc/<pid>/environ`, logging only
+  variable names (never values). Missing or unexpected values fail the check.
 - **Live evidence:** loopback navigation + subresource succeed; navigation to
   an external hostname, an external IP, and an external subresource all fail;
-  no service worker registers.
+  no service worker registers. The unavailable `chrome://sandbox` diagnostic
+  is reported as NOT_TESTED, not a successful check.
 
 `CHROMIUM_PATH` overrides the resolved executable (the same hook the repo's
 own `playwright.config.mjs` honours). `ARENA_BROWSER_SCRATCH` overrides the

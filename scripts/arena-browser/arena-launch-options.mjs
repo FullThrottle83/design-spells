@@ -30,13 +30,36 @@
  * defaults it to false, which adds `--no-sandbox`; this run must stay sandboxed
  * if the platform supports it (verified by `verify-chromium.mjs`).
  */
-import { existsSync } from "node:fs";
-import { homedir, tmpdir } from "node:os";
+import { existsSync, mkdirSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 export const PLAYWRIGHT_CORE_VERSION = "1.63.0";
 export const SPARTICUZ_CHROMIUM_VERSION = "153.0.0";
+
+/**
+ * Browser subprocesses must not inherit the agent/session environment.
+ * Playwright otherwise defaults to process.env, potentially forwarding
+ * GitHub tokens and other credentials. Keep the list intentionally small.
+ */
+export const BROWSER_ENV_ALLOWLIST = Object.freeze([
+  "PATH", "TMPDIR", "TMP", "TEMP", "LD_LIBRARY_PATH",
+  "FONTCONFIG_PATH", "LANG", "LC_ALL", "LC_CTYPE", "TZ",
+  "XDG_RUNTIME_DIR",
+]);
+
+export function browserEnvironment() {
+  const env = Object.fromEntries(
+    BROWSER_ENV_ALLOWLIST
+      .filter((key) => typeof process.env[key] === "string")
+      .map((key) => [key, process.env[key]]),
+  );
+  // Isolate browser home from the agent's home/credential configuration.
+  env.HOME = join(scratchDir(), "browser-home");
+  mkdirSync(env.HOME, { recursive: true });
+  return env;
+}
 
 /** Flags that must never appear in the effective browser command line. */
 export const FORBIDDEN_ARGS = ["--disable-web-security", "--allow-running-insecure-content"];
@@ -106,12 +129,10 @@ export async function arenaLaunchOptions(options = {}) {
   if (!existsSync(executablePath)) {
     throw new Error(`CHROMIUM_PATH does not exist: ${executablePath}`);
   }
-  if (process.env.HOME === undefined || process.env.HOME === homedir()) {
-    process.env.HOME ??= tmpdir();
-  }
   return {
     executablePath,
     chromiumSandbox: options.sandbox ?? true,
+    env: browserEnvironment(),
     args: [
       `--host-resolver-rules=${HOST_RESOLVER_RULES}`,
       `--proxy-server=${DEAD_PROXY}`,

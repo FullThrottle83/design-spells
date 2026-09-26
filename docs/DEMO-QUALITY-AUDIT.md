@@ -6,7 +6,7 @@ Tracking: [#40](https://github.com/FullThrottle83/design-spells/issues/40) · 20
 
 **Inventory: all 154 stable IDs reconciled between README.md and public/spells.json. This is NOT a completed 154-spell visual audit.**
 
-- **12 individually verified (scoped behavior):** Pilot 01 ds-5, ds-12, ds-16, ds-21, ds-37, ds-95 across Chromium/Firefox/WebKit; Batch 02 ds-30, ds-55, ds-69, ds-93, ds-111, ds-134 locally in Chromium (cross-engine results below).
+- **12 individually verified (scoped behavior):** Pilot 01 ds-5, ds-12, ds-16, ds-21, ds-37, ds-95 across Chromium/Firefox/WebKit; Batch 02 ds-30, ds-55, ds-69, ds-93, ds-111, ds-134 across Chromium/Firefox/WebKit (named behaviors and native fallbacks only).
 - **3 fixed in prior work:** ds-44–46, PRs #37–39. Existing evidence is preserved; no repeat implementation or new visual claim here.
 - **139 uninspected:** intended behavior/action/support below are imported source metadata, not browser findings. Unknowns explicitly remain unknown.
 
@@ -88,9 +88,21 @@ Baseline: `6414b5a`. Local browser: **Chromium 153.0.8010.0**, Playwright 1.62.1
 - Initial QA caught horizontal min-content expansion in the ledger scene: fixed with an explicit bounded scene width, not hidden overflow. Native key scrolling can continue even with CSS motion reduced; the test waits for actual scroll geometry to settle before testing an independent reset. The shadow must still switch off at the start.
 - Ds-55's shrink/dimming is an **exit** effect. Tests separately verify pinned overlap, actual width/filter change while exiting, and reset. It is not falsely presented as a shrink-on-next-card effect.
 - Full local `npm test`: **80 Python + 376 Chromium passed** (5.4m). Deterministic rebuild: **637 public files byte-identical**, including integration bundles and classic output.
-- Firefox/WebKit installation is unavailable locally because CDN/apt endpoints are blocked, as in Pilot 01. CI will exercise the same cases; results are appended only after observation.
+- Firefox/WebKit installation is unavailable locally because CDN/apt endpoints are blocked, as in Pilot 01. CI exercised the same cases successfully; results below are linked to the observed run.
 - Removing enhancement rules is a deliberate degradation simulation, not a historical-browser certification. Touch-emulated taps and programmatic native scroll are not a physical-device swipe review. Assistive technology, 200% text zoom, physical mobile gestures and formal contrast review remain manual work.
 - Before/after images show actual initial/activated viewports; the old CTA/deck/KPI cannot show a genuine scroll activation because no runway existed. The before KPI active image deliberately shows the removed-enhancement fallback; raw observations distinguish the earlier supported fill.
+
+### Batch 02 final CI evidence
+
+[PR #42](https://github.com/FullThrottle83/design-spells/pull/42), [successful run 36228537619](https://github.com/FullThrottle83/design-spells/actions/runs/36228537619), code/initial-handoff commit `f5ede95`, 2026-09-26:
+
+- `npm run build`, tracked generated-file parity and `git diff --check`: **passed**.
+- `npm test`: **80 Python + 376 Chromium tests passed**. No unrelated test failure remains.
+- Full `npx playwright test -c playwright.cross-browser.config.mjs`: **350 passed** (4.7m), including 78 Batch 02 scenarios per engine in Firefox and WebKit. No feature behavior is certified solely by CSS.supports; supported enhancements and native fallbacks both have rendered assertions.
+- The existing Pilot 01 and ds-44–46 regression cases also remain green.
+- Independent local deterministic comparison remains **637 public files byte-identical**, including ignored/generated bundles and classic catalogue.
+
+This evidence does not promote the production verification overlay or certify physical touch, screen readers, historical engines or WCAG. Screenshots remain specifically local Chromium evidence. PR #42 is left open for review; no automatic merge was performed.
 
 ## Next coherent batch — native overlays and focus
 

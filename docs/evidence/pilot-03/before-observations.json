@@ -1,0 +1,111 @@
+{
+  "capturedAt": "2026-09-26T10:28:24.004Z",
+  "browserVersion": "153.0.8010.0",
+  "base": "http://127.0.0.1:8791",
+  "states": [
+    {
+      "id": "ds-48",
+      "width": 1440,
+      "initial": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      },
+      "active": {
+        "userInvalid": true,
+        "error": {
+          "display": "block",
+          "x": 647.046875,
+          "right": 792.9375,
+          "y": 126.24298095703125,
+          "bottom": 160.02423095703125
+        }
+      }
+    },
+    {
+      "id": "ds-49",
+      "width": 1440,
+      "initial": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      },
+      "active": {
+        "open": null,
+        "panel": {
+          "x": 687.828125,
+          "right": 921.828125,
+          "width": 234,
+          "display": "block"
+        }
+      }
+    },
+    {
+      "id": "ds-50",
+      "width": 1440,
+      "initial": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      },
+      "active": {
+        "focused": true,
+        "help": {
+          "visibility": "visible",
+          "opacity": "0.261924",
+          "x": 651.790283203125,
+          "right": 833.743408203125
+        }
+      }
+    },
+    {
+      "id": "ds-48",
+      "width": 390,
+      "initial": {
+        "scrollWidth": 390,
+        "innerWidth": 390
+      },
+      "active": {
+        "userInvalid": true,
+        "error": {
+          "display": "block",
+          "x": 122.046875,
+          "right": 267.9375,
+          "y": 126.24197387695312,
+          "bottom": 160.02322387695312
+        }
+      }
+    },
+    {
+      "id": "ds-49",
+      "width": 390,
+      "initial": {
+        "scrollWidth": 397,
+        "innerWidth": 390
+      },
+      "active": {
+        "open": null,
+        "panel": {
+          "x": 162.828125,
+          "right": 396.828125,
+          "width": 234,
+          "display": "block"
+        }
+      }
+    },
+    {
+      "id": "ds-50",
+      "width": 390,
+      "initial": {
+        "scrollWidth": 390,
+        "innerWidth": 390
+      },
+      "active": {
+        "focused": true,
+        "help": {
+          "visibility": "visible",
+          "opacity": "0.262336",
+          "x": 126.79277038574219,
+          "right": 308.74591064453125
+        }
+      }
+    }
+  ]
+}

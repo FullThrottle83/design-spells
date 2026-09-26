@@ -25,7 +25,7 @@ export default defineConfig({
       name: "chromium",
       // The preview sidebar is display:none below 960px (see .browse__preview
       // in public/styles.css), so the viewport has to stay above that.
-      use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 } },
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 }, launchOptions: process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {} },
     },
   ],
   webServer: {

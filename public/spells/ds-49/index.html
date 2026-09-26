@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Anchored Filter Panel — Design Spells</title>
-  <meta name="description" content="Filter menus, sort panels, and account menus pinned to their trigger.">
+  <meta name="description" content="A native disclosure keeps filter controls closed and operable without anchor positioning; supporting wide viewports pin the open panel to its trigger.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-49/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Anchored Filter Panel — Design Spells">
-  <meta property="og:description" content="Filter menus, sort panels, and account menus pinned to their trigger.">
+  <meta property="og:description" content="A native disclosure keeps filter controls closed and operable without anchor positioning; supporting wide viewports pin the open panel to its trigger.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-49/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -21,13 +21,13 @@
     <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
   </header>
   <main id="main" class="shell">
-    <p class="eyebrow">ds-49 / Anchor / 0 JS</p>
+    <p class="eyebrow">ds-49 / Anchor / Markup</p>
     <h1>Anchored Filter Panel</h1>
-    <p class="lede">Filter menus, sort panels, and account menus pinned to their trigger.</p>
+    <p class="lede">A native disclosure keeps filter controls closed and operable without anchor positioning; supporting wide viewports pin the open panel to its trigger.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-49/">Open standalone demo ↗</a><a class="action" href="/download/ds-49.html" download="ds-49.html">Download runnable HTML ↓</a></div>
-      
+      <p class='note'>Open Filters with the native disclosure. Choose preferences, then activate Filters again to close. Selections are visual only; no results are recalculated.</p>
       
       <iframe title="Isolated demonstration: Anchored Filter Panel" src="/play/ds-49/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -40,28 +40,47 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;div class=&quot;filterbar&quot;&gt;&lt;button class=&quot;filter-trigger&quot;&gt;Filters&lt;/button&gt;&lt;div class=&quot;filter-panel&quot;&gt;Sort · Date · Owner&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;details class=&quot;filterbar&quot;&gt;
+  &lt;summary class=&quot;filter-trigger&quot;&gt;Filters&lt;/summary&gt;
+  &lt;form class=&quot;filter-panel&quot; action=&quot;#filter-selection&quot;&gt;
+    &lt;fieldset&gt;
+      &lt;legend&gt;Category&lt;/legend&gt;
+      &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;packs&quot;&gt; Packs&lt;/label&gt;
+      &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;shelter&quot;&gt; Shelter&lt;/label&gt;
+    &lt;/fieldset&gt;
+    &lt;label&gt;Order
+      &lt;select name=&quot;sort&quot;&gt;&lt;option&gt;Editor’s pick&lt;/option&gt;&lt;option&gt;Lightest first&lt;/option&gt;&lt;/select&gt;
+    &lt;/label&gt;
+    &lt;p&gt;Selections are a visual preview; applying filters requires application logic.&lt;/p&gt;
+    &lt;button type=&quot;submit&quot;&gt;Save selection&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/details&gt;
+&lt;p id=&quot;filter-selection&quot;&gt;Your chosen controls remain selected above.&lt;/p&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.filterbar {
-  position: relative;
-  anchor-scope: --filter-btn;
-}
-
-.filter-trigger {
-  anchor-name: --filter-btn;
-}
-
+      <pre tabindex="0"><code>.filterbar { position: relative; anchor-scope: --filter-btn; }
+.filter-trigger { anchor-name: --filter-btn; cursor: pointer; }
 .filter-panel {
-  position: absolute;
-  position-anchor: --filter-btn;
-  position-area: bottom end;
-  margin-top: .5rem;
-  min-inline-size: 18rem;
+  margin-block-start: .5rem;
+  inline-size: 100%;
+  max-inline-size: 22rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-bg);
   box-shadow: 0 20px 50px oklch(0 0 0 / .14);
+}
+@supports (position-anchor: --filter-btn) {
+  @media (min-width: 42rem) {
+    .filter-panel {
+      position: absolute;
+      position-anchor: --filter-btn;
+      inset-block-start: anchor(bottom);
+      inset-inline-end: anchor(right);
+      margin-block-start: .5rem;
+      inline-size: 22rem;
+      z-index: 3;
+    }
+  }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">

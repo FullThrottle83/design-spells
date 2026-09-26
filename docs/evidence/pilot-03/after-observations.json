@@ -1,0 +1,111 @@
+{
+  "capturedAt": "2026-09-26T10:28:20.759Z",
+  "browserVersion": "153.0.8010.0",
+  "base": "http://127.0.0.1:8790",
+  "states": [
+    {
+      "id": "ds-48",
+      "width": 1440,
+      "initial": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      },
+      "active": {
+        "userInvalid": true,
+        "error": {
+          "display": "block",
+          "x": 722.71875,
+          "right": 1048.46875,
+          "y": 442.875,
+          "bottom": 525.71875
+        }
+      }
+    },
+    {
+      "id": "ds-49",
+      "width": 1440,
+      "initial": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      },
+      "active": {
+        "open": true,
+        "panel": {
+          "x": 837,
+          "right": 1123,
+          "width": 286,
+          "display": "block"
+        }
+      }
+    },
+    {
+      "id": "ds-50",
+      "width": 1440,
+      "initial": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      },
+      "active": {
+        "focused": true,
+        "help": {
+          "visibility": "visible",
+          "opacity": "0.262437",
+          "x": 599.4495849609375,
+          "right": 833.5745849609375
+        }
+      }
+    },
+    {
+      "id": "ds-48",
+      "width": 390,
+      "initial": {
+        "scrollWidth": 390,
+        "innerWidth": 390
+      },
+      "active": {
+        "userInvalid": true,
+        "error": {
+          "display": "block",
+          "x": 40,
+          "right": 350,
+          "y": 581.109375,
+          "bottom": 663.953125
+        }
+      }
+    },
+    {
+      "id": "ds-49",
+      "width": 390,
+      "initial": {
+        "scrollWidth": 390,
+        "innerWidth": 390
+      },
+      "active": {
+        "open": true,
+        "panel": {
+          "x": 179.40625,
+          "right": 351,
+          "width": 171.59375,
+          "display": "block"
+        }
+      }
+    },
+    {
+      "id": "ds-50",
+      "width": 390,
+      "initial": {
+        "scrollWidth": 390,
+        "innerWidth": 390
+      },
+      "active": {
+        "focused": true,
+        "help": {
+          "visibility": "visible",
+          "opacity": "0.0835364",
+          "x": 38,
+          "right": 352
+        }
+      }
+    }
+  ]
+}

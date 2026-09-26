@@ -35,3 +35,13 @@ bundle remain unchanged. ds-35 exposes native light/dark controls using a
 preview-only scheme override; ds-9 has a plain reload link to replay the
 one-shot entrance; ds-143 tells visitors to use browser print preview rather
 than faking print CSS in screen media. No preview helper requires script.
+
+## Sticky scroll-state walkthrough (ds-44)
+
+The ds-44 hosted and downloaded demos provide a preview-only introduction and
+scroll runway so the existing sticky navigation can actually reach its top
+inset. The authored CSS and integration bundle are unchanged. Chromium's
+`stuck: top` transition is tested by reading the rendered `box-shadow` before,
+during and after document scrolling, not by a CSS syntax probe. Firefox/WebKit
+retain the native sticky positioning when scroll-state styling is unavailable.
+A browser test does not replace manual keyboard, zoom or screen-reader review.

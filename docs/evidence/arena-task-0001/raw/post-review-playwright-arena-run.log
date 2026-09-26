@@ -1,0 +1,948 @@
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:11:55] "GET /index.html HTTP/1.1" 200 -
+
+Running 423 tests using 1 worker
+
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:11:56] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:11:56] "GET /styles.css HTTP/1.1" 200 -
+  ✓    1 [chromium] › tests/accessibility.spec.mjs:13:5 › catalogue with JavaScript disabled › filters, source disclosures and keyboard dismissal remain usable (4.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:00] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:00] "GET /styles.css HTTP/1.1" 200 -
+  ✓    2 [chromium] › tests/accessibility.spec.mjs:40:5 › catalogue with JavaScript disabled › preview radios have names; mobile layout has no page overflow (3.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:03] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:03] "GET /styles.css HTTP/1.1" 200 -
+  ✓    3 [chromium] › tests/accessibility.spec.mjs:13:5 › catalogue with JavaScript blocked › filters, source disclosures and keyboard dismissal remain usable (3.9s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:07] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:07] "GET /styles.css HTTP/1.1" 200 -
+  ✓    4 [chromium] › tests/accessibility.spec.mjs:40:5 › catalogue with JavaScript blocked › preview radios have names; mobile layout has no page overflow (3.2s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:10] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:10] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:10] "GET /search.js HTTP/1.1" 200 -
+  ✓    5 [chromium] › tests/accessibility.spec.mjs:13:5 › catalogue with JavaScript enabled › filters, source disclosures and keyboard dismissal remain usable (4.1s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:15] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:15] "GET /search.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:15] "GET /styles.css HTTP/1.1" 200 -
+  ✓    6 [chromium] › tests/accessibility.spec.mjs:40:5 › catalogue with JavaScript enabled › preview radios have names; mobile layout has no page overflow (3.1s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:18] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:18] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:18] "GET /search.js HTTP/1.1" 200 -
+  ✓    7 [chromium] › tests/accessibility.spec.mjs:55:1 › native popover toggle updates deep links and compatibility text (2.2s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:20] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:20] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:20] "GET /search.js HTTP/1.1" 200 -
+  ✓    8 [chromium] › tests/accessibility.spec.mjs:70:1 › document previews retain a safe sandbox and descriptive titles (3.7s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:24] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:24] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:24] "GET /search.js HTTP/1.1" 200 -
+  ✓    9 [chromium] › tests/accessibility.spec.mjs:81:1 › native close buttons dismiss classic popovers by pointer, including a tooltip preview (4.1s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:28] "GET /play/ds-131/ HTTP/1.1" 200 -
+  ✓   10 [chromium] › tests/behavior-contracts.spec.mjs:6:1 › manual toast has explicit native close and stays in the top layer until dismissed (152ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:28] "GET /play/ds-85/ HTTP/1.1" 200 -
+  ✓   11 [chromium] › tests/behavior-contracts.spec.mjs:21:1 › wizard is a visual stepper, not an input-validation gate (121ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:28] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:28] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:28] "GET /search.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:30] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+  ✓   12 [chromium] › tests/bundle.spec.mjs:3:1 › integration bundle is a native source link when scripts are disabled (1.8s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:30] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:30] "GET /styles.css HTTP/1.1" 200 -
+  ✓   13 [chromium] › tests/bundle.spec.mjs:21:3 › integration source without client JS › source link is visible while copy enhancement is hidden (1.7s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:32] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:32] "GET /search.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:32] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:34] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:34] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+  ✓   14 [chromium] › tests/bundle.spec.mjs:30:1 › optional copy writes exactly the generated bundle, not the raw CSS tab (2.2s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:34] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:34] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:34] "GET /search.js HTTP/1.1" 200 -
+  ✓   15 [chromium] › tests/bundle.spec.mjs:47:1 › failed fetch never claims successful copy (2.1s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:36] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:36] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:12:36] "GET /search.js HTTP/1.1" 200 -
+  ✓   16 [chromium] › tests/drawer.spec.mjs:54:3 › drawer descriptions › renders inline markdown as elements for all 76 spells that carry it (25.4s)
+  ✓   17 [chromium] › tests/drawer.spec.mjs:119:3 › drawer descriptions › spells without markdown still show their description (379ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:03] "GET /play/ds-152/ HTTP/1.1" 200 -
+  ✓   18 [chromium] › tests/gap-spells.spec.mjs:5:1 › table crosshair exposes a distinct keyboard row/column intersection (141ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:03] "GET /play/ds-153/ HTTP/1.1" 200 -
+  ✓   19 [chromium] › tests/gap-spells.spec.mjs:21:1 › calc-size disclosure keeps a working fixed-width fallback and expands on activation (249ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:04] "GET /play/ds-154/ HTTP/1.1" 200 -
+  ✓   20 [chromium] › tests/gap-spells.spec.mjs:32:1 › breakpointless switcher changes layout from row to stack without media queries (74ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:04] "GET /play/ds-155/ HTTP/1.1" 200 -
+  ✓   21 [chromium] › tests/gap-spells.spec.mjs:44:1 › round gauge resolves the 73 percent target to a 70 percent step (2.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+  ✓   22 [chromium] › tests/lean-catalog.spec.mjs:12:5 › light homepage with scripting disabled › category navigation, full docs and isolated demos work (288ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓   23 [chromium] › tests/lean-catalog.spec.mjs:27:5 › light homepage with scripting disabled › has no page-level horizontal overflow on small screens (248ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /catalogue.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:06] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+  ✓   24 [chromium] › tests/lean-catalog.spec.mjs:12:5 › light homepage with scripting enabled › category navigation, full docs and isolated demos work (312ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /catalogue.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓   25 [chromium] › tests/lean-catalog.spec.mjs:27:5 › light homepage with scripting enabled › has no page-level horizontal overflow on small screens (238ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /?q=shimmer HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /catalogue.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓   26 [chromium] › tests/lean-catalog.spec.mjs:46:1 › optional search filters metadata, not embedded CSS (337ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+  ✓   27 [chromium] › tests/lean-catalog.spec.mjs:56:1 › failed enhancement leaves ordinary browsing intact (269ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:07] "GET /play/ds-120/ HTTP/1.1" 200 -
+  ✓   28 [chromium] › tests/native-behavior.spec.mjs:9:1 › ds-120 filters sibling cards using native checkboxes (142ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:08] "GET /play/ds-132/ HTTP/1.1" 200 -
+  ✓   29 [chromium] › tests/native-behavior.spec.mjs:41:1 › ds-132 named disclosures behave exclusively with keyboard activation (118ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:08] "GET /play/ds-128/ HTTP/1.1" 200 -
+  ✓   30 [chromium] › tests/native-behavior.spec.mjs:64:1 › ds-128 uses native form validity for the visual meter (880ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:09] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓   31 [chromium] › tests/native-behavior.spec.mjs:83:1 › ds-1 keyboard focus activates its decorative shimmer without scripting (112ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:09] "GET /play/ds-2/ HTTP/1.1" 200 -
+  ✓   32 [chromium] › tests/native-behavior.spec.mjs:97:1 › ds-2 press effect returns to rest on release (115ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:09] "GET /play/ds-90/ HTTP/1.1" 200 -
+  ✓   33 [chromium] › tests/native-behavior.spec.mjs:112:1 › ds-90 quick actions are exposed by native disclosure and keyboard (97ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:09] "GET /play/ds-18/ HTTP/1.1" 200 -
+  ✓   34 [chromium] › tests/native-behavior.spec.mjs:128:1 › ds-18 tooltip decoration follows hover and keyboard focus without scripting (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /spells/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓   35 [chromium] › tests/preview-visibility.spec.mjs:5:1 › underline is perceptibly different from the identical baseline on hover (240ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /spells/ds-2/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /play/ds-2/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /play/ds-2/ HTTP/1.1" 200 -
+  ✓   36 [chromium] › tests/preview-visibility.spec.mjs:21:1 › soft push is distinguishable from the unchanged baseline while pressed (223ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /spells/ds-14/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /play/ds-14/ HTTP/1.1" 200 -
+  ✓   37 [chromium] › tests/preview-visibility.spec.mjs:38:1 › non-comparable document behavior retains one genuine demo (107ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:13:11] "GET /search.js HTTP/1.1" 200 -
+  ✓   38 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-1 — Shimmer on primary buttons (706ms)
+  ✓   39 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-2 — Soft Push (674ms)
+  ✓   40 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-3 — Lift & Zoom on cards (684ms)
+  ✓   41 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-5 — Magnetic Underline (750ms)
+  ✓   42 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-7 — Icon Color Shift (665ms)
+  ✓   43 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-19 — Focus-Within Halo (657ms)
+  ✓   44 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-20 — Spring-Loaded Checkbox (623ms)
+  ✓   45 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-22 — Details Chevron Rotate (597ms)
+  ✓   46 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-24 — External Link Nudge (693ms)
+  ✓   47 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-26 — Pill Segmented Control Glow (647ms)
+  ✓   48 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-38 — Color-Mix Hover States (609ms)
+  ✓   49 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-39 — Accent Color Forms (578ms)
+  ✓   50 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-67 — Scroll-Driven Before/After Comparison (586ms)
+  ✓   51 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-71 — Sliding Segment Indicator (600ms)
+  ✓   52 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-73 — Expandable Speed Dial FAB (634ms)
+  ✓   53 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-79 — Anchor-Positioned Mega Menu (`[popover]`) (614ms)
+  ✓   54 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-80 — Squircle Chips & Nav (`corner-shape`) (596ms)
+  ✓   55 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-81 — Overflow-Aware Breadcrumbs (602ms)
+  ✓   56 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-82 — Fixed-Angle 3D Tilt Card (626ms)
+  ✓   57 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-83 — Perforated Ticket Card (614ms)
+  ✓   58 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-84 — Hover/Focus Reveal Card Actions (604ms)
+  ✓   59 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-88 — `:target` Toast Stack (744ms)
+  ✓   60 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-89 — Anchor-Pinned Context Menu (673ms)
+  ✓   61 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-90 — Sun-Fan FAB (radial) (685ms)
+  ✓   62 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-8 — Gradient Reveal on headings (627ms)
+  ✓   63 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-9 — Depth Parallax on hero (617ms)
+  ✓   64 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-11 — Skeleton Shimmer (655ms)
+  ✓   65 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-14 — Native Page Transitions (`@view-transition`) (657ms)
+  ✓   66 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-31 — Phantom Entry (`@starting-style`) (581ms)
+  ✓   67 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-65 — Scroll-Driven Header Compression (604ms)
+  ✓   68 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-66 — Backdrop Transition (`::backdrop`) (645ms)
+  ✓   69 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-68 — Infinite Logo Marquee (661ms)
+  ✓   70 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-72 — Scroll-Driven Staggered List (578ms)
+  ✓   71 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-75 — Native Modal Image Zoom (`popovertarget`) (545ms)
+  ✓   72 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-91 — Ken Burns Scroll Gallery (565ms)
+  ✓   73 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-92 — Image-Clipped Gradient Headline (582ms)
+  ✓   74 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-93 — Snapped Caption Reveal (595ms)
+  ✓   75 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-17 — Ambient Frost Header (594ms)
+  ✓   76 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-30 — Sticky CTA Elevation (648ms)
+  ✓   77 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-36 — Scroll Progress Bar (580ms)
+  ✓   78 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-43 — Auto-Hide Header (595ms)
+  ✓   79 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-44 — Sticky Shadow When Stuck (571ms)
+  ✓   80 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-45 — Snapped Spotlight (586ms)
+  ✓   81 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-46 — Real Overflow Hint (637ms)
+  ✓   82 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-47 — Scroll-Awake Back-to-Top (649ms)
+  ✓   83 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-55 — Sticky Card Deck (691ms)
+  ✓   84 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-69 — Scroll-Aware Table Boundaries (`container-type: scroll-state`) (694ms)
+  ✓   85 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-12 — Scroll Snap gallery (605ms)
+  ✓   86 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-15 — 0fr Accordion (622ms)
+  ✓   87 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-27 — Edge Fade Scroll Hint (622ms)
+  ✓   88 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-33 — True Auto-Height (`interpolate-size`) (610ms)
+  ✓   89 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-37 — Container-Aware Card (`@container`) (612ms)
+  ✓   90 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-40 — Subgrid Alignment (757ms)
+  ✓   91 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-56 — Seamless Edge Mask (`mask-image`) (663ms)
+  ✓   92 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-61 — Native Accordion Tabs (`::details-content`) (680ms)
+  ✓   93 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-62 — Native Carousel Controls (`::scroll-marker`, `::scroll-button`) (719ms)
+  ✓   94 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-70 — Native Tree View Navigation (`<details>`) (697ms)
+  ✓   95 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-77 — Responsive Sheet Modal (616ms)
+  ✓   96 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-18 — Micro-Tooltips (`attr(data-tooltip)`) (693ms)
+  ✓   97 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-34 — Anchor-Positioned Tooltips (623ms)
+  ✓   98 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-48 — Anchored Error Bubble (612ms)
+  ✓   99 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-49 — Anchored Filter Panel (658ms)
+  ✓  100 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-50 — Focus Help Rail (624ms)
+  ✓  101 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-10 — Selection Skin (600ms)
+  ✓  102 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-bonus — Typographic Harmony (`text-wrap`) (572ms)
+  ✓  103 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-53 — Text-Box-Trim (619ms)
+  ✓  104 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-63 — Smart Hyphenation (623ms)
+  ✓  105 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-6 — Focus Glow (621ms)
+  ✓  106 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-16 — Floating Labels (603ms)
+  ✓  107 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-23 — Validation Whisper (634ms)
+  ✓  108 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-28 — Current Step Counter (644ms)
+  ✓  109 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-32 — Elastic Textarea (`field-sizing`) (565ms)
+  ✓  110 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-54 — Customizable Select (`appearance: base-select`) (619ms)
+  ✓  111 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-57 — Form Gatekeeper (599ms)
+  ✓  112 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-76 — Modern Wrapper Floating Label (`:has()`) (619ms)
+  ✓  113 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-85 — 0-JS Multi-Step Wizard (661ms)
+  ✓  114 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-86 — Themed Range Slider (609ms)
+  ✓  115 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-87 — Group Error Summary (`:has(:user-invalid)`) (632ms)
+  ✓  116 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-25 — Media Scrim Lift (644ms)
+  ✓  117 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-35 — Inline Theme Switch (`light-dark()`) (634ms)
+  ✓  118 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-51 — Ribbon Cut Card (`shape()`) (714ms)
+  ✓  119 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-52 — Organic Section Divider (`shape()`) (711ms)
+  ✓  120 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-58 — Breathing Conic Border (`@property`) (692ms)
+  ✓  121 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-64 — Path Motion (`offset-path`) (852ms)
+  ✓  122 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-74 — Auto-Inverting Contrast Scrim (`mix-blend-mode`) (633ms)
+  ✓  123 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-78 — Smooth Multiline Text Fade Mask (`mask-image`) (604ms)
+  ✓  124 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-13 — Spotlight Focus (625ms)
+  ✓  125 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-21 — `:target` Highlight (673ms)
+  ✓  126 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-29 — Link Fade Neighbors (570ms)
+  ✓  127 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-59 — Auto Empty State (563ms)
+  ✓  128 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-60 — Read More Toggle (598ms)
+  ✓  129 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-41 — Content-Visibility Turbo (594ms)
+  ✓  130 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-94 — Sticky Header + Zebra Data Table (724ms)
+  ✓  131 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-95 — CSS Sparkline / Bar Chart (616ms)
+  ✓  132 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-96 — Themed `<progress>` & `<meter>` (589ms)
+  ✓  133 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-97 — Invoker Command Drawer (`commandfor` + `closedby`) (666ms)
+  ✓  134 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-98 — Interest-Hint Tooltip (`interestfor` + `popover="hint"`) (632ms)
+  ✓  135 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-99 — Scroll-Initial-Target Carousel (615ms)
+  ✓  136 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-100 — Grid Lanes Masonry (`display: grid-lanes`) (685ms)
+  ✓  137 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-101 — Sibling-Index Stagger (`sibling-index()`) (781ms)
+  ✓  138 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-102 — `:open` Custom Select Chrome (890ms)
+  ✓  139 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-103 — Contrast-Safe Chips (`contrast-color()`) (1.0s)
+  ✓  140 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-104 — `if()` Inline Theme Tokens (738ms)
+  ✓  141 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-105 — Typed `attr()` Field Meter (633ms)
+  ✓  142 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-106 — Light-Dismiss Confirm Dialog (`closedby="any"`) (844ms)
+  ✓  143 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-107 — Position-Visibility Auto-Hide (`position-visibility`) (1.1s)
+  ✓  144 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-108 — Find-in-Page Accordion (`hidden="until-found"`) (675ms)
+  ✓  145 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-109 — Named View-Transition Cards (`view-transition-class` + typed `attr()`) (750ms)
+  ✓  146 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-110 — Typed `attr()` Sparkline (1.0s)
+  ✓  147 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-111 — View-Timeline KPI Fill (640ms)
+  ✓  148 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-112 — `::target-text` Share Highlight (755ms)
+  ✓  149 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-113 — Reading-Flow Grid (`reading-flow`) (661ms)
+  ✓  150 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-114 — Themed Scrollbars (`scrollbar-color`) (946ms)
+  ✓  151 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-115 — File Dropzone State (`::file-selector-button`) (989ms)
+  ✓  152 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-116 — Checkbox Theme Switch (`:has()` + `color-scheme`) (907ms)
+  ✓  153 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-117 — Split Action Button (`commandfor`) (858ms)
+  ✓  154 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-118 — Customizable Select Checkmark (`::checkmark` + `::picker-icon`) (905ms)
+  ✓  155 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-119 — Native Donut Chart (`conic-gradient` + `mask-image`) (681ms)
+  ✓  156 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-120 — Faceted Category Filter Matrix (`:has()`) (634ms)
+  ✓  157 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-121 — 0-JS Global Cart Counter & Badge (`counter` + Anchor) (674ms)
+  ✓  158 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-122 — CSS Gantt Schedule Grid (`grid-template-columns`) (700ms)
+  ✓  159 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-123 — Matrix Heatmap (`color-mix()` + `oklch()`) (876ms)
+  ✓  160 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-124 — Stacked KPI Segment Bar (`flex` + `color-mix()`) (939ms)
+  ✓  161 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-125 — Inline SVG Line Chart (0-JS Draw & Fill) (642ms)
+  ✓  162 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-126 — Section-Spy Active Navigation (`timeline-scope`) (748ms)
+  ✓  163 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-127 — Nested Cascade Popovers (`popover="auto"` + Anchor) (683ms)
+  ✓  164 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-128 — 0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`) (664ms)
+  ✓  165 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-129 — 0-JS Star Rating Input (`row-reverse` + `~`) (821ms)
+  ✓  166 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-130 — Dual-Thumb Range Slider (Overlapping inputs) (729ms)
+  ✓  167 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-131 — Dismissible Toast (`popover="manual"`) (680ms)
+  ✓  168 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-132 — Exclusive Accordion Group (`<details name="...">`) (656ms)
+  ✓  169 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-133 — Billing Period Pricing Toggle (`:has()`) (754ms)
+  ✓  170 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-134 — Mobile Swipe-to-Action List (`scroll-snap`) (690ms)
+  ✓  171 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-135 — Hero Parallax Lockup & Depth (`view-timeline`) (662ms)
+  ✓  172 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-136 — Native Datalist Autocomplete Search (662ms)
+  ✓  173 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-137 — Expandable Icon Search Field (`:focus-within`) (611ms)
+  ✓  174 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-138 — Drop Cap & Editorial Typography (`initial-letter`) (612ms)
+  ✓  175 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-139 — Scroll-Driven Image Wipe (`clip-path: inset()`) (630ms)
+  ✓  176 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-140 — Sticky Footer Reveal Layout (767ms)
+  ✓  177 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-141 — Accessible Skip Link (`:focus-visible` Slide-In) (561ms)
+  ✓  178 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-142 — Interactive Map Pin Popover (`anchor-name` + `position-anchor`) (636ms)
+  ✓  179 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-143 — Print-Friendly Article Stylesheet (`@media print`) (683ms)
+  ✓  180 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-144 — Dynamic Counter Summary (`counter-increment` + `:has()`) (592ms)
+  ✓  181 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-145 — Animated Number Counter (`@property` + `@keyframes`) (690ms)
+  ✓  182 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-146 — Guardrail Focus-Lock Modal (`overscroll-behavior: contain`) (627ms)
+  ✓  183 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-147 — Fluid Rhythm Function (`@function`) (647ms)
+  ✓  184 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-148 — Donut-Scoped Documentation Callout (`@scope`) (660ms)
+  ✓  185 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-149 — Snapped Product State (`scroll-state()`) (679ms)
+  ✓  186 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-150 — Semantic Metrics Dividers (`column-rule`) (723ms)
+  ✓  187 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-151 — Organic Avatar Cluster (`random()`) (673ms)
+  ✓  188 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-152 — Keyboard-Friendly Table Crosshair (`:has()`) (627ms)
+  ✓  189 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-153 — Intrinsic Disclosure Width (`calc-size()`) (740ms)
+  ✓  190 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-154 — Breakpointless Switcher Layout (814ms)
+  ✓  191 [chromium] › tests/previews.spec.mjs:165:5 › spell previews › ds-155 — Stepped CSS Math Gauge (`round()`) (908ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:14:58] "GET /play/ds-44/ HTTP/1.1" 200 -
+ds-44 chromium 153.0.8010.0 scroll-state declaration=true
+  ✓  192 [chromium] › tests/scroll-state-behavior.spec.mjs:9:1 › ds-44 sticky navigation reaches the inset and its supported shadow toggles (256ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:14:58] "GET /play/ds-45/ HTTP/1.1" 200 -
+ds-45 chromium 153.0.8010.0 motion=reduce declaration=true
+  ✓  193 [chromium] › tests/scroll-state-behavior.spec.mjs:50:3 › ds-45 snapped card changes its actual spotlight state (reduce) (733ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:14:59] "GET /play/ds-46/ HTTP/1.1" 200 -
+ds-46 chromium 153.0.8010.0 motion=reduce declaration=true
+  ✓  194 [chromium] › tests/scroll-state-behavior.spec.mjs:93:3 › ds-46 scrollability and hint change together via native checkbox (reduce) (992ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:00] "GET /play/ds-45/ HTTP/1.1" 200 -
+ds-45 chromium 153.0.8010.0 motion=no-preference declaration=true
+  ✓  195 [chromium] › tests/scroll-state-behavior.spec.mjs:50:3 › ds-45 snapped card changes its actual spotlight state (no-preference) (747ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:01] "GET /play/ds-46/ HTTP/1.1" 200 -
+ds-46 chromium 153.0.8010.0 motion=no-preference declaration=true
+  ✓  196 [chromium] › tests/scroll-state-behavior.spec.mjs:93:3 › ds-46 scrollability and hint change together via native checkbox (no-preference) (1.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:02] "GET /classic/?stack=ds-1%2C%22%3E%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E%2Cds-999 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:02] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:02] "GET /search.js HTTP/1.1" 200 -
+  ✓  197 [chromium] › tests/security.spec.mjs:3:1 › discard untrusted URL stack identifiers before rendering (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:03] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:03] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:03] "GET /search.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:04] "GET /classic/ HTTP/1.1" 304 -
+  ✓  198 [chromium] › tests/security.spec.mjs:15:1 › discard untrusted persisted identifiers (2.5s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:05] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:05] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:05] "GET /search.js HTTP/1.1" 200 -
+  ✓  199 [chromium] › tests/security.spec.mjs:26:1 › storage-denied browsers retain working search and filters (2.2s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:08] "GET /classic/?q=shimmer&category=Interaction&status=baseline HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:08] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:08] "GET /search.js HTTP/1.1" 200 -
+  ✓  200 [chromium] › tests/security.spec.mjs:40:1 › history without filter params clears previous state (1.5s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:09] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:09] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:09] "GET /search.js HTTP/1.1" 200 -
+  ✓  201 [chromium] › tests/security.spec.mjs:52:1 › unmodified global character shortcuts do not hijack focus (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:11] "GET /classic/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:11] "GET /styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:11] "GET /search.js HTTP/1.1" 200 -
+  ✓  202 [chromium] › tests/security.spec.mjs:61:1 › compatibility probes never claim component behavior as verified (1.6s)
+Pilot behavior engine: chromium 153.0.8010.0
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:12] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  203 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-5 1440 no-preference: real reversible behavior (376ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:13] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  204 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-12 1440 no-preference: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:14] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  205 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-16 1440 no-preference: real reversible behavior (475ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:14] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  206 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-21 1440 no-preference: real reversible behavior (340ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:15] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  207 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-37 1440 no-preference: real reversible behavior (334ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:15] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  208 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-95 1440 no-preference: real reversible behavior (832ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:16] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  209 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-5 1440 reduce: real reversible behavior (243ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:16] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  210 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-12 1440 reduce: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:18] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  211 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-16 1440 reduce: real reversible behavior (201ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:18] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  212 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-21 1440 reduce: real reversible behavior (272ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:18] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  213 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-37 1440 reduce: real reversible behavior (226ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:18] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  214 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-95 1440 reduce: real reversible behavior (290ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:19] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  215 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-5 390 no-preference: real reversible behavior (351ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:19] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  216 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-12 390 no-preference: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:20] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  217 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-16 390 no-preference: real reversible behavior (415ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:21] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  218 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-21 390 no-preference: real reversible behavior (291ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:21] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  219 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-37 390 no-preference: real reversible behavior (223ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:21] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  220 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-95 390 no-preference: real reversible behavior (797ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:22] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  221 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-5 390 reduce: real reversible behavior (242ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:22] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  222 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-12 390 reduce: real reversible behavior (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:24] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  223 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-16 390 reduce: real reversible behavior (200ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:24] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  224 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-21 390 reduce: real reversible behavior (256ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:24] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  225 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-37 390 reduce: real reversible behavior (227ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:24] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  226 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › play ds-95 390 reduce: real reversible behavior (268ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:25] "GET /download/ds-5.html HTTP/1.1" 200 -
+  ✓  227 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-5 1440 no-preference: real reversible behavior (329ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:25] "GET /download/ds-12.html HTTP/1.1" 200 -
+  ✓  228 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-12 1440 no-preference: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:26] "GET /download/ds-16.html HTTP/1.1" 200 -
+  ✓  229 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-16 1440 no-preference: real reversible behavior (407ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:27] "GET /download/ds-21.html HTTP/1.1" 200 -
+  ✓  230 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-21 1440 no-preference: real reversible behavior (285ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:27] "GET /download/ds-37.html HTTP/1.1" 200 -
+  ✓  231 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-37 1440 no-preference: real reversible behavior (227ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:27] "GET /download/ds-95.html HTTP/1.1" 200 -
+  ✓  232 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-95 1440 no-preference: real reversible behavior (736ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:28] "GET /download/ds-5.html HTTP/1.1" 200 -
+  ✓  233 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-5 1440 reduce: real reversible behavior (223ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:28] "GET /download/ds-12.html HTTP/1.1" 200 -
+  ✓  234 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-12 1440 reduce: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:30] "GET /download/ds-16.html HTTP/1.1" 200 -
+  ✓  235 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-16 1440 reduce: real reversible behavior (168ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:30] "GET /download/ds-21.html HTTP/1.1" 200 -
+  ✓  236 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-21 1440 reduce: real reversible behavior (244ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:30] "GET /download/ds-37.html HTTP/1.1" 200 -
+  ✓  237 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-37 1440 reduce: real reversible behavior (226ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:30] "GET /download/ds-95.html HTTP/1.1" 200 -
+  ✓  238 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-95 1440 reduce: real reversible behavior (269ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:31] "GET /download/ds-5.html HTTP/1.1" 200 -
+  ✓  239 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-5 390 no-preference: real reversible behavior (337ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:31] "GET /download/ds-12.html HTTP/1.1" 200 -
+  ✓  240 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-12 390 no-preference: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:32] "GET /download/ds-16.html HTTP/1.1" 200 -
+  ✓  241 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-16 390 no-preference: real reversible behavior (396ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:33] "GET /download/ds-21.html HTTP/1.1" 200 -
+  ✓  242 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-21 390 no-preference: real reversible behavior (265ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:33] "GET /download/ds-37.html HTTP/1.1" 200 -
+  ✓  243 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-37 390 no-preference: real reversible behavior (227ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:33] "GET /download/ds-95.html HTTP/1.1" 200 -
+  ✓  244 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-95 390 no-preference: real reversible behavior (784ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:34] "GET /download/ds-5.html HTTP/1.1" 200 -
+  ✓  245 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-5 390 reduce: real reversible behavior (222ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:34] "GET /download/ds-12.html HTTP/1.1" 200 -
+  ✓  246 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-12 390 reduce: real reversible behavior (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:36] "GET /download/ds-16.html HTTP/1.1" 200 -
+  ✓  247 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-16 390 reduce: real reversible behavior (190ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:36] "GET /download/ds-21.html HTTP/1.1" 200 -
+  ✓  248 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-21 390 reduce: real reversible behavior (284ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:36] "GET /download/ds-37.html HTTP/1.1" 200 -
+  ✓  249 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-37 390 reduce: real reversible behavior (227ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:36] "GET /download/ds-95.html HTTP/1.1" 200 -
+  ✓  250 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › download ds-95 390 reduce: real reversible behavior (268ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /spells/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /play/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+  ✓  251 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-5 1440 no-preference: real reversible behavior (619ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /spells/ds-12/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:37] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  252 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-12 1440 no-preference: real reversible behavior (1.5s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:39] "GET /spells/ds-16/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:39] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:39] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  253 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-16 1440 no-preference: real reversible behavior (533ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:39] "GET /spells/ds-21/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:39] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:39] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  254 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-21 1440 no-preference: real reversible behavior (459ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:40] "GET /spells/ds-37/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:40] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:40] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  255 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-37 1440 no-preference: real reversible behavior (374ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:40] "GET /spells/ds-95/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:40] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:40] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  256 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-95 1440 no-preference: real reversible behavior (1.1s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:41] "GET /spells/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:41] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:41] "GET /play/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:41] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+  ✓  257 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-5 1440 reduce: real reversible behavior (317ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:42] "GET /spells/ds-12/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:42] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:42] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  258 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-12 1440 reduce: real reversible behavior (1.5s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:43] "GET /spells/ds-16/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:43] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:43] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  259 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-16 1440 reduce: real reversible behavior (365ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /spells/ds-21/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  260 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-21 1440 reduce: real reversible behavior (458ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /spells/ds-37/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  261 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-37 1440 reduce: real reversible behavior (375ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /spells/ds-95/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:44] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  262 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-95 1440 reduce: real reversible behavior (411ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /spells/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  263 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-5 390 no-preference: real reversible behavior (568ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /spells/ds-12/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:45] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  264 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-12 390 no-preference: real reversible behavior (1.5s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:47] "GET /spells/ds-16/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:47] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:47] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  265 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-16 390 no-preference: real reversible behavior (438ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:47] "GET /spells/ds-21/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:47] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:47] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  266 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-21 390 no-preference: real reversible behavior (495ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:48] "GET /spells/ds-37/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:48] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:48] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  267 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-37 390 no-preference: real reversible behavior (465ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:48] "GET /spells/ds-95/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:48] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:48] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  268 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-95 390 no-preference: real reversible behavior (1.2s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /spells/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  269 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-5 390 reduce: real reversible behavior (398ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /spells/ds-12/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:50] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  270 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-12 390 reduce: real reversible behavior (1.5s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:51] "GET /spells/ds-16/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:51] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:51] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  271 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-16 390 reduce: real reversible behavior (348ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:52] "GET /spells/ds-21/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:52] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:52] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  272 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-21 390 reduce: real reversible behavior (452ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:52] "GET /spells/ds-37/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:52] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:52] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  273 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-37 390 reduce: real reversible behavior (359ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /spells/ds-95/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  274 [chromium] › tests/showcase-pilot.spec.mjs:130:27 › iframe ds-95 390 reduce: real reversible behavior (399ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  275 [chromium] › tests/showcase-pilot.spec.mjs:151:22 › ds-5: dark mobile, touch controls, and readable degraded presentation (121ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /play/ds-12/ HTTP/1.1" 200 -
+  ✓  276 [chromium] › tests/showcase-pilot.spec.mjs:151:22 › ds-12: dark mobile, touch controls, and readable degraded presentation (113ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /play/ds-16/ HTTP/1.1" 200 -
+  ✓  277 [chromium] › tests/showcase-pilot.spec.mjs:151:22 › ds-16: dark mobile, touch controls, and readable degraded presentation (124ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:53] "GET /play/ds-21/ HTTP/1.1" 200 -
+  ✓  278 [chromium] › tests/showcase-pilot.spec.mjs:151:22 › ds-21: dark mobile, touch controls, and readable degraded presentation (135ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:54] "GET /play/ds-37/ HTTP/1.1" 200 -
+  ✓  279 [chromium] › tests/showcase-pilot.spec.mjs:151:22 › ds-37: dark mobile, touch controls, and readable degraded presentation (182ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:54] "GET /play/ds-95/ HTTP/1.1" 200 -
+  ✓  280 [chromium] › tests/showcase-pilot.spec.mjs:151:22 › ds-95: dark mobile, touch controls, and readable degraded presentation (125ms)
+Pilot 02: chromium 153.0.8010.0
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:54] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  281 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 hosted 1440 no-preference (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:55] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  282 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 hosted 1440 no-preference (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:57] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  283 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 hosted 1440 no-preference (169ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:57] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  284 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 hosted 1440 no-preference (564ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:15:58] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  285 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 hosted 1440 no-preference (2.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:00] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  286 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 hosted 1440 no-preference (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:01] "GET /download/ds-111.html HTTP/1.1" 200 -
+  ✓  287 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 download 1440 no-preference (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:02] "GET /download/ds-93.html HTTP/1.1" 200 -
+  ✓  288 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 download 1440 no-preference (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:04] "GET /download/ds-134.html HTTP/1.1" 200 -
+  ✓  289 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 download 1440 no-preference (154ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:04] "GET /download/ds-30.html HTTP/1.1" 200 -
+  ✓  290 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 download 1440 no-preference (566ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:04] "GET /download/ds-55.html HTTP/1.1" 200 -
+  ✓  291 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 download 1440 no-preference (2.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:06] "GET /download/ds-69.html HTTP/1.1" 200 -
+  ✓  292 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 download 1440 no-preference (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:08] "GET /spells/ds-111/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:08] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:08] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  293 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 iframe 1440 no-preference (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:09] "GET /spells/ds-93/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:09] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:09] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  294 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 iframe 1440 no-preference (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:11] "GET /spells/ds-134/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:11] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:11] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  295 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 iframe 1440 no-preference (215ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:11] "GET /spells/ds-30/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:11] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:11] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  296 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 iframe 1440 no-preference (629ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:12] "GET /spells/ds-55/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:12] "GET /play/ds-55/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:12] "GET /spell-pages.css HTTP/1.1" 200 -
+  ✓  297 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 iframe 1440 no-preference (2.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:14] "GET /spells/ds-69/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:14] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:14] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  298 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 iframe 1440 no-preference (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:15] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  299 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 hosted 1440 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:17] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  300 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 hosted 1440 reduce (911ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:18] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  301 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 hosted 1440 reduce (212ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:18] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  302 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 hosted 1440 reduce (550ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:18] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  303 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 hosted 1440 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:20] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  304 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 hosted 1440 reduce (991ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:21] "GET /download/ds-111.html HTTP/1.1" 200 -
+  ✓  305 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 download 1440 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:23] "GET /download/ds-93.html HTTP/1.1" 200 -
+  ✓  306 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 download 1440 reduce (896ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:24] "GET /download/ds-134.html HTTP/1.1" 200 -
+  ✓  307 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 download 1440 reduce (149ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:24] "GET /download/ds-30.html HTTP/1.1" 200 -
+  ✓  308 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 download 1440 reduce (551ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:24] "GET /download/ds-55.html HTTP/1.1" 200 -
+  ✓  309 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 download 1440 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:26] "GET /download/ds-69.html HTTP/1.1" 200 -
+  ✓  310 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 download 1440 reduce (972ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:27] "GET /spells/ds-111/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:27] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:27] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  311 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 iframe 1440 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:28] "GET /spells/ds-93/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:28] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:28] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  312 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 iframe 1440 reduce (971ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:29] "GET /spells/ds-134/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:29] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:29] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  313 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 iframe 1440 reduce (208ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:30] "GET /spells/ds-30/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:30] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:30] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  314 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 iframe 1440 reduce (652ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:30] "GET /spells/ds-55/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:30] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:30] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  315 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 iframe 1440 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:32] "GET /spells/ds-69/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:32] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:32] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  316 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 iframe 1440 reduce (1.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:33] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  317 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 hosted 390 no-preference (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:35] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  318 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 hosted 390 no-preference (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:36] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  319 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 hosted 390 no-preference (149ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:36] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  320 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 hosted 390 no-preference (548ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:37] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  321 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 hosted 390 no-preference (1.9s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:39] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  322 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 hosted 390 no-preference (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:40] "GET /download/ds-111.html HTTP/1.1" 200 -
+  ✓  323 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 download 390 no-preference (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:42] "GET /download/ds-93.html HTTP/1.1" 200 -
+  ✓  324 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 download 390 no-preference (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:43] "GET /download/ds-134.html HTTP/1.1" 200 -
+  ✓  325 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 download 390 no-preference (157ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:43] "GET /download/ds-30.html HTTP/1.1" 200 -
+  ✓  326 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 download 390 no-preference (547ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:44] "GET /download/ds-55.html HTTP/1.1" 200 -
+  ✓  327 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 download 390 no-preference (2.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:46] "GET /download/ds-69.html HTTP/1.1" 200 -
+  ✓  328 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 download 390 no-preference (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:47] "GET /spells/ds-111/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:47] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:47] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  329 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 iframe 390 no-preference (1.7s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:49] "GET /spells/ds-93/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:49] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:49] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  330 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 iframe 390 no-preference (1.3s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:50] "GET /spells/ds-134/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:50] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:50] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  331 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 iframe 390 no-preference (212ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:50] "GET /spells/ds-30/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:50] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:50] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  332 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 iframe 390 no-preference (610ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:51] "GET /spells/ds-55/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:51] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:51] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  333 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 iframe 390 no-preference (2.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:53] "GET /spells/ds-69/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:53] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:53] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  334 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 iframe 390 no-preference (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:54] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  335 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 hosted 390 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:56] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  336 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 hosted 390 reduce (910ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:57] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  337 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 hosted 390 reduce (161ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:57] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  338 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 hosted 390 reduce (558ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:57] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  339 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 hosted 390 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:16:59] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  340 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 hosted 390 reduce (979ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:00] "GET /download/ds-111.html HTTP/1.1" 200 -
+  ✓  341 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 download 390 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:02] "GET /download/ds-93.html HTTP/1.1" 200 -
+  ✓  342 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 download 390 reduce (900ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:03] "GET /download/ds-134.html HTTP/1.1" 200 -
+  ✓  343 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 download 390 reduce (158ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:03] "GET /download/ds-30.html HTTP/1.1" 200 -
+  ✓  344 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 download 390 reduce (547ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:03] "GET /download/ds-55.html HTTP/1.1" 200 -
+  ✓  345 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 download 390 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:05] "GET /download/ds-69.html HTTP/1.1" 200 -
+  ✓  346 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 download 390 reduce (1.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:06] "GET /spells/ds-111/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:06] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:06] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  347 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 111 iframe 390 reduce (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:08] "GET /spells/ds-93/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:08] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:08] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  348 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 93 iframe 390 reduce (982ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /spells/ds-134/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  349 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 134 iframe 390 reduce (277ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /spells/ds-30/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  350 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 30 iframe 390 reduce (644ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:09] "GET /spells/ds-55/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:10] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:10] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  351 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 55 iframe 390 reduce (1.7s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:11] "GET /spells/ds-69/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:11] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:11] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  352 [chromium] › tests/showcase-pilot02.spec.mjs:111:2 › 69 iframe 390 reduce (1.0s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:12] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  353 [chromium] › tests/showcase-pilot02.spec.mjs:119:21 › 111 dark touch-emulated mobile (1.6s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:14] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  354 [chromium] › tests/showcase-pilot02.spec.mjs:119:21 › 93 dark touch-emulated mobile (1.2s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:15] "GET /play/ds-134/ HTTP/1.1" 200 -
+  ✓  355 [chromium] › tests/showcase-pilot02.spec.mjs:119:21 › 134 dark touch-emulated mobile (204ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:15] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  356 [chromium] › tests/showcase-pilot02.spec.mjs:119:21 › 30 dark touch-emulated mobile (593ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:16] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  357 [chromium] › tests/showcase-pilot02.spec.mjs:119:21 › 55 dark touch-emulated mobile (1.9s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:18] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  358 [chromium] › tests/showcase-pilot02.spec.mjs:119:21 › 69 dark touch-emulated mobile (1.4s)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:19] "GET /play/ds-111/ HTTP/1.1" 200 -
+  ✓  359 [chromium] › tests/showcase-pilot02.spec.mjs:122:32 › 111 simulated unsupported enhancement (96ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:19] "GET /play/ds-93/ HTTP/1.1" 200 -
+  ✓  360 [chromium] › tests/showcase-pilot02.spec.mjs:122:32 › 93 simulated unsupported enhancement (482ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:20] "GET /play/ds-55/ HTTP/1.1" 200 -
+  ✓  361 [chromium] › tests/showcase-pilot02.spec.mjs:122:32 › 55 simulated unsupported enhancement (110ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:20] "GET /play/ds-69/ HTTP/1.1" 200 -
+  ✓  362 [chromium] › tests/showcase-pilot02.spec.mjs:122:32 › 69 simulated unsupported enhancement (126ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:20] "GET /play/ds-30/ HTTP/1.1" 200 -
+  ✓  363 [chromium] › tests/showcase-pilot02.spec.mjs:131:1 › 30 short zoom-equivalent viewport leaves CTA in flow (145ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:20] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  364 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 hosted 1440 no-preference (659ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:21] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  365 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 hosted 1440 no-preference (438ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:21] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  366 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 hosted 1440 no-preference (630ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:22] "GET /download/ds-48.html HTTP/1.1" 200 -
+  ✓  367 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 download 1440 no-preference (659ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:23] "GET /download/ds-49.html HTTP/1.1" 200 -
+  ✓  368 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 download 1440 no-preference (440ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:23] "GET /download/ds-50.html HTTP/1.1" 200 -
+  ✓  369 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 download 1440 no-preference (635ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:24] "GET /spells/ds-48/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:24] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:24] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  370 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 iframe 1440 no-preference (731ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:24] "GET /spells/ds-49/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:24] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:24] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  371 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 iframe 1440 no-preference (542ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:25] "GET /spells/ds-50/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:25] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:25] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  372 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 iframe 1440 no-preference (684ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:26] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  373 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 hosted 1440 reduce (645ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:26] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  374 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 hosted 1440 reduce (424ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:27] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  375 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 hosted 1440 reduce (633ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:27] "GET /download/ds-48.html HTTP/1.1" 200 -
+  ✓  376 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 download 1440 reduce (669ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:28] "GET /download/ds-49.html HTTP/1.1" 200 -
+  ✓  377 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 download 1440 reduce (444ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:28] "GET /download/ds-50.html HTTP/1.1" 200 -
+  ✓  378 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 download 1440 reduce (635ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:29] "GET /spells/ds-48/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:29] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:29] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  379 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 iframe 1440 reduce (705ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:30] "GET /spells/ds-49/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:30] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:30] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  380 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 iframe 1440 reduce (565ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:30] "GET /spells/ds-50/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:30] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:30] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  381 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 iframe 1440 reduce (692ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:31] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  382 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 hosted 390 no-preference (655ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:32] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  383 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 hosted 390 no-preference (439ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:32] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  384 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 hosted 390 no-preference (631ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:33] "GET /download/ds-48.html HTTP/1.1" 200 -
+  ✓  385 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 download 390 no-preference (648ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:34] "GET /download/ds-49.html HTTP/1.1" 200 -
+  ✓  386 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 download 390 no-preference (435ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:34] "GET /download/ds-50.html HTTP/1.1" 200 -
+  ✓  387 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 download 390 no-preference (645ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:35] "GET /spells/ds-48/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:35] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:35] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  388 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 iframe 390 no-preference (714ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:35] "GET /spells/ds-49/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:35] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:35] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  389 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 iframe 390 no-preference (537ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:36] "GET /spells/ds-50/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:36] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:36] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  390 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 iframe 390 no-preference (686ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:37] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  391 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 hosted 390 reduce (658ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:37] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  392 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 hosted 390 reduce (436ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:38] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  393 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 hosted 390 reduce (667ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:38] "GET /download/ds-48.html HTTP/1.1" 200 -
+  ✓  394 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 download 390 reduce (654ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:39] "GET /download/ds-49.html HTTP/1.1" 200 -
+  ✓  395 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 download 390 reduce (448ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:39] "GET /download/ds-50.html HTTP/1.1" 200 -
+  ✓  396 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 download 390 reduce (643ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:40] "GET /spells/ds-48/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:40] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:40] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  397 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 48 iframe 390 reduce (763ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:41] "GET /spells/ds-49/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:41] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:41] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  398 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 49 iframe 390 reduce (543ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:41] "GET /spells/ds-50/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:41] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:41] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  399 [chromium] › tests/showcase-pilot03.spec.mjs:37:150 › 50 iframe 390 reduce (694ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:42] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  400 [chromium] › tests/showcase-pilot03.spec.mjs:40:21 › 48 dark mobile (652ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:43] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  401 [chromium] › tests/showcase-pilot03.spec.mjs:40:21 › 49 dark mobile (442ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:43] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  402 [chromium] › tests/showcase-pilot03.spec.mjs:40:21 › 50 dark mobile (630ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-48/ HTTP/1.1" 200 -
+  ✓  403 [chromium] › tests/showcase-pilot03.spec.mjs:41:21 › 48 simulated no anchor positioning (121ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-49/ HTTP/1.1" 200 -
+  ✓  404 [chromium] › tests/showcase-pilot03.spec.mjs:41:21 › 49 simulated no anchor positioning (134ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-50/ HTTP/1.1" 200 -
+  ✓  405 [chromium] › tests/showcase-pilot03.spec.mjs:41:21 › 50 simulated no anchor positioning (109ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+  ✓  406 [chromium] › tests/spell-copy.spec.mjs:6:3 › individual documentation source without JavaScript › native source link remains usable and optional copy is hidden (125ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:44] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓  407 [chromium] › tests/spell-copy.spec.mjs:19:3 › individual documentation optional copy › missing clipboard leaves the native link and no inert button (114ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+  ✓  408 [chromium] › tests/spell-copy.spec.mjs:28:3 › individual documentation optional copy › copies exactly the published integration source and announces success (183ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓  409 [chromium] › tests/spell-copy.spec.mjs:44:3 › individual documentation optional copy › failed fetch never touches clipboard or claims copy succeeded (189ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+  ✓  410 [chromium] › tests/spell-copy.spec.mjs:59:3 › individual documentation optional copy › rejected clipboard write keeps the fallback link (190ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spells/ds-14/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /spell-copy.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /play/ds-14/ HTTP/1.1" 200 -
+  ✓  411 [chromium] › tests/spell-copy.spec.mjs:73:3 › individual documentation optional copy › document-level effects have source and full demo links, but no one-file copy (113ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /bundle/ds-1.txt HTTP/1.1" 200 -
+  ✓  412 [chromium] › tests/spell-copy.spec.mjs:87:5 › clean integration documents in a browser › ds-1 parses without catalogue styles or scripts (91ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /bundle/ds-43.txt HTTP/1.1" 200 -
+  ✓  413 [chromium] › tests/spell-copy.spec.mjs:87:5 › clean integration documents in a browser › ds-43 parses without catalogue styles or scripts (88ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:45] "GET /bundle/ds-120.txt HTTP/1.1" 200 -
+  ✓  414 [chromium] › tests/spell-copy.spec.mjs:87:5 › clean integration documents in a browser › ds-120 parses without catalogue styles or scripts (82ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-1/ HTTP/1.1" 200 -
+  ✓  415 [chromium] › tests/static-pages.spec.mjs:6:3 › static spell pages without scripting › standalone docs expose accessible source and an isolated demo (122ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /spells/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-5/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-5/before/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-5/ HTTP/1.1" 200 -
+  ✓  416 [chromium] › tests/static-pages.spec.mjs:17:3 › static spell pages without scripting › subtle interaction has side-by-side native previews and clear instruction (128ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /catalogue.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /spells/ds-1/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-1/before/ HTTP/1.1" 200 -
+  ✓  417 [chromium] › tests/static-pages.spec.mjs:32:3 › static spell pages without scripting › catalogue provides direct links to independent pages without scripting (307ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-14/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-14/next/ HTTP/1.1" 200 -
+  ✓  418 [chromium] › tests/static-pages.spec.mjs:41:3 › static spell pages without scripting › cross-document transition uses actual page navigation (132ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-143/ HTTP/1.1" 200 -
+  ✓  419 [chromium] › tests/static-pages.spec.mjs:50:3 › static spell pages without scripting › print example is a real document with print rules (84ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:46] "GET /play/ds-8/ HTTP/1.1" 200 -
+  ✓  420 [chromium] › tests/walkthroughs.spec.mjs:5:1 › view-timeline reveal has a full-height entry runway and native jump link (146ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:47] "GET /play/ds-125/ HTTP/1.1" 200 -
+  ✓  421 [chromium] › tests/walkthroughs.spec.mjs:16:1 › SVG chart demo preserves the original drawing CSS below the fold (240ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:47] "GET /play/ds-35/ HTTP/1.1" 200 -
+  ✓  422 [chromium] › tests/walkthroughs.spec.mjs:26:1 › native theme controls switch the document scheme without scripting (157ms)
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:47] "GET /play/ds-9/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:47] "GET /spells/ds-143/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:47] "GET /spell-pages.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [26/Sep/2026 17:17:47] "GET /play/ds-143/ HTTP/1.1" 200 -
+  ✓  423 [chromium] › tests/walkthroughs.spec.mjs:38:1 › one-shot animation offers native replay and print media is explained (131ms)
+
+  423 passed (5.9m)

@@ -1,0 +1,12 @@
+{
+  "scratchDir": "/tmp/arena-browser-scratch",
+  "playwrightCore": "1.63.0",
+  "sparticuzChromium": "153.0.0",
+  "executablePath": "/tmp/chromium",
+  "chromiumSandbox": true,
+  "args": [
+    "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost",
+    "--proxy-server=http://127.0.0.1:9"
+  ],
+  "installedFresh": false
+}

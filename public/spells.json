@@ -1,7 +1,7 @@
 {
   "$schema": "https://design-spells.hultsan20.workers.dev/spells.schema.json",
   "supportAsOf": "2026-08-24",
-  "total": 150,
+  "total": 152,
   "spells": [
     {
       "id": "ds-1",
@@ -6070,6 +6070,86 @@
         "safari": "yes"
       },
       "supportNote": "Safari 26.2+; Chromium and Firefox unsupported.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
+    },
+    {
+      "id": "ds-152",
+      "number": "152",
+      "title": "Responsive Switcher (intrinsic flex layout)",
+      "section": "Practical native patterns (2026)",
+      "category": "Layout",
+      "rawCategory": "Layout",
+      "status": "baseline",
+      "statusLabel": "Baseline",
+      "jsNeed": "markup",
+      "jsLabel": "Markup",
+      "note": "",
+      "description": "A three-card service row that stacks itself when its own container becomes narrow. Resize the demo to see the layout change without a viewport media query or JavaScript. Cards keep their content and reading order.",
+      "html": "<div class=\"service-switcher\">\n  <article class=\"switcher-card\"><strong>Starter</strong><p>One-page launch.</p></article>\n  <article class=\"switcher-card\"><strong>Growth</strong><p>Room for new services and content.</p></article>\n  <article class=\"switcher-card\"><strong>Studio</strong><p>A larger, structured website.</p></article>\n</div>\n",
+      "css": ".service-switcher {\n  --switch-at: 34rem;\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--space-4);\n  inline-size: 100%;\n}\n.service-switcher > .switcher-card {\n  flex-grow: 1;\n  flex-basis: calc((var(--switch-at) - 100%) * 999);\n  min-inline-size: min(100%, 12rem);\n  padding: var(--space-4);\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n.switcher-card strong { display: block; color: var(--color-primary); font-size: 1.1rem; }\n.switcher-card p { margin: .35rem 0 0; color: var(--color-text-muted); }\n",
+      "previewEnvironment": "shadow",
+      "previewAction": {
+        "kind": "none",
+        "hint": ""
+      },
+      "previewHtml": "<div class=\"service-switcher\">\n  <article class=\"switcher-card\"><strong>Starter</strong><p>One-page launch.</p></article>\n  <article class=\"switcher-card\"><strong>Growth</strong><p>Room for new services and content.</p></article>\n  <article class=\"switcher-card\"><strong>Studio</strong><p>A larger, structured website.</p></article>\n</div>",
+      "previewCss": ".service-switcher {\n  --switch-at: 34rem;\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--space-4);\n  inline-size: 100%;\n}\n.service-switcher > .switcher-card {\n  flex-grow: 1;\n  flex-basis: calc((var(--switch-at) - 100%) * 999);\n  min-inline-size: min(100%, 12rem);\n  padding: var(--space-4);\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n.switcher-card strong { display: block; color: var(--color-primary); font-size: 1.1rem; }\n.switcher-card p { margin: .35rem 0 0; color: var(--color-text-muted); }\n",
+      "featureKeys": [
+        "baseline"
+      ],
+      "feature": "Widely available CSS",
+      "browsers": {
+        "chrome": "yes",
+        "edge": "yes",
+        "firefox": "yes",
+        "safari": "yes"
+      },
+      "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
+      "verification": {
+        "support": "registry-estimate",
+        "behavior": "not-individually-verified",
+        "accessibility": "not-audited",
+        "sources": []
+      }
+    },
+    {
+      "id": "ds-153",
+      "number": "153",
+      "title": "Table Crosshair Highlight (:has())",
+      "section": "Practical native patterns (2026)",
+      "category": "Data",
+      "rawCategory": "Data",
+      "status": "baseline",
+      "statusLabel": "Baseline",
+      "jsNeed": "markup",
+      "jsLabel": "Markup",
+      "note": "",
+      "description": "Highlights the row and column of a hovered or keyboard-focused table link, making dense data easier to scan. Cells remain real table cells; this is visual orientation, not a spreadsheet keyboard-navigation implementation.",
+      "html": "<div class=\"crosshair-scroller\" role=\"region\" aria-label=\"Quarterly revenue\" tabindex=\"0\">\n  <table class=\"crosshair-table\">\n    <caption>Revenue by region, in thousands</caption>\n    <thead><tr><th scope=\"col\">Region</th><th scope=\"col\">Q1</th><th scope=\"col\">Q2</th><th scope=\"col\">Q3</th></tr></thead>\n    <tbody>\n      <tr><th scope=\"row\">North</th><td><a href=\"#crosshair-note\">24</a></td><td><a href=\"#crosshair-note\">31</a></td><td><a href=\"#crosshair-note\">38</a></td></tr>\n      <tr><th scope=\"row\">West</th><td><a href=\"#crosshair-note\">18</a></td><td><a href=\"#crosshair-note\">27</a></td><td><a href=\"#crosshair-note\">34</a></td></tr>\n      <tr><th scope=\"row\">East</th><td><a href=\"#crosshair-note\">15</a></td><td><a href=\"#crosshair-note\">22</a></td><td><a href=\"#crosshair-note\">29</a></td></tr>\n    </tbody>\n  </table>\n  <p id=\"crosshair-note\">Illustrative values only.</p>\n</div>\n",
+      "css": ".crosshair-scroller { inline-size: 100%; max-inline-size: 100%; overflow-x: auto; }\n.crosshair-table { inline-size: 100%; border-collapse: collapse; }\n.crosshair-table caption { text-align: start; margin-block-end: .5rem; font-weight: 600; }\n.crosshair-table th,\n.crosshair-table td {\n  padding: .6rem .7rem;\n  border: 1px solid var(--color-border);\n  text-align: start;\n  min-inline-size: 4.5rem;\n}\n.crosshair-table thead th { background: var(--color-surface-offset); }\n.crosshair-table tbody tr:hover > *,\n.crosshair-table tbody tr:focus-within > * { background: var(--color-surface-offset); }\n.crosshair-table:has(tbody :nth-child(2):is(:hover, :focus-within)) tr > :nth-child(2),\n.crosshair-table:has(tbody :nth-child(3):is(:hover, :focus-within)) tr > :nth-child(3),\n.crosshair-table:has(tbody :nth-child(4):is(:hover, :focus-within)) tr > :nth-child(4) {\n  background: var(--color-surface-offset);\n}\n.crosshair-table tbody td:is(:hover, :focus-within) {\n  background: var(--color-primary);\n  color: var(--color-text-inverse);\n}\n.crosshair-table td a { display: grid; align-items: center; min-block-size: 44px; color: inherit; }\n.crosshair-table td a:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }\n",
+      "previewEnvironment": "shadow",
+      "previewAction": {
+        "kind": "hover-or-focus",
+        "hint": "Hover or focus to preview"
+      },
+      "previewHtml": "<div class=\"crosshair-scroller\" role=\"region\" aria-label=\"Quarterly revenue\" tabindex=\"0\">\n  <table class=\"crosshair-table\">\n    <caption>Revenue by region, in thousands</caption>\n    <thead><tr><th scope=\"col\">Region</th><th scope=\"col\">Q1</th><th scope=\"col\">Q2</th><th scope=\"col\">Q3</th></tr></thead>\n    <tbody>\n      <tr><th scope=\"row\">North</th><td><a href=\"#crosshair-note\">24</a></td><td><a href=\"#crosshair-note\">31</a></td><td><a href=\"#crosshair-note\">38</a></td></tr>\n      <tr><th scope=\"row\">West</th><td><a href=\"#crosshair-note\">18</a></td><td><a href=\"#crosshair-note\">27</a></td><td><a href=\"#crosshair-note\">34</a></td></tr>\n      <tr><th scope=\"row\">East</th><td><a href=\"#crosshair-note\">15</a></td><td><a href=\"#crosshair-note\">22</a></td><td><a href=\"#crosshair-note\">29</a></td></tr>\n    </tbody>\n  </table>\n  <p id=\"crosshair-note\">Illustrative values only.</p>\n</div>",
+      "previewCss": ".crosshair-scroller { inline-size: 100%; max-inline-size: 100%; overflow-x: auto; }\n.crosshair-table { inline-size: 100%; border-collapse: collapse; }\n.crosshair-table caption { text-align: start; margin-block-end: .5rem; font-weight: 600; }\n.crosshair-table th,\n.crosshair-table td {\n  padding: .6rem .7rem;\n  border: 1px solid var(--color-border);\n  text-align: start;\n  min-inline-size: 4.5rem;\n}\n.crosshair-table thead th { background: var(--color-surface-offset); }\n.crosshair-table tbody tr:hover > *,\n.crosshair-table tbody tr:focus-within > * { background: var(--color-surface-offset); }\n.crosshair-table:has(tbody :nth-child(2):is(:hover, :focus-within)) tr > :nth-child(2),\n.crosshair-table:has(tbody :nth-child(3):is(:hover, :focus-within)) tr > :nth-child(3),\n.crosshair-table:has(tbody :nth-child(4):is(:hover, :focus-within)) tr > :nth-child(4) {\n  background: var(--color-surface-offset);\n}\n.crosshair-table tbody td:is(:hover, :focus-within) {\n  background: var(--color-primary);\n  color: var(--color-text-inverse);\n}\n.crosshair-table td a { display: grid; align-items: center; min-block-size: 44px; color: inherit; }\n.crosshair-table td a:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }\n",
+      "featureKeys": [
+        "has"
+      ],
+      "feature": ":has()",
+      "browsers": {
+        "chrome": "yes",
+        "edge": "yes",
+        "firefox": "yes",
+        "safari": "yes"
+      },
+      "supportNote": ":has() has been Baseline since late 2023.",
       "verification": {
         "support": "registry-estimate",
         "behavior": "not-individually-verified",

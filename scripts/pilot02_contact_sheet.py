@@ -13,3 +13,11 @@ for phase in ['before','after']:
             for i,f in enumerate(files):
                 im=Image.open(f);im.thumbnail((300,image_height));x=(i%4)*300;y=(i//4)*tile_height;sheet.paste(im,(x,y));draw.text((x+5,y+image_height+4),f'ds-{f.name.split("-")[0]} / {f.stem.split("-")[-1]}',fill='black')
             sheet.save(root/f'{phase}-{width}-{variant}contact.jpg',quality=90)
+
+files=[root/'fallback'/f'{i}-390-no-preference-light-active.jpg' for i in [111,93,55,69]]
+if all(f.exists() for f in files):
+    sheet=Image.new('RGB',(800,455),'#e9e9e6')
+    for i,f in enumerate(files):
+        im=Image.open(f);im.thumbnail((200,430));sheet.paste(im,(i*200,0))
+        ImageDraw.Draw(sheet).text((i*200+5,435),f'ds-{f.name.split("-")[0]} / simulated fallback',fill='black')
+    sheet.save(root/'fallback-mobile-contact.jpg')

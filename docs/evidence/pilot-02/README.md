@@ -21,3 +21,11 @@ Individual captures: `before/{number}-{width}-{initial|active}.jpg`; `after/{num
 Reproduce after evidence: build, serve `public` on port 8787, then `node scripts/capture_pilot02.mjs after`. Optional `DS_CHROMIUM_PATH` and `DS_CAPTURE_ORIGIN` select an external runtime/server. `scripts/pilot02_contact_sheet.py` uses optional Pillow, outside the build dependency path. Reproducing before evidence requires the baseline checkout; do not overwrite it using the new source.
 
 Limits: automated keyboard, native scrolling and emulated touch, not physical devices or assistive technology. Fallback-removal tests simulate unavailable enhancements; actual Firefox/WebKit observations are recorded separately in the audit ledger. No accessibility certification is implied.
+
+## Simulated unsupported enhancements
+
+[Mobile fallback contact sheet](fallback-mobile-contact.jpg) and [`fallback/observations.json`](fallback/observations.json) record the four enhancement-dependent spells after removing `@supports` and `@container` rules. Individual desktop/mobile initial and active captures live in `fallback/`. This is deliberate fault injection, not a historical browser screenshot. The filled KPI, all captions, readable native sticky deck and native table scroll remain. Reproduce with `node scripts/capture_pilot02.mjs fallback`.
+
+## Limited next-batch triage
+
+[ds-49 mobile](next-batch-ds49.jpg), [raw geometry](next-batch-triage.json): its Filters panel is already displayed before clicking and stays displayed; its right edge measures 396.83px in a 390px viewport. No ds-49 code is changed in this pilot.

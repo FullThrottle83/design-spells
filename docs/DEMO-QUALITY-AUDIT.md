@@ -47,6 +47,7 @@ Local rendering uses **Chromium 153.0.8010.0**, provided by an external `@sparti
 
 - Six Firefox mobile ds-12 scenarios reached the end, then a single reverse wheel event snapped to the middle item (scrollLeft 293), not the beginning. The harness now performs repeated real wheel gestures while retaining the same <2px start/end geometry assertions; it does not assume every engine consumes a wheel delta identically.
 - Two WebKit ds-5 iframe scenarios failed to bring the fragment destination into view with smooth scrolling. The scene now opts out of smooth document scrolling (also used in ds-21); the canonical underline remains unchanged. The same viewport-visibility assertion is retained.
+- Follow-up [run 36225894086](https://github.com/FullThrottle83/design-spells/actions/runs/36225894086): **188 passed, 6 failed**. WebKit fragment navigation is fixed; Firefox reached the start successfully, then the repeat-forward gesture also settled at the middle item. Both directions now use the same repeated-wheel helper. An additional off-grid scroll asserts exact interior-item snap alignment (not only edge clamping).
 - Final local `npm test` before these two follow-ups: **76 Python + 298 Chromium passed (4.8m)**. Follow-up results recorded below once CI completes.
 
 ## Next coherent batch — scroll journeys and honest fallback

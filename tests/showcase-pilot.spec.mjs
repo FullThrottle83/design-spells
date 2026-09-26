@@ -30,20 +30,28 @@ async function exercise(root, page, id, width, motion) {
     await gallery.focus();
     await page.keyboard.press('ArrowRight');
     await expect.poll(async () => (await geometry()).left).toBeGreaterThan(5);
-    // A real wheel scroll, not a fake active class. End/start snap are reachable on every viewport.
-    await gallery.hover();
-    await page.mouse.wheel(2200, 0);
-    await expect.poll(async () => {const g=await geometry(); return Math.abs(g.left-g.max);}).toBeLessThan(2);
+    // Prove snapping at an interior item, not just clamping at a scroll edge.
+    await gallery.evaluate(e => {
+      e.scrollLeft = e.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(e).gap) + 45;
+    });
+    await expect.poll(async () => Math.abs((await box(figures.nth(1))).x - (await box(gallery)).x)).toBeLessThan(2);
+    // Real wheel gestures, not fake active classes or script-set final positions.
+    // Firefox can settle one item per transaction even for a large delta.
+    const wheelToEdge = async (direction) => {
+      await gallery.hover();
+      await expect(async () => {
+        await page.mouse.wheel(direction * 2200, 0);
+        await expect.poll(async () => {
+          const g = await geometry();
+          return direction < 0 ? g.left : Math.abs(g.left - g.max);
+        }, {timeout: 1200}).toBeLessThan(2);
+      }).toPass({timeout: 7000, intervals: [300, 500, 1000]});
+    };
+    await wheelToEdge(1);
     const last = await box(figures.last()), gbox = await box(gallery);
     expect(Math.abs(last.x+last.width-gbox.x-gbox.width)).toBeLessThan(3);
-    // Firefox can snap one item per wheel transaction even for a large delta.
-    // Repeat native gestures; still require arrival at the exact first snap point.
-    await expect(async () => {
-      await page.mouse.wheel(-2200, 0);
-      await expect.poll(async () => (await geometry()).left, {timeout: 1200}).toBeLessThan(2);
-    }).toPass({timeout: 7000, intervals: [300, 500, 1000]});
-    await page.mouse.wheel(2200,0);
-    await expect.poll(async () => {const g=await geometry();return Math.abs(g.left-g.max);}).toBeLessThan(2);
+    await wheelToEdge(-1);
+    await wheelToEdge(1);
   }
   if (id === 16) {
     const input = root.getByRole('textbox', {name:'Full name',exact:true});

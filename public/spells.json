@@ -6097,6 +6097,8 @@
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
+      "previewHtml": "<table class=\"crosshair-table\">\n  <thead>\n    <tr><th scope=\"col\">Region</th><th scope=\"col\">Q1</th><th scope=\"col\">Q2</th><th scope=\"col\">Q3</th></tr>\n  </thead>\n  <tbody>\n    <tr><th scope=\"row\">North</th><td><button class=\"cell-value\">42</button></td><td><button class=\"cell-value\">56</button></td><td><button class=\"cell-value\">61</button></td></tr>\n    <tr><th scope=\"row\">South</th><td><button class=\"cell-value\">38</button></td><td><button class=\"cell-value\">49</button></td><td><button class=\"cell-value\">67</button></td></tr>\n    <tr><th scope=\"row\">West</th><td><button class=\"cell-value\">51</button></td><td><button class=\"cell-value\">63</button></td><td><button class=\"cell-value\">72</button></td></tr>\n  </tbody>\n</table>",
+      "previewCss": ".crosshair-table {\n  inline-size: min(34rem, 100%);\n  border-collapse: collapse;\n  font-variant-numeric: tabular-nums;\n}\n.crosshair-table th,\n.crosshair-table td {\n  padding: .7rem;\n  border: 1px solid var(--color-border);\n  text-align: center;\n  transition: background-color 140ms ease;\n}\n.crosshair-table th { font-weight: 700; }\n.cell-value {\n  inline-size: 100%;\n  min-block-size: 44px;\n  border: 0;\n  background: transparent;\n  color: inherit;\n  font: inherit;\n  cursor: pointer;\n}\n.crosshair-table tbody tr:has(.cell-value:hover, .cell-value:focus-visible) > * {\n  background: var(--color-surface-offset);\n}\n.crosshair-table:has(td:nth-child(2) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(2),\n.crosshair-table:has(td:nth-child(3) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(3),\n.crosshair-table:has(td:nth-child(4) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(4) {\n  background: var(--color-surface-dynamic);\n}\n.cell-value:focus-visible {\n  outline: 2px solid var(--color-primary);\n  outline-offset: -3px;\n}\n@media (prefers-reduced-motion: reduce) {\n  .crosshair-table th,\n  .crosshair-table td { transition: none; }\n}\n",
       "featureKeys": [
         "has"
       ],
@@ -6108,8 +6110,6 @@
         "safari": "yes"
       },
       "supportNote": ":has() has been Baseline since late 2023.",
-      "previewHtml": "<table class=\"crosshair-table\">\n  <thead>\n    <tr><th scope=\"col\">Region</th><th scope=\"col\">Q1</th><th scope=\"col\">Q2</th><th scope=\"col\">Q3</th></tr>\n  </thead>\n  <tbody>\n    <tr><th scope=\"row\">North</th><td><button class=\"cell-value\">42</button></td><td><button class=\"cell-value\">56</button></td><td><button class=\"cell-value\">61</button></td></tr>\n    <tr><th scope=\"row\">South</th><td><button class=\"cell-value\">38</button></td><td><button class=\"cell-value\">49</button></td><td><button class=\"cell-value\">67</button></td></tr>\n    <tr><th scope=\"row\">West</th><td><button class=\"cell-value\">51</button></td><td><button class=\"cell-value\">63</button></td><td><button class=\"cell-value\">72</button></td></tr>\n  </tbody>\n</table>",
-      "previewCss": ".crosshair-table {\n  inline-size: min(34rem, 100%);\n  border-collapse: collapse;\n  font-variant-numeric: tabular-nums;\n}\n.crosshair-table th,\n.crosshair-table td {\n  padding: .7rem;\n  border: 1px solid var(--color-border);\n  text-align: center;\n  transition: background-color 140ms ease;\n}\n.crosshair-table th { font-weight: 700; }\n.cell-value {\n  inline-size: 100%;\n  min-block-size: 44px;\n  border: 0;\n  background: transparent;\n  color: inherit;\n  font: inherit;\n  cursor: pointer;\n}\n.crosshair-table tbody tr:has(.cell-value:hover, .cell-value:focus-visible) > * {\n  background: var(--color-surface-offset);\n}\n.crosshair-table:has(td:nth-child(2) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(2),\n.crosshair-table:has(td:nth-child(3) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(3),\n.crosshair-table:has(td:nth-child(4) .cell-value:is(:hover, :focus-visible)) :is(th, td):nth-child(4) {\n  background: var(--color-surface-dynamic);\n}\n.cell-value:focus-visible {\n  outline: 2px solid var(--color-primary);\n  outline-offset: -3px;\n}\n@media (prefers-reduced-motion: reduce) {\n  .crosshair-table th,\n  .crosshair-table td { transition: none; }\n}\n",
       "verification": {
         "support": "registry-estimate",
         "behavior": "not-individually-verified",
@@ -6137,6 +6137,8 @@
         "kind": "toggle-control",
         "hint": "Toggle the control to preview"
       },
+      "previewHtml": "<div class=\"intrinsic-demo\">\n  <input class=\"sr-only intrinsic-toggle\" type=\"checkbox\" id=\"intrinsic-more\">\n  <label class=\"intrinsic-pill\" for=\"intrinsic-more\">\n    <span class=\"intrinsic-pill__icon\" aria-hidden=\"true\">＋</span>\n    <span>Show intrinsic details</span>\n  </label>\n</div>",
+      "previewCss": ".intrinsic-demo { inline-size: min(28rem, 100%); }\n.intrinsic-pill {\n  inline-size: 3rem;\n  max-inline-size: 100%;\n  min-block-size: 44px;\n  display: inline-flex;\n  align-items: center;\n  gap: .65rem;\n  padding-inline: .75rem;\n  overflow: clip;\n  white-space: nowrap;\n  border: 1px solid var(--color-border);\n  border-radius: 999px;\n  background: var(--color-surface);\n  cursor: pointer;\n  transition: inline-size 320ms cubic-bezier(.16,1,.3,1);\n}\n.intrinsic-pill__icon { flex: 0 0 1.4rem; text-align: center; }\n.intrinsic-toggle:checked + .intrinsic-pill {\n  inline-size: min(18rem, 100%);\n}\n@supports (inline-size: calc-size(max-content, size + 2rem)) {\n  .intrinsic-toggle:checked + .intrinsic-pill {\n    inline-size: calc-size(max-content, size + 2rem);\n  }\n}\n.intrinsic-toggle:focus-visible + .intrinsic-pill {\n  outline: 2px solid var(--color-primary);\n  outline-offset: 2px;\n}\n@media (prefers-reduced-motion: reduce) {\n  .intrinsic-pill { transition: none; }\n}\n",
       "featureKeys": [
         "calc-size"
       ],
@@ -6148,8 +6150,6 @@
         "safari": "no"
       },
       "supportNote": "Chromium 129+; Firefox and Safari do not support calc-size().",
-      "previewHtml": "<div class=\"intrinsic-demo\">\n  <input class=\"sr-only intrinsic-toggle\" type=\"checkbox\" id=\"intrinsic-more\">\n  <label class=\"intrinsic-pill\" for=\"intrinsic-more\">\n    <span class=\"intrinsic-pill__icon\" aria-hidden=\"true\">＋</span>\n    <span>Show intrinsic details</span>\n  </label>\n</div>",
-      "previewCss": ".intrinsic-demo { inline-size: min(28rem, 100%); }\n.intrinsic-pill {\n  inline-size: 3rem;\n  max-inline-size: 100%;\n  min-block-size: 44px;\n  display: inline-flex;\n  align-items: center;\n  gap: .65rem;\n  padding-inline: .75rem;\n  overflow: clip;\n  white-space: nowrap;\n  border: 1px solid var(--color-border);\n  border-radius: 999px;\n  background: var(--color-surface);\n  cursor: pointer;\n  transition: inline-size 320ms cubic-bezier(.16,1,.3,1);\n}\n.intrinsic-pill__icon { flex: 0 0 1.4rem; text-align: center; }\n.intrinsic-toggle:checked + .intrinsic-pill {\n  inline-size: min(18rem, 100%);\n}\n@supports (inline-size: calc-size(max-content, size + 2rem)) {\n  .intrinsic-toggle:checked + .intrinsic-pill {\n    inline-size: calc-size(max-content, size + 2rem);\n  }\n}\n.intrinsic-toggle:focus-visible + .intrinsic-pill {\n  outline: 2px solid var(--color-primary);\n  outline-offset: 2px;\n}\n@media (prefers-reduced-motion: reduce) {\n  .intrinsic-pill { transition: none; }\n}\n",
       "verification": {
         "support": "registry-estimate",
         "behavior": "not-individually-verified",
@@ -6177,6 +6177,8 @@
         "kind": "none",
         "hint": ""
       },
+      "previewHtml": "<section class=\"switcher\" aria-label=\"Service options\">\n  <article><strong>Audit</strong><span>Find the bottlenecks.</span></article>\n  <article><strong>Build</strong><span>Ship the lean version.</span></article>\n  <article><strong>Improve</strong><span>Measure and iterate.</span></article>\n</section>",
+      "previewCss": ".switcher {\n  --switcher-threshold: 34rem;\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--space-4);\n  inline-size: 100%;\n}\n.switcher > * {\n  flex-grow: 1;\n  flex-basis: calc((var(--switcher-threshold) - 100%) * 999);\n  min-inline-size: min(100%, 10rem);\n  display: grid;\n  gap: .35rem;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n.switcher strong { font-size: 1.05rem; }\n.switcher span { color: var(--color-text-muted); }\n",
       "featureKeys": [
         "baseline"
       ],
@@ -6188,8 +6190,6 @@
         "safari": "yes"
       },
       "supportNote": "Works in current Chrome, Edge, Firefox, and Safari.",
-      "previewHtml": "<section class=\"switcher\" aria-label=\"Service options\">\n  <article><strong>Audit</strong><span>Find the bottlenecks.</span></article>\n  <article><strong>Build</strong><span>Ship the lean version.</span></article>\n  <article><strong>Improve</strong><span>Measure and iterate.</span></article>\n</section>",
-      "previewCss": ".switcher {\n  --switcher-threshold: 34rem;\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--space-4);\n  inline-size: 100%;\n}\n.switcher > * {\n  flex-grow: 1;\n  flex-basis: calc((var(--switcher-threshold) - 100%) * 999);\n  min-inline-size: min(100%, 10rem);\n  display: grid;\n  gap: .35rem;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n.switcher strong { font-size: 1.05rem; }\n.switcher span { color: var(--color-text-muted); }\n",
       "verification": {
         "support": "registry-estimate",
         "behavior": "not-individually-verified",
@@ -6217,6 +6217,8 @@
         "kind": "none",
         "hint": ""
       },
+      "previewHtml": "<figure class=\"step-gauge\" style=\"--target:73%;--step:10%\">\n  <figcaption><strong>Capacity</strong><span>73% target → 70% step</span></figcaption>\n  <div class=\"step-gauge__track\" aria-hidden=\"true\"><span class=\"step-gauge__fill\"></span></div>\n</figure>",
+      "previewCss": "@property --raw-progress {\n  syntax: \"<percentage>\";\n  initial-value: 0%;\n  inherits: false;\n}\n.step-gauge {\n  inline-size: min(28rem, 100%);\n  margin: 0;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n.step-gauge figcaption {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  margin-block-end: .75rem;\n}\n.step-gauge figcaption span { color: var(--color-text-muted); }\n.step-gauge__track {\n  block-size: 1rem;\n  overflow: hidden;\n  border-radius: 999px;\n  background: var(--color-surface-offset);\n}\n.step-gauge__fill {\n  display: block;\n  block-size: 100%;\n  inline-size: var(--target);\n  border-radius: inherit;\n  background: var(--color-primary);\n}\n@supports (inline-size: round(down, 73%, 10%)) {\n  .step-gauge__fill {\n    --raw-progress: 0%;\n    inline-size: round(down, var(--raw-progress), var(--step));\n    animation: step-gauge-fill 1800ms ease-out forwards;\n  }\n  @keyframes step-gauge-fill {\n    to { --raw-progress: var(--target); }\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .step-gauge__fill {\n    animation: none;\n    --raw-progress: var(--target);\n  }\n}\n",
       "featureKeys": [
         "round-math",
         "property"
@@ -6229,8 +6231,6 @@
         "safari": "yes"
       },
       "supportNote": "round() is Baseline 2024 across current major engines. @property is Baseline and needed for typed interpolation.",
-      "previewHtml": "<figure class=\"step-gauge\" style=\"--target:73%;--step:10%\">\n  <figcaption><strong>Capacity</strong><span>73% target → 70% step</span></figcaption>\n  <div class=\"step-gauge__track\" aria-hidden=\"true\"><span class=\"step-gauge__fill\"></span></div>\n</figure>",
-      "previewCss": "@property --raw-progress {\n  syntax: \"<percentage>\";\n  initial-value: 0%;\n  inherits: false;\n}\n.step-gauge {\n  inline-size: min(28rem, 100%);\n  margin: 0;\n  padding: 1rem;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-md);\n  background: var(--color-surface);\n}\n.step-gauge figcaption {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  margin-block-end: .75rem;\n}\n.step-gauge figcaption span { color: var(--color-text-muted); }\n.step-gauge__track {\n  block-size: 1rem;\n  overflow: hidden;\n  border-radius: 999px;\n  background: var(--color-surface-offset);\n}\n.step-gauge__fill {\n  display: block;\n  block-size: 100%;\n  inline-size: var(--target);\n  border-radius: inherit;\n  background: var(--color-primary);\n}\n@supports (inline-size: round(down, 73%, 10%)) {\n  .step-gauge__fill {\n    --raw-progress: 0%;\n    inline-size: round(down, var(--raw-progress), var(--step));\n    animation: step-gauge-fill 1800ms ease-out forwards;\n  }\n  @keyframes step-gauge-fill {\n    to { --raw-progress: var(--target); }\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .step-gauge__fill {\n    animation: none;\n    --raw-progress: var(--target);\n  }\n}\n",
       "verification": {
         "support": "registry-estimate",
         "behavior": "not-individually-verified",

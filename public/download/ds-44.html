@@ -136,10 +136,17 @@
     box-shadow: 0 12px 32px oklch(0 0 0 / .10);
   }
 }
+
+.sticky-demo { display: block; min-block-size: 190dvh; padding: 2rem; }
+.sticky-demo__intro { margin: 0 0 6rem; max-inline-size: 36ch; color: var(--color-text-muted); }
+.sticky-demo .toc { z-index: 1; max-inline-size: 28rem; margin-inline: auto; }
+.sticky-demo .toc__inner { padding: 1rem; border-radius: var(--radius-md); }
+.sticky-demo__runway { min-block-size: 150dvh; max-inline-size: 28rem; margin-inline: auto;
+  padding-block-start: 3rem; color: var(--color-text-muted); }
 </style>
 </head>
 <body>
-  <div class="stage"><nav class="toc"><div class="toc__inner">On this page</div></nav></div>
+  <div class="stage sticky-demo"><p class="sticky-demo__intro">Scroll down until the navigation reaches the top edge.</p><nav class="toc"><div class="toc__inner">On this page</div></nav><div class="sticky-demo__runway"><p>Keep scrolling to see the navigation remain pinned.</p></div></div>
   <p class='demo-hint'>Scroll to preview</p>
 </body>
 </html>

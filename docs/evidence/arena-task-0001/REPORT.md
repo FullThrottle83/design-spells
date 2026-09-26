@@ -1,5 +1,19 @@
 # Arena task 0001 — evidence report
 
+> **Review amendment (2026-09-26):** The 76 Python / 423 Playwright results and
+> `verify-chromium.out` below were captured by Arena **before** a follow-up
+> security fix on this PR branch. Review found that Playwright could inherit
+> the parent agent's environment. The launcher now supplies an explicit,
+> credential-free subprocess environment with a scratch HOME, and the verifier
+> tests a synthetic parent-env canary against the actual browser's
+> `/proc/<pid>/environ`. It now fails rather than falling back to an
+> unsandboxed browser, and reports unavailable `chrome://sandbox` as
+> NOT_TESTED. An offline regression check was added to CI. The original raw
+> evidence is preserved, not rewritten. **The new live browser verifier and
+> 423-case Arena run need a fresh execution on the amended head before their
+> results can be attributed to the security fix.**
+
+
 Date: 2026-09-26 · Session branch `arena/01a0de89-design-spells` · Base `main` @ `8bc1de55d6f649f4a86e66600dd2dc3c24f8f6ee` (task brief's baseline `fd4a7fa` is stale; actual verified HEAD recorded here). PR #47 (`instinct/agent-guide-design-spells-20260926`) untouched; no PR existed for this branch.
 
 ## Commands and raw outcomes

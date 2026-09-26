@@ -27,7 +27,7 @@
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-153/">Open standalone demo ↗</a><a class="action" href="/download/ds-153.html" download="ds-153.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Toggle the control to preview</p>
+      <p class='note'>Open the disclosure to preview</p>
       
       <iframe title="Isolated demonstration: Intrinsic Disclosure Width (`calc-size()`)" src="/play/ds-153/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -49,7 +49,10 @@
   &lt;/label&gt;
 &lt;/div&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.intrinsic-demo { inline-size: 100%; max-inline-size: 28rem; }
+      <pre tabindex="0"><code>.intrinsic-demo {
+  inline-size: 100%;
+  max-inline-size: 28rem;
+}
 .intrinsic-pill {
   inline-size: 3rem;
   max-inline-size: 100%;
@@ -64,20 +67,27 @@
   border-radius: 999px;
   background: var(--color-surface);
   cursor: pointer;
+  list-style: none;
   transition: inline-size 320ms cubic-bezier(.16,1,.3,1);
 }
+.intrinsic-pill::-webkit-details-marker { display: none; }
 .intrinsic-pill__icon { flex: 0 0 1.4rem; text-align: center; }
-.intrinsic-toggle:checked + .intrinsic-pill {
+.intrinsic-demo[open] .intrinsic-pill {
   inline-size: min(18rem, 100%);
 }
 @supports (inline-size: calc-size(max-content, size + 2rem)) {
-  .intrinsic-toggle:checked + .intrinsic-pill {
+  .intrinsic-demo[open] .intrinsic-pill {
     inline-size: calc-size(max-content, size + 2rem);
   }
 }
-.intrinsic-toggle:focus-visible + .intrinsic-pill {
+.intrinsic-pill:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+.intrinsic-demo__detail {
+  margin: .75rem 0 0;
+  max-inline-size: 32ch;
+  color: var(--color-text-muted);
 }
 @media (prefers-reduced-motion: reduce) {
   .intrinsic-pill { transition: none; }

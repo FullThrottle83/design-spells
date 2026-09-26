@@ -4639,17 +4639,20 @@ Highlight the active table row and column together without JavaScript. Pointer h
 Expand a compact disclosure to its real max-content width plus breathing room. The fixed-width fallback stays usable where `calc-size()` is unavailable.
 
 ```html
-<div class="intrinsic-demo">
-  <input class="sr-only intrinsic-toggle" type="checkbox" id="intrinsic-more">
-  <label class="intrinsic-pill" for="intrinsic-more">
+<details class="intrinsic-demo">
+  <summary class="intrinsic-pill">
     <span class="intrinsic-pill__icon" aria-hidden="true">＋</span>
     <span>Show intrinsic details</span>
-  </label>
-</div>
+  </summary>
+  <p class="intrinsic-demo__detail">The disclosure width follows its intrinsic summary content.</p>
+</details>
 ```
 
 ```css
-.intrinsic-demo { inline-size: 100%; max-inline-size: 28rem; }
+.intrinsic-demo {
+  inline-size: 100%;
+  max-inline-size: 28rem;
+}
 .intrinsic-pill {
   inline-size: 3rem;
   max-inline-size: 100%;
@@ -4664,20 +4667,27 @@ Expand a compact disclosure to its real max-content width plus breathing room. T
   border-radius: 999px;
   background: var(--color-surface);
   cursor: pointer;
+  list-style: none;
   transition: inline-size 320ms cubic-bezier(.16,1,.3,1);
 }
+.intrinsic-pill::-webkit-details-marker { display: none; }
 .intrinsic-pill__icon { flex: 0 0 1.4rem; text-align: center; }
-.intrinsic-toggle:checked + .intrinsic-pill {
+.intrinsic-demo[open] .intrinsic-pill {
   inline-size: min(18rem, 100%);
 }
 @supports (inline-size: calc-size(max-content, size + 2rem)) {
-  .intrinsic-toggle:checked + .intrinsic-pill {
+  .intrinsic-demo[open] .intrinsic-pill {
     inline-size: calc-size(max-content, size + 2rem);
   }
 }
-.intrinsic-toggle:focus-visible + .intrinsic-pill {
+.intrinsic-pill:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+.intrinsic-demo__detail {
+  margin: .75rem 0 0;
+  max-inline-size: 32ch;
+  color: var(--color-text-muted);
 }
 @media (prefers-reduced-motion: reduce) {
   .intrinsic-pill { transition: none; }

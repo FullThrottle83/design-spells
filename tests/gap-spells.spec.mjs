@@ -15,10 +15,11 @@ test("table crosshair exposes a distinct keyboard row/column intersection", asyn
 
 test("calc-size disclosure keeps a working fixed-width fallback and expands on activation", async ({ page }) => {
   await page.goto("/play/ds-153/");
+  const disclosure = page.locator(".intrinsic-demo");
   const pill = page.locator(".intrinsic-pill");
   const before = await pill.evaluate(el => el.getBoundingClientRect().width);
   await pill.click();
-  await expect(page.locator("#intrinsic-more")).toBeChecked();
+  await expect(disclosure).toHaveAttribute("open", "");
   const after = await pill.evaluate(el => el.getBoundingClientRect().width);
   expect(after).toBeGreaterThan(before + 80);
 });

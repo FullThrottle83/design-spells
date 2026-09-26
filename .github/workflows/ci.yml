@@ -20,6 +20,8 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - name: Check Arena browser environment isolation (offline)
+        run: node scripts/arena-browser/test-environment.mjs
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: test -s public/classic/index.html

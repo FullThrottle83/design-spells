@@ -131,11 +131,39 @@
   transition: width 240ms cubic-bezier(0.16,1,0.3,1);
 }
 .nav-link:hover::after,
+.nav-link:focus-visible::after,
 .nav-link[aria-current="page"]::after { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.journal) {scroll-behavior:auto}
+.journal-head {display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:.06em;padding-bottom:24px}
+.journal-head strong {font-size:18px;letter-spacing:-.03em}
+.journal-head span {color:var(--color-text-muted)}
+.journal-nav {display:flex;gap:clamp(18px,4vw,48px);border-block:1px solid var(--color-border);padding-block:8px;font-size:14px}
+.journal-feature {padding:42px clamp(20px,5vw,56px);margin-top:30px;background:light-dark(#e8e5d9,#262e29);border-left:5px solid var(--color-primary)}
+.journal-feature h1 {font-size:clamp(44px,6vw,76px)}
+.journal-feature p:last-child {max-width:40ch;margin:0}
+.journal-notes {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:30px;margin-top:24px}
+.journal-notes h2 {font:600 12px ui-monospace,monospace}.journal-notes p {font-size:14px;margin:0}
 </style>
 </head>
 <body>
-  <div class="stage"><nav><a class="nav-link" href="#">Overview</a> <a class="nav-link" href="#" aria-current="page">Pricing</a></nav></div>
-  <p class='demo-hint'>Hover to preview</p>
+  <div class="stage"><div class="showcase"><div class="journal"><header class="journal-head"><strong>FORM / FIELD</strong><span>Independent design journal</span></header><nav class="journal-nav" aria-label="Journal"><a class="nav-link" href="#overview">Overview</a><a class="nav-link" href="#field-notes">Field notes</a><a class="nav-link" href="#edition" aria-current="page">Edition 08</a></nav><section id="edition" class="journal-feature"><p class="scene-kicker">Edition 08 · Autumn 2026</p><h1>Less, but<br>with intention.</h1><p>Objects, spaces and ideas that make room for a slower kind of living.</p></section><div class="journal-notes"><section id="overview"><h2>01 / Overview</h2><p>A study in considered design. Start with what matters; leave room for the rest.</p></section><section id="field-notes"><h2>02 / Field notes</h2><p>From the workshop: material honesty, useful details and everyday rituals.</p></section></div></div><p class="scene-instruction">Hover or Tab through the navigation. Follow a link to its section; the current page keeps its underline.</p></div></div>
+
 </body>
 </html>

@@ -271,7 +271,11 @@ The underline slides in instead of blinking on.
   transition: width 240ms cubic-bezier(0.16,1,0.3,1);
 }
 .nav-link:hover::after,
+.nav-link:focus-visible::after,
 .nav-link[aria-current="page"]::after { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+}
 ```
 
 ### 7. Icon Color Shift
@@ -2282,6 +2286,9 @@ Always use a real `<label>`. The placeholder trick never replaces the label sema
   transform: translateY(-130%) scale(0.76);
   color: var(--color-primary);
 }
+@media (prefers-reduced-motion: reduce) {
+  .form-group label { transition: none; }
+}
 ```
 
 ### 23. Validation Whisper
@@ -2726,11 +2733,16 @@ A deep-linked section gets a short highlight flash.
 
 ```css
 section:target {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
   animation: target-flash 1.2s ease-out;
 }
 @keyframes target-flash {
   0%   { box-shadow: 0 0 0 0 oklch(from var(--color-primary) l c h / .22); }
   100% { box-shadow: 0 0 0 18px oklch(from var(--color-primary) l c h / 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  section:target { animation: none; }
 }
 ```
 
@@ -2873,22 +2885,30 @@ Long tables with a sticky header row, zebra stripes, and row highlight on hover/
 A miniature bar chart driven by an inline `--v` custom property per bar — 0-JS data visualization for dashboards and KPI cards.
 
 ```html
-<figure class="spark" role="img" aria-label="Sales by quarter: 34, 58, 41, 72, 66, 90 percent — rising trend">
+<figure class="spark" tabindex="0" role="img" aria-label="Studio capacity booked, January to June 2026: 34, 58, 41, 72, 66, 90 percent">
   <span style="--v:34"></span><span style="--v:58"></span><span style="--v:41"></span>
   <span style="--v:72"></span><span style="--v:66"></span><span style="--v:90"></span>
 </figure>
 ```
 
 ```css
-.spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }
+.spark {
+  display: flex; align-items: end; gap: 4px;
+  inline-size: min(100%, 32rem); block-size: 10rem; margin: 0;
+}
 .spark span {
   flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;
+  background: var(--color-primary); /* Solid fallback when color-mix is unavailable. */
   background: color-mix(in oklch, var(--color-primary), transparent 25%);
   block-size: calc(var(--v, 0) * 1%);
   transition: background 160ms ease, block-size 400ms cubic-bezier(.16,1,.3,1);
 }
 .spark span:last-child { background: var(--color-primary); }
-.spark:hover span { background: var(--color-primary); }
+.spark:hover span, .spark:focus-visible span { background: var(--color-primary); }
+.spark:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .spark span { transition: none; }
+}
 ```
 
 ### 96. Themed `<progress>` & `<meter>`
@@ -3349,6 +3369,7 @@ The same sparkline as Spell 95, but the value lives in `data-v` — no inline `s
 .attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }
 .attr-spark span {
   flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;
+  background: var(--color-primary); /* Solid fallback when color-mix is unavailable. */
   background: color-mix(in oklch, var(--color-primary), transparent 25%);
 }
 @supports (x: attr(x type(*))) {

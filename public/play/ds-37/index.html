@@ -138,10 +138,34 @@
     border-radius: var(--radius-md) 0 0 var(--radius-md);
   }
 }
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.size-controls {border:0;padding:0;display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.size-controls legend {font-size:12px;margin-bottom:8px}.size-controls label {display:flex;gap:8px;align-items:center;min-height:44px;padding:8px 16px;border:1px solid var(--color-border);cursor:pointer}
+.size-controls label:has(:checked) {background:var(--color-surface-offset);border-color:var(--color-primary)}
+.container-boundary {padding:16px;border:1px dashed var(--color-text-muted)}
+.container-lab .card-container {width:min(100%,240px);margin-inline:auto}
+.container-lab:has(#size-wide:checked) .card-container {width:100%}
+.container-lab .adaptive-card {background:var(--color-surface);border:1px solid var(--color-border)}
+.card-media {overflow:hidden}.card-media svg {height:100%;object-fit:cover}.card-copy {padding:22px}.card-copy h2 {font:400 32px/1.1 Georgia,serif;margin:12px 0}.card-copy p:not(.scene-kicker) {font-size:14px}.card-meta {font:11px ui-monospace,monospace}
+.container-lab .container-note,.container-fallback {font-size:12px;margin:16px 0 0;max-width:65ch}
+@supports (container-type:inline-size) {.container-fallback {display:none}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="card-container" style="resize:horizontal;overflow:auto;width:220px;min-width:180px;max-width:100%;padding:.5rem;border:1px dashed var(--color-border)"><article class="adaptive-card"><img class="card-media" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E" alt=""><div><h3>Adaptive</h3><p>Layout follows the container.</p></div></article></div></div>
-  <p class='demo-hint'>Drag the corner to resize</p>
+  <div class="stage"><div class="showcase"><div class="container-lab"><header><p class="scene-kicker">Layout lab / One component, two contexts</p><h1>Space sets the pace.</h1></header><fieldset class="size-controls"><legend>Available container space</legend><label><input type="radio" name="card-size" id="size-compact" checked> Sidebar</label><label><input type="radio" name="card-size" id="size-wide"> Feature</label></fieldset><div class="container-boundary"><div class="card-container"><article class="adaptive-card"><div class="card-media"><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#d7e2dd"/><path d="M0 350 180 85 360 350Z" fill="#254f4b"/><path d="m230 350 170-225 220 225Z" fill="#71988a"/><circle cx="500" cy="96" r="42" fill="#e6b66c"/><path d="M0 380h640" stroke="#254f4b" stroke-width="16"/></svg></div><div class="card-copy"><p class="scene-kicker">Field guide / 06</p><h2>The quiet route.</h2><p>A weekend among the pines. Notes on finding a little more space, closer to home.</p><span class="card-meta">6 min read · Outdoors</span></div></article></div></div><p class="container-note">The dashed line is the container. On narrow screens both choices stay stacked; widen the window to see the 420px threshold.</p><p class="container-fallback">Without container queries, this remains a readable stacked card.</p></div><p class="scene-instruction">Choose Sidebar or Feature to change the container, not the viewport. Above 420px the card becomes two columns.</p></div></div>
+
 </body>
 </html>

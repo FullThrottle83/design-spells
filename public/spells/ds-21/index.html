@@ -27,7 +27,7 @@
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-21/">Open standalone demo ↗</a><a class="action" href="/download/ds-21.html" download="ds-21.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the link to preview</p>
+      <p class='note'>Choose a chapter to highlight its destination. Choose another to repeat. The outline remains after the pulse.</p>
       
       <iframe title="Isolated demonstration: `:target` Highlight" src="/play/ds-21/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -41,14 +41,19 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;section id=&quot;preview-target&quot;&gt;Deep-linked highlight&lt;/section&gt;</code></pre>
+      <pre tabindex="0"><code>&lt;article class=&quot;reading-guide&quot; id=&quot;guide&quot;&gt;&lt;header&gt;&lt;p class=&quot;scene-kicker&quot;&gt;The studio handbook / 04&lt;/p&gt;&lt;h1&gt;Make the destination clear.&lt;/h1&gt;&lt;p&gt;A reading guide with native, shareable chapter links.&lt;/p&gt;&lt;/header&gt;&lt;nav aria-label=&quot;Chapters&quot;&gt;&lt;a href=&quot;#materials&quot;&gt;01 Materials ↗&lt;/a&gt;&lt;a href=&quot;#process&quot;&gt;02 Process ↗&lt;/a&gt;&lt;a href=&quot;#care&quot;&gt;03 Care ↗&lt;/a&gt;&lt;/nav&gt;&lt;div class=&quot;guide-chapters&quot;&gt;&lt;section id=&quot;materials&quot; tabindex=&quot;-1&quot;&gt;&lt;small&gt;01 / The starting point&lt;/small&gt;&lt;h2&gt;Material matters.&lt;/h2&gt;&lt;p&gt;Choose materials that age with grace: honest timber, uncoated paper and well-made textiles.&lt;/p&gt;&lt;/section&gt;&lt;section id=&quot;process&quot; tabindex=&quot;-1&quot;&gt;&lt;small&gt;02 / The method&lt;/small&gt;&lt;h2&gt;Leave room to refine.&lt;/h2&gt;&lt;p&gt;Sketch, make, test. The most useful details often emerge on the second pass.&lt;/p&gt;&lt;/section&gt;&lt;section id=&quot;care&quot; tabindex=&quot;-1&quot;&gt;&lt;small&gt;03 / The long view&lt;/small&gt;&lt;h2&gt;Built to be kept.&lt;/h2&gt;&lt;p&gt;Repair is part of the design. Care for the things you use, and let them tell their story.&lt;/p&gt;&lt;/section&gt;&lt;/div&gt;&lt;a class=&quot;guide-reset&quot; href=&quot;#guide&quot;&gt;Clear highlight ↑&lt;/a&gt;&lt;/article&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>section:target {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
   animation: target-flash 1.2s ease-out;
 }
 @keyframes target-flash {
   0%   { box-shadow: 0 0 0 0 oklch(from var(--color-primary) l c h / .22); }
   100% { box-shadow: 0 0 0 18px oklch(from var(--color-primary) l c h / 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  section:target { animation: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">

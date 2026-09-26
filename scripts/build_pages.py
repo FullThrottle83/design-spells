@@ -15,6 +15,7 @@ from xml.sax.saxutils import escape as xml_escape
 
 from build import DOCUMENT_TOKENS, rewrite_preview_assets
 from build_bundle import ROOT_SCROLL_IDS, render_bundle
+from showcase_fixtures import HTML as SCENE_HTML, HINTS, CSS as SCENE_CSS, COMMON_CSS, scene_html
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
@@ -61,7 +62,7 @@ def render_doc(spell: dict) -> str:
         f"<li><strong>{name}</strong><span>{esc(spell['browsers'][key])}</span></li>"
         for key, name in BROWSERS
     )
-    instruction = spell.get("previewAction", {}).get("hint", "")
+    instruction = HINTS.get(sid, spell.get("previewAction", {}).get("hint", ""))
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
     if sid in SCROLL_ENTRY_DEMOS:
         instruction_html += '<p class="note">This entry animation needs a scroll runway. Scroll inside the iframe or open the full-page demo, then move down to the effect. The spell CSS has not been accelerated.</p>'
@@ -185,6 +186,8 @@ def render_play(spell: dict, next_page: bool = False, baseline: bool = False) ->
         # as their integration bundles; it must not leak into other spells.
         css = "html { container-type: scroll-state; overflow: auto; }\n" + css
     raw_html = spell["previewHtml"] or spell["html"] or "<p>CSS-only example.</p>"
+    if sid == "ds-37":
+        raw_html = SCENE_HTML["37"]
     if sid == "ds-35":
         # Preview-only scheme controls: keep the source CSS and integration bundle unchanged.
         css += """
@@ -287,6 +290,10 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
         )
     elif sid == "ds-9":
         stage += '<p class="demo-replay"><a href="/play/ds-9/">Replay entrance animation ↻</a></p>'
+    if sid in HINTS:
+        stage = f'<div class="stage">{scene_html(sid, raw_html)}</div>'
+        css += COMMON_CSS + SCENE_CSS[sid]
+        hint_html = ""  # The contextual instruction lives inside the scene.
     page_css = """
     *,*::before,*::after {box-sizing:border-box}
     html {scroll-behavior:smooth}
@@ -313,7 +320,7 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
 </head>
 <body>
   {stage}
-  {hint_html}
+{"" if sid in HINTS else "  " + hint_html}
 </body>
 </html>"""
 

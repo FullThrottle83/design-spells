@@ -20,7 +20,7 @@ for (const enabled of [false, true]) {
       const demos = page.locator(".demo-compare iframe");
       await expect(demos).toHaveCount(2);
       for (const demo of await demos.all()) {
-        await expect(demo).toHaveAttribute("sandbox", "allow-same-origin");
+        await expect(demo).toHaveAttribute("sandbox", "allow-same-origin allow-forms");
       }
     });
 

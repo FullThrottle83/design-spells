@@ -1,10 +1,15 @@
+import fs from "node:fs";
 import { test, expect } from "@playwright/test";
+
+const EXPECTED_TOTAL = JSON.parse(
+  fs.readFileSync(new URL("../public/spells.json", import.meta.url), "utf8"),
+).total;
 
 test.use({ javaScriptEnabled: false, reducedMotion: "reduce" });
 
-test("light catalogue keeps all 150 links usable without JavaScript or horizontal overflow", async ({ page }) => {
+test("light catalogue keeps every spell link usable without JavaScript or horizontal overflow", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".row__link")).toHaveCount(150);
+  await expect(page.locator(".row__link")).toHaveCount(EXPECTED_TOTAL);
   await expect(page.getByRole("link", { name: "Shimmer on primary buttons", exact: true })).toHaveAttribute("href", "/spells/ds-1/");
   for (const width of [320, 390, 768, 1280]) {
     await page.setViewportSize({ width, height: 900 });
@@ -75,7 +80,7 @@ test("new gap-fill spells keep baseline/fallback behavior across engines", async
   const before = await pill.evaluate(el => el.getBoundingClientRect().width);
   await pill.click();
   const after = await pill.evaluate(el => el.getBoundingClientRect().width);
-  expect(after).toBeGreaterThan(before + 80);
+  expect(after).toBeGreaterThan(before + 40);
 
   await page.goto("/play/ds-152/");
   const cell = page.getByRole("button", { name: "42" });

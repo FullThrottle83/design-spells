@@ -32,7 +32,7 @@ async function exercise(root, page, id, width, motion) {
     await expect.poll(async () => (await geometry()).left).toBeGreaterThan(5);
     // Prove snapping at an interior item, not just clamping at a scroll edge.
     await gallery.evaluate(e => {
-      e.scrollLeft = e.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(e).gap) + 45;
+      e.scrollLeft = e.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(e).gap) - 45;
     });
     await expect.poll(async () => Math.abs((await box(figures.nth(1))).x - (await box(gallery)).x)).toBeLessThan(2);
     // Real wheel gestures, not fake active classes or script-set final positions.

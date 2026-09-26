@@ -1,4 +1,9 @@
 import { test, expect } from "@playwright/test";
+import fs from "node:fs";
+
+const CATALOGUE_TOTAL = JSON.parse(
+  fs.readFileSync(new URL("../public/spells.json", import.meta.url), "utf8"),
+).total;
 
 for (const enabled of [false, true]) {
   test.describe(`light homepage with scripting ${enabled ? "enabled" : "disabled"}`, () => {
@@ -6,7 +11,7 @@ for (const enabled of [false, true]) {
 
     test("category navigation, full docs and isolated demos work", async ({ page }) => {
       await page.goto("/");
-      await expect(page.locator(".row")).toHaveCount(150);
+      await expect(page.locator(".row")).toHaveCount(CATALOGUE_TOTAL);
       await expect(page.locator(".row[data-id='ds-1'] .row__link")).toHaveAttribute("href", "/spells/ds-1/");
       await expect(page.locator(".row[data-id='ds-1'] .row__demo")).toHaveAttribute("href", "/play/ds-1/");
       await expect(page.locator(".catalogue-tools")).toBeVisible({ visible: enabled });
@@ -42,9 +47,9 @@ test("optional search filters metadata, not embedded CSS", async ({ page }) => {
   await page.goto("/?q=shimmer");
   await expect(page.locator("#search")).toHaveValue("shimmer");
   await expect(page.locator(".row:visible")).toHaveCount(2);
-  await expect(page.locator("#result-count")).toContainText("2 of 150");
+  await expect(page.locator("#result-count")).toContainText(`2 of ${CATALOGUE_TOTAL}`);
   await page.locator("#search").fill("");
-  await expect(page.locator(".row:visible")).toHaveCount(150);
+  await expect(page.locator(".row:visible")).toHaveCount(CATALOGUE_TOTAL);
   await expect(page).not.toHaveURL(/\?q=/);
 });
 

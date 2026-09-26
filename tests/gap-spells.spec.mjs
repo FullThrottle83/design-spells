@@ -6,7 +6,8 @@ test("table crosshair exposes a distinct keyboard row/column intersection", asyn
   await page.goto("/play/ds-152/");
   const target = page.getByRole("button", { name: "42" });
   const sameRow = page.getByRole("button", { name: "61" });
-  await target.focus();
+  // Exercise real keyboard modality so :focus-visible matches.
+  await page.keyboard.press("Tab");
   const targetBg = await target.locator("xpath=..").evaluate(el => getComputedStyle(el).backgroundColor);
   const rowBg = await sameRow.locator("xpath=..").evaluate(el => getComputedStyle(el).backgroundColor);
   expect(targetBg).not.toBe(rowBg);
@@ -20,8 +21,8 @@ test("calc-size disclosure keeps a working fixed-width fallback and expands on a
   const before = await pill.evaluate(el => el.getBoundingClientRect().width);
   await pill.click();
   await expect(disclosure).toHaveAttribute("open", "");
-  const after = await pill.evaluate(el => el.getBoundingClientRect().width);
-  expect(after).toBeGreaterThan(before + 80);
+  await expect.poll(() => pill.evaluate(el => el.getBoundingClientRect().width))
+    .toBeGreaterThan(before + 80);
 });
 
 test("breakpointless switcher changes layout from row to stack without media queries", async ({ page }) => {
@@ -38,11 +39,11 @@ test("breakpointless switcher changes layout from row to stack without media que
 
 test("round gauge resolves the 73 percent target to a 70 percent step", async ({ page }) => {
   await page.goto("/play/ds-155/");
-  const ratio = await page.locator(".step-gauge").evaluate(el => {
+  const ratio = () => page.locator(".step-gauge").evaluate(el => {
     const track = el.querySelector(".step-gauge__track").getBoundingClientRect().width;
     const fill = el.querySelector(".step-gauge__fill").getBoundingClientRect().width;
     return fill / track;
   });
-  expect(ratio).toBeGreaterThan(0.68);
-  expect(ratio).toBeLessThan(0.72);
+  await expect.poll(ratio).toBeGreaterThan(0.68);
+  await expect.poll(ratio).toBeLessThan(0.72);
 });

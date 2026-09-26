@@ -28,7 +28,7 @@ async function verify(root,page,id,motion,browserName){
  }
  if(id===50){
   const rows=root.locator('.form-row'),first=rows.first(),second=rows.nth(1),help1=first.locator('.help-rail'),help2=second.locator('.help-rail');
-  expect(await style(help1,'visibility')).toBe('hidden');await first.locator('input').focus();await settle(page);expect(await style(help1,'visibility')).toBe('visible');expect(parseFloat(await style(help1,'opacity'))).toBe(1);
+  expect(await style(help1,'visibility')).toBe('hidden');await first.locator('input').focus();await settle(page);expect(await style(help1,'visibility')).toBe('visible');await expect.poll(async()=>parseFloat(await style(help1,'opacity'))).toBe(1);
   const h=await rect(help1),v=await doc.evaluate(()=>({w:innerWidth,h:innerHeight}));expect(h.x).toBeGreaterThanOrEqual(-1);expect(h.right).toBeLessThanOrEqual(v.w+1);
   await page.keyboard.press('Tab');await settle(page);expect(await style(help1,'visibility')).toBe('hidden');expect(await style(help2,'visibility')).toBe('visible');
   if(motion==='reduce')expect(await style(help2,'transitionDuration')).toBe('0s');

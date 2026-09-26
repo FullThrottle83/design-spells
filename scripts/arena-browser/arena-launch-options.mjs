@@ -122,16 +122,15 @@ async function resolveExecutablePath() {
  * Returns the Playwright `launchOptions` for the arena run and prepares this
  * process environment so the spawned browser finds its libraries.
  *
- * @param {{ sandbox?: boolean }} [options]
  */
-export async function arenaLaunchOptions(options = {}) {
+export async function arenaLaunchOptions() {
   const executablePath = process.env.CHROMIUM_PATH || (await resolveExecutablePath());
   if (!existsSync(executablePath)) {
     throw new Error(`CHROMIUM_PATH does not exist: ${executablePath}`);
   }
   return {
     executablePath,
-    chromiumSandbox: options.sandbox ?? true,
+    chromiumSandbox: true,
     env: browserEnvironment(),
     args: [
       `--host-resolver-rules=${HOST_RESOLVER_RULES}`,

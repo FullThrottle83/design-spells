@@ -1,0 +1,1 @@
+PASS: explicit browser env excludes synthetic credentials and arbitrary variables

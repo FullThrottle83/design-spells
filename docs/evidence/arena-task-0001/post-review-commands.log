@@ -1,0 +1,18 @@
+# Post-review revalidation command log (2026-09-26, head 4317b2c)
+
+## step 1: npm ci (exit 0)
+added 3 packages, and audited 4 packages in 461ms
+
+found 0 vulnerabilities
+
+## step 2: npm run build (exit 0)
+wrote public/spells.json 463930 bytes
+wrote index.html 5071951 bytes
+wrote 154 static spell pages and isolated demos
+wrote light public/index.html 107959 bytes
+
+## step 6: npm run test:build (exit 0)
+----------------------------------------------------------------------
+Ran 76 tests in 1.983s
+
+OK

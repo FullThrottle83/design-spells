@@ -99,3 +99,56 @@ The flags enforce the boundary inside the browser process, so it also covers con
 - `playwright.arena.config.mjs` — derives from the repo config; launch options + `serviceWorkers: "block"` only
 - `docs/evidence/arena-task-0001/` — this report, `verify-chromium.out`, `raw/playwright-arena-run.log`
 - `.arena/results/0001.md`
+
+---
+
+# Post-review revalidation (2026-09-26, amended head `4317b2c`)
+
+This section supersedes the "pending re-run" note in the review amendment above:
+the live browser verifier and the full Arena suite **have now been re-executed on
+the amended head** with the environment-isolation fix active. The pre-review
+evidence above is preserved unchanged for provenance (original raw log
+`raw/playwright-arena-run.log`, md5 `a09bf5576130d8aee49f428e15f89f96`).
+
+## Commands (branch fast-forwarded `14a847e` → `4317b2c`; reviewer changes intact)
+
+| # | Command | Exit | Outcome |
+| --- | --- | --- | --- |
+| 1 | `npm ci` | 0 | 0 vulnerabilities |
+| 2 | `npm run build` | 0 | spells.json 463,930 bytes; worktree clean after build |
+| 3 | `node scripts/arena-browser/test-environment.mjs` | 0 | PASS — explicit browser env excludes synthetic credentials/canary/arbitrary variables; scratch `HOME` enforced |
+| 4 | `node scripts/arena-browser/bootstrap.mjs` | 0 | scratch reused (`installedFresh: false`), playwright-core 1.63.0, @sparticuz/chromium 153.0.0, executablePath `/tmp/chromium`, sandbox true |
+| 5 | `node scripts/arena-browser/verify-chromium.mjs` | 0 | 11 PASS + **browser environment isolation PASS**; `chrome://sandbox` NOT_TESTED (unavailable in this headless build) |
+| 6 | `npm run test:build` | 0 | `Ran 76 tests in 1.983s` — **76 passed / 0 failed / 0 skipped** |
+| 7 | `npx playwright test --config playwright.arena.config.mjs` | 0 | **423 passed / 0 failed / 0 skipped** in 5.9m (423 `✓`, zero `✘`/`flaky`/`skipped`/`interrupted`) |
+| 8 | `git diff --check` | 0 | clean |
+
+## Environment isolation — synthetic canary result
+
+`verify-chromium.mjs` sets `ARENA_BROWSER_ENV_CANARY` in its own (parent) process
+before launching, then reads the **spawned browser's actual `/proc/<pid>/environ`**
+and compares variable *names* (never values) against the declared allowlist:
+
+> PASS browser environment isolation — "only 4 explicit allowlisted variables; synthetic canary and credential variables absent"
+
+**The synthetic canary was absent from the spawned Chromium process.** No
+credential-shaped name (`*TOKEN*`, `*SECRET*`, `*PASSWORD*`, `*CREDENTIAL*`,
+`*API_KEY*`, `*PRIVATE_KEY*`) appeared; every name in the child environ belonged
+to the declared `BROWSER_ENV_ALLOWLIST` + scratch `HOME`. No environment values
+were read out or printed by any step.
+
+## Effective browser flags (amended head)
+
+- Sandbox required, no fallback: `chromiumSandbox: true` launch succeeded;
+  `--no-sandbox` occurrences in effective argv: **0** (hard-fails otherwise).
+- Forbidden flags `--disable-web-security` / `--allow-running-insecure-content`:
+  **0 occurrences** (hard-fail guard, verified against `/proc/<pid>/cmdline`).
+- Boundary flags present exactly once each, as required:
+  `--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost`
+  and `--proxy-server=http://127.0.0.1:9` (implicit loopback bypass keeps the
+  test server direct). Live probes re-confirmed: loopback nav/subresource OK;
+  external hostname, external IP, external subresource all blocked.
+
+Raw post-review artifacts: `post-review-commands.log`, `post-review-test-environment.out`,
+`post-review-bootstrap.json`, `post-review-verify-chromium.out`,
+`raw/post-review-playwright-arena-run.log`.

@@ -1699,9 +1699,43 @@
       "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023. color-mix() and oklch() are Baseline 2023.",
       "verification": {
         "support": "registry-estimate",
-        "behavior": "not-individually-verified",
+        "behavior": "browser-tested",
         "accessibility": "not-audited",
-        "sources": []
+        "sources": [
+          "https://github.com/FullThrottle83/design-spells/actions/runs/36217318466"
+        ],
+        "evidence": [
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36217318466",
+            "checkedAt": "2026-09-26",
+            "note": "Scoped ds-44 test: at 900×700 the sticky nav reached its top inset, computed shadow appeared when stuck and returned to none after scrolling to top; scripts disabled, reduced motion.",
+            "browser": "chromium",
+            "version": "151.0.7922.34"
+          },
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36217318466",
+            "checkedAt": "2026-09-26",
+            "note": "Fallback observation: native sticky position reached the inset; scroll-state declaration unavailable and shadow stayed none.",
+            "browser": "firefox",
+            "version": "153.0"
+          },
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36217318466",
+            "checkedAt": "2026-09-26",
+            "note": "Fallback observation: native sticky position reached the inset; scroll-state declaration unavailable and shadow stayed none.",
+            "browser": "webkit",
+            "version": "26.5"
+          }
+        ],
+        "dependencies": [
+          "Native sticky positioning and a real document scroll runway",
+          "Scroll-state container query for the progressive shadow"
+        ],
+        "fallback": "Native sticky navigation remains usable without scroll-state; the progressive shadow stays absent. The sample is not a complete table of contents.",
+        "accessibilityNotes": "Only visual sticky/shadow state was automatically checked with scripts disabled and reduced-motion preference. Keyboard-only scrolling, 200% text/400% zoom, NVDA, VoiceOver, contrast and complete motion review remain untested."
       }
     },
     {
@@ -1740,9 +1774,43 @@
       "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
       "verification": {
         "support": "registry-estimate",
-        "behavior": "not-individually-verified",
+        "behavior": "browser-tested",
         "accessibility": "not-audited",
-        "sources": []
+        "sources": [
+          "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400"
+        ],
+        "evidence": [
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400",
+            "checkedAt": "2026-09-26",
+            "note": "Scoped ds-45 test with scripts disabled: first snapped card had full opacity and settled scale 1; after horizontal scroll the second gained both and the first dimmed. Both reduced and normal motion tested.",
+            "browser": "chromium",
+            "version": "151.0.7922.34"
+          },
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400",
+            "checkedAt": "2026-09-26",
+            "note": "Fallback observation in both motion modes: carousel overflow and snap positioning remained; unsupported scroll-state spotlight stayed dimmed.",
+            "browser": "firefox",
+            "version": "153.0"
+          },
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400",
+            "checkedAt": "2026-09-26",
+            "note": "Fallback observation in both motion modes: carousel overflow and snap positioning remained; unsupported scroll-state spotlight stayed dimmed.",
+            "browser": "webkit",
+            "version": "26.5"
+          }
+        ],
+        "dependencies": [
+          "Overflowing native CSS scroll-snap scroller with snap targets",
+          "Scroll-state container on each slide and equal-specificity queried article selector"
+        ],
+        "fallback": "Firefox and WebKit retain native horizontal scroll snapping and readable cards; the unsupported spotlight enhancement stays absent.",
+        "accessibilityNotes": "Hosted/downloaded sample adds a named focusable scroll region only. No complete production carousel controls or screen-reader announcements were reviewed. The original 220ms transition remains under reduced-motion preference; manual motion, keyboard, zoom and screen-reader audits are pending."
       }
     },
     {
@@ -1781,9 +1849,44 @@
       "supportNote": "Chrome/Edge 133+. Not in Firefox or Safari as of 2026. Size container queries are Baseline since 2023.",
       "verification": {
         "support": "registry-estimate",
-        "behavior": "not-individually-verified",
+        "behavior": "browser-tested",
         "accessibility": "not-audited",
-        "sources": []
+        "sources": [
+          "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400"
+        ],
+        "evidence": [
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400",
+            "checkedAt": "2026-09-26",
+            "note": "Scoped ds-46 test with scripts disabled: measured positive overflow and hint opacity 1, checkbox removed overflow and opacity became 0, restoring overflow returned opacity to 1; both motion modes.",
+            "browser": "chromium",
+            "version": "151.0.7922.34"
+          },
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400",
+            "checkedAt": "2026-09-26",
+            "note": "Fallback observation in both motion modes: checkbox toggled real overflow; unsupported scroll-state hint remained hidden; named scroller stayed available.",
+            "browser": "firefox",
+            "version": "153.0"
+          },
+          {
+            "kind": "behavior",
+            "url": "https://github.com/FullThrottle83/design-spells/actions/runs/36218969400",
+            "checkedAt": "2026-09-26",
+            "note": "Fallback observation in both motion modes: checkbox toggled real overflow; unsupported scroll-state hint remained hidden; named scroller stayed available.",
+            "browser": "webkit",
+            "version": "26.5"
+          }
+        ],
+        "dependencies": [
+          "Overflowing horizontal scroller with a scroll-state query container",
+          "Native demo-only checkbox changing content from overflow to wrapped without changing authored query CSS",
+          "Equal-specificity queried hint selector"
+        ],
+        "fallback": "Firefox and WebKit retain horizontal scrolling and readable labels; the unsupported hint stays hidden. The preview-only checkbox still changes content layout.",
+        "accessibilityNotes": "Only the named focusable demo region, native checkbox state, overflow geometry and visual opacity were automatically tested; labels are not functional tabs. The original 180ms transition remains under reduced-motion preference. Manual keyboard, zoom and screen-reader audit is pending."
       }
     },
     {

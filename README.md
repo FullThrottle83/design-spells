@@ -4643,9 +4643,9 @@ Highlights the row and column of a hovered or keyboard-focused table link, makin
 .crosshair-table thead th { background: var(--color-surface-offset); }
 .crosshair-table tbody tr:hover > *,
 .crosshair-table tbody tr:focus-within > * { background: var(--color-surface-offset); }
-.crosshair-table:has(tbody :nth-child(2):is(:hover, :focus-within)) tr > :nth-child(2),
-.crosshair-table:has(tbody :nth-child(3):is(:hover, :focus-within)) tr > :nth-child(3),
-.crosshair-table:has(tbody :nth-child(4):is(:hover, :focus-within)) tr > :nth-child(4) {
+.crosshair-table:has(tbody tr > :nth-child(2):is(:hover, :focus-within)) tr > :nth-child(2),
+.crosshair-table:has(tbody tr > :nth-child(3):is(:hover, :focus-within)) tr > :nth-child(3),
+.crosshair-table:has(tbody tr > :nth-child(4):is(:hover, :focus-within)) tr > :nth-child(4) {
   background: var(--color-surface-offset);
 }
 .crosshair-table tbody td:is(:hover, :focus-within) {

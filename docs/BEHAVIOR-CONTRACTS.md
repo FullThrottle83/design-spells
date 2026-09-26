@@ -21,7 +21,13 @@ per-spell evidence and appropriate manual review actually exist.
   opt-in root `container-type: scroll-state` preset. Their instruction is
   **scroll**, not resize. `scrolled` queries describe the most recent
   direction, not absolute distance or permanent "scrolled past" state.
-- **ds-44 / ds-45 / ds-46:** `stuck`, `snapped`, and `scrollable` are
+- **ds-44:** The hosted/downloaded fixture supplies enough document runway for
+  the unchanged `stuck: top` query to transition. A visible shadow is a
+  progressive enhancement; without scroll-state support, native sticky
+  positioning and text remain. The nav is demonstrative markup, not a complete
+  table of contents with destination links. Individual automated observations
+  do not establish screen-reader behavior or WCAG conformance.
+- **ds-45 / ds-46:** `stuck`, `snapped`, and `scrollable` are
   different observations. Do not substitute the invented `overflowing`
   descriptor. Check each actual rendered transition with a suitable demo.
 

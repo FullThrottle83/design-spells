@@ -20,6 +20,17 @@ libraries to `/tmp/al2023/lib`, and points `LD_LIBRARY_PATH` /
 the package only does it automatically there, but Debian 12 needs those
 libraries (`libnss3.so`, `libnspr4.so`, …) to start the binary at all.
 
+## Offline environment regression (also run in CI)
+
+```bash
+node scripts/arena-browser/test-environment.mjs
+```
+
+Uses synthetic credential names to confirm that the explicit browser environment
+cannot inherit an agent/session secret or arbitrary variable. No browser,
+download, or network request is involved. The live verifier additionally checks
+the actual spawned process via `/proc/<pid>/environ`.
+
 ## Security self-check (required before a run)
 
 ```bash

@@ -67,6 +67,10 @@ def render_doc(spell: dict) -> str:
         instruction_html += '<p class="note">This entry animation needs a scroll runway. Scroll inside the iframe or open the full-page demo, then move down to the effect. The spell CSS has not been accelerated.</p>'
     elif sid == "ds-44":
         instruction_html += "<p class=\"note\">Scroll inside the iframe or open the full-page demo. The preview-only runway lets the sticky navigation reach its top inset; supporting browsers then apply the authored shadow. Other browsers retain the sticky navigation without that enhancement.</p>"
+    elif sid == "ds-45":
+        instruction_html += "<p class=\"note\">Scroll horizontally in the carousel or use the arrow keys after focusing it. On supporting browsers the snapped card becomes fully opaque and returns to its original scale. Other browsers retain native scroll snapping without spotlight styling.</p>"
+    elif sid == "ds-46":
+        instruction_html += "<p class=\"note\">Use the native Fit content checkbox to compare an overflowing row with one that wraps. The overflow arrow follows actual scrollability in supporting browsers; horizontal scrolling and readable labels remain available without the enhancement. These labels are a visual fixture, not working tab controls.</p>"
     elif sid == "ds-35":
         instruction_html += '<p class="note">Use the native Light / Dark controls inside the demo to compare both color schemes without changing the spell CSS.</p>'
     elif sid == "ds-9":
@@ -208,6 +212,27 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
 .sticky-demo__runway { min-block-size: 150dvh; max-inline-size: 28rem; margin-inline: auto;
   padding-block-start: 3rem; color: var(--color-text-muted); }
 """
+    elif sid == "ds-45":
+        css += """
+/* The scroller itself is keyboard-focusable in the hosted/downloaded fixture. */
+.carousel:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+"""
+        raw_html = raw_html.replace('class="carousel"', 'class="carousel" role="region" aria-label="Snapped cards" tabindex="0"', 1)
+    elif sid == "ds-46":
+        css += """
+/* Demo-only conditions: the authored scroll-state rule above is unchanged. */
+.overflow-demo { inline-size: 100%; max-inline-size: 32rem; }
+.overflow-demo__toggle { display: inline-flex; align-items: center; gap: .6rem; min-block-size: 44px; margin-block-end: 1rem; cursor: pointer; }
+.overflow-demo .tabs-wrap { inline-size: 100%; }
+.overflow-demo:has(#overflow-fit:checked) .tabs-wrap > div:first-child {
+  min-width: 0 !important;
+  white-space: normal !important;
+  flex-wrap: wrap;
+  padding-inline-end: 0 !important;
+}
+.overflow-demo .fade-hint { position: sticky; inset-inline-end: 0; inline-size: 2rem; margin-inline-start: auto; text-align: center; }
+"""
+        raw_html = raw_html.replace('class="tabs-wrap"', 'class="tabs-wrap" role="region" aria-label="Scrollable labels" tabindex="0"', 1)
     elif sid == "ds-9":
         css += ".demo-replay {padding:1rem;text-align:center}\n.demo-replay a {display:inline-flex;min-block-size:44px;align-items:center}\n"
     hint = spell.get("previewAction", {}).get("hint", "")
@@ -241,6 +266,15 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
             f"{raw_html}"
             '<div class="sticky-demo__runway"><p>Keep scrolling to see the navigation remain pinned.</p></div>'
             '</div>'
+        )
+    elif sid == "ds-46":
+        stage = (
+            '<div class="stage"><div class="overflow-demo">'
+            '<label class="overflow-demo__toggle">'
+            '<input type="checkbox" id="overflow-fit"> Fit content without horizontal scrolling'
+            '</label>'
+            f"{raw_html}"
+            '</div></div>'
         )
     else:
         stage = raw_html + extra if sid in SCROLL_DEMOS else f'<div class="stage">{raw_html}</div>'

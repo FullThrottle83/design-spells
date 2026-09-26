@@ -27,9 +27,22 @@ per-spell evidence and appropriate manual review actually exist.
   positioning and text remain. The nav is demonstrative markup, not a complete
   table of contents with destination links. Individual automated observations
   do not establish screen-reader behavior or WCAG conformance.
-- **ds-45 / ds-46:** `stuck`, `snapped`, and `scrollable` are
-  different observations. Do not substitute the invented `overflowing`
-  descriptor. Check each actual rendered transition with a suitable demo.
+- **ds-45 — Snapped Spotlight:** the corrected scroll-state selector matches the
+  base selector's specificity so the snapped rule can win the cascade. The
+  hosted/downloaded scroller has a focusable,
+  named region. A snap position alone is not evidence of the authored spotlight;
+  inspect the descendant article's rendered opacity and scale before/after a
+  second target is snapped. Without scroll-state support, ordinary mandatory
+  CSS scroll snapping remains and the cards keep their default dimmed style.
+  This is a visual carousel sample, not a production carousel control system.
+- **ds-46 — Real Overflow Hint:** the corrected scroll-state selector matches
+  the base hint selector's specificity. A preview-only checkbox lets the same content
+  overflow or wrap, without changing authored CSS. Assert scrollWidth/clientWidth
+  alongside the rendered hint opacity in both states. Without scroll-state
+  support, the arrow stays hidden and the scrollable region remains available.
+  The span labels are not functional tabs. The original 180ms/220ms transitions
+  in ds-46/ds-45 do not currently opt out under reduced-motion preference;
+  test the resulting state without claiming an audited motion policy.
 
 ## Reduced motion
 

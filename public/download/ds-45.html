@@ -138,15 +138,18 @@
 }
 
 @container scroll-state(snapped: inline) {
-  article {
+  .slide > article {
     opacity: 1;
     transform: scale(1);
   }
 }
+
+/* The scroller itself is keyboard-focusable in the hosted/downloaded fixture. */
+.carousel:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 </style>
 </head>
 <body>
-  <div class="stage"><div class="carousel" style="max-width:20rem"><div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">01</article></div><div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">02</article></div><div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">03</article></div></div></div>
+  <div class="stage"><div class="carousel" role="region" aria-label="Snapped cards" tabindex="0" style="max-width:20rem"><div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">01</article></div><div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">02</article></div><div class="slide"><article style="min-width:200px;padding:1.5rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08);text-align:center">03</article></div></div></div>
   <p class='demo-hint'>Scroll to preview</p>
 </body>
 </html>

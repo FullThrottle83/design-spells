@@ -45,6 +45,29 @@ class WalkthroughTest(unittest.TestCase):
         bundle = (PUBLIC / "bundle" / f"{sid}.txt").read_text(encoding="utf-8")
         self.assertNotIn("sticky-demo__runway", bundle)
 
+    def test_scroll_state_fixtures_preserve_authored_css_and_offer_native_controls(self):
+        for sid in ("ds-45", "ds-46"):
+            with self.subTest(spell=sid):
+                doc = (PUBLIC / "spells" / sid / "index.html").read_text(encoding="utf-8")
+                self.assertIn("Scroll to preview", doc)
+                bundle = (PUBLIC / "bundle" / f"{sid}.txt").read_text(encoding="utf-8")
+                self.assertNotIn("overflow-demo", bundle)
+                self.assertNotIn('aria-label="Snapped cards"', bundle)
+                for path in (PUBLIC / "play" / sid / "index.html",
+                             PUBLIC / "download" / f"{sid}.html"):
+                    source = path.read_text(encoding="utf-8")
+                    self.assertIn(SPELLS[sid]["css"].strip(), source)
+                    self.assertIn("container-type: scroll-state", source)
+                    self.assertIn('tabindex="0"', source)
+                    self.assertNotIn("<script", source.lower())
+                    if sid == "ds-45":
+                        self.assertIn('aria-label="Snapped cards"', source)
+                        self.assertIn("Scroll horizontally", doc)
+                    else:
+                        self.assertIn('id="overflow-fit"', source)
+                        self.assertIn("min-width: 0 !important", source)
+                        self.assertIn("Fit content checkbox", doc)
+
     def test_demo_only_theme_and_replay_never_pollute_spells(self):
         for sid, required in (
             ("ds-35", 'id="scheme-dark"'),

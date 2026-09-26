@@ -12,7 +12,7 @@ A single **canonical** reference bank of design spells for modern Astro projects
 
 The document therefore contains only spells marked **`0 JS`** or **`Markup`**. In the original file's terminology, `Markup` still means the spell is JS-free, but it needs a precise HTML pattern — for example `<details>`, checkbox state, `popover`, a `dialog`-compatible structure, or another native state machine.
 
-In total there are **150 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–151** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal, Fluid Rhythm Function, Donut-Scoped Callout, Snapped Product State, Semantic Metrics Dividers, Organic Avatar Cluster).
+In total there are **152 Astro-relevant spells**. Excluded `+ JS` spells: **4, 42**. Spells **97–153** are 2026 additions (Invoker Commands, Interest Invokers, Grid Lanes, `if()`, typed `attr()`, `closedby`, `hidden="until-found"`, Conic Donut, Faceted Matrix, Cart Badge, Gantt, Heatmap, SVG Draw, Section-Spy, Password Meter, Star Rating, Auto Toast, Exclusive Accordion, Swipe Action, Parallax, Datalist, Drop Cap, Image Wipe, Sticky Footer, Skip Link, Map Pin, Dynamic Counter, Animated Counter, Focus-Lock Modal, Fluid Rhythm Function, Donut-Scoped Callout, Snapped Product State, Semantic Metrics Dividers, Organic Avatar Cluster).
 
 ---
 
@@ -4572,6 +4572,90 @@ Cosmetic rotation and vertical jitter for avatar stacks using CSS `random()`, ba
 ```
 
 ---
+
+## Practical native patterns (2026)
+
+### 152. Responsive Switcher (intrinsic flex layout)
+*Layout · Baseline · Markup*
+
+A three-card service row that stacks itself when its own container becomes narrow. Resize the demo to see the layout change without a viewport media query or JavaScript. Cards keep their content and reading order.
+
+```html
+<div class="service-switcher">
+  <article class="switcher-card"><strong>Starter</strong><p>One-page launch.</p></article>
+  <article class="switcher-card"><strong>Growth</strong><p>Room for new services and content.</p></article>
+  <article class="switcher-card"><strong>Studio</strong><p>A larger, structured website.</p></article>
+</div>
+```
+
+```css
+.service-switcher {
+  --switch-at: 34rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  inline-size: 100%;
+}
+.service-switcher > .switcher-card {
+  flex-grow: 1;
+  flex-basis: calc((var(--switch-at) - 100%) * 999);
+  min-inline-size: min(100%, 12rem);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.switcher-card strong { display: block; color: var(--color-primary); font-size: 1.1rem; }
+.switcher-card p { margin: .35rem 0 0; color: var(--color-text-muted); }
+```
+
+### 153. Table Crosshair Highlight (:has())
+*Data · Baseline · Markup*
+
+Highlights the row and column of a hovered or keyboard-focused table link, making dense data easier to scan. Cells remain real table cells; this is visual orientation, not a spreadsheet keyboard-navigation implementation.
+
+```html
+<div class="crosshair-scroller" role="region" aria-label="Quarterly revenue" tabindex="0">
+  <table class="crosshair-table">
+    <caption>Revenue by region, in thousands</caption>
+    <thead><tr><th scope="col">Region</th><th scope="col">Q1</th><th scope="col">Q2</th><th scope="col">Q3</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">North</th><td><a href="#crosshair-note">24</a></td><td><a href="#crosshair-note">31</a></td><td><a href="#crosshair-note">38</a></td></tr>
+      <tr><th scope="row">West</th><td><a href="#crosshair-note">18</a></td><td><a href="#crosshair-note">27</a></td><td><a href="#crosshair-note">34</a></td></tr>
+      <tr><th scope="row">East</th><td><a href="#crosshair-note">15</a></td><td><a href="#crosshair-note">22</a></td><td><a href="#crosshair-note">29</a></td></tr>
+    </tbody>
+  </table>
+  <p id="crosshair-note">Illustrative values only.</p>
+</div>
+```
+
+```css
+.crosshair-scroller { inline-size: 100%; max-inline-size: 100%; overflow-x: auto; }
+.crosshair-table { inline-size: 100%; border-collapse: collapse; }
+.crosshair-table caption { text-align: start; margin-block-end: .5rem; font-weight: 600; }
+.crosshair-table th,
+.crosshair-table td {
+  padding: .6rem .7rem;
+  border: 1px solid var(--color-border);
+  text-align: start;
+  min-inline-size: 4.5rem;
+}
+.crosshair-table thead th { background: var(--color-surface-offset); }
+.crosshair-table tbody tr:hover > *,
+.crosshair-table tbody tr:focus-within > * { background: var(--color-surface-offset); }
+.crosshair-table:has(tbody :nth-child(2):is(:hover, :focus-within)) tr > :nth-child(2),
+.crosshair-table:has(tbody :nth-child(3):is(:hover, :focus-within)) tr > :nth-child(3),
+.crosshair-table:has(tbody :nth-child(4):is(:hover, :focus-within)) tr > :nth-child(4) {
+  background: var(--color-surface-offset);
+}
+.crosshair-table tbody td:is(:hover, :focus-within) {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.crosshair-table td a { display: grid; align-items: center; min-block-size: 44px; color: inherit; }
+.crosshair-table td a:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+```
+
 
 # Ready-made stacks
 

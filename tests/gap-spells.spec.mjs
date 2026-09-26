@@ -8,10 +8,14 @@ test("table crosshair exposes a distinct keyboard row/column intersection", asyn
   const sameRow = page.getByRole("button", { name: "61" });
   // Exercise real keyboard modality so :focus-visible matches.
   await page.keyboard.press("Tab");
-  const targetBg = await target.locator("xpath=..").evaluate(el => getComputedStyle(el).backgroundColor);
-  const rowBg = await sameRow.locator("xpath=..").evaluate(el => getComputedStyle(el).backgroundColor);
-  expect(targetBg).not.toBe(rowBg);
   await expect(target).toBeFocused();
+  // :focus-visible and its background can settle after the focus event.
+  // Assert the rendered distinction eventually appears, not the first frame.
+  await expect.poll(async () => {
+    const targetBg = await target.locator("xpath=..").evaluate(el => getComputedStyle(el).backgroundColor);
+    const rowBg = await sameRow.locator("xpath=..").evaluate(el => getComputedStyle(el).backgroundColor);
+    return targetBg !== rowBg;
+  }, { message: "focused cell must have a distinct rendered crosshair intersection" }).toBe(true);
 });
 
 test("calc-size disclosure keeps a working fixed-width fallback and expands on activation", async ({ page }) => {

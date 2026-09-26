@@ -65,6 +65,7 @@ COMMON_CSS = """
 """
 CSS = {
     "ds-5": """
+html:has(.journal) {scroll-behavior:auto}
 .journal-head {display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:.06em;padding-bottom:24px}
 .journal-head strong {font-size:18px;letter-spacing:-.03em}
 .journal-head span {color:var(--color-text-muted)}

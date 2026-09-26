@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 const ids = [5, 12, 16, 21, 37, 95];
+test.beforeAll(async ({ browser, browserName }) => {
+  console.log(`Pilot behavior engine: ${browserName} ${browser.version()}`);
+});
 const css = async (el, prop, pseudo = null) => el.evaluate((e, [p, pseudo]) => getComputedStyle(e, pseudo)[p], [prop, pseudo]);
 const box = el => el.boundingBox();
 
@@ -33,8 +36,12 @@ async function exercise(root, page, id, width, motion) {
     await expect.poll(async () => {const g=await geometry(); return Math.abs(g.left-g.max);}).toBeLessThan(2);
     const last = await box(figures.last()), gbox = await box(gallery);
     expect(Math.abs(last.x+last.width-gbox.x-gbox.width)).toBeLessThan(3);
-    await page.mouse.wheel(-2200, 0);
-    await expect.poll(async () => (await geometry()).left).toBeLessThan(2);
+    // Firefox can snap one item per wheel transaction even for a large delta.
+    // Repeat native gestures; still require arrival at the exact first snap point.
+    await expect(async () => {
+      await page.mouse.wheel(-2200, 0);
+      await expect.poll(async () => (await geometry()).left, {timeout: 1200}).toBeLessThan(2);
+    }).toPass({timeout: 7000, intervals: [300, 500, 1000]});
     await page.mouse.wheel(2200,0);
     await expect.poll(async () => {const g=await geometry();return Math.abs(g.left-g.max);}).toBeLessThan(2);
   }

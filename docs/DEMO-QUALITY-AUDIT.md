@@ -41,6 +41,14 @@ Local rendering uses **Chromium 153.0.8010.0**, provided by an external `@sparti
 - Desktop/mobile screenshots were inspected visually; gallery min-content overflow and chart/month alignment discovered during iteration were corrected before the passing pilot run.
 - Remaining manual work: physical iOS/Android gestures, assistive technology, full 200% text-only resize/400% zoom and formal contrast review. Browser automation is not certification.
 
+### First CI run and follow-up
+
+[Run 36225534363](https://github.com/FullThrottle83/design-spells/actions/runs/36225534363): stock Chromium + Python + deterministic generation passed. Firefox/WebKit: **186 passed, 8 failed**, all in the new pilot, not unrelated legacy assertions.
+
+- Six Firefox mobile ds-12 scenarios reached the end, then a single reverse wheel event snapped to the middle item (scrollLeft 293), not the beginning. The harness now performs repeated real wheel gestures while retaining the same <2px start/end geometry assertions; it does not assume every engine consumes a wheel delta identically.
+- Two WebKit ds-5 iframe scenarios failed to bring the fragment destination into view with smooth scrolling. The scene now opts out of smooth document scrolling (also used in ds-21); the canonical underline remains unchanged. The same viewport-visibility assertion is retained.
+- Final local `npm test` before these two follow-ups: **76 Python + 298 Chromium passed (4.8m)**. Follow-up results recorded below once CI completes.
+
 ## Next coherent batch — scroll journeys and honest fallback
 
 Do not repeat Pilot 01 or PRs #37–39. On the latest main after this PR is merged, reproduce these source-derived risks before implementing:

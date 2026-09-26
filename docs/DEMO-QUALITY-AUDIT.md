@@ -60,11 +60,11 @@ Local rendering uses **Chromium 153.0.8010.0**, provided by an external `@sparti
 - Local pilot after the final harness refinement: **78 passed** (35.6s), Chromium 153.0.8010.0.
 - The extra interior-snap assertion initially sampled too close to the terminal edge on wide viewports; it now samples 45px before the middle snap point and requires that item's exact alignment. No tolerance was widened and no feature was skipped.
 
-All six pilot entries' named interactions are therefore observed across the three tested engines. Screenshots remain local Chromium evidence. This does not close #17/#19, certify accessibility, or change the production verification overlay. PR #41 is intentionally unmerged.
+All six pilot entries' named interactions are therefore observed across the three tested engines. Screenshots remain local Chromium evidence. This does not close #17/#19, certify accessibility, or change the production verification overlay. At Pilot 01 handoff, PR #41 was intentionally left unmerged; it was subsequently merged by the repository owner.
 
 ## Batch 02 — scroll journeys and honest fallback
 
-Continuation on the same Arena session branch; PR #41 remains open and unmerged, so this is a separate commit/evidence batch in that PR, not a competing PR from the same branch. No Pilot 01 implementation or PR #37–39 work is repeated.
+Continuation on the same Arena session branch. PR #41 was merged by the repository owner during implementation (2026-09-26 07:41 UTC); this batch therefore has its own PR against updated main. No Pilot 01 implementation or PR #37–39 work is repeated.
 
 ### Reproduction and implementation
 
@@ -87,6 +87,7 @@ Baseline: `6414b5a`. Local browser: **Chromium 153.0.8010.0**, Playwright 1.62.1
 - Targeted local suite: **78 passed** (50.0s) across all three surfaces, both viewports and motion preferences; additional dark/mobile touch-emulated and enhancement-removal cases. Tests assert real geometry, changing shadow/opacity/width, fragment targets, keyboard scroll and focus. Syntax detection is only a branch selector, never the evidence itself.
 - Initial QA caught horizontal min-content expansion in the ledger scene: fixed with an explicit bounded scene width, not hidden overflow. Native key scrolling can continue even with CSS motion reduced; the test waits for actual scroll geometry to settle before testing an independent reset. The shadow must still switch off at the start.
 - Ds-55's shrink/dimming is an **exit** effect. Tests separately verify pinned overlap, actual width/filter change while exiting, and reset. It is not falsely presented as a shrink-on-next-card effect.
+- Full local `npm test`: **80 Python + 376 Chromium passed** (5.4m). Deterministic rebuild: **637 public files byte-identical**, including integration bundles and classic output.
 - Firefox/WebKit installation is unavailable locally because CDN/apt endpoints are blocked, as in Pilot 01. CI will exercise the same cases; results are appended only after observation.
 - Removing enhancement rules is a deliberate degradation simulation, not a historical-browser certification. Touch-emulated taps and programmatic native scroll are not a physical-device swipe review. Assistive technology, 200% text zoom, physical mobile gestures and formal contrast review remain manual work.
 - Before/after images show actual initial/activated viewports; the old CTA/deck/KPI cannot show a genuine scroll activation because no runway existed. The before KPI active image deliberately shows the removed-enhancement fallback; raw observations distinguish the earlier supported fill.

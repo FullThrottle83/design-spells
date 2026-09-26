@@ -1,7 +1,7 @@
 # Batch 02 — scroll journeys and fallback evidence
 
 2026-09-26 · Chromium **153.0.8010.0**, Playwright **1.62.1**; scripts disabled.
-Before: generated pages at `6414b5a`. After: Batch 02 continuation in PR #41.
+Before: generated pages at `6414b5a`. After: Batch 02 continuation, separate from the now-merged Pilot 01 PR #41.
 
 [Before overview](before-contact.png) · [After overview](after-contact.png) · [Raw baseline measurements](before-observations.json)
 

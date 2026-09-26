@@ -25,6 +25,8 @@ viewport width; heights are 900 desktop and 844 mobile. Reduced-motion suffix
 means `prefers-reduced-motion: reduce`; dark images use a dark mobile context.
 No claim of physical touch or assistive-technology testing.
 
+The final [cross-engine CI run](https://github.com/FullThrottle83/design-spells/actions/runs/36226259446) passed 194 Firefox/WebKit checks, including these six demos. Screenshots here are still specifically Chromium captures, not Firefox/WebKit screenshots.
+
 | Spell | Before desktop | After desktop | Before mobile | After mobile | Reduced motion | Dark mobile |
 |---|---|---|---|---|---|---|
 | ds-5 | [initial](before-ds-5-1440.png) / [attempted action](before-active-ds-5-1440.png) | [initial](after-ds-5-1440.png) / [active](after-ds-5-1440-active.png) | [initial](before-ds-5-390.png) / [attempted action](before-active-ds-5-390.png) | [initial](after-ds-5-390.png) / [active](after-ds-5-390-active.png) | [desktop](after-ds-5-1440-reduced-active.png) / [mobile](after-ds-5-390-reduced-active.png) | [active](after-ds-5-390-dark.png) |

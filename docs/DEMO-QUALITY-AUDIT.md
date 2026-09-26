@@ -6,7 +6,7 @@ Tracking: [#40](https://github.com/FullThrottle83/design-spells/issues/40) · 20
 
 **Inventory: all 154 stable IDs reconciled between README.md and public/spells.json. This is NOT a completed 154-spell visual audit.**
 
-- **6 individually verified (scoped local Chromium behavior):** ds-5, ds-12, ds-16, ds-21, ds-37, ds-95.
+- **6 individually verified (scoped Chromium / Firefox / WebKit behavior):** ds-5, ds-12, ds-16, ds-21, ds-37, ds-95.
 - **3 fixed in prior work:** ds-44–46, PRs #37–39. Existing evidence is preserved; no repeat implementation or new visual claim here.
 - **6 needs work (source inspection only):** ds-30, ds-55, ds-69, ds-93, ds-111, ds-134. Prioritized next batch below.
 - **139 uninspected:** intended behavior/action/support below are imported source metadata, not browser findings. Unknowns explicitly remain unknown.
@@ -36,7 +36,7 @@ Local rendering uses **Chromium 153.0.8010.0**, provided by an external `@sparti
 
 - [Screenshot index](evidence/pilot-01/README.md): before/after, desktop/mobile, initial/activated, reduced-motion and dark mobile.
 - Pilot local Chromium: **78 passed** (36.7s), scripts disabled.
-- `npm run build`: passed, 154 spells; canonical/source parity suite initially **76 passed**. Full local Chromium suite: **298 passed** (5.1m). CI results are appended before handoff.
+- `npm run build`: passed, 154 spells; canonical/source parity suite initially **76 passed**. Full local Chromium suite: **298 passed** (5.1m). Successful CI results are recorded below.
 - `npx playwright test -c playwright.cross-browser.config.mjs`: attempted locally; browser cases blocked by missing Firefox/WebKit executables after CDN install failures, not reported as behavior failures or passes. Existing non-browser request cases run independently.
 - Desktop/mobile screenshots were inspected visually; gallery min-content overflow and chart/month alignment discovered during iteration were corrected before the passing pilot run.
 - Remaining manual work: physical iOS/Android gestures, assistive technology, full 200% text-only resize/400% zoom and formal contrast review. Browser automation is not certification.
@@ -48,7 +48,20 @@ Local rendering uses **Chromium 153.0.8010.0**, provided by an external `@sparti
 - Six Firefox mobile ds-12 scenarios reached the end, then a single reverse wheel event snapped to the middle item (scrollLeft 293), not the beginning. The harness now performs repeated real wheel gestures while retaining the same <2px start/end geometry assertions; it does not assume every engine consumes a wheel delta identically.
 - Two WebKit ds-5 iframe scenarios failed to bring the fragment destination into view with smooth scrolling. The scene now opts out of smooth document scrolling (also used in ds-21); the canonical underline remains unchanged. The same viewport-visibility assertion is retained.
 - Follow-up [run 36225894086](https://github.com/FullThrottle83/design-spells/actions/runs/36225894086): **188 passed, 6 failed**. WebKit fragment navigation is fixed; Firefox reached the start successfully, then the repeat-forward gesture also settled at the middle item. Both directions now use the same repeated-wheel helper. An additional off-grid scroll asserts exact interior-item snap alignment (not only edge clamping).
-- Final local `npm test` before these two follow-ups: **76 Python + 298 Chromium passed (4.8m)**. Follow-up results recorded below once CI completes.
+- Final local `npm test` before these two follow-ups: **76 Python + 298 Chromium passed (4.8m)**. Successful follow-up results are recorded below.
+
+### Final successful verification
+
+[Run 36226259446](https://github.com/FullThrottle83/design-spells/actions/runs/36226259446), code commit `75d7f92`, **passed** on 2026-09-26:
+
+- `npm run build` and generated-file parity: passed.
+- `npm test`: **76 Python tests + 298 Chromium tests passed**. No unrelated test failure remains.
+- `npx playwright test -c playwright.cross-browser.config.mjs`: **194 passed** (2.8m), including all 78 pilot scenarios in each of Firefox and WebKit. CI logs print actual engine versions; these are Playwright engines, not a claim about every shipping Safari/iOS version.
+- Independent local deterministic check: **637 public files byte-identical** across consecutive builds, including ignored/generated integration bundles and classic catalogue.
+- Local pilot after the final harness refinement: **78 passed** (35.6s), Chromium 153.0.8010.0.
+- The extra interior-snap assertion initially sampled too close to the terminal edge on wide viewports; it now samples 45px before the middle snap point and requires that item's exact alignment. No tolerance was widened and no feature was skipped.
+
+All six pilot entries' named interactions are therefore observed across the three tested engines. Screenshots remain local Chromium evidence. This does not close #17/#19, certify accessibility, or change the production verification overlay. PR #41 is intentionally unmerged.
 
 ## Next coherent batch — scroll journeys and honest fallback
 

@@ -136,10 +136,32 @@
   transform: translateY(-130%) scale(0.76);
   color: var(--color-primary);
 }
+@media (prefers-reduced-motion: reduce) {
+  .form-group label { transition: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.showcase:has(.profile-sheet) {max-width:520px}
+.profile-sheet {background:var(--color-surface);border:1px solid var(--color-border);border-top:5px solid var(--color-primary);padding:clamp(22px,4vw,48px)}
+.profile-sheet h1 {font-size:clamp(32px,4vw,44px)}
+.profile-fields {display:grid;gap:22px;margin:32px 0}.profile-fields input {font-size:16px;border-radius:6px;min-height:62px}
+.profile-sheet .profile-foot {font-size:12px;margin:0;color:var(--color-text-muted)}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="form-group"><input placeholder=" "><label>Your name</label></div></div>
-  <p class='demo-hint'>Focus to preview</p>
+  <div class="stage"><div class="showcase"><div class="profile-sheet"><p class="scene-kicker">Member profile / Local preview</p><h1>A proper introduction.</h1><p>Your details, with labels that never lose their place.</p><div class="profile-fields"><div class="form-group"><input id="profile-name" name="name" autocomplete="name" placeholder=" "><label for="profile-name">Full name</label></div><div class="form-group"><input id="profile-email" name="email" type="email" autocomplete="email" placeholder=" "><label for="profile-email">Email address</label></div></div><p class="profile-foot">No account created. No data sent.<br>Just a small detail that makes a form feel better.</p></div><p class="scene-instruction">Focus a field and type. Move away, then clear it: the label stays raised only while focused or filled. Nothing is submitted.</p></div></div>
+
 </body>
 </html>

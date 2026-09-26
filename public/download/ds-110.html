@@ -121,6 +121,7 @@
 .attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }
 .attr-spark span {
   flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;
+  background: var(--color-primary); /* Solid fallback when color-mix is unavailable. */
   background: color-mix(in oklch, var(--color-primary), transparent 25%);
 }
 @supports (x: attr(x type(*))) {

@@ -671,6 +671,15 @@ PREVIEW_HTML: dict[str, str] = {
 }
 
 
+# Editorial markup is shared with standalone demos and CSS-only bundles.
+if __package__:
+    from .showcase_fixtures import HTML as SHOWCASE_HTML, INTEGRATION_CARD_HTML
+else:
+    from showcase_fixtures import HTML as SHOWCASE_HTML, INTEGRATION_CARD_HTML
+PREVIEW_HTML.update(SHOWCASE_HTML)
+PREVIEW_HTML["37"] = INTEGRATION_CARD_HTML
+
+
 def parse_spells(md: str) -> list[dict]:
     # Slice from the Spells heading to Ready-made stacks.
     start = md.find("\n# Spells\n")

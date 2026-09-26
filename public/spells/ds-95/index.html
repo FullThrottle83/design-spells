@@ -27,7 +27,7 @@
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-95/">Open standalone demo ↗</a><a class="action" href="/download/ds-95.html" download="ds-95.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Hover to preview</p>
+      <p class='note'>Hover or keyboard-focus the chart to emphasize all six bars. Open the values below for the exact data.</p>
       
       <iframe title="Isolated demonstration: CSS Sparkline / Bar Chart" src="/play/ds-95/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -41,20 +41,28 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       
-      <pre tabindex="0"><code>&lt;figure class=&quot;spark&quot; role=&quot;img&quot; aria-label=&quot;Sales by quarter: 34, 58, 41, 72, 66, 90 percent — rising trend&quot;&gt;
+      <pre tabindex="0"><code>&lt;figure class=&quot;spark&quot; tabindex=&quot;0&quot; role=&quot;img&quot; aria-label=&quot;Studio capacity booked, January to June 2026: 34, 58, 41, 72, 66, 90 percent&quot;&gt;
   &lt;span style=&quot;--v:34&quot;&gt;&lt;/span&gt;&lt;span style=&quot;--v:58&quot;&gt;&lt;/span&gt;&lt;span style=&quot;--v:41&quot;&gt;&lt;/span&gt;
   &lt;span style=&quot;--v:72&quot;&gt;&lt;/span&gt;&lt;span style=&quot;--v:66&quot;&gt;&lt;/span&gt;&lt;span style=&quot;--v:90&quot;&gt;&lt;/span&gt;
 &lt;/figure&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }
+      <pre tabindex="0"><code>.spark {
+  display: flex; align-items: end; gap: 4px;
+  inline-size: min(100%, 32rem); block-size: 10rem; margin: 0;
+}
 .spark span {
   flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;
+  background: var(--color-primary); /* Solid fallback when color-mix is unavailable. */
   background: color-mix(in oklch, var(--color-primary), transparent 25%);
   block-size: calc(var(--v, 0) * 1%);
   transition: background 160ms ease, block-size 400ms cubic-bezier(.16,1,.3,1);
 }
 .spark span:last-child { background: var(--color-primary); }
-.spark:hover span { background: var(--color-primary); }</code></pre>
+.spark:hover span, .spark:focus-visible span { background: var(--color-primary); }
+.spark:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .spark span { transition: none; }
+}</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

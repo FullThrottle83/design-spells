@@ -129,10 +129,30 @@
   flex: 0 0 clamp(280px, 70vw, 480px);
   scroll-snap-align: start;
 }
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.print-gallery {min-width:0;width:100%}.print-gallery header {margin-bottom:30px}
+.print-gallery .gallery {width:100%;padding-bottom:14px;scrollbar-width:thin}
+.print-gallery figure {margin:0;min-width:0;background:var(--color-surface);border:1px solid var(--color-border)}
+.print-gallery figcaption {display:grid;gap:4px;padding:18px}.print-gallery figcaption span {font-family:Georgia,serif;font-size:24px}
+.print-gallery figcaption small {color:var(--color-text-muted)}
+.print-gallery .gallery-foot {display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;margin-top:16px}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="gallery"><figure><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E" alt=""></figure><figure><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='1' x2='0' y1='0' y2='1'%3E%3Cstop stop-color='%230f766e'/%3E%3Cstop offset='1' stop-color='%235eead4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E" alt=""></figure><figure><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E" alt=""></figure></div></div>
-  <p class='demo-hint'>Swipe to preview</p>
+  <div class="stage"><div class="showcase"><div class="print-gallery"><header><p class="scene-kicker">The print room / Collection 03</p><h1>Studies in stillness.</h1><p>Three architectural compositions. One continuous shelf.</p></header><div class="gallery" tabindex="0" role="region" aria-label="Three art prints"><figure><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#dfd4bf"/><circle cx="420" cy="128" r="65" fill="#c15b3c"/><path d="M110 440V225a145 145 0 0 1 290 0v215Z" fill="#303c35"/><path d="M185 440V225a70 70 0 0 1 140 0v215Z" fill="#b0b39b"/><path d="M0 375h640v65H0Z" fill="#303c35"/></svg><figcaption><span>01 / Archway</span><small>Terracotta & stone</small></figcaption></figure><figure><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#d7e2dd"/><path d="M0 350 180 85 360 350Z" fill="#254f4b"/><path d="m230 350 170-225 220 225Z" fill="#71988a"/><circle cx="500" cy="96" r="42" fill="#e6b66c"/><path d="M0 380h640" stroke="#254f4b" stroke-width="16"/></svg><figcaption><span>02 / Highlands</span><small>Pine & morning mist</small></figcaption></figure><figure><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#e8c6b0"/><path d="M0 280Q160 120 320 280T640 280V440H0Z" fill="#ae503b"/><path d="M0 370Q160 210 320 370T640 370V440H0Z" fill="#592f2d"/><circle cx="320" cy="115" r="64" fill="#f7e7cd"/></svg><figcaption><span>03 / Tidal forms</span><small>Clay & evening light</small></figcaption></figure></div><p class="gallery-foot">← Scroll to explore → <span>Original vector studies · 2026</span></p></div><p class="scene-instruction">Swipe or scroll sideways. Keyboard: Tab into the gallery, then use the arrow keys. Each print snaps into place.</p></div></div>
+
 </body>
 </html>

@@ -27,7 +27,7 @@
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-5/">Open standalone demo ↗</a><a class="action" href="/download/ds-5.html" download="ds-5.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Hover to preview</p>
+      <p class='note'>Hover or Tab through the navigation. Follow a link to its section; the current page keeps its underline.</p>
       
       <div class="demo-compare"><div class="demo-compare__item"><h3>Base fixture</h3><iframe title="Baseline without spell CSS: Magnetic Underline" src="/play/ds-5/before/" loading="lazy" sandbox="allow-same-origin"></iframe></div><div class="demo-compare__item"><h3>With spell CSS</h3><iframe title="Isolated demonstration: Magnetic Underline" src="/play/ds-5/" loading="lazy" sandbox="allow-same-origin"></iframe></div></div><p class="note demo-compare__guide">Hover Overview in both previews. The right underline grows across the link. Both use identical markup and shared demo styling; only the right includes this spell’s CSS.</p>
     </section>
@@ -41,7 +41,7 @@
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
       <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;nav&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;Overview&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;#&quot; aria-current=&quot;page&quot;&gt;Pricing&lt;/a&gt;&lt;/nav&gt;</code></pre>
+      <pre tabindex="0"><code>&lt;div class=&quot;journal&quot;&gt;&lt;header class=&quot;journal-head&quot;&gt;&lt;strong&gt;FORM / FIELD&lt;/strong&gt;&lt;span&gt;Independent design journal&lt;/span&gt;&lt;/header&gt;&lt;nav class=&quot;journal-nav&quot; aria-label=&quot;Journal&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#overview&quot;&gt;Overview&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#field-notes&quot;&gt;Field notes&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#edition&quot; aria-current=&quot;page&quot;&gt;Edition 08&lt;/a&gt;&lt;/nav&gt;&lt;section id=&quot;edition&quot; class=&quot;journal-feature&quot;&gt;&lt;p class=&quot;scene-kicker&quot;&gt;Edition 08 · Autumn 2026&lt;/p&gt;&lt;h1&gt;Less, but&lt;br&gt;with intention.&lt;/h1&gt;&lt;p&gt;Objects, spaces and ideas that make room for a slower kind of living.&lt;/p&gt;&lt;/section&gt;&lt;div class=&quot;journal-notes&quot;&gt;&lt;section id=&quot;overview&quot;&gt;&lt;h2&gt;01 / Overview&lt;/h2&gt;&lt;p&gt;A study in considered design. Start with what matters; leave room for the rest.&lt;/p&gt;&lt;/section&gt;&lt;section id=&quot;field-notes&quot;&gt;&lt;h2&gt;02 / Field notes&lt;/h2&gt;&lt;p&gt;From the workshop: material honesty, useful details and everyday rituals.&lt;/p&gt;&lt;/section&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>.nav-link {
   position: relative; text-decoration: none;
@@ -56,7 +56,11 @@
   transition: width 240ms cubic-bezier(0.16,1,0.3,1);
 }
 .nav-link:hover::after,
-.nav-link[aria-current=&quot;page&quot;]::after { width: 100%; }</code></pre>
+.nav-link:focus-visible::after,
+.nav-link[aria-current=&quot;page&quot;]::after { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+}</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

@@ -119,16 +119,42 @@
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
 section:target {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
   animation: target-flash 1.2s ease-out;
 }
 @keyframes target-flash {
   0%   { box-shadow: 0 0 0 0 oklch(from var(--color-primary) l c h / .22); }
   100% { box-shadow: 0 0 0 18px oklch(from var(--color-primary) l c h / 0); }
 }
+@media (prefers-reduced-motion: reduce) {
+  section:target { animation: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+html:has(.reading-guide) {scroll-behavior:auto}
+.reading-guide {max-width:760px;margin:auto}.reading-guide header {max-width:540px}
+.reading-guide nav {display:flex;gap:8px 24px;flex-wrap:wrap;padding-block:8px 24px;font-size:14px}
+.reading-guide nav a,.guide-reset {display:inline-flex;align-items:center;min-height:44px}
+.guide-chapters {display:grid;gap:24px}.guide-chapters section {padding:24px;background:var(--color-surface-offset);scroll-margin-block:24px}
+.guide-chapters h2 {font:400 28px/1.2 Georgia,serif;margin:10px 0}.guide-chapters p {margin:0;max-width:60ch;font-size:15px}
+.guide-chapters small {text-transform:uppercase;letter-spacing:.08em}.guide-reset {margin-top:20px;font-size:13px}
 </style>
 </head>
 <body>
-  <div class="stage"><section id="preview-target">Deep-linked highlight</section></div>
-  <p class='demo-hint'>Activate the link to preview</p>
+  <div class="stage"><div class="showcase"><article class="reading-guide" id="guide"><header><p class="scene-kicker">The studio handbook / 04</p><h1>Make the destination clear.</h1><p>A reading guide with native, shareable chapter links.</p></header><nav aria-label="Chapters"><a href="#materials">01 Materials ↗</a><a href="#process">02 Process ↗</a><a href="#care">03 Care ↗</a></nav><div class="guide-chapters"><section id="materials" tabindex="-1"><small>01 / The starting point</small><h2>Material matters.</h2><p>Choose materials that age with grace: honest timber, uncoated paper and well-made textiles.</p></section><section id="process" tabindex="-1"><small>02 / The method</small><h2>Leave room to refine.</h2><p>Sketch, make, test. The most useful details often emerge on the second pass.</p></section><section id="care" tabindex="-1"><small>03 / The long view</small><h2>Built to be kept.</h2><p>Repair is part of the design. Care for the things you use, and let them tell their story.</p></section></div><a class="guide-reset" href="#guide">Clear highlight ↑</a></article><p class="scene-instruction">Choose a chapter to highlight its destination. Choose another to repeat. The outline remains after the pulse.</p></div></div>
+
 </body>
 </html>

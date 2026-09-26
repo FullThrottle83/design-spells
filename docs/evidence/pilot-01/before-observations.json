@@ -1,0 +1,291 @@
+{
+  "browser": "153.0.8010.0",
+  "spells": {
+    "ds-5-1440": {
+      "width": 1440,
+      "body": "Overview Pricing\n\nHover to preview",
+      "targets": [
+        {
+          "tag": "A",
+          "cls": "nav-link",
+          "w": 61.21875,
+          "h": 44,
+          "scroll": 61,
+          "client": 61
+        },
+        {
+          "tag": "A",
+          "cls": "nav-link",
+          "w": 43.828125,
+          "h": 44,
+          "scroll": 44,
+          "client": 44
+        }
+      ],
+      "focusUnderline": "0px"
+    },
+    "ds-12-1440": {
+      "width": 1440,
+      "body": "Swipe to preview",
+      "targets": [
+        {
+          "tag": "DIV",
+          "cls": "gallery",
+          "w": 1388,
+          "h": 326,
+          "scroll": 1706,
+          "client": 1388
+        }
+      ]
+    },
+    "ds-16-1440": {
+      "width": 1440,
+      "body": "Your name\n\nFocus to preview",
+      "targets": [
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "w": 198,
+          "h": 46.828125,
+          "scroll": 196,
+          "client": 196
+        }
+      ]
+    },
+    "ds-21-1440": {
+      "width": 1440,
+      "body": "Deep-linked highlight\n\nActivate the link to preview",
+      "targets": [
+        {
+          "tag": "SECTION",
+          "cls": "",
+          "w": 139.015625,
+          "h": 19.5,
+          "scroll": 139,
+          "client": 139
+        }
+      ],
+      "links": 0
+    },
+    "ds-37-1440": {
+      "width": 1440,
+      "body": "Adaptive\n\nLayout follows the container.\n\nDrag the corner to resize",
+      "targets": [
+        {
+          "tag": "DIV",
+          "cls": "card-container",
+          "w": 220,
+          "h": 238.578125,
+          "scroll": 218,
+          "client": 218
+        }
+      ],
+      "resizeControls": 0
+    },
+    "ds-95-1440": {
+      "width": 1440,
+      "body": "Hover to preview",
+      "targets": [
+        {
+          "tag": "FIGURE",
+          "cls": "spark",
+          "w": 20,
+          "h": 65,
+          "scroll": 20,
+          "client": 20
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 22.09375,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 37.6875,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 26.640625,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 46.796875,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 42.890625,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 58.5,
+          "scroll": 0,
+          "client": 0
+        }
+      ]
+    },
+    "ds-5-390": {
+      "width": 390,
+      "body": "Overview Pricing\n\nHover to preview",
+      "targets": [
+        {
+          "tag": "A",
+          "cls": "nav-link",
+          "w": 61.21875,
+          "h": 44,
+          "scroll": 61,
+          "client": 61
+        },
+        {
+          "tag": "A",
+          "cls": "nav-link",
+          "w": 43.828125,
+          "h": 44,
+          "scroll": 44,
+          "client": 44
+        }
+      ],
+      "focusUnderline": "0px"
+    },
+    "ds-12-390": {
+      "width": 390,
+      "body": "Swipe to preview",
+      "targets": [
+        {
+          "tag": "DIV",
+          "cls": "gallery",
+          "w": 338,
+          "h": 201,
+          "scroll": 1106,
+          "client": 338
+        }
+      ]
+    },
+    "ds-16-390": {
+      "width": 390,
+      "body": "Your name\n\nFocus to preview",
+      "targets": [
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "w": 198,
+          "h": 46.828125,
+          "scroll": 196,
+          "client": 196
+        }
+      ]
+    },
+    "ds-21-390": {
+      "width": 390,
+      "body": "Deep-linked highlight\n\nActivate the link to preview",
+      "targets": [
+        {
+          "tag": "SECTION",
+          "cls": "",
+          "w": 139.015625,
+          "h": 19.5,
+          "scroll": 139,
+          "client": 139
+        }
+      ],
+      "links": 0
+    },
+    "ds-37-390": {
+      "width": 390,
+      "body": "Adaptive\n\nLayout follows the container.\n\nDrag the corner to resize",
+      "targets": [
+        {
+          "tag": "DIV",
+          "cls": "card-container",
+          "w": 220,
+          "h": 238.578125,
+          "scroll": 218,
+          "client": 218
+        }
+      ],
+      "resizeControls": 0
+    },
+    "ds-95-390": {
+      "width": 390,
+      "body": "Hover to preview",
+      "targets": [
+        {
+          "tag": "FIGURE",
+          "cls": "spark",
+          "w": 20,
+          "h": 65,
+          "scroll": 20,
+          "client": 20
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 22.09375,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 37.6875,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 26.640625,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 46.796875,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 42.890625,
+          "scroll": 0,
+          "client": 0
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "w": 0,
+          "h": 58.5,
+          "scroll": 0,
+          "client": 0
+        }
+      ]
+    }
+  }
+}

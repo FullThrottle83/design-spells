@@ -118,34 +118,50 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.form-row {
-  position: relative;
-  anchor-scope: --help-anchor;
-}
-
-.form-row label {
-  anchor-name: --help-anchor;
-}
-
-.form-row .help-rail {
-  position: absolute;
-  position-anchor: --help-anchor;
-  position-area: right span-all;
-  margin-left: .75rem;
-  inline-size: 22ch;
+.form-row { position: relative; anchor-scope: --help-anchor; }
+.form-row .control { anchor-name: --help-anchor; }
+.help-rail {
+  margin-block-start: .75rem;
   opacity: 0;
-  transform: translateX(-6px);
+  visibility: hidden;
   transition: opacity 180ms ease, transform 180ms ease;
 }
+.form-row:focus-within .help-rail { opacity: 1; visibility: visible; }
 
-.form-row:focus-within .help-rail {
-  opacity: 1;
-  transform: translateX(0);
+@supports (position-anchor: --help-anchor) {
+  @media (min-width: 48rem) {
+    .help-rail {
+      position: absolute;
+      position-anchor: --help-anchor;
+      position-area: right center;
+      position-try-fallbacks: flip-inline, flip-block;
+      margin: 0 0 0 .9rem;
+      inline-size: 23ch;
+      transform: translateX(-6px);
+    }
+    .form-row:focus-within .help-rail { transform: translateX(0); }
+  }
 }
+@media (prefers-reduced-motion: reduce) { .help-rail { transition: none; } }
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.settings-scene{width:min(100%,840px);padding:clamp(26px,5vw,58px);border-radius:28px;background:light-dark(#f7f2e8,#18211f);box-shadow:0 28px 80px #102b241a}.settings-scene>header{border-bottom:1px solid var(--color-border);margin-bottom:8px}.settings-scene>header p:last-child{color:var(--color-text-muted);max-width:48ch}.settings-form{max-width:520px}.form-row{padding:22px 0;border-bottom:1px solid var(--color-border)}.control label{display:block;font-weight:750;margin-bottom:8px}.control input,.control select{width:100%;min-height:50px;border:1px solid var(--color-border);border-radius:9px;padding:0 13px;background:var(--color-bg);color:inherit;font:inherit}.url-input{display:flex;align-items:center;border:1px solid var(--color-border);border-radius:9px;background:var(--color-bg);overflow:hidden}.url-input span{padding-left:13px;color:var(--color-text-muted);white-space:nowrap}.url-input input{border:0;border-radius:0;padding-left:2px}.help-rail{border-left:3px solid #bd603e;padding:4px 0 4px 14px;background:light-dark(#f7f2e8,#18211f)}.help-rail>span{font:700 10px ui-monospace;color:#bd603e}.help-rail strong{display:block;font-family:Georgia,serif;margin:3px 0}.help-rail p{font-size:12px;color:var(--color-text-muted);margin:0}.settings-form>button{margin-top:24px;min-height:50px;border:0;border-radius:999px;padding:0 22px;background:#224c44;color:#fff;font-weight:750}.form-note{font-size:12px;color:var(--color-text-muted);margin-top:12px}@media(max-width:720px){.settings-scene{padding:25px 20px;border-radius:20px}.settings-form{max-width:none}.form-row{padding:18px 0}.help-rail{margin-top:12px}.url-input span{font-size:13px}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="form-row"><label>API key<input></label><p class="help-rail">Keep this secret.</p></div></div>
-  <p class='demo-hint'>Focus to preview</p>
+  <div class="stage"><div class="showcase"><main class="settings-scene"><header><p class="scene-kicker">Lumen publishing / Workspace</p><h1>Shape your byline.</h1><p>Set the public details that travel with every story you publish.</p></header><form class="settings-form" action="#settings-preview"><div class="form-row"><div class="control"><label for="public-name">Public name</label><input id="public-name" name="name" autocomplete="name" value="Mara Ellison" aria-describedby="help-name"></div><aside class="help-rail" id="help-name"><span>01</span><strong>Recognisable, not rigid.</strong><p>Use the name readers know. You can include a middle initial or studio name.</p></aside></div><div class="form-row"><div class="control"><label for="profile-url">Profile address</label><div class="url-input"><span aria-hidden="true">lumen.press/</span><input id="profile-url" name="slug" value="mara-ellison" pattern="[a-z0-9-]+" aria-describedby="help-url"></div></div><aside class="help-rail" id="help-url"><span>02</span><strong>Keep it easy to share.</strong><p>Lowercase letters, numbers and hyphens only. Existing story links will keep working.</p></aside></div><div class="form-row"><div class="control"><label for="story-replies">Story replies</label><select id="story-replies" name="replies" aria-describedby="help-replies"><option>People I follow</option><option>All members</option><option>No one</option></select></div><aside class="help-rail" id="help-replies"><span>03</span><strong>You set the boundary.</strong><p>This controls who can start a private response from your published stories.</p></aside></div><button type="submit">Preview profile <span aria-hidden="true">→</span></button><p id="settings-preview" class="form-note">Demonstration only—these settings are not saved.</p></form></main><p class="scene-instruction">Tab through the settings. Each field’s guidance follows focus; on a narrow screen it stays in the reading flow.</p></div></div>
+
 </body>
 </html>

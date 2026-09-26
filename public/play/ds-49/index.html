@@ -118,30 +118,49 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.filterbar {
-  position: relative;
-  anchor-scope: --filter-btn;
-}
-
-.filter-trigger {
-  anchor-name: --filter-btn;
-}
-
+.filterbar { position: relative; anchor-scope: --filter-btn; }
+.filter-trigger { anchor-name: --filter-btn; cursor: pointer; }
 .filter-panel {
-  position: absolute;
-  position-anchor: --filter-btn;
-  position-area: bottom end;
-  margin-top: .5rem;
-  min-inline-size: 18rem;
+  margin-block-start: .5rem;
+  inline-size: 100%;
+  max-inline-size: 22rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-bg);
   box-shadow: 0 20px 50px oklch(0 0 0 / .14);
 }
+@supports (position-anchor: --filter-btn) {
+  @media (min-width: 42rem) {
+    .filter-panel {
+      position: absolute;
+      position-anchor: --filter-btn;
+      inset-block-start: anchor(bottom);
+      inset-inline-end: anchor(right);
+      margin-block-start: .5rem;
+      inline-size: 22rem;
+      z-index: 3;
+    }
+  }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.catalogue-scene{width:100%;padding:clamp(22px,5vw,56px);background:light-dark(#f1eee5,#18201d);border:1px solid var(--color-border);border-radius:28px}.catalogue-scene>header{display:flex;align-items:end;justify-content:space-between;gap:30px;padding-bottom:28px}.catalogue-scene>header h1{max-width:12ch}.catalogue-scene>header>p{max-width:34ch;color:var(--color-text-muted)}.result-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;border-block:1px solid var(--color-border);padding:14px 0}.result-bar>p{margin:0;display:grid}.result-bar>p span{font-size:12px;color:var(--color-text-muted)}.filter-trigger{list-style:none;display:flex;align-items:center;gap:18px;min-height:46px;padding:0 18px;border-radius:999px;background:#c75135;color:#fff;font-weight:750;cursor:pointer}.filter-trigger::-webkit-details-marker{display:none}.filterbar[open] .filter-trigger span{rotate:45deg}.filter-panel{padding:22px}.panel-head strong{display:block;font:400 24px Georgia,serif;margin-top:4px}.filter-panel fieldset{border:0;border-top:1px solid var(--color-border);padding:16px 0 4px;margin:16px 0 0}.filter-panel legend,.sort{font-weight:750}.filter-panel fieldset label{display:flex;align-items:center;gap:10px;min-height:38px}.filter-panel fieldset label span{margin-left:auto;color:var(--color-text-muted)}.filter-panel input{accent-color:#c75135}.sort{display:grid;gap:7px;border-top:1px solid var(--color-border);padding-top:16px}.sort select{min-height:44px;border:1px solid var(--color-border);border-radius:8px;padding:0 10px;background:var(--color-bg);color:inherit}.filter-note{font-size:12px;color:var(--color-text-muted);margin:16px 0}.filter-panel button{width:100%;min-height:46px;border:0;border-radius:8px;background:#1f4b43;color:#fff;font-weight:750}.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-top:24px}.product-grid article{padding:18px;border-radius:16px;background:light-dark(#fffdf8,#222c28)}.product-grid article>span{font:600 10px ui-monospace;color:var(--color-text-muted)}.product-grid article>div{display:grid;place-items:center;aspect-ratio:1.4;margin:14px 0;background:light-dark(#dce2d5,#303b35);color:#c75135;font-size:54px}.product-grid h2{font:400 21px Georgia,serif;margin:0}.product-grid p,.selection-anchor{font-size:12px;color:var(--color-text-muted);margin:5px 0}.selection-anchor{margin-top:22px}@media(max-width:650px){.catalogue-scene{padding:20px;border-radius:20px}.catalogue-scene>header{display:block}.catalogue-scene>header h1{font-size:38px}.result-bar{align-items:flex-start}.product-grid{grid-template-columns:1fr 1fr}.product-grid article:last-child{display:none}.filterbar{max-width:55%}.filter-trigger{padding:0 13px;gap:10px}.filter-panel{max-width:none}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="filterbar"><button class="filter-trigger">Filters</button><div class="filter-panel">Sort · Date · Owner</div></div></div>
-  
+  <div class="stage"><div class="showcase"><main class="catalogue-scene"><header><div><p class="scene-kicker">Atlas supply / Field collection</p><h1>Made for the long way round.</h1></div><p>Trail equipment selected for repairability, honest materials and years of use.</p></header><div class="result-bar"><p><strong>24 pieces</strong><span>Autumn field collection</span></p><details class="filterbar"><summary class="filter-trigger">Filters <span aria-hidden="true">＋</span></summary><form class="filter-panel" action="#filter-selection"><div class="panel-head"><div><span class="scene-kicker">Refine collection</span><strong>What matters to you?</strong></div></div><fieldset><legend>Category</legend><label><input type="checkbox" name="category" value="packs"> Packs <span>8</span></label><label><input type="checkbox" name="category" value="shelter"> Shelter <span>6</span></label><label><input type="checkbox" name="category" value="camp"> Camp goods <span>10</span></label></fieldset><fieldset><legend>Best for</legend><label><input type="radio" name="use" value="any" checked> Any journey</label><label><input type="radio" name="use" value="weekend"> Weekends</label><label><input type="radio" name="use" value="expedition"> Expeditions</label></fieldset><label class="sort">Order <select name="sort"><option>Field notes’ pick</option><option>Price, low to high</option><option>Lightest first</option></select></label><p class="filter-note">Selections are a visual preview; this zero-JS demo does not update the collection.</p><button type="submit">Save selection</button></form></details></div><section class="product-grid" aria-label="Collection preview"><article><span>01 / Carry</span><div aria-hidden="true">△</div><h2>Ridgeline 28L</h2><p>Waxed canvas · Moss</p></article><article><span>02 / Rest</span><div aria-hidden="true">◯</div><h2>Roam blanket</h2><p>Recycled wool · Ochre</p></article><article><span>03 / Light</span><div aria-hidden="true">◇</div><h2>Beacon lamp</h2><p>Aluminium · Ember</p></article></section><p id="filter-selection" class="selection-anchor" tabindex="-1">Your chosen controls remain selected above. Applying them to data requires application logic.</p></main><p class="scene-instruction">Open Filters with the native disclosure. Choose preferences, then activate Filters again to close. Selections are visual only; no results are recalculated.</p></div></div>
+
 </body>
 </html>

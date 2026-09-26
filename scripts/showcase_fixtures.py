@@ -139,3 +139,12 @@ except ImportError:
 HTML.update(P02_HTML)
 CSS.update(P02_CSS)
 HINTS.update(P02_HINTS)
+
+# Pilot 03: anchored interactions and their contextual product scenes.
+try:
+    from .showcase_pilot03 import HTML as P03_HTML, CSS as P03_CSS, HINTS as P03_HINTS
+except ImportError:
+    from showcase_pilot03 import HTML as P03_HTML, CSS as P03_CSS, HINTS as P03_HINTS
+HTML.update(P03_HTML)
+CSS.update(P03_CSS)
+HINTS.update(P03_HINTS)

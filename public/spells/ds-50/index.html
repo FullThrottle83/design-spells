@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Focus Help Rail — Design Spells</title>
-  <meta name="description" content="Contextual help appears beside a field on `:focus-within`.">
+  <meta name="description" content="Contextual field guidance appears on `:focus-within`. It is stacked in the reading flow by default and moves beside the control only when there is room and anchor positioning is supported.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-50/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Focus Help Rail — Design Spells">
-  <meta property="og:description" content="Contextual help appears beside a field on `:focus-within`.">
+  <meta property="og:description" content="Contextual field guidance appears on `:focus-within`. It is stacked in the reading flow by default and moves beside the control only when there is room and anchor positioning is supported.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-50/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -21,13 +21,13 @@
     <a href="https://github.com/FullThrottle83/design-spells">GitHub ↗</a>
   </header>
   <main id="main" class="shell">
-    <p class="eyebrow">ds-50 / Anchor / 0 JS</p>
+    <p class="eyebrow">ds-50 / Anchor / Markup</p>
     <h1>Focus Help Rail</h1>
-    <p class="lede">Contextual help appears beside a field on `:focus-within`.</p>
+    <p class="lede">Contextual field guidance appears on `:focus-within`. It is stacked in the reading flow by default and moves beside the control only when there is room and anchor positioning is supported.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-50/">Open standalone demo ↗</a><a class="action" href="/download/ds-50.html" download="ds-50.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Focus to preview</p>
+      <p class='note'>Tab through the settings. Each field’s guidance follows focus; on a narrow screen it stays in the reading flow.</p>
       
       <iframe title="Isolated demonstration: Focus Help Rail" src="/play/ds-50/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -40,33 +40,43 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      <p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>
-      <pre tabindex="0"><code>&lt;div class=&quot;form-row&quot;&gt;&lt;label&gt;API key&lt;input&gt;&lt;/label&gt;&lt;p class=&quot;help-rail&quot;&gt;Keep this secret.&lt;/p&gt;&lt;/div&gt;</code></pre>
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;div class=&quot;form-row&quot;&gt;
+  &lt;div class=&quot;control&quot;&gt;
+    &lt;label for=&quot;profile-slug&quot;&gt;Profile address&lt;/label&gt;
+    &lt;input id=&quot;profile-slug&quot; name=&quot;slug&quot; aria-describedby=&quot;help-slug&quot;&gt;
+  &lt;/div&gt;
+  &lt;aside class=&quot;help-rail&quot; id=&quot;help-slug&quot;&gt;
+    &lt;strong&gt;Keep it easy to share.&lt;/strong&gt;
+    &lt;p&gt;Use lowercase letters, numbers and hyphens.&lt;/p&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.form-row {
-  position: relative;
-  anchor-scope: --help-anchor;
-}
-
-.form-row label {
-  anchor-name: --help-anchor;
-}
-
-.form-row .help-rail {
-  position: absolute;
-  position-anchor: --help-anchor;
-  position-area: right span-all;
-  margin-left: .75rem;
-  inline-size: 22ch;
+      <pre tabindex="0"><code>.form-row { position: relative; anchor-scope: --help-anchor; }
+.form-row .control { anchor-name: --help-anchor; }
+.help-rail {
+  margin-block-start: .75rem;
   opacity: 0;
-  transform: translateX(-6px);
+  visibility: hidden;
   transition: opacity 180ms ease, transform 180ms ease;
 }
+.form-row:focus-within .help-rail { opacity: 1; visibility: visible; }
 
-.form-row:focus-within .help-rail {
-  opacity: 1;
-  transform: translateX(0);
-}</code></pre>
+@supports (position-anchor: --help-anchor) {
+  @media (min-width: 48rem) {
+    .help-rail {
+      position: absolute;
+      position-anchor: --help-anchor;
+      position-area: right center;
+      position-try-fallbacks: flip-inline, flip-block;
+      margin: 0 0 0 .9rem;
+      inline-size: 23ch;
+      transform: translateX(-6px);
+    }
+    .form-row:focus-within .help-rail { transform: translateX(0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .help-rail { transition: none; } }</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>

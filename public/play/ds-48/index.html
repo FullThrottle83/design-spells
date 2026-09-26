@@ -118,40 +118,54 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.field {
-  position: relative;
-}
-
-.field input,
-.field textarea,
-.field select {
-  anchor-name: --field-anchor;
-}
-
-.field .error-bubble {
-  position: absolute;
-  position-anchor: --field-anchor;
-  position-area: bottom span-all;
-  margin-top: .5rem;
-  inline-size: max-content;
-  max-inline-size: min(32ch, 90vw);
-  padding: .55rem .75rem;
+.field { position: relative; }
+.field input { anchor-name: --field-anchor; }
+.error-bubble {
+  display: none;
+  margin-block: .5rem 0;
+  inline-size: fit-content;
+  max-inline-size: min(32ch, 100%);
+  padding: .65rem .8rem;
   border-radius: var(--radius-sm);
   background: var(--color-error);
   color: white;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 180ms ease, transform 180ms ease;
+}
+.field:has(:user-invalid) .error-bubble { display: block; }
+
+@supports (position-anchor: --field-anchor) {
+  @media (min-width: 42rem) {
+    .field:has(> .error-bubble) { padding-block-end: 5rem; }
+    .error-bubble {
+      position: absolute;
+      position-anchor: --field-anchor;
+      position-area: bottom span-all;
+      position-try-fallbacks: flip-inline, flip-block;
+      align-self: center;
+      block-size: fit-content;
+      margin: 0 0 0 .5rem;
+      z-index: 2;
+    }
+  }
 }
 
-.field:has(:user-invalid) .error-bubble {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.invite-scene{display:grid;grid-template-columns:minmax(210px,.72fr) minmax(0,1.28fr);background:light-dark(#193d38,#122924);border-radius:28px;overflow:hidden;box-shadow:0 28px 80px #102b2426}.invite-scene>aside{padding:clamp(28px,5vw,58px);color:#f2ead8;background:linear-gradient(145deg,#214c43,#15352f);display:flex;flex-direction:column;justify-content:flex-end;min-height:560px}.invite-scene>aside strong{font:400 clamp(30px,4vw,48px)/1.06 Georgia,serif;letter-spacing:-.04em;margin:18px 0}.invite-scene>aside p{color:#d0ddd5}.avatar-row{display:flex;margin-top:26px}.avatar-row i{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#e9b96e;color:#183a34;border:3px solid #214c43;font:700 10px ui-monospace;margin-right:-8px}.invite-card{padding:clamp(28px,5vw,62px);background:light-dark(#fffdf7,#17211e)}.invite-card .intro{color:var(--color-text-muted);max-width:45ch}.field{margin-top:24px}.field label{display:block;font-weight:700;margin-bottom:8px}.field input,.field select{width:100%;min-height:52px;border:1px solid var(--color-border);border-radius:10px;background:var(--color-bg);color:inherit;padding:0 14px;font:inherit}.field small{display:block;color:var(--color-text-muted);margin-top:7px}.invite-card button{margin-top:28px;min-height:50px;border:0;border-radius:999px;padding:0 22px;background:#d66c47;color:#fff;font-weight:750}.error-bubble strong,.error-bubble span{display:block}.error-bubble span{font-size:12px;margin-top:2px}@media(max-width:650px){.invite-scene{grid-template-columns:1fr;border-radius:20px}.invite-scene>aside{min-height:210px;padding:24px}.invite-scene>aside strong{font-size:32px}.avatar-row{display:none}.invite-card{padding:26px 22px}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="field"><input type="email" required placeholder="you@site.com"><div class="error-bubble">Enter a valid email.</div></div></div>
-  <p class='demo-hint'>Enter an invalid value, then leave the field</p>
+  <div class="stage"><div class="showcase"><main class="invite-scene"><aside aria-label="Workspace summary"><span class="scene-kicker">Northstar studio</span><strong>12 makers.<br>One clear place.</strong><p>Invite a collaborator to the autumn field-notes workspace.</p><div class="avatar-row" aria-hidden="true"><i>AM</i><i>KL</i><i>SR</i><i>+9</i></div></aside><form class="invite-card" action="#invite-preview"><p class="scene-kicker">Workspace invitation / Draft</p><h1>Bring someone in.</h1><p class="intro">We’ll use this address for the invitation. Nothing is sent in this demonstration.</p><div class="field"><label for="invite-email">Work email</label><input id="invite-email" name="email" type="email" autocomplete="email" required aria-describedby="invite-email-note invite-email-error" placeholder="name@company.com"><small id="invite-email-note">Use the address they check at work.</small><p class="error-bubble" id="invite-email-error"><strong>Check the email address</strong><span>Include a name, @ sign and domain—for example, ari@northstar.co.</span></p></div><div class="field"><label for="invite-role">Workspace role</label><select id="invite-role" name="role"><option>Editor — can create and publish</option><option>Reviewer — can comment</option></select></div><button type="submit">Review invitation <span aria-hidden="true">→</span></button></form></main><p class="scene-instruction">Enter an incomplete email, then Tab away. Correct it to watch the browser-owned validation state clear.</p></div></div>
+
 </body>
 </html>

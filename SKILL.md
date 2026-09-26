@@ -2100,99 +2100,148 @@ Tooltips pinned via `anchor-name` / `position-anchor`. No overflow problems.
 ### 48. Anchored Error Bubble
 *Anchor · Newer · 0 JS*
 
-Field validation errors pin to the input without pushing the layout down.
+Field validation errors pin to the input without pushing the layout down. The message remains in flow when anchor positioning is unavailable.
+
+```html
+<div class="field">
+  <label for="account-email">Work email</label>
+  <input id="account-email" name="email" type="email" required
+    aria-describedby="account-email-note account-email-error">
+  <small id="account-email-note">Use the address you check at work.</small>
+  <p class="error-bubble" id="account-email-error">
+    <strong>Check the email address</strong>
+    <span>Include a name, @ sign and domain.</span>
+  </p>
+</div>
+```
 
 ```css
-.field {
-  position: relative;
-}
-
-.field input,
-.field textarea,
-.field select {
-  anchor-name: --field-anchor;
-}
-
-.field .error-bubble {
-  position: absolute;
-  position-anchor: --field-anchor;
-  position-area: bottom span-all;
-  margin-top: .5rem;
-  inline-size: max-content;
-  max-inline-size: min(32ch, 90vw);
-  padding: .55rem .75rem;
+.field { position: relative; }
+.field input { anchor-name: --field-anchor; }
+.error-bubble {
+  display: none;
+  margin-block: .5rem 0;
+  inline-size: fit-content;
+  max-inline-size: min(32ch, 100%);
+  padding: .65rem .8rem;
   border-radius: var(--radius-sm);
   background: var(--color-error);
   color: white;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 180ms ease, transform 180ms ease;
 }
+.field:has(:user-invalid) .error-bubble { display: block; }
 
-.field:has(:user-invalid) .error-bubble {
-  opacity: 1;
-  transform: translateY(0);
+@supports (position-anchor: --field-anchor) {
+  @media (min-width: 42rem) {
+    .field:has(> .error-bubble) { padding-block-end: 5rem; }
+    .error-bubble {
+      position: absolute;
+      position-anchor: --field-anchor;
+      position-area: bottom span-all;
+      position-try-fallbacks: flip-inline, flip-block;
+      align-self: center;
+      block-size: fit-content;
+      margin: 0 0 0 .5rem;
+      z-index: 2;
+    }
+  }
 }
 ```
 
 ### 49. Anchored Filter Panel
-*Anchor · Newer · 0 JS*
+*Anchor · Newer · Markup*
 
-Filter menus, sort panels, and account menus pinned to their trigger.
+A native disclosure keeps filter controls closed and operable without anchor positioning; supporting wide viewports pin the open panel to its trigger.
+
+```html
+<details class="filterbar">
+  <summary class="filter-trigger">Filters</summary>
+  <form class="filter-panel" action="#filter-selection">
+    <fieldset>
+      <legend>Category</legend>
+      <label><input type="checkbox" name="category" value="packs"> Packs</label>
+      <label><input type="checkbox" name="category" value="shelter"> Shelter</label>
+    </fieldset>
+    <label>Order
+      <select name="sort"><option>Editor’s pick</option><option>Lightest first</option></select>
+    </label>
+    <p>Selections are a visual preview; applying filters requires application logic.</p>
+    <button type="submit">Save selection</button>
+  </form>
+</details>
+<p id="filter-selection">Your chosen controls remain selected above.</p>
+```
 
 ```css
-.filterbar {
-  position: relative;
-  anchor-scope: --filter-btn;
-}
-
-.filter-trigger {
-  anchor-name: --filter-btn;
-}
-
+.filterbar { position: relative; anchor-scope: --filter-btn; }
+.filter-trigger { anchor-name: --filter-btn; cursor: pointer; }
 .filter-panel {
-  position: absolute;
-  position-anchor: --filter-btn;
-  position-area: bottom end;
-  margin-top: .5rem;
-  min-inline-size: 18rem;
+  margin-block-start: .5rem;
+  inline-size: 100%;
+  max-inline-size: 22rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-bg);
   box-shadow: 0 20px 50px oklch(0 0 0 / .14);
 }
+@supports (position-anchor: --filter-btn) {
+  @media (min-width: 42rem) {
+    .filter-panel {
+      position: absolute;
+      position-anchor: --filter-btn;
+      inset-block-start: anchor(bottom);
+      inset-inline-end: anchor(right);
+      margin-block-start: .5rem;
+      inline-size: 22rem;
+      z-index: 3;
+    }
+  }
+}
 ```
 
 ### 50. Focus Help Rail
-*Anchor · Newer · 0 JS*
+*Anchor · Newer · Markup*
 
-Contextual help appears beside a field on `:focus-within`.
+Contextual field guidance appears on `:focus-within`. It is stacked in the reading flow by default and moves beside the control only when there is room and anchor positioning is supported.
+
+```html
+<div class="form-row">
+  <div class="control">
+    <label for="profile-slug">Profile address</label>
+    <input id="profile-slug" name="slug" aria-describedby="help-slug">
+  </div>
+  <aside class="help-rail" id="help-slug">
+    <strong>Keep it easy to share.</strong>
+    <p>Use lowercase letters, numbers and hyphens.</p>
+  </aside>
+</div>
+```
 
 ```css
-.form-row {
-  position: relative;
-  anchor-scope: --help-anchor;
-}
-
-.form-row label {
-  anchor-name: --help-anchor;
-}
-
-.form-row .help-rail {
-  position: absolute;
-  position-anchor: --help-anchor;
-  position-area: right span-all;
-  margin-left: .75rem;
-  inline-size: 22ch;
+.form-row { position: relative; anchor-scope: --help-anchor; }
+.form-row .control { anchor-name: --help-anchor; }
+.help-rail {
+  margin-block-start: .75rem;
   opacity: 0;
-  transform: translateX(-6px);
+  visibility: hidden;
   transition: opacity 180ms ease, transform 180ms ease;
 }
+.form-row:focus-within .help-rail { opacity: 1; visibility: visible; }
 
-.form-row:focus-within .help-rail {
-  opacity: 1;
-  transform: translateX(0);
+@supports (position-anchor: --help-anchor) {
+  @media (min-width: 48rem) {
+    .help-rail {
+      position: absolute;
+      position-anchor: --help-anchor;
+      position-area: right center;
+      position-try-fallbacks: flip-inline, flip-block;
+      margin: 0 0 0 .9rem;
+      inline-size: 23ch;
+      transform: translateX(-6px);
+    }
+    .form-row:focus-within .help-rail { transform: translateX(0); }
+  }
 }
+@media (prefers-reduced-motion: reduce) { .help-rail { transition: none; } }
 ```
 
 ---

@@ -77,8 +77,11 @@ test("baseline/effect comparison works without JS in both engines", async ({ pag
 test("new gap-fill spells keep baseline/fallback behavior across engines", async ({ page }) => {
   await page.goto("/play/ds-153/");
   const pill = page.locator(".intrinsic-pill");
+  const toggle = page.locator("#intrinsic-more");
   const before = await pill.evaluate(el => el.getBoundingClientRect().width);
-  await pill.click();
+  await toggle.focus();
+  await page.keyboard.press("Space");
+  await expect(toggle).toBeChecked();
   const after = await pill.evaluate(el => el.getBoundingClientRect().width);
   expect(after).toBeGreaterThan(before + 40);
 

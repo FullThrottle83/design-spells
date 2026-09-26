@@ -8,8 +8,8 @@ canonical overlay behavior.
 
 HINTS = {
     "ds-79": "Open Products with a click, or with Enter while the trigger has focus. Every destination in the panel is a section of this page. Nothing auto-closes on navigation — one click away or Escape clears the panel, which becomes a contained bottom sheet on narrow screens.",
-    "ds-89": "Open a row’s ⋯ menu. “Open full record” and “View change history” jump to real sections of this page; “Star for review” is a real checkbox the owning row reflects. Escape or a click away closes the menu.",
-    "ds-142": "Activate any numbered pin with pointer or keyboard. Its own popover opens above the pin and flips below when the pin sits near the top edge. The numbered key lists every location for keyboard and no-enhancement reading.",
+    "ds-89": "Open a row’s ⋯ menu. “Open full record” and “View change history” jump to that row’s own record and history sections; “Star for review” is a real checkbox the owning row reflects. Escape or a click away closes the menu.",
+    "ds-142": "Activate any numbered pin with pointer or keyboard. Its own popover opens above the pin and flips below when the pin sits near the top edge. The numbered key links to every location’s note for keyboard and no-enhancement reading.",
 }
 
 
@@ -96,7 +96,7 @@ HTML = {
     ),
     "89": (
         '<main class="papertrail-scene"><header class="pt-head"><div><p class="scene-kicker">Papertrail / Shared workspace</p>'
-        '<h1>The reading room.</h1></div><p>Four living documents. Each row’s ⋯ menu offers real destinations and one real state change — nothing is deleted, sent or saved.</p></header>'
+        '<h1>The reading room.</h1></div><p>Three living documents and one closed archive. Each row’s ⋯ menu offers that row’s own destinations and one real state change — nothing is deleted, sent or saved.</p></header>'
         '<div class="pt-list">'
         '<article class="doc-row" style="--ctx-anchor: --ctx-q3;"><div class="doc-copy"><h2>Q3 renewal forecast <span class="star-flag" aria-hidden="true">★</span></h2><p>Updated 2 days ago · Owned by Priya</p></div>'
         '<button class="ctx-btn" commandfor="ctx-menu" command="toggle-popover" aria-label="Actions for Q3 renewal forecast">⋯</button>'
@@ -115,17 +115,19 @@ HTML = {
         '<section id="history-2" tabindex="-1"><p class="scene-kicker">History / Lease</p><h2>Change history</h2><p>20 Sep — Jonas attached the floor plan. 18 Sep — draft created. Illustrative entries only.</p><a href="#top-89">Back to documents ↑</a></section>'
         '<section id="record-3" tabindex="-1"><p class="scene-kicker">Record / Residency</p><h2>Winter residency brief</h2><p>Six weeks, four makers, one shared kiln. The brief describes space, stipend and application dates.</p><a href="#top-89">Back to documents ↑</a></section>'
         '<section id="history-3" tabindex="-1"><p class="scene-kicker">History / Residency</p><h2>Change history</h2><p>25 Sep — Mara opened applications. 21 Sep — brief created. Illustrative entries only.</p><a href="#top-89">Back to documents ↑</a></section>'
+        '<section id="record-4" tabindex="-1"><p class="scene-kicker">Record / Archive</p><h2>Archive: spring catalogue</h2><p>Closed in June after forty printed copies. The archive record keeps the contents list and the print run for reference only; nothing is reprinted or sold here.</p><a href="#top-89">Back to documents ↑</a></section>'
+        '<section id="history-4" tabindex="-1"><p class="scene-kicker">History / Archive</p><h2>Change history</h2><p>02 Jun — catalogue closed and moved to the archive. 14 Mar — spring edition created. Illustrative entries only.</p><a href="#top-89">Back to documents ↑</a></section>'
         '</div>'
         '<footer class="pt-foot" id="top-89">'
         '<article class="doc-row" style="--ctx-anchor: --ctx-4;"><div class="doc-copy"><h2>Archive: spring catalogue <span class="star-flag" aria-hidden="true">★</span></h2><p>Closed · Owned by the studio</p></div>'
         '<button class="ctx-btn" commandfor="ctx-menu-4" command="toggle-popover" aria-label="Actions for archived spring catalogue">⋯</button>'
-        '<div id="ctx-menu-4" popover="auto" class="ctx-menu"><a class="ctx-item" href="#record-3">Open full record</a><label class="ctx-item ctx-check"><input type="checkbox"> Star for review</label><a class="ctx-item" href="#history-3">View change history</a></div></article>'
+        '<div id="ctx-menu-4" popover="auto" class="ctx-menu"><a class="ctx-item" href="#record-4">Open full record</a><label class="ctx-item ctx-check"><input type="checkbox"> Star for review</label><a class="ctx-item" href="#history-4">View change history</a></div></article>'
         '<p class="pt-foot-note">The archived row sits at the foot of the page: open its menu to see the anchored menu flip above the trigger when there is no room below.</p>'
         '</footer></main>'
     ),
     "142": (
         '<main class="atlas-scene"><header class="atlas-head"><p class="scene-kicker">Fieldline atlas / Four studios</p>'
-        '<h1>Where the work happens.</h1><p>Four small studios, one shared practice. Activate a numbered pin for its details, or read the key below the map.</p></header>'
+        '<h1>Where the work happens.</h1><p>Four small studios, one shared practice. Activate a numbered pin for its details, or follow the numbered key below the map to each studio’s note.</p></header>'
         '<figure class="map-figure"><div class="map-container" role="group" aria-label="Illustrated studio map with four locations">' + atlas_art()
         + '<div class="map-stop" style="--pin-anchor: --pin-1; --pin-x: 22%; --pin-y: 46%;"><button class="map-pin" commandfor="pop-pin-1" command="toggle-popover" aria-label="Location 1, Harbour Point, Lisbon"><span aria-hidden="true"><i>1</i></span></button>'
         '<div id="pop-pin-1" popover="auto" class="pin-pop"><strong>Harbour Point</strong><span>Lisbon · 14 people · UTC+1</span><a class="pin-link" href="#note-1">Studio notes →</a><button class="pin-close" commandfor="pop-pin-1" command="hide-popover" aria-label="Close Harbour Point notes">×</button></div></div>'
@@ -136,10 +138,10 @@ HTML = {
         + '<div class="map-stop" style="--pin-anchor: --pin-4; --pin-x: 40%; --pin-y: 80%;"><button class="map-pin" commandfor="pop-pin-4" command="toggle-popover" aria-label="Location 4, Field Station, Azores"><span aria-hidden="true"><i>4</i></span></button>'
         '<div id="pop-pin-4" popover="auto" class="pin-pop"><strong>Field Station</strong><span>Azores · 2 people · UTC+0</span><a class="pin-link" href="#note-4">Studio notes →</a><button class="pin-close" commandfor="pop-pin-4" command="hide-popover" aria-label="Close Field Station notes">×</button></div></div>'
         + '</div><figcaption class="map-key"><ul>'
-        '<li><span aria-hidden="true">1</span>Harbour Point — Lisbon</li>'
-        '<li><span aria-hidden="true">2</span>Kiln Yard — Porto</li>'
-        '<li><span aria-hidden="true">3</span>North Light — Tromsø</li>'
-        '<li><span aria-hidden="true">4</span>Field Station — Azores</li>'
+        '<li><a href="#note-1"><span aria-hidden="true">1</span>Harbour Point — Lisbon</a></li>'
+        '<li><a href="#note-2"><span aria-hidden="true">2</span>Kiln Yard — Porto</a></li>'
+        '<li><a href="#note-3"><span aria-hidden="true">3</span>North Light — Tromsø</a></li>'
+        '<li><a href="#note-4"><span aria-hidden="true">4</span>Field Station — Azores</a></li>'
         '</ul></figcaption></figure>'
         '<div class="atlas-notes">'
         '<section id="note-1" tabindex="-1"><p class="scene-kicker">01 / Lisbon</p><h2>Harbour Point</h2><p>A converted warehouse by the water. The studio keeps its press room and the shared material library here.</p></section>'

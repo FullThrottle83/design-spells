@@ -4383,7 +4383,7 @@ A keyboard-first skip link that slides in at the top of the screen on focus.
 ### 142. Interactive Map Pin Popover (`anchor-name` + `position-anchor`)
 *Overlays · Newer · Markup*
 
-Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key. Pins near a viewport edge flip with `position-try-fallbacks`.
+Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key's `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.
 
 ```html
 <figure class="map-figure">
@@ -4427,10 +4427,10 @@ Map pins that open anchored popovers on click. Each pin owns exactly one popover
   </div>
   <figcaption class="map-key">
     <ul>
-      <li><span aria-hidden="true">1</span>Harbour Point — Lisbon</li>
-      <li><span aria-hidden="true">2</span>Kiln Yard — Porto</li>
-      <li><span aria-hidden="true">3</span>North Light — Tromsø</li>
-      <li><span aria-hidden="true">4</span>Field Station — Azores</li>
+      <li><a href="#note-1"><span aria-hidden="true">1</span>Harbour Point — Lisbon</a></li>
+      <li><a href="#note-2"><span aria-hidden="true">2</span>Kiln Yard — Porto</a></li>
+      <li><a href="#note-3"><span aria-hidden="true">3</span>North Light — Tromsø</a></li>
+      <li><a href="#note-4"><span aria-hidden="true">4</span>Field Station — Azores</a></li>
     </ul>
   </figcaption>
 </figure>
@@ -4489,7 +4489,13 @@ Map pins that open anchored popovers on click. Each pin owns exactly one popover
   display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4);
   font-size: .85rem; color: var(--color-text-muted);
 }
-.map-key li { display: flex; align-items: center; gap: .45rem; }
+.map-key a {
+  display: flex; align-items: center; gap: .45rem;
+  min-block-size: 32px; color: inherit; text-decoration: none;
+  border-radius: 4px;
+}
+.map-key a:hover { text-decoration: underline; }
+.map-key a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .map-key span {
   display: inline-grid; place-items: center; inline-size: 18px; block-size: 18px;
   border-radius: 50%; background: var(--color-primary); color: var(--color-text-inverse);

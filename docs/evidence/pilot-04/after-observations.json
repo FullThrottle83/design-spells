@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-09-26T16:11:20.084Z",
+  "capturedAt": "2026-09-26T16:53:57.018Z",
   "browserVersion": "153.0.8010.0",
   "base": "http://127.0.0.1:8790",
   "prefix": "after",
@@ -254,27 +254,27 @@
           "target": "ctx-menu-4",
           "triggerRect": {
             "x": 1066,
-            "y": 1374.28,
+            "y": 1612.36,
             "width": 44,
             "height": 44,
             "right": 1110,
-            "bottom": 1418.28
+            "bottom": 1656.36
           },
           "command": {
             "commandfor": "ctx-menu-4",
             "command": "toggle-popover",
             "haspopup": null
           },
-          "keyboardTabsToTrigger": 10,
+          "keyboardTabsToTrigger": 12,
           "triggerFocused": true,
           "keyboardOpened": true,
           "openRect": {
             "x": 910.84,
-            "y": 409.03,
+            "y": 409.11,
             "width": 199.16,
             "height": 147,
             "right": 1110,
-            "bottom": 556.03
+            "bottom": 556.11
           },
           "openContained": true,
           "openPosition": "fixed",
@@ -329,11 +329,11 @@
           "target": "pop-pin-1",
           "triggerRect": {
             "x": 472.31,
-            "y": 494.45,
+            "y": 520.05,
             "width": 44,
             "height": 44,
             "right": 516.31,
-            "bottom": 538.45
+            "bottom": 564.05
           },
           "command": {
             "commandfor": "pop-pin-1",
@@ -345,11 +345,11 @@
           "keyboardOpened": true,
           "openRect": {
             "x": 405.3,
-            "y": 391.98,
+            "y": 417.58,
             "width": 178.03,
             "height": 95.97,
             "right": 583.33,
-            "bottom": 487.95
+            "bottom": 513.55
           },
           "openContained": true,
           "openPosition": "fixed",
@@ -370,11 +370,11 @@
           "target": "pop-pin-2",
           "triggerRect": {
             "x": 762.47,
-            "y": 407.56,
+            "y": 433.16,
             "width": 44,
             "height": 44,
             "right": 806.47,
-            "bottom": 451.56
+            "bottom": 477.16
           },
           "command": {
             "commandfor": "pop-pin-2",
@@ -386,11 +386,11 @@
           "keyboardOpened": true,
           "openRect": {
             "x": 702.52,
-            "y": 305.09,
+            "y": 330.69,
             "width": 163.91,
             "height": 95.97,
             "right": 866.42,
-            "bottom": 401.06
+            "bottom": 426.66
           },
           "openContained": true,
           "openPosition": "fixed",
@@ -411,11 +411,11 @@
           "target": "pop-pin-3",
           "triggerRect": {
             "x": 907.55,
-            "y": 566.84,
+            "y": 592.44,
             "width": 44,
             "height": 44,
             "right": 951.55,
-            "bottom": 610.84
+            "bottom": 636.44
           },
           "command": {
             "commandfor": "pop-pin-3",
@@ -427,11 +427,11 @@
           "keyboardOpened": true,
           "openRect": {
             "x": 842.2,
-            "y": 464.38,
+            "y": 489.97,
             "width": 174.7,
             "height": 95.97,
             "right": 1016.9,
-            "bottom": 560.34
+            "bottom": 585.94
           },
           "openContained": true,
           "openPosition": "fixed",
@@ -441,10 +441,10 @@
             "a:Studio notes →",
             "button:Close North Light notes",
             "button:Location 4, Field Station, Azores",
-            "BODY"
+            "a:1Harbour Point — Lisbon"
           ],
           "escapeClosed": true,
-          "focusAfterEscape": "BODY",
+          "focusAfterEscape": "a",
           "clickOpened": true,
           "lightDismissClosed": true
         },
@@ -452,11 +452,11 @@
           "target": "pop-pin-4",
           "triggerRect": {
             "x": 617.39,
-            "y": 617.53,
+            "y": 643.13,
             "width": 44,
             "height": 44,
             "right": 661.39,
-            "bottom": 661.53
+            "bottom": 687.13
           },
           "command": {
             "commandfor": "pop-pin-4",
@@ -468,11 +468,11 @@
           "keyboardOpened": true,
           "openRect": {
             "x": 553.29,
-            "y": 515.06,
+            "y": 540.66,
             "width": 172.2,
             "height": 95.97,
             "right": 725.49,
-            "bottom": 611.03
+            "bottom": 636.63
           },
           "openContained": true,
           "openPosition": "fixed",
@@ -481,11 +481,11 @@
           "focusChain": [
             "a:Studio notes →",
             "button:Close Field Station notes",
-            "BODY",
-            "button:Location 1, Harbour Point, Lisbon"
+            "a:1Harbour Point — Lisbon",
+            "a:2Kiln Yard — Porto"
           ],
           "escapeClosed": true,
-          "focusAfterEscape": "button",
+          "focusAfterEscape": "a",
           "clickOpened": true,
           "lightDismissClosed": true
         }
@@ -639,11 +639,11 @@
           "target": "ctx-menu",
           "triggerRect": {
             "x": 292,
-            "y": 276.31,
+            "y": 298.7,
             "width": 44,
             "height": 44,
             "right": 336,
-            "bottom": 320.31
+            "bottom": 342.7
           },
           "command": {
             "commandfor": "ctx-menu",
@@ -680,11 +680,11 @@
           "target": "ctx-menu-2",
           "triggerRect": {
             "x": 292,
-            "y": 373.48,
+            "y": 395.88,
             "width": 44,
             "height": 44,
             "right": 336,
-            "bottom": 417.48
+            "bottom": 439.88
           },
           "command": {
             "commandfor": "ctx-menu-2",
@@ -721,11 +721,11 @@
           "target": "ctx-menu-3",
           "triggerRect": {
             "x": 292,
-            "y": 470.66,
+            "y": 493.05,
             "width": 44,
             "height": 44,
             "right": 336,
-            "bottom": 514.66
+            "bottom": 537.05
           },
           "command": {
             "commandfor": "ctx-menu-3",
@@ -762,18 +762,18 @@
           "target": "ctx-menu-4",
           "triggerRect": {
             "x": 292,
-            "y": 2104.09,
+            "y": 2623.44,
             "width": 44,
             "height": 44,
             "right": 336,
-            "bottom": 2148.09
+            "bottom": 2667.44
           },
           "command": {
             "commandfor": "ctx-menu-4",
             "command": "toggle-popover",
             "haspopup": null
           },
-          "keyboardTabsToTrigger": 10,
+          "keyboardTabsToTrigger": 12,
           "triggerFocused": true,
           "keyboardOpened": true,
           "openRect": {
@@ -949,10 +949,10 @@
             "a:Studio notes →",
             "button:Close North Light notes",
             "button:Location 4, Field Station, Azores",
-            "BODY"
+            "a:1Harbour Point — Lisbon"
           ],
           "escapeClosed": true,
-          "focusAfterEscape": "BODY",
+          "focusAfterEscape": "a",
           "clickOpened": true,
           "lightDismissClosed": true
         },
@@ -989,11 +989,11 @@
           "focusChain": [
             "a:Studio notes →",
             "button:Close Field Station notes",
-            "BODY",
-            "button:Location 1, Harbour Point, Lisbon"
+            "a:1Harbour Point — Lisbon",
+            "a:2Kiln Yard — Porto"
           ],
           "escapeClosed": true,
-          "focusAfterEscape": "button",
+          "focusAfterEscape": "a",
           "clickOpened": true,
           "lightDismissClosed": true
         }

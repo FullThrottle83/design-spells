@@ -138,6 +138,30 @@ async function verify79(root, page, width, motion) {
 async function verify89(root, page, width, motion) {
   // Honest semantics: no application-menu roles the zero-JS demo cannot fulfil.
   expect(await root.locator('[role="menu"], [role="menuitem"], [aria-haspopup]').count()).toBe(0);
+  // Destination identity: every row's menu points at that row's own record and
+  // history sections — a valid fragment belonging to another row is a misroute.
+  const rows = root.locator('.doc-row');
+  expect(await rows.count()).toBe(4);
+  const subjects = [];
+  for (let i = 0; i < 4; i++) {
+    const r = rows.nth(i);
+    const title = (await r.locator('h2').innerText()).replace('★', '').trim();
+    const links = r.locator('.ctx-menu a');
+    expect(await links.count()).toBe(2);
+    const recHref = await links.nth(0).getAttribute('href');
+    const histHref = await links.nth(1).getAttribute('href');
+    const rec = root.locator(recHref);
+    const hist = root.locator(histHref);
+    expect((await rec.locator('h2').innerText()).trim()).toBe(title);
+    const recSubject = (await rec.locator('.scene-kicker').innerText()).split('/')[1].trim().toLowerCase();
+    const histKind = (await hist.locator('.scene-kicker').innerText()).split('/')[0].trim().toLowerCase();
+    const histSubject = (await hist.locator('.scene-kicker').innerText()).split('/')[1].trim().toLowerCase();
+    expect((await rec.locator('.scene-kicker').innerText()).split('/')[0].trim().toLowerCase()).toBe('record');
+    expect(histKind).toBe('history');
+    expect(histSubject).toBe(recSubject);
+    expect(subjects).not.toContain(recSubject);
+    subjects.push(recSubject);
+  }
   const row = root.locator('.doc-row').first();
   const btn = row.locator('.ctx-btn');
   const menu = root.locator('#ctx-menu');
@@ -243,7 +267,14 @@ async function verify142(root, page, width, motion) {
       await settle(page, 200);
       await restScroll(root);
       expect(await root.locator('body').evaluate(() => location.hash)).toBe('#note-1');
-      await root.locator('body').evaluate(() => scrollTo(0, 0));
+      // Centre the persisted popover in the scrolling document: the docs
+      // iframe only shows ~390px, so a scroll-0 reset can leave the close
+      // control outside the clip where no click can reach it. Top-layer
+      // elements ignore scrollIntoView, so compute the offset manually.
+      await root.locator('body').evaluate((e, sel) => {
+        const r = document.querySelector(sel).getBoundingClientRect();
+        scrollTo(0, scrollY + r.top + r.height / 2 - innerHeight / 2);
+      }, '#pop-pin-1 .pin-close');
       await restScroll(root);
       // Native popovers persist across fragment navigation; close explicitly.
       expect(await openState(pop)).toBe(true);
@@ -260,6 +291,24 @@ async function verify142(root, page, width, motion) {
     expect(await openState(pop)).toBe(false);
     expect(await focusName(root)).toContain('map-pin');
   }
+  // The numbered key is a set of real local links, keyboard-activatable.
+  const keyLinks = root.locator('.map-key a');
+  expect(await keyLinks.count()).toBe(4);
+  for (let i = 0; i < 4; i++) {
+    expect(await keyLinks.nth(i).getAttribute('href')).toBe(`#note-${i + 1}`);
+  }
+  const keyLink = keyLinks.nth(2);
+  expect(await tabTo(keyLink, page, 20)).toBe(true);
+  await page.keyboard.press('Enter');
+  await settle(page, 200);
+  await restScroll(root);
+  expect(await root.locator('body').evaluate(() => location.hash)).toBe('#note-3');
+  const noteRect = await rect(root.locator('#note-3'));
+  const keyV = await viewport(root);
+  expect(noteRect.y).toBeGreaterThanOrEqual(-1);
+  expect(noteRect.y).toBeLessThan(keyV.h);
+  await root.locator('body').evaluate(() => scrollTo(0, 0));
+  await restScroll(root);
   // Light dismiss on the first pin.
   await pins.first().click();
   await settle(page);

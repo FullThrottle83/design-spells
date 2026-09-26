@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Interactive Map Pin Popover (`anchor-name` + `position-anchor`) — Design Spells</title>
-  <meta name="description" content="Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key. Pins near a viewport edge flip with `position-try-fallbacks`.">
+  <meta name="description" content="Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key&#x27;s `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-142/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Interactive Map Pin Popover (`anchor-name` + `position-anchor`) — Design Spells">
-  <meta property="og:description" content="Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key. Pins near a viewport edge flip with `position-try-fallbacks`.">
+  <meta property="og:description" content="Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key&#x27;s `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-142/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-142 / Overlays / Markup</p>
     <h1>Interactive Map Pin Popover (`anchor-name` + `position-anchor`)</h1>
-    <p class="lede">Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key. Pins near a viewport edge flip with `position-try-fallbacks`.</p>
+    <p class="lede">Map pins that open anchored popovers on click. Each pin owns exactly one popover, and a per-stop `--pin-anchor` custom property keeps the anchor names unique. The numbered key below the map is the accessible, no-enhancement reading of the same locations: without anchor positioning the popovers remain usable centred native overlays, and without pointer input every place stays reachable through the key&#x27;s `#note-N` links. Pins near a viewport edge flip with `position-try-fallbacks`.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-142/">Open standalone demo ↗</a><a class="action" href="/download/ds-142.html" download="ds-142.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate any numbered pin with pointer or keyboard. Its own popover opens above the pin and flips below when the pin sits near the top edge. The numbered key lists every location for keyboard and no-enhancement reading.</p>
+      <p class='note'>Activate any numbered pin with pointer or keyboard. Its own popover opens above the pin and flips below when the pin sits near the top edge. The numbered key links to every location’s note for keyboard and no-enhancement reading.</p>
       
       <iframe title="Isolated demonstration: Interactive Map Pin Popover (`anchor-name` + `position-anchor`)" src="/play/ds-142/" loading="lazy" sandbox="allow-same-origin"></iframe>
     </section>
@@ -82,10 +82,10 @@
   &lt;/div&gt;
   &lt;figcaption class=&quot;map-key&quot;&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;span aria-hidden=&quot;true&quot;&gt;1&lt;/span&gt;Harbour Point — Lisbon&lt;/li&gt;
-      &lt;li&gt;&lt;span aria-hidden=&quot;true&quot;&gt;2&lt;/span&gt;Kiln Yard — Porto&lt;/li&gt;
-      &lt;li&gt;&lt;span aria-hidden=&quot;true&quot;&gt;3&lt;/span&gt;North Light — Tromsø&lt;/li&gt;
-      &lt;li&gt;&lt;span aria-hidden=&quot;true&quot;&gt;4&lt;/span&gt;Field Station — Azores&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-1&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;1&lt;/span&gt;Harbour Point — Lisbon&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-2&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;2&lt;/span&gt;Kiln Yard — Porto&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-3&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;3&lt;/span&gt;North Light — Tromsø&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#note-4&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;4&lt;/span&gt;Field Station — Azores&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;</code></pre>
@@ -142,7 +142,13 @@
   display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4);
   font-size: .85rem; color: var(--color-text-muted);
 }
-.map-key li { display: flex; align-items: center; gap: .45rem; }
+.map-key a {
+  display: flex; align-items: center; gap: .45rem;
+  min-block-size: 32px; color: inherit; text-decoration: none;
+  border-radius: 4px;
+}
+.map-key a:hover { text-decoration: underline; }
+.map-key a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .map-key span {
   display: inline-grid; place-items: center; inline-size: 18px; block-size: 18px;
   border-radius: 50%; background: var(--color-primary); color: var(--color-text-inverse);

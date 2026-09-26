@@ -29,6 +29,22 @@ class WalkthroughTest(unittest.TestCase):
                     self.assertIn(SPELLS[sid]["previewHtml"], source)
                     self.assertNotIn("<script", source.lower())
 
+    def test_sticky_shadow_demo_has_a_real_runway_without_rewriting_spell(self):
+        sid = "ds-44"
+        doc = (PUBLIC / "spells" / sid / "index.html").read_text(encoding="utf-8")
+        self.assertIn("preview-only runway", doc)
+        for path in (PUBLIC / "play" / sid / "index.html",
+                     PUBLIC / "download" / f"{sid}.html"):
+            source = path.read_text(encoding="utf-8")
+            self.assertIn('class="stage sticky-demo"', source)
+            self.assertIn('class="sticky-demo__runway"', source)
+            self.assertIn("min-block-size: 150dvh", source)
+            self.assertIn(SPELLS[sid]["css"].strip(), source)
+            self.assertIn(SPELLS[sid]["previewHtml"], source)
+            self.assertNotIn("<script", source.lower())
+        bundle = (PUBLIC / "bundle" / f"{sid}.txt").read_text(encoding="utf-8")
+        self.assertNotIn("sticky-demo__runway", bundle)
+
     def test_demo_only_theme_and_replay_never_pollute_spells(self):
         for sid, required in (
             ("ds-35", 'id="scheme-dark"'),

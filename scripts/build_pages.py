@@ -65,6 +65,8 @@ def render_doc(spell: dict) -> str:
     instruction_html = f"<p class='note'>{esc(instruction)}</p>" if instruction else ""
     if sid in SCROLL_ENTRY_DEMOS:
         instruction_html += '<p class="note">This entry animation needs a scroll runway. Scroll inside the iframe or open the full-page demo, then move down to the effect. The spell CSS has not been accelerated.</p>'
+    elif sid == "ds-44":
+        instruction_html += "<p class=\"note\">Scroll inside the iframe or open the full-page demo. The preview-only runway lets the sticky navigation reach its top inset; supporting browsers then apply the authored shadow. Other browsers retain the sticky navigation without that enhancement.</p>"
     elif sid == "ds-35":
         instruction_html += '<p class="note">Use the native Light / Dark controls inside the demo to compare both color schemes without changing the spell CSS.</p>'
     elif sid == "ds-9":
@@ -196,6 +198,16 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
 .scroll-entry__intro a {display:inline-flex;min-block-size:44px;align-items:center}
 .scroll-entry__tail {min-block-size:65dvh;display:grid;place-items:center;padding:2rem}
 """
+    elif sid == "ds-44":
+        # Demo-only scroll runway: never rewrite authored sticky CSS or its bundle.
+        css += """
+.sticky-demo { display: block; min-block-size: 190dvh; padding: 2rem; }
+.sticky-demo__intro { margin: 0 0 6rem; max-inline-size: 36ch; color: var(--color-text-muted); }
+.sticky-demo .toc { z-index: 1; max-inline-size: 28rem; margin-inline: auto; }
+.sticky-demo .toc__inner { padding: 1rem; border-radius: var(--radius-md); }
+.sticky-demo__runway { min-block-size: 150dvh; max-inline-size: 28rem; margin-inline: auto;
+  padding-block-start: 3rem; color: var(--color-text-muted); }
+"""
     elif sid == "ds-9":
         css += ".demo-replay {padding:1rem;text-align:center}\n.demo-replay a {display:inline-flex;min-block-size:44px;align-items:center}\n"
     hint = spell.get("previewAction", {}).get("hint", "")
@@ -221,6 +233,14 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
             '</section>'
             f'<div class="stage scroll-entry__stage" id="entry-effect">{raw_html}</div>'
             '<div class="scroll-entry__tail">Continue scrolling to finish the animation.</div>'
+        )
+    elif sid == "ds-44":
+        stage = (
+            '<div class="stage sticky-demo">'
+            '<p class="sticky-demo__intro">Scroll down until the navigation reaches the top edge.</p>'
+            f"{raw_html}"
+            '<div class="sticky-demo__runway"><p>Keep scrolling to see the navigation remain pinned.</p></div>'
+            '</div>'
         )
     else:
         stage = raw_html + extra if sid in SCROLL_DEMOS else f'<div class="stage">{raw_html}</div>'

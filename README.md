@@ -1350,10 +1350,10 @@ A headline filled with an image or gradient via `background-clip: text`.
 ### 93. Snapped Caption Reveal
 *Media · Progressive · Markup*
 
-Captions in a scroll-snap carousel fade in only once the slide is “snapped”.
+Captions reveal when a slide snaps. Without scroll-state queries, all captions remain readable.
 
 ```html
-<div class="snap-carousel">
+<div class="snap-carousel" tabindex="0" role="region" aria-label="Landscape gallery">
   <figure class="slide">
     <img src="/a.jpg" alt="">
     <figcaption class="caption">The Alps — winter 2026</figcaption>
@@ -1374,10 +1374,14 @@ Captions in a scroll-snap carousel fade in only once the slide is “snapped”.
 .caption {
   position: absolute; bottom: var(--space-3); left: var(--space-3);
   padding: .4rem .8rem; border-radius: 999px; background: oklch(0 0 0 / .6); color: white;
-  opacity: 0; translate: 0 8px; transition: opacity 220ms ease, transform 220ms cubic-bezier(.16,1,.3,1);
+  opacity: 1; translate: 0 0; transition: opacity 220ms ease, translate 220ms cubic-bezier(.16,1,.3,1);
 }
-@container scroll-state(snapped: inline) { .caption { opacity: 1; translate: 0 0; } }
+@supports (container-type: scroll-state) {
+  .caption { opacity: 0; translate: 0 8px; }
+  @container scroll-state(snapped: inline) { .caption { opacity: 1; translate: 0 0; } }
+}
 .slide:focus-within .caption { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: reduce) { .caption { transition: none; } }
 ```
 
 ---
@@ -1416,7 +1420,7 @@ The header becomes frosted glass only after the user has scrolled a little.
 ### 30. Sticky CTA Elevation
 *Scroll-driven · Baseline · 0 JS*
 
-A sticky bottom CTA gains more separation when it sits on top of content.
+A native sticky bottom CTA uses a persistent elevated edge to stay distinct over a long page. This is not scroll-state detection. Keep its destination outside the sticky container and reserve space for focus targets.
 
 ```css
 .sticky-cta {
@@ -1424,6 +1428,11 @@ A sticky bottom CTA gains more separation when it sits on top of content.
   background: oklch(from var(--color-bg) l c h / .88);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 24px light-dark(oklch(0 0 0 / .12), oklch(1 0 0 / .1));
+}
+.sticky-cta a { display: inline-flex; min-block-size: 44px; align-items: center; }
+@media (max-height: 480px) {
+  .sticky-cta { position: static; }
 }
 ```
 
@@ -1609,6 +1618,9 @@ Cards stack like a deck as the user scrolls. Scale and dimming stay synced to th
     }
 }
 }
+@media (prefers-reduced-motion: reduce) {
+  .card-stack .card { animation: none; }
+}
 ```
 
 ### 69. Scroll-Aware Table Boundaries (`container-type: scroll-state`)
@@ -1630,11 +1642,14 @@ Tables with `position: sticky` show edge shadows and dividers *only* when the co
   transition: box-shadow 200ms ease;
 }
 
-@container scroll-state(scrolled: inline) {
+@container scroll-state(scrollable: left) {
   .table-wrapper th:first-child,
   .table-wrapper td:first-child {
-    box-shadow: 4px 0 12px oklch(0 0 0 / 0.1);
+    box-shadow: 8px 0 12px -4px light-dark(oklch(0 0 0 / .3), oklch(1 0 0 / .25));
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .table-wrapper th:first-child, .table-wrapper td:first-child { transition: none; }
 }
 ```
 
@@ -3387,27 +3402,28 @@ KPI bars fill as they enter the viewport via `animation-timeline: view()` — no
 
 ```html
 <div class="kpi" style="--kpi: 72%">
-  <span>Conversion</span>
+  <span>Onboarding completed <strong>72%</strong></span>
   <div class="kpi-track" aria-hidden="true"><i></i></div>
 </div>
 ```
 
 ```css
+.kpi { view-timeline-name: --kpi-entry; view-timeline-axis: block; }
 .kpi-track {
   block-size: .6rem; border-radius: 999px;
   background: var(--color-surface-offset); overflow: hidden;
 }
 .kpi-track i {
-  display: block; block-size: 100%; inline-size: 0;
+  display: block; block-size: 100%; inline-size: var(--kpi, 0%);
   background: var(--color-primary); border-radius: inherit;
 }
 @supports (animation-timeline: view()) {
   .kpi-track i {
     animation: kpi-fill linear both;
-    animation-timeline: view();
-    animation-range: entry 10% entry 60%;
+    animation-timeline: --kpi-entry;
+    animation-range: entry 0% cover 45%;
   }
-  @keyframes kpi-fill { to { inline-size: var(--kpi, 0%); } }
+  @keyframes kpi-fill { from { inline-size: 0; } to { inline-size: var(--kpi, 0%); } }
 }
 @media (prefers-reduced-motion: reduce) {
   .kpi-track i { inline-size: var(--kpi, 0%); animation: none; }
@@ -4061,23 +4077,23 @@ Visually switches prices between monthly and yearly billing with no JS.
 ### 134. Mobile Swipe-to-Action List (`scroll-snap`)
 *Interaction · Baseline · Markup*
 
-A mobile-first swipe list where a delete button appears on a horizontal swipe.
+Swipe to reveal a document link, or Tab directly to it. This reveals an action; it does not implement deletion.
 
 ```html
 <ul class="swipe-list">
-  <li class="swipe-item">
+  <li class="swipe-item" tabindex="0" aria-label="Document actions; scroll right or Tab to open">
     <div class="swipe-content">Document_v1.pdf</div>
-    <button class="swipe-action">Delete</button>
+    <a class="swipe-action" href="#document">Open</a>
   </li>
 </ul>
+<section id="document" tabindex="-1"><h2>Document_v1.pdf</h2><p>Document summary and review notes.</p></section>
 ```
 
 ```css
 .swipe-list { list-style: none; padding: 0; margin: 0; }
-.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
-.swipe-item::-webkit-scrollbar { display: none; }
-.swipe-content { flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
-.swipe-action { flex: 0 0 80px; scroll-snap-align: end; background: var(--color-error); color: white; border: 0; cursor: pointer; font-weight: 600; }
+.swipe-item { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.swipe-content { box-sizing: border-box; flex: 0 0 100%; scroll-snap-align: start; padding: 1rem; min-block-size: 44px; background: var(--color-surface); }
+.swipe-action { position: relative; flex: 0 0 80px; scroll-snap-align: end; display: grid; place-items: center; background: #254f4b; color: white; border: 0; cursor: pointer; font-weight: 600; }
 ```
 
 ### 135. Hero Parallax Lockup & Depth (`view-timeline`)

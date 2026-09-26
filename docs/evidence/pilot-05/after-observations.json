@@ -1,0 +1,904 @@
+{
+  "capturedAt": "2026-09-26T18:08:59.338Z",
+  "browserVersion": "153.0.8010.0",
+  "base": "http://127.0.0.1:8791",
+  "prefix": "after",
+  "states": [
+    {
+      "id": "ds-66",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "bd-pop",
+        "text": "Preview the evening programme",
+        "rect": {
+          "x": 308,
+          "y": 560.16,
+          "width": 291.5,
+          "height": 44,
+          "right": 599.5,
+          "bottom": 604.16
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardTabsOk": true,
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 578.59,
+        "y": 329.89,
+        "width": 282.8,
+        "height": 240.2,
+        "right": 861.39,
+        "bottom": 570.09
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "blur(10px)",
+        "display": "block",
+        "transitionDuration": "0.28s, 0.28s, 0.28s, 0.28s"
+      },
+      "focusAfterOpen": "button:Preview the evening programme",
+      "escapeClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Preview the evening programme",
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 578.59,
+          "y": 329.89,
+          "width": 282.8,
+          "height": 240.2,
+          "right": 861.39,
+          "bottom": 570.09
+        }
+      }
+    },
+    {
+      "id": "ds-66",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 578.59,
+        "y": 329.89,
+        "width": 282.8,
+        "height": 240.2,
+        "right": 861.39,
+        "bottom": 570.09
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "blur(10px)",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "img-modal-1",
+        "rect": {
+          "x": 544,
+          "y": 492.92,
+          "width": 352,
+          "height": 439.5,
+          "right": 896,
+          "bottom": 932.42
+        }
+      },
+      "thumbnail": {
+        "rect": {
+          "x": 545,
+          "y": 493.92,
+          "width": 350,
+          "height": 437.5,
+          "right": 895,
+          "bottom": 931.42
+        },
+        "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2",
+        "alt": "Harbour at dusk",
+        "natural": {
+          "w": 1200,
+          "h": 1500
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "enlarged": {
+        "rect": {
+          "x": 446.41,
+          "y": 92.02,
+          "width": 547.19,
+          "height": 684,
+          "right": 993.59,
+          "bottom": 776.02
+        },
+        "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2",
+        "alt": "Harbour at dusk, enlarged view",
+        "natural": {
+          "w": 1200,
+          "h": 1500
+        }
+      },
+      "popoverRect": {
+        "x": 433.41,
+        "y": 79.02,
+        "width": 573.19,
+        "height": 741.95,
+        "right": 1006.59,
+        "bottom": 820.97
+      },
+      "enlargement": {
+        "widthRatio": 1.56,
+        "areaRatio": 2.44
+      },
+      "sameSrc": true,
+      "focusAfterOpen": "button:Enlarge: harbour at dusk",
+      "escapeClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 433.41,
+          "y": 79.02,
+          "width": 573.19,
+          "height": 741.95,
+          "right": 1006.59,
+          "bottom": 820.97
+        }
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 433.41,
+        "y": 79.02,
+        "width": 573.19,
+        "height": 741.95,
+        "right": 1006.59,
+        "bottom": 820.97
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.62)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "sheet-demo",
+        "command": "show-modal",
+        "text": "Review booking",
+        "rect": {
+          "x": 393,
+          "y": 328.28,
+          "width": 167.59,
+          "height": 48,
+          "right": 560.59,
+          "bottom": 376.28
+        }
+      },
+      "dialogCopy": "Cabin booking · 2 nightsReview your stayFriday 14:00 · Two guests · Total €240. Preferences stay on this page — nothing is booked or charged here.Arrival window 14:00 – 16:00 16:00 – 18:00 After 18:00",
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "closedby": "any",
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 512,
+        "y": 133.64,
+        "width": 416,
+        "height": 632.7,
+        "right": 928,
+        "bottom": 766.34
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0.3s, 0.3s, 0.3s"
+      },
+      "focusAfterOpen": "input:INPUT",
+      "topLayerAbove": "dialog-owns-point",
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Review booking",
+      "clickOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "backdropClickClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 512,
+          "y": 133.64,
+          "width": 416,
+          "height": 632.7,
+          "right": 928,
+          "bottom": 766.34
+        }
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 512,
+        "y": 133.64,
+        "width": 416,
+        "height": 632.7,
+        "right": 928,
+        "bottom": 766.34
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "close-options",
+        "command": "show-modal",
+        "text": "How does this dialog close?",
+        "rect": {
+          "x": 441,
+          "y": 378.28,
+          "width": 258.59,
+          "height": 48,
+          "right": 699.59,
+          "bottom": 426.28
+        }
+      },
+      "dialogCopy": "Three ways to closeThis native dialog dismisses three ways. Try each of them — nothing is sent or saved.Choose Close dialog below.Press Escape.Select the dimmed backdrop around this card.Without closedby support the backdrop click does nothing; the close controls and Escape still work.Keep readingCl",
+      "buttonLabels": [
+        "Keep reading",
+        "Close dialog"
+      ],
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 538,
+        "y": 235.56,
+        "width": 364,
+        "height": 428.88,
+        "right": 902,
+        "bottom": 664.44
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0.22s, 0.22s, 0.22s"
+      },
+      "focusAfterOpen": "button:Close dialog",
+      "cancelClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "cancelSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "focusAfterCancel": "button:How does this dialog close?",
+      "reopenWorks": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "deleteClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "deleteSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:How does this dialog close?",
+      "lightDismissClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 538,
+          "y": 235.56,
+          "width": 364,
+          "height": 428.88,
+          "right": 902,
+          "bottom": 664.44
+        }
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 538,
+        "y": 235.56,
+        "width": 364,
+        "height": 428.88,
+        "right": 902,
+        "bottom": 664.44
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-66",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "bd-pop",
+        "text": "Preview the evening programme",
+        "rect": {
+          "x": 38,
+          "y": 514.95,
+          "width": 291.5,
+          "height": 44,
+          "right": 329.5,
+          "bottom": 558.95
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardTabsOk": true,
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 53.59,
+        "y": 301.89,
+        "width": 282.8,
+        "height": 240.2,
+        "right": 336.39,
+        "bottom": 542.09
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "blur(10px)",
+        "display": "block",
+        "transitionDuration": "0.28s, 0.28s, 0.28s, 0.28s"
+      },
+      "focusAfterOpen": "button:Preview the evening programme",
+      "escapeClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Preview the evening programme",
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 53.59,
+          "y": 301.89,
+          "width": 282.8,
+          "height": 240.2,
+          "right": 336.39,
+          "bottom": 542.09
+        }
+      }
+    },
+    {
+      "id": "ds-66",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 53.59,
+        "y": 301.89,
+        "width": 282.8,
+        "height": 240.2,
+        "right": 336.39,
+        "bottom": 542.09
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "blur(10px)",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "img-modal-1",
+        "rect": {
+          "x": 75,
+          "y": 473.72,
+          "width": 240,
+          "height": 299.5,
+          "right": 315,
+          "bottom": 773.22
+        }
+      },
+      "thumbnail": {
+        "rect": {
+          "x": 76,
+          "y": 474.72,
+          "width": 238,
+          "height": 297.5,
+          "right": 314,
+          "bottom": 772.22
+        },
+        "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2",
+        "alt": "Harbour at dusk",
+        "natural": {
+          "w": 1200,
+          "h": 1500
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "enlarged": {
+        "rect": {
+          "x": 24.7,
+          "y": 191.53,
+          "width": 343.19,
+          "height": 428.98,
+          "right": 367.89,
+          "bottom": 620.52
+        },
+        "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2",
+        "alt": "Harbour at dusk, enlarged view",
+        "natural": {
+          "w": 1200,
+          "h": 1500
+        }
+      },
+      "popoverRect": {
+        "x": 11.7,
+        "y": 178.53,
+        "width": 366.59,
+        "height": 486.94,
+        "right": 378.3,
+        "bottom": 665.47
+      },
+      "enlargement": {
+        "widthRatio": 1.44,
+        "areaRatio": 2.08
+      },
+      "sameSrc": true,
+      "focusAfterOpen": "button:Enlarge: harbour at dusk",
+      "escapeClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 11.7,
+          "y": 178.53,
+          "width": 366.59,
+          "height": 486.94,
+          "right": 378.3,
+          "bottom": 665.47
+        }
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 11.7,
+        "y": 178.53,
+        "width": 366.59,
+        "height": 486.94,
+        "right": 378.3,
+        "bottom": 665.47
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.62)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "sheet-demo",
+        "command": "show-modal",
+        "text": "Review booking",
+        "rect": {
+          "x": 45,
+          "y": 380.5,
+          "width": 167.59,
+          "height": 48,
+          "right": 212.59,
+          "bottom": 428.5
+        }
+      },
+      "dialogCopy": "Cabin booking · 2 nightsReview your stayFriday 14:00 · Two guests · Total €240. Preferences stay on this page — nothing is booked or charged here.Arrival window 14:00 – 16:00 16:00 – 18:00 After 18:00",
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "closedby": "any",
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 0,
+        "y": 201.55,
+        "width": 390,
+        "height": 642.45,
+        "right": 390,
+        "bottom": 844
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0.3s, 0.3s, 0.3s"
+      },
+      "focusAfterOpen": "input:INPUT",
+      "topLayerAbove": "dialog-owns-point",
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Review booking",
+      "clickOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "backdropClickClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 0,
+          "y": 201.55,
+          "width": 390,
+          "height": 642.45,
+          "right": 390,
+          "bottom": 844
+        }
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 0,
+        "y": 201.55,
+        "width": 390,
+        "height": 642.45,
+        "right": 390,
+        "bottom": 844
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "close-options",
+        "command": "show-modal",
+        "text": "How does this dialog close?",
+        "rect": {
+          "x": 45,
+          "y": 322.91,
+          "width": 258.59,
+          "height": 48,
+          "right": 303.59,
+          "bottom": 370.91
+        }
+      },
+      "dialogCopy": "Three ways to closeThis native dialog dismisses three ways. Try each of them — nothing is sent or saved.Choose Close dialog below.Press Escape.Select the dimmed backdrop around this card.Without closedby support the backdrop click does nothing; the close controls and Escape still work.Keep readingCl",
+      "buttonLabels": [
+        "Keep reading",
+        "Close dialog"
+      ],
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 13,
+        "y": 207.56,
+        "width": 364,
+        "height": 428.88,
+        "right": 377,
+        "bottom": 636.44
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0.22s, 0.22s, 0.22s"
+      },
+      "focusAfterOpen": "button:Close dialog",
+      "cancelClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "cancelSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "focusAfterCancel": "button:How does this dialog close?",
+      "reopenWorks": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "deleteClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "deleteSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:How does this dialog close?",
+      "lightDismissClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 13,
+          "y": 207.56,
+          "width": 364,
+          "height": 428.88,
+          "right": 377,
+          "bottom": 636.44
+        }
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 13,
+        "y": 207.56,
+        "width": 364,
+        "height": 428.88,
+        "right": 377,
+        "bottom": 636.44
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.45)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    }
+  ]
+}

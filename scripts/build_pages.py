@@ -56,7 +56,7 @@ def render_doc(spell: dict) -> str:
     example_html = esc(authored_html or spell["previewHtml"].strip())
     fixture_note = (
         "<p class='note'>This is demonstration fixture markup; the technique does not require a specific HTML structure.</p>"
-        if not authored_html else ("<!-- Canonical authored markup. -->" if sid in {"ds-48", "ds-49", "ds-50", "ds-79", "ds-89", "ds-142"} else "")
+        if not authored_html else ("<!-- Canonical authored markup. -->" if sid in {"ds-48", "ds-49", "ds-50", "ds-79", "ds-89", "ds-142", "ds-66", "ds-75", "ds-77", "ds-106"} else "")
     )
     support = "".join(
         f"<li><strong>{name}</strong><span>{esc(spell['browsers'][key])}</span></li>"
@@ -79,11 +79,11 @@ def render_doc(spell: dict) -> str:
     elif sid == "ds-143":
         instruction_html += '<p class="note">Print styles are visible only in print media. Open the standalone demo, then use your browser’s Print preview (Ctrl+P or Cmd+P).</p>'
     download_note = '<p class="note">This cross-document transition also needs <a href="/download/ds-14-next.html" download="ds-14-next.html">page B (HTML) ↓</a>; save both files together.</p>' if sid == "ds-14" else ""
-    effect_iframe = f'<iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin"></iframe>'
+    effect_iframe = f'<iframe title="Isolated demonstration: {title}" src="/play/{sid}/" loading="lazy" sandbox="allow-same-origin allow-forms"></iframe>'
     if sid in COMPARE_NOTES:
         demo_preview = (
             '<div class="demo-compare">'
-            f'<div class="demo-compare__item"><h3>Base fixture</h3><iframe title="Baseline without spell CSS: {title}" src="/play/{sid}/before/" loading="lazy" sandbox="allow-same-origin"></iframe></div>'
+            f'<div class="demo-compare__item"><h3>Base fixture</h3><iframe title="Baseline without spell CSS: {title}" src="/play/{sid}/before/" loading="lazy" sandbox="allow-same-origin allow-forms"></iframe></div>'
             f'<div class="demo-compare__item"><h3>With spell CSS</h3>{effect_iframe}</div>'
             '</div>'
             f'<p class="note demo-compare__guide">{esc(COMPARE_NOTES[sid])} Both use identical markup and shared demo styling; only the right includes this spell’s CSS.</p>'

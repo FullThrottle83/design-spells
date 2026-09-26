@@ -120,8 +120,10 @@
     
 .confirm {
   margin: auto; border: 0; padding: var(--space-6);
-  max-inline-size: 28rem; border-radius: var(--radius-lg);
-  background: var(--color-bg);
+  max-inline-size: min(28rem, calc(100vw - 2rem));
+  max-block-size: min(88dvh, 40rem); overflow: auto;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg); color: var(--color-text);
   box-shadow: 0 24px 60px oklch(0 0 0 / .22);
   opacity: 0; transform: scale(.96);
   transition: opacity 220ms cubic-bezier(.16,1,.3,1), transform 220ms cubic-bezier(.16,1,.3,1),
@@ -129,22 +131,53 @@
 }
 .confirm[open], .confirm:open { opacity: 1; transform: none; }
 @starting-style { .confirm[open], .confirm:open { opacity: 0; transform: scale(.96); } }
-.confirm-actions { display: flex; justify-content: end; gap: var(--space-3); margin-block-start: var(--space-5); }
-.confirm-actions .btn, .btn { min-block-size: 44px; }
-.btn.danger { background: var(--color-error); color: white; }
+.confirm::backdrop {
+  background: oklch(0 0 0 / .45);
+  opacity: 0;
+  transition: opacity 220ms ease, display 220ms allow-discrete, overlay 220ms allow-discrete;
+}
+.confirm[open]::backdrop, .confirm:open::backdrop { opacity: 1; }
+@starting-style { .confirm[open]::backdrop, .confirm:open::backdrop { opacity: 0; } }
+.confirm h2 { margin: 0 0 var(--space-2); }
+.confirm > p { margin: 0 0 var(--space-3); }
+.confirm ol { margin: 0 0 var(--space-4); padding-inline-start: 1.25rem; display: grid; gap: .4rem; }
+.confirm kbd {
+  padding: .1rem .4rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); background: var(--color-surface-offset); font-size: .85em;
+}
+.confirm-note { color: var(--color-text-muted); font-size: .85rem; }
+.confirm-actions { display: flex; justify-content: end; gap: var(--space-3); margin-block-start: var(--space-5); flex-wrap: wrap; }
+.confirm-actions button { min-block-size: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  .confirm { transition: none; transform: none; }
+  .confirm::backdrop { transition: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.showcase:has(.close-options-article){max-width:680px}
+.close-options-article{width:100%;background:light-dark(#f4f2ec,#131519);border:1px solid light-dark(#dcd6c6,#2a2d33);border-radius:24px;padding:clamp(26px,5vw,60px);--color-primary:light-dark(#20242e,#e8b04b);--color-text:light-dark(#20242e,#eceef2);--color-text-muted:light-dark(#5d6474,#9aa0ac);--color-border:light-dark(#d5cfbd,#2a2d33);--color-bg:light-dark(#fffdf7,#1a1d23);--color-surface-offset:light-dark(#e9e4d4,#24272e);--color-accent:light-dark(#8f3b2a,#e8a37e)}
+.close-options-article :where(button):focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.close-options-article h1{font-size:clamp(34px,5vw,50px)}
+.close-options-article h2{font:400 24px/1.25 Georgia,serif;margin:30px 0 8px}
+.close-options-article article>p{color:light-dark(#3a404c,#c2c7d1)}
+.close-options-article article>button{min-block-size:48px;padding:0 1.6rem;font-weight:600;cursor:pointer;border:0;border-radius:12px;background:var(--color-primary);color:light-dark(#fffdf7,#141414);margin:6px 0 4px}
+.close-options-article code{font-size:.85em}
 </style>
 </head>
 <body>
-  <div class="stage"><button class="btn" commandfor="confirm-delete" command="show-modal">Delete customer</button>
+  <div class="stage"><div class="showcase"><main class="close-options-article"><article><p class="scene-kicker">Reading room · A two-minute lesson</p><h1>Closing is a feature, not an apology.</h1><p>Every overlay on this page is native HTML: no script opens it, and no script closes it. The dialog below exists to teach its own dismissal — open it, then close it three different ways.</p><button type="button" commandfor="close-options" command="show-modal">How does this dialog close?</button><h2>Why three ways matter</h2><p>Some readers reach for Escape; some tap outside the card; some want a labelled button. A native <code>closedby="any"</code> dialog honours all three without a line of client script, and returns focus to the button that opened it.</p><h2>What this demo will not do</h2><p>It will not delete, submit or save anything. “Close dialog” and “Keep reading” both dismiss the overlay; the difference is only which label you preferred.</p></article><dialog id="close-options" class="confirm" closedby="any" aria-labelledby="close-options-title"><h2 id="close-options-title">Three ways to close</h2><p>This native dialog dismisses three ways. Try each of them — nothing is sent or saved.</p><ol><li>Choose <strong>Close dialog</strong> below.</li><li>Press <kbd>Escape</kbd>.</li><li>Select the dimmed backdrop around this card.</li></ol><p class="confirm-note">Without <code>closedby</code> support the backdrop click does nothing; the close controls and Escape still work.</p><form method="dialog" class="confirm-actions"><button type="submit" value="stay">Keep reading</button><button type="submit" value="close" autofocus>Close dialog</button></form></dialog></main><p class="scene-instruction">Open the dialog and try all three closings: the Close dialog button, Escape and a backdrop click. Each one only closes the dialog — nothing is sent or saved.</p></div></div>
 
-<dialog id="confirm-delete" class="confirm" closedby="any">
-  <h2>Delete customer?</h2>
-  <p>This cannot be undone.</p>
-  <div class="confirm-actions">
-    <button class="btn ghost" commandfor="confirm-delete" command="close">Cancel</button>
-    <button class="btn danger" commandfor="confirm-delete" command="close">Delete</button>
-  </div>
-</dialog></div>
-  <p class='demo-hint'>Activate the control to preview</p>
 </body>
 </html>

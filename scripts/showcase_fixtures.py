@@ -157,3 +157,12 @@ except ImportError:
 HTML.update(P04_HTML)
 CSS.update(P04_CSS)
 HINTS.update(P04_HINTS)
+
+# Pilot 05: modal and dialog overlay spells and their product scenes.
+try:
+    from .showcase_pilot05 import HTML as P05_HTML, CSS as P05_CSS, HINTS as P05_HINTS
+except ImportError:
+    from showcase_pilot05 import HTML as P05_HTML, CSS as P05_CSS, HINTS as P05_HINTS
+HTML.update(P05_HTML)
+CSS.update(P05_CSS)
+HINTS.update(P05_HINTS)

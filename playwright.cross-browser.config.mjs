@@ -7,7 +7,7 @@ export default defineConfig({
   ...baseConfig,
   // Surface precise failures as check annotations when log storage is unreachable.
   reporter: process.env.CI ? [["list"], ["github"]] : [["list"]],
-  testMatch: ["**/cross-browser.spec.mjs", "**/native-behavior.spec.mjs", "**/scroll-state-behavior.spec.mjs", "**/showcase-pilot.spec.mjs", "**/showcase-pilot02.spec.mjs", "**/showcase-pilot03.spec.mjs", "**/showcase-pilot04.spec.mjs"],
+  testMatch: ["**/cross-browser.spec.mjs", "**/native-behavior.spec.mjs", "**/scroll-state-behavior.spec.mjs", "**/showcase-pilot.spec.mjs", "**/showcase-pilot02.spec.mjs", "**/showcase-pilot03.spec.mjs", "**/showcase-pilot04.spec.mjs", "**/showcase-pilot05.spec.mjs"],
   testIgnore: [],
   projects: [
     { name: "firefox", use: { ...devices["Desktop Firefox"], viewport: { width: 1280, height: 900 } } },

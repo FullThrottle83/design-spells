@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Responsive Sheet Modal — Design Spells</title>
-  <meta name="description" content="A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.">
+  <meta name="description" content="A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens. Opened with `command=&quot;show-modal&quot;`; `closedby=&quot;any&quot;` adds Escape and backdrop dismissal, with an explicit close control for engines without `closedby`. The sheet scrolls internally on short viewports. Reduced motion keeps the open final state without the slide.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-77/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Responsive Sheet Modal — Design Spells">
-  <meta property="og:description" content="A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.">
+  <meta property="og:description" content="A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens. Opened with `command=&quot;show-modal&quot;`; `closedby=&quot;any&quot;` adds Escape and backdrop dismissal, with an explicit close control for engines without `closedby`. The sheet scrolls internally on short viewports. Reduced motion keeps the open final state without the slide.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-77/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,13 +23,13 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-77 / Layout / Markup</p>
     <h1>Responsive Sheet Modal</h1>
-    <p class="lede">A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.</p>
+    <p class="lede">A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens. Opened with `command=&quot;show-modal&quot;`; `closedby=&quot;any&quot;` adds Escape and backdrop dismissal, with an explicit close control for engines without `closedby`. The sheet scrolls internally on short viewports. Reduced motion keeps the open final state without the slide.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-77/">Open standalone demo ↗</a><a class="action" href="/download/ds-77.html" download="ds-77.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Choose “Review booking” to open the native dialog — a bottom sheet on narrow screens, a centred modal on wider ones. Try the arrival, extras and bedding controls, then Done, Escape or a backdrop click.</p>
       
-      <iframe title="Isolated demonstration: Responsive Sheet Modal" src="/play/ds-77/" loading="lazy" sandbox="allow-same-origin"></iframe>
+      <iframe title="Isolated demonstration: Responsive Sheet Modal" src="/play/ds-77/" loading="lazy" sandbox="allow-same-origin allow-forms"></iframe>
     </section>
     <section aria-labelledby="source-title">
       <h2 id="source-title">Complete source</h2>
@@ -40,22 +40,49 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;button type=&quot;button&quot; commandfor=&quot;sheet-demo&quot; command=&quot;show-modal&quot;&gt;Open sheet&lt;/button&gt;
-&lt;dialog id=&quot;sheet-demo&quot; class=&quot;responsive-sheet&quot; closedby=&quot;any&quot;&gt;
-  &lt;h2&gt;Sheet content&lt;/h2&gt;
-  &lt;p&gt;This stays a native modal dialog.&lt;/p&gt;
-  &lt;form method=&quot;dialog&quot;&gt;&lt;button type=&quot;submit&quot;&gt;Close&lt;/button&gt;&lt;/form&gt;
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;button type=&quot;button&quot; commandfor=&quot;sheet-demo&quot; command=&quot;show-modal&quot;&gt;Review booking&lt;/button&gt;
+&lt;dialog id=&quot;sheet-demo&quot; class=&quot;responsive-sheet&quot; closedby=&quot;any&quot; aria-labelledby=&quot;sheet-title&quot;&gt;
+  &lt;p class=&quot;sheet-kicker&quot;&gt;Cabin booking · 2 nights&lt;/p&gt;
+  &lt;h2 id=&quot;sheet-title&quot;&gt;Review your stay&lt;/h2&gt;
+  &lt;p class=&quot;sheet-lede&quot;&gt;Friday 14:00 · Two guests · Total €240. Preferences stay on this page — nothing is booked or charged here.&lt;/p&gt;
+  &lt;fieldset class=&quot;sheet-field&quot;&gt;
+    &lt;legend&gt;Arrival window&lt;/legend&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;arrival&quot; checked&gt; 14:00 – 16:00&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;arrival&quot;&gt; 16:00 – 18:00&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;arrival&quot;&gt; After 18:00&lt;/label&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset class=&quot;sheet-field&quot;&gt;
+    &lt;legend&gt;Extras&lt;/legend&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; checked&gt; Breakfast basket · €18&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Sauna slot · €12&lt;/label&gt;
+  &lt;/fieldset&gt;
+  &lt;div class=&quot;sheet-field&quot;&gt;
+    &lt;label for=&quot;sheet-bedding&quot;&gt;Bedding&lt;/label&gt;
+    &lt;select id=&quot;sheet-bedding&quot;&gt;
+      &lt;option&gt;Double bed made up&lt;/option&gt;
+      &lt;option&gt;Two singles&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;form method=&quot;dialog&quot; class=&quot;sheet-actions&quot;&gt;
+    &lt;button type=&quot;submit&quot; value=&quot;done&quot;&gt;Done&lt;/button&gt;
+  &lt;/form&gt;
 &lt;/dialog&gt;</code></pre>
       <h3>CSS</h3>
       <pre tabindex="0"><code>dialog.responsive-sheet {
   margin: auto auto 0 auto; /* Bottom-aligned on mobile */
-  width: 100%;
-  max-width: 100%;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  max-block-size: min(88dvh, 52rem);
+  overflow: auto;
+  border: 0;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  border: none;
+  background: var(--color-bg); color: var(--color-text);
+  padding: var(--space-5);
+  box-shadow: 0 -18px 50px oklch(0 0 0 / .18);
   transform: translateY(100%);
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              display 300ms allow-discrete, overlay 300ms allow-discrete;
 }
 
 dialog.responsive-sheet[open] {
@@ -68,13 +95,50 @@ dialog.responsive-sheet[open] {
   }
 }
 
+dialog.responsive-sheet::backdrop {
+  background: oklch(0 0 0 / .45);
+  opacity: 0;
+  transition: opacity 300ms ease, display 300ms allow-discrete, overlay 300ms allow-discrete;
+}
+dialog.responsive-sheet[open]::backdrop { opacity: 1; }
+@starting-style { dialog.responsive-sheet[open]::backdrop { opacity: 0; } }
+
+.responsive-sheet h2 { margin: 0 0 var(--space-2); }
+.responsive-sheet .sheet-kicker {
+  margin: 0 0 var(--space-2);
+  font: 600 11px/1.5 ui-monospace, monospace;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.responsive-sheet .sheet-lede { margin: 0 0 var(--space-4); color: var(--color-text-muted); }
+.sheet-field { display: grid; gap: var(--space-1); margin: 0 0 var(--space-4); padding: 0; border: 0; }
+.sheet-field legend, .sheet-field &gt; label { font-weight: 600; }
+.sheet-field label { display: flex; align-items: center; gap: var(--space-2); min-block-size: 44px; }
+.sheet-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-block-start: var(--space-5); }
+.sheet-actions button { min-block-size: 44px; }
+
+/* Sheet grabber on narrow viewports only; the desktop modal has none. */
+@media (max-width: 639px) {
+  dialog.responsive-sheet { padding-block-start: var(--space-4); }
+  dialog.responsive-sheet::before {
+    content: &quot;&quot;; display: block; inline-size: 2.5rem; block-size: .25rem;
+    margin: 0 auto var(--space-3); border-radius: 999px;
+    background: var(--color-border);
+  }
+}
+
 /* Centered modal on desktop */
 @media (min-width: 640px) {
   dialog.responsive-sheet {
     margin: auto;
-    max-width: 32rem;
+    inline-size: min(32rem, calc(100vw - 2rem));
     border-radius: var(--radius-lg);
+    box-shadow: 0 24px 60px oklch(0 0 0 / .2);
     transform: scale(0.95);
+  }
+
+  dialog.responsive-sheet[open] {
+    transform: scale(1);
   }
 
   @starting-style {
@@ -82,6 +146,11 @@ dialog.responsive-sheet[open] {
       transform: scale(0.95);
     }
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog.responsive-sheet { transition: none; transform: none; }
+  dialog.responsive-sheet::backdrop { transition: none; }
 }</code></pre>
     </section>
     <section aria-labelledby="support-title">
@@ -89,7 +158,7 @@ dialog.responsive-sheet[open] {
       <p class="note">Project category: Newer. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
       <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>no</span></li></ul>
-      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features.</p>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

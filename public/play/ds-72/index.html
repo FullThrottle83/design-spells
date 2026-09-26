@@ -136,10 +136,16 @@
     }
 }
 }
+
+.scroll-entry__intro {min-block-size:100dvh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:2rem;background:var(--color-bg)}
+.scroll-entry__intro h1 {font-size:clamp(1.5rem,5vw,2.5rem);margin:0}
+.scroll-entry__intro p {max-width:46ch;margin:0;color:var(--color-text-muted)}
+.scroll-entry__intro a {display:inline-flex;min-block-size:44px;align-items:center}
+.scroll-entry__tail {min-block-size:65dvh;display:grid;place-items:center;padding:2rem}
 </style>
 </head>
 <body>
-  <div class="stage"><ul class="stagger-list"><li>One</li><li>Two</li><li>Three</li></ul></div>
+  <section class="scroll-entry__intro"><h1>Scroll to see this effect</h1><p>The target starts below the fold so its view timeline has room to run.</p><a href="#entry-effect">Jump to the effect ↓</a></section><div class="stage scroll-entry__stage" id="entry-effect"><ul class="stagger-list"><li>One</li><li>Two</li><li>Three</li></ul></div><div class="scroll-entry__tail">Continue scrolling to finish the animation.</div>
   <p class='demo-hint'>Scroll to preview</p>
 </body>
 </html>

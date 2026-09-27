@@ -1,0 +1,269 @@
+[
+  {
+    "id": 97,
+    "w": 390,
+    "surface": "hosted",
+    "state": "initial",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      1447
+    ],
+    "trigger": {
+      "x": 242,
+      "y": 33,
+      "w": 109,
+      "h": 44,
+      "right": 351,
+      "bottom": 77
+    },
+    "overlay": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "open": false,
+    "active": "<body>\n  <div class=\"stage\"><div class=\"showcase\"><div class=\"nav-site\" id=\"nav-home\">\n<header class=\"nav-site__header\"><div class=\"nl-brand\"><span class=\"nl-symbol\" aria",
+    "links": [
+      "#nav-home",
+      "#nav-routes",
+      "#nav-notes",
+      "#nav-visit"
+    ],
+    "styles": {
+      "display": "none",
+      "position": "fixed",
+      "opacity": "1"
+    }
+  },
+  {
+    "id": 97,
+    "w": 390,
+    "surface": "hosted",
+    "state": "active",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      1447
+    ],
+    "trigger": {
+      "x": 242,
+      "y": 33,
+      "w": 109,
+      "h": 44,
+      "right": 351,
+      "bottom": 77
+    },
+    "overlay": {
+      "x": 0,
+      "y": 0,
+      "w": 325,
+      "h": 844,
+      "right": 325,
+      "bottom": 844
+    },
+    "open": true,
+    "active": "<button type=\"submit\" value=\"close\" class=\"nav-close\">Close <span aria-hidden=\"true\">×</span></button>",
+    "links": [
+      "#nav-home",
+      "#nav-routes",
+      "#nav-notes",
+      "#nav-visit"
+    ],
+    "styles": {
+      "display": "block",
+      "position": "fixed",
+      "opacity": "1"
+    }
+  },
+  {
+    "id": 97,
+    "w": 390,
+    "surface": "hosted",
+    "probe": "escape",
+    "open": false
+  },
+  {
+    "id": 117,
+    "w": 390,
+    "surface": "hosted",
+    "state": "initial",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      1676
+    ],
+    "trigger": {
+      "x": 204.09375,
+      "y": 572.75,
+      "w": 48,
+      "h": 48,
+      "right": 252.09375,
+      "bottom": 620.75
+    },
+    "overlay": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "open": false,
+    "active": "<body>\n  <div class=\"stage\"><div class=\"showcase\"><main class=\"split-page\"><header class=\"sp-header\"><strong>atelier<span> / </span>index</strong><span>PROJECT SPACE &nbs",
+    "links": [
+      "#project-brief",
+      "#project-timeline",
+      "#project-people"
+    ],
+    "styles": {
+      "display": "none",
+      "position": "fixed",
+      "opacity": "1"
+    }
+  },
+  {
+    "id": 117,
+    "w": 390,
+    "surface": "hosted",
+    "state": "active",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      1676
+    ],
+    "trigger": {
+      "x": 204.09375,
+      "y": 572.75,
+      "w": 48,
+      "h": 48,
+      "right": 252.09375,
+      "bottom": 620.75
+    },
+    "overlay": {
+      "x": 130,
+      "y": 683.40625,
+      "w": 247,
+      "h": 147.59375,
+      "right": 377,
+      "bottom": 831
+    },
+    "open": true,
+    "active": "<button type=\"button\" class=\"split-more\" commandfor=\"split-menu\" command=\"toggle-popover\" aria-label=\"More project links\"><span aria-hidden=\"true\">⌄</span></button>",
+    "links": [
+      "#project-brief",
+      "#project-timeline",
+      "#project-people"
+    ],
+    "styles": {
+      "display": "block",
+      "position": "fixed",
+      "opacity": "1"
+    }
+  },
+  {
+    "id": 117,
+    "w": 390,
+    "surface": "hosted",
+    "probe": "escape",
+    "open": false
+  },
+  {
+    "id": 131,
+    "w": 390,
+    "surface": "hosted",
+    "state": "initial",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      1197
+    ],
+    "trigger": {
+      "x": 49,
+      "y": 515.546875,
+      "w": 186.1875,
+      "h": 48,
+      "right": 235.1875,
+      "bottom": 563.546875
+    },
+    "overlay": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "open": false,
+    "active": "<body>\n  <div class=\"stage\"><div class=\"showcase\"><main class=\"toast-page\"><header class=\"tp-header\"><strong>PAPERTRAIL<span> / READING DESK</span></strong><span>ISSUE 01",
+    "links": [],
+    "styles": {
+      "display": "none",
+      "position": "fixed",
+      "opacity": "0"
+    }
+  },
+  {
+    "id": 131,
+    "w": 390,
+    "surface": "hosted",
+    "state": "active",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      1197
+    ],
+    "trigger": {
+      "x": 49,
+      "y": 515.546875,
+      "w": 186.1875,
+      "h": 48,
+      "right": 235.1875,
+      "bottom": 563.546875
+    },
+    "overlay": {
+      "x": 13,
+      "y": 758.21875,
+      "w": 364,
+      "h": 72.78125,
+      "right": 377,
+      "bottom": 831
+    },
+    "open": true,
+    "active": "<button type=\"button\" class=\"toast-trigger\" commandfor=\"auto-toast-1\" command=\"show-popover\">Preview a notice <span aria-hidden=\"true\">↗</span></button>",
+    "links": [],
+    "styles": {
+      "display": "flex",
+      "position": "fixed",
+      "opacity": "1"
+    }
+  },
+  {
+    "id": 131,
+    "w": 390,
+    "surface": "hosted",
+    "probe": "escape",
+    "open": true
+  }
+]

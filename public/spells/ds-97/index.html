@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Invoker Command Drawer (`commandfor` + `closedby`) — Design Spells</title>
-  <meta name="description" content="An off-canvas menu as a native `&lt;dialog&gt;` — opened and closed with Invoker Commands, light-dismissed via `closedby=&quot;any&quot;`. No `showModal()`, no click-outside listener.">
+  <meta name="description" content="A modal navigation drawer opened with `commandfor` / `show-modal`. The explicit `method=&quot;dialog&quot;` close works without `closedby`; Escape is the native modal default, while backdrop dismissal requires `closedby=&quot;any&quot;` support. Invoker commands themselves need browser support: without them this button cannot open a modal without script. Fragment destinations below exist in the standalone example; replace both links and targets together when integrating.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-97/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Invoker Command Drawer (`commandfor` + `closedby`) — Design Spells">
-  <meta property="og:description" content="An off-canvas menu as a native `&lt;dialog&gt;` — opened and closed with Invoker Commands, light-dismissed via `closedby=&quot;any&quot;`. No `showModal()`, no click-outside listener.">
+  <meta property="og:description" content="A modal navigation drawer opened with `commandfor` / `show-modal`. The explicit `method=&quot;dialog&quot;` close works without `closedby`; Escape is the native modal default, while backdrop dismissal requires `closedby=&quot;any&quot;` support. Invoker commands themselves need browser support: without them this button cannot open a modal without script. Fragment destinations below exist in the standalone example; replace both links and targets together when integrating.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-97/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-97 / Navigation / Markup</p>
     <h1>Invoker Command Drawer (`commandfor` + `closedby`)</h1>
-    <p class="lede">An off-canvas menu as a native `&lt;dialog&gt;` — opened and closed with Invoker Commands, light-dismissed via `closedby=&quot;any&quot;`. No `showModal()`, no click-outside listener.</p>
+    <p class="lede">A modal navigation drawer opened with `commandfor` / `show-modal`. The explicit `method=&quot;dialog&quot;` close works without `closedby`; Escape is the native modal default, while backdrop dismissal requires `closedby=&quot;any&quot;` support. Invoker commands themselves need browser support: without them this button cannot open a modal without script. Fragment destinations below exist in the standalone example; replace both links and targets together when integrating.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-97/">Open standalone demo ↗</a><a class="action" href="/download/ds-97.html" download="ds-97.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Open Explore. Use the links to travel within this guide. Close with the button or Escape; backdrop dismissal depends on closedby support.</p>
       
       <iframe title="Isolated demonstration: Invoker Command Drawer (`commandfor` + `closedby`)" src="/play/ds-97/" loading="lazy" sandbox="allow-same-origin allow-forms"></iframe>
     </section>
@@ -40,57 +40,65 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;button class=&quot;nav-open&quot; commandfor=&quot;site-drawer&quot; command=&quot;show-modal&quot; aria-label=&quot;Open menu&quot;&gt;
-  Menu
-&lt;/button&gt;
-
-&lt;dialog id=&quot;site-drawer&quot; class=&quot;nav-drawer&quot; closedby=&quot;any&quot;&gt;
-  &lt;form method=&quot;dialog&quot;&gt;
-    &lt;button class=&quot;nav-close&quot; commandfor=&quot;site-drawer&quot; command=&quot;close&quot; aria-label=&quot;Close menu&quot;&gt;✕&lt;/button&gt;
-  &lt;/form&gt;
-  &lt;nav aria-label=&quot;Mobile navigation&quot;&gt;
-    &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
-    &lt;a href=&quot;/services&quot;&gt;Services&lt;/a&gt;
-    &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
-  &lt;/nav&gt;
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;div class=&quot;nav-site&quot; id=&quot;nav-home&quot;&gt;
+  &lt;header class=&quot;nav-site__header&quot;&gt;&lt;strong&gt;Northline / Field guide&lt;/strong&gt;
+    &lt;button type=&quot;button&quot; class=&quot;nav-open&quot; commandfor=&quot;site-drawer&quot; command=&quot;show-modal&quot;&gt;Explore &lt;span aria-hidden=&quot;true&quot;&gt;☰&lt;/span&gt;&lt;/button&gt;&lt;/header&gt;
+  &lt;main&gt;&lt;p class=&quot;nav-site__eyebrow&quot;&gt;The long way round · Issue 04&lt;/p&gt;
+    &lt;h1&gt;Go somewhere quieter.&lt;/h1&gt;&lt;p&gt;Three places to start, one route to make your own.&lt;/p&gt;
+    &lt;section id=&quot;nav-routes&quot;&gt;&lt;h2&gt;Routes&lt;/h2&gt;&lt;p&gt;Woodland paths for slow mornings.&lt;/p&gt;&lt;/section&gt;
+    &lt;section id=&quot;nav-notes&quot;&gt;&lt;h2&gt;Field notes&lt;/h2&gt;&lt;p&gt;Small observations from the trail.&lt;/p&gt;&lt;/section&gt;
+    &lt;section id=&quot;nav-visit&quot;&gt;&lt;h2&gt;Plan a visit&lt;/h2&gt;&lt;p&gt;Pack light. Leave time to wander.&lt;/p&gt;&lt;/section&gt;&lt;/main&gt;
+&lt;/div&gt;
+&lt;dialog id=&quot;site-drawer&quot; class=&quot;nav-drawer&quot; closedby=&quot;any&quot; aria-labelledby=&quot;drawer-title&quot;&gt;
+  &lt;div class=&quot;nav-drawer__head&quot;&gt;&lt;span&gt;Northline / 04&lt;/span&gt;
+    &lt;form method=&quot;dialog&quot;&gt;&lt;button type=&quot;submit&quot; value=&quot;close&quot; class=&quot;nav-close&quot;&gt;Close &lt;span aria-hidden=&quot;true&quot;&gt;×&lt;/span&gt;&lt;/button&gt;&lt;/form&gt;&lt;/div&gt;
+  &lt;p class=&quot;nav-drawer__label&quot; id=&quot;drawer-title&quot;&gt;Explore the guide&lt;/p&gt;
+  &lt;nav aria-label=&quot;Guide sections&quot;&gt;&lt;a href=&quot;#nav-home&quot;&gt;&lt;span&gt;01&lt;/span&gt; Home&lt;/a&gt;
+    &lt;a href=&quot;#nav-routes&quot;&gt;&lt;span&gt;02&lt;/span&gt; Routes&lt;/a&gt;
+    &lt;a href=&quot;#nav-notes&quot;&gt;&lt;span&gt;03&lt;/span&gt; Field notes&lt;/a&gt;
+    &lt;a href=&quot;#nav-visit&quot;&gt;&lt;span&gt;04&lt;/span&gt; Plan a visit&lt;/a&gt;&lt;/nav&gt;
+  &lt;p class=&quot;nav-drawer__foot&quot;&gt;Choose a section, then Close to view it.&lt;/p&gt;
 &lt;/dialog&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.nav-open, .nav-close, .nav-drawer a {
-  min-block-size: 44px; min-inline-size: 44px;
-  display: inline-grid; place-items: center; align-content: center;
-}
+      <pre tabindex="0"><code>.nav-site { background: var(--color-bg); color: var(--color-text); }
+.nav-site__header { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.nav-open, .nav-close { min-block-size:44px; padding:.5rem 1rem; font:inherit; cursor:pointer; }
 .nav-drawer {
-  margin: 0; inset: 0 auto 0 0;
-  inline-size: min(22rem, 92vw); block-size: 100dvh;
-  border: 0; padding: var(--space-6);
-  background: var(--color-bg);
-  transform: translateX(-100%);
-  transition: transform 280ms cubic-bezier(.16,1,.3,1),
-              display 280ms allow-discrete, overlay 280ms allow-discrete;
+  position:fixed; margin:0; inset:0 auto 0 0;
+  inline-size:min(25rem, 100vw); block-size:100dvh; max-block-size:100dvh;
+  overflow-y:auto; overscroll-behavior:contain; border:0; padding:clamp(1.25rem,4vw,2rem);
+  background:var(--color-bg); color:var(--color-text);
+  box-shadow:12px 0 50px oklch(0 0 0 / .17);
+  transform:translateX(-100%);
+  transition:transform 280ms cubic-bezier(.16,1,.3,1), display 280ms allow-discrete, overlay 280ms allow-discrete;
 }
-.nav-drawer[open], .nav-drawer:open { transform: translateX(0); }
-@starting-style { .nav-drawer[open], .nav-drawer:open { transform: translateX(-100%); } }
-.nav-drawer::backdrop {
-  background: oklch(0 0 0 / .4);
-  opacity: 0;
-  transition: opacity 280ms ease, display 280ms allow-discrete, overlay 280ms allow-discrete;
-}
-.nav-drawer[open]::backdrop, .nav-drawer:open::backdrop { opacity: 1; }
-@starting-style { .nav-drawer[open]::backdrop, .nav-drawer:open::backdrop { opacity: 0; } }
-.nav-drawer nav { display: grid; gap: .25rem; margin-block-start: var(--space-6); }
-.nav-drawer a {
-  justify-content: start; padding-inline: var(--space-3);
-  border-radius: var(--radius-sm); color: var(--color-text); text-decoration: none;
-}
-.nav-drawer a:hover, .nav-drawer a:focus-visible { background: var(--color-surface-offset); }</code></pre>
+.nav-drawer[open] { transform:none; }
+@starting-style { .nav-drawer[open] { transform:translateX(-100%); } }
+.nav-drawer::backdrop { background:oklch(0 0 0 / .55); opacity:0;
+  transition:opacity 280ms ease, display 280ms allow-discrete, overlay 280ms allow-discrete; }
+.nav-drawer[open]::backdrop { opacity:1; }
+@starting-style { .nav-drawer[open]::backdrop { opacity:0; } }
+.nav-drawer__head { display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.nav-drawer__head form { margin:0; }
+.nav-drawer__label { margin:clamp(2rem,7vh,4rem) 0 1rem; }
+.nav-drawer nav { display:grid; border-top:1px solid var(--color-border); }
+.nav-drawer a { display:flex; align-items:center; gap:1.2rem; min-block-size:58px;
+  border-bottom:1px solid var(--color-border); color:inherit; text-decoration:none; }
+.nav-drawer a:hover, .nav-drawer a:focus-visible { background:var(--color-surface-offset); }
+.nav-drawer a span { font-size:.75rem; }
+.nav-drawer__foot { margin:2rem 0 0; }
+.nav-drawer :focus-visible, .nav-open:focus-visible { outline:2px solid var(--color-accent); outline-offset:3px; }
+@media (prefers-reduced-motion:reduce) {
+  .nav-drawer, .nav-drawer::backdrop { transition:none; }
+}</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>
       <p class="note">Project category: Newer. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
       <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>no</span></li></ul>
-      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. :open: Chrome/Edge 133+, Firefox 136+, Safari 26.5+. Baseline newly available in 2026. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 134+ and Firefox 141+. Safari still needs an explicit close path. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

@@ -9,12 +9,12 @@ test("manual toast has explicit native close and stays in the top layer until di
   expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   const toast = page.locator("#auto-toast-1");
   await expect(page.locator("#auto-toast-1:popover-open")).toHaveCount(0);
-  await page.getByRole("button", { name: "Show notification" }).click();
+  await page.getByRole("button", { name: "Preview a notice" }).click();
   await expect(toast).toHaveJSProperty("popover", "manual");
   await expect(toast).toHaveCSS("opacity", "1");
   await expect(page.locator("#auto-toast-1:popover-open")).toHaveCount(1);
   await expect(toast).toHaveCSS("transition-duration", "0s");
-  await page.getByRole("button", { name: "Dismiss notification" }).click();
+  await page.getByRole("button", { name: "Dismiss notice" }).click();
   await expect(page.locator("#auto-toast-1:popover-open")).toHaveCount(0);
 });
 

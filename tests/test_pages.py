@@ -46,7 +46,7 @@ class StaticPagesTest(unittest.TestCase):
                 self.assertNotIn('name="robots" content="noindex', exported)
                 self.assertNotIn('href="/spell-pages.css"', exported)
                 self.assertIn(f"/spells/{sid}/", doc)
-                self.assertIn('sandbox="allow-same-origin"', doc)
+                self.assertIn('sandbox="allow-same-origin allow-forms"', doc)
                 self.assertIn('name="robots" content="noindex,follow"', play)
                 self.assertEqual(doc.count("<script"), 1)
                 self.assertNotIn("<script", play.lower())

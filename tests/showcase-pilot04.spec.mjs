@@ -279,6 +279,11 @@ async function verify142(root, page, width, motion) {
       // Native popovers persist across fragment navigation; close explicitly.
       expect(await openState(pop)).toBe(true);
     }
+    // Gate the close click on the entry transition's exact endpoint: on a
+    // loaded engine the anchored popover can still be moving when the fixed
+    // settles end (WebKit reported the close control unstable until the
+    // test timeout). Opacity shares the entry transition's clock.
+    await expect.poll(async () => parseFloat(await style(pop, 'opacity'))).toBe(1);
     // Explicit close control, then Escape with focus return to the pin.
     await pop.locator('.pin-close').click();
     await settle(page, 150);

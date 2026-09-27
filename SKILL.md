@@ -1225,18 +1225,57 @@ Shrinks the sticky header and scales the logo down as the user scrolls, without 
 ### 66. Backdrop Transition (`::backdrop`)
 *Reveal · Newer · Markup*
 
-A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` modals, with no JS.
+A seamless fade and blur on `::backdrop` for native `<dialog>` and `[popover]` overlays, with no JS. The demonstration opens a non-modal `popover`: Escape and light-dismiss are native, while the page behind stays scrollable — this is deliberately not a modal dialog, so no focus trapping is claimed. Reduced motion keeps the dimmed final state without the fade.
 
 ```html
-<button type="button" popovertarget="bd-pop">Open</button>
-<div id="bd-pop" popover="auto">Popover with native backdrop styling.</div>
+<button type="button" class="programme-trigger" popovertarget="bd-pop">Preview the evening programme</button>
+<div id="bd-pop" class="backdrop-card" popover="auto">
+  <p class="backdrop-kicker">Gallery late · Friday</p>
+  <h2>Evening programme</h2>
+  <ul>
+    <li><strong>19:00</strong> Doors and courtyard bar</li>
+    <li><strong>20:00</strong> First set in the atrium</li>
+    <li><strong>21:30</strong> Print room opens late</li>
+  </ul>
+  <button type="button" popovertarget="bd-pop" popovertargetaction="hide">Close</button>
+</div>
 ```
 
 ```css
+.programme-trigger {
+  min-block-size: 44px; padding: 0 1.25rem; cursor: pointer;
+  border: 0; border-radius: var(--radius-md);
+  background: var(--color-primary); color: var(--color-text-inverse);
+  font-weight: 600;
+}
+.programme-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.backdrop-card {
+  max-inline-size: min(26rem, calc(100vw - 2rem));
+  padding: var(--space-5);
+  background: var(--color-bg); color: var(--color-text);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px oklch(0 0 0 / .2);
+  opacity: 0; transform: translateY(10px) scale(.98);
+  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              display 280ms allow-discrete,
+              overlay 280ms allow-discrete;
+}
+.backdrop-card:popover-open { opacity: 1; transform: none; }
+@starting-style { .backdrop-card:popover-open { opacity: 0; transform: translateY(10px) scale(.98); } }
+.backdrop-card h2 { margin: 0 0 var(--space-3); }
+.backdrop-card .backdrop-kicker {
+  margin: 0 0 var(--space-2);
+  font: 600 11px/1.5 ui-monospace, monospace;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.backdrop-card ul { margin: 0 0 var(--space-4); padding-inline-start: 1.1rem; display: grid; gap: .4rem; }
+.backdrop-card [popovertargetaction="hide"] { min-block-size: 44px; }
 dialog::backdrop,
 [popover]::backdrop {
-  background: oklch(0 0 0 / 0.4);
-  backdrop-filter: blur(8px);
+  background: oklch(0 0 0 / 0.45);
+  backdrop-filter: blur(10px);
   opacity: 0;
   transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
               backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -1254,6 +1293,12 @@ dialog[open]::backdrop,
   [popover]:popover-open::backdrop {
     opacity: 0;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-card { transition: none; transform: none; }
+  dialog::backdrop,
+  [popover]::backdrop { transition: none; }
 }
 ```
 
@@ -1331,37 +1376,49 @@ List and card items fade in sequence as the user scrolls, synced to viewport pos
 }
 ```
 
-### 75. Native Modal Image Zoom (`popovertarget`)
+### 75. Native Image Zoom (`popovertarget`)
 *Reveal · Newer · Markup*
 
-Click an image to enlarge it to a fullscreen view with a native `popover` — no heavy lightbox library.
+Select an image to enlarge it in a native `popover` — no lightbox library. The trigger and the enlarged view share one image; the enlargement keeps its intrinsic aspect ratio and stays inside the viewport, with a visible close control alongside native Escape and light-dismiss. An `auto` popover is not modal: the page behind stays interactive, so no focus trapping is claimed. Reduced motion keeps the enlarged final state without the scale transition.
 
 ```html
-<button commandfor="img-modal-1" command="toggle-popover" class="img-trigger">
-  <img src="/photo-thumb.jpg" alt="Enlarge image">
-</button>
+<figure class="zoom-figure">
+  <button type="button" class="img-trigger" popovertarget="img-modal-1" aria-label="Enlarge: harbour at dusk">
+    <img src="/photo-thumb.jpg" alt="Harbour at dusk" width="640" height="800">
+  </button>
+  <figcaption>Harbour at dusk · Select the image to enlarge it.</figcaption>
+</figure>
 
-<div id="img-modal-1" popover class="lightbox-popover">
-  <img src="/photo-full.jpg" alt="Enlarged image">
+<div id="img-modal-1" class="lightbox-popover" popover="auto">
+  <figure>
+    <img src="/photo-full.jpg" alt="Harbour at dusk, enlarged view" width="1200" height="1500">
+    <figcaption>Harbour at dusk · Press Escape or choose Close.</figcaption>
+  </figure>
+  <button type="button" class="lightbox-close" popovertarget="img-modal-1" popovertargetaction="hide">Close</button>
 </div>
 ```
 
 ```css
+.zoom-figure { margin: 0; display: grid; gap: var(--space-2); justify-items: start; }
+.zoom-figure figcaption { color: var(--color-text-muted); font-size: .85rem; }
 .img-trigger {
   display: block; padding: 0; border: 0; background: none; cursor: pointer;
   min-block-size: 44px; min-inline-size: 44px;
 }
-.img-trigger img { display: block; inline-size: 100%; }
+.img-trigger img { display: block; inline-size: 100%; block-size: auto; }
+.img-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .lightbox-popover {
   margin: auto;
-  padding: 0;
+  padding: var(--space-4);
   border: none;
   background: transparent;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-inline-size: 94vw;
+  max-block-size: 92dvh;
+  overflow: auto;
   opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), display 250ms allow-discrete;
+  transform: scale(0.94);
+  transition: opacity 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              display 250ms allow-discrete, overlay 250ms allow-discrete;
 }
 
 .lightbox-popover:popover-open {
@@ -1372,8 +1429,39 @@ Click an image to enlarge it to a fullscreen view with a native `popover` — no
 @starting-style {
   .lightbox-popover:popover-open {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.94);
   }
+}
+
+.lightbox-popover::backdrop {
+  background: oklch(0 0 0 / .62);
+  opacity: 0;
+  transition: opacity 250ms ease, display 250ms allow-discrete, overlay 250ms allow-discrete;
+}
+.lightbox-popover:popover-open::backdrop { opacity: 1; }
+@starting-style { .lightbox-popover:popover-open::backdrop { opacity: 0; } }
+
+.lightbox-popover figure { margin: 0; display: grid; gap: var(--space-2); justify-items: center; }
+.lightbox-popover img {
+  display: block; inline-size: auto; block-size: auto;
+  max-inline-size: min(88vw, 60rem); max-block-size: 76dvh;
+  border-radius: var(--radius-md);
+}
+.lightbox-popover figcaption {
+  color: oklch(1 0 0 / .92); font-size: .85rem;
+  background: oklch(0 0 0 / .55); padding: .3rem .9rem; border-radius: 999px;
+}
+.lightbox-close {
+  position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+  min-block-size: 44px; min-inline-size: 44px; cursor: pointer;
+  border: 1px solid oklch(1 0 0 / .35); border-radius: 999px;
+  background: oklch(0 0 0 / .55); color: white;
+}
+.lightbox-close:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-popover { transition: none; transform: none; }
+  .lightbox-popover::backdrop { transition: none; }
 }
 ```
 
@@ -2069,26 +2157,53 @@ A tree view for documentation or sidebars built from nested `<details>` elements
 ### 77. Responsive Sheet Modal
 *Layout · Newer · Markup*
 
-A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens.
+A dialog that behaves as a bottom sheet on phones and a centered modal on larger screens. Opened with `command="show-modal"`; `closedby="any"` adds Escape and backdrop dismissal, with an explicit close control for engines without `closedby`. The sheet scrolls internally on short viewports. Reduced motion keeps the open final state without the slide.
 
 ```html
-<button type="button" commandfor="sheet-demo" command="show-modal">Open sheet</button>
-<dialog id="sheet-demo" class="responsive-sheet" closedby="any">
-  <h2>Sheet content</h2>
-  <p>This stays a native modal dialog.</p>
-  <form method="dialog"><button type="submit">Close</button></form>
+<button type="button" commandfor="sheet-demo" command="show-modal">Review booking</button>
+<dialog id="sheet-demo" class="responsive-sheet" closedby="any" aria-labelledby="sheet-title">
+  <p class="sheet-kicker">Cabin booking · 2 nights</p>
+  <h2 id="sheet-title">Review your stay</h2>
+  <p class="sheet-lede">Friday 14:00 · Two guests · Total €240. Preferences stay on this page — nothing is booked or charged here.</p>
+  <fieldset class="sheet-field">
+    <legend>Arrival window</legend>
+    <label><input type="radio" name="arrival" checked> 14:00 – 16:00</label>
+    <label><input type="radio" name="arrival"> 16:00 – 18:00</label>
+    <label><input type="radio" name="arrival"> After 18:00</label>
+  </fieldset>
+  <fieldset class="sheet-field">
+    <legend>Extras</legend>
+    <label><input type="checkbox" checked> Breakfast basket · €18</label>
+    <label><input type="checkbox"> Sauna slot · €12</label>
+  </fieldset>
+  <div class="sheet-field">
+    <label for="sheet-bedding">Bedding</label>
+    <select id="sheet-bedding">
+      <option>Double bed made up</option>
+      <option>Two singles</option>
+    </select>
+  </div>
+  <form method="dialog" class="sheet-actions">
+    <button type="submit" value="done">Done</button>
+  </form>
 </dialog>
 ```
 
 ```css
 dialog.responsive-sheet {
   margin: auto auto 0 auto; /* Bottom-aligned on mobile */
-  width: 100%;
-  max-width: 100%;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  max-block-size: min(88dvh, 52rem);
+  overflow: auto;
+  border: 0;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  border: none;
+  background: var(--color-bg); color: var(--color-text);
+  padding: var(--space-5);
+  box-shadow: 0 -18px 50px oklch(0 0 0 / .18);
   transform: translateY(100%);
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), display 300ms allow-discrete;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              display 300ms allow-discrete, overlay 300ms allow-discrete;
 }
 
 dialog.responsive-sheet[open] {
@@ -2101,13 +2216,50 @@ dialog.responsive-sheet[open] {
   }
 }
 
+dialog.responsive-sheet::backdrop {
+  background: oklch(0 0 0 / .45);
+  opacity: 0;
+  transition: opacity 300ms ease, display 300ms allow-discrete, overlay 300ms allow-discrete;
+}
+dialog.responsive-sheet[open]::backdrop { opacity: 1; }
+@starting-style { dialog.responsive-sheet[open]::backdrop { opacity: 0; } }
+
+.responsive-sheet h2 { margin: 0 0 var(--space-2); }
+.responsive-sheet .sheet-kicker {
+  margin: 0 0 var(--space-2);
+  font: 600 11px/1.5 ui-monospace, monospace;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.responsive-sheet .sheet-lede { margin: 0 0 var(--space-4); color: var(--color-text-muted); }
+.sheet-field { display: grid; gap: var(--space-1); margin: 0 0 var(--space-4); padding: 0; border: 0; }
+.sheet-field legend, .sheet-field > label { font-weight: 600; }
+.sheet-field label { display: flex; align-items: center; gap: var(--space-2); min-block-size: 44px; }
+.sheet-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-block-start: var(--space-5); }
+.sheet-actions button { min-block-size: 44px; }
+
+/* Sheet grabber on narrow viewports only; the desktop modal has none. */
+@media (max-width: 639px) {
+  dialog.responsive-sheet { padding-block-start: var(--space-4); }
+  dialog.responsive-sheet::before {
+    content: ""; display: block; inline-size: 2.5rem; block-size: .25rem;
+    margin: 0 auto var(--space-3); border-radius: 999px;
+    background: var(--color-border);
+  }
+}
+
 /* Centered modal on desktop */
 @media (min-width: 640px) {
   dialog.responsive-sheet {
     margin: auto;
-    max-width: 32rem;
+    inline-size: min(32rem, calc(100vw - 2rem));
     border-radius: var(--radius-lg);
+    box-shadow: 0 24px 60px oklch(0 0 0 / .2);
     transform: scale(0.95);
+  }
+
+  dialog.responsive-sheet[open] {
+    transform: scale(1);
   }
 
   @starting-style {
@@ -2115,6 +2267,11 @@ dialog.responsive-sheet[open] {
       transform: scale(0.95);
     }
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog.responsive-sheet { transition: none; transform: none; }
+  dialog.responsive-sheet::backdrop { transition: none; }
 }
 ```
 
@@ -3380,26 +3537,34 @@ Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. 
 ### 106. Light-Dismiss Confirm Dialog (`closedby="any"`)
 *Overlays · Newer · Markup*
 
-A confirm dialog that closes on Escape *and* backdrop click. Opened with `command="show-modal"`. `closedby="closerequest"` is Escape-only; `"none"` requires an explicit close button.
+A confirm dialog that closes on Escape *and* backdrop click. Opened with `command="show-modal"`. `closedby="closerequest"` is Escape-only; `"none"` requires an explicit close button. The demonstration confirms nothing destructive: it teaches the three dismissal paths, and every button only closes the dialog. Reduced motion keeps the open final state without the scale transition.
 
 ```html
-<button class="btn" commandfor="confirm-delete" command="show-modal">Delete customer</button>
+<button type="button" commandfor="close-options" command="show-modal">How does this dialog close?</button>
 
-<dialog id="confirm-delete" class="confirm" closedby="any">
-  <h2>Delete customer?</h2>
-  <p>This cannot be undone.</p>
-  <div class="confirm-actions">
-    <button class="btn ghost" commandfor="confirm-delete" command="close">Cancel</button>
-    <button class="btn danger" commandfor="confirm-delete" command="close">Delete</button>
-  </div>
+<dialog id="close-options" class="confirm" closedby="any" aria-labelledby="close-options-title">
+  <h2 id="close-options-title">Three ways to close</h2>
+  <p>This native dialog dismisses three ways. Try each of them — nothing is sent or saved.</p>
+  <ol>
+    <li>Choose <strong>Close dialog</strong> below.</li>
+    <li>Press <kbd>Escape</kbd>.</li>
+    <li>Select the dimmed backdrop around this card.</li>
+  </ol>
+  <p class="confirm-note">Without <code>closedby</code> support the backdrop click does nothing; the close controls and Escape still work.</p>
+  <form method="dialog" class="confirm-actions">
+    <button type="submit" value="stay">Keep reading</button>
+    <button type="submit" value="close" autofocus>Close dialog</button>
+  </form>
 </dialog>
 ```
 
 ```css
 .confirm {
   margin: auto; border: 0; padding: var(--space-6);
-  max-inline-size: 28rem; border-radius: var(--radius-lg);
-  background: var(--color-bg);
+  max-inline-size: min(28rem, calc(100vw - 2rem));
+  max-block-size: min(88dvh, 40rem); overflow: auto;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg); color: var(--color-text);
   box-shadow: 0 24px 60px oklch(0 0 0 / .22);
   opacity: 0; transform: scale(.96);
   transition: opacity 220ms cubic-bezier(.16,1,.3,1), transform 220ms cubic-bezier(.16,1,.3,1),
@@ -3407,9 +3572,27 @@ A confirm dialog that closes on Escape *and* backdrop click. Opened with `comman
 }
 .confirm[open], .confirm:open { opacity: 1; transform: none; }
 @starting-style { .confirm[open], .confirm:open { opacity: 0; transform: scale(.96); } }
-.confirm-actions { display: flex; justify-content: end; gap: var(--space-3); margin-block-start: var(--space-5); }
-.confirm-actions .btn, .btn { min-block-size: 44px; }
-.btn.danger { background: var(--color-error); color: white; }
+.confirm::backdrop {
+  background: oklch(0 0 0 / .45);
+  opacity: 0;
+  transition: opacity 220ms ease, display 220ms allow-discrete, overlay 220ms allow-discrete;
+}
+.confirm[open]::backdrop, .confirm:open::backdrop { opacity: 1; }
+@starting-style { .confirm[open]::backdrop, .confirm:open::backdrop { opacity: 0; } }
+.confirm h2 { margin: 0 0 var(--space-2); }
+.confirm > p { margin: 0 0 var(--space-3); }
+.confirm ol { margin: 0 0 var(--space-4); padding-inline-start: 1.25rem; display: grid; gap: .4rem; }
+.confirm kbd {
+  padding: .1rem .4rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); background: var(--color-surface-offset); font-size: .85em;
+}
+.confirm-note { color: var(--color-text-muted); font-size: .85rem; }
+.confirm-actions { display: flex; justify-content: end; gap: var(--space-3); margin-block-start: var(--space-5); flex-wrap: wrap; }
+.confirm-actions button { min-block-size: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  .confirm { transition: none; transform: none; }
+  .confirm::backdrop { transition: none; }
+}
 ```
 
 ### 107. Position-Visibility Auto-Hide (`position-visibility`)

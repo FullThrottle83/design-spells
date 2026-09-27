@@ -74,7 +74,7 @@ test('document previews retain a safe sandbox and descriptive titles', async ({ 
   for (const frame of await frames.all()) {
     await expect(frame).toHaveAttribute('title', /^Live preview: .+/);
     await expect(frame).toHaveAttribute('loading', 'lazy');
-    await expect(frame).toHaveAttribute('sandbox', 'allow-same-origin');
+    await expect(frame).toHaveAttribute('sandbox', 'allow-same-origin allow-forms');
   }
 });
 

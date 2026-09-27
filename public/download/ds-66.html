@@ -118,10 +118,40 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
+.programme-trigger {
+  min-block-size: 44px; padding: 0 1.25rem; cursor: pointer;
+  border: 0; border-radius: var(--radius-md);
+  background: var(--color-primary); color: var(--color-text-inverse);
+  font-weight: 600;
+}
+.programme-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.backdrop-card {
+  max-inline-size: min(26rem, calc(100vw - 2rem));
+  padding: var(--space-5);
+  background: var(--color-bg); color: var(--color-text);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px oklch(0 0 0 / .2);
+  opacity: 0; transform: translateY(10px) scale(.98);
+  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              display 280ms allow-discrete,
+              overlay 280ms allow-discrete;
+}
+.backdrop-card:popover-open { opacity: 1; transform: none; }
+@starting-style { .backdrop-card:popover-open { opacity: 0; transform: translateY(10px) scale(.98); } }
+.backdrop-card h2 { margin: 0 0 var(--space-3); }
+.backdrop-card .backdrop-kicker {
+  margin: 0 0 var(--space-2);
+  font: 600 11px/1.5 ui-monospace, monospace;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.backdrop-card ul { margin: 0 0 var(--space-4); padding-inline-start: 1.1rem; display: grid; gap: .4rem; }
+.backdrop-card [popovertargetaction="hide"] { min-block-size: 44px; }
 dialog::backdrop,
 [popover]::backdrop {
-  background: oklch(0 0 0 / 0.4);
-  backdrop-filter: blur(8px);
+  background: oklch(0 0 0 / 0.45);
+  backdrop-filter: blur(10px);
   opacity: 0;
   transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
               backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -140,10 +170,59 @@ dialog[open]::backdrop,
     opacity: 0;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-card { transition: none; transform: none; }
+  dialog::backdrop,
+  [popover]::backdrop { transition: none; }
+}
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.showcase:has(.gallery-late){max-width:1080px}
+.gallery-late{width:100%;background:light-dark(#f6f1e6,#10151d);border-radius:28px;overflow:clip;--color-primary:light-dark(#8f3b2a,#e8a37e);--color-text:light-dark(#20242e,#eef0f4);--color-text-muted:light-dark(#5d6474,#9aa3b5);--color-border:light-dark(#ddd3bf,#263041);--color-bg:light-dark(#fffdf7,#171e2a);--color-surface-offset:light-dark(#ece4d2,#222b3c);--color-accent:light-dark(#8f3b2a,#e8a37e)}
+.gallery-late :where(button):focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.gl-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px clamp(20px,4vw,48px);border-bottom:1px solid var(--color-border)}
+.gl-brand{display:flex;align-items:baseline;gap:10px}
+.gl-brand strong{font-family:Georgia,serif;font-size:24px;letter-spacing:-.02em}
+.gl-brand span{font-size:12px;color:var(--color-text-muted)}
+.gl-nav{display:flex;gap:4px 20px;flex-wrap:wrap;font-size:14px}
+.gl-nav a{display:inline-flex;min-block-size:44px;align-items:center}
+.gl-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(200px,.65fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(36px,6vw,84px) clamp(20px,4vw,48px);background:linear-gradient(150deg,light-dark(#e9dfc9,#1c2434),light-dark(#f6f1e6,#10151d) 72%)}
+.gl-hero h1{max-width:16ch}
+.gl-hero p{color:var(--color-text-muted);max-width:52ch}
+.gl-facts{display:grid;gap:12px;margin:0;background:var(--color-bg);border:1px solid var(--color-border);border-radius:16px;padding:22px 24px;box-shadow:0 18px 44px #10233a14}
+.gl-facts div{display:grid;gap:2px;border-top:1px solid var(--color-border);padding-top:10px}
+.gl-facts div:first-child{border-top:0;padding-top:0}
+.gl-facts dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted)}
+.gl-facts dd{margin:0;font-family:Georgia,serif;font-size:26px}
+.gl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--color-border);border-block:1px solid var(--color-border)}
+.gl-grid article{background:var(--color-bg);padding:clamp(18px,2.4vw,26px)}
+.gl-grid .scene-kicker{color:var(--color-primary)}
+.gl-grid h2{font:400 21px/1.2 Georgia,serif;margin:8px 0 6px}
+.gl-grid p:last-child{font-size:13px;color:var(--color-text-muted);margin:0}
+.gl-art{border-radius:12px;overflow:hidden;margin-bottom:14px;border:1px solid var(--color-border)}
+.gl-visit{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:clamp(26px,4vw,52px)}
+.gl-visit h2{font:400 24px/1.2 Georgia,serif;margin:8px 0}
+.gl-visit p{font-size:14px;color:var(--color-text-muted)}
+.gl-note{font-size:12px;align-self:end;margin:0}
+@media(max-width:900px){.gl-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.gl-hero{grid-template-columns:1fr}.gl-hero h1{font-size:38px}.gl-grid{grid-template-columns:1fr}.gl-visit{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-  <div class="stage"><p class="demo-note">Backdrop fade applies to native dialogs and popovers.</p><button popovertarget="bd-pop">Open</button><div id="bd-pop" popover>Hello</div></div>
-  <p class='demo-hint'>Activate the control to preview</p>
+  <div class="stage"><div class="showcase"><main class="gallery-late"><header class="gl-top"><div class="gl-brand"><strong>Meridian</strong><span>Gallery · Est. 1987</span></div><nav class="gl-nav" aria-label="Gallery"><a href="#gl-visit">Visit</a><a href="#gl-shows">Exhibitions</a><a href="#gl-late">Gallery late</a></nav></header><section class="gl-hero" id="gl-late"><div><p class="scene-kicker">Gallery late · First Friday monthly</p><h1>One evening a month, the gallery stays awake.</h1><p>Four rooms, one courtyard bar and a print room that only opens after dark. Preview the running order — the backdrop behind the card dims and softens while it is open.</p><button type="button" class="programme-trigger" popovertarget="bd-pop">Preview the evening programme</button></div><dl class="gl-facts"><div><dt>Doors</dt><dd>19:00</dd></div><div><dt>First set</dt><dd>20:00</dd></div><div><dt>Entry</dt><dd>€6 · under 16 free</dd></div></dl></section><div id="bd-pop" class="backdrop-card" popover="auto"><p class="backdrop-kicker">Gallery late · Friday</p><h2>Evening programme</h2><ul><li><strong>19:00</strong> Doors and courtyard bar</li><li><strong>20:00</strong> First set in the atrium</li><li><strong>21:30</strong> Print room opens late</li></ul><button type="button" popovertarget="bd-pop" popovertargetaction="hide">Close</button></div><section class="gl-grid" id="gl-shows" aria-label="Current exhibitions"><article><div class="gl-art"><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#232b3a"/><circle cx="470" cy="120" r="70" fill="#e8c87e"/><path d="M0 330Q160 250 320 330T640 330V440H0Z" fill="#3d4a63"/><path d="M0 380Q160 320 320 380T640 380V440H0Z" fill="#141a28"/><path d="M120 330v-90h24v90Zm40 0v-60h24v60Zm40 0v-110h24v110Z" fill="#e8c87e"/></svg></div><p class="scene-kicker">Room one · Until Oct</p><h2>Harbour light</h2><p>Twelve studies of working harbours at dusk, printed large and hung low.</p></article><article><div class="gl-art"><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#f0e4cf"/><path d="M0 300Q160 180 320 300T640 300V440H0Z" fill="#c9704b"/><path d="M0 360Q160 260 320 360T640 360V440H0Z" fill="#5d3a36"/><circle cx="180" cy="130" r="58" fill="#c9704b"/><path d="M400 200h120v140H400Z" fill="#232b3a"/><path d="M400 200l60-40 60 40Z" fill="#141a28"/></svg></div><p class="scene-kicker">Room two · Until Nov</p><h2>Night shifts</h2><p>Portraits of the people who keep the city running after midnight.</p></article><article><div class="gl-art"><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#1d2b26"/><path d="M80 440V200l60-40 60 40v240Z" fill="#9ed5c4"/><path d="M260 440V140l60-40 60 40v300Z" fill="#e8c87e"/><path d="M440 440V240l60-40 60 40v200Z" fill="#c9704b"/><path d="M0 400h640v40H0Z" fill="#0f1512"/></svg></div><p class="scene-kicker">Atrium · Fridays</p><h2>First sets</h2><p>Forty-minute concerts under the glass roof. No amplification past ten.</p></article><article><div class="gl-art"><svg class="study-art" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="440" fill="#e5ddd2"/><circle cx="320" cy="200" r="110" fill="#232b3a"/><circle cx="320" cy="200" r="70" fill="#f0e4cf"/><path d="M0 340h640v100H0Z" fill="#232b3a"/><path d="M60 340v-70m80 70v-110m80 110v-60m80 60v-130m80 130v-80m80 80v-100m80 100v-50" stroke="#e8c87e" stroke-width="14"/></svg></div><p class="scene-kicker">Print room · Late only</p><h2>Open drawers</h2><p>Two hundred prints, out of storage and priced to take home.</p></article></section><section class="gl-visit" id="gl-visit"><div><p class="scene-kicker">Plan your visit</p><h2>Find us by the water.</h2><p>Harbour Road 4 · Open Tue–Sun 10:00–18:00 · Step-free throughout. The courtyard bar takes cards only.</p></div><p class="gl-note">This page is a demonstration backdrop: the exhibition copy is illustrative, and the programme card above is the spell.</p></section></main><p class="scene-instruction">Open “Preview the evening programme” with pointer or keyboard, and watch the gallery page dim and blur behind the card. Escape, a backdrop click or Close dismisses it — the page behind stays scrollable throughout.</p></div></div>
+
 </body>
 </html>

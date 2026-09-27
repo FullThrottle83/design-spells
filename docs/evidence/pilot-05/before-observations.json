@@ -1,0 +1,904 @@
+{
+  "capturedAt": "2026-09-26T17:56:07.744Z",
+  "browserVersion": "153.0.8010.0",
+  "base": "http://127.0.0.1:8791",
+  "prefix": "before",
+  "states": [
+    {
+      "id": "ds-66",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "bd-pop",
+        "text": "Open",
+        "rect": {
+          "x": 690.81,
+          "y": 174.5,
+          "width": 58.38,
+          "height": 36,
+          "right": 749.19,
+          "bottom": 210.5
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardTabsOk": true,
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 698.25,
+        "y": 434,
+        "width": 43.5,
+        "height": 32,
+        "right": 741.75,
+        "bottom": 466
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.4)",
+        "backdropFilter": "blur(8px)",
+        "display": "block",
+        "transitionDuration": "0.28s, 0.28s, 0.28s, 0.28s"
+      },
+      "focusAfterOpen": "button:Open",
+      "escapeClosed": {
+        "open": false,
+        "display": "none"
+      },
+      "focusAfterEscape": "button:Open",
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "none"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 698.25,
+          "y": 434,
+          "width": 43.5,
+          "height": 32,
+          "right": 741.75,
+          "bottom": 466
+        }
+      }
+    },
+    {
+      "id": "ds-66",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 698.25,
+        "y": 434,
+        "width": 43.5,
+        "height": 32,
+        "right": 741.75,
+        "bottom": 466
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.4)",
+        "backdropFilter": "blur(8px)",
+        "display": "block",
+        "transitionDuration": "0.28s, 0.28s, 0.28s, 0.28s"
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "img-modal-1",
+        "rect": {
+          "x": 570,
+          "y": 46.25,
+          "width": 300,
+          "height": 187.5,
+          "right": 870,
+          "bottom": 233.75
+        }
+      },
+      "thumbnail": {
+        "rect": {
+          "x": 570,
+          "y": 46.25,
+          "width": 300,
+          "height": 187.5,
+          "right": 870,
+          "bottom": 233.75
+        },
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 40",
+        "alt": "Enlarge image",
+        "natural": {
+          "w": 240,
+          "h": 150
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "enlarged": {
+        "rect": {
+          "x": 720,
+          "y": 450,
+          "width": 0,
+          "height": 0,
+          "right": 720,
+          "bottom": 450
+        },
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 40",
+        "alt": "Enlarged image",
+        "natural": {
+          "w": 240,
+          "h": 150
+        }
+      },
+      "popoverRect": {
+        "x": 720,
+        "y": 450,
+        "width": 0,
+        "height": 0,
+        "right": 720,
+        "bottom": 450
+      },
+      "enlargement": {
+        "widthRatio": 0,
+        "areaRatio": 0
+      },
+      "sameSrc": true,
+      "focusAfterOpen": "button:",
+      "escapeClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 720,
+          "y": 450,
+          "width": 0,
+          "height": 0,
+          "right": 720,
+          "bottom": 450
+        }
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0.25s, 0.25s, 0.25s",
+      "opened": true,
+      "openRect": {
+        "x": 720,
+        "y": 450,
+        "width": 0,
+        "height": 0,
+        "right": 720,
+        "bottom": 450
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "sheet-demo",
+        "command": "show-modal",
+        "text": "Open sheet",
+        "rect": {
+          "x": 672.81,
+          "y": 174.5,
+          "width": 94.38,
+          "height": 36,
+          "right": 767.19,
+          "bottom": 210.5
+        }
+      },
+      "dialogCopy": "Sheet contentClose",
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "closedby": "any",
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 512,
+        "y": 396.25,
+        "width": 416,
+        "height": 107.5,
+        "right": 928,
+        "bottom": 503.75
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      },
+      "focusAfterOpen": "button:Close",
+      "topLayerAbove": "dialog-owns-point",
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Open sheet",
+      "clickOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "backdropClickClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 512,
+          "y": 396.25,
+          "width": 416,
+          "height": 107.5,
+          "right": 928,
+          "bottom": 503.75
+        }
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0.3s, 0.3s",
+      "opened": true,
+      "openRect": {
+        "x": 512,
+        "y": 396.25,
+        "width": 416,
+        "height": 107.5,
+        "right": 928,
+        "bottom": 503.75
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 1440,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "confirm-delete",
+        "command": "show-modal",
+        "text": "Delete customer",
+        "rect": {
+          "x": 658.31,
+          "y": 118,
+          "width": 123.38,
+          "height": 44,
+          "right": 781.69,
+          "bottom": 162
+        }
+      },
+      "dialogCopy": "Delete customer? This cannot be undone. Cancel Delete",
+      "buttonLabels": [
+        "Cancel",
+        "Delete"
+      ],
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 612.5,
+        "y": 359.83,
+        "width": 215,
+        "height": 180.34,
+        "right": 827.5,
+        "bottom": 540.17
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      },
+      "focusAfterOpen": "button:Cancel",
+      "cancelClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "cancelSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "focusAfterCancel": "button:Delete customer",
+      "reopenWorks": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "deleteClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "deleteSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Delete customer",
+      "lightDismissClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 612.5,
+          "y": 359.83,
+          "width": 215,
+          "height": 180.34,
+          "right": 827.5,
+          "bottom": 540.17
+        }
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 1440,
+      "reducedMotion": true,
+      "transitionDuration": "0.22s, 0.22s, 0.22s, 0.22s",
+      "opened": true,
+      "openRect": {
+        "x": 612.5,
+        "y": 359.83,
+        "width": 215,
+        "height": 180.34,
+        "right": 827.5,
+        "bottom": 540.17
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-66",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "bd-pop",
+        "text": "Open",
+        "rect": {
+          "x": 165.81,
+          "y": 174.5,
+          "width": 58.38,
+          "height": 36,
+          "right": 224.19,
+          "bottom": 210.5
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardTabsOk": true,
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 173.25,
+        "y": 406,
+        "width": 43.5,
+        "height": 32,
+        "right": 216.75,
+        "bottom": 438
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.4)",
+        "backdropFilter": "blur(8px)",
+        "display": "block",
+        "transitionDuration": "0.28s, 0.28s, 0.28s, 0.28s"
+      },
+      "focusAfterOpen": "button:Open",
+      "escapeClosed": {
+        "open": false,
+        "display": "none"
+      },
+      "focusAfterEscape": "button:Open",
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "none"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 173.25,
+          "y": 406,
+          "width": 43.5,
+          "height": 32,
+          "right": 216.75,
+          "bottom": 438
+        }
+      }
+    },
+    {
+      "id": "ds-66",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0s",
+      "opened": true,
+      "openRect": {
+        "x": 173.25,
+        "y": 406,
+        "width": 43.5,
+        "height": 32,
+        "right": 216.75,
+        "bottom": 438
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "oklch(0 0 0 / 0.4)",
+        "backdropFilter": "blur(8px)",
+        "display": "block",
+        "transitionDuration": "0.28s, 0.28s, 0.28s, 0.28s"
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "img-modal-1",
+        "rect": {
+          "x": 45,
+          "y": 46.25,
+          "width": 300,
+          "height": 187.5,
+          "right": 345,
+          "bottom": 233.75
+        }
+      },
+      "thumbnail": {
+        "rect": {
+          "x": 45,
+          "y": 46.25,
+          "width": 300,
+          "height": 187.5,
+          "right": 345,
+          "bottom": 233.75
+        },
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 40",
+        "alt": "Enlarge image",
+        "natural": {
+          "w": 240,
+          "h": 150
+        }
+      },
+      "closed": {
+        "open": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "enlarged": {
+        "rect": {
+          "x": 195,
+          "y": 422,
+          "width": 0,
+          "height": 0,
+          "right": 195,
+          "bottom": 422
+        },
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 40",
+        "alt": "Enlarged image",
+        "natural": {
+          "w": 240,
+          "h": 150
+        }
+      },
+      "popoverRect": {
+        "x": 195,
+        "y": 422,
+        "width": 0,
+        "height": 0,
+        "right": 195,
+        "bottom": 422
+      },
+      "enlargement": {
+        "widthRatio": 0,
+        "areaRatio": 0
+      },
+      "sameSrc": true,
+      "focusAfterOpen": "button:",
+      "escapeClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "clickOpened": {
+        "open": true,
+        "display": "block"
+      },
+      "lightDismissClosed": {
+        "open": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 195,
+          "y": 422,
+          "width": 0,
+          "height": 0,
+          "right": 195,
+          "bottom": 422
+        }
+      }
+    },
+    {
+      "id": "ds-75",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0.25s, 0.25s, 0.25s",
+      "opened": true,
+      "openRect": {
+        "x": 195,
+        "y": 422,
+        "width": 0,
+        "height": 0,
+        "right": 195,
+        "bottom": 422
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "sheet-demo",
+        "command": "show-modal",
+        "text": "Open sheet",
+        "rect": {
+          "x": 147.81,
+          "y": 174.5,
+          "width": 94.38,
+          "height": 36,
+          "right": 242.19,
+          "bottom": 210.5
+        }
+      },
+      "dialogCopy": "Sheet contentClose",
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "closedby": "any",
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 0,
+        "y": 736.5,
+        "width": 390,
+        "height": 107.5,
+        "right": 390,
+        "bottom": 844
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      },
+      "focusAfterOpen": "button:Close",
+      "topLayerAbove": "dialog-owns-point",
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Open sheet",
+      "clickOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "backdropClickClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 0,
+          "y": 736.5,
+          "width": 390,
+          "height": 107.5,
+          "right": 390,
+          "bottom": 844
+        }
+      }
+    },
+    {
+      "id": "ds-77",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0.3s, 0.3s",
+      "opened": true,
+      "openRect": {
+        "x": 0,
+        "y": 736.5,
+        "width": 390,
+        "height": 107.5,
+        "right": 390,
+        "bottom": 844
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 390,
+      "initial": {
+        "scripts": 0,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "supportsStartingStyle": true,
+        "supportsInvoker": true,
+        "supportsClosedby": true,
+        "supportsPopover": true
+      },
+      "trigger": {
+        "target": "confirm-delete",
+        "command": "show-modal",
+        "text": "Delete customer",
+        "rect": {
+          "x": 133.31,
+          "y": 118,
+          "width": 123.38,
+          "height": 44,
+          "right": 256.69,
+          "bottom": 162
+        }
+      },
+      "dialogCopy": "Delete customer? This cannot be undone. Cancel Delete",
+      "buttonLabels": [
+        "Cancel",
+        "Delete"
+      ],
+      "closed": {
+        "open": false,
+        "modal": false,
+        "display": "none"
+      },
+      "keyboardOpened": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "openRect": {
+        "x": 87.5,
+        "y": 331.83,
+        "width": 215,
+        "height": 180.34,
+        "right": 302.5,
+        "bottom": 512.17
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      },
+      "focusAfterOpen": "button:Cancel",
+      "cancelClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "cancelSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "focusAfterCancel": "button:Delete customer",
+      "reopenWorks": {
+        "open": true,
+        "modal": true,
+        "display": "block"
+      },
+      "deleteClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "deleteSideEffects": {
+        "urlChanged": false,
+        "domDelta": -8
+      },
+      "escapeClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "focusAfterEscape": "button:Delete customer",
+      "lightDismissClosed": {
+        "open": false,
+        "modal": false,
+        "display": "block"
+      },
+      "noStartingStyle": {
+        "opened": true,
+        "rect": {
+          "x": 87.5,
+          "y": 331.83,
+          "width": 215,
+          "height": 180.34,
+          "right": 302.5,
+          "bottom": 512.17
+        }
+      }
+    },
+    {
+      "id": "ds-106",
+      "width": 390,
+      "reducedMotion": true,
+      "transitionDuration": "0.22s, 0.22s, 0.22s, 0.22s",
+      "opened": true,
+      "openRect": {
+        "x": 87.5,
+        "y": 331.83,
+        "width": 215,
+        "height": 180.34,
+        "right": 302.5,
+        "bottom": 512.17
+      },
+      "openBackdrop": {
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0.1)",
+        "backdropFilter": "none",
+        "display": "block",
+        "transitionDuration": "0s"
+      }
+    }
+  ]
+}

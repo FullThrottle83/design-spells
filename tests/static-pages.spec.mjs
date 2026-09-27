@@ -7,7 +7,7 @@ test.describe("static spell pages without scripting", () => {
     await page.goto("/spells/ds-1/");
     await expect(page.getByRole("heading", { name: "Shimmer on primary buttons" })).toBeVisible();
     const demo = page.getByTitle("Isolated demonstration: Shimmer on primary buttons");
-    await expect(demo).toHaveAttribute("sandbox", "allow-same-origin");
+    await expect(demo).toHaveAttribute("sandbox", "allow-same-origin allow-forms");
     await expect(page.getByRole("link", { name: /Open standalone demo/ })).toHaveAttribute("href", "/play/ds-1/");
     await expect(page.locator("pre code")).toHaveCount(2);
     await expect(page.locator('script[src="/spell-copy.js"]')).toHaveCount(1);

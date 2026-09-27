@@ -1461,7 +1461,7 @@ def render_preview_box(spell: dict) -> str:
 </body>
 </html>"""
         esc_doc = html.escape(doc_src, quote=True)
-        return f"""<iframe class="ds-document" loading="lazy" sandbox="allow-same-origin" srcdoc="{esc_doc}" title="Live preview: {html.escape(spell['title'], quote=True)}" style="width:100%;min-height:280px;border:0;display:block;background:var(--paper);"></iframe>{doc_hint}"""
+        return f"""<iframe class="ds-document" loading="lazy" sandbox="allow-same-origin allow-forms" srcdoc="{esc_doc}" title="Live preview: {html.escape(spell['title'], quote=True)}" style="width:100%;min-height:280px;border:0;display:block;background:var(--paper);"></iframe>{doc_hint}"""
     else:
         return f"""<template shadowrootmode="open">
   <style>

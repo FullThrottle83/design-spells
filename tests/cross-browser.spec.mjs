@@ -31,7 +31,7 @@ test("docs expose labelled isolated demos, readable source and keyboard navigati
   await expect(page.getByRole("heading", { name: "Live demo" })).toBeVisible();
   await expect(page.getByRole("link", { name: /Download runnable HTML/ })).toHaveAttribute("download", "ds-1.html");
   const iframe = page.getByTitle("Isolated demonstration: Shimmer on primary buttons");
-  await expect(iframe).toHaveAttribute("sandbox", "allow-same-origin");
+  await expect(iframe).toHaveAttribute("sandbox", "allow-same-origin allow-forms");
   await expect(iframe).toHaveAttribute("loading", "lazy");
   await expect(page.locator("pre code")).toHaveCount(2);
   await expect(page.getByRole("link", { name: /View integration source/ })).toHaveAttribute("href", "/bundle/ds-1.txt");

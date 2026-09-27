@@ -18,6 +18,11 @@ const backdrop = (loc) => loc.evaluate((e) => {
   const b = getComputedStyle(e, '::backdrop');
   return { opacity: b.opacity, backgroundColor: b.backgroundColor, backdropFilter: b.backdropFilter };
 });
+// Transition-endpoint gates (Pilot 03 pattern): fixed sleeps race loaded
+// engines — WebKit sampled backdrop opacity at 0.365–0.999998 — so the spec
+// waits for the same exact endpoints instead of weakening the assertions.
+const backdropOpacity1 = (loc) => expect.poll(async () => parseFloat((await backdrop(loc)).opacity)).toBe(1);
+const displayNone = (loc) => expect.poll(async () => style(loc, 'display')).toBe('none');
 const popOpen = (loc) => loc.evaluate((e) => e.matches(':popover-open'));
 const dialogState = (loc) => loc.evaluate((e) => ({ open: !!e.open, modal: e.matches(':modal') }));
 const settle = (p, ms = 320) => p.waitForTimeout(ms);
@@ -104,8 +109,8 @@ async function verify66(root, page, width, motion) {
   expect(contained(r, v)).toBe(true);
   expect(r.width).toBeGreaterThan(200);
   expect(r.height).toBeGreaterThan(150);
+  await backdropOpacity1(card);
   const bd = await backdrop(card);
-  expect(bd.opacity).toBe('1');
   expect(bd.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   expect(bd.backdropFilter).not.toBe('none');
   expect(bd.backdropFilter).toContain('blur');
@@ -116,7 +121,7 @@ async function verify66(root, page, width, motion) {
   expect(await focusName(root)).toContain('programme-trigger');
   if (motion === 'reduce') {
     expect(await style(card, 'transitionDuration')).toBe('0s');
-    expect((await backdrop(card)).opacity).toBe('1');
+    await backdropOpacity1(card);
   }
   // Focusing the background trigger and pressing Enter toggles the open
   // card closed (a bare popovertarget toggles).
@@ -125,7 +130,7 @@ async function verify66(root, page, width, motion) {
   await page.keyboard.press('Enter');
   await settleClosed(page);
   expect(await popOpen(card)).toBe(false);
-  expect(await style(card, 'display')).toBe('none');
+  await displayNone(card);
   // Escape closes and returns focus to the invoker.
   await trigger.focus();
   await page.keyboard.press('Enter');
@@ -134,7 +139,7 @@ async function verify66(root, page, width, motion) {
   await page.keyboard.press('Escape');
   await settleClosed(page);
   expect(await popOpen(card)).toBe(false);
-  expect(await style(card, 'display')).toBe('none');
+  await displayNone(card);
   expect(await focusName(root)).toContain('programme-trigger');
   // Light dismiss via the backdrop.
   await trigger.click();
@@ -198,8 +203,8 @@ async function verify75(root, page, width, motion) {
   expect(contained(cr, v)).toBe(true);
   expect(cr.width).toBeGreaterThanOrEqual(43.5); // authored 44px; subpixel slack
   expect(cr.height).toBeGreaterThanOrEqual(43.5); // authored 44px; subpixel slack
+  await backdropOpacity1(pop);
   const bd = await backdrop(pop);
-  expect(bd.opacity).toBe('1');
   expect(bd.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   // Non-modal proof: the background trigger stays focusable and operable
   // while the zoom is open — no focus trap is claimed for `popover=auto`.
@@ -208,7 +213,7 @@ async function verify75(root, page, width, motion) {
   expect(await focusName(root)).toContain('img-trigger');
   if (motion === 'reduce') {
     expect(await style(pop, 'transitionDuration')).toBe('0s');
-    expect((await backdrop(pop)).opacity).toBe('1');
+    await backdropOpacity1(pop);
   }
   // Focusing the background trigger and pressing Enter toggles the open
   // zoom closed (a bare popovertarget toggles).
@@ -217,7 +222,7 @@ async function verify75(root, page, width, motion) {
   await page.keyboard.press('Enter');
   await settleClosed(page);
   expect(await popOpen(pop)).toBe(false);
-  expect(await style(pop, 'display')).toBe('none');
+  await displayNone(pop);
   // Escape closes and returns focus to the trigger.
   await trigger.focus();
   await page.keyboard.press('Enter');
@@ -271,6 +276,9 @@ async function verify77(root, page, width, motion, browserName) {
   await page.keyboard.press('Enter');
   await settle(page);
   expect(await dialogState(dlg)).toEqual({ open: true, modal: true });
+  // Gate the transform-sensitive geometry below on the entry transition's
+  // exact endpoint (the backdrop shares its clock).
+  await backdropOpacity1(dlg);
   const r = await rect(dlg); const v = await viewport(root);
   expect(contained(r, v)).toBe(true);
   const scroll = await dlg.evaluate((e) => ({ scrollH: e.scrollHeight, clientH: e.clientHeight }));
@@ -296,9 +304,7 @@ async function verify77(root, page, width, motion, browserName) {
     // Short surfaces (documentation iframes) scroll internally instead.
     expect(scroll.scrollH).toBeGreaterThan(scroll.clientH);
   }
-  const bd = await backdrop(dlg);
-  expect(bd.opacity).toBe('1');
-  expect(bd.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
+  expect((await backdrop(dlg)).backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   // Modal proof: background hit-testing is blocked and Tab is trapped.
   expect(await root.locator('body').evaluate(() => {
     const t = document.querySelector('[commandfor="sheet-demo"]');
@@ -396,6 +402,9 @@ async function verify106(root, page, width, motion, browserName) {
   await page.keyboard.press('Enter');
   await settle(page);
   expect(await dialogState(dlg)).toEqual({ open: true, modal: true });
+  // Gate the transform-sensitive geometry below on the entry transition's
+  // exact endpoint (the backdrop shares its clock).
+  await backdropOpacity1(dlg);
   const r = await rect(dlg); const v = await viewport(root);
   expect(contained(r, v)).toBe(true);
   // Autofocus lands on the primary close control.
@@ -410,9 +419,7 @@ async function verify106(root, page, width, motion, browserName) {
       expect(br.bottom).toBeLessThanOrEqual(r.bottom + 4); // font-metric slack across engines
     }
   }
-  const bd = await backdrop(dlg);
-  expect(bd.opacity).toBe('1');
-  expect(bd.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
+  expect((await backdrop(dlg)).backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   // Modal proof: background hit-testing is blocked and Tab is trapped.
   expect(await root.locator('body').evaluate(() => {
     const t = document.querySelector('[commandfor="close-options"]');
@@ -541,7 +548,7 @@ for (const id of ids) {
     const r = await rect(overlay); const v = await viewport(page);
     expect(contained(r, v)).toBe(true);
     expect(r.width).toBeGreaterThan(120);
-    expect((await backdrop(overlay)).opacity).toBe('1');
+    await backdropOpacity1(overlay);
     await page.keyboard.press('Escape');
     await settleClosed(page);
     expect(isDialog ? (await dialogState(overlay)).open : await popOpen(overlay)).toBe(false);

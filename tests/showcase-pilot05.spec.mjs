@@ -105,11 +105,12 @@ async function verify66(root, page, width, motion) {
   await page.keyboard.press('Enter');
   await settle(page);
   expect(await popOpen(card)).toBe(true);
+  // Gate all geometry below on the entry transition's exact endpoint.
+  await backdropOpacity1(card);
   const r = await rect(card); const v = await viewport(root);
   expect(contained(r, v)).toBe(true);
   expect(r.width).toBeGreaterThan(200);
   expect(r.height).toBeGreaterThan(150);
-  await backdropOpacity1(card);
   const bd = await backdrop(card);
   expect(bd.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   expect(bd.backdropFilter).not.toBe('none');
@@ -180,6 +181,10 @@ async function verify75(root, page, width, motion) {
   await page.keyboard.press('Enter');
   await settle(page);
   expect(await popOpen(pop)).toBe(true);
+  // Gate all geometry below on the entry transition's exact endpoint: the
+  // zoom entry scales inner boxes (WebKit sampled the 44px close pill
+  // at 41.36px mid-transition under CI load).
+  await backdropOpacity1(pop);
   // The same image at full fidelity; genuinely enlarged where the viewport
   // has room, aspect preserved everywhere.
   expect(await thumb.getAttribute('src')).toBe(await big.getAttribute('src'));
@@ -203,7 +208,6 @@ async function verify75(root, page, width, motion) {
   expect(contained(cr, v)).toBe(true);
   expect(cr.width).toBeGreaterThanOrEqual(43.5); // authored 44px; subpixel slack
   expect(cr.height).toBeGreaterThanOrEqual(43.5); // authored 44px; subpixel slack
-  await backdropOpacity1(pop);
   const bd = await backdrop(pop);
   expect(bd.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   // Non-modal proof: the background trigger stays focusable and operable

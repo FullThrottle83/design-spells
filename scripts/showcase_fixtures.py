@@ -166,3 +166,12 @@ except ImportError:
 HTML.update(P05_HTML)
 CSS.update(P05_CSS)
 HINTS.update(P05_HINTS)
+
+# Pilot 06: remaining invoker overlays and their standalone product contexts.
+try:
+    from .showcase_pilot06 import HTML as P06_HTML, CSS as P06_CSS, HINTS as P06_HINTS
+except ImportError:
+    from showcase_pilot06 import HTML as P06_HTML, CSS as P06_CSS, HINTS as P06_HINTS
+HTML.update(P06_HTML)
+CSS.update(P06_CSS)
+HINTS.update(P06_HINTS)

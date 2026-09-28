@@ -118,46 +118,53 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.split { display: inline-flex; position: relative; anchor-scope: --split; }
-.split-main, .split-more {
-  min-block-size: 44px; display: inline-grid; place-items: center;
-  background: var(--color-primary); color: white; border: 0;
-  text-decoration: none; cursor: pointer;
+.split { display:inline-flex; vertical-align:middle; }
+.split a.split-main, .split-more { min-block-size:48px; display:inline-flex; align-items:center;
+  justify-content:center; gap:.7rem; padding:.6rem 1rem; background:var(--color-primary);
+  color:var(--color-bg); border:0; text-decoration:none; font:inherit; cursor:pointer; }
+.split-main { border-radius:.7rem 0 0 .7rem; }
+.split-more { anchor-name:--project-split-more; min-inline-size:48px; padding:.6rem;
+  border-inline-start:1px solid oklch(1 0 0 / .3); border-radius:0 .7rem .7rem 0; }
+.split-menu { position:fixed; inset:auto 1rem 1rem auto; margin:0;
+  inline-size:min(19rem, calc(100vw - 2rem)); max-block-size:calc(100dvh - 2rem);
+  overflow:auto; padding:.6rem; background:var(--color-bg); color:var(--color-text);
+  border:1px solid var(--color-border); border-radius:.8rem;
+  box-shadow:0 18px 48px oklch(0 0 0 / .2); }
+.split-menu p { margin:.3rem .7rem .5rem; font-size:.75rem; }
+.split-menu a { min-block-size:48px; display:flex; align-items:center; justify-content:space-between;
+  padding:.65rem .7rem; border-radius:.4rem; color:inherit; text-decoration:none; }
+.split-menu a:hover, .split-menu a:focus-visible { background:var(--color-surface-offset); }
+.split :focus-visible, .split-menu :focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+@supports (position-anchor:--project-split-more) and (position-area:bottom span-left) {
+  @media (min-width:600px) and (min-height:560px) {
+    .split-menu { position-anchor:--project-split-more; position-area:bottom span-left;
+      position-try-fallbacks:flip-block, flip-inline; inset:auto;
+      margin-block-start:.5rem; }
+  }
 }
-.split-main { padding-inline: var(--space-4); border-radius: var(--radius-md) 0 0 var(--radius-md); }
-.split-more {
-  anchor-name: --split;
-  min-inline-size: 44px;
-  border-inline-start: 1px solid oklch(1 0 0 / .25);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-.split-menu {
-  margin: 0; inset: auto;
-  position-anchor: --split; position-area: bottom end;
-  margin-block-start: .35rem;
-  position-try-fallbacks: flip-inline, flip-block;
-  position-visibility: anchors-visible;
-  min-inline-size: 12rem; padding: var(--space-2);
-  background: var(--color-bg); border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 40px oklch(0 0 0 / .14);
-}
-.split-menu a {
-  display: grid; align-items: center; min-block-size: 44px;
-  padding-inline: .75rem; border-radius: var(--radius-sm);
-  color: var(--color-text); text-decoration: none;
-}
-.split-menu a:hover, .split-menu a:focus-visible { background: var(--color-surface-offset); }
+
+/* Demo-only art direction; the spell rules above remain authoritative. */
+.stage:has(.showcase) {padding:clamp(18px,4vw,56px);min-height:min(100dvh,760px);align-content:center}
+.showcase {min-width:0;width:min(100%,920px);font-size:16px;line-height:1.6;--color-primary:light-dark(#254f4b,#9ed5c4)}
+.showcase h1 {font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(32px,4.5vw,58px);line-height:1.08;margin:14px 0 20px;text-wrap:balance}
+.showcase h2 {line-height:1.2;letter-spacing:-.025em}
+.showcase p {margin:0 0 20px}
+.showcase .scene-kicker {font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.showcase a {color:inherit}
+.showcase :where(a,input,summary,[tabindex="0"]):focus-visible {outline:2px solid var(--color-primary);outline-offset:5px}
+.showcase svg {display:block;width:100%;height:auto}
+.showcase .scene-instruction {border-top:1px solid var(--color-border);padding-top:18px;margin:24px 0 0;font-size:13px;max-width:70ch}
+.showcase small {font-size:12px}
+
+.showcase:has(.split-page){max-width:1100px;--color-primary:light-dark(#62352b,#edbb98);--color-text:light-dark(#322c26,#f0e9df);--color-bg:light-dark(#faf6ec,#211d1b);--color-border:light-dark(#dbcabb,#514137);--color-surface-offset:light-dark(#efe2d3,#43352e);--color-accent:light-dark(#823e33,#f5bd9b)}
+.split-page{width:100%;background:var(--color-bg);color:var(--color-text);border:1px solid var(--color-border);border-radius:16px;overflow:hidden}.sp-header{padding:22px clamp(22px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--color-border)}.sp-header strong{font-size:22px;letter-spacing:-.08em}.sp-header strong span{color:var(--color-primary)}.sp-header>span,.sp-kicker,.sp-action-label,.sp-sections section>span{font:600 11px ui-monospace,monospace;letter-spacing:.12em;color:var(--color-text-muted)}.sp-body{display:grid;grid-template-columns:1.1fr .9fr;min-height:490px}.sp-overview{padding:clamp(28px,4vw,55px)}.sp-overview h1{font-size:clamp(46px,5vw,72px);line-height:1;margin:22px 0}.sp-overview h1 em{color:var(--color-primary);font-weight:normal}.sp-lede{font-size:17px;max-width:42ch;color:var(--color-text-muted)}.sp-meta{display:flex;gap:clamp(14px,3vw,32px);flex-wrap:wrap;padding:20px 0;border-block:1px solid var(--color-border);margin:26px 0;font:10px/1.8 ui-monospace,monospace;letter-spacing:.08em;color:var(--color-text-muted)}.sp-meta strong{font:600 13px system-ui;color:var(--color-text)}.sp-controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.split-main,.split-more{background:light-dark(#62352b,#edbb98);color:light-dark(#fffaf0,#211d1b);font-weight:600}.split-more span{font-size:23px;line-height:1;transform:translateY(-4px)}.split-more:active,.split-main:active{filter:brightness(.85)}
+.sp-art{position:relative;overflow:hidden;background:light-dark(#dec2a2,#6d493e);display:flex;align-items:flex-start;padding:clamp(28px,4vw,50px)}.sp-art-caption{z-index:1;font:600 clamp(32px,4vw,56px)/.98 Georgia,serif;color:#412f26;letter-spacing:-.06em}.sp-art-caption small{font:600 11px ui-monospace,monospace;letter-spacing:.2em}.sp-orb{position:absolute;border-radius:50%;box-shadow:inset -25px -28px 55px #37282035,18px 25px 45px #3c261b3d}.sp-orb-one{width:52%;aspect-ratio:1;right:13%;top:29%;background:#d16842}.sp-orb-two{width:34%;aspect-ratio:1;left:12%;bottom:-5%;background:#8e9c59}.sp-art-foot{position:absolute;right:25px;bottom:22px;font:10px ui-monospace,monospace;color:#412f26}.sp-sections{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--color-border)}.sp-sections section{padding:28px;border-right:1px solid var(--color-border);scroll-margin-top:12px}.sp-sections section:last-child{border:0}.sp-sections h2{font:normal 24px Georgia,serif;margin:12px 0}.sp-sections p{font-size:14px;color:var(--color-text-muted);margin:0}
+.split-menu{background:light-dark(#faf6ec,#211d1b);color:light-dark(#322c26,#f0e9df);border-color:light-dark(#dbcabb,#514137);--color-surface-offset:light-dark(#efe2d3,#43352e);--color-accent:light-dark(#823e33,#f5bd9b)}.split-menu p{font:600 10px ui-monospace,monospace;letter-spacing:.12em;color:light-dark(#7c6d60,#c9a996)}.split-menu a{font-size:14px;font-weight:600}.split-menu a+a{border-top:1px solid light-dark(#dbcabb,#514137)}
+@media(max-width:700px){.sp-header>span{display:none}.sp-body{grid-template-columns:1fr}.sp-art{min-height:260px}.sp-sections{grid-template-columns:1fr}.sp-sections section{border-right:0;border-bottom:1px solid var(--color-border)}}
 </style>
 </head>
 <body>
-  <div class="stage"><div class="split">
-  <a class="split-main" href="/quote">Request quote</a>
-  <button class="split-more" commandfor="split-menu" command="toggle-popover" aria-label="More actions">▾</button>
-  <div id="split-menu" popover="auto" class="split-menu">
-    <a href="/quote?plan=pro">Pro quote</a>
-    <a href="/contact">Talk to sales</a>
-  </div></div>
-  <p class='demo-hint'>Activate the control to preview</p>
+  <div class="stage"><div class="showcase"><main class="split-page"><header class="sp-header"><strong>atelier<span> / </span>index</strong><span>PROJECT SPACE &nbsp;·&nbsp; 2026</span></header><div class="sp-body"><div class="sp-overview"><p class="sp-kicker">01 / ACTIVE PROJECT</p><h1>The Orchard<br><em>identity.</em></h1><p class="sp-lede">A warm, adaptable visual language for a neighbourhood market finding its place in the city.</p><div class="sp-meta"><span>CLIENT<br><strong>The Orchard</strong></span><span>DISCIPLINE<br><strong>Identity & signage</strong></span><span>STATUS<br><strong>In progress</strong></span></div><div class="sp-controls"><span class="sp-action-label">EXPLORE THIS PROJECT</span><div class="split"><a class="split-main" href="#project-brief">Read the brief <span aria-hidden="true">↗</span></a><button type="button" class="split-more" commandfor="split-menu" command="toggle-popover" aria-label="More project links"><span aria-hidden="true">⌄</span></button></div></div></div><div class="sp-art" aria-hidden="true"><span class="sp-art-caption">THE ORCHARD<br><small>EVERYDAY, FRESH.</small></span><div class="sp-orb sp-orb-one"></div><div class="sp-orb sp-orb-two"></div><span class="sp-art-foot">GATHER GOOD THINGS. &nbsp; ◇ &nbsp; 2026</span></div></div><div class="sp-sections"><section id="project-brief"><span>01 / BRIEF</span><h2>A market for everyone.</h2><p>Identity, signage and a reusable seasonal palette. The system has to feel familiar on a paper bag and unmistakable from across the street.</p></section><section id="project-timeline"><span>02 / TIMELINE</span><h2>From first sketch to street.</h2><p>Discovery in September; first concepts in October; a neighbourhood launch when the signs are ready.</p></section><section id="project-people"><span>03 / PEOPLE</span><h2>Made together.</h2><p>A small team of designers and market organisers shaping something that belongs to the block.</p></section></div></main><div id="split-menu" popover="auto" class="split-menu" aria-label="More project links"><p>PROJECT INDEX / 02–03</p><a href="#project-timeline">View timeline <span aria-hidden="true">↗</span></a><a href="#project-people">Meet the team <span aria-hidden="true">↗</span></a></div><p class="scene-instruction">Read the brief goes to the brief. The adjacent arrow opens a separate native project index; Escape or click elsewhere to dismiss it.</p></div></div>
+
 </body>
 </html>

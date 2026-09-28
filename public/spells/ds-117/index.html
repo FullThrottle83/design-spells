@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Split Action Button (`commandfor`) — Design Spells</title>
-  <meta name="description" content="A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.">
+  <meta name="description" content="The primary link opens the brief; the adjacent button opens *different* destinations. All fragments have local targets. Native `popover=&quot;auto&quot;` handles Escape and light-dismiss. Without invoker command support the secondary trigger is inert; without anchor positioning, the open popover remains a usable fixed corner panel. Do not use `position-visibility` to paper over placement errors.">
   <link rel="canonical" href="https://design-spells.hultsan20.workers.dev/spells/ds-117/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Split Action Button (`commandfor`) — Design Spells">
-  <meta property="og:description" content="A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.">
+  <meta property="og:description" content="The primary link opens the brief; the adjacent button opens *different* destinations. All fragments have local targets. Native `popover=&quot;auto&quot;` handles Escape and light-dismiss. Without invoker command support the secondary trigger is inert; without anchor positioning, the open popover remains a usable fixed corner panel. Do not use `position-visibility` to paper over placement errors.">
   <meta property="og:url" content="https://design-spells.hultsan20.workers.dev/spells/ds-117/">
   <link rel="stylesheet" href="/spell-pages.css">
 </head>
@@ -23,11 +23,11 @@
   <main id="main" class="shell">
     <p class="eyebrow">ds-117 / Overlays / Markup</p>
     <h1>Split Action Button (`commandfor`)</h1>
-    <p class="lede">A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.</p>
+    <p class="lede">The primary link opens the brief; the adjacent button opens *different* destinations. All fragments have local targets. Native `popover=&quot;auto&quot;` handles Escape and light-dismiss. Without invoker command support the secondary trigger is inert; without anchor positioning, the open popover remains a usable fixed corner panel. Do not use `position-visibility` to paper over placement errors.</p>
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-117/">Open standalone demo ↗</a><a class="action" href="/download/ds-117.html" download="ds-117.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Activate the control to preview</p>
+      <p class='note'>Read the brief goes to the brief. The adjacent arrow opens a separate native project index; Escape or click elsewhere to dismiss it.</p>
       
       <iframe title="Isolated demonstration: Split Action Button (`commandfor`)" src="/play/ds-117/" loading="lazy" sandbox="allow-same-origin allow-forms"></iframe>
     </section>
@@ -40,52 +40,55 @@
       </div>
       <p class="note">Integration source includes only referenced shared tokens and authored HTML (or a labelled demo fixture); project variables and external media may need attention. Raw snippets below omit shared base tokens. Download runnable HTML above for the complete styled demo.</p>
       <h3>HTML</h3>
-      
-      <pre tabindex="0"><code>&lt;div class=&quot;split&quot;&gt;
-  &lt;a class=&quot;split-main&quot; href=&quot;/quote&quot;&gt;Request quote&lt;/a&gt;
-  &lt;button class=&quot;split-more&quot; commandfor=&quot;split-menu&quot; command=&quot;toggle-popover&quot; aria-label=&quot;More actions&quot;&gt;▾&lt;/button&gt;
-  &lt;div id=&quot;split-menu&quot; popover=&quot;auto&quot; class=&quot;split-menu&quot;&gt;
-    &lt;a href=&quot;/quote?plan=pro&quot;&gt;Pro quote&lt;/a&gt;
-    &lt;a href=&quot;/contact&quot;&gt;Talk to sales&lt;/a&gt;
-  &lt;/div&gt;</code></pre>
+      <!-- Canonical authored markup. -->
+      <pre tabindex="0"><code>&lt;main class=&quot;split-page&quot;&gt;
+  &lt;p&gt;Atelier / Project workspace&lt;/p&gt;&lt;h1&gt;The Orchard identity&lt;/h1&gt;
+  &lt;p&gt;A visual system for a small neighbourhood market.&lt;/p&gt;
+  &lt;div class=&quot;split&quot;&gt;
+    &lt;a class=&quot;split-main&quot; href=&quot;#project-brief&quot;&gt;Read the brief &lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;
+    &lt;button type=&quot;button&quot; class=&quot;split-more&quot; commandfor=&quot;split-menu&quot; command=&quot;toggle-popover&quot; aria-label=&quot;More project links&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;⌄&lt;/span&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;section id=&quot;project-brief&quot;&gt;&lt;h2&gt;Project brief&lt;/h2&gt;&lt;p&gt;Identity, signage and a reusable seasonal palette.&lt;/p&gt;&lt;/section&gt;
+  &lt;section id=&quot;project-timeline&quot;&gt;&lt;h2&gt;Timeline&lt;/h2&gt;&lt;p&gt;Discovery in September; first concepts in October.&lt;/p&gt;&lt;/section&gt;
+  &lt;section id=&quot;project-people&quot;&gt;&lt;h2&gt;People&lt;/h2&gt;&lt;p&gt;A small team of designers and market organisers.&lt;/p&gt;&lt;/section&gt;
+&lt;/main&gt;
+&lt;div id=&quot;split-menu&quot; popover=&quot;auto&quot; class=&quot;split-menu&quot; aria-label=&quot;More project links&quot;&gt;
+  &lt;p&gt;Project index&lt;/p&gt;
+  &lt;a href=&quot;#project-timeline&quot;&gt;View timeline &lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;
+  &lt;a href=&quot;#project-people&quot;&gt;Meet the team &lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.split { display: inline-flex; position: relative; anchor-scope: --split; }
-.split-main, .split-more {
-  min-block-size: 44px; display: inline-grid; place-items: center;
-  background: var(--color-primary); color: white; border: 0;
-  text-decoration: none; cursor: pointer;
-}
-.split-main { padding-inline: var(--space-4); border-radius: var(--radius-md) 0 0 var(--radius-md); }
-.split-more {
-  anchor-name: --split;
-  min-inline-size: 44px;
-  border-inline-start: 1px solid oklch(1 0 0 / .25);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-.split-menu {
-  margin: 0; inset: auto;
-  position-anchor: --split; position-area: bottom end;
-  margin-block-start: .35rem;
-  position-try-fallbacks: flip-inline, flip-block;
-  position-visibility: anchors-visible;
-  min-inline-size: 12rem; padding: var(--space-2);
-  background: var(--color-bg); border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 40px oklch(0 0 0 / .14);
-}
-.split-menu a {
-  display: grid; align-items: center; min-block-size: 44px;
-  padding-inline: .75rem; border-radius: var(--radius-sm);
-  color: var(--color-text); text-decoration: none;
-}
-.split-menu a:hover, .split-menu a:focus-visible { background: var(--color-surface-offset); }</code></pre>
+      <pre tabindex="0"><code>.split { display:inline-flex; vertical-align:middle; }
+.split a.split-main, .split-more { min-block-size:48px; display:inline-flex; align-items:center;
+  justify-content:center; gap:.7rem; padding:.6rem 1rem; background:var(--color-primary);
+  color:var(--color-bg); border:0; text-decoration:none; font:inherit; cursor:pointer; }
+.split-main { border-radius:.7rem 0 0 .7rem; }
+.split-more { anchor-name:--project-split-more; min-inline-size:48px; padding:.6rem;
+  border-inline-start:1px solid oklch(1 0 0 / .3); border-radius:0 .7rem .7rem 0; }
+.split-menu { position:fixed; inset:auto 1rem 1rem auto; margin:0;
+  inline-size:min(19rem, calc(100vw - 2rem)); max-block-size:calc(100dvh - 2rem);
+  overflow:auto; padding:.6rem; background:var(--color-bg); color:var(--color-text);
+  border:1px solid var(--color-border); border-radius:.8rem;
+  box-shadow:0 18px 48px oklch(0 0 0 / .2); }
+.split-menu p { margin:.3rem .7rem .5rem; font-size:.75rem; }
+.split-menu a { min-block-size:48px; display:flex; align-items:center; justify-content:space-between;
+  padding:.65rem .7rem; border-radius:.4rem; color:inherit; text-decoration:none; }
+.split-menu a:hover, .split-menu a:focus-visible { background:var(--color-surface-offset); }
+.split :focus-visible, .split-menu :focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+@supports (position-anchor:--project-split-more) and (position-area:bottom span-left) {
+  @media (min-width:600px) and (min-height:560px) {
+    .split-menu { position-anchor:--project-split-more; position-area:bottom span-left;
+      position-try-fallbacks:flip-block, flip-inline; inset:auto;
+      margin-block-start:.5rem; }
+  }
+}</code></pre>
     </section>
     <section aria-labelledby="support-title">
       <h2 id="support-title">Browser-support guidance</h2>
-      <p class="note">Project category: Newer. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
+      <p class="note">Project category: Baseline. This hand-maintained registry is a dated estimate, not proof of browser behavior.</p>
       <p class="note">Support: registry-estimate; behavior: not-individually-verified; accessibility: not-audited.</p>
-      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>no</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
-      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. Chrome 125+, Safari 26+. Overlay stays visible without support. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
+      <ul class="browser-list"><li><strong>Chrome</strong><span>yes</span></li><li><strong>Edge</strong><span>yes</span></li><li><strong>Firefox</strong><span>yes</span></li><li><strong>Safari</strong><span>yes</span></li></ul>
+      <p class="note">Chrome/Edge 135+, Firefox 144+, Safari 26.2+; Baseline newly available in late 2025. Chrome/Edge 125+, Safari 26+, Firefox 147+. @starting-style: Chrome/Edge 117+, Firefox 129+, Safari 17.5+. Popover is also supported in current browsers; both are newer Baseline features. color-mix() and oklch() are Baseline 2023.</p>
     </section>
     <footer><a href="/">Back to catalogue</a><span>Built from canonical README.md</span></footer>
   </main>

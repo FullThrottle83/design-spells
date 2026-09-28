@@ -3239,54 +3239,62 @@ progress::-moz-progress-bar { background: var(--color-primary); border-radius: 9
 ### 97. Invoker Command Drawer (`commandfor` + `closedby`)
 *Navigation · Newer · Markup*
 
-An off-canvas menu as a native `<dialog>` — opened and closed with Invoker Commands, light-dismissed via `closedby="any"`. No `showModal()`, no click-outside listener.
+A modal navigation drawer opened with `commandfor` / `show-modal`. The explicit `method="dialog"` close works without `closedby`; Escape is the native modal default, while backdrop dismissal requires `closedby="any"` support. Invoker commands themselves need browser support: without them this button cannot open a modal without script. Fragment destinations below exist in the standalone example; replace both links and targets together when integrating.
 
 ```html
-<button class="nav-open" commandfor="site-drawer" command="show-modal" aria-label="Open menu">
-  Menu
-</button>
-
-<dialog id="site-drawer" class="nav-drawer" closedby="any">
-  <form method="dialog">
-    <button class="nav-close" commandfor="site-drawer" command="close" aria-label="Close menu">✕</button>
-  </form>
-  <nav aria-label="Mobile navigation">
-    <a href="/">Home</a>
-    <a href="/services">Services</a>
-    <a href="/contact">Contact</a>
-  </nav>
+<div class="nav-site" id="nav-home">
+  <header class="nav-site__header"><strong>Northline / Field guide</strong>
+    <button type="button" class="nav-open" commandfor="site-drawer" command="show-modal">Explore <span aria-hidden="true">☰</span></button></header>
+  <main><p class="nav-site__eyebrow">The long way round · Issue 04</p>
+    <h1>Go somewhere quieter.</h1><p>Three places to start, one route to make your own.</p>
+    <section id="nav-routes"><h2>Routes</h2><p>Woodland paths for slow mornings.</p></section>
+    <section id="nav-notes"><h2>Field notes</h2><p>Small observations from the trail.</p></section>
+    <section id="nav-visit"><h2>Plan a visit</h2><p>Pack light. Leave time to wander.</p></section></main>
+</div>
+<dialog id="site-drawer" class="nav-drawer" closedby="any" aria-labelledby="drawer-title">
+  <div class="nav-drawer__head"><span>Northline / 04</span>
+    <form method="dialog"><button type="submit" value="close" class="nav-close">Close <span aria-hidden="true">×</span></button></form></div>
+  <p class="nav-drawer__label" id="drawer-title">Explore the guide</p>
+  <nav aria-label="Guide sections"><a href="#nav-home"><span>01</span> Home</a>
+    <a href="#nav-routes"><span>02</span> Routes</a>
+    <a href="#nav-notes"><span>03</span> Field notes</a>
+    <a href="#nav-visit"><span>04</span> Plan a visit</a></nav>
+  <p class="nav-drawer__foot">Choose a section, then Close to view it.</p>
 </dialog>
 ```
 
 ```css
-.nav-open, .nav-close, .nav-drawer a {
-  min-block-size: 44px; min-inline-size: 44px;
-  display: inline-grid; place-items: center; align-content: center;
-}
+.nav-site { background: var(--color-bg); color: var(--color-text); }
+.nav-site__header { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.nav-open, .nav-close { min-block-size:44px; padding:.5rem 1rem; font:inherit; cursor:pointer; }
 .nav-drawer {
-  margin: 0; inset: 0 auto 0 0;
-  inline-size: min(22rem, 92vw); block-size: 100dvh;
-  border: 0; padding: var(--space-6);
-  background: var(--color-bg);
-  transform: translateX(-100%);
-  transition: transform 280ms cubic-bezier(.16,1,.3,1),
-              display 280ms allow-discrete, overlay 280ms allow-discrete;
+  position:fixed; margin:0; inset:0 auto 0 0;
+  inline-size:min(25rem, 100vw); block-size:100dvh; max-block-size:100dvh;
+  overflow-y:auto; overscroll-behavior:contain; border:0; padding:clamp(1.25rem,4vw,2rem);
+  background:var(--color-bg); color:var(--color-text);
+  box-shadow:12px 0 50px oklch(0 0 0 / .17);
+  transform:translateX(-100%);
+  transition:transform 280ms cubic-bezier(.16,1,.3,1), display 280ms allow-discrete, overlay 280ms allow-discrete;
 }
-.nav-drawer[open], .nav-drawer:open { transform: translateX(0); }
-@starting-style { .nav-drawer[open], .nav-drawer:open { transform: translateX(-100%); } }
-.nav-drawer::backdrop {
-  background: oklch(0 0 0 / .4);
-  opacity: 0;
-  transition: opacity 280ms ease, display 280ms allow-discrete, overlay 280ms allow-discrete;
+.nav-drawer[open] { transform:none; }
+@starting-style { .nav-drawer[open] { transform:translateX(-100%); } }
+.nav-drawer::backdrop { background:oklch(0 0 0 / .55); opacity:0;
+  transition:opacity 280ms ease, display 280ms allow-discrete, overlay 280ms allow-discrete; }
+.nav-drawer[open]::backdrop { opacity:1; }
+@starting-style { .nav-drawer[open]::backdrop { opacity:0; } }
+.nav-drawer__head { display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.nav-drawer__head form { margin:0; }
+.nav-drawer__label { margin:clamp(2rem,7vh,4rem) 0 1rem; }
+.nav-drawer nav { display:grid; border-top:1px solid var(--color-border); }
+.nav-drawer a { display:flex; align-items:center; gap:1.2rem; min-block-size:58px;
+  border-bottom:1px solid var(--color-border); color:inherit; text-decoration:none; }
+.nav-drawer a:hover, .nav-drawer a:focus-visible { background:var(--color-surface-offset); }
+.nav-drawer a span { font-size:.75rem; }
+.nav-drawer__foot { margin:2rem 0 0; }
+.nav-drawer :focus-visible, .nav-open:focus-visible { outline:2px solid var(--color-accent); outline-offset:3px; }
+@media (prefers-reduced-motion:reduce) {
+  .nav-drawer, .nav-drawer::backdrop { transition:none; }
 }
-.nav-drawer[open]::backdrop, .nav-drawer:open::backdrop { opacity: 1; }
-@starting-style { .nav-drawer[open]::backdrop, .nav-drawer:open::backdrop { opacity: 0; } }
-.nav-drawer nav { display: grid; gap: .25rem; margin-block-start: var(--space-6); }
-.nav-drawer a {
-  justify-content: start; padding-inline: var(--space-3);
-  border-radius: var(--radius-sm); color: var(--color-text); text-decoration: none;
-}
-.nav-drawer a:hover, .nav-drawer a:focus-visible { background: var(--color-surface-offset); }
 ```
 
 ### 98. Interest-Hint Tooltip (`interestfor` + `popover="hint"`)
@@ -3876,49 +3884,52 @@ A declarative light/dark switch with no JS. The checkbox sets `color-scheme` on 
 ### 117. Split Action Button (`commandfor`)
 *Overlays · Newer · Markup*
 
-A primary action plus overflow menu in the same control. The menu is `[popover=auto]` pinned with anchor positioning.
+The primary link opens the brief; the adjacent button opens *different* destinations. All fragments have local targets. Native `popover="auto"` handles Escape and light-dismiss. Without invoker command support the secondary trigger is inert; without anchor positioning, the open popover remains a usable fixed corner panel. Do not use `position-visibility` to paper over placement errors.
 
 ```html
-<div class="split">
-  <a class="split-main" href="/quote">Request quote</a>
-  <button class="split-more" commandfor="split-menu" command="toggle-popover" aria-label="More actions">▾</button>
-  <div id="split-menu" popover="auto" class="split-menu">
-    <a href="/quote?plan=pro">Pro quote</a>
-    <a href="/contact">Talk to sales</a>
+<main class="split-page">
+  <p>Atelier / Project workspace</p><h1>The Orchard identity</h1>
+  <p>A visual system for a small neighbourhood market.</p>
+  <div class="split">
+    <a class="split-main" href="#project-brief">Read the brief <span aria-hidden="true">↗</span></a>
+    <button type="button" class="split-more" commandfor="split-menu" command="toggle-popover" aria-label="More project links"><span aria-hidden="true">⌄</span></button>
   </div>
+  <section id="project-brief"><h2>Project brief</h2><p>Identity, signage and a reusable seasonal palette.</p></section>
+  <section id="project-timeline"><h2>Timeline</h2><p>Discovery in September; first concepts in October.</p></section>
+  <section id="project-people"><h2>People</h2><p>A small team of designers and market organisers.</p></section>
+</main>
+<div id="split-menu" popover="auto" class="split-menu" aria-label="More project links">
+  <p>Project index</p>
+  <a href="#project-timeline">View timeline <span aria-hidden="true">↗</span></a>
+  <a href="#project-people">Meet the team <span aria-hidden="true">↗</span></a>
+</div>
 ```
 
 ```css
-.split { display: inline-flex; position: relative; anchor-scope: --split; }
-.split-main, .split-more {
-  min-block-size: 44px; display: inline-grid; place-items: center;
-  background: var(--color-primary); color: white; border: 0;
-  text-decoration: none; cursor: pointer;
+.split { display:inline-flex; vertical-align:middle; }
+.split a.split-main, .split-more { min-block-size:48px; display:inline-flex; align-items:center;
+  justify-content:center; gap:.7rem; padding:.6rem 1rem; background:var(--color-primary);
+  color:var(--color-bg); border:0; text-decoration:none; font:inherit; cursor:pointer; }
+.split-main { border-radius:.7rem 0 0 .7rem; }
+.split-more { anchor-name:--project-split-more; min-inline-size:48px; padding:.6rem;
+  border-inline-start:1px solid oklch(1 0 0 / .3); border-radius:0 .7rem .7rem 0; }
+.split-menu { position:fixed; inset:auto 1rem 1rem auto; margin:0;
+  inline-size:min(19rem, calc(100vw - 2rem)); max-block-size:calc(100dvh - 2rem);
+  overflow:auto; padding:.6rem; background:var(--color-bg); color:var(--color-text);
+  border:1px solid var(--color-border); border-radius:.8rem;
+  box-shadow:0 18px 48px oklch(0 0 0 / .2); }
+.split-menu p { margin:.3rem .7rem .5rem; font-size:.75rem; }
+.split-menu a { min-block-size:48px; display:flex; align-items:center; justify-content:space-between;
+  padding:.65rem .7rem; border-radius:.4rem; color:inherit; text-decoration:none; }
+.split-menu a:hover, .split-menu a:focus-visible { background:var(--color-surface-offset); }
+.split :focus-visible, .split-menu :focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+@supports (position-anchor:--project-split-more) and (position-area:bottom span-left) {
+  @media (min-width:600px) and (min-height:560px) {
+    .split-menu { position-anchor:--project-split-more; position-area:bottom span-left;
+      position-try-fallbacks:flip-block, flip-inline; inset:auto;
+      margin-block-start:.5rem; }
+  }
 }
-.split-main { padding-inline: var(--space-4); border-radius: var(--radius-md) 0 0 var(--radius-md); }
-.split-more {
-  anchor-name: --split;
-  min-inline-size: 44px;
-  border-inline-start: 1px solid oklch(1 0 0 / .25);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-.split-menu {
-  margin: 0; inset: auto;
-  position-anchor: --split; position-area: bottom end;
-  margin-block-start: .35rem;
-  position-try-fallbacks: flip-inline, flip-block;
-  position-visibility: anchors-visible;
-  min-inline-size: 12rem; padding: var(--space-2);
-  background: var(--color-bg); border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 40px oklch(0 0 0 / .14);
-}
-.split-menu a {
-  display: grid; align-items: center; min-block-size: 44px;
-  padding-inline: .75rem; border-radius: var(--radius-sm);
-  color: var(--color-text); text-decoration: none;
-}
-.split-menu a:hover, .split-menu a:focus-visible { background: var(--color-surface-offset); }
 ```
 
 ### 118. Customizable Select Checkmark (`::checkmark` + `::picker-icon`)
@@ -4284,46 +4295,41 @@ A min/max range picker with two overlapping native sliders whose thumbs stay int
 ### 131. Dismissible Toast (`popover="manual"`)
 *Overlays · Newer · Markup*
 
-A native toast that opens and closes with declarative buttons. It does **not** time out automatically; a CSS fade alone cannot close a manual popover or remove it from the top layer. The close button stays available to keyboard users.
+A manually dismissed, declaratively opened notice. No saving, submission, timer or persistence is implied: pressing the trigger only displays this notice. Unlike `auto`, a manual popover does **not** light-dismiss on Escape or an outside click. A CSS fade does not close it. Without invoker commands the buttons cannot operate without script.
 
 ```html
-<button commandfor="auto-toast-1" command="show-popover" class="btn">Show notification</button>
-
-<div id="auto-toast-1" popover="manual" class="auto-toast">
-  <span role="status">Changes saved.</span>
-  <button type="button" class="auto-toast__close"
-          commandfor="auto-toast-1" command="hide-popover"
-          aria-label="Dismiss notification">×</button>
+<main class="toast-page"><p>Papertrail / Reading desk</p><h1>Keep the good ideas close.</h1>
+  <p>Collect a thought, then return to your reading. This page is a demonstration: it does not save notes.</p>
+  <button type="button" class="toast-trigger" commandfor="auto-toast-1" command="show-popover">Preview a notice</button>
+  <section><h2>On your desk</h2><p>01 / On noticing the details · 4 min read</p></section>
+</main>
+<div id="auto-toast-1" popover="manual" class="auto-toast" aria-label="Preview notice">
+  <span class="auto-toast__mark" aria-hidden="true">i</span>
+  <span role="status"><strong>Just a preview</strong><br>No notes were saved.</span>
+  <button type="button" class="auto-toast__close" commandfor="auto-toast-1" command="hide-popover" aria-label="Dismiss notice">Close <span aria-hidden="true">×</span></button>
 </div>
 ```
 
 ```css
-.auto-toast {
-  margin: auto auto 2rem auto; border: 0; padding: .75rem 1.25rem;
-  border-radius: 999px; background: var(--color-text); color: var(--color-bg);
-  box-shadow: 0 12px 32px oklch(0 0 0 / 0.15);
-  opacity: 0; transform: translateY(12px);
-  transition: opacity 220ms ease, transform 220ms cubic-bezier(.16,1,.3,1),
-              display 220ms allow-discrete, overlay 220ms allow-discrete;
-}
-.auto-toast:popover-open {
-  display: flex; align-items: center; gap: .75rem;
-  opacity: 1; transform: none;
-}
-@starting-style {
-  .auto-toast:popover-open { opacity: 0; transform: translateY(12px); }
-}
-.auto-toast__close {
-  display: grid; place-items: center; min-inline-size: 44px; min-block-size: 44px;
-  border: 0; border-radius: 999px; background: transparent; color: inherit;
-  font: inherit; cursor: pointer;
-}
-.auto-toast__close:focus-visible {
-  outline: 2px solid currentColor; outline-offset: 2px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .auto-toast { transition: none; }
-}
+.toast-trigger { min-block-size:48px; padding:.6rem 1.2rem; cursor:pointer; font:inherit; }
+.auto-toast { position:fixed; inset:auto 1rem max(1rem, env(safe-area-inset-bottom)) auto;
+  margin:0; inline-size:min(23rem, calc(100vw - 2rem)); max-block-size:calc(100dvh - 2rem);
+  overflow:auto; border:1px solid var(--color-border); border-radius:1rem;
+  padding:1rem; background:var(--color-text); color:var(--color-bg);
+  box-shadow:0 16px 48px oklch(0 0 0 / .22);
+  opacity:0; transform:translateY(.75rem);
+  transition:opacity 220ms ease, transform 220ms ease, display 220ms allow-discrete, overlay 220ms allow-discrete; }
+.auto-toast:popover-open { display:flex; align-items:center; gap:.75rem; opacity:1; transform:none; }
+@starting-style { .auto-toast:popover-open { opacity:0; transform:translateY(.75rem); } }
+.auto-toast__mark { display:grid; place-items:center; flex:none; inline-size:32px; block-size:32px;
+  border:1px solid currentColor; border-radius:50%; font-style:italic; }
+.auto-toast [role="status"] { flex:1; line-height:1.4; }
+.auto-toast__close { min-block-size:44px; padding:.4rem .7rem; flex:none; border:1px solid currentColor;
+  border-radius:.5rem; background:transparent; color:inherit; font:inherit; cursor:pointer; }
+.auto-toast__close:focus-visible, .toast-trigger:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+@media (max-width:560px) { .auto-toast { inset:auto 1rem max(1rem, env(safe-area-inset-bottom)) 1rem;
+  inline-size:auto; } }
+@media (prefers-reduced-motion:reduce) { .auto-toast { transition:none; } }
 ```
 
 ### 132. Exclusive Accordion Group (`<details name="...">`)

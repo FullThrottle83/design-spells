@@ -3907,7 +3907,7 @@ The primary link opens the brief; the adjacent button opens *different* destinat
 
 ```css
 .split { display:inline-flex; vertical-align:middle; }
-.split-main, .split-more { min-block-size:48px; display:inline-flex; align-items:center;
+.split a.split-main, .split-more { min-block-size:48px; display:inline-flex; align-items:center;
   justify-content:center; gap:.7rem; padding:.6rem 1rem; background:var(--color-primary);
   color:var(--color-bg); border:0; text-decoration:none; font:inherit; cursor:pointer; }
 .split-main { border-radius:.7rem 0 0 .7rem; }

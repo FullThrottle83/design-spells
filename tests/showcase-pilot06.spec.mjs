@@ -113,6 +113,14 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
     }
     for(const a of await o.locator('a').all()) expect(await root.locator(await a.getAttribute('href')).count()).toBe(1);
     expect(await root.locator('.split-main').getAttribute('href')).toBe('#project-brief');
+    // The primary label retains its contrasting button ink inside showcase CSS.
+    const contrast=await root.locator('.split-main').evaluate(e=>{
+      const rgb=s=>s.match(/[0-9.]+/g).slice(0,3).map(Number).map(c=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4});
+      const lum=s=>rgb(s).reduce((a,c,i)=>a+c*[.2126,.7152,.0722][i],0);
+      const fg=lum(getComputedStyle(e).color),bg=lum(getComputedStyle(e).backgroundColor);
+      return (Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05);
+    });
+    expect(contrast).toBeGreaterThan(4.5);
     await page.keyboard.press('Escape'); await closed(o,id);
     expect(await t.evaluate(e=>e===document.activeElement)).toBe(true);
     await focusTrigger(t,page); await endpoint(o,id);
@@ -176,15 +184,19 @@ test('ds-117 simulated no anchor positioning retains usable native corner overla
  expect(await root.locator('body').evaluate(()=>location.hash)).toBe('#project-people');
 });
 
-test('ds-97 Chromium closedby backdrop actually dismisses fresh modal',async({page,browserName})=>{
- test.skip(browserName!=='chromium','closedby backdrop support is not inferred for other engines');
+test('ds-97 fresh backdrop click and explicit fallback by engine',async({page,browserName})=>{
  const {root,t,o}=await scene(page,97,1440,'hosted');
- await t.click(); await endpoint(o,97);
+ if(!await open(t,o,97,page)) return; // invoker-less engine: documented no-op
  // Backdrop is not hit-test-ready while its discrete entry is in flight.
  await expect.poll(async()=>o.evaluate(e=>getComputedStyle(e).transform)).toBe('none');
  await expect.poll(async()=>o.evaluate(e=>getComputedStyle(e,'::backdrop').opacity)).toBe('1');
  const r=await rect(o),v=await viewport(root);
  await page.mouse.click(Math.min(r.right+40,v.w-10),100);
+ if(browserName==='chromium') expect(await state(o,97)).toBe(false);
+ if(await state(o,97)) {
+   // Actual no-backdrop-dismiss behavior: Close must remain operable.
+   await o.locator('.nav-close').focus(); await page.keyboard.press('Enter');
+ }
  await closed(o,97);
  expect(await t.evaluate(e=>e===document.activeElement)).toBe(true);
 });

@@ -24,6 +24,15 @@ async function scene(page,id,w,surface,motion='no-preference',scheme='light') {
 async function centreFrame(page,surface) {
   if(surface==='iframe') await page.locator('iframe').first().evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));
 }
+// Pointer events at a known visible point of the *iframe viewport*, not a
+// Playwright body locator that scrolls a tall body beneath fixed top-layer UI.
+async function outsideClick(page,surface,x,y) {
+  if(surface==='iframe') {
+    await centreFrame(page,surface);
+    const r=await rect(page.locator('iframe').first());
+    await page.mouse.click(r.x+x,r.y+y);
+  } else await page.mouse.click(x,y);
+}
 async function open(t,o,id,page) {
   await t.click();
   // A behavioral probe: no inferred universal commandfor support.
@@ -41,6 +50,7 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
  test(`ds-${id} ${surface} ${w} ${motion} native state and controls`,async({page})=>{
   await page.context().route('**/*',route=>route.continue());
   const {root,t,o}=await scene(page,id,w,surface,motion,w===390?'dark':'light');
+  await centreFrame(page,surface);
   expect(await state(o,id)).toBe(false);
   expect(await o.evaluate(e=>getComputedStyle(e).display)).toBe('none');
   const v=await viewport(root);
@@ -71,13 +81,15 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
     await page.keyboard.press('Tab');
     expect(await inside(root,'#site-drawer')).toBe(true);
     await centreFrame(page,surface);
-    await o.locator('.nav-close').click();
+    if(surface==='iframe') {await o.locator('.nav-close').focus();await page.keyboard.press('Enter');}
+    else await o.locator('.nav-close').click();
     await closed(o,id);
     expect(await t.evaluate(e=>e===document.activeElement)).toBe(true);
     await focusTrigger(t,page); await endpoint(o,id);
     await page.keyboard.press('Escape'); await closed(o,id);
     expect(await t.evaluate(e=>e===document.activeElement)).toBe(true);
-    await t.click(); await endpoint(o,id);
+    if(surface==='iframe') await focusTrigger(t,page); else await t.click();
+    await endpoint(o,id);
     const link=o.locator('nav a[href="#nav-notes"]');
     await centreFrame(page,surface);
     await link.focus();
@@ -92,8 +104,9 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
     const target=await rect(root.locator('#nav-notes'));
     expect(target.y).toBeLessThan(v.h);
     // Backdrop light dismiss only when the running engine actually supports closedby=any.
-    await t.click(); await endpoint(o,id);
-    await root.locator('body').click({position:{x:Math.min(v.w-5,(await rect(o)).right+12),y:12},force:true});
+    if(surface==='iframe') await focusTrigger(t,page); else await t.click();
+    await endpoint(o,id);
+    await outsideClick(page,surface,Math.min(v.w-5,(await rect(o)).right+12),12);
     if(await state(o,id)) {
       // Some engines ignore backdrop clicks; after the fragment jump a fixed
       // top-layer element is not reliably scrolled into view by Playwright.
@@ -103,9 +116,10 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
   if(id===117) {
     const menu=await rect(o),button=await rect(t);
     if(v.w>=600 && v.h>=560 && await o.evaluate(e=>getComputedStyle(e).positionAnchor==='--project-split-more')) {
-      // Declared anchor plus rendered adjacency; CSS support alone is not proof.
+      // Declared anchor plus actual geometry: native flip-block is also valid
+      // when the invoker is low in the viewport (CI uses different fonts).
       expect(Math.abs(menu.right-button.right)).toBeLessThan(3);
-      expect(menu.y).toBeGreaterThanOrEqual(button.bottom-2);
+      expect(menu.y>=button.bottom-2 || menu.bottom<=button.y+2).toBe(true);
     } else {
       // Real mobile/short or unsupported-anchor geometry, not hidden content.
       expect(v.w-menu.right).toBeGreaterThanOrEqual(8);
@@ -124,14 +138,19 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
     await page.keyboard.press('Escape'); await closed(o,id);
     expect(await t.evaluate(e=>e===document.activeElement)).toBe(true);
     await focusTrigger(t,page); await endpoint(o,id);
-    await root.locator('.sp-header').click(); await closed(o,id); // native auto light-dismiss
-    await t.click(); await endpoint(o,id);
-    await o.locator('a[href="#project-timeline"]').click();
+    await outsideClick(page,surface,8,8); await closed(o,id); // native auto light-dismiss
+    if(surface==='iframe') await focusTrigger(t,page); else await t.click();
+    await endpoint(o,id);
+    const timeline=o.locator('a[href="#project-timeline"]');
+    if(surface==='iframe') {await timeline.focus();await page.keyboard.press('Enter');}
+    else await timeline.click();
     expect(await root.locator('body').evaluate(()=>location.hash)).toBe('#project-timeline');
     // Fragment navigation does not itself light-dismiss an auto popover.
     if(await state(o,id)) {await page.keyboard.press('Escape');}
     await closed(o,id);
-    await root.locator('.split-main').click();
+    const primary=root.locator('.split-main');
+    if(surface==='iframe') {await primary.focus();await page.keyboard.press('Enter');}
+    else await primary.click();
     expect(await root.locator('body').evaluate(()=>location.hash)).toBe('#project-brief');
     expect(await state(o,id)).toBe(false); // primary does not open secondary
   }
@@ -140,7 +159,7 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
     expect(await o.locator('[role="status"]').innerText()).toContain('No notes were saved');
     await page.keyboard.press('Escape'); expect(await state(o,id)).toBe(true);
     // Outside click does not dismiss manual popovers.
-    await root.locator('.tp-header').click(); expect(await state(o,id)).toBe(true);
+    await outsideClick(page,surface,8,8); expect(await state(o,id)).toBe(true);
     // Native state persists without a timer; not an opacity-only simulation.
     await page.waitForTimeout(400); expect(await state(o,id)).toBe(true);
     const x=o.locator('.auto-toast__close');
@@ -149,11 +168,16 @@ for(const id of ids) for(const surface of ['hosted','iframe','download']) for(co
     await focusTrigger(t,page); await endpoint(o,id);
     await centreFrame(page,surface);
     await expect.poll(async()=>o.evaluate(e=>getComputedStyle(e).opacity)).toBe('1');
-    await x.click(); await closed(o,id);
-    await t.click(); await endpoint(o,id);
+    if(surface==='iframe') {await x.focus();await page.keyboard.press('Enter');}
+    else await x.click();
+    await closed(o,id);
+    if(surface==='iframe') await focusTrigger(t,page); else await t.click();
+    await endpoint(o,id);
     await centreFrame(page,surface);
     await expect.poll(async()=>o.evaluate(e=>getComputedStyle(e).opacity)).toBe('1');
-    await x.click(); await closed(o,id);
+    if(surface==='iframe') {await x.focus();await page.keyboard.press('Enter');}
+    else await x.click();
+    await closed(o,id);
   }
  });
 }

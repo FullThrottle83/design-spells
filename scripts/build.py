@@ -560,7 +560,7 @@ PREVIEW_HTML: dict[str, str] = {
         '<p class="demo-note">Scroll the table sideways.</p></div>',
     "12": f'<div class="gallery"><figure><img src="{IMG}" alt=""></figure><figure><img src="{IMG_B}" alt=""></figure><figure><img src="{IMG}" alt=""></figure></div>',
     "15": '<details><summary>Open panel</summary><div class="accordion-panel"><div class="accordion-inner">Animated with 0fr → 1fr.</div></div></details>',
-    "27": '<div class="scroller-wrap" style="inline-size:min(18rem,100%)"><div style="display:flex;gap:1rem;overflow:auto;white-space:nowrap"><span>Alpha</span><span>Bravo</span><span>Charlie</span><span>Delta</span></div></div>',
+    "27": '<div class="scroller-wrap" style="inline-size:min(18rem,100%)"><div style="display:flex;gap:1rem;overflow:auto;white-space:nowrap"><span style="flex:0 0 9rem">Alpha</span><span style="flex:0 0 9rem">Bravo</span><span style="flex:0 0 9rem">Charlie</span><span style="flex:0 0 9rem">Delta</span></div></div>',
     "33": '<details><summary>True auto height</summary><div class="accordion-panel">Animates to auto.</div></details>',
     "37": f'<div class="card-container" style="resize:horizontal;overflow:auto;width:220px;min-width:180px;max-width:100%;padding:.5rem;border:1px dashed var(--color-border)"><article class="adaptive-card"><img class="card-media" src="{IMG}" alt=""><div><h3>Adaptive</h3><p>Layout follows the container.</p></div></article></div>',
     "40": '<div class="card-grid"><article class="card"><h3>One</h3><p>Short</p><button>Go</button></article><article class="card"><h3>Two</h3><p>A little more copy in this card.</p><button>Go</button></article></div>',

@@ -40,3 +40,21 @@ test("non-comparable document behavior retains one genuine demo", async ({ page 
   await expect(page.locator(".demo-compare")).toHaveCount(0);
   await expect(page.getByTitle(/Isolated demonstration/)).toHaveCount(1);
 });
+
+
+test("ds-27 edge fade preview provides real horizontal overflow", async ({ page }) => {
+  await page.goto("/play/ds-27/");
+  const scroller = page.locator(".scroller-wrap > div");
+  await expect(scroller).toBeVisible();
+  const before = await scroller.evaluate(el => ({
+    clientWidth: el.clientWidth,
+    scrollWidth: el.scrollWidth,
+    before: getComputedStyle(el.parentElement, "::before").content,
+    after: getComputedStyle(el.parentElement, "::after").content,
+  }));
+  expect(before.scrollWidth).toBeGreaterThan(before.clientWidth);
+  expect(before.before).not.toBe("none");
+  expect(before.after).not.toBe("none");
+  await scroller.evaluate(el => { el.scrollLeft = el.scrollWidth; });
+  await expect.poll(() => scroller.evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
+});

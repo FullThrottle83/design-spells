@@ -27,7 +27,7 @@
     <p class="note">The spell and its demo use zero JavaScript. Optional copy controls do not affect the example.</p>
     <section aria-labelledby="demo-title">
       <div class="section-head"><h2 id="demo-title">Live demo</h2><a class="action" href="/play/ds-139/">Open standalone demo ↗</a><a class="action" href="/download/ds-139.html" download="ds-139.html">Download runnable HTML ↓</a></div>
-      <p class='note'>Scroll to preview</p>
+      <p class='note'>Scroll to preview</p><p class="note">This entry animation needs a scroll runway. Scroll inside the iframe or open the full-page demo, then move down to the effect. The spell CSS has not been accelerated.</p>
       
       <iframe title="Isolated demonstration: Scroll-Driven Image Wipe (`clip-path: inset()`)" src="/play/ds-139/" loading="lazy" sandbox="allow-same-origin allow-forms"></iframe>
     </section>
@@ -43,7 +43,7 @@
       
       <pre tabindex="0"><code>&lt;figure class=&quot;img-wipe&quot;&gt;&lt;img src=&quot;/photo.jpg&quot; alt=&quot;Description&quot;&gt;&lt;/figure&gt;</code></pre>
       <h3>CSS</h3>
-      <pre tabindex="0"><code>.img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }
+      <pre tabindex="0"><code>.img-wipe { margin: 0; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); }
 .img-wipe img { display: block; inline-size: 100%; block-size: auto; }
 @supports (animation-timeline: view()) {
   .img-wipe img {

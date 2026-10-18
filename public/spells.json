@@ -103,7 +103,7 @@
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
-      "previewHtml": "<article class=\"destination-card\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\"><h3>Lisbon</h3><p>Atlantic light.</p></article>",
+      "previewHtml": "<article class=\"destination-card\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\"><h3><a href=\"#\" style=\"color:inherit;text-decoration:none\">Lisbon</a></h3><p>Atlantic light.</p></article>",
       "previewCss": ".destination-card {\n  overflow: hidden;\n  border-radius: var(--radius-lg);\n  background: var(--color-surface);\n  box-shadow: 0 1px 2px oklch(0.2 0.01 80 / 0.08);\n  transition: transform 350ms cubic-bezier(0.16,1,0.3,1), box-shadow 350ms cubic-bezier(0.16,1,0.3,1);\n}\n.destination-card img {\n  display: block; aspect-ratio: 16 / 10; object-fit: cover;\n  transition: transform 600ms cubic-bezier(0.16,1,0.3,1);\n}\n.destination-card :is(h3, p) { margin: 0; padding-inline: 1rem; }\n.destination-card h3 { padding-block-start: .85rem; }\n.destination-card p { padding-block-end: 1rem; color: var(--color-text-muted); }\n.destination-card:hover,\n.destination-card:focus-within {\n  transform: translateY(-6px);\n  box-shadow: 0 12px 28px oklch(0.2 0.01 80 / 0.18);\n}\n.destination-card:hover img,\n.destination-card:focus-within img { transform: scale(1.05); }\n@media (hover: none) {\n  .destination-card:hover { transform: none; box-shadow: none; }\n  .destination-card:hover img { transform: none; }\n}\n",
       "featureKeys": [
         "color-mix"
@@ -710,7 +710,7 @@
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
-      "previewHtml": "<nav class=\"crumbs-wrap\" aria-label=\"Breadcrumb\">\n  <ol class=\"crumbs\">\n    <li><a href=\"/\">Home</a></li>\n    <li><a href=\"/docs\">Documentation</a></li>\n    <li><a href=\"/docs/components\">Components</a></li>\n    <li aria-current=\"page\">Spells</li>\n  </ol>\n  <span class=\"crumb-hint\" aria-hidden=\"true\">+2</span>\n</nav>",
+      "previewHtml": "<nav class=\"crumbs-wrap\" aria-label=\"Breadcrumb\" style=\"inline-size:min(15rem, 100%)\"><ol class=\"crumbs\"><li><a href=\"/\">Home</a></li><li><a href=\"/docs\">Documentation</a></li><li><a href=\"/docs/components\">Components</a></li><li aria-current=\"page\">Spells</li></ol><span class=\"crumb-hint\" aria-hidden=\"true\">+2</span></nav>",
       "previewCss": ".crumbs-wrap {\n  position: relative; overflow-x: auto; container-type: scroll-state;\n  overscroll-behavior-x: contain;\n  scrollbar-width: none;\n  mask-image: linear-gradient(to right, black 92%, transparent);\n  -webkit-mask-image: linear-gradient(to right, black 92%, transparent);\n}\n.crumbs-wrap::-webkit-scrollbar { display: none; }\n.crumbs { display: flex; gap: var(--space-2); white-space: nowrap; list-style: none; padding: 0; }\n.crumbs a, .crumbs [aria-current] {\n  min-block-size: 44px; display: inline-grid; place-items: center; padding-inline: .35rem;\n  color: var(--color-text-muted); text-decoration: none;\n}\n.crumbs a:hover { color: var(--color-text); }\n.crumb-hint {\n  position: absolute; right: 0; top: 50%; translate: 0 -50%;\n  padding: .2rem .5rem; border-radius: 999px; font-size: .75rem;\n  background: var(--color-primary); color: white;\n  opacity: 0; transition: opacity 180ms ease;\n}\n@container scroll-state(scrollable: inline) { .crumb-hint { opacity: 1; } }\n",
       "featureKeys": [
         "scroll-state",
@@ -1278,7 +1278,7 @@
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
-      "previewHtml": "<div class=\"marquee\">\n  <div class=\"marquee-track\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>\n  <!-- Duplicated track for a seamless loop -->\n  <div class=\"marquee-track\" aria-hidden=\"true\">\n    <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span>\n  </div>",
+      "previewHtml": "<div class=\"marquee\"><div class=\"marquee-track\"><a href=\"#\" style=\"color:inherit\">Logo 1</a><a href=\"#\" style=\"color:inherit\">Logo 2</a><a href=\"#\" style=\"color:inherit\">Logo 3</a></div><div class=\"marquee-track\" aria-hidden=\"true\"><span>Logo 1</span><span>Logo 2</span><span>Logo 3</span></div></div>",
       "previewCss": ".marquee {\n  display: flex;\n  overflow: hidden;\n  user-select: none;\n  gap: 2rem;\n  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);\n  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);\n}\n\n.marquee-track {\n  display: flex;\n  flex-shrink: 0;\n  gap: 2rem;\n  align-items: center;\n  min-width: 100%;\n  animation: marquee-scroll 25s linear infinite;\n}\n\n.marquee:hover .marquee-track,\n.marquee:focus-within .marquee-track {\n  animation-play-state: paused;\n}\n\n@keyframes marquee-scroll {\n  from { transform: translateX(0%); }\n  to   { transform: translateX(-100%); }\n}\n",
       "featureKeys": [
         "baseline"
@@ -1393,14 +1393,14 @@
       "note": "",
       "description": "Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in the viewport, with no scroll listener.",
       "html": "<figure class=\"kb\"><img src=\"/hero-1.jpg\" alt=\"Coastal landscape\"></figure>\n",
-      "css": ".kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n}\n",
+      "css": ".kb { overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<figure class=\"kb\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Coastal landscape\"></figure>",
-      "previewCss": ".kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n}\n",
+      "previewCss": ".kb { overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); margin: 0; }\n.kb img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .kb img {\n    animation: kb-breathe linear both;\n    animation-timeline: view();\n    animation-range: entry 0% exit 100%;\n  }\n  @keyframes kb-breathe {\n    0%   { transform: scale(1.12) translateY(2%); }\n    50%  { transform: scale(1)    translateY(0); }\n    100% { transform: scale(1.12) translateY(-2%); }\n  }\n}\n",
       "featureKeys": [
         "view-timeline"
       ],
@@ -2642,7 +2642,7 @@
         "kind": "focus",
         "hint": "Focus to preview"
       },
-      "previewHtml": "<main class=\"settings-scene\"><header><p class=\"scene-kicker\">Lumen publishing / Workspace</p><h1>Shape your byline.</h1><p>Set the public details that travel with every story you publish.</p></header><form class=\"settings-form\" action=\"#settings-preview\"><div class=\"form-row\"><div class=\"control\"><label for=\"public-name\">Public name</label><input id=\"public-name\" name=\"name\" autocomplete=\"name\" value=\"Mara Ellison\" aria-describedby=\"help-name\"></div><aside class=\"help-rail\" id=\"help-name\"><span>01</span><strong>Recognisable, not rigid.</strong><p>Use the name readers know. You can include a middle initial or studio name.</p></aside></div><div class=\"form-row\"><div class=\"control\"><label for=\"profile-url\">Profile address</label><div class=\"url-input\"><span aria-hidden=\"true\">lumen.press/</span><input id=\"profile-url\" name=\"slug\" value=\"mara-ellison\" pattern=\"[a-z0-9-]+\" aria-describedby=\"help-url\"></div></div><aside class=\"help-rail\" id=\"help-url\"><span>02</span><strong>Keep it easy to share.</strong><p>Lowercase letters, numbers and hyphens only. Existing story links will keep working.</p></aside></div><div class=\"form-row\"><div class=\"control\"><label for=\"story-replies\">Story replies</label><select id=\"story-replies\" name=\"replies\" aria-describedby=\"help-replies\"><option>People I follow</option><option>All members</option><option>No one</option></select></div><aside class=\"help-rail\" id=\"help-replies\"><span>03</span><strong>You set the boundary.</strong><p>This controls who can start a private response from your published stories.</p></aside></div><button type=\"submit\">Preview profile <span aria-hidden=\"true\">→</span></button><p id=\"settings-preview\" class=\"form-note\">Demonstration only—these settings are not saved.</p></form></main>",
+      "previewHtml": "<main class=\"settings-scene\"><header><p class=\"scene-kicker\">Lumen publishing / Workspace</p><h1>Shape your byline.</h1><p>Set the public details that travel with every story you publish.</p></header><form class=\"settings-form\" action=\"#settings-preview\"><div class=\"form-row\"><div class=\"control\"><label for=\"public-name\">Public name</label><input id=\"public-name\" name=\"name\" autocomplete=\"name\" value=\"Mara Ellison\" aria-describedby=\"help-name\"></div><aside class=\"help-rail\" id=\"help-name\"><span>01</span><strong>Recognisable, not rigid.</strong><p>Use the name readers know. You can include a middle initial or studio name.</p></aside></div><div class=\"form-row\"><div class=\"control\"><label for=\"profile-url\">Profile address</label><div class=\"url-input\"><span aria-hidden=\"true\">lumen.press/</span><input id=\"profile-url\" name=\"slug\" value=\"mara-ellison\" pattern=\"[a-z0-9\\-]+\" aria-describedby=\"help-url\"></div></div><aside class=\"help-rail\" id=\"help-url\"><span>02</span><strong>Keep it easy to share.</strong><p>Lowercase letters, numbers and hyphens only. Existing story links will keep working.</p></aside></div><div class=\"form-row\"><div class=\"control\"><label for=\"story-replies\">Story replies</label><select id=\"story-replies\" name=\"replies\" aria-describedby=\"help-replies\"><option>People I follow</option><option>All members</option><option>No one</option></select></div><aside class=\"help-rail\" id=\"help-replies\"><span>03</span><strong>You set the boundary.</strong><p>This controls who can start a private response from your published stories.</p></aside></div><button type=\"submit\">Preview profile <span aria-hidden=\"true\">→</span></button><p id=\"settings-preview\" class=\"form-note\">Demonstration only—these settings are not saved.</p></form></main>",
       "previewCss": ".form-row { position: relative; anchor-scope: --help-anchor; }\n.form-row .control { anchor-name: --help-anchor; }\n.help-rail {\n  margin-block-start: .75rem;\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity 180ms ease, transform 180ms ease;\n}\n.form-row:focus-within .help-rail { opacity: 1; visibility: visible; }\n\n@supports (position-anchor: --help-anchor) {\n  @media (min-width: 48rem) {\n    .help-rail {\n      position: absolute;\n      position-anchor: --help-anchor;\n      position-area: right center;\n      position-try-fallbacks: flip-inline, flip-block;\n      margin: 0 0 0 .9rem;\n      inline-size: 23ch;\n      transform: translateX(-6px);\n    }\n    .form-row:focus-within .help-rail { transform: translateX(0); }\n  }\n}\n@media (prefers-reduced-motion: reduce) { .help-rail { transition: none; } }\n",
       "featureKeys": [
         "anchor"
@@ -2722,7 +2722,7 @@
         "kind": "none",
         "hint": ""
       },
-      "previewHtml": "<h2 class='text-balance'>Typographic harmony on a long heading</h2><p class='text-pretty'>Pretty wrapping keeps orphans off the last line of a paragraph.</p>",
+      "previewHtml": "<div style='max-inline-size:24rem'><h2 class='text-balance'>Typographic harmony on a long heading</h2><p class='text-pretty'>Pretty wrapping keeps orphans off the last line of a paragraph.</p></div>",
       "previewCss": "h1, h2, h3, h4, .text-balance { text-wrap: balance; }\np, li, .text-pretty { text-wrap: pretty; }\n",
       "featureKeys": [
         "baseline"
@@ -2802,7 +2802,7 @@
         "kind": "none",
         "hint": ""
       },
-      "previewHtml": "<article><p>Hyphenation keeps narrow columns from opening rivers of white space.</p></article>",
+      "previewHtml": "<article style=\"inline-size:14rem\"><p>Internationalization and accessibility improve comprehension for extraordinarily responsible communities.</p></article>",
       "previewCss": ":root { hyphens: auto; }\n\narticle p, article li {\n  hyphens: auto;\n  hyphenate-character: \"\\2010\";  /* real hyphen instead of a minus */\n  hyphenate-limit-chars: 8 4 4;  /* min 8 chars, 4 before the break, 4 after */\n  hyphenate-limit-lines: 2;       /* max 2 hyphenated lines in a row */\n  hyphenate-limit-last: always;   /* never hyphenate the last line of a paragraph */\n}\n\nhtml[lang=\"en\"] body { hyphens: auto; }\n",
       "featureKeys": [
         "baseline"
@@ -3284,7 +3284,7 @@
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
-      "previewHtml": "<article class=\"media-card\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" style=\"display:block;width:100%\"><h3 style=\"position:absolute;bottom:1rem;left:1rem;z-index:1;color:white\">Stay</h3></article>",
+      "previewHtml": "<article class=\"media-card\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\" style=\"display:block;width:100%\"><h3 style=\"position:absolute;bottom:1rem;left:1rem;z-index:1;color:white\"><a href=\"#\" style=\"color:inherit;text-decoration:none\">Stay</a></h3></article>",
       "previewCss": ".media-card { position: relative; overflow: hidden; }\n.media-card::after {\n  content: \"\";\n  position: absolute; inset: 0;\n  background: linear-gradient(to top, oklch(0 0 0 / .52), oklch(0 0 0 / .08));\n  opacity: .5;\n  transition: opacity 240ms cubic-bezier(0.16,1,0.3,1);\n}\n.media-card:hover::after,\n.media-card:focus-within::after { opacity: 1; }\n",
       "featureKeys": [
         "color-mix"
@@ -3605,7 +3605,7 @@
         "kind": "hover-or-focus",
         "hint": "Hover or focus to preview"
       },
-      "previewHtml": "<div class=\"card-grid\"><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Alpha</article><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Bravo</article><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\">Charlie</article></div>",
+      "previewHtml": "<div class=\"card-grid\"><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\"><a href=\"#\" style=\"color:inherit;text-decoration:none\">Alpha</a></article><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\"><a href=\"#\" style=\"color:inherit;text-decoration:none\">Bravo</a></article><article class=\"destination-card\" style=\"padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)\"><a href=\"#\" style=\"color:inherit;text-decoration:none\">Charlie</a></article></div>",
       "previewCss": ".card-grid { display: grid; gap: var(--space-4); }\n.card-grid:has(.destination-card:hover) .destination-card:not(:hover),\n.card-grid:has(.destination-card:focus-within) .destination-card:not(:focus-within) {\n  opacity: 0.65;\n  transform: scale(0.985);\n}\n.destination-card {\n  transition: opacity 300ms cubic-bezier(0.16,1,0.3,1), transform 300ms cubic-bezier(0.16,1,0.3,1);\n}\n",
       "featureKeys": [
         "has"
@@ -3845,7 +3845,7 @@
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
-      "previewHtml": "<div class=\"table-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Transactions\">\n  <table>\n    <thead><tr><th>Date</th><th>Customer</th><th>Amount</th></tr></thead>\n    <tbody>\n      <tr><td>2026-08-01</td><td>Acme Inc</td><td>$12,400</td></tr>\n      <tr><td>2026-08-02</td><td>Nordic Inc</td><td>$8,900</td></tr>\n    </tbody>\n  </table>\n</div>",
+      "previewHtml": "<div class=\"table-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Transactions\"><table><thead><tr><th>Date</th><th>Customer</th><th>Amount</th></tr></thead><tbody><tr><td>2026-08-01</td><td>Acme Inc</td><td>$12,400</td></tr><tr><td>2026-08-02</td><td>Nordic Inc</td><td>$8,900</td></tr><tr><td>2026-08-03</td><td>Fjord AB</td><td>$5,300</td></tr><tr><td>2026-08-04</td><td>Lumen Ltd</td><td>$17,650</td></tr><tr><td>2026-08-05</td><td>Harbor Co</td><td>$2,200</td></tr><tr><td>2026-08-06</td><td>Pine Hollow</td><td>$9,100</td></tr><tr><td>2026-08-07</td><td>Atelier North</td><td>$4,800</td></tr><tr><td>2026-08-08</td><td>Studio Fika</td><td>$7,300</td></tr><tr><td>2026-08-09</td><td>Kvarn Works</td><td>$15,100</td></tr><tr><td>2026-08-10</td><td>Birch & Co</td><td>$3,900</td></tr><tr><td>2026-08-11</td><td>Skerry Labs</td><td>$6,400</td></tr><tr><td>2026-08-12</td><td>Moss Ltd</td><td>$11,800</td></tr><tr><td>2026-08-13</td><td>Tern Partners</td><td>$2,750</td></tr><tr><td>2026-08-14</td><td>Aurora Print</td><td>$8,250</td></tr></tbody></table></div>",
       "previewCss": ".table-scroller { overflow: auto; max-block-size: 24rem; container-type: scroll-state;\n  border: 1px solid var(--color-border); border-radius: var(--radius-md); }\n.table-scroller table { inline-size: 100%; border-collapse: collapse; }\n.table-scroller th, .table-scroller td { padding: .7rem .9rem; text-align: start; white-space: nowrap; }\n.table-scroller thead th {\n  position: sticky; top: 0; z-index: 2;\n  background: var(--color-surface-offset); color: var(--color-text);\n  box-shadow: inset 0 -1px 0 var(--color-border);\n}\n.table-scroller tbody tr:nth-child(even) { background: oklch(from var(--color-surface-offset) l c h / .4); }\n.table-scroller tbody tr { transition: background 120ms ease; }\n.table-scroller tbody tr:hover,\n.table-scroller tbody tr:focus-within { background: oklch(from var(--color-primary) l c h / .08); }\n",
       "featureKeys": [
         "scroll-state",
@@ -4285,15 +4285,15 @@
       "jsNeed": "markup",
       "jsLabel": "Markup",
       "note": "",
-      "description": "Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. Feature-detect with `attr(x type(*))`.",
-      "html": "<div class=\"attr-meter\" data-value=\"72\" aria-label=\"Profile complete to 72 percent\">\n  <span class=\"attr-meter-fill\"></span>\n</div>\n",
+      "description": "Read `data-value` as a `<number>` from the element being styled (`attr()` never reads a parent's attribute) and drive a meter with no inline `--v` or JS. Feature-detect with `attr(x type(*))`.",
+      "html": "<div class=\"attr-meter\" aria-label=\"Profile complete to 72 percent\">\n  <span class=\"attr-meter-fill\" data-value=\"72\"></span>\n</div>\n",
       "css": ".attr-meter {\n  block-size: .6rem; border-radius: 999px;\n  background: var(--color-surface-offset); overflow: hidden;\n}\n.attr-meter-fill {\n  display: block; block-size: 100%;\n  background: var(--color-primary); border-radius: inherit;\n  inline-size: 0%;\n}\n@supports (x: attr(x type(*))) {\n  .attr-meter-fill {\n    inline-size: calc(attr(data-value type(<number>), 0) * 1%);\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "none",
         "hint": ""
       },
-      "previewHtml": "<div class=\"attr-meter\" data-value=\"72\" style=\"inline-size:min(18rem, 100%)\" aria-label=\"Profile complete to 72 percent\"><span class=\"attr-meter-fill\"></span></div>",
+      "previewHtml": "<div class=\"attr-meter\" style=\"inline-size:min(18rem, 100%)\" aria-label=\"Profile complete to 72 percent\"><span class=\"attr-meter-fill\" data-value=\"72\"></span></div>",
       "previewCss": ".attr-meter {\n  block-size: .6rem; border-radius: 999px;\n  background: var(--color-surface-offset); overflow: hidden;\n}\n.attr-meter-fill {\n  display: block; block-size: 100%;\n  background: var(--color-primary); border-radius: inherit;\n  inline-size: 0%;\n}\n@supports (x: attr(x type(*))) {\n  .attr-meter-fill {\n    inline-size: calc(attr(data-value type(<number>), 0) * 1%);\n  }\n}\n",
       "featureKeys": [
         "typed-attr"
@@ -4458,7 +4458,7 @@
         "kind": "none",
         "hint": ""
       },
-      "previewHtml": "<article class=\"vt-card\" id=\"case-acme\">…</article>",
+      "previewHtml": "<article class=\"vt-card\" id=\"case-acme\"><h3>Acme case study</h3><p>Named card: its transition runs when a real page navigation carries it to another document.</p></article>",
       "previewCss": "@supports (view-transition-name: none) {\n  @view-transition { navigation: auto; }\n}\n@supports (x: attr(x type(*))) {\n  .vt-card {\n    view-transition-name: attr(id type(<custom-ident>), none);\n    view-transition-class: card;\n  }\n}\n::view-transition-group(*.card) {\n  animation-duration: 320ms;\n  animation-timing-function: cubic-bezier(.16,1,.3,1);\n}\n@media (prefers-reduced-motion: reduce) {\n  ::view-transition-group(*),\n  ::view-transition-old(*),\n  ::view-transition-new(*) { animation: none !important; }\n}\n",
       "featureKeys": [
         "typed-attr",
@@ -4500,7 +4500,7 @@
         "kind": "none",
         "hint": ""
       },
-      "previewHtml": "<figure class=\"attr-spark\" role=\"img\" aria-label=\"Sales: 34, 58, 41, 72, 66, 90 percent\">\n  <span data-v=\"34\"></span><span data-v=\"58\"></span><span data-v=\"41\"></span>\n  <span data-v=\"72\"></span><span data-v=\"66\"></span><span data-v=\"90\"></span>\n</figure>",
+      "previewHtml": "<figure class=\"attr-spark\" style=\"inline-size:min(16rem, 100%)\" role=\"img\" aria-label=\"Sales: 34, 58, 41, 72, 66, 90 percent\"><span data-v=\"34\"></span><span data-v=\"58\"></span><span data-v=\"41\"></span><span data-v=\"72\"></span><span data-v=\"66\"></span><span data-v=\"90\"></span></figure>",
       "previewCss": ".attr-spark { display: flex; align-items: end; gap: 4px; block-size: 5rem; margin: 0; }\n.attr-spark span {\n  flex: 1; min-block-size: 2px; border-radius: 3px 3px 0 0;\n  background: var(--color-primary); /* Solid fallback when color-mix is unavailable. */\n  background: color-mix(in oklch, var(--color-primary), transparent 25%);\n}\n@supports (x: attr(x type(*))) {\n  .attr-spark span {\n    block-size: calc(attr(data-v type(<number>), 0) * 1%);\n  }\n}\n.attr-spark span:last-child { background: var(--color-primary); }\n",
       "featureKeys": [
         "typed-attr",
@@ -4581,7 +4581,7 @@
         "kind": "none",
         "hint": ""
       },
-      "previewHtml": "<p>Shared links that use #:~:text= highlight with ::target-text.</p>",
+      "previewHtml": "<p>Shared links that use #:~:text= highlight with ::target-text.</p><p><a href=\"#:~:text=highlight%20with\">Follow a text-fragment link</a></p>",
       "previewCss": "::target-text {\n  background: oklch(from var(--color-primary) l c h / .28);\n  color: var(--color-text);\n  text-decoration: underline;\n  text-decoration-thickness: 2px;\n}\n",
       "featureKeys": [
         "target-text",
@@ -5511,14 +5511,14 @@
       "note": "",
       "description": "Multi-layer parallax where background and foreground move at different speeds on scroll.",
       "html": "<header class=\"plx-hero\">\n  <div class=\"plx-layer plx-bg\" aria-hidden=\"true\"></div>\n  <div class=\"plx-layer plx-fg\"><h1>The future of UI</h1></div>\n</header>\n",
-      "css": ".plx-hero { position: relative; block-size: 70vh; overflow: hidden; display: grid; place-items: center; }\n.plx-layer { position: absolute; inset: -10%; }\n.plx-bg { background: url('/hero-bg.jpg') center/cover; }\n.plx-fg { display: grid; place-items: center; z-index: 2; color: white; }\n\n@supports (animation-timeline: view()) {\n  .plx-bg { animation: plx-bg-anim linear both; animation-timeline: view(); }\n  @keyframes plx-bg-anim { to { transform: translateY(15%); } }\n}\n",
+      "css": ".plx-hero { position: relative; block-size: 70vh; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ display: grid; place-items: center; }\n.plx-layer { position: absolute; inset: -10%; }\n.plx-bg { background: url('/hero-bg.jpg') center/cover; }\n.plx-fg { display: grid; place-items: center; z-index: 2; color: white; }\n\n@supports (animation-timeline: view()) {\n  .plx-bg { animation: plx-bg-anim linear both; animation-timeline: view(); }\n  @keyframes plx-bg-anim { to { transform: translateY(15%); } }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<header class=\"plx-hero\" style=\"inline-size:22rem;max-inline-size:100%\"><div class=\"plx-layer plx-bg\" aria-hidden=\"true\"></div><div class=\"plx-layer plx-fg\"><h1>The future of UI</h1></div></header>",
-      "previewCss": ".plx-hero { position: relative; block-size: 70vh; overflow: hidden; display: grid; place-items: center; }\n.plx-layer { position: absolute; inset: -10%; }\n.plx-bg { background: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\") center/cover; }\n.plx-fg { display: grid; place-items: center; z-index: 2; color: white; }\n\n@supports (animation-timeline: view()) {\n  .plx-bg { animation: plx-bg-anim linear both; animation-timeline: view(); }\n  @keyframes plx-bg-anim { to { transform: translateY(15%); } }\n}\n",
+      "previewCss": ".plx-hero { position: relative; block-size: 70vh; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ display: grid; place-items: center; }\n.plx-layer { position: absolute; inset: -10%; }\n.plx-bg { background: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\") center/cover; }\n.plx-fg { display: grid; place-items: center; z-index: 2; color: white; }\n\n@supports (animation-timeline: view()) {\n  .plx-bg { animation: plx-bg-anim linear both; animation-timeline: view(); }\n  @keyframes plx-bg-anim { to { transform: translateY(15%); } }\n}\n",
       "featureKeys": [
         "view-timeline"
       ],
@@ -5671,14 +5671,14 @@
       "note": "",
       "description": "A tactile image reveal with `clip-path` that wipes the image in, synced to scroll.",
       "html": "<figure class=\"img-wipe\"><img src=\"/photo.jpg\" alt=\"Description\"></figure>\n",
-      "css": ".img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n}\n",
+      "css": ".img-wipe { margin: 0; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n}\n",
       "previewEnvironment": "shadow",
       "previewAction": {
         "kind": "scroll",
         "hint": "Scroll to preview"
       },
       "previewHtml": "<figure class=\"img-wipe\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"Description\"></figure>",
-      "previewCss": ".img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n}\n",
+      "previewCss": ".img-wipe { margin: 0; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); }\n.img-wipe img { display: block; inline-size: 100%; block-size: auto; }\n@supports (animation-timeline: view()) {\n  .img-wipe img {\n    animation: wipe-anim linear both; animation-timeline: view();\n    animation-range: entry 0% entry 60%;\n  }\n  @keyframes wipe-anim {\n    from { clip-path: inset(0 100% 0 0); transform: scale(1.05); }\n    to { clip-path: inset(0 0 0 0); transform: scale(1); }\n  }\n}\n",
       "featureKeys": [
         "view-timeline"
       ],
@@ -5757,7 +5757,7 @@
         "kind": "keyboard-focus",
         "hint": "Press Tab to preview"
       },
-      "previewHtml": "<a href=\"#main-content\" class=\"skip-link\">Skip to content</a>",
+      "previewHtml": "<a href=\"#main-content\" class=\"skip-link\">Skip to content</a><main id=\"main-content\" tabindex=\"-1\"><h1>Page content</h1><p>Activating the skip link moves focus here.</p></main>",
       "previewCss": ".skip-link {\n  position: fixed; top: 1rem; left: 1rem; z-index: 9999;\n  min-block-size: 44px; padding-inline: 1rem; display: inline-grid; place-items: center;\n  background: var(--color-text); color: var(--color-bg); font-weight: 700;\n  border-radius: var(--radius-md); text-decoration: none;\n  transform: translateY(-200%); transition: transform 200ms ease;\n}\n.skip-link:focus-visible { transform: translateY(0); outline: 2px solid var(--color-primary); outline-offset: 3px; }\n",
       "featureKeys": [
         "baseline"
@@ -5961,7 +5961,7 @@
         "kind": "activate-control",
         "hint": "Activate the control to preview"
       },
-      "previewHtml": "<button commandfor=\"guard-modal\" command=\"show-modal\" class=\"btn\">Open modal</button><dialog id=\"guard-modal\" class=\"guard-modal\" closedby=\"any\"><h2>Modal content</h2><div class=\"guard-body\">Long scrollable content…</div></dialog>",
+      "previewHtml": "<button commandfor=\"guard-modal\" command=\"show-modal\" class=\"btn\">Open modal</button><p class=\"demo-note\">Scroll the dialog to its end and keep scrolling: the page behind stays put.</p><dialog id=\"guard-modal\" class=\"guard-modal\" closedby=\"any\"><h2>Modal content</h2><div class=\"guard-body\"><p>Paragraph 1: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 2: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 3: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 4: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 5: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 6: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 7: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 8: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 9: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 10: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 11: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 12: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 13: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 14: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 15: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 16: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 17: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 18: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 19: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 20: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 21: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 22: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 23: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p><p>Paragraph 24: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p></div></dialog>",
       "previewCss": ".guard-modal {\n  max-block-size: 80vh; max-inline-size: min(90vw, 36rem); margin: auto;\n  padding: var(--space-6); border: 0; border-radius: var(--radius-lg);\n  overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;\n}\n.guard-modal::backdrop { overscroll-behavior: none; background: oklch(0 0 0 / .4); }\n",
       "featureKeys": [
         "closedby",

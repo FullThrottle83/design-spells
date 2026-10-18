@@ -1475,7 +1475,7 @@ Images breathe slowly (scale 1.12 → 1 → 1.12) synced to their position in th
 ```
 
 ```css
-.kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }
+.kb { overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); margin: 0; }
 .kb img { display: block; inline-size: 100%; block-size: auto; }
 @supports (animation-timeline: view()) {
   .kb img {
@@ -3513,11 +3513,11 @@ Conditional values in the property value itself — media, style query, and supp
 ### 105. Typed `attr()` Field Meter
 *Forms · Progressive · Markup*
 
-Read `data-value` as a `<number>` and drive a meter with no inline `--v` or JS. Feature-detect with `attr(x type(*))`.
+Read `data-value` as a `<number>` from the element being styled (`attr()` never reads a parent's attribute) and drive a meter with no inline `--v` or JS. Feature-detect with `attr(x type(*))`.
 
 ```html
-<div class="attr-meter" data-value="72" aria-label="Profile complete to 72 percent">
-  <span class="attr-meter-fill"></span>
+<div class="attr-meter" aria-label="Profile complete to 72 percent">
+  <span class="attr-meter-fill" data-value="72"></span>
 </div>
 ```
 
@@ -4424,7 +4424,7 @@ Multi-layer parallax where background and foreground move at different speeds on
 ```
 
 ```css
-.plx-hero { position: relative; block-size: 70vh; overflow: hidden; display: grid; place-items: center; }
+.plx-hero { position: relative; block-size: 70vh; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ display: grid; place-items: center; }
 .plx-layer { position: absolute; inset: -10%; }
 .plx-bg { background: url('/hero-bg.jpg') center/cover; }
 .plx-fg { display: grid; place-items: center; z-index: 2; color: white; }
@@ -4514,7 +4514,7 @@ A tactile image reveal with `clip-path` that wipes the image in, synced to scrol
 ```
 
 ```css
-.img-wipe { margin: 0; overflow: hidden; border-radius: var(--radius-lg); }
+.img-wipe { margin: 0; overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); }
 .img-wipe img { display: block; inline-size: 100%; block-size: auto; }
 @supports (animation-timeline: view()) {
   .img-wipe img {

@@ -104,7 +104,8 @@ cross-browser config. 18 fail on unmodified `origin/main` and pass on this branc
 (the 19th is a sweep of all 154 demos for console errors, failed requests and
 broken images and passes on both). Each asserts measured state: bar widths and
 height ratio from typed `attr()`, meter fill ratio, wrapped line counts and
-`hyphens: auto` versus `manual`, balanced versus greedy line widths, timeline
+`hyphens: auto` versus `manual` (asserted only where the browser build ships a
+hyphenation dictionary: a local Chromium does, CI's runner build does not), balanced versus greedy line widths, timeline
 source and progress, sticky offset after `scrollTop`, hint opacity with a
 widened control, validity and `patternMismatch`, Tab focus and `:target`,
 `getAnimations()` play state, pixel change after a text-fragment click, and

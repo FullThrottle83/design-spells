@@ -118,7 +118,7 @@
     .print-example {max-width:42rem;margin:3rem auto;line-height:1.7;padding:1rem}
     @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
     
-.kb { overflow: hidden; border-radius: var(--radius-lg); margin: 0; }
+.kb { overflow: hidden; overflow: clip; /* clip keeps view() bound to the page, not to this box */ border-radius: var(--radius-lg); margin: 0; }
 .kb img { display: block; inline-size: 100%; block-size: auto; }
 @supports (animation-timeline: view()) {
   .kb img {
@@ -132,10 +132,16 @@
     100% { transform: scale(1.12) translateY(-2%); }
   }
 }
+
+.scroll-entry__intro {min-block-size:100dvh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:2rem;background:var(--color-bg)}
+.scroll-entry__intro h1 {font-size:clamp(1.5rem,5vw,2.5rem);margin:0}
+.scroll-entry__intro p {max-width:46ch;margin:0;color:var(--color-text-muted)}
+.scroll-entry__intro a {display:inline-flex;min-block-size:44px;align-items:center}
+.scroll-entry__tail {min-block-size:65dvh;display:grid;place-items:center;padding:2rem}
 </style>
 </head>
 <body>
-  <div class="stage"><figure class="kb"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E" alt="Coastal landscape"></figure></div>
+  <section class="scroll-entry__intro"><h1>Scroll to see this effect</h1><p>The target starts below the fold so its view timeline has room to run.</p><a href="#entry-effect">Jump to the effect ↓</a></section><div class="stage scroll-entry__stage" id="entry-effect"><figure class="kb"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%236d5efc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3C/svg%3E" alt="Coastal landscape"></figure></div><div class="scroll-entry__tail">Continue scrolling to finish the animation.</div>
   <p class='demo-hint'>Scroll to preview</p>
 </body>
 </html>

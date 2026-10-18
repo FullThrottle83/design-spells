@@ -1,0 +1,1239 @@
+{
+ "generated": "2026-10-18",
+ "browser": "Chromium 151.0.7922.34 (Playwright 1.62.1)",
+ "build": "branch audit/preview-behavior-20261018 on origin/main 35110d2",
+ "spells": [
+  {
+   "id": "ds-1",
+   "title": "Shimmer on primary buttons",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-2",
+   "title": "Soft Push",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-3",
+   "title": "Lift & Zoom on cards",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: :focus-within unreachable, no focusable descendant; added link",
+   "note": ""
+  },
+  {
+   "id": "ds-5",
+   "title": "Magnetic Underline",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-6",
+   "title": "Focus Glow",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-7",
+   "title": "Icon Color Shift",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-8",
+   "title": "Gradient Reveal on headings",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-9",
+   "title": "Depth Parallax on hero",
+   "class": "PASS",
+   "evidence": "running animation",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-10",
+   "title": "Selection Skin",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-11",
+   "title": "Skeleton Shimmer",
+   "class": "PASS",
+   "evidence": "running animation",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-12",
+   "title": "Scroll Snap gallery",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-13",
+   "title": "Spotlight Focus",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: :focus-within unreachable, no focusable descendant; added links",
+   "note": ""
+  },
+  {
+   "id": "ds-14",
+   "title": "Native Page Transitions (`@view-transition`)",
+   "class": "PASS",
+   "evidence": "existing two-document navigation test",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-15",
+   "title": "0fr Accordion",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-16",
+   "title": "Floating Labels",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-17",
+   "title": "Ambient Frost Header",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-18",
+   "title": "Micro-Tooltips (`attr(data-tooltip)`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-19",
+   "title": "Focus-Within Halo",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-20",
+   "title": "Spring-Loaded Checkbox",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-21",
+   "title": "`:target` Highlight",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-22",
+   "title": "Details Chevron Rotate",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-23",
+   "title": "Validation Whisper",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-24",
+   "title": "External Link Nudge",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-25",
+   "title": "Media Scrim Lift",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: :focus-within unreachable, no focusable descendant; added link",
+   "note": ""
+  },
+  {
+   "id": "ds-26",
+   "title": "Pill Segmented Control Glow",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-27",
+   "title": "Edge Fade Scroll Hint",
+   "class": "BROKEN",
+   "evidence": "",
+   "repaired": "",
+   "note": "confirmed defect (scroller has no horizontal overflow); fix and test live in draft PR #53, whose CI is red because public/spells/ds-27/index.html was not regenerated"
+  },
+  {
+   "id": "ds-28",
+   "title": "Current Step Counter",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-29",
+   "title": "Link Fade Neighbors",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-30",
+   "title": "Sticky CTA Elevation",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-31",
+   "title": "Phantom Entry (`@starting-style`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-32",
+   "title": "Elastic Textarea (`field-sizing`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-33",
+   "title": "True Auto-Height (`interpolate-size`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-34",
+   "title": "Anchor-Positioned Tooltips",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-35",
+   "title": "Inline Theme Switch (`light-dark()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-36",
+   "title": "Scroll Progress Bar",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-37",
+   "title": "Container-Aware Card (`@container`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-38",
+   "title": "Color-Mix Hover States",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-39",
+   "title": "Accent Color Forms",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-40",
+   "title": "Subgrid Alignment",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-41",
+   "title": "Content-Visibility Turbo",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-43",
+   "title": "Auto-Hide Header",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-44",
+   "title": "Sticky Shadow When Stuck",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-45",
+   "title": "Snapped Spotlight",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-46",
+   "title": "Real Overflow Hint",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-47",
+   "title": "Scroll-Awake Back-to-Top",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-48",
+   "title": "Anchored Error Bubble",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-49",
+   "title": "Anchored Filter Panel",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-50",
+   "title": "Focus Help Rail",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "scene markup: pattern=\"[a-z0-9-]+\" is a syntax error under the v flag, constraint was ignored; hyphen escaped",
+   "note": ""
+  },
+  {
+   "id": "ds-51",
+   "title": "Ribbon Cut Card (`shape()`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-52",
+   "title": "Organic Section Divider (`shape()`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-53",
+   "title": "Text-Box-Trim",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-54",
+   "title": "Customizable Select (`appearance: base-select`)",
+   "class": "INCONCLUSIVE",
+   "evidence": "",
+   "repaired": "",
+   "note": "base-select picker option hover not exercised by the harness"
+  },
+  {
+   "id": "ds-55",
+   "title": "Sticky Card Deck",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-56",
+   "title": "Seamless Edge Mask (`mask-image`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-57",
+   "title": "Form Gatekeeper",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-58",
+   "title": "Breathing Conic Border (`@property`)",
+   "class": "PASS",
+   "evidence": "running animation",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-59",
+   "title": "Auto Empty State",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-60",
+   "title": "Read More Toggle",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-61",
+   "title": "Native Accordion Tabs (`::details-content`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-62",
+   "title": "Native Carousel Controls (`::scroll-marker`, `::scroll-button`)",
+   "class": "INCONCLUSIVE",
+   "evidence": "",
+   "repaired": "",
+   "note": "::scroll-marker/::scroll-button not exercised by the harness"
+  },
+  {
+   "id": "ds-63",
+   "title": "Smart Hyphenation",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: single-line paragraph could not hyphenate; narrow column and longer words",
+   "note": ""
+  },
+  {
+   "id": "ds-64",
+   "title": "Path Motion (`offset-path`)",
+   "class": "PASS",
+   "evidence": "running animation",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-65",
+   "title": "Scroll-Driven Header Compression",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-66",
+   "title": "Backdrop Transition (`::backdrop`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-67",
+   "title": "Scroll-Driven Before/After Comparison",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-68",
+   "title": "Infinite Logo Marquee",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: :focus-within pause unreachable from keyboard; added focusable logos",
+   "note": ""
+  },
+  {
+   "id": "ds-69",
+   "title": "Scroll-Aware Table Boundaries (`container-type: scroll-state`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-70",
+   "title": "Native Tree View Navigation (`<details>`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-71",
+   "title": "Sliding Segment Indicator",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-72",
+   "title": "Scroll-Driven Staggered List",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-73",
+   "title": "Expandable Speed Dial FAB",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-74",
+   "title": "Auto-Inverting Contrast Scrim (`mix-blend-mode`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-75",
+   "title": "Native Image Zoom (`popovertarget`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-76",
+   "title": "Modern Wrapper Floating Label (`:has()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-77",
+   "title": "Responsive Sheet Modal",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-78",
+   "title": "Smooth Multiline Text Fade Mask (`mask-image`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-79",
+   "title": "Anchor-Positioned Mega Menu (`[popover]`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-80",
+   "title": "Squircle Chips & Nav (`corner-shape`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-81",
+   "title": "Overflow-Aware Breadcrumbs",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: breadcrumbs never overflowed so the scroll-state hint never appeared; 15rem container",
+   "note": ""
+  },
+  {
+   "id": "ds-82",
+   "title": "Fixed-Angle 3D Tilt Card",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-83",
+   "title": "Perforated Ticket Card",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-84",
+   "title": "Hover/Focus Reveal Card Actions",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-85",
+   "title": "0-JS Multi-Step Wizard",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-86",
+   "title": "Themed Range Slider",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-87",
+   "title": "Group Error Summary (`:has(:user-invalid)`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-88",
+   "title": "`:target` Toast Stack",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-89",
+   "title": "Anchor-Pinned Context Menu",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-90",
+   "title": "Sun-Fan FAB (radial)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-91",
+   "title": "Ken Burns Scroll Gallery",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "canonical CSS: overflow:hidden made the view() timeline source a box that never scrolls; added overflow:clip; added scroll runway",
+   "note": ""
+  },
+  {
+   "id": "ds-92",
+   "title": "Image-Clipped Gradient Headline",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-93",
+   "title": "Snapped Caption Reveal",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-94",
+   "title": "Sticky Header + Zebra Data Table",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: two rows never overflowed the scroller so the sticky header was unobservable; 14 rows",
+   "note": ""
+  },
+  {
+   "id": "ds-95",
+   "title": "CSS Sparkline / Bar Chart",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-96",
+   "title": "Themed `<progress>` & `<meter>`",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-97",
+   "title": "Invoker Command Drawer (`commandfor` + `closedby`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-98",
+   "title": "Interest-Hint Tooltip (`interestfor` + `popover=\"hint\"`)",
+   "class": "INCONCLUSIVE",
+   "evidence": "",
+   "repaired": "",
+   "note": "interest-invoker hover delay not exercised by the harness"
+  },
+  {
+   "id": "ds-99",
+   "title": "Scroll-Initial-Target Carousel",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-100",
+   "title": "Grid Lanes Masonry (`display: grid-lanes`)",
+   "class": "UNSUPPORTED",
+   "evidence": "",
+   "repaired": "",
+   "note": "display: grid-lanes unavailable in Chromium 151; demo shows the documented fallback"
+  },
+  {
+   "id": "ds-101",
+   "title": "Sibling-Index Stagger (`sibling-index()`)",
+   "class": "PASS",
+   "evidence": "running animation",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-102",
+   "title": "`:open` Custom Select Chrome",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-103",
+   "title": "Contrast-Safe Chips (`contrast-color()`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-104",
+   "title": "`if()` Inline Theme Tokens",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-105",
+   "title": "Typed `attr()` Field Meter",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "canonical markup: data-value was on the parent but attr() reads the styled element; moved onto .attr-meter-fill",
+   "note": ""
+  },
+  {
+   "id": "ds-106",
+   "title": "Light-Dismiss Confirm Dialog (`closedby=\"any\"`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-107",
+   "title": "Position-Visibility Auto-Hide (`position-visibility`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-108",
+   "title": "Find-in-Page Accordion (`hidden=\"until-found\"`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-109",
+   "title": "Named View-Transition Cards (`view-transition-class` + typed `attr()`)",
+   "class": "NEEDS INTERACTION",
+   "evidence": "",
+   "repaired": "fixture: literal ellipsis replaced by an honest card; two-document walkthrough still missing",
+   "note": "hosted demo cannot show a cross-document view transition without a two-page walkthrough like ds-14"
+  },
+  {
+   "id": "ds-110",
+   "title": "Typed `attr()` Sparkline",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "fixture: shrink-wrapped figure was 20px wide so every flex bar was 0px; stated an inline size",
+   "note": ""
+  },
+  {
+   "id": "ds-111",
+   "title": "View-Timeline KPI Fill",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-112",
+   "title": "`::target-text` Share Highlight",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: ::target-text needs a text-fragment navigation; added a same-page link",
+   "note": ""
+  },
+  {
+   "id": "ds-113",
+   "title": "Reading-Flow Grid (`reading-flow`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-114",
+   "title": "Themed Scrollbars (`scrollbar-color`)",
+   "class": "INCONCLUSIVE",
+   "evidence": "",
+   "repaired": "",
+   "note": "themed scrollbar verified by computed style and real overflow; headless Chromium hides scrollbars so no visual evidence"
+  },
+  {
+   "id": "ds-115",
+   "title": "File Dropzone State (`::file-selector-button`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-116",
+   "title": "Checkbox Theme Switch (`:has()` + `color-scheme`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-117",
+   "title": "Split Action Button (`commandfor`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-118",
+   "title": "Customizable Select Checkmark (`::checkmark` + `::picker-icon`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-119",
+   "title": "Native Donut Chart (`conic-gradient` + `mask-image`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-120",
+   "title": "Faceted Category Filter Matrix (`:has()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-121",
+   "title": "0-JS Global Cart Counter & Badge (`counter` + Anchor)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-122",
+   "title": "CSS Gantt Schedule Grid (`grid-template-columns`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-123",
+   "title": "Matrix Heatmap (`color-mix()` + `oklch()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-124",
+   "title": "Stacked KPI Segment Bar (`flex` + `color-mix()`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-125",
+   "title": "Inline SVG Line Chart (0-JS Draw & Fill)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-126",
+   "title": "Section-Spy Active Navigation (`timeline-scope`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-127",
+   "title": "Nested Cascade Popovers (`popover=\"auto\"` + Anchor)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-128",
+   "title": "0-JS Password Strength Meter (`pattern` + `:valid` + `:has()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-129",
+   "title": "0-JS Star Rating Input (`row-reverse` + `~`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-130",
+   "title": "Dual-Thumb Range Slider (Overlapping inputs)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-131",
+   "title": "Dismissible Toast (`popover=\"manual\"`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-132",
+   "title": "Exclusive Accordion Group (`<details name=\"...\">`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-133",
+   "title": "Billing Period Pricing Toggle (`:has()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-134",
+   "title": "Mobile Swipe-to-Action List (`scroll-snap`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-135",
+   "title": "Hero Parallax Lockup & Depth (`view-timeline`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "canonical CSS: same view() timeline binding defect; added overflow:clip; added scroll runway",
+   "note": ""
+  },
+  {
+   "id": "ds-136",
+   "title": "Native Datalist Autocomplete Search",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-137",
+   "title": "Expandable Icon Search Field (`:focus-within`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-138",
+   "title": "Drop Cap & Editorial Typography (`initial-letter`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-139",
+   "title": "Scroll-Driven Image Wipe (`clip-path: inset()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "canonical CSS: same view() timeline binding defect; added overflow:clip; added scroll runway",
+   "note": ""
+  },
+  {
+   "id": "ds-140",
+   "title": "Sticky Footer Reveal Layout",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-141",
+   "title": "Accessible Skip Link (`:focus-visible` Slide-In)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: skip link target #main-content did not exist; added target",
+   "note": ""
+  },
+  {
+   "id": "ds-142",
+   "title": "Interactive Map Pin Popover (`anchor-name` + `position-anchor`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-143",
+   "title": "Print-Friendly Article Stylesheet (`@media print`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-144",
+   "title": "Dynamic Counter Summary (`counter-increment` + `:has()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-145",
+   "title": "Animated Number Counter (`@property` + `@keyframes`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-146",
+   "title": "Guardrail Focus-Lock Modal (`overscroll-behavior: contain`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "fixture: dialog did not scroll and the page behind could not; long dialog content, demo-only page runway",
+   "note": ""
+  },
+  {
+   "id": "ds-147",
+   "title": "Fluid Rhythm Function (`@function`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-148",
+   "title": "Donut-Scoped Documentation Callout (`@scope`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-149",
+   "title": "Snapped Product State (`scroll-state()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-150",
+   "title": "Semantic Metrics Dividers (`column-rule`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-151",
+   "title": "Organic Avatar Cluster (`random()`)",
+   "class": "UNSUPPORTED",
+   "evidence": "",
+   "repaired": "",
+   "note": "random() unavailable in Chromium 151; demo shows the documented fallback"
+  },
+  {
+   "id": "ds-152",
+   "title": "Keyboard-Friendly Table Crosshair (`:has()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-153",
+   "title": "Intrinsic Disclosure Width (`calc-size()`)",
+   "class": "PASS",
+   "evidence": "measured state/interaction/scroll change",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-154",
+   "title": "Breakpointless Switcher Layout",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-155",
+   "title": "Stepped CSS Math Gauge (`round()`)",
+   "class": "PASS",
+   "evidence": "running animation",
+   "repaired": "",
+   "note": ""
+  },
+  {
+   "id": "ds-bonus",
+   "title": "Typographic Harmony (`text-wrap`)",
+   "class": "PASS",
+   "evidence": "static effect differs from unstyled baseline",
+   "repaired": "fixture: heading never wrapped so text-wrap had no effect; 24rem container",
+   "note": ""
+  }
+ ]
+}

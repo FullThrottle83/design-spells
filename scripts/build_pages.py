@@ -22,7 +22,7 @@ PUBLIC = ROOT / "public"
 SITE_URL = "https://design-spells.hultsan20.workers.dev"
 VALID_ID = re.compile(r"ds-(?:[1-9]\d*|bonus)\Z")
 SCROLL_DEMOS = {"ds-17", "ds-36", "ds-43", "ds-47", "ds-65", "ds-126"}
-SCROLL_ENTRY_DEMOS = {"ds-8", "ds-72", "ds-125", "ds-145"}
+SCROLL_ENTRY_DEMOS = {"ds-8", "ds-72", "ds-91", "ds-125", "ds-135", "ds-139", "ds-145"}
 # A curated comparison, not a claim that all 150 CSS features have a
 # meaningful single-frame before/after state. Keep authored spell CSS intact.
 COMPARE_NOTES = {
@@ -236,6 +236,9 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
 .overflow-demo .fade-hint { position: sticky; inset-inline-end: 0; inline-size: 2rem; margin-inline-start: auto; text-align: center; }
 """
         raw_html = raw_html.replace('class="tabs-wrap"', 'class="tabs-wrap" role="region" aria-label="Scrollable labels" tabindex="0"', 1)
+    elif sid == "ds-146":
+        # Demo-only: scroll chaining needs a page behind the dialog that can scroll.
+        css += ".demo-runway {min-block-size:150vh}\n"
     elif sid == "ds-9":
         css += ".demo-replay {padding:1rem;text-align:center}\n.demo-replay a {display:inline-flex;min-block-size:44px;align-items:center}\n"
     hint = spell.get("previewAction", {}).get("hint", "")
@@ -279,6 +282,8 @@ html:has(#scheme-dark:checked) { color-scheme: dark; }
             f"{raw_html}"
             '</div></div>'
         )
+    elif sid == "ds-146":
+        stage = f'<div class="stage">{raw_html}</div><div class="demo-runway" aria-hidden="true"></div>'
     else:
         stage = raw_html + extra if sid in SCROLL_DEMOS else f'<div class="stage">{raw_html}</div>'
     if sid == "ds-35":

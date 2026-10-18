@@ -522,7 +522,9 @@ LOCAL_IMG_B = r"(?:before|photo-thumb|b)\.jpg"
 PREVIEW_HTML: dict[str, str] = {
     "1": f'<button class="btn-primary">Get started</button>',
     "2": '<button class="btn">Press me</button>',
-    "3": f'<article class="destination-card"><img src="{IMG}" alt=""><h3>Lisbon</h3><p>Atlantic light.</p></article>',
+    # The authored CSS also reacts to :focus-within, so the fixture needs a
+    # focusable descendant or the keyboard path is physically unreachable.
+    "3": f'<article class="destination-card"><img src="{IMG}" alt=""><h3><a href="#" style="color:inherit;text-decoration:none">Lisbon</a></h3><p>Atlantic light.</p></article>',
     "5": '<nav><a class="nav-link" href="#">Overview</a> <a class="nav-link" href="#" aria-current="page">Pricing</a></nav>',
     "7": '<button class="icon" aria-label="Star">★</button>',
     "19": '<div class="input-group"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search spells"></div>',
@@ -574,9 +576,12 @@ PREVIEW_HTML: dict[str, str] = {
     "49": '<div class="filterbar"><button class="filter-trigger">Filters</button><div class="filter-panel">Sort · Date · Owner</div></div>',
     "50": '<div class="form-row"><label>API key<input></label><p class="help-rail">Keep this secret.</p></div>',
     "10": "<p>Select this sentence to see the skin.</p>",
-    "bonus": "<h2 class='text-balance'>Typographic harmony on a long heading</h2><p class='text-pretty'>Pretty wrapping keeps orphans off the last line of a paragraph.</p>",
+    # Wrapping rules are only observable where text actually wraps: in the
+    # full-width stage this heading stays on one line and balance is a no-op.
+    "bonus": "<div style='max-inline-size:24rem'><h2 class='text-balance'>Typographic harmony on a long heading</h2><p class='text-pretty'>Pretty wrapping keeps orphans off the last line of a paragraph.</p></div>",
     "53": '<button class="btn">Trimmed</button> <span class="chip">Chip</span>',
-    "63": "<article><p>Hyphenation keeps narrow columns from opening rivers of white space.</p></article>",
+    # Hyphenation can only break words in a column narrower than the text.
+    "63": "<article style=\"inline-size:14rem\"><p>Internationalization and accessibility improve comprehension for extraordinarily responsible communities.</p></article>",
     "6": '<input type="text" placeholder="Focus me">',
     "16": '<div class="form-group"><input placeholder=" "><label>Your name</label></div>',
     "23": '<input type="email" required placeholder="you@site.com">',
@@ -584,7 +589,7 @@ PREVIEW_HTML: dict[str, str] = {
     "32": '<textarea class="auto-grow" placeholder="Type to grow…"></textarea>',
     "54": '<select class="premium-dropdown"><option>Overview</option><option>Reports</option><option>Settings</option></select>',
     "57": '<form class="checkout-form"><div class="form-group"><input required placeholder="Email"></div><button type="submit">Pay</button></form>',
-    "25": f'<article class="media-card"><img src="{IMG}" alt="" style="display:block;width:100%"><h3 style="position:absolute;bottom:1rem;left:1rem;z-index:1;color:white">Stay</h3></article>',
+    "25": f'<article class="media-card"><img src="{IMG}" alt="" style="display:block;width:100%"><h3 style="position:absolute;bottom:1rem;left:1rem;z-index:1;color:white"><a href="#" style="color:inherit;text-decoration:none">Stay</a></h3></article>',
     "35": '<article class="premium-card" style="padding:1rem">light-dark() follows the OS.</article>',
     "51": '<article class="ribbon-card" style="padding:1.5rem;background:var(--color-surface)">Ribbon cut</article>',
     # See the ZERO-WIDTH note further down: full-bleed in real use, so the
@@ -595,7 +600,7 @@ PREVIEW_HTML: dict[str, str] = {
     "74": f'<div class="blend-container" style="position:relative"><img src="{IMG}" alt="" style="width:100%;display:block"><p class="contrast-text" style="position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem">Contrast</p></div>',
     "78": '<p class="text-fade-clamp">The faded mask replaces a hard line-clamp so the last visible line dissolves instead of being chopped mid-word. Extra copy keeps the fade honest.</p>',
     "13": '<div class="card-grid">' + "".join(
-        f'<article class="destination-card" style="padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)">{name}</article>'
+        f'<article class="destination-card" style="padding:1rem;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:0 1px 2px oklch(0.2 0.01 80 / .08)"><a href="#" style="color:inherit;text-decoration:none">{name}</a></article>'
         for name in ("Alpha", "Bravo", "Charlie")
     ) + '</div>',
     "21": '<section id="preview-target">Deep-linked highlight</section>',
@@ -603,7 +608,9 @@ PREVIEW_HTML: dict[str, str] = {
     "59": '<div class="data-grid"></div>',
     "41": '<section class="lazy-section">Offscreen layout is skipped.</section>',
     "107": '<p class="demo-note">The panel hides when its anchor leaves the viewport.</p><button class="filter-trigger" style="anchor-name:--filter-btn">Filters</button><div class="filter-panel">Hidden when the trigger is gone.</div>',
-    "112": "<p>Shared links that use #:~:text= highlight with ::target-text.</p>",
+    # ::target-text only paints after a text-fragment navigation; a same-page
+    # link is a native way to trigger one without script.
+    "112": '<p>Shared links that use #:~:text= highlight with ::target-text.</p><p><a href="#:~:text=highlight%20with">Follow a text-fragment link</a></p>',
     "113": '<div class="pack-grid"><article>A</article><article>B</article><article>C</article></div>',
     "114": '<div class="table-scroller" style="max-height:6rem;overflow:auto"><p>Themed scrollbars on embedded panels.</p><p>More</p><p>More</p><p>More</p></div>',
     "118": '<select class="premium-dropdown"><option>One</option><option selected>Two</option><option>Three</option></select>',
@@ -613,8 +620,14 @@ PREVIEW_HTML: dict[str, str] = {
     # only contents are empty or absolutely positioned has nothing to derive an
     # inline size from and collapses to 0px wide — the effect renders, just
     # infinitely thin. These are full-bleed in real pages; state a width here.
-    "105": '<div class="attr-meter" data-value="72" style="inline-size:min(18rem, 100%)"'
-        ' aria-label="Profile complete to 72 percent"><span class="attr-meter-fill"></span></div>',
+    # attr() reads the element it styles, so data-value belongs on the fill.
+    "105": '<div class="attr-meter" style="inline-size:min(18rem, 100%)"'
+        ' aria-label="Profile complete to 72 percent"><span class="attr-meter-fill" data-value="72"></span></div>',
+    # The bars are flex:1 with no content: without a stated width the
+    # shrink-wrapped figure is 20px (the gaps) and every bar is 0px wide.
+    "110": '<figure class="attr-spark" style="inline-size:min(16rem, 100%)" role="img" aria-label="Sales: 34, 58, 41, 72, 66, 90 percent">'
+        '<span data-v="34"></span><span data-v="58"></span><span data-v="41"></span>'
+        '<span data-v="72"></span><span data-v="66"></span><span data-v="90"></span></figure>',
     "130": '<div class="double-slider" style="inline-size:min(20rem, 100%)">'
         '<input type="range" min="0" max="100" value="20" aria-label="Lowest price">'
         '<input type="range" min="0" max="100" value="80" aria-label="Highest price">'
@@ -622,9 +635,38 @@ PREVIEW_HTML: dict[str, str] = {
     "135": '<header class="plx-hero" style="inline-size:22rem;max-inline-size:100%">'
         '<div class="plx-layer plx-bg" aria-hidden="true"></div>'
         '<div class="plx-layer plx-fg"><h1>The future of UI</h1></div></header>',
+    # Scroll containment needs a dialog that scrolls; the standalone demo adds
+    # the scrollable page behind it (see build_pages.py), the shared preview does not.
     "146": '<button commandfor="guard-modal" command="show-modal" class="btn">Open modal</button>'
+        '<p class="demo-note">Scroll the dialog to its end and keep scrolling: the page behind stays put.</p>'
         '<dialog id="guard-modal" class="guard-modal" closedby="any"><h2>Modal content</h2>'
-        '<div class="guard-body">Long scrollable content…</div></dialog>',
+        '<div class="guard-body">'
+        + "".join(f"<p>Paragraph {n}: the dialog scrolls on its own, so overscroll never chains to the page behind it.</p>" for n in range(1, 25))
+        + '</div></dialog>',
+    # Cross-document view transitions only run on a real navigation. The fixture
+    # at least shows an honest named card instead of a literal ellipsis; the
+    # two-page walkthrough used by ds-14 is the remaining gap.
+    "109": '<article class="vt-card" id="case-acme"><h3>Acme case study</h3><p>Named card: its transition runs when a real page navigation carries it to another document.</p></article>',
+    # A skip link needs somewhere to skip to.
+    "141": '<a href="#main-content" class="skip-link">Skip to content</a>'
+        '<main id="main-content" tabindex="-1"><h1>Page content</h1><p>Activating the skip link moves focus here.</p></main>',
+    # The sticky header and scroll-state need a body taller than the scrollport.
+    "94": '<div class="table-scroller" tabindex="0" role="region" aria-label="Transactions"><table>'
+        '<thead><tr><th>Date</th><th>Customer</th><th>Amount</th></tr></thead><tbody>'
+        + "".join(f"<tr><td>2026-08-{n:02d}</td><td>{c}</td><td>${a:,}</td></tr>" for n, (c, a) in enumerate(
+            [("Acme Inc", 12400), ("Nordic Inc", 8900), ("Fjord AB", 5300), ("Lumen Ltd", 17650), ("Harbor Co", 2200), ("Pine Hollow", 9100),
+             ("Atelier North", 4800), ("Studio Fika", 7300), ("Kvarn Works", 15100), ("Birch & Co", 3900), ("Skerry Labs", 6400), ("Moss Ltd", 11800),
+             ("Tern Partners", 2750), ("Aurora Print", 8250)], start=1))
+        + '</tbody></table></div>',
+    # The overflow hint only appears when the crumbs actually overflow.
+    "81": '<nav class="crumbs-wrap" aria-label="Breadcrumb" style="inline-size:min(15rem, 100%)"><ol class="crumbs">'
+        '<li><a href="/">Home</a></li><li><a href="/docs">Documentation</a></li>'
+        '<li><a href="/docs/components">Components</a></li><li aria-current="page">Spells</li></ol>'
+        '<span class="crumb-hint" aria-hidden="true">+2</span></nav>',
+    # Focusable logos so the :focus-within pause is reachable from the keyboard.
+    "68": '<div class="marquee"><div class="marquee-track">'
+        '<a href="#" style="color:inherit">Logo 1</a><a href="#" style="color:inherit">Logo 2</a><a href="#" style="color:inherit">Logo 3</a></div>'
+        '<div class="marquee-track" aria-hidden="true"><span>Logo 1</span><span>Logo 2</span><span>Logo 3</span></div></div>',
     "67": '<div class="compare-container" style="width:100%;max-width:24rem">'
         f'<img src="{IMG_B}" alt="After" class="compare-img compare-after">'
         '<div class="compare-before-wrap">'

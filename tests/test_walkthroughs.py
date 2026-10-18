@@ -9,7 +9,7 @@ PUBLIC = ROOT / "public"
 SPELLS = {spell["id"]: spell for spell in json.loads(
     (PUBLIC / "spells.json").read_text(encoding="utf-8")
 )["spells"]}
-ENTRY = {"ds-8", "ds-72", "ds-125", "ds-145"}
+ENTRY = {"ds-8", "ds-72", "ds-91", "ds-125", "ds-139", "ds-145"}
 
 
 class WalkthroughTest(unittest.TestCase):
@@ -28,6 +28,20 @@ class WalkthroughTest(unittest.TestCase):
                     self.assertIn(SPELLS[sid]["css"].strip(), source)
                     self.assertIn(SPELLS[sid]["previewHtml"], source)
                     self.assertNotIn("<script", source.lower())
+
+    def test_parallax_hero_has_a_scroll_runway_without_script(self):
+        # ds-135's spell CSS references a hosted image that the demo rewrites to
+        # an inline asset, so it cannot join the byte-for-byte ENTRY contract.
+        sid = "ds-135"
+        doc = (PUBLIC / "spells" / sid / "index.html").read_text(encoding="utf-8")
+        self.assertIn("scroll runway", doc)
+        for path in (PUBLIC / "play" / sid / "index.html",
+                     PUBLIC / "download" / f"{sid}.html"):
+            source = path.read_text(encoding="utf-8")
+            self.assertIn('class="scroll-entry__intro"', source)
+            self.assertIn('id="entry-effect"', source)
+            self.assertIn(SPELLS[sid]["previewHtml"], source)
+            self.assertNotIn("<script", source.lower())
 
     def test_sticky_shadow_demo_has_a_real_runway_without_rewriting_spell(self):
         sid = "ds-44"

@@ -60,3 +60,43 @@ actual scrollWidth/clientWidth as well as its rendered opacity. This is a
 visual scrollability example, not a fully implemented tabs component. Unsupported
 browsers retain native scrolling and readable content. Manual keyboard, zoom,
 screen-reader and motion review remains separate from these browser assertions.
+
+## Observability audit (2026-10-18)
+
+A nonzero box is not evidence that a spell demonstrates its technique. An
+independent Chromium inventory of all 154 hosted demos found fixtures and
+three authored snippets whose effect could not occur. Root causes, fixed here
+without touching spell CSS except where the CSS itself was wrong:
+
+- **Scroll timeline bound to a box that never scrolls (ds-91, ds-135, ds-139).**
+  `animation-timeline: view()` tracks the nearest scroll container. The
+  authored wrappers used `overflow: hidden`, which *is* a scroll container, so
+  progress stayed pinned at 0.5 / 1 / 0.5 regardless of page scroll in every
+  browser. The authored CSS now adds `overflow: clip` after the `hidden`
+  fallback. The three demos also receive the existing scroll runway.
+- **Authored markup and CSS disagreed (ds-105).** `attr()` reads the styled
+  element, but `data-value` sat on the parent, so the fill was always 0%. The
+  attribute moved onto `.attr-meter-fill` in README.md and the demo.
+- **Collapsed shrink-wrapped fixture (ds-110).** Flex bars with no content in a
+  centred grid stage were 0px wide; the fixture states an inline size.
+- **Nothing to act on (ds-63, ds-bonus, ds-81, ds-94, ds-146).** Hyphenation
+  and `text-wrap` need text that wraps, the overflow hint needs overflowing
+  crumbs, the sticky header needs rows beyond the scrollport, and overscroll
+  containment needs a dialog that scrolls above a page that could. Fixtures
+  now supply those conditions; nothing in the spell CSS changed.
+- **Keyboard path unreachable (ds-3, ds-13, ds-25, ds-68).** The hint said
+  "Hover or focus", but the fixture had no focusable element for
+  `:focus-within`.
+- **Dead ends (ds-141, ds-112, ds-109).** The skip link pointed at a missing
+  `#main-content`; `::target-text` needs a text-fragment navigation (now a
+  same-page link); the ds-109 fixture was a literal ellipsis.
+- **Invalid pattern (ds-50).** `pattern="[a-z0-9-]+"` is a syntax error under
+  the `v` flag browsers use, so the constraint was silently ignored.
+
+`tests/preview-observability.spec.mjs` asserts measurable state for each
+(geometry, animation progress and timeline source, scroll offsets, validity,
+computed style) and includes controls that fail without the fix. Chromium-only
+cases skip elsewhere explicitly. Known limits: Playwright's headless Chromium
+hides scrollbars, so ds-114's themed scrollbar is verified by computed style
+only; ds-27 is tracked in PR #53; ds-109 still needs a ds-14-style
+two-document walkthrough to show its transition.
